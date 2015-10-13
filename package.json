@@ -1,0 +1,28 @@
+{
+  "name": "farmbot-web-frontend",
+  "version": "0.0.1",
+  "description": "A single page application that controls FarmBot.",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FarmBot/farmbot-web-frontend.git"
+  },
+  "keywords": [
+    "farmbot"
+  ],
+  "author": "Rick Carlino, FarmBot.io",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FarmBot/farmbot-web-frontend/issues"
+  },
+  "homepage": "https://github.com/FarmBot/farmbot-web-frontend#readme",
+  "dependencies": {
+    "babel-loader": "^5.3.2",
+    "lodash": "^3.10.1",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
+  }
+}
