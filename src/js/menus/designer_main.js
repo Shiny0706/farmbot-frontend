@@ -18,20 +18,66 @@ export class DesignerMain extends React.Component {
   }
   render(){
     return (
-      <div className="farm-designer-body">
-        <div className="farm-designer-left">
-          <div id="designer-left">
-            { this.renderPanel() }
+      <div>
+        <div className="row">
+        <nav className="navbar navbar-default drop-shadow">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <button className="navbar-toggle" type="button">
+                <span className="glyphicon glyphicon-menu-hamburger"></span>
+              </button>
+            </div>
+            <div className="collapse navbar-collapse" id="navbar">
+              <ul className="nav navbar-nav">
+                  <li>
+                    <a href="/pages/farm_designer">Farm Designer</a>
+                  </li>
+                  <li>
+                    <a href="/dashboard#/movement">Controls</a>
+                  </li>
+                  <li>
+                    <a href="/dashboard#/devices">Devices</a>
+                  </li>
+                  <li>
+                    <a href="/dashboard#/sequence">Sequences</a>
+                  </li>
+                  <li>
+                    <a href="/dashboard#/schedule">Schedules</a>
+                  </li>
+              </ul>
+              <ul className="nav navbar-nav navbar-right">
+                  <li>
+                    <syncbutton className="nav-status-buttons" schedules="schedules"><button className="button-like yellow" type="button"> Sync Now <i className="fa fa-upload"></i> </button> <div className="last-sync">LAST SYNC: ---</div></syncbutton>
+                  </li>
+                  <li>
+                    <button className="red button-like" type="button">Stop</button>
+                  </li>
+                  <li>
+                    <a href="/users/sign_out">Sign out</a>
+                  </li>
+                  <li>
+                    <a href="/users/edit">My Account</a>
+                  </li>
+              </ul>
+            </div>
           </div>
+        </nav>
         </div>
+        <div className="farm-designer-body">
+          <div className="farm-designer-left">
+            <div id="designer-left">
+              { this.renderPanel() }
+            </div>
+          </div>
 
-        <div className="farm-designer-middle">
-          <div></div>
-        </div>
+          <div className="farm-designer-middle">
+            <div></div>
+          </div>
 
-        <div className="farm-designer-right">
-          <div id="designer-right">
-            <Calendar />
+          <div className="farm-designer-right">
+            <div id="designer-right">
+              <Calendar />
+            </div>
           </div>
         </div>
       </div>

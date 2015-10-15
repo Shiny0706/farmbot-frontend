@@ -1,38 +1,55 @@
+// Google Fonts
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic,100,100italic);
+
+// Font Variables
+// TODO: Prevent this from being overridden by normalize.css
+$roboto: 'Roboto', Arial, Helvetica, sans-serif;
+
+// Variables
+
 $translucent:    rgba(0, 0, 0, 0.2);
 $translucent2:   rgba(0, 0, 0, 0.6);
 $white:          #fff;
+$off_white:      #f4f4f4;
 $light_gray:     #ddd;
-$gray:           #999;
-$dark_gray:      #444;
+$gray:           #cccccc;
+$medium_gray:    #666666;
+$dark_gray:      #434343;
 $black:          #000;
 
 $light_blue:     #cdf;
-$blue:           #00f;
+$blue:           #a4c2f4;
 $dark_blue:      #37d;
+
 $light_green:    #bda;
 $green:          #6a4;
 $dark_green:     #371;
+
+
+$light_yellow:   #ffc;
+$yellow:         #fd6;
 $gold:           #b90;
 $beige:          #fec;
-$yellow:         #fd6;
-$light_yellow:   #ffc;
+$brown:          #CA8;
+
 $orange:         #fa0;
 $dark_orange:    #e93;
+
+$light_purple:   #dab;
 $lavender:       #bad;
 $royal_purple:   #64a;
 $dark_purple:    #a47;
-$light_purple:   #dab;
+
 $pink:           #e99;
 $dark_pink:      #e66;
 $peach:          #fc9;
 $red:            #f00;
 $dark_red:       #900;
-$brown:          #CA8;
 
 %greenish {
   float: right;
   background-color: $green;
-  color: $white;
+  color: $off_white;
   font-weight: bold;
   border-bottom: 3px solid $dark_green;
 }
@@ -40,7 +57,7 @@ $brown:          #CA8;
 %reddish {
   background-color: $dark_pink;
   float: right;
-  color: $white;
+  color: $off_white;
   font-weight: bold;
   border-bottom: 3px solid $dark_red;
 }
@@ -78,6 +95,30 @@ $brown:          #CA8;
   padding-left: 20px;
   box-shadow: 0 4px 10px $translucent;
 }
+
+// Styles
+body, html {
+  font-family: $roboto;
+  font-weight: 400;
+}
+h1, h2, h3, h4, h5, h6, p {
+  font-family: $roboto;
+  font-weight: 400;
+}
+
+p {
+  font-size: 1.1rem;
+  color: $dark_gray;
+  line-height: 1.4rem;
+  margin-bottom: 0;
+}
+
+.button {
+  font-family: $roboto;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
 .flex {
   display: flex;
 }
@@ -114,7 +155,7 @@ $brown:          #CA8;
     font-style: normal;
     display: inline;
     background-color: $dark_gray;
-    color: $white;
+    color: $off_white;
     border-radius: 3px;
     padding: 3px;
   }
@@ -141,7 +182,7 @@ $brown:          #CA8;
     z-index: 3;
     background-color: $dark_gray;
     font-style: italic;
-    color: $white;
+    color: $off_white;
     display: flex;
     justify-content: center; /* align horizontal */
     align-items: center; /* align vertical */
@@ -178,7 +219,7 @@ $brown:          #CA8;
   height: 52px;
   padding: 13px;
   font-family: FontAwesome;
-  color: $white;
+  color: $off_white;
   font-size: 20px;
   text-align: center;
   display: inline-block;
@@ -300,15 +341,18 @@ $brown:          #CA8;
   background-color: $dark_gray;
 }
 button {
-  font-size: 0.8rem;
+  font-size: .8rem;
   text-transform: uppercase;
   text-align: center;
   font-weight: bold;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  padding-left: 15px;
-  padding-right: 15px;
-  border-radius: 5px;
+  padding-top: .2rem;
+  padding-bottom: .2rem;
+  padding-left: .8rem;
+  padding-right: .8rem;
+  border-radius: 3px;
+  border-bottom-width: 2px!important;
+  border: none;
+  margin-bottom: 0px;
   &.stop {
     background-color: $red;
   }
@@ -319,9 +363,11 @@ button {
     background-color: $orange;
   }
   &.move-amount {
-    background-color: $light_gray;
+    background-color: $white;
+    border-right: 2px solid $off-white;
+    box-shadow: 0px 0px 10px $light_gray;
+    color: $medium_gray;
     font-weight: bold;
-    border: 2px solid $dark_gray;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 0;
@@ -332,25 +378,25 @@ button {
     float: left;
         transition: 0s;
     &:hover {
-      background-color: $light_gray;
-      color: $dark_gray;
+      background-color: $medium_gray;
+      color: $off_white;
     }
     &:nth-child(n+2) {
       border-left: 0;
     }
     &.leftmost {
-            border-bottom-left-radius: 7px;
-            border-top-left-radius: 7px;
+      border-bottom-left-radius: 7px;
+      border-top-left-radius: 7px;
     }
     &.rightmost {
-            border-bottom-right-radius: 7px;
-            border-top-right-radius: 7px;
+      border-bottom-right-radius: 7px;
+      border-top-right-radius: 7px;
+      border-right: 0px none;
     }
   }
   &.move-amount-selected {
-    background-color: $dark_gray;
-    color: $white;
-    border-color: inherit;
+    background-color: $medium_gray;
+    color: $off_white;
   }
   &.green {
     @extend %greenish;
@@ -361,7 +407,7 @@ button {
   &.gray {
     background-color: $dark_gray;
     float: right;
-    color: $white;
+    color: $off_white;
     font-weight: bold;
     border-bottom: 3px solid $dark_gray;
   }
@@ -373,25 +419,13 @@ button {
     border-bottom: 3px solid $gold;
   }
 }
-.row-length {
-  width: 8%;
-}
-.row-invert {
-  width: 8%;
-}
-.row-axis {
-  width: 5%;
-}
-.row-input {
-  width: 15%;
-}
 .content-wrapper {
   border-style: none;
   border-top-width: 0;
   border-color: $light_gray;
   padding: 1.25rem;
   padding-bottom: 0;
-  background: $white;
+  background: $off_white;
   color: $dark_gray;
   &.calendar-wrapper {
     padding-bottom: 20px;
@@ -399,12 +433,14 @@ button {
 }
 .header-wrapper {
   margin-bottom: 0;
-  padding: 1rem;
+  padding: .75rem 1rem;
   background: $dark_gray;
-  color: $white;
+  text-transform: uppercase;
+  letter-spacing: .05rem;
   h5 {
-    color: $white;
-    margin: 0;
+    color: $gray;
+    margin: .25rem;
+    font-size: 1.2rem;
   }
   p {
     font-size: 88%;
@@ -419,27 +455,28 @@ button {
   border-style: dashed;
   border-width: 2px;
   border-color: $light_gray;
+  color: $gray;
+  font-weight: bold;
   margin-bottom: 1rem;
   padding: 1.25rem;
-  background: $white;
-  color: $dark_gray;
+  background: $off_white;
   text-align: center;
+  color: $gray;
+  font-weight: bold;
 }
 .blue-header {
-  background-color: $light_blue;
+  background-color: $blue;
   color: $dark_gray;
 }
 .blue-block {
-  background-color: $light_blue;
+  background-color: $blue;
   color: $dark_gray;
-  border-right: 2px solid $dark_blue;
-  border-bottom: 2px solid $dark_blue;
   &:hover {
-    background-color: $light_blue;
+    background-color: $blue;
     color: $dark_gray;
   }
   &:focus {
-    background-color: $light_blue;
+    background-color: $blue;
     color: $dark_gray;
   }
 }
@@ -454,8 +491,6 @@ button {
 .green-block {
   background-color: $light_green;
   color: $dark_gray;
-  border-right: 2px solid $green;
-  border-bottom: 2px solid $green;
   &:hover {
     background-color: $light_green;
     color: $dark_gray;
@@ -471,20 +506,18 @@ button {
 }
 
 .yellow-header {
-  background-color: $light_yellow;
+  background-color: $yellow;
   color: $dark_gray;
 }
 .yellow-block {
-  background-color: $light_yellow;
+  background-color: $yellow;
   color: $dark_gray;
-  border-right: 2px solid $gold;
-  border-bottom: 2px solid $gold;
   &:hover {
-    background-color: $light_yellow;
+    background-color: $yellow;
     color: $dark_gray;
   }
   &:focus {
-    background-color: $light_yellow;
+    background-color: $yellow;
     color: $dark_gray;
   }
 }
@@ -498,8 +531,6 @@ button {
 .orange-block {
   background-color: $peach;
   color: $dark_gray;
-  border-right: 2px solid $dark_orange;
-  border-bottom: 2px solid $dark_orange;
   &:hover {
     background-color: $peach;
     color: $dark_gray;
@@ -519,8 +550,6 @@ button {
 .purple-block {
   background-color: $lavender;
   color: $dark_gray;
-  border-right: 2px solid $royal_purple;
-  border-bottom: 2px solid $royal_purple;
   &:hover {
     background-color: $lavender;
     color: $dark_gray;
@@ -546,8 +575,6 @@ button {
 .pink-block {
   background-color: $light_purple;
   color: $dark_gray;
-  border-right: 2px solid $dark_purple;
-  border-bottom: 2px solid $dark_purple;
   &:hover {
     background-color: $light_purple;
     color: $dark_gray;
@@ -567,8 +594,6 @@ button {
 .gray-block {
   background-color: $gray;
   color: $dark_gray;
-  border-right: 2px solid $dark_gray;
-  border-bottom: 2px solid $dark_gray;
   &:hover {
     background-color: $gray;
     color: $dark_gray;
@@ -588,8 +613,6 @@ button {
 .red-block {
   background-color: $pink;
   color: $dark_gray;
-  border-right: 2px solid $dark_pink;
-  border-bottom: 2px solid $dark_pink;
   &:hover {
     background-color: $pink;
     color: $dark_gray;
@@ -603,10 +626,11 @@ button {
   background-color: $pink;
 }
 .block {
-  margin-bottom: 20px;
-    box-shadow: 0 4px 10px $translucent;
+  height: 2.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0px 10px $light_gray;
   &:hover {
-        transform: translateY(-2px);
+        transform: translateY(-1px);
         box-shadow: 0 4px 10px $translucent;
         transition: all 0.2s ease-out;
     .edit-icon {
@@ -654,12 +678,23 @@ button {
   padding-bottom: 1rem;
 }
 label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: $medium_gray;
+}
+
+input, input[type="text"] {
   font-size: 1.2rem;
   color: $dark_gray;
-}
-input[type="text"] {
-  font-size: 1.2rem;
   height: auto;
+  width: 100%;
+  border: 0;
+  padding: 6px 8px;
+  box-shadow: 0px 0px 10px $light_gray;
+  &:focus {
+    background-color: $white;
+    box-shadow: 0px 0px 10px $translucent;
+  }
 }
 input[type="password"] {
   font-size: 1.2rem;
@@ -719,19 +754,19 @@ input[type="submit"] {
   background-color: $green;
   font-weight: bold;
   text-transform: uppercase;
-  color: $white;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  padding-left: 15px;
-  padding-right: 15px;
+  color: $off-white;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 12px;
+  padding-right: 12px;
   border: none;
-    border-radius: 5px;
+  border-radius: 4px;
 }
 .padding-bottom-large {
   padding-bottom: 50px;
 }
 .row {
-  max-width: 120rem;
+  max-width: 160rem;
   &.date-flipper {
     margin-bottom: 20px;
   }
@@ -782,22 +817,30 @@ input[type="submit"] {
   float: left;
 }
 .arrow-button {
-  background-color: $dark_gray;
-  color: $white;
-  width: 50px;
-  height: 50px;
-  padding: 15px;
-  font-size: 20px;
+  background-color: $medium_gray;
+  color: $off_white;
+  width: 40px;
+  height: 40px;
+  padding: 12px;
+  font-size: 16px;
   text-align: center;
   border-bottom: 3px solid $dark_gray;
+  margin: 0;
   &:active {
     border-bottom-width: 1px!important;
         transform: translateY(2px);
   }
+  &:hover {
+    background-color: $medium_gray;
+  }
 }
+
 .jog-table {
   margin-top: 15px;
+  background-color: $off-white;
+  width: auto;
 }
+
 input {
   &.move-input {
     font-size: 1rem;
@@ -824,56 +867,20 @@ body {
 .drop-shadow {
     box-shadow: 0 4px 10px $translucent;
 }
-nav {
+nav.navbar {
   background-color: $dark_gray;
+  color: $light_gray;
+  font-size: 1.2rem;
+  letter-spacing: .15rem;
   margin: 0;
-  width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
-  height: 48px;
-    transition: height 0.2s;
-  > a {
-    @extend %extend_3;
-    &:hover {
-      background-color: $dark_gray;
-      color: $white!important;
-    }
-    &:focus {
-      color: $light_gray;
-    }
-    &.large-menu-right {
-      float: right;
-    }
-  }
+  text-transform: uppercase;
+  border-radius: 0px;
+
 }
-.small-menu-title {
-  @extend %extend_3;
-  display: none;
-}
-@media only screen and(max-width: 64.063em) {
-  nav {
-    &:hover {
-      height: 432px;
-            transition: height 0.2s;
-      height: 432px;
-            transition: height 0.2s;
-      > a {
-        display: block;
-        display: block;
-      }
-    }
-    > a {
-      display: none;
-      display: none;
-      &.large-menu-right {
-        float: none;
-        float: none;
-      }
-    }
-  }
-  .small-menu-title {
-    display: inline-block;
-    display: inline-block;
+.navbar-nav>li>a {
+  color: $gray!important;
+  &:hover, :active, :focus {
+    color: $off_white!important;
   }
 }
 .alert-box {
@@ -889,10 +896,6 @@ nav {
 }
 .padding-bottom {
   padding-bottom: 20px;
-}
-.control-title {
-  font-weight: bold;
-  font-size: 0.8rem;
 }
 .no-right-gutter {
   padding-right: 0;
@@ -919,19 +922,12 @@ fieldset {
   font-size: 1.3rem;
 }
 .widget-wrapper {
-  margin-bottom: 20px;
+  margin-top: 25px;
+  box-shadow: 0px 0px 10px $gray;
 }
 .farmdesigner-left-menu {
   border: 1px $black dashed;
   background-color: $blue;
-}
-table.calibration-control {
-  table-layout: fixed;
-  width: 100%;
-  white-space: nowrap;
-}
-td input.fixed {
-  width: 85%;
 }
 .sized a {
   width: 100px;
@@ -969,15 +965,39 @@ h6.date {
   font-size: 1.4rem;
   line-height: 50px;
 }
-.transparent-table tr:nth-of-type(even) {
-  background-color: transparent !important;
-}
 .button-like:active {
   border-bottom-width: 1px!important;
-    transform: translateY(2px);
+  transform: translateY(1px);
   margin-top: 2px;
 }
 .device-row:hover {
   background-color: $light_gray;
 }
 
+table {
+  width: 100%;
+  margin-bottom: 0;
+}
+table.plain tr:nth-of-type(1n) {
+  background: $off-white;
+  border: .5rem solid $off-white;
+}
+
+table tr td {
+  padding: .5rem;
+}
+
+table thead tr th {
+  padding: .5rem;
+}
+
+.nav-status-buttons {
+  display: block;
+  margin: 15px;
+  float: right;
+}
+
+.last-sync {
+  margin-right: 30px;
+  float: right;
+}
