@@ -3,6 +3,7 @@ import { CropInventory } from './crop_inventory';
 import { PlantCatalog } from './plant_catalog';
 import { Calendar } from './calendar';
 import { CropInfo } from './crop_info';
+import _ from 'lodash';
 
 const MENU_CHOICES = {CropInventory, PlantCatalog, CropInfo}
 

@@ -1,20 +1,21 @@
 import React from 'react';
-import { Router, Route, Link } from 'react-router';
+import { Router, Route } from 'react-router';
+import FarmDesigner from './farm_designer';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.displayName = 'App';
-    }
-    render() {
-        return <div>App</div>;
-    }
-};
+class NoMatch extends React.Component {
+  constructor(props) {
+    super(props);
+    this.displayName = 'NoMatch';
+  }
 
-React.render((
+  render() {
+    return <div>Page Not Found?</div>;
+  }
+}
+
+React.render(
   <Router>
-    <Route path="/" component={App}>
-      <Route path="*" component={NoMatch}/>
+    <Route path="/" component={ FarmDesigner }>
+      <Route path="*" component={ NoMatch }/>
     </Route>
-  </Router>
-), document.body)
+  </Router>, document.body)
