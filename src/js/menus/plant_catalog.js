@@ -1,5 +1,5 @@
 import React from "react";
-import { Crop, fakeCrops } from '../crops';
+import { Crop, fakeCrops } from '../models/crops';
 
 export class PlantCatalogTile extends React.Component {
   showCropInfo(){

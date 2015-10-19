@@ -1,7 +1,7 @@
 import React from "react";
-import { Crop } from '../crops';
+import { Crop } from '../models/crops';
 import { store } from '../farm_designer';
-import { ToolTip } from '../tooltip'
+import { ToolTip } from '../menus/tooltip'
 import { renderCatalog } from './plant_catalog';
 
 export class Tab extends React.Component {

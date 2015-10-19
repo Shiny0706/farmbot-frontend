@@ -1,6 +1,6 @@
 import React from "react";
 import { renderScheduleCreation } from './schedule_creation'
-import { ToolTip } from '../tooltip'
+import { ToolTip } from '../menus/tooltip'
 
 export class CalendarMenu extends React.Component {
   render() {
