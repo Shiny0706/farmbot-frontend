@@ -11,3 +11,7 @@ HTML, CSS, JS. Mostly React / WebPack
  3. `Visit http://localhost:8080/webpack-dev-server/src/bundle`
 
 **Notes:** Make sure you have [node installed](https://docs.npmjs.com/getting-started/installing-node).
+
+# TODO:
+
+ * De-ES6ify stuff

@@ -1,28 +1,28 @@
-import React from "react";
-import { Crop, fakeCrops } from '../models/crops';
+import React from 'react';
+import { Plant } from '../models/plant';
 
 export class PlantCatalogTile extends React.Component {
-  showCropInfo(){
+  showPlantInfo(){
     this.props.dispatch({
-      type: 'CROP_INFO_SHOW',
-      crop: this.props.crop
+      type: 'PLANT_INFO_SHOW',
+      payload: this.props.plant
     });
   };
 
   render() {
     return(
-      <div className="plantCatalogTile" onClick={ this.showCropInfo.bind(this) }>
+      <div className="plantCatalogTile" onClick={ this.showPlantInfo.bind(this) }>
         <div className="row">
           <div className="small-12 columns">
             <div className="small-header-wrapper">
-              <h5>{ this.props.crop.name }</h5>
+              <h5>{ this.props.plant.name }</h5>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="small-12 columns">
             <div className="content-wrapper">
-              <p> <img src={this.props.crop.imgUrl} /> </p>
+              <p> <img src={this.props.plant.imgUrl} /> </p>
             </div>
           </div>
         </div>
@@ -34,8 +34,8 @@ export class PlantCatalogTile extends React.Component {
 export class PlantCatalog extends React.Component {
   back() { this.props.dispatch({type: "INVENTORY_SHOW"}) }
   render() {
-    var crops = Crop.fakeCrops.map(
-       (crop, k) => <PlantCatalogTile crop={ crop }
+    var plants = Plant.fakePlants.map(
+       (plant, k) => <PlantCatalogTile plant={ plant }
                                       key={ k }
                                       dispatch={ this.props.dispatch } />
      );
@@ -51,9 +51,9 @@ export class PlantCatalog extends React.Component {
                 </p>
               </div>
             </div>
-            <div crops={ Crop.fakeCrops }>
+            <div plants={ Plant.fakePlants }>
               <br/>
-              { crops }
+              { plants }
             </div>
            </div>
   }

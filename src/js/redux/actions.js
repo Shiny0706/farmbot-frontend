@@ -4,10 +4,11 @@ let actions = {
   '@@redux/INIT': empty,
   DEFAULT: function (s, a) {
     console.warn("Unknown action fired.");
+    console.dir(arguments);
     console.trace();
     return s;
   },
-  CROP_INFO_SHOW: function(s, a) {
+  PLANT_INFO_SHOW: function(s, a) {
     // TODO: add type system to check for presence of `crop` Object?
     let fragment = {
       leftMenu: {
@@ -21,7 +22,7 @@ let actions = {
     return changeLeftComponent(s, 'PlantCatalog');
   },
   INVENTORY_SHOW: function(s, a){
-    return changeLeftComponent(s, 'CropInventory');
+    return changeLeftComponent(s, 'PlantInventory');
   },
   INVENTORY_SHOW_TAB: function(s, a) {
     return update(s, {leftMenu: {tab: a.tab}});

@@ -1,5 +1,4 @@
-import React from "react";
-
+import React from 'react';
 export class ScheduleCreation extends React.Component {
   back() { renderCalendar(); }
 
@@ -66,7 +65,3 @@ export class ScheduleCreation extends React.Component {
     return html;
   }
 }
-
-export function renderScheduleCreation() {
-  React.render(<ScheduleCreation />, rightMenu);
-};

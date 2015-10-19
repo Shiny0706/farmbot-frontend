@@ -1,7 +1,7 @@
 import React from "react";
-import { Crop } from '../models/crops';
+import { Plant } from '../models/plant';
 import { store } from '../farm_designer';
-import { ToolTip } from '../menus/tooltip'
+import { ToolTip } from './tooltip'
 import { renderCatalog } from './plant_catalog';
 
 export class Tab extends React.Component {
@@ -24,7 +24,7 @@ export class Plants extends React.Component {
   render() {
     return(
       <div>
-        <List crops={ Crop.fakeCrops } />
+        <List plants={ Plant.fakePlants } />
         <ToolTip action={ () => this.props.dispatch({type: "CATALOG_SHOW"}) } desc="Add a new plant" color="dark-green"/>
       </div>
     );
@@ -118,15 +118,15 @@ export class Item extends React.Component {
 
 export class List extends React.Component {
   render() {
-    var crops = this.props.crops.map(
+    var plants = this.props.plants.map(
        (crop, k) => <Item crop={crop} key={ k } />
      );
 
-    return(<ul className="crop-inventory"> { crops } </ul>);
+    return(<ul className="crop-inventory"> { plants } </ul>);
   }
 };
 
-export class CropInventory extends React.Component {
+export class PlantInventory extends React.Component {
   get tabName() { return (this.props.tab || "Plants") };
   get content() {
     var component = {Plants, Groups, Zones}[this.tabName];
@@ -156,8 +156,4 @@ export class CropInventory extends React.Component {
       </div>
     )
   }
-};
-
-export function renderInventory() {
-  React.render(<CropInventory />, leftMenu);
 };

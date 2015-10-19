@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import { renderScheduleCreation } from './schedule_creation'
-import { ToolTip } from '../menus/tooltip'
+import { ToolTip } from './tooltip'
 
 export class CalendarMenu extends React.Component {
   render() {
@@ -100,7 +100,3 @@ export class Calendar extends React.Component {
            </div>
   }
 }
-
-export function renderCalendar() {
-  React.render(<Calendar />, function(){ alert('Dispatch a show_calendar method here.') });
-};
