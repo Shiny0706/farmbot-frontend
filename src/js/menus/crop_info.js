@@ -13,7 +13,7 @@ export class MapPointView extends React.Component {
       left: (this.props.point.x - 20),
       top: (this.props.point.y - 40)
     };
-    return  <img style={style} src="/designer_icons/pin.png"></img>;
+    return  <img style={style} src="/img/pin.png"></img>;
   }
 };
 
