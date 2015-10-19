@@ -8,11 +8,10 @@ export class CropInfo extends React.Component {
 
   removeCrop() {
    this.props.dispatch({type: "CROP_REMOVE_REQUEST",
-                        payload: this.props.plant });
+                        payload: this.props.selectedPlant });
   }
 
   render() {
-    debugger;
     return <div>
             <div className="green-content">
               <div className="search-box-wrapper">
@@ -20,7 +19,7 @@ export class CropInfo extends React.Component {
                   <a href="#" onClick={ this.goBack.bind(this) }>
                     <i className="fa fa-arrow-left"></i>
                   </a>
-                  Crop { this.props.plant._id || "" }
+                  Crop { this.props.selectedPlant._id || "" }
                 </p>
               </div>
             </div>
@@ -28,7 +27,7 @@ export class CropInfo extends React.Component {
               <div className="crop-drag-info-tile">
                 <h6>Photos of this Crop</h6>
                 <img className="crop-drag-info-image"
-                     src={this.props.plant.imgUrl || '/designer_icons/placeholder_berries.jpg'} />
+                     src={this.props.selectedPlant.imgUrl || '/img/placeholder_berries.jpg'} />
                 </div>
               </div>
               <div>
