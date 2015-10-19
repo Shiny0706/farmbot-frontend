@@ -4,23 +4,23 @@ import { store } from './redux/store';
 import { connect } from 'react-redux';
 import { DesignerMain } from './menus/designer_main'
 
-function dispatchMapper (d) {
+function mapDispatchToProps (d) {
   return {dispatch: d};
 }
 
-var App = connect(s => s, dispatchMapper)(DesignerMain);
+var App = connect(s => s, mapDispatchToProps)(DesignerMain);
 
 class FarmDesigner extends React.Component {
-    constructor(props) {
-        super(props);
-        this.displayName = 'FarmDesigner';
-    }
-    render() {
-      return <Provider store={store}>
-          {() => <App />}
-        </Provider>;
-    }
+  constructor(props) {
+    super(props);
+    this.displayName = 'FarmDesigner';
+  }
+
+  render() {
+    return <Provider store={store}>
+        {() => <App />}
+      </Provider>;
+  }
 }
 
 export default FarmDesigner;
-
