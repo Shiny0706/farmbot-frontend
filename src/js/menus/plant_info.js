@@ -9,7 +9,7 @@ export class PlantInfo extends React.Component {
       .getBoundingClientRect();
     var coords = fromScreenToGarden(e.pageX, e.pageY, box.left, box.bottom)
     var plant = new Plant(coords);
-    this.props.dispatch({type: "CROP_ADD_REQUEST", payload: plant});
+    this.props.dispatch({type: "PLANT_ADD_REQUEST", payload: plant});
   }
 
   showCatalog(){

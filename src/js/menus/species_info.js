@@ -4,7 +4,7 @@ import { Plant } from '../models/plant';
 export class SpeciesInfo extends React.Component {
   drop (e) {
     var plant = new Plant({x: e.clientX, y: e.clientY});
-    this.props.dispatch({type: "CROP_ADD_REQUEST", payload: plant});
+    this.props.dispatch({type: "PLANT_ADD_REQUEST", payload: plant});
   }
 
   showCatalog(){
