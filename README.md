@@ -15,3 +15,6 @@ HTML, CSS, JS. Mostly React / WebPack
 # TODO:
 
  * De-ES6ify stuff
+ * Add test suite
+ * Clarify all those weird crop/plant/species ambiguations.
+ * Add ENV module.
