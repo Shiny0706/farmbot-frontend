@@ -22,17 +22,13 @@ actions.CROP_SELECT = function(s, a) {
   return _.merge({}, select_crop, change_menu);
 };
 
-actions.PLANT_ADD_REQUEST = function(s, a) {
-  // TODO: Add some sort of Redux Async handler.
-  $.ajax({
-    method: "POST",
-    url: "/api/plants",
-    data: a.payload
-  })
+actions.PLANT_ADD_REQUEST = function(s, action) {
+  action.payload
+  .save()
   .fail((a, b, c) => alert("Failed to add crop. Refresh page."))
   .then((aa,bb,cc,dd) => store.dispatch({type: "CROP_ADD_FINISH"}));
   var plants = _.cloneDeep(s.global.plants);
-  var selectedPlant = _.cloneDeep(a.payload);
+  var selectedPlant = _.cloneDeep(action.payload);
   plants.push(selectedPlant);
   return update(s, {
     global: {

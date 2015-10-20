@@ -8,3 +8,4 @@
 /*.sublime-workspace
 src/css/bootstrap.css
 src/fonts/*
+src/js/config.js
