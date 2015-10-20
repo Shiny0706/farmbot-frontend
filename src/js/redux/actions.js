@@ -8,12 +8,12 @@ let actions = {
     console.trace();
     return s;
   },
-  PLANT_INFO_SHOW: function(s, a) {
+  SPECIES_INFO_SHOW: function(s, a) {
     // TODO: add type system to check for presence of `crop` Object?
     let fragment = {
       leftMenu: {
-        component: 'CropInfo',
-        crop: a.crop
+        component: 'SpeciesInfo',
+        selectedSpecies: a.payload
       }
     };
     return update(s, fragment);

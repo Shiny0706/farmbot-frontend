@@ -6,9 +6,10 @@ import { GardenMap } from './garden_map';
 import { Navbar } from './navbar';
 import { PlantCatalog } from './plant_catalog';
 import { PlantInfo } from './plant_info';
+import { SpeciesInfo } from './species_info';
 import { PlantInventory } from './plant_inventory';
 
-const MENU_CHOICES = {PlantInventory, PlantCatalog, CropInfo}
+const MENU_CHOICES = {PlantInventory, PlantCatalog, CropInfo, SpeciesInfo}
 
 export class DesignerMain extends React.Component {
   transferableProps(name){

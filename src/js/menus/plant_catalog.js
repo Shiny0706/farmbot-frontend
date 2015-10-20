@@ -1,10 +1,11 @@
 import React from 'react';
 import { Plant } from '../models/plant';
+import { Species } from '../models/species';
 
 export class PlantCatalogTile extends React.Component {
   showPlantInfo(){
     this.props.dispatch({
-      type: 'PLANT_INFO_SHOW',
+      type: 'SPECIES_INFO_SHOW',
       payload: this.props.plant
     });
   };
@@ -58,7 +59,3 @@ export class PlantCatalog extends React.Component {
            </div>
   }
 }
-
-export function renderCatalog() {
-  alert('this is where you left off. Add a redux dispatcher here.');
-};

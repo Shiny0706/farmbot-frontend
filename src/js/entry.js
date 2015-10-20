@@ -2,6 +2,8 @@ require("./routes")
 require("!style!css!../css/bootstrap.css");
 require("!style!css!sass!../css/farmbot.scss");
 
+// Programmatically add *.css and *.js from CDN to dom.
+// If there's a way to (easily) do this with WebPack, submit a PR!
 function loadjscssfile(filename, filetype){
     if (filetype=="js"){ //if filename is a external JavaScript file
         var fileref=document.createElement('script')
