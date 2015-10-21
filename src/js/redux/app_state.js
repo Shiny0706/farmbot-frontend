@@ -1,8 +1,12 @@
-var oldCache = localStorage && localStorage["FARMBOT_DESIGNER_CACHE"];
-if (oldCache) {
-  export var initialState = JSON.parse(oldCache)
-} else {
-  export var initialState = {
+export var appState = {
+  getState: function() {
+    var stored = localStorage["FARMBOT_DESIGNER_CACHE"];
+    return (stored ? JSON.parse(stored) : this.defaultState);
+  },
+  saveState: function (state) {
+    return localStorage["FARMBOT_DESIGNER_CACHE"] = JSON.stringify(state);
+  },
+  defaultState: {
       leftMenu: {
         component: 'PlantInventory',
         tab:       'Plants'
@@ -17,6 +21,5 @@ if (oldCache) {
                        },
         selectedPlant: {}
       }
-    };
-}
-
+    }
+  };

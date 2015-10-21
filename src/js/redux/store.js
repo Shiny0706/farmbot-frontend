@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
-import { initialState } from './initial_state';
+import { appState } from './app_state';
 import { reducer } from './reducer';
 
-var store = createStore(reducer, initialState);
+var store = createStore(reducer, appState.getState());
 
 export { store };
