@@ -12,7 +12,7 @@ actions.DEFAULT = function (s, a) {
     return s;
 };
 
-actions.CROP_SELECT = function(s, a) {
+actions.PLANT_SELECT = function(s, a) {
   var select_crop = update(s, {
     global: {
       selectedPlant: a.payload

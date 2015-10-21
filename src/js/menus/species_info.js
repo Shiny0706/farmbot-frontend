@@ -1,9 +1,14 @@
 import React from 'react';
 import { Plant } from '../models/plant';
+import { fromScreenToGarden } from '../geometry/coordinates';
 
 export class SpeciesInfo extends React.Component {
   drop (e) {
-    var plant = new Plant({x: e.clientX, y: e.clientY});
+    var box = document
+      .querySelector('#drop-area > svg > rect')
+      .getBoundingClientRect();
+    var coords = fromScreenToGarden(e.pageX, e.pageY, box.left, box.bottom)
+    var plant = new Plant(coords);
     this.props.dispatch({type: "PLANT_ADD_REQUEST", payload: plant});
   }
 

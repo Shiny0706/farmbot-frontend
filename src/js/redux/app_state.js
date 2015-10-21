@@ -1,7 +1,15 @@
 export var appState = {
   getState: function() {
     var stored = localStorage["FARMBOT_DESIGNER_CACHE"];
-    return (stored ? JSON.parse(stored) : this.defaultState);
+    try {
+      return (stored ? JSON.parse(stored) : this.defaultState);
+    } catch(e) {
+      console.warn("Error while loading app state from localStorage. " +
+                   "Reseting app state.");
+      this.saveState(this.defaultState);
+      return this.defaultState;
+    };
+
   },
   saveState: function (state) {
     return localStorage["FARMBOT_DESIGNER_CACHE"] = JSON.stringify(state);
