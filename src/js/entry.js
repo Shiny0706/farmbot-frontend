@@ -1,25 +1,13 @@
-require("./routes")
+import React from 'react';
+import FarmDesigner from './farm_designer';
+import { router } from './router.js';
+import { loadFromCdn } from './load_from_cdn';
+
 require("!style!css!../css/bootstrap.css");
 require("!style!css!sass!../css/farmbot.scss");
-
-// Programmatically add *.css and *.js from CDN to dom.
-// If there's a way to (easily) do this with WebPack, submit a PR!
-function loadjscssfile(filename, filetype){
-    if (filetype=="js"){ //if filename is a external JavaScript file
-        var fileref=document.createElement('script')
-        fileref.setAttribute("type","text/javascript")
-        fileref.setAttribute("src", filename)
-    }
-    else if (filetype=="css"){ //if filename is an external CSS file
-        var fileref=document.createElement("link")
-        fileref.setAttribute("rel", "stylesheet")
-        fileref.setAttribute("type", "text/css")
-        fileref.setAttribute("href", filename)
-    }
-    if (typeof fileref!="undefined")
-        document.getElementsByTagName("head")[0].appendChild(fileref)
-}
-
-loadjscssfile(
+loadFromCdn(
   "//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
   "css");
+
+React.render(<FarmDesigner/>, document.body);
+router.bootstrap();

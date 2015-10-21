@@ -15,6 +15,6 @@ HTML, CSS, JS. Mostly React / WebPack
 
 # TODO:
 
- * De-ES6ify stuff.
+ * Finish routing ("ROUTE_CHANGE" action creator does nothing.)
  * Add test suite.
- * Clarify all those weird crop/plant/species ambiguations.
+ * Get sourcemaps working

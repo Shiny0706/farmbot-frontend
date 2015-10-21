@@ -19,6 +19,10 @@ export var appState = {
         component: 'PlantInventory',
         tab:       'Plants'
       },
+      route: {
+        // Empty initially.
+      }
+      ,
       global: {
         plants: [],
         planting_area: {

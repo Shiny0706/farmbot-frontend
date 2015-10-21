@@ -5,11 +5,16 @@ let actions = {};
 
 actions['@@redux/INIT'] = empty;
 
+
 actions.DEFAULT = function (s, a) {
     console.warn("Unknown action (" + (a.type || 'null') +") fired.");
     console.dir(a || "Empty action payload");
     console.dir(s || "Empty state");
     return s;
+};
+
+actions.ROUTE_CHANGE = function(s, a) {
+  return s;
 };
 
 actions.PLANT_SELECT = function(s, a) {
