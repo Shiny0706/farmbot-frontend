@@ -15,8 +15,6 @@ HTML, CSS, JS. Mostly React / WebPack
 
 # TODO:
 
- * Cache app state in localStorage
- * Fix crop dropping issues (Check old codebase?)
  * De-ES6ify stuff.
  * Add test suite.
  * Clarify all those weird crop/plant/species ambiguations.

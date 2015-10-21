@@ -2,8 +2,8 @@ import React from 'react';
 
 export class Navbar extends React.Component {
   render() {
-    return <div className="row">
-             <nav className="drop-shadow">
+    return <div>
+             <nav className="drop-shadow navbar">
                <div className="small-menu-title">MENU</div>
                <a href="/">Home</a>
                  <a href="/pages/farm_designer">Farm Designer</a>
