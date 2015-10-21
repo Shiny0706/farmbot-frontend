@@ -5,5 +5,6 @@ export function reducer(state, action) {
   console.log(action.type)
   var outcome = (actions[action.type] || actions.DEFAULT)(state, action);
   appState.saveState(outcome);
+
   return outcome;
 };

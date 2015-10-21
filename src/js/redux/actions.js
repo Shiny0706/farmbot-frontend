@@ -18,7 +18,7 @@ actions.CROP_SELECT = function(s, a) {
       selectedPlant: a.payload
     }
   });
-  var change_menu = actions.CROP_INFO_SHOW(select_crop, a);
+  var change_menu = actions.PLANT_INFO_SHOW(select_crop, a);
   return _.merge({}, select_crop, change_menu);
 };
 
@@ -62,16 +62,17 @@ actions.SPECIES_INFO_SHOW = function(s, a) {
     };
     return update(s, fragment);
   }
-// actions.PLANT_INFO_SHOW = function(s, a) {
-//   // TODO: add type system to check for presence of `crop` Object?
-//   let fragment = {
-//     leftMenu: {
-//       component: 'PlantInfo',
-//       plant: a.payload
-//     }
-//   };crop
-//   return update(s, fragment);
-// };
+
+actions.PLANT_INFO_SHOW = function(s, a) {
+  // TODO: add type system to check for presence of `crop` Object?
+  var fragment = {
+    leftMenu: {
+      component: 'PlantInfo',
+      selectedPlant: a.payload
+    }
+  };
+  return update(s, fragment);
+};
 
 // actions.CROP_INFO_SHOW = function(s, a) {
 //   // TODO: add type system to check for presence of `crop` Object?

@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React from "react";
 import { Calendar } from './calendar';
-import { CropInfo } from './crop_info';
 import { GardenMap } from './garden_map';
 import { Navbar } from './navbar';
 import { PlantCatalog } from './plant_catalog';
@@ -9,7 +8,7 @@ import { PlantInfo } from './plant_info';
 import { SpeciesInfo } from './species_info';
 import { PlantInventory } from './plant_inventory';
 
-const MENU_CHOICES = {PlantInventory, PlantCatalog, CropInfo, SpeciesInfo}
+const MENU_CHOICES = {PlantInventory, PlantCatalog, PlantInfo, SpeciesInfo}
 
 export class DesignerMain extends React.Component {
   transferableProps(name){
