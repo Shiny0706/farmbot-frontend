@@ -1,34 +1,43 @@
 import React from 'react';
 import Rlite from 'rlite-router';
 import { store } from './redux/store';
-export var router = Rlite();
+import { FarmDesigner } from './menus/farm_designer';
+import { NotFound } from './menus/not_found';
 
-router.add('', defaultRouteHandler);
-router.add('s/:screen', defaultRouteHandler);
+export var Router = Rlite();
 
-router.Component = React.createClass({
+Router.Component = React.createClass({
   componentTable: {
 
   },
-  currentScreen: function () {
-    // body...
+  renderScreen: function (name) {
+    var choices = {
+      'designer': FarmDesigner
+    }
+    var component = choices[name] || NotFound;
+    return React.createElement(component, this.props);
   },
   render: function(){
+    var screenName = this.props.route.screen;
     return(
       <div>
-        { this.currentScreen() }
+        { this.renderScreen(screenName) }
       </div>
     );
   }
 })
 
-router.bootstrap = function(){
+
+Router.add('', defaultRouteHandler);
+Router.add('s/:screen', defaultRouteHandler);
+
+Router.bootstrap = function(){
   window.addEventListener('hashchange', this.processHash);
 }
 
-router.processHash = function() {
+Router.processHash = function() {
   var hash = location.hash || '#';
-  router.run(hash.slice(1)) || console.warn('Unknown route');
+  Router.run(hash.slice(1)) || console.warn('Unknown route');
 }
 
 function defaultRouteHandler (r) {

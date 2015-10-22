@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './app';
-import { router } from './router.js';
+import { Router } from './router.js';
 import { loadFromCdn } from './load_from_cdn';
 
 require("!style!css!../css/bootstrap.css");
@@ -10,4 +10,4 @@ loadFromCdn(
   "css");
 
 React.render(<App/>, document.body);
-router.bootstrap();
+Router.bootstrap();
