@@ -7,10 +7,10 @@ export class Navbar extends React.Component {
                <div className="small-menu-title">MENU</div>
                <a href="#">Home</a>
                <a href="#s/designer">Farm Designer</a>
-               <a href="#s/movement">Controls</a>
+               <a href="#s/controls">Controls</a>
                <a href="#s/devices">Devices</a>
-               <a href="#s/sequence">Sequences</a>
-               <a href="#s/schedule">Schedules</a>
+               <a href="#s/sequences">Sequences</a>
+               <a href="#s/schedules">Schedules</a>
                <a className="large-menu-right" href="/users/sign_out">Sign out</a>
                <a className="large-menu-right" href="/users/edit">My Account</a>
                <button className="red button-like" type="button">Stop*</button>
