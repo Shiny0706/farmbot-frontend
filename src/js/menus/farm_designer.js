@@ -10,7 +10,7 @@ import { PlantInventory } from './plant_inventory';
 
 const MENU_CHOICES = {PlantInventory, PlantCatalog, PlantInfo, SpeciesInfo}
 
-export class DesignerMain extends React.Component {
+export class FarmDesigner extends React.Component {
   transferableProps(name){
     return _.merge({}, this.props.global, {dispatch: this.props.dispatch}, this.props[name]);
   };

@@ -1,5 +1,5 @@
 import React from 'react';
-import FarmDesigner from './farm_designer';
+import App from './app';
 import { router } from './router.js';
 import { loadFromCdn } from './load_from_cdn';
 
@@ -9,5 +9,5 @@ loadFromCdn(
   "//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
   "css");
 
-React.render(<FarmDesigner/>, document.body);
+React.render(<App/>, document.body);
 router.bootstrap();

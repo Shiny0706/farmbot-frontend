@@ -2,15 +2,16 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { connect } from 'react-redux';
-import { DesignerMain } from './menus/designer_main'
+import { FarmDesigner } from './menus/farm_designer'
 
 function mapDispatchToProps (d) {
   return {dispatch: d};
 }
 
-var App = connect(s => s, mapDispatchToProps)(DesignerMain);
+// var ConnectedApp = connect(s => s, mapDispatchToProps)(FarmDesigner);
+var ConnectedApp = connect(s => s, mapDispatchToProps)(FarmDesigner);
 
-class FarmDesigner extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.displayName = 'FarmDesigner';
@@ -18,9 +19,9 @@ class FarmDesigner extends React.Component {
 
   render() {
     return <Provider store={store}>
-        {() => <App />}
+        {() => <ConnectedApp />}
       </Provider>;
   }
 }
 
-export default FarmDesigner;
+export default App;

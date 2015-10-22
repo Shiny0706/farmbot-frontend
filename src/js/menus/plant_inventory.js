@@ -1,6 +1,6 @@
 import React from "react";
 import { Plant } from '../models/plant';
-import { store } from '../farm_designer';
+import { store } from '../app';
 import { ToolTip } from './tooltip'
 import { renderCatalog } from './plant_catalog';
 

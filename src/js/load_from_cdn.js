@@ -1,4 +1,3 @@
-
 // Programmatically add *.css and *.js from CDN to dom.
 // If there's a way to (easily) do this with WebPack, submit a PR!
 export function loadFromCdn(filename, filetype){

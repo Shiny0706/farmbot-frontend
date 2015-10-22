@@ -21,8 +21,7 @@ export var appState = {
       },
       route: {
         // Empty initially.
-      }
-      ,
+      },
       global: {
         plants: [],
         planting_area: {

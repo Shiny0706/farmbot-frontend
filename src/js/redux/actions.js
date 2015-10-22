@@ -14,7 +14,10 @@ actions.DEFAULT = function (s, a) {
 };
 
 actions.ROUTE_CHANGE = function(s, a) {
-  return s;
+  var newRouteData = a.payload.params;
+  newRouteData.url = a.payload.url;
+  console.dir(newRouteData);
+  return update(s, {route: newRouteData});
 };
 
 actions.PLANT_SELECT = function(s, a) {
