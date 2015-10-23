@@ -1,10 +1,10 @@
+import { Plant } from '../models/plant'
 import { store } from './store';
 import $ from 'jquery';
 
 let actions = {};
 
 actions['@@redux/INIT'] = empty;
-
 
 actions.DEFAULT = function (s, a) {
     console.warn("Unknown action (" + (a.type || 'null') +") fired.");
@@ -14,10 +14,9 @@ actions.DEFAULT = function (s, a) {
 };
 
 actions.ROUTE_CHANGE = function(s, a) {
-  var newRouteData = a.payload.params;
-  newRouteData.url = a.payload.url;
-  console.dir(newRouteData);
-  return update(s, {route: newRouteData});
+  var oldRouteStore = _.cloneDeep(s.route);
+  var newRouteStore = _.merge(s.route, a.payload.params);
+  return update(s, {route: newRouteStore});
 };
 
 actions.PLANT_SELECT = function(s, a) {
@@ -31,10 +30,9 @@ actions.PLANT_SELECT = function(s, a) {
 };
 
 actions.PLANT_ADD_REQUEST = function(s, action) {
-  action.payload
-  .save()
-  .fail((a, b, c) => alert("Failed to add crop. Refresh page."))
-  .then((aa,bb,cc,dd) => store.dispatch({type: "CROP_ADD_FINISH"}));
+  Plant
+    .save(action.payload)
+    .fail((a, b, c) => alert("Failed to add crop. Refresh page."));
   var plants = _.cloneDeep(s.global.plants);
   var selectedPlant = _.cloneDeep(action.payload);
   plants.push(selectedPlant);
@@ -46,17 +44,13 @@ actions.PLANT_ADD_REQUEST = function(s, action) {
   });
 };
 
-actions.CROP_ADD_FINISH = function(s, a) { return s; };
-
-actions.CROP_REMOVE_REQUEST = function(s, a) {
+actions.PLANT_REMOVE_REQUEST = function(s, a) {
   var s = _.cloneDeep(s);
   var id = a.payload._id;
-  _.remove(s.global.plants, a.payload)
-
-  $.ajax({
-    method: "DELETE",
-    url: "/api/plants/" + id
-  }).fail(() => alert("Failed to delete. Refresh the page."));
+  _.remove(s.global.plants, a.payload);
+  Plant
+    .destroy(a.payload)
+    .fail(() => alert("Failed to delete. Refresh the page."));
 
   return s;
 };
@@ -81,16 +75,6 @@ actions.PLANT_INFO_SHOW = function(s, a) {
   };
   return update(s, fragment);
 };
-
-// actions.CROP_INFO_SHOW = function(s, a) {
-//   // TODO: add type system to check for presence of `crop` Object?
-//   return update(s, {
-//     leftMenu: {
-//       component: 'CropInfo',
-//       plant: a.payload
-//     }
-//   });
-// };
 
 actions.CATALOG_SHOW = function(s, a) {
   return changeLeftComponent(s, 'PlantCatalog');

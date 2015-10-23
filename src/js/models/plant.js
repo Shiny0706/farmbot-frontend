@@ -9,7 +9,7 @@ Plant.fakePlants = [
   new Plant({name: "Cilantro", imgUrl: CONFIG.ROOT_URL + "/img/cilantro.svg"}),
 ];
 
-Plant.prototype.save = function(){
+Plant.save = function (that) {
   return $.ajax({
     method: "POST",
     headers: {
@@ -17,9 +17,16 @@ Plant.prototype.save = function(){
       bot_token: "2649365c72ae225ef5cdfe208a4462eb0a11a1fc"
     },
     url: CONFIG.FARMBOT_API_URL + "/api/plants",
-    data: {data: this}
+    data: that
   });
 };
+
+Plant.destroy = function (that) {
+  return $.ajax({
+    method: "DELETE",
+    url: CONFIG.FARMBOT_API_URL + "/api/plants/" + that._id
+  });
+}
 
 export function Plant (options) {
   this._id  = (options._id || _.random(0, 1000));

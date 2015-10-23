@@ -14,7 +14,7 @@ export class MapPoint extends React.Component {
     var fill = this.selected() ? "red" : "black";
 
     return <circle cx={ this.props.plant.x }
-                   cy={ (-1 * this.props.plant.y) + length  }
+                   cy={ (-1 * this.props.plant.y) + length - 30 }
                    onClick={ this.select.bind(this) }
                    fill={ fill }
                    r="5" />;

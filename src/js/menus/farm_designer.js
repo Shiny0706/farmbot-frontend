@@ -8,11 +8,14 @@ import { PlantInfo } from './plant_info';
 import { SpeciesInfo } from './species_info';
 import { PlantInventory } from './plant_inventory';
 
-const MENU_CHOICES = {PlantInventory, PlantCatalog, PlantInfo, SpeciesInfo}
+const MENU_CHOICES = {PlantInventory, PlantCatalog, PlantInfo, SpeciesInfo};
 
 export class FarmDesigner extends React.Component {
   transferableProps(name){
-    return _.merge({}, this.props.global, {dispatch: this.props.dispatch}, this.props[name]);
+    return _.merge({},
+                   this.props.global,
+                   {dispatch: this.props.dispatch},
+                   this.props[name]);
   };
 
   // Dynamically determine what to render on the left side of the designer,

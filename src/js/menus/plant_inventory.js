@@ -110,7 +110,7 @@ export class Item extends React.Component {
   render() {
     return(
       <li>
-        <a href="#?wow=123"> {this.props.crop.name} </a>
+        <a href="#?screen=controls"> {this.props.crop.name} </a>
         <div>{this.props.crop.age} days old</div>
       </li>);
   }

@@ -1,4 +1,3 @@
-export var appState = {
   getState: function() {
     var stored = localStorage["FARMBOT_DESIGNER_CACHE"];
     try {

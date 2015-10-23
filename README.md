@@ -13,8 +13,9 @@ HTML, CSS, JS. Mostly React / WebPack
 
 **Notes:** Make sure you have [node installed](https://docs.npmjs.com/getting-started/installing-node).
 
-# TODO:
+# TODO / Refinements:
 
- * Finish routing ("ROUTE_CHANGE" action creator does nothing.)
+ * Integrate Immutable.js into action creators / dispatchers.
+ * Remove onclick() handlers now that routing is done.
  * Add test suite.
  * Get sourcemaps working
