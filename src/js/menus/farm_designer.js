@@ -11,14 +11,6 @@ import { PlantInventory } from './plant_inventory';
 const MENU_CHOICES = {PlantInventory, PlantCatalog, PlantInfo, SpeciesInfo};
 
 export class FarmDesigner extends React.Component {
-  // TODO: This is terrible and needs to be removed.
-  transferableProps(name){
-    return _.merge({},
-                   this.props.global,
-                   {dispatch: this.props.dispatch},
-                   this.props[name]);
-  };
-
   // Dynamically determine what to render on the left side of the designer,
   // based on the value of hash fragment designer_left_menu
   renderLeft() {
@@ -33,11 +25,6 @@ export class FarmDesigner extends React.Component {
     };
   }
 
-  renderMiddle(){
-    return React.createElement(GardenMap,
-                               this.transferableProps("middleMenu"));
-  }
-
   render(){
     return (
         <div className="farm-designer">
@@ -50,7 +37,9 @@ export class FarmDesigner extends React.Component {
             </div>
 
             <div className="farm-designer-middle">
-              { this.renderMiddle() }
+              <GardenMap dispath={this.props.dispatch}
+                         route={this.props.route}
+                         {...this.props.global}/>
             </div>
 
             <div className="farm-designer-right">

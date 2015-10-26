@@ -14,14 +14,15 @@ export var appState = {
   saveState: function (state) {
     return localStorage["FARMBOT_DESIGNER_CACHE"] = JSON.stringify(state);
   },
+  // Yes, it needs to be snake case.
   defaultState: {
-      leftMenu: {
-        component: 'PlantInventory',
-        tab:       'Plants'
-      },
+      // State stored in the URL hash for bookmarks / sharing / back button use.
       route: {
-        // Empty initially.
+        designer_left_menu: 'PlantInventory',
+        designer_left_tab: 'Plants',
+        selected_plant_id: 0
       },
+      // Everything else.
       global: {
         plants: [],
         planting_area: {
@@ -30,7 +31,6 @@ export var appState = {
                          length: 300,
                          width: 600
                        },
-        selectedPlant: {}
       }
     }
   };

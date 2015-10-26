@@ -4,22 +4,6 @@ import { store } from '../app';
 import { ToolTip } from './tooltip'
 import { renderCatalog } from './plant_catalog';
 
-export class Tab extends React.Component {
-  render() {
-    return <li onClick={ this.handleClick.bind(this) }>
-            <a href="#"
-               className={this.props.active ? "active" : ""}>
-              { this.props.name }
-            </a>
-           </li>
-  }
-
-  handleClick() {
-    this.props.dispatch({type: "INVENTORY_SHOW_TAB", tab: this.props.name});
-  }
-}
-
-
 export class Plants extends React.Component {
   render() {
     return(
@@ -108,9 +92,13 @@ export class Zones extends React.Component {
 
 export class Item extends React.Component {
   render() {
+    var url = "#s/designer?designer_left_menu=PlantInfo&selected_plant_id=" +
+              (this.props.crop._id || 0);
     return(
       <li>
-        <a href="#?screen=controls"> {this.props.crop.name} </a>
+        <a href={ url }>
+          {this.props.crop.name}
+        </a>
         <div>{this.props.crop.age} days old</div>
       </li>);
   }
@@ -127,13 +115,17 @@ export class List extends React.Component {
 };
 
 export class PlantInventory extends React.Component {
-  get tabName() { return (this.props.tab || "Plants") };
+  get tabName() {
+    return (this.props.route.designer_left_tab || "Plants")
+  }
+
   get content() {
     var component = {Plants, Groups, Zones}[this.tabName];
     return React.createElement(component,
                                {dispatch: this.props.dispatch});
-  };
-  isActive(item) { return this.tabName === item };
+  }
+
+  isActive(item) { return this.props.route.designer_left_tab === item };
 
   render() {
     return (
@@ -145,10 +137,14 @@ export class PlantInventory extends React.Component {
           <ul className="tabs">
             {
               ["Plants", "Groups", "Zones"].map(function(item, i) {
-                return <Tab key={i}
-                            name={item}
-                            dispatch={this.props.dispatch}
-                            active={this.isActive(item)}/>;
+                var url = "#s/designer?designer_left_tab=" + (item || 'Plants');
+                return  <li key={i}>
+                          <a href={ url }
+                             className={this.isActive(item) ? "active" : ""}>
+                            { item }
+                          </a>
+                        </li>;
+
             }.bind(this))}
           </ul>
         </div>

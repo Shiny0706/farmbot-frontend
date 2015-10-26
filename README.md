@@ -16,7 +16,8 @@ HTML, CSS, JS. Mostly React / WebPack
 # TODO / Refinements:
 
  * Integrate Immutable.js into action creators / dispatchers.
- * Remove onclick() handlers now that routing is done.
- * Pass props down the `<GardenMap/>` the right way.
+ * Remove onclick() handlers.
+ * Remove `*_SHOW` actions.
+ * Add URL route helpers to keep things DRY.
  * Add test suite.
  * Get sourcemaps working

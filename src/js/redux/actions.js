@@ -19,7 +19,6 @@ actions.ROUTE_CHANGE = function(s, a) {
   var oldParams = s.route;
   var newParams = _.merge({}, oldParams, additions);
 
-  Router.silentUpdate(newParams); // Silently add params to hash fragment.
   return update(s, {route: newParams});
 };
 
@@ -87,10 +86,6 @@ actions.CATALOG_SHOW = function(s, a) {
 actions.INVENTORY_SHOW = function(s, a) {
   return changeLeftComponent(s, 'PlantInventory');
 };
-
-actions.INVENTORY_SHOW_TAB = function(s, a) {
-    return update(s, {leftMenu: {tab: a.tab}});
-}
 
 function empty(s, a) {
   return s;
