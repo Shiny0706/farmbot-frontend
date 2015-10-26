@@ -11,6 +11,7 @@ import { PlantInventory } from './plant_inventory';
 const MENU_CHOICES = {PlantInventory, PlantCatalog, PlantInfo, SpeciesInfo};
 
 export class FarmDesigner extends React.Component {
+  // TODO: This is terrible and needs to be removed.
   transferableProps(name){
     return _.merge({},
                    this.props.global,
@@ -19,16 +20,16 @@ export class FarmDesigner extends React.Component {
   };
 
   // Dynamically determine what to render on the left side of the designer,
-  // based on the value of getStore().leftMenu.component
+  // based on the value of hash fragment designer_left_menu
   renderLeft() {
-    var props = this.transferableProps("leftMenu");
-    var component = MENU_CHOICES[props.component];
+    var leftMenu = this.props.route.designer_left_menu || 'PlantInventory';
+    var component = MENU_CHOICES[leftMenu];
     if (!component) {
-      var msg = `Attempted to render component ${props.component}, but valid choices are:`
+      var msg = `Cant render '${props.component}', valid choices are:`
       var choices = Object.keys(MENU_CHOICES);
       console.warn(msg, choices);
     } else {
-      return React.createElement(component, props);
+      return React.createElement(component, this.props);
     };
   }
 
