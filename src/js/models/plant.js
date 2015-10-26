@@ -2,20 +2,25 @@ import _ from 'lodash';
 import $ from 'jquery';
 import { CONFIG } from '../config'
 
-Plant.fakePlants = [
-  new Plant({name: "Blueberry", imgUrl: CONFIG.ROOT_URL + "/img/blueberry.svg"}),
-  new Plant({name: "Cabbage", imgUrl: CONFIG.ROOT_URL + "/img/cabbage.svg"}),
-  new Plant({name: "Pepper", imgUrl: CONFIG.ROOT_URL + "/img/pepper.svg"}),
-  new Plant({name: "Cilantro", imgUrl: CONFIG.ROOT_URL + "/img/cilantro.svg"}),
-];
+var fakeHeaders = { // TODO: Add auth scheme.
+      bot_uuid: "c3c854e5-5508-49f9-8348-725bee7d392c",
+      bot_token: "2649365c72ae225ef5cdfe208a4462eb0a11a1fc"
+};
+
+Plant.fakePlants = [];
+
+Plant.fetchAll = function() {
+  return $.ajax({
+    method: "GET",
+    headers: fakeHeaders,
+    url: CONFIG.FARMBOT_API_URL + "/api/plants"
+  });
+};
 
 Plant.save = function (that) {
   return $.ajax({
     method: "POST",
-    headers: {
-      bot_uuid: "c3c854e5-5508-49f9-8348-725bee7d392c",
-      bot_token: "2649365c72ae225ef5cdfe208a4462eb0a11a1fc"
-    },
+    headers: fakeHeaders,
     url: CONFIG.FARMBOT_API_URL + "/api/plants",
     data: that
   });

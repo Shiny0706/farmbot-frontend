@@ -8,11 +8,6 @@ function mapStateToProps (d) { return {dispatch: d}; }
 var ConnectedApp = connect(s => s, mapStateToProps)(Router.Component);
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.displayName = 'FarmBotFrontend';
-  }
-
   render() {
     return <Provider store={store}>
         {

@@ -20,4 +20,5 @@ HTML, CSS, JS. Mostly React / WebPack
  * Remove `*_SHOW` actions.
  * Add URL route helpers to keep things DRY.
  * Add test suite.
+ * Add global error handler.
  * Get sourcemaps working

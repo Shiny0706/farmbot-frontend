@@ -1,17 +1,25 @@
 import { Plant } from '../models/plant'
-import { store } from './store';
 import $ from 'jquery';
 import { Router } from '../router';
+import { store } from './store';
 
 let actions = {};
 
-actions['@@redux/INIT'] = empty;
+actions['@@redux/INIT'] = function(s, a) {
+  // This is private!
+  return s;
+};
 
 actions.DEFAULT = function (s, a) {
     console.warn("Unknown action (" + (a.type || 'null') +") fired.");
     console.dir(a || "Empty action payload");
     console.dir(s || "Empty state");
     return s;
+};
+
+actions.POST_INIT = function(s, a) {
+  store.dispatch({type: "PLANT_FETCH_REQUEST"});
+  return s;
 };
 
 actions.ROUTE_CHANGE = function(s, a) {
@@ -31,6 +39,14 @@ actions.PLANT_SELECT = function(s, a) {
   var change_menu = actions.PLANT_INFO_SHOW(select_crop, a);
   return _.merge({}, select_crop, change_menu);
 };
+
+actions.PLANT_FETCH_REQUEST = function(state, action) {
+  Plant
+    .fetchAll()
+    .then(function(data){ debugger })
+    .catch(function(){ alert("Cant fetch crops.") });
+
+}
 
 actions.PLANT_ADD_REQUEST = function(s, action) {
   Plant
@@ -86,10 +102,6 @@ actions.CATALOG_SHOW = function(s, a) {
 actions.INVENTORY_SHOW = function(s, a) {
   return changeLeftComponent(s, 'PlantInventory');
 };
-
-function empty(s, a) {
-  return s;
-}
 
 function changeLeftComponent(state, name) {
   return update(state, {
