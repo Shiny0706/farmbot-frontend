@@ -1,6 +1,7 @@
 import { Plant } from '../models/plant'
 import { store } from './store';
 import $ from 'jquery';
+import { Router } from '../router';
 
 let actions = {};
 
@@ -14,9 +15,12 @@ actions.DEFAULT = function (s, a) {
 };
 
 actions.ROUTE_CHANGE = function(s, a) {
-  var oldRouteStore = _.cloneDeep(s.route);
-  var newRouteStore = _.merge(s.route, a.payload.params);
-  return update(s, {route: newRouteStore});
+  var additions = a.payload.params;
+  var oldParams = s.route;
+  var newParams = _.merge({}, oldParams, additions);
+
+  Router.silentUpdate(newParams); // Silently add params to hash fragment.
+  return update(s, {route: newParams});
 };
 
 actions.PLANT_SELECT = function(s, a) {
