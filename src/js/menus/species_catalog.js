@@ -3,13 +3,6 @@ import { Plant } from '../models/plant';
 import { Species } from '../models/species';
 
 export class SpeciesCatalogTile extends React.Component {
-  // showPlantInfo(){
-  //   this.props.dispatch({
-  //     type: 'SPECIES_INFO_SHOW',
-  //     payload: this.props.plant
-  //   });
-  // };
-
   render() {
     var specimen = this.props.specimen;
     var url = "#s/designer?designer_left_menu=SpeciesInfo&selected_specimen_id="

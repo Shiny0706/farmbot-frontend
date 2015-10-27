@@ -5,11 +5,6 @@ import { store } from './store';
 
 let actions = {};
 
-actions['@@redux/INIT'] = function(s, a) {
-  // This is private!
-  return s;
-};
-
 actions.DEFAULT = function (s, a) {
     console.warn("Unknown action (" + (a.type || 'null') +") fired.");
     console.dir(a || "Empty action payload");
@@ -23,16 +18,6 @@ actions.ROUTE_CHANGE = function(s, a) {
   var newParams = _.merge({}, oldParams, additions);
 
   return update(s, {route: newParams});
-};
-
-actions.PLANT_SELECT = function(s, a) {
-  var select_crop = update(s, {
-    global: {
-      selectedPlant: a.payload
-    }
-  });
-  var change_menu = actions.PLANT_INFO_SHOW(select_crop, a);
-  return _.merge({}, select_crop, change_menu);
 };
 
 actions.PLANT_ADD_REQUEST = function(s, action) {
@@ -60,36 +45,9 @@ actions.PLANT_REMOVE_REQUEST = function(s, a) {
 
   return s;
 };
-actions.SPECIES_INFO_SHOW = function(s, a) {
-    // TODO: add type system to check for presence of `crop` Object?
-    let fragment = {
-      leftMenu: {
-        component: 'SpeciesInfo',
-        selectedSpecies: a.payload
-      }
-    };
-    return update(s, fragment);
-  }
 
-// actions.PLANT_INFO_SHOW = function(s, a) {
-//   // TODO: add type system to check for presence of `crop` Object?
-//   var fragment = {
-//     leftMenu: {
-//       component: 'PlantInfo',
-//       selectedPlant: a.payload
-//     }
-//   };
-//   return update(s, fragment);
-// };
-
-
-function changeLeftComponent(state, name) {
-  return update(state, {
-    leftMenu: {
-      component: name
-    }
-  });
-}
+// DO NOT TOUCH!
+actions['@@redux/INIT'] = ((s) => s)
 
 function update(old_state, new_state) {
   return _.merge({}, old_state, new_state);

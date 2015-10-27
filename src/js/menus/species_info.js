@@ -12,10 +12,6 @@ export class SpeciesInfo extends React.Component {
     this.props.dispatch({type: "PLANT_ADD_REQUEST", payload: plant});
   }
 
-  showCatalog(){
-    this.props.dispatch({type: "CATALOG_SHOW"});
-  }
-
   render() {
     var specimen = _(this.props.global.species).
       find({_id: this.props.route.selected_specimen_id}) || {};
@@ -24,7 +20,7 @@ export class SpeciesInfo extends React.Component {
               <div className="green-content">
                 <div className="search-box-wrapper">
                   <p>
-                    <a href="#" onClick={ this.showCatalog.bind(this) }>
+                    <a href="#s/designer?designer_left_menu=SpeciesCatalog">
                       <i className="fa fa-arrow-left"></i>
                     </a>
                     { specimen.name }

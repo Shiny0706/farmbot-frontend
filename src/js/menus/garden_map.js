@@ -2,7 +2,11 @@ import React from 'react';
 
 export class MapPoint extends React.Component {
   select() {
-    this.props.dispatch({type: "PLANT_SELECT", payload: this.props.plant});
+    var baseUrl = '#s/designer?designer_left_menu=PlantInfo&selected_plant_id=';
+
+    window.
+      location.
+      hash = baseUrl + this.props.plant._id;
   }
 
   selected() {
@@ -29,6 +33,7 @@ export class GardenMap extends React.Component {
                  planting_area={ this.props.planting_area }
                  selected={ (this.props.route.selected_plant_id === p._id) }
                  dispatch={ this.props.dispatch }/>
+
     );
   }
 

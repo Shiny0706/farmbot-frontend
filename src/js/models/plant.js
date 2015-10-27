@@ -40,7 +40,7 @@ Plant.destroy = function (that) {
 
 export function Plant (options) {
   var options = (options || {});
-  this._id  = (options._id || _.random(0, 1000));
+  this._id  = String(options._id || _.random(0, 1000));
   this.age  = (options.age || _.random(0, 5));
   this.imgUrl = (options.imgUrl || "/img/unknown.svg");
   this.name = (options.name || "Untitled Plant");
