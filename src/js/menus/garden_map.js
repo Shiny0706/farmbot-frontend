@@ -27,7 +27,7 @@ export class GardenMap extends React.Component {
       (p, k) => <MapPoint plant={ p }
                  key={ k }
                  planting_area={ this.props.planting_area }
-                 selected={ (this.props.selectedPlant._id === p._id) }
+                 selected={ (this.props.route.selected_plant_id === p._id) }
                  dispatch={ this.props.dispatch }/>
     );
   }

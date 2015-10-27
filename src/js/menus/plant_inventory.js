@@ -8,8 +8,10 @@ export class Plants extends React.Component {
   render() {
     return(
       <div>
-        <List plants={ Plant.fakePlants } />
-        <ToolTip action={ () => this.props.dispatch({type: "CATALOG_SHOW"}) } desc="Add a new plant" color="dark-green"/>
+        <List plants={ this.props.global.plants } />
+        <ToolTip href="#s/designer?designer_left_menu=PlantCatalog"
+                 desc="Add a new plant"
+                 color="dark-green"/>
       </div>
     );
   }
@@ -121,8 +123,7 @@ export class PlantInventory extends React.Component {
 
   get content() {
     var component = {Plants, Groups, Zones}[this.tabName];
-    return React.createElement(component,
-                               {dispatch: this.props.dispatch});
+    return React.createElement(component, this.props);
   }
 
   isActive(item) { return this.props.route.designer_left_tab === item };

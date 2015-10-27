@@ -33,26 +33,25 @@ export class PlantCatalogTile extends React.Component {
 };
 
 export class PlantCatalog extends React.Component {
-  back() { this.props.dispatch({type: "INVENTORY_SHOW"}) }
   render() {
-    var plants = Plant.fakePlants.map(
+    var plants = this.props.global.plants.map(
        (plant, k) => <PlantCatalogTile plant={ plant }
-                                      key={ k }
-                                      dispatch={ this.props.dispatch } />
+                                       key={ k }
+                                       dispatch={ this.props.dispatch } />
      );
 
     return <div id="designer-left">
             <div className="green-content">
               <div className="search-box-wrapper">
                 <p>
-                  <a href="#" onClick={ this.back.bind(this) }>
+                  <a href="#s/designer?designer_left_menu=PlantInventory">
                     <i className="fa fa-arrow-left"></i>
                   </a>
                   Choose a Crop
                 </p>
               </div>
             </div>
-            <div plants={ Plant.fakePlants }>
+            <div plants={ this.props.global.plants }>
               <br/>
               { plants }
             </div>

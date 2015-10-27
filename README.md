@@ -10,12 +10,15 @@ HTML, CSS, JS. Mostly React / WebPack
  0. Move a copy of `/src/js/config.example.js` over to `/src/js/config.js`
  0. `npm start`
  0. `Visit http://localhost:8080/webpack-dev-server/src/bundle`
+ 0. Explore the codebase! `js/app.js` and `js/app.js` are a great place to start looking around.
 
 **Notes:** Make sure you have [node installed](https://docs.npmjs.com/getting-started/installing-node).
 
 # TODO / Refinements:
 
  * Fetch all plants on startup.
+ * Implement `PLANT_FETCH_REQUEST` at application start.
+ * Add better async action support.
  * Integrate Immutable.js into action creators / dispatchers.
  * Remove onclick() handlers.
  * Remove `*_SHOW` actions.

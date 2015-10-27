@@ -17,11 +17,6 @@ actions.DEFAULT = function (s, a) {
     return s;
 };
 
-actions.POST_INIT = function(s, a) {
-  store.dispatch({type: "PLANT_FETCH_REQUEST"});
-  return s;
-};
-
 actions.ROUTE_CHANGE = function(s, a) {
   var additions = a.payload.params;
   var oldParams = s.route;
@@ -39,14 +34,6 @@ actions.PLANT_SELECT = function(s, a) {
   var change_menu = actions.PLANT_INFO_SHOW(select_crop, a);
   return _.merge({}, select_crop, change_menu);
 };
-
-actions.PLANT_FETCH_REQUEST = function(state, action) {
-  Plant
-    .fetchAll()
-    .then(function(data){ debugger })
-    .catch(function(){ alert("Cant fetch crops.") });
-
-}
 
 actions.PLANT_ADD_REQUEST = function(s, action) {
   Plant
@@ -93,10 +80,6 @@ actions.PLANT_INFO_SHOW = function(s, a) {
     }
   };
   return update(s, fragment);
-};
-
-actions.CATALOG_SHOW = function(s, a) {
-  return changeLeftComponent(s, 'PlantCatalog');
 };
 
 actions.INVENTORY_SHOW = function(s, a) {

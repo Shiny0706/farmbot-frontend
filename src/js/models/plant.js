@@ -7,7 +7,12 @@ var fakeHeaders = { // TODO: Add auth scheme.
       bot_token: "2649365c72ae225ef5cdfe208a4462eb0a11a1fc"
 };
 
-Plant.fakePlants = [];
+Plant.fakePlants = [
+  new Plant({name: "Blueberry", imgUrl: "/img/blueberry.svg"}),
+  new Plant({name: "Cabbage", imgUrl: "/img/cabbage.svg"}),
+  new Plant({name: "Pepper", imgUrl: "/img/pepper.svg"}),
+  new Plant({name: "Cilantro", imgUrl: "/img/cilantro.svg"}),
+];
 
 Plant.fetchAll = function() {
   return $.ajax({
@@ -34,6 +39,7 @@ Plant.destroy = function (that) {
 }
 
 export function Plant (options) {
+  var options = (options || {});
   this._id  = (options._id || _.random(0, 1000));
   this.age  = (options.age || _.random(0, 5));
   this.imgUrl = (options.imgUrl || "/img/unknown.svg");

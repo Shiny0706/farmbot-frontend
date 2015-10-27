@@ -9,9 +9,10 @@ export class ToolTip extends React.Component {
             { this.props.desc }
           </div>
         </div>
-        <span className={ (this.props.color || "") + " plus-circle" }
-              onClick={ this.props.action }>
-        </span>
+        <a href={ this.props.href }>
+          <span className={ (this.props.color || "") + " plus-circle" }>
+          </span>
+        </a>
       </div>
     );
   }
