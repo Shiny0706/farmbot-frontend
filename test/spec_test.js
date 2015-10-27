@@ -4,7 +4,7 @@ import React from 'react'
 import TestUtils from 'react/lib/ReactTestUtils'
 
 describe('A spec', function() {
-  it('fuggin works', function() {
+  it('is an exceptional specification', function() {
     expect(true).toBe(true);
   });
 });

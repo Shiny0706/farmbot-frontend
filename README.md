@@ -15,10 +15,11 @@ HTML, CSS, JS. Mostly React / WebPack
 
 # TODO / Refinements:
 
+ * Fetch all plants on startup.
  * Integrate Immutable.js into action creators / dispatchers.
  * Remove onclick() handlers.
  * Remove `*_SHOW` actions.
- * Add URL route helpers to keep things DRY.
+ * Add URL route helpers to keep things DRY (repetition of strings everywhere, eg: `#s/designer?blah=`).
  * Add test suite.
  * Add global error handler.
  * Get sourcemaps working
