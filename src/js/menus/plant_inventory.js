@@ -2,14 +2,14 @@ import React from "react";
 import { Plant } from '../models/plant';
 import { store } from '../app';
 import { ToolTip } from './tooltip'
-import { renderCatalog } from './plant_catalog';
+import { renderCatalog } from './species_catalog';
 
 export class Plants extends React.Component {
   render() {
     return(
       <div>
         <List plants={ this.props.global.plants } />
-        <ToolTip href="#s/designer?designer_left_menu=PlantCatalog"
+        <ToolTip href="#s/designer?designer_left_menu=SpeciesCatalog"
                  desc="Add a new plant"
                  color="dark-green"/>
       </div>

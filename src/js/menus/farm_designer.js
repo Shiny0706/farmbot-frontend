@@ -3,12 +3,12 @@ import React from "react";
 import { Calendar } from './calendar';
 import { GardenMap } from './garden_map';
 import { Navbar } from './navbar';
-import { PlantCatalog } from './plant_catalog';
+import { SpeciesCatalog } from './species_catalog';
 import { PlantInfo } from './plant_info';
 import { SpeciesInfo } from './species_info';
 import { PlantInventory } from './plant_inventory';
 
-const MENU_CHOICES = {PlantInventory, PlantCatalog, PlantInfo, SpeciesInfo};
+const MENU_CHOICES = {PlantInventory, SpeciesCatalog, PlantInfo, SpeciesInfo};
 
 export class FarmDesigner extends React.Component {
   // Dynamically determine what to render on the left side of the designer,
@@ -17,7 +17,7 @@ export class FarmDesigner extends React.Component {
     var leftMenu = this.props.route.designer_left_menu || 'PlantInventory';
     var component = MENU_CHOICES[leftMenu];
     if (!component) {
-      var msg = `Cant render '${props.component}', valid choices are:`
+      var msg = `Cant render '${leftMenu}', valid choices are:`
       var choices = Object.keys(MENU_CHOICES);
       console.warn(msg, choices);
     } else {

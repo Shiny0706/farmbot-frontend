@@ -4,18 +4,13 @@ import { Plant } from '../models/plant';
 export class PlantInfo extends React.Component {
   removePlant() {
    this.props.dispatch({type: "PLANT_REMOVE_REQUEST",
-                        payload: this.props.selectedPlant });
+                        payload: this.plant });
   }
 
-  getPlant() {
-    if (!this.plant) {
-      // Lazy load selected plant.
-      var plantId = parseInt(this.props.route.selected_plant_id, 10);
-      var plants  = this.props.global.plants;
+  get plant() {
+    return _(this.props.global.plants)
+             .find({_id: this.props.route.selected_plant_id}) || {};
 
-      this.plant = _(plants).find({_id: plantId}) || {};
-    };
-    return this.plant
   }
 
   render() {
@@ -26,7 +21,7 @@ export class PlantInfo extends React.Component {
                   <a href="#s/designer?designer_left_menu=PlantInventory">
                     <i className="fa fa-arrow-left"></i>
                   </a>
-                  Plant { this.getPlant()._id || "" }
+                  Plant { this.plant._id || "" }
                 </p>
               </div>
             </div>
@@ -34,7 +29,7 @@ export class PlantInfo extends React.Component {
               <div className="crop-drag-info-tile">
                 <h6>Photos of this Plant</h6>
                 <img className="crop-drag-info-image"
-                     src={this.getPlant().imgUrl || '/img/placeholder_berries.jpg'} />
+                     src={this.plant.imgUrl || '/img/placeholder_berries.jpg'} />
                 </div>
               </div>
               <div>

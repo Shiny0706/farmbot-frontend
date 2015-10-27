@@ -71,20 +71,17 @@ actions.SPECIES_INFO_SHOW = function(s, a) {
     return update(s, fragment);
   }
 
-actions.PLANT_INFO_SHOW = function(s, a) {
-  // TODO: add type system to check for presence of `crop` Object?
-  var fragment = {
-    leftMenu: {
-      component: 'PlantInfo',
-      selectedPlant: a.payload
-    }
-  };
-  return update(s, fragment);
-};
+// actions.PLANT_INFO_SHOW = function(s, a) {
+//   // TODO: add type system to check for presence of `crop` Object?
+//   var fragment = {
+//     leftMenu: {
+//       component: 'PlantInfo',
+//       selectedPlant: a.payload
+//     }
+//   };
+//   return update(s, fragment);
+// };
 
-actions.INVENTORY_SHOW = function(s, a) {
-  return changeLeftComponent(s, 'PlantInventory');
-};
 
 function changeLeftComponent(state, name) {
   return update(state, {

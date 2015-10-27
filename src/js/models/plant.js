@@ -7,7 +7,7 @@ var fakeHeaders = { // TODO: Add auth scheme.
       bot_token: "2649365c72ae225ef5cdfe208a4462eb0a11a1fc"
 };
 
-Plant.fakePlants = [
+Plant.fakes = [
   new Plant({name: "Blueberry", imgUrl: "/img/blueberry.svg"}),
   new Plant({name: "Cabbage", imgUrl: "/img/cabbage.svg"}),
   new Plant({name: "Pepper", imgUrl: "/img/pepper.svg"}),

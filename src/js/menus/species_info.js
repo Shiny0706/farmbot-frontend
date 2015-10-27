@@ -17,6 +17,9 @@ export class SpeciesInfo extends React.Component {
   }
 
   render() {
+    var specimen = _(this.props.global.species).
+      find({_id: this.props.route.selected_specimen_id}) || {};
+
     return  <div>
               <div className="green-content">
                 <div className="search-box-wrapper">
@@ -24,7 +27,7 @@ export class SpeciesInfo extends React.Component {
                     <a href="#" onClick={ this.showCatalog.bind(this) }>
                       <i className="fa fa-arrow-left"></i>
                     </a>
-                    { this.props.selectedSpecies.name }
+                    { specimen.name }
                   </p>
                 </div>
               </div>
@@ -32,7 +35,7 @@ export class SpeciesInfo extends React.Component {
                 <div className="crop-drag-info-tile">
                   <h6>Species Image</h6>
                   <img className="crop-drag-info-image"
-                       src={this.props.selectedSpecies.imgUrl}
+                       src={ specimen.imgUrl }
                        onDragEnd={ this.drop.bind(this) }/>
                   <div className="crop-info-overlay">
                     To plant, drag and drop into map

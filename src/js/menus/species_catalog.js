@@ -2,28 +2,35 @@ import React from 'react';
 import { Plant } from '../models/plant';
 import { Species } from '../models/species';
 
-export class PlantCatalogTile extends React.Component {
-  showPlantInfo(){
-    this.props.dispatch({
-      type: 'SPECIES_INFO_SHOW',
-      payload: this.props.plant
-    });
-  };
+export class SpeciesCatalogTile extends React.Component {
+  // showPlantInfo(){
+  //   this.props.dispatch({
+  //     type: 'SPECIES_INFO_SHOW',
+  //     payload: this.props.plant
+  //   });
+  // };
 
   render() {
+    var specimen = this.props.specimen;
+    var url = "#s/designer?designer_left_menu=SpeciesInfo&selected_specimen_id="
+                + specimen._id;
     return(
-      <div className="plantCatalogTile" onClick={ this.showPlantInfo.bind(this) }>
+      <div className="plantCatalogTile">
         <div className="row">
           <div className="small-12 columns">
             <div className="small-header-wrapper">
-              <h5>{ this.props.plant.name }</h5>
+              <h5>{ specimen.name }</h5>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="small-12 columns">
             <div className="content-wrapper">
-              <p> <img src={this.props.plant.imgUrl} /> </p>
+              <p>
+                <a href={ url }>
+                  <img src={ specimen.imgUrl } />
+                </a>
+              </p>
             </div>
           </div>
         </div>
@@ -32,10 +39,10 @@ export class PlantCatalogTile extends React.Component {
   }
 };
 
-export class PlantCatalog extends React.Component {
+export class SpeciesCatalog extends React.Component {
   render() {
-    var plants = this.props.global.plants.map(
-       (plant, k) => <PlantCatalogTile plant={ plant }
+    var species = this.props.global.species.map(
+       (specimen, k) => <SpeciesCatalogTile specimen={ specimen }
                                        key={ k }
                                        dispatch={ this.props.dispatch } />
      );
@@ -47,13 +54,13 @@ export class PlantCatalog extends React.Component {
                   <a href="#s/designer?designer_left_menu=PlantInventory">
                     <i className="fa fa-arrow-left"></i>
                   </a>
-                  Choose a Crop
+                  Choose a Species
                 </p>
               </div>
             </div>
-            <div plants={ this.props.global.plants }>
+            <div>
               <br/>
-              { plants }
+              { species }
             </div>
            </div>
   }

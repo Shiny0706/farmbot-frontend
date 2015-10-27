@@ -1,4 +1,6 @@
-import { Plant } from '../models/plant'
+import { Plant } from '../models/plant';
+import { Species } from '../models/species';
+
 export var appState = {
   getState: function() {
     var stored = localStorage["FARMBOT_DESIGNER_CACHE"];
@@ -25,7 +27,8 @@ export var appState = {
       },
       // Everything else.
       global: {
-        plants: Plant.fakePlants,
+        plants: Plant.fakes,
+        species: Species.fakes,
         planting_area: {
                          _id: "56154f3e766f6c5789020000",
                          device_id: "56154f2f766f6c5789010000",
