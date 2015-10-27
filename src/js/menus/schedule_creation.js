@@ -1,14 +1,12 @@
 import React from 'react';
 export class ScheduleCreation extends React.Component {
-  back() { renderCalendar(); }
-
   render() {
     var html = (
     <div>
       <div>
         <div className="search-box-wrapper purple-content">
           <p>
-            <a href="#" onClick={ this.back }>
+            <a href="#">
               <i className="fa fa-arrow-left"></i>
             </a>
             Schedule Event
