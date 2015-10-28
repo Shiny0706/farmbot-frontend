@@ -1,33 +1,34 @@
+// All Redux actions are namespaced under the 'actions' object for convinience.
+// an `update()` helper method handles cloning/modifying the current state.
+
 import { Plant } from '../models/plant'
 import $ from 'jquery';
 import { Router } from '../router';
 import { store } from './store';
 
-let actions = {};
+var actions = {};
 
-actions.DEFAULT = function (s, a) {
-    console.warn("Unknown action (" + (a.type || 'null') +") fired.");
-    console.dir(a || "Empty action payload");
-    console.dir(s || "Empty state");
-    return s;
+actions.DEFAULT = function (state, action) {
+    console.warn("Unknown action (" + (action.type || 'null') +") fired.");
+    return state;
 };
 
-actions.ROUTE_CHANGE = function(s, a) {
-  var additions = a.payload.params;
-  var oldParams = s.route;
+actions.ROUTE_CHANGE = function(state, action) {
+  var additions = action.payload.params;
+  var oldParams = state.route;
   var newParams = _.merge({}, oldParams, additions);
 
-  return update(s, {route: newParams});
+  return update(state, {route: newParams});
 };
 
-actions.PLANT_ADD_REQUEST = function(s, action) {
+actions.PLANT_ADD_REQUEST = function(state, action) {
   Plant
     .save(action.payload)
     .fail((a, b, c) => alert("Failed to add crop. Refresh page."));
-  var plants = _.cloneDeep(s.global.plants);
+  var plants = _.cloneDeep(state.global.plants);
   var selectedPlant = _.cloneDeep(action.payload);
   plants.push(selectedPlant);
-  return update(s, {
+  return update(state, {
     global: {
       plants,
       selectedPlant
@@ -35,19 +36,14 @@ actions.PLANT_ADD_REQUEST = function(s, action) {
   });
 };
 
-actions.PLANT_REMOVE_REQUEST = function(s, a) {
-  var s = _.cloneDeep(s);
-  var id = a.payload._id;
-  _.remove(s.global.plants, a.payload);
-  Plant
-    .destroy(a.payload)
-    .fail(() => alert("Failed to delete. Refresh the page."));
-
-  return s;
+actions.PLANT_REMOVE_REQUEST = function(state, action) {
+  // This needs Redux thunk or something like that.
+  Plant.destroy(action.payload).then(() => console.log("Fix me"))
+  return state
 };
 
 // DO NOT TOUCH!
-actions['@@redux/INIT'] = ((s) => s)
+actions['@@redux/INIT'] = ((state) => state)
 
 function update(old_state, new_state) {
   return _.merge({}, old_state, new_state);

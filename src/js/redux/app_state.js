@@ -1,3 +1,8 @@
+// This is a "poor mans hot re-loader". It's just a module that either:
+// 1. stores state in localStorage for persistence across page reloads.
+// 2. Supplies a default value for new users. (appState.defaultState)
+// 3. Resets state to default state if anything goes wrong.
+
 import { Plant } from '../models/plant';
 import { Species } from '../models/species';
 
