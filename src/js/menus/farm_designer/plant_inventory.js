@@ -1,7 +1,7 @@
 import React from "react";
-import { Plant } from '../models/plant';
-import { store } from '../app';
-import { ToolTip } from './tooltip'
+import { Plant } from '../../models/plant';
+import { store } from '../../app';
+import { ToolTip } from '../tooltip'
 import { renderCatalog } from './species_catalog';
 
 export class Plants extends React.Component {

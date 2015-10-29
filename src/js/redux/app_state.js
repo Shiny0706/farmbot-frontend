@@ -26,6 +26,7 @@ export var appState = {
   defaultState: {
       // State stored in the URL hash for bookmarks / sharing / back button use.
       route: {
+        designer_right_menu: 'Calendar',
         designer_left_menu: 'PlantInventory',
         designer_left_tab: 'Plants',
         selected_plant_id: 0
@@ -34,7 +35,7 @@ export var appState = {
       global: {
         plants: Plant.fakes,
         species: Species.fakes,
-        planting_area: {
+        planting_area: {  // Just a stub for now. See backend API for more info.
                          _id: "56154f3e766f6c5789020000",
                          device_id: "56154f2f766f6c5789010000",
                          length: 300,

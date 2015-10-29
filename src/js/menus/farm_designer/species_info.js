@@ -1,6 +1,6 @@
 import React from 'react';
-import { Plant } from '../models/plant';
-import { fromScreenToGarden } from '../geometry/coordinates';
+import { Plant } from '../../models/plant';
+import { fromScreenToGarden } from '../../geometry/coordinates';
 
 export class SpeciesInfo extends React.Component {
   drop (e) {

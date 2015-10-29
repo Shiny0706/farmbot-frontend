@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar} from './navbar';
+import {Navbar} from '../navbar';
 
 export var Controls = React.createClass({
 render: function() {

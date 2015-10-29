@@ -2,19 +2,21 @@ import _ from 'lodash';
 import React from "react";
 import { Calendar } from './calendar';
 import { GardenMap } from './garden_map';
-import { Navbar } from './navbar';
+import { Navbar } from '../navbar';
 import { SpeciesCatalog } from './species_catalog';
 import { PlantInfo } from './plant_info';
 import { SpeciesInfo } from './species_info';
 import { PlantInventory } from './plant_inventory';
+import { ScheduleCreation } from './schedule_creation'
 
-const MENU_CHOICES = {PlantInventory, SpeciesCatalog, PlantInfo, SpeciesInfo};
+const MENU_CHOICES = {PlantInventory, SpeciesCatalog, PlantInfo, SpeciesInfo,
+                      Calendar, ScheduleCreation};
 
 export class FarmDesigner extends React.Component {
   // Dynamically determine what to render on the left side of the designer,
   // based on the value of hash fragment designer_left_menu
-  renderLeft() {
-    var leftMenu = this.props.route.designer_left_menu || 'PlantInventory';
+  renderPanel(name) {
+    var leftMenu = name || 'PlantInventory';
     var component = MENU_CHOICES[leftMenu];
     if (!component) {
       var msg = `Cant render '${leftMenu}', valid choices are:`
@@ -32,7 +34,7 @@ export class FarmDesigner extends React.Component {
           <div className="farm-designer-body">
             <div className="farm-designer-left">
               <div id="designer-left">
-                { this.renderLeft() }
+                { this.renderPanel(this.props.route.designer_left_menu) }
               </div>
             </div>
 
@@ -44,7 +46,7 @@ export class FarmDesigner extends React.Component {
 
             <div className="farm-designer-right">
               <div id="designer-right">
-                <Calendar />
+                { this.renderPanel(this.props.route.designer_right_menu) }
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Plant } from '../models/plant';
-import { Species } from '../models/species';
+import { Plant } from '../../models/plant';
+import { Species } from '../../models/species';
 
 export class SpeciesCatalogTile extends React.Component {
   render() {

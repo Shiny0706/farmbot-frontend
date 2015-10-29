@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plant } from '../models/plant';
+import { Plant } from '../../models/plant';
 
 export class PlantInfo extends React.Component {
   removePlant() {

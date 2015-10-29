@@ -16,6 +16,8 @@ HTML, CSS, JS. Mostly React / WebPack
 
 # TODO / Refinements:
 
+ * Port DeviceService over from old repo.
+ * Port device management page business logic over.
  * Fetch all plants on startup.
  * Implement `PLANT_FETCH_REQUEST` at application start.
  * Add better async action support.

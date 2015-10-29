@@ -2,6 +2,7 @@ import React from 'react';
 import App from './app';
 import { Router } from './router.js';
 import { loadFromCdn } from './load_from_cdn';
+import { MeshBlu } from './mesh_blu';
 
 require("!style!css!sass!../css/farmbot.scss");
 loadFromCdn(
