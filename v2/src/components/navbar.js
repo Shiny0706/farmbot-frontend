@@ -13,19 +13,19 @@ export var Navbar = React.createClass({
           <div className="collapse navbar-collapse" id="navbar">
             <ul className="nav navbar-nav">
               <li>
-                <a href="#s/designer">Farm Designer</a>
+                <a href="/dashboard/designer">Farm Designer</a>
               </li>
               <li>
-                <a href="#s/controls">Controls</a>
+                <a href="/dashboard/controls">Controls</a>
               </li>
               <li>
-                <a href="#s/devices">Devices</a>
+                <a href="/dashboard/devices">Devices</a>
               </li>
               <li>
-                <a href="#s/sequences">Sequences</a>
+                <a href="/dashboard/sequences">Sequences</a>
               </li>
               <li>
-                <a href="#s/schedules">Schedules</a>
+                <a href="/dashboard/schedules">Schedules</a>
               </li>
             </ul>
             <ul className="nav navbar-nav navbar-right">

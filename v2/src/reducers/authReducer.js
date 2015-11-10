@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   token: null,
-  authenticated: false,
+  authenticated: true, // Comment this to 'false' when ready to implement auth.
 };
 
 export function authReducer(state = initialState, action) {

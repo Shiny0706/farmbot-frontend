@@ -16,7 +16,7 @@ export var Navbar = React.createClass({
                 <a href="#s/designer">Farm Designer</a>
               </li>
               <li>
-                <a href="#s/controls">Controls</a>
+                <a href="/dashboard/controls">Controls</a>
               </li>
               <li>
                 <a href="#s/devices">Devices</a>
