@@ -2,6 +2,7 @@
 *.orig
 /*.log
 /node_modules
+/v2/node_modules
 /src/bundle.js
 /dist
 /bower_components
