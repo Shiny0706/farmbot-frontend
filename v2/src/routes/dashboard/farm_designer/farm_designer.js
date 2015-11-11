@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React from "react";
+import { connect } from 'react-redux';
 import { Calendar } from './calendar';
 import { GardenMap } from './garden_map';
 import { Navbar } from '../../../components/navbar';
@@ -12,6 +13,11 @@ import { ScheduleCreation } from './schedule_creation'
 const MENU_CHOICES = {PlantInventory, SpeciesCatalog, PlantInfo, SpeciesInfo,
                       Calendar, ScheduleCreation};
 
+function mapStateToProps(state) {
+  return { global: state.global };
+}
+
+@connect(mapStateToProps)
 export class FarmDesigner extends React.Component {
   // Dynamically determine what to render on the left side of the designer,
   // based on the value of hash fragment designer_left_menu
@@ -28,7 +34,6 @@ export class FarmDesigner extends React.Component {
   }
 
   render() {
-    debugger;
     return (
         <div className="farm-designer">
           <Navbar/>
