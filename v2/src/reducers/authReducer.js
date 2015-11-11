@@ -6,7 +6,8 @@ import {
 
 const initialState = {
   token: null,
-  authenticated: true, // Comment this to 'false' when ready to implement auth.
+  authenticated: true // Comment this to 'false' when ready to implement auth.
+      // State stored in the URL hash for bookmarks / sharing / back button use.
 };
 
 export function authReducer(state = initialState, action) {

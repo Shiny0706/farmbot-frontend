@@ -27,7 +27,8 @@ export class FarmDesigner extends React.Component {
     };
   }
 
-  render(){
+  render() {
+    debugger;
     return (
         <div className="farm-designer">
           <Navbar/>
