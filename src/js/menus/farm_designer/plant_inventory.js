@@ -137,7 +137,11 @@ export class PlantInventory extends React.Component {
           </div>
           <ul className="tabs">
             {
-              ["Plants", "Groups", "Zones"].map(function(item, i) {
+              [
+                "Plants",
+                "Groups",
+                "Zones"
+              ].map(function(item, i) {
                 var url = "#s/designer?designer_left_tab=" + (item || 'Plants');
                 return  <li key={i}>
                           <a href={ url }

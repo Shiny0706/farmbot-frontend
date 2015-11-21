@@ -117,7 +117,7 @@ export class List extends React.Component {
 
 export class PlantInventory extends React.Component {
   get tabName() {
-    return (this.props.route.designer_left_tab || "Plants")
+    return (this.props.location.query.designer_left_tab || "Plants")
   }
 
   get content() {
@@ -125,7 +125,9 @@ export class PlantInventory extends React.Component {
     return React.createElement(component, this.props);
   }
 
-  isActive(item) { return this.props.route.designer_left_tab === item };
+  isActive(item) {
+    return this.props.location.query.designer_left_tab === item
+  };
 
   render() {
     return (
@@ -136,8 +138,12 @@ export class PlantInventory extends React.Component {
           </div>
           <ul className="tabs">
             {
-              ["Plants", "Groups", "Zones"].map(function(item, i) {
-                var url = "#s/designer?designer_left_tab=" + (item || 'Plants');
+              [
+                "Plants",
+                "Groups",
+                "Zones"
+              ].map(function(item, i) {
+                var url = "/dashboard/designer?designer_left_tab=" + (item || 'Plants');
                 return  <li key={i}>
                           <a href={ url }
                              className={this.isActive(item) ? "active" : ""}>

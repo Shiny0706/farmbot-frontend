@@ -40,7 +40,9 @@ export class FarmDesigner extends React.Component {
           <div className="farm-designer-body">
             <div className="farm-designer-left">
               <div id="designer-left">
-                { this.renderPanel(this.props.route.designer_left_menu) }
+                {
+                  this.renderPanel(this.props.location.query.designer_left_menu)
+                }
               </div>
             </div>
 
