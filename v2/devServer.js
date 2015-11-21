@@ -15,6 +15,11 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
+// ?? ¯\_(ツ)_/¯
+app.get('/img/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'src', req.url));
+});
+
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'src', 'index.html'));
 });

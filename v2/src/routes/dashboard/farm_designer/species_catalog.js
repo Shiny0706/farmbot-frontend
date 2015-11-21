@@ -44,7 +44,7 @@ export class SpeciesCatalog extends React.Component {
             <div className="green-content">
               <div className="search-box-wrapper">
                 <p>
-                  <a href="#s/designer?designer_left_menu=PlantInventory">
+                  <a href="?designer_left_menu=PlantInventory">
                     <i className="fa fa-arrow-left"></i>
                   </a>
                   Choose a Species

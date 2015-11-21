@@ -8,7 +8,7 @@ export class Plants extends React.Component {
     return(
       <div>
         <List plants={ this.props.global.plants } />
-        <ToolTip href="#s/designer?designer_left_menu=SpeciesCatalog"
+        <ToolTip href="?designer_left_menu=SpeciesCatalog"
                  desc="Add a new plant"
                  color="dark-green"/>
       </div>
@@ -126,7 +126,9 @@ export class PlantInventory extends React.Component {
   }
 
   isActive(item) {
-    return this.props.location.query.designer_left_tab === item
+    var currentTab = this.props.location.query.designer_left_tab;
+    var defaultTab = "Plants";
+    return (currentTab || defaultTab) === item
   };
 
   render() {
