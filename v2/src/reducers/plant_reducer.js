@@ -18,7 +18,14 @@ var action_handlers = {
     return state;
   },
   ADD_PLANT_FAILURE: function(state, action) {
-    console.log('ADD_PLANT_FAILURE');
+    return state;
+  },
+  FETCH_PLANTS_SUCCESS: function(state, action) {
+    state = _.cloneDeep(state)
+    state.all = action.payload;
+    return state;
+  },
+  FETCH_PLANTS_FAILURE: function(state, action) {
     return state;
   },
 }

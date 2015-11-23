@@ -8,7 +8,8 @@ import { SpeciesCatalog } from './species_catalog';
 import { PlantInfo } from './plant_info';
 import { SpeciesInfo } from './species_info';
 import { PlantInventory } from './plant_inventory';
-import { ScheduleCreation } from './schedule_creation'
+import { ScheduleCreation } from './schedule_creation';
+import { fetchAllPlants } from '../../../actions/plant_actions';
 
 const MENU_CHOICES = {PlantInventory, SpeciesCatalog, PlantInfo, SpeciesInfo,
                       Calendar, ScheduleCreation};
@@ -20,6 +21,11 @@ function mapStateToProps(state) {
 
 @connect(mapStateToProps)
 export class FarmDesigner extends React.Component {
+
+  componentDidMount() {
+    alert("?")
+    this.props.dispatch(fetchAllPlants());
+  }
   // Dynamically determine what to render on the left side of the designer,
   // based on the value of hash fragment designer_left_menu
   renderPanel(name) {
