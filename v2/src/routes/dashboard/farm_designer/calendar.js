@@ -59,7 +59,7 @@ export class Calendar extends React.Component {
                    </div>
                  </div>
                </div>
-               <ToolTip href="#s/designer?designer_right_menu=ScheduleCreation"
+               <ToolTip href="?designer_right_menu=ScheduleCreation"
                         desc="Schedule new event"
                         color="dark-purple"/>
              </div>

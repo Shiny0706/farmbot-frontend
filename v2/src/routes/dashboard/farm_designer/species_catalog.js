@@ -1,6 +1,7 @@
 import React from 'react';
-import { Plant } from '../../../models/plant'
+import { Plant } from '../../../models/plant';
 import { Species } from '../../../models/species';
+import { BackArrow } from './back_arrow';
 
 export class SpeciesCatalogTile extends React.Component {
   render() {
@@ -43,10 +44,7 @@ export class SpeciesCatalog extends React.Component {
             <div className="green-content">
               <div className="search-box-wrapper">
                 <p>
-                  <a href="javascript:history.back()">
-                    <i className="fa fa-arrow-left"></i>
-                  </a>
-                  Choose a Species
+                  <BackArrow/> Choose a Species
                 </p>
               </div>
             </div>

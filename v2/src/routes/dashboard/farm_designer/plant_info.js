@@ -1,5 +1,6 @@
 import React from 'react';
 import { Plant } from '../../../models/plant'
+import { BackArrow } from './back_arrow';
 
 export class PlantInfo extends React.Component {
   removePlant() {
@@ -18,10 +19,7 @@ export class PlantInfo extends React.Component {
             <div className="green-content">
               <div className="search-box-wrapper">
                 <p>
-                  <a href="javascript:history.back()">
-                    <i className="fa fa-arrow-left"></i>
-                  </a>
-                  Plant { this.plant._id || "" }
+                  <BackArrow /> Plant { this.plant._id || "" }
                 </p>
               </div>
             </div>

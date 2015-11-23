@@ -25,11 +25,10 @@ export class FarmDesigner extends React.Component {
   componentDidMount() { this.props.dispatch(fetchAllPlants()); }
   // Dynamically determine what to render on the left side of the designer,
   // based on the value of hash fragment designer_left_menu
-  renderPanel(name) {
-    var leftMenu = name || 'PlantInventory';
-    var component = MENU_CHOICES[leftMenu];
+  renderPanel(selectedComponent) {
+    var component = MENU_CHOICES[selectedComponent];
     if (!component) {
-      var msg = `Cant render '${leftMenu}', valid choices are:`
+      var msg = `Cant render '${selectedComponent}', valid choices are:`
       var choices = Object.keys(MENU_CHOICES);
       console.warn(msg, choices);
     } else {
@@ -45,7 +44,9 @@ export class FarmDesigner extends React.Component {
             <div className="farm-designer-left">
               <div id="designer-left">
                 {
-                  this.renderPanel(this.props.location.query.designer_left_menu)
+                  this.renderPanel(
+                    this.props.location.query.designer_left_menu || "PlantInventory"
+                  )
                 }
               </div>
             </div>
@@ -60,7 +61,11 @@ export class FarmDesigner extends React.Component {
 
             <div className="farm-designer-right">
               <div id="designer-right">
-                { this.renderPanel(this.props.route.designer_right_menu) }
+                {
+                  this.renderPanel(
+                    this.props.location.query.designer_right_menu || "Calendar"
+                  )
+                }
               </div>
             </div>
           </div>

@@ -1,14 +1,13 @@
 import React from 'react';
+import { BackArrow } from './back_arrow';
+
 export class ScheduleCreation extends React.Component {
   render() {
     return <div>
             <div>
               <div className="search-box-wrapper purple-content">
                 <p>
-                  <a href="#s/designer?designer_right_menu=Calendar">
-                    <i className="fa fa-arrow-left"></i>
-                  </a>
-                  Schedule Event
+                  <BackArrow /> Schedule Event
                 </p>
               </div>
             </div>
@@ -24,7 +23,7 @@ export class ScheduleCreation extends React.Component {
               <div className="flex">
                 <input placeholder="Today"
                        type="text"
-                       className="flex3"></input>
+                       className="flex3"/>
                 <select className="flex3">
                   <option value="volvo">12:30</option>
                   <option value="saab">12:00</option>
@@ -34,18 +33,18 @@ export class ScheduleCreation extends React.Component {
               <div className="flex">
                 <input placeholder="2"
                        type="text"
-                       className="flex3"></input>
+                       className="flex3"/>
                 <select className="flex3">
                   <option value="volvo">days</option>
                   <option value="saab">hours</option>
                 </select>
-                <input type="checkbox" name="wow" value="no">Does not repeat</input>
+                <input type="checkbox" name="wow" value="no"/>Does not repeat
               </div>
               <h6>Ends</h6>
               <div className="flex">
                 <input placeholder="Today"
                        type="text"
-                       className="flex3"></input>
+                       className="flex3"/>
                 <select className="flex3">
                   <option value="volvo">12:30</option>
                   <option value="saab">12:00</option>

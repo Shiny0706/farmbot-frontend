@@ -2,6 +2,7 @@ import React from 'react';
 import { Plant } from '../../../models/plant';
 import { fromScreenToGarden } from '../../../geometry/coordinates'
 import { addPlant } from '../../../actions/plant_actions';
+import { BackArrow } from './back_arrow';
 
 export class SpeciesInfo extends React.Component {
   drop (e) {
@@ -22,10 +23,7 @@ export class SpeciesInfo extends React.Component {
               <div className="green-content">
                 <div className="search-box-wrapper">
                   <p>
-                    <a href="javascript:history.back()">
-                      <i className="fa fa-arrow-left"></i>
-                    </a>
-                    { specimen.name }
+                    <BackArrow /> { specimen.name }
                   </p>
                 </div>
               </div>
