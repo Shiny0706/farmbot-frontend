@@ -91,24 +91,19 @@ export class Zones extends React.Component {
   }
 };
 
-export class Item extends React.Component {
-  render() {
-    var plant = this.props.crop;
-    return(
-      <li>
-        <a href={ Plant.designerUrl(plant) }> {plant.name} </a>
-        <div>{plant.age} days old</div>
-      </li>);
-  }
-};
-
 export class List extends React.Component {
   render() {
-    var plants = this.props.plants.map(
-       (crop, k) => <Item crop={crop} key={ k } />
-     );
+    var mapper = function(plant, key) {
+      return(
+        <li key={ key } >
+          <a href={ Plant.designerUrl(plant) }> { plant.name } </a>
+          <div>{plant.age} days old</div>
+        </li>);
+    };
 
-    return(<ul className="crop-inventory"> { plants } </ul>);
+    return(<ul className="crop-inventory">
+             { this.props.plants.map(mapper) }
+           </ul>);
   }
 };
 
