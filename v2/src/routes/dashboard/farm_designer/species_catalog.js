@@ -5,7 +5,7 @@ import { Species } from '../../../models/species';
 export class SpeciesCatalogTile extends React.Component {
   render() {
     var specimen = this.props.specimen;
-    var url = "#s/designer?designer_left_menu=SpeciesInfo&selected_specimen_id="
+    var url = "?designer_left_menu=SpeciesInfo&selected_specimen_id="
                 + specimen._id;
     return(
       <div className="plantCatalogTile">
@@ -39,7 +39,6 @@ export class SpeciesCatalog extends React.Component {
                                        key={ k }
                                        dispatch={ this.props.dispatch } />
      );
-
     return <div id="designer-left">
             <div className="green-content">
               <div className="search-box-wrapper">

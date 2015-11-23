@@ -1,6 +1,7 @@
 import React from 'react';
 import { Plant } from '../../../models/plant';
 import { fromScreenToGarden } from '../../../geometry/coordinates'
+import { addPlant } from '../../../actions/plant_actions';
 
 export class SpeciesInfo extends React.Component {
   drop (e) {
@@ -9,13 +10,14 @@ export class SpeciesInfo extends React.Component {
       .getBoundingClientRect();
     var coords = fromScreenToGarden(e.pageX, e.pageY, box.left, box.bottom)
     var plant = new Plant(coords);
-    this.props.dispatch({type: "PLANT_ADD_REQUEST", payload: plant});
+    this.props.dispatch(addPlant(plant));
   }
 
   render() {
-    var specimen = _(this.props.global.species).
-      find({_id: this.props.route.selected_specimen_id}) || {};
-
+    var query = {_id: this.props.location.query.selected_specimen_id};
+    var all = this.props.global.species;
+    // TODO REAL ERROR HANDLER ZOMG
+    var specimen = _(all).find(query) || (function(){ alert("Invalid plant id")})();
     return  <div>
               <div className="green-content">
                 <div className="search-box-wrapper">
