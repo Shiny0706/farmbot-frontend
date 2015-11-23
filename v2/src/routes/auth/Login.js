@@ -7,10 +7,8 @@ const formOptions = {
   form: 'login',
   fields: ['username', 'password'],
   onSubmit: ({ username, password }, dispatch) => {
-    console.log('onSubmit');
     return dispatch(login(username, password))
       .then(() => {
-        console.log('navigateNextPathOrDashboard');
         dispatch(navigateNextPathOrDashboard())
       });
   },

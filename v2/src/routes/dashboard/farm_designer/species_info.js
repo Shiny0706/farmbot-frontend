@@ -22,7 +22,7 @@ export class SpeciesInfo extends React.Component {
               <div className="green-content">
                 <div className="search-box-wrapper">
                   <p>
-                    <a href="#s/designer?designer_left_menu=SpeciesCatalog">
+                    <a href="javascript:history.back()">
                       <i className="fa fa-arrow-left"></i>
                     </a>
                     { specimen.name }

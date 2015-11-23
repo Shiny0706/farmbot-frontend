@@ -22,10 +22,7 @@ function mapStateToProps(state) {
 @connect(mapStateToProps)
 export class FarmDesigner extends React.Component {
 
-  componentDidMount() {
-    alert("?")
-    this.props.dispatch(fetchAllPlants());
-  }
+  componentDidMount() { this.props.dispatch(fetchAllPlants()); }
   // Dynamically determine what to render on the left side of the designer,
   // based on the value of hash fragment designer_left_menu
   renderPanel(name) {
@@ -56,6 +53,7 @@ export class FarmDesigner extends React.Component {
             <div className="farm-designer-middle">
               <GardenMap dispath={this.props.dispatch}
                          route={this.props.route}
+                         location={this.props.location}
                          {...this.props.global}
                          plants={this.props.plants}/>
             </div>
