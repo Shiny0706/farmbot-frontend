@@ -93,14 +93,11 @@ export class Zones extends React.Component {
 
 export class Item extends React.Component {
   render() {
-    var url = "#s/designer?designer_left_menu=PlantInfo&selected_plant_id=" +
-              (this.props.crop._id || 0);
+    var plant = this.props.crop;
     return(
       <li>
-        <a href={ url }>
-          {this.props.crop.name}
-        </a>
-        <div>{this.props.crop.age} days old</div>
+        <a href={ Plant.designerUrl(plant) }> {plant.name} </a>
+        <div>{plant.age} days old</div>
       </li>);
   }
 };
