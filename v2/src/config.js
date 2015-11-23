@@ -1,5 +1,4 @@
 export var CONFIG = {
-  FARMBOT_API_URL: "//my.farmbot.io",
+  FARMBOT_API_URL: "//localhost:3000",
   MESHBLU_URL: "wss://meshblu.octoblu.com/ws/v2"
-  // MESHBLU_URL: "ws://mesh.farmbot.io"
 };

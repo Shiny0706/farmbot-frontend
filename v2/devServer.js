@@ -6,11 +6,12 @@ var config = require('./webpack.dev.config');
 var app = express();
 var compiler = webpack(config);
 
-var SERVER_PORT = 3000;
+var SERVER_PORT = 3001;
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
-  publicPath: config.output.publicPath
+  publicPath: config.output.publicPath,
+  port: SERVER_PORT
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));

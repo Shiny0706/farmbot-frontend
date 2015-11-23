@@ -7,8 +7,9 @@ export function addPlant(plant) {
   return dispatch => {
     // addPlantStart(plant); // SA Copypasta: Is this even make sense?
 
+
     return Plant.save(plant).then(
-      (res) => alert("Plant added :)"), //dispatch(loginComplete(res.token)),
+      function (res) { debugger; alert("Plant added :)") }, //dispatch(loginComplete(res.token)),
       (err) => alert("Plant error :(")  //dispatch(loginError(err))
     );
   };
