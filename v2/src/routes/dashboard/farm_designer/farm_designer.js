@@ -14,7 +14,8 @@ const MENU_CHOICES = {PlantInventory, SpeciesCatalog, PlantInfo, SpeciesInfo,
                       Calendar, ScheduleCreation};
 
 function mapStateToProps(state) {
-  return { global: state.global };
+  return { global: state.global,
+           plants: state.plants };
 }
 
 @connect(mapStateToProps)
@@ -49,7 +50,8 @@ export class FarmDesigner extends React.Component {
             <div className="farm-designer-middle">
               <GardenMap dispath={this.props.dispatch}
                          route={this.props.route}
-                         {...this.props.global}/>
+                         {...this.props.global}
+                         plants={this.props.plants}/>
             </div>
 
             <div className="farm-designer-right">

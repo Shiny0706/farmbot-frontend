@@ -27,7 +27,7 @@ export class MapPoint extends React.Component {
 
 export class GardenMap extends React.Component {
   plants() {
-    return this.props.plants.map(
+    return this.props.plants.all.map(
       (p, k) => <MapPoint plant={ p }
                  key={ k }
                  planting_area={ this.props.planting_area }

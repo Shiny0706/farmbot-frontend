@@ -8,7 +8,7 @@ export class PlantInfo extends React.Component {
   }
 
   get plant() {
-    return _(this.props.global.plants)
+    return _(this.props.plants.all)
              .find({_id: this.props.route.selected_plant_id}) || {};
 
   }

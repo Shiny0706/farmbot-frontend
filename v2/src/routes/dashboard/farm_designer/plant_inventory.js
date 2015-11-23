@@ -7,7 +7,7 @@ export class Plants extends React.Component {
   render() {
     return(
       <div>
-        <List plants={ this.props.global.plants } />
+        <List plants={ this.props.plants.all } />
         <ToolTip href="?designer_left_menu=SpeciesCatalog"
                  desc="Add a new plant"
                  color="dark-green"/>
