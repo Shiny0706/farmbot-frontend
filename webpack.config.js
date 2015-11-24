@@ -1,25 +1,31 @@
+var path = require('path');
+var webpack = require('webpack');
+
 module.exports = {
-  entry: "./src/js/entry.js",
+  resolve: {
+    extensions: ['', '.js'],
+    modulesDirectories: ['node_modules', 'src'],
+  },
+  entry: {
+    app: [
+      './src/index.js',
+    ]
+  },
   output: {
-    filename: "./src/bundle.js"
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/public/'
   },
   module: {
     loaders: [
       {
-        test: /\.js?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel'
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loaders: ['babel?stage=0&optional=runtime'],
       },
-      {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        loader: 'url-loader?limit=100000'
-      },
-      {
-        test: /\.scss$/,
-        loaders: ["style", "css", "sass?outputStyle=expanded&" +
-          "includePaths[]=" +
-            encodeURIComponent("./css")]
-      }
-    ]
-  }
+    ],
+  },
+  plugins: [
+    new webpack.NoErrorsPlugin(),
+  ]
 };

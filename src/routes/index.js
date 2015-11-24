@@ -9,7 +9,8 @@ import { Devices } from './dashboard/devices';
 import { Sequences } from './dashboard/sequences/sequences';
 import { Schedules } from './dashboard/schedules/schedules';
 import { logout } from '../actions/FarmbotActions';
-import { FarmDesigner } from './dashboard/farm_designer/farm_designer'
+import { FarmDesigner } from './dashboard/farm_designer/farm_designer';
+
 // TODO: remove setTimeout and getState mess.
 // Track https://github.com/rackt/redux-router/pull/62
 // and https://github.com/rackt/redux-router/issues/61
@@ -48,7 +49,7 @@ export function getRoutes(store) {
         <Route path="schedules" component={Schedules}/>
         <IndexRoute component={Controls} onEnter={requireAuth}/>
       </Route>
-      <IndexRedirect to="dashboard"/>
+      <IndexRedirect to="/dashboard"/>
     </Route>
   );
 }
