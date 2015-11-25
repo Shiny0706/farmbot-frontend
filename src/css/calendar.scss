@@ -1,0 +1,65 @@
+// Styles for the CALENDAR Widget
+
+.event {
+  @extend %extend_1;
+  &.past {
+    color: $light_gray;
+    &:hover {
+      color: $dark_gray;
+    }
+  }
+  &.next {
+    margin-top: -2px;
+    border-top: 4px solid $green;
+  }
+  &:hover {
+    @extend %extend_2;
+    .edit-icon {
+      display: inherit;
+    }
+  }
+}
+
+.row {
+  &.date-flipper {
+    margin-bottom: 20px;
+  }
+  &.event {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.edit-icon {
+  float: left;
+  display: none;
+}
+.event-icon {
+  float: left;
+  width: 30px;
+}
+.event-time {
+  float: left;
+  width: 90px;
+}
+.event-title {
+  float: left;
+}
+
+.picker__day {
+  text-align: center;
+}
+.picker__weekday {
+  text-align: center;
+}
+
+h6.date {
+  text-align: center;
+  text-transform: uppercase;
+  color: $dark_gray;
+  margin-bottom: 0;
+  margin-top: 0;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 50px;
+}
