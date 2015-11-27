@@ -8,9 +8,9 @@ import { loadFromCdn } from './load_from_cdn';
 
 const store = configureStore();
 
-require("!style!css!sass!./css/FarmDesigner.scss");
-require("!style!css!sass!./css/MoveWidget.scss");
-require("!style!css!sass!./css/PlantsPanel.scss");
+require("!style!css!sass!./css/farm_designer.scss");
+require("!style!css!sass!./css/move_widget.scss");
+require("!style!css!sass!./css/plants_panel.scss");
 require("!style!css!sass!./css/alerts.scss");
 require("!style!css!sass!./css/blocks.scss");
 require("!style!css!sass!./css/buttons.scss");
