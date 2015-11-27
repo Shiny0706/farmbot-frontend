@@ -1,0 +1,32 @@
+// Styles for the NAVBAR
+
+@import 'colors';
+@import 'fonts';
+
+nav.navbar {
+  background-color: $dark_gray;
+  color: $light_gray;
+  font-size: 1.2rem;
+  letter-spacing: .15rem;
+  margin: 0;
+  text-transform: uppercase;
+  border-radius: 0px;
+
+}
+.navbar-nav>li>a {
+  color: $gray!important;
+  &:hover, :active, :focus {
+    color: $off_white!important;
+  }
+}
+
+.nav-status-buttons {
+  display: block;
+  margin: 15px;
+  float: right;
+}
+
+.last-sync {
+  margin-right: 30px;
+  float: right;
+}

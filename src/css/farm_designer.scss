@@ -1,0 +1,48 @@
+// Styles for the Farm Designer
+
+@import 'colors';
+@import 'fonts';
+
+.designer-info {
+  .crop-drag-info-image {
+    max-width: 98%;
+    padding: 0 auto 0 auto;
+    background-color: $translucent;
+  }
+  .crop-info-overlay {
+    position: relative;
+    bottom: 3rem;
+    z-index: 3;
+    background-color: $dark_gray;
+    font-style: italic;
+    color: $off_white;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+    height: 3rem;
+    max-width: 98%;
+  }
+  padding: 0 5px 0 5px;
+  color: $dark_gray;
+  a {
+    color: $dark_gray;
+    padding: 0 0 0 4px;
+    text-transform: none;
+    text-decoration: underline;
+    font-weight: normal;
+    font-size: 0.75rem;
+  }
+  li {
+    padding: 2px;
+  }
+  h6 {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.farmdesigner-left-menu {
+  border: 1px $black dashed;
+  background-color: $blue;
+}

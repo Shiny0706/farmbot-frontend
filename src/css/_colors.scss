@@ -1,0 +1,103 @@
+// COLORS used throughout the web app
+
+$translucent:    rgba(0, 0, 0, 0.2);
+$translucent2:   rgba(0, 0, 0, 0.6);
+$white:          #fff;
+$off_white:      #f4f4f4;
+$light_gray:     #ddd;
+$gray:           #cccccc;
+$medium_gray:    #666666;
+$dark_gray:      #434343;
+$black:          #000;
+
+$light_blue:     #cdf;
+$blue:           #a4c2f4;
+$dark_blue:      #37d;
+
+$light_green:    #bda;
+$green:          #6a4;
+$dark_green:     #371;
+
+
+$light_yellow:   #ffc;
+$yellow:         #fd6;
+$gold:           #b90;
+$beige:          #fec;
+$brown:          #CA8;
+
+$orange:         #fa0;
+$dark_orange:    #e93;
+
+$light_purple:   #dab;
+$lavender:       #bad;
+$royal_purple:   #64a;
+$dark_purple:    #a47;
+
+$pink:           #e99;
+$dark_pink:      #e66;
+$peach:          #fc9;
+$red:            #f00;
+$dark_red:       #900;
+
+%greenish {
+  float: right;
+  background-color: $green;
+  color: $off_white;
+  font-weight: bold;
+  border-bottom: 3px solid $dark_green;
+}
+
+%reddish {
+  background-color: $dark_pink;
+  float: right;
+  color: $off_white;
+  font-weight: bold;
+  border-bottom: 3px solid $dark_red;
+}
+
+%extend_1 {
+  background-color: $white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 2px;
+    box-shadow: 0 4px 10px $translucent;
+}
+
+%extend_2 {
+  background-color: $light_gray;
+  color: $black;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px $translucent;
+    transition: all 0.2s ease-out;
+}
+
+%extend_3 {
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin: 0;
+  color: $light_gray;
+}
+
+%extend_4 {
+  background-color: $dark_pink;
+  border: none;
+  font-weight: bold;
+  padding-left: 20px;
+  box-shadow: 0 4px 10px $translucent;
+}
+
+.dark-gray {
+  background-color: $dark_gray;
+}
+.light-gray {
+  background-color: $gray;
+}
+.black {
+  background-color: $black;
+}
+.brown {
+  background-color: $brown;
+}

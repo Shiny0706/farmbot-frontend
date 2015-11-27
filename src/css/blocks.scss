@@ -1,0 +1,196 @@
+// Styles for the sequence and regimen BLOCKS
+
+@import 'colors';
+@import 'fonts';
+
+.block {
+  height: 2.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0px 10px $light_gray;
+  &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px $translucent;
+        transition: all 0.2s ease-out;
+    .edit-icon {
+      display: inherit;
+      padding-right: 15px;
+      color: $dark_gray;
+    }
+  }
+}
+
+// BLUE BLOCKS
+.blue-header {
+  background-color: $blue;
+  color: $dark_gray;
+}
+.blue-block {
+  background-color: $blue;
+  color: $dark_gray;
+  &:hover {
+    background-color: $blue;
+    color: $dark_gray;
+  }
+  &:focus {
+    background-color: $blue;
+    color: $dark_gray;
+  }
+}
+.blue-content {
+  background-color: $light_blue;
+}
+
+// GREEN BLOCKS
+.green-header {
+  background-color: $light_green;
+  color: $dark_gray;
+}
+.green-block {
+  background-color: $light_green;
+  color: $dark_gray;
+  &:hover {
+    background-color: $light_green;
+    color: $dark_gray;
+  }
+  &:focus {
+    background-color: $light_green;
+    color: $dark_gray;
+  }
+}
+.green-content {
+  background-color: $dark_green;
+  position: relative;
+}
+.dark-green { background: $dark_green; }
+
+// YELLOW BLOCKS
+.yellow-header {
+  background-color: $yellow;
+  color: $dark_gray;
+}
+.yellow-block {
+  background-color: $yellow;
+  color: $dark_gray;
+  &:hover {
+    background-color: $yellow;
+    color: $dark_gray;
+  }
+  &:focus {
+    background-color: $yellow;
+    color: $dark_gray;
+  }
+}
+.yellow-content {
+  background-color: $light_yellow;
+}
+
+// ORANGE BLOCKS
+.orange-header {
+  background-color: $peach;
+  color: $dark_gray;
+}
+.orange-block {
+  background-color: $peach;
+  color: $dark_gray;
+  &:hover {
+    background-color: $peach;
+    color: $dark_gray;
+  }
+  &:focus {
+    background-color: $peach;
+    color: $dark_gray;
+  }
+}
+.orange-content {
+  background-color: $beige;
+}
+
+// PURPLE BLOCKS
+.purple-header {
+  background-color: $lavender;
+  color: $dark_gray;
+}
+.purple-block {
+  background-color: $lavender;
+  color: $dark_gray;
+  &:hover {
+    background-color: $lavender;
+    color: $dark_gray;
+  }
+  &:focus {
+    background-color: $lavender;
+    color: $dark_gray;
+  }
+}
+.purple-content {
+  background-color: $dark_purple;
+}
+
+.light-purple-content {
+  background-color: $light_purple;
+}
+.dark-purple { background: $dark_purple; }
+
+
+// PINK BLOCKS
+.pink-header {
+  background-color: $light_purple;
+  color: $dark_gray;
+}
+.pink-block {
+  background-color: $light_purple;
+  color: $dark_gray;
+  &:hover {
+    background-color: $light_purple;
+    color: $dark_gray;
+  }
+  &:focus {
+    background-color: $light_purple;
+    color: $dark_gray;
+  }
+}
+.pink-content {
+  background-color: $light_gray;
+}
+
+// GRAY BLOCKS
+.gray-header {
+  background-color: $gray;
+  color: $dark_gray;
+}
+.gray-block {
+  background-color: $gray;
+  color: $dark_gray;
+  &:hover {
+    background-color: $gray;
+    color: $dark_gray;
+  }
+  &:focus {
+    background-color: $gray;
+    color: $dark_gray;
+  }
+}
+.gray-content {
+  background-color: $light_gray;
+}
+
+// RED BLOCKS
+.red-header {
+  background-color: $pink;
+  color: $dark_gray;
+}
+.red-block {
+  background-color: $pink;
+  color: $dark_gray;
+  &:hover {
+    background-color: $pink;
+    color: $dark_gray;
+  }
+  &:focus {
+    background-color: $pink;
+    color: $dark_gray;
+  }
+}
+.red-content {
+  background-color: $pink;
+}
