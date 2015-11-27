@@ -1,5 +1,8 @@
 // Styles for ALL INPUTS
 
+@import 'colors';
+@import 'fonts';
+
 input, input[type="text"] {
   font-size: 1.2rem;
   color: $dark_gray;

@@ -1,5 +1,8 @@
 // Styles for the CALENDAR Widget
 
+@import 'colors';
+@import 'fonts';
+
 .event {
   @extend %extend_1;
   &.past {
