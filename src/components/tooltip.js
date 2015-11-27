@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router';
 
 export class ToolTip extends React.Component {
   render() {
@@ -9,10 +10,10 @@ export class ToolTip extends React.Component {
             { this.props.desc }
           </div>
         </div>
-        <a href={ this.props.href }>
+        <Link to={ this.props.href }>
           <span className={ (this.props.color || "") + " plus-circle" }>
           </span>
-        </a>
+        </Link>
       </div>
     );
   }

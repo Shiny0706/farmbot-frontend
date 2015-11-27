@@ -1,4 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router';
+
+var links = {
+  "/dashboard/designer" : "Farm Designer",
+  "/dashboard/controls" : "Controls",
+  "/dashboard/devices"  : "Devices",
+  "/dashboard/sequences": "Sequences",
+  "/dashboard/schedules": "Schedules"
+}
+
 
 export var Navbar = React.createClass({
   render: function() {
@@ -12,35 +22,16 @@ export var Navbar = React.createClass({
           </div>
           <div className="collapse navbar-collapse" id="navbar">
             <ul className="nav navbar-nav">
-              <li>
-                <a href="/dashboard/designer">Farm Designer</a>
-              </li>
-              <li>
-                <a href="/dashboard/controls">Controls</a>
-              </li>
-              <li>
-                <a href="/dashboard/devices">Devices</a>
-              </li>
-              <li>
-                <a href="/dashboard/sequences">Sequences</a>
-              </li>
-              <li>
-                <a href="/dashboard/schedules">Schedules</a>
-              </li>
-            </ul>
-            <ul className="nav navbar-nav navbar-right">
-              <li>
-                <syncbutton className="nav-status-buttons" schedules="schedules"><button className="button-like yellow" type="button"> Sync Now <i className="fa fa-upload" /> </button> <div className="last-sync">LAST SYNC: ---</div></syncbutton>
-              </li>
-              <li>
-                <stopbutton className="nav-status-buttons"><button className="red button-like" type="button">Stop</button></stopbutton>
-              </li>
-              <li>
-                <a href="/users/sign_out">Sign out</a>
-              </li>
-              <li>
-                <a href="/users/edit">My Account</a>
-              </li>
+              {
+                Object.keys(links).map(function (url) {
+                  var description = links[url];
+                  return (
+                          <li>
+                            <Link to={url}>{description}</Link>
+                          </li>
+                         )
+                })
+              }
             </ul>
           </div>
         </div>
