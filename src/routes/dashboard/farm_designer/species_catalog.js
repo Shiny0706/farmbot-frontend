@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { Plant } from '../../../models/plant';
 import { Species } from '../../../models/species';
 import { BackArrow } from './back_arrow';
@@ -21,9 +22,9 @@ export class SpeciesCatalogTile extends React.Component {
           <div className="small-12 columns">
             <div className="content-wrapper">
               <p>
-                <a href={ url }>
+                <Link to={ url }>
                   <img src={ specimen.imgUrl } />
-                </a>
+                </Link>
               </p>
             </div>
           </div>

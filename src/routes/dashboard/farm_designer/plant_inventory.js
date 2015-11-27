@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router';
 import { Plant } from '../../../models/plant'
 import { ToolTip } from '../../../components/tooltip';
 import { renderCatalog } from './species_catalog';
@@ -8,7 +9,7 @@ export class Plants extends React.Component {
     return(
       <div>
         <List plants={ this.props.plants.all } />
-        <ToolTip href="?designer_left_menu=SpeciesCatalog"
+        <ToolTip href="/dashboard/designer?designer_left_menu=SpeciesCatalog"
                  desc="Add a new plant"
                  color="dark-green"/>
       </div>
@@ -96,7 +97,7 @@ export class List extends React.Component {
     var mapper = function(plant, key) {
       return(
         <li key={ key } >
-          <a href={ Plant.designerUrl(plant) }> { plant.name } </a>
+          <Link to={ Plant.designerUrl(plant) }> { plant.name } </Link>
           <div>{plant.age} days old</div>
         </li>);
     };
@@ -139,10 +140,10 @@ export class PlantInventory extends React.Component {
               ].map(function(item, i) {
                 var url = "/dashboard/designer?designer_left_tab=" + (item || 'Plants');
                 return  <li key={i}>
-                          <a href={ url }
-                             className={this.isActive(item) ? "active" : ""}>
+                          <Link to={ url }
+                                className={this.isActive(item) ? "active" : ""}>
                             { item }
-                          </a>
+                          </Link>
                         </li>;
 
             }.bind(this))}
