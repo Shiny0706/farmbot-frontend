@@ -14,14 +14,16 @@ export var Schedules = React.createClass({
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <div className="header-wrapper">
-                          <h5>Schedule a Sequence</h5>
+                        <button className="green button-like widget-control">Save</button>
+                        <button className="red button-like widget-control">Delete</button>
+                        <div className="widget-header">
+                          <h5>Event Editor</h5>
                         </div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-sm-12">
-                        <form className="content-wrapper ng-pristine ng-invalid ng-invalid-required" name="form" ng-submit="submit()">
+                        <form className="widget-content ng-pristine ng-invalid ng-invalid-required" name="form" ng-submit="submit()">
                           <div className="row padding-bottom">
                             <div className="col-sm-4">
                               <p>Choose a Sequence</p>
@@ -88,17 +90,6 @@ export var Schedules = React.createClass({
                               </div>
                             </div>
                           </div>
-                          <div className="row">
-                            <div className="col-sm-12">
-                              <button className="green button-like" ng-disabled="form.$invalid" type="submit" disabled="disabled">
-                                Schedule
-                              </button>
-                              <syncbutton schedules="schedules" className="ng-isolate-scope"><button className="yellow button-like" type="button"> Sync Now <i className="fa fa-upload" /> </button> <div className="last-sync ng-binding">LAST SYNC: ---</div></syncbutton>
-                              <button className="red button-like left" ng-click="destroy()" type="button">
-                                Delete
-                              </button>
-                            </div>
-                          </div>
                           <div className="row padding-bottom">
                             <div className="col-sm-12">
                               <strong ng-show="form.$invalid">
@@ -117,14 +108,14 @@ export var Schedules = React.createClass({
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <div className="header-wrapper">
+                        <div className="widget-header">
                           <h5>Calendar</h5>
                         </div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-sm-12">
-                        <div className="content-wrapper calendar-wrapper">
+                        <div className="widget-content calendar-wrapper">
                           <div className="row date-flipper">
                             <div className="col-sm-2">
                               <i className="fa fa-2x fa-arrow-left arrow-button radius" ng_click="shiftDate(-1)" />

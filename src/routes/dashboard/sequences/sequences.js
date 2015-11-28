@@ -9,13 +9,96 @@ export var Sequences = React.createClass({
         <div className="all-content-wrapper">
           <div ng-view className="ng-scope">
             <div className="row ng-scope">
-              <div className="col-md-4 col-sm-12">
+
+              <div className="col-md-3 col-sm-12">
+                <div>
+                  <div className="widget-wrapper">
+                    <div className="row">
+                      <div className="col-sm-12">
+                        <button className="gray button-like widget-control">
+                          Add
+                        </button>
+                        <div className="widget-header">
+                          <h5>Sequences</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-12">
+                        <div className="widget-content">
+                          <div className="block-wrapper">
+                            {/* ngRepeat: seq in storedSequences track by $id(seq) */}<div ng-repeat="seq in storedSequences track by $id(seq)" className="ng-scope">
+                              <button className="block full-width no-radius text-left purple-block block-header" ng-click="load(seq)">
+                                Untitled Sequence
+                                <i className="fa fa-arrows block-control" />
+                                <i className="fa fa-pencil block-control" />
+                              </button>
+                            </div>{/* end ngRepeat: seq in storedSequences track by $id(seq) */}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div>
+                  <div className="widget-wrapper">
+                    <div className="row">
+                      <div className="col-sm-12">
+                        <button className="green button-like widget-control" ng-click="saveSequence(sequence)">
+                          Save
+                        </button>
+                        <button className="yellow button-like widget-control" ng-click="execute(sequence)">
+                          Execute
+                        </button>
+                        <button className="red button-like widget-control" ng-click="deleteSequence(sequence)">
+                          Delete
+                        </button>
+                        <div className="widget-header">
+                          <h5>Sequence Editor</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-12">
+                        <div className="widget-content">
+                          <div className="row">
+                            <div className="col-sm-12">
+                              <input id="right-label" ng-model="sequence.name" type="text" className="ng-pristine ng-untouched ng-valid" />
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col-sm-12">
+                              <label>Sequence Parameters:</label>
+                              <a className="tiny expand button round dark-gray" href="#">PLANT-ID/PLANT-GROUP-ID</a>
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div as-sortable="dragControlListeners" className="col-sm-12 ng-pristine ng-untouched ng-valid" ng-model="sequence.steps">
+                              {/* ngRepeat: step in sequence.steps | orderBy: 'position' */}
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col-sm-12">
+                              <div className="drag-drop-area padding">DROP OPERATIONS AND SEQUENCES HERE</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-3 col-sm-12">
                 <div>
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="widget-header">
-                          <h5>Basic Operations</h5>
+                          <h5>Operations</h5>
                         </div>
                       </div>
                     </div>
@@ -99,85 +182,8 @@ export var Sequences = React.createClass({
                     </div>
                   </div>
                 </div>
-                <div>
-                  <div className="widget-wrapper">
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <button className="gray button-like widget-control">
-                          Add
-                        </button>
-                        <div className="widget-header">
-                          <h5>Saved Sequences</h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <div className="widget-content">
-                          <div className="block-wrapper">
-                            {/* ngRepeat: seq in storedSequences track by $id(seq) */}<div ng-repeat="seq in storedSequences track by $id(seq)" className="ng-scope">
-                              <button className="block full-width no-radius text-left purple-block block-header" ng-click="load(seq)">
-                                Untitled Sequence
-                                <i className="fa fa-arrows block-control" />
-                                <i className="fa fa-pencil block-control" />
-                              </button>
-                            </div>{/* end ngRepeat: seq in storedSequences track by $id(seq) */}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
-              <div className="col-md-8 col-sm-12">
-                <div>
-                  <div className="widget-wrapper">
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <button className="green button-like widget-control" ng-click="saveSequence(sequence)">
-                          Save
-                        </button>
-                        <button className="yellow button-like widget-control" ng-click="execute(sequence)">
-                          Execute
-                        </button>
-                        <button className="red button-like widget-control" ng-click="deleteSequence(sequence)">
-                          Delete
-                        </button>
-                        <div className="widget-header">
-                          <h5>Sequence Editor</h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <div className="widget-content">
-                          <div className="row">
-                            <div className="col-sm-12">
-                              <input id="right-label" ng-model="sequence.name" type="text" className="ng-pristine ng-untouched ng-valid" />
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-sm-12">
-                              <label>Sequence Parameters:</label>
-                              <a className="tiny expand button round dark-gray" href="#">PLANT-ID/PLANT-GROUP-ID</a>
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div as-sortable="dragControlListeners" className="col-sm-12 ng-pristine ng-untouched ng-valid" ng-model="sequence.steps">
-                              {/* ngRepeat: step in sequence.steps | orderBy: 'position' */}
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-sm-12">
-                              <div className="drag-drop-area padding">DRAG AND DROP BASIC OPERATIONS AND SEQUENCES HERE</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>

@@ -107,7 +107,7 @@ export var Devices = React.createClass({
                                       <p>Caution! This cannot be undone</p>
                                     </td>
                                     <td>
-                                      <button className="button-like red left">DELETE FARMBOT</button>
+                                      <button className="button-like red">DELETE FARMBOT</button>
                                     </td>
                                   </tr>
                                 </tbody>
