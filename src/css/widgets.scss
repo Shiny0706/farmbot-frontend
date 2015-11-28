@@ -7,6 +7,12 @@
   margin-bottom: 3rem;
 }
 
+@media (max-width: 600px) {
+  .widget-wrapper {
+    margin-bottom: 1.5rem;
+  }
+}
+
 .widget-header {
   background: $dark_gray;
   letter-spacing: .05rem;
