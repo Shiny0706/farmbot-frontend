@@ -22,22 +22,22 @@ $dark_green:     #371;
 $light_yellow:   #ffc;
 $yellow:         #fd6;
 $gold:           #b90;
+
 $beige:          #fec;
 $brown:          #CA8;
 
+$light_orange:   #fc9;
 $orange:         #fa0;
 $dark_orange:    #e93;
 
 $light_purple:   #dab;
-$lavender:       #bad;
-$royal_purple:   #64a;
-$dark_purple:    #a47;
+$purple:         #bad;
+$dark_purple:    #64a;
 
-$pink:           #e99;
-$dark_pink:      #e66;
-$peach:          #fc9;
-$red:            #f00;
-$dark_red:       #900;
+$light_red:      #e99;
+$red:            #e66;
+$dark_red:       #f00;
+$darkest_red:    #900;
 
 %extend_1 {
   background-color: $white;
@@ -66,7 +66,7 @@ $dark_red:       #900;
 }
 
 %extend_4 {
-  background-color: $dark_pink;
+  background-color: $red;
   border: none;
   font-weight: bold;
   padding-left: 20px;

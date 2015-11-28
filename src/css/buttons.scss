@@ -39,11 +39,11 @@ button {
     }
   }
   &.red {
-    background-color: $dark_pink;
+    background-color: $red;
     color: $off_white;
     border-bottom: 3px solid $dark_red;
     &:hover {
-      background-color: darken($dark_pink, 5%);
+      background-color: darken($red, 5%);
     }
   }
   &.gray {

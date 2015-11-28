@@ -3,113 +3,82 @@
 @import 'colors';
 
 .block-wrapper {
-  height: 2.5rem;
+  height: 3.5rem;
   margin-bottom: 1.5rem;
   box-shadow: 0 0px 10px $light_gray;
-  &:hover, :focus {
+  &:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 10px $translucent;
     transition: all 0.2s ease-out;
-    .edit-icon {
-      display: inherit;
-      padding-right: 15px;
-      color: $dark_gray;
-    }
   }
 }
 
-/////////////////
-// BLUE BLOCKS //
-/////////////////
+.block-control {
+  float: right;
+  color: $dark_gray;
+  font-size: 1.5rem!important;
+  display: none!important;
+}
 
-.blue-block-header {
+.block-header {
+  height: 3.5rem;
+  font-size: 1.2rem!important;
+  color: $dark_gray;
+  &:hover {
+    .block-control {
+      display: inherit!important;
+    }
+  }
+
+  &.blue-block {
   background-color: $blue;
-  color: $dark_gray;
-}
-.blue-block-content {
-  background-color: $light_blue;
-}
-
-//////////////////
-// GREEN BLOCKS //
-//////////////////
-
-.green-block-header {
+  }
+  &.green-block {
   background-color: $green;
-  color: $dark_gray;
-}
-.green-block-content {
-  background-color: $light_green;
-}
-
-///////////////////
-// YELLOW BLOCKS //
-///////////////////
-
-.yellow-block-header {
+  }
+  &.yellow-block {
   background-color: $yellow;
-  color: $dark_gray;
-}
-.yellow-block-content {
-  background-color: $light_yellow;
-}
-
-///////////////////
-// ORANGE BLOCKS //
-///////////////////
-
-.orange-block-header {
-  background-color: $peach;
-  color: $dark_gray;
-}
-.orange-block-content {
-  background-color: $beige;
-}
-
-///////////////////
-// PURPLE BLOCKS //
-///////////////////
-
-.purple-block-header {
-  background-color: $lavender;
-  color: $dark_gray;
-}
-.purple-block-content {
-  background-color: $light_purple;
-}
-
-/////////////////
-// PINK BLOCKS //
-/////////////////
-
-.pink-block-header {
-  background-color: $light_purple;
-  color: $dark_gray;
-}
-.pink-block-content {
-  background-color: $light_gray;
-}
-
-/////////////////
-// GRAY BLOCKS //
-/////////////////
-
-.gray-block-header {
+  }
+  &.orange-block {
+  background-color: $orange;
+  }
+  &.purple-block {
+  background-color: $purple;
+  }
+  &.brown-block {
+  background-color: $brown;
+  }
+  &.gray-block {
   background-color: $gray;
-  color: $dark_gray;
-}
-.gray-block-content {
-  background-color: $light_gray;
+  }
+  &.red-block {
+  background-color: $red;
+  }
 }
 
-////////////////
-// RED BLOCKS //
-////////////////
-
-.red-block-header {
-  background-color: $pink;
-  color: $dark_gray;
-}
-.red-block-content {
-  background-color: $pink;
+.block-content {
+  .blue-block {
+    background-color: $light_blue;
+  }
+  .green-block {
+    background-color: $light_green;
+  }
+  .yellow-block {
+    background-color: $light_yellow;
+  }
+  .orange-block {
+    background-color: $beige;
+  }
+  .purple-block {
+    background-color: $light_purple;
+  }
+  .brown-block {
+    background-color: $brown;
+  }
+  .gray-block {
+    background-color: $light_gray;
+  }
+  .red-block {
+    background-color: $red;
+  }
 }

@@ -25,17 +25,17 @@ export var Sequences = React.createClass({
                           <div className="row">
                             <div className="col-sm-6 col-md-6">
                               <div className="block-wrapper">
-                                <button className="full-width text-left blue-block-header no-radius block" ng-click="addStep('move_absolute')">
+                                <button className="full-width text-left blue-block block-header no-radius block" ng-click="addStep('move_absolute')">
                                   MOVE ABSOLUTE
-                                  <i className="fa fa-bars right" />
+                                  <i className="fa fa-arrows block-control" />
                                 </button>
                               </div>
                             </div>
                             <div className="col-sm-6 col-md-6">
                               <div className="block-wrapper">
-                                <button className="full-width text-left green-block-header no-radius block" ng-click="addStep('move_relative')">
+                                <button className="full-width text-left green-block block-header no-radius block" ng-click="addStep('move_relative')">
                                   MOVE RELATIVE
-                                  <i className="fa fa-bars right" />
+                                  <i className="fa fa-arrows block-control" />
                                 </button>
                               </div>
                             </div>
@@ -43,53 +43,53 @@ export var Sequences = React.createClass({
                           <div className="row">
                             <div className="col-sm-6 col-md-6">
                               <div className="block-wrapper">
-                                <button className="full-width text-left orange-block-header no-radius block" ng-click="addStep('pin_write')">
+                                <button className="full-width text-left orange-block block-header no-radius block" ng-click="addStep('pin_write')">
                                   WRITE PIN
-                                  <i className="fa fa-bars right" />
+                                  <i className="fa fa-arrows block-control" />
                                 </button>
                               </div>
                             </div>
                             <div className="col-sm-6 col-md-6">
                               <div className="block-wrapper">
-                                <button className="full-width text-left gray-block-header no-radius block" ng-click="addStep('wait')">
-                                  WAIT
-                                  <i className="fa fa-bars right" />
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-sm-6 col-md-6">
-                              <div className="block-wrapper">
-                                <button className="full-width text-left red-block-header no-radius block" ng-click="addStep('send_message')">
-                                  SEND MESSAGE
-                                  <i className="fa fa-bars right" />
-                                </button>
-                              </div>
-                            </div>
-                            <div className="col-sm-6 col-md-6">
-                              <div className="block-wrapper">
-                                <button className="full-width text-left pink-block-header no-radius block" ng-click="addStep('if_statement')">
-                                  IF STATEMENT
-                                  <i className="fa fa-bars right" />
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-sm-6 col-md-6">
-                              <div className="block-wrapper">
-                                <button className="full-width text-left purple-block-header no-radius block" ng-click="addStep('move_relative')">
-                                  TAKE PICTURE*
-                                  <i className="fa fa-bars right" />
-                                </button>
-                              </div>
-                            </div>
-                            <div className="col-sm-6 col-md-6">
-                              <div className="block-wrapper">
-                                <button className="full-width text-left yellow-block-header no-radius block" ng-click="addStep('read_pin')">
+                                <button className="full-width text-left yellow-block block-header no-radius block" ng-click="addStep('read_pin')">
                                   READ PIN
-                                  <i className="fa fa-bars right" />
+                                  <i className="fa fa-arrows block-control" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col-sm-6 col-md-6">
+                              <div className="block-wrapper">
+                                <button className="full-width text-left gray-block block-header no-radius block" ng-click="addStep('wait')">
+                                  WAIT
+                                  <i className="fa fa-arrows block-control" />
+                                </button>
+                              </div>
+                            </div>
+                            <div className="col-sm-6 col-md-6">
+                              <div className="block-wrapper">
+                                <button className="full-width text-left red-block block-header no-radius" ng-click="addStep('send_message')">
+                                  SEND MESSAGE
+                                  <i className="fa fa-arrows block-control" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col-sm-6 col-md-6">
+                              <div className="block-wrapper">
+                                <button className="full-width text-left brown-block block-header no-radius block" ng-click="addStep('if_statement')">
+                                  IF STATEMENT
+                                  <i className="fa fa-arrows block-control" />
+                                </button>
+                              </div>
+                            </div>
+                            <div className="col-sm-6 col-md-6">
+                              <div className="block-wrapper">
+                                <button className="full-width text-left purple-block block-header no-radius block" ng-click="addStep('move_relative')">
+                                  TAKE PICTURE*
+                                  <i className="fa fa-arrows block-control" />
                                 </button>
                               </div>
                             </div>
@@ -103,25 +103,26 @@ export var Sequences = React.createClass({
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
+                        <button className="gray button-like widget-control">
+                          Add
+                        </button>
                         <div className="widget-header">
-                          <button className="green button-like text-left" ng-click="addSequence()" style={{marginTop: '-3px'}}>
-                            <i className="step fi-plus size-12" />
-                            Add
-                          </button>
-                          <h5>Sequences</h5>
+                          <h5>Saved Sequences</h5>
                         </div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="widget-content">
-                          {/* ngRepeat: seq in storedSequences track by $id(seq) */}<div ng-repeat="seq in storedSequences track by $id(seq)" className="ng-scope">
-                            <button className="block full-width no-radius text-left purple-block" ng-click="load(seq)">
-                              Untitled Sequence
-                              <i className="fa fa-bars right" />
-                              <i className="fa fa-pencil right edit-icon" />
-                            </button>
-                          </div>{/* end ngRepeat: seq in storedSequences track by $id(seq) */}
+                          <div className="block-wrapper">
+                            {/* ngRepeat: seq in storedSequences track by $id(seq) */}<div ng-repeat="seq in storedSequences track by $id(seq)" className="ng-scope">
+                              <button className="block full-width no-radius text-left purple-block block-header" ng-click="load(seq)">
+                                Untitled Sequence
+                                <i className="fa fa-arrows block-control" />
+                                <i className="fa fa-pencil block-control" />
+                              </button>
+                            </div>{/* end ngRepeat: seq in storedSequences track by $id(seq) */}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -143,7 +144,7 @@ export var Sequences = React.createClass({
                           Delete
                         </button>
                         <div className="widget-header">
-                          <h5>Sequence Builder</h5>
+                          <h5>Sequence Editor</h5>
                         </div>
                       </div>
                     </div>
@@ -162,19 +163,12 @@ export var Sequences = React.createClass({
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-sm-12">
-                              <div className="drag-drop-area padding">
-                                <h6>DRAG BASIC OPERATIONS AND/OR SAVE SEQUENCES HERE</h6>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row">
                             <div as-sortable="dragControlListeners" className="col-sm-12 ng-pristine ng-untouched ng-valid" ng-model="sequence.steps">
                               {/* ngRepeat: step in sequence.steps | orderBy: 'position' */}
                             </div>
                           </div>
                           <div className="row">
-                            <div className="small-12 columns">
+                            <div className="col-sm-12">
                               <div className="drag-drop-area padding">DRAG AND DROP BASIC OPERATIONS AND SEQUENCES HERE</div>
                             </div>
                           </div>
