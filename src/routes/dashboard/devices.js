@@ -16,9 +16,9 @@ export var Devices = React.createClass({
                       <div className="col-sm-12">
                         <div className="row">
                           <div className="col-sm-12">
-                            <button className="button-like green widget-control">
-                              Save
-                            </button>
+                            <button className="button-like green widget-control">Save</button>
+                            <button className="button-like yellow widget-control">RESTART</button>
+                            <button className="button-like red widget-control">SHUTDOWN</button>
                             <div className="widget-header">
                               <h5>DEVICE</h5>
                             </div>
@@ -27,26 +27,6 @@ export var Devices = React.createClass({
                         <div className="row">
                           <div className="col-sm-12">
                             <div className="widget-content">
-                              <form ng_submit="createDevice()" className="ng-pristine ng-valid ng-valid-required">
-                                <fieldset>
-                                  <div className="row">
-                                    <div className="col-md-12">
-                                      <label>FARMBOT NAME *</label>
-                                      <input id="botname" ng_model="device.name" placeholder="Brocolli Overlord" required type="text" className="ng-pristine ng-untouched ng-valid ng-valid-required" />
-                                    </div>
-                                  </div>
-                                  <div className="row">
-                                    <div className="col-md-6">
-                                      <label>UUID *</label>
-                                      <input ng_model="device.uuid" placeholder="ad698900-2546-11e3-87fb-c560cb0ca47b" required type="text" className="ng-pristine ng-untouched ng-valid ng-valid-required" />
-                                    </div>
-                                    <div className="col-md-6">
-                                      <label>SECURITY TOKEN *</label>
-                                      <input ng_model="device.token" placeholder="4bbd2jm242dl5wmimbwz4rvlu77m0a4i" required type="text" className="ng-pristine ng-untouched ng-valid ng-valid-required" />
-                                    </div>
-                                  </div>
-                                </fieldset>
-                              </form>
                               <table className="plain">
                                 <tbody>
                                   <tr>
@@ -54,7 +34,7 @@ export var Devices = React.createClass({
                                       <label>FARMBOT NAME</label>
                                     </td>
                                     <td colSpan={2}>
-                                      <p>Broccoli Overlord</p>
+                                      <input ng_model="device.name" />
                                     </td>
                                   </tr>
                                   <tr>
@@ -62,7 +42,7 @@ export var Devices = React.createClass({
                                       <label>UUID</label>
                                     </td>
                                     <td colSpan={2}>
-                                      <p>12345678-1234-1234-1234-123456789abc</p>
+                                      <input ng_model="device.uuid" />
                                     </td>
                                   </tr>
                                   <tr>
@@ -70,7 +50,7 @@ export var Devices = React.createClass({
                                       <label>SECURITY TOKEN</label>
                                     </td>
                                     <td colSpan={2}>
-                                      <p>1a17aacb03981542b892ccb1gf19e13d2b980dc2</p>
+                                      <input ng_model="device.token" />
                                     </td>
                                   </tr>
                                   <tr>
@@ -121,26 +101,14 @@ export var Devices = React.createClass({
                                   </tr>
                                   <tr>
                                     <td>
-                                      <label>POWER</label>
-                                    </td>
-                                    <td>
-                                      <button className="button-like yellow left">RESTART</button>
-                                      <button className="button-like red left">SHUTDOWN</button>
-                                    </td>
-                                    {/* / TODO: Make this real ^ */}
-                                    <td />
-                                    {/* / TODO: Make this real ^ */}
-                                  </tr>
-                                  <tr>
-                                    <td>
                                       <label>DELETE FARMBOT</label>
                                     </td>
                                     <td>
-                                      <button className="button-like red left">DELETE</button>
                                       <p>Caution! This cannot be undone</p>
                                     </td>
-                                    <td />
-                                    {/* / TODO: Make this real ^ */}
+                                    <td>
+                                      <button className="button-like red left">DELETE FARMBOT</button>
+                                    </td>
                                   </tr>
                                 </tbody>
                               </table>
@@ -185,13 +153,13 @@ export var Devices = React.createClass({
                                     <label>LENGTH (m)</label>
                                   </td>
                                   <td>
-                                    <input ng_model="device.LENGTH_X" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.LENGTH_X" />
                                   </td>
                                   <td>
-                                    <input ng_model="device.LENGTH_Y" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.LENGTH_Y" />
                                   </td>
                                   <td>
-                                    <input ng_model="device.LENGTH_Z" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.LENGTH_Z" />
                                   </td>
                                 </tr>
                                 <tr>
@@ -199,13 +167,13 @@ export var Devices = React.createClass({
                                     <label>MAX SPEED (mm/s)</label>
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_MAX_SPD_X" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_MAX_SPD_X" />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_MAX_SPD_Y" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_MAX_SPD_Y" />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_MAX_SPD_Z" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_MAX_SPD_Z" />
                                   </td>
                                 </tr>
                                 <tr>
@@ -213,13 +181,13 @@ export var Devices = React.createClass({
                                     <label>ACCELERATE FOR (steps)</label>
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_ACC_DEC_X" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_STEPS_ACC_DEC_X" />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_ACC_DEC_Y" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_STEPS_ACC_DEC_Y" />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_ACC_DEC_Z" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_STEPS_ACC_DEC_Z" />
                                   </td>
                                 </tr>
                                 <tr>
@@ -227,13 +195,13 @@ export var Devices = React.createClass({
                                     <label>TIMEOUT AFTER (seconds)</label>
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_TIMEOUT_X" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_TIMEOUT_X" />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_TIMEOUT_Y" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_TIMEOUT_Y" />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_TIMEOUT_Z" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_TIMEOUT_Z" />
                                   </td>
                                 </tr>
                                 <tr>
@@ -241,13 +209,13 @@ export var Devices = React.createClass({
                                     <label>STEPS PER MM</label>
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_PER_MM_X" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_STEPS_PER_MM_X" />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_PER_MM_Y" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_STEPS_PER_MM_Y" />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_PER_MM_Z" className="ng-pristine ng-untouched ng-valid" />
+                                    <input ng_model="device.MOVEMENT_STEPS_PER_MM_Z" />
                                   </td>
                                 </tr>
                                 <tr>
