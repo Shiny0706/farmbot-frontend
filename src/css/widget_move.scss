@@ -12,21 +12,26 @@
   width: 100%;
 }
 
+.move-amount-wrapper {
+  box-shadow: 0px 0px 10px $light_gray;
+  height: 2.5rem;
+  border-radius: 7px;
+}
+
 .move-amount {
   background-color: $white;
   border-right: 2px solid $off-white;
-  box-shadow: 0px 0px 10px $light_gray;
   color: $medium_gray;
   font-weight: bold;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  height: 2.5rem;
+  padding-top: auto;
+  padding-bottom: auto;
   padding-left: 0;
   padding-right: 0;
   text-align: center;
-  width: 25%;
+  width: 20%;
   margin: 0;
   float: left;
-      transition: 0s;
   &:hover {
     background-color: darken($white, 40%);
     color: $off_white;
@@ -43,12 +48,12 @@
     border-top-right-radius: 7px;
     border-right: 0px none;
   }
+  &.move-amount-selected {
+    background-color: $medium_gray!important;
+    color: $off_white;
+  }
 }
 
-.move-amount-selected {
-  background-color: $medium_gray!important;
-  color: $off_white;
-}
 
 //////////////////
 // JOG CONTROLS //

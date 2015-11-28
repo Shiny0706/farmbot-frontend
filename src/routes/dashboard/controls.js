@@ -24,10 +24,13 @@ render: function() {
                           <label className="text-center ng-binding">MOVE AMOUNT (mm) Busy</label>
                           <div className="row">
                             <div className="col-sm-12">
-                              <button className="move-amount no-radius leftmost" stepsize={1}>1</button>
-                              <button className="move-amount no-radius" stepsize={10}>10</button>
-                              <button className="move-amount no-radius" stepsize={100}>100</button>
-                              <button className="move-amount no-radius rightmost move-amount-selected" stepsize={1000}>1000</button>
+                              <div className="move-amount-wrapper">
+                                <button className="move-amount no-radius leftmost" stepsize={1}>1</button>
+                                <button className="move-amount no-radius" stepsize={10}>10</button>
+                                <button className="move-amount no-radius" stepsize={100}>100</button>
+                                <button className="move-amount no-radius move-amount-selected" stepsize={1000}>1,000</button>
+                                <button className="move-amount no-radius rightmost" stepsize={10000}>10,000</button>
+                              </div>
                             </div>
                           </div>
                           <div className="row">
