@@ -125,7 +125,7 @@ export var Devices = React.createClass({
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <button className="yellow button-like widget-control">UPDATE FARMBOT</button>
+                        <button className="green button-like widget-control">SAVE</button>
                         {/* / TODO: Hide the save button ^ until a value in the table has been changed and needs saving. Once the user presses the button, change the text to 'UPDATING' (while the update is happening, just like the sync button). Once the update is complete, change it to 'UPDATED :checkmark:' and make it green. */}
                         <div className="widget-header">
                           <h5>Hardware</h5>

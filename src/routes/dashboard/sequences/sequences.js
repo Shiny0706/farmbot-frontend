@@ -66,7 +66,7 @@ export var Sequences = React.createClass({
                         <div className="widget-content">
                           <div className="row">
                             <div className="col-sm-12">
-                              <input id="right-label" ng-model="sequence.name" type="text" className="ng-pristine ng-untouched ng-valid" />
+                              <input id="right-label" placeholder="Sequence Name" ng-model="sequence.name" type="text" className="ng-pristine ng-untouched ng-valid" />
                             </div>
                           </div>
                           <div className="row">
