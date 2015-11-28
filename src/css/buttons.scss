@@ -3,17 +3,12 @@
 @import 'colors';
 @import 'fonts';
 
-.button {
-  font-family: $roboto;
-  font-weight: 700;
-  margin-bottom: 0;
-}
-
 button {
   font-size: .8rem;
   text-transform: uppercase;
   text-align: center;
-  font-weight: bold;
+  font-family: $roboto;
+  font-weight: 700;
   padding-top: .2rem;
   padding-bottom: .2rem;
   padding-left: .8rem;
