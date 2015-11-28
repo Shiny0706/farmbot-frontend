@@ -1,7 +1,6 @@
 // Styles for the NAVBAR
 
 @import 'colors';
-@import 'fonts';
 
 nav.navbar {
   background-color: $dark_gray;
@@ -11,6 +10,7 @@ nav.navbar {
   margin: 0;
   text-transform: uppercase;
   border-radius: 0px;
+  border: 0px solid;
 
 }
 .navbar-nav>li>a {

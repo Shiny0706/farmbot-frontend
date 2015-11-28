@@ -1,7 +1,6 @@
 // Styles for the sequence and regimen BLOCKS
 
 @import 'colors';
-@import 'fonts';
 
 .block-wrapper {
   height: 2.5rem;
@@ -36,7 +35,7 @@
 //////////////////
 
 .green-block-header {
-  background-color: $dark_green;
+  background-color: $green;
   color: $dark_gray;
 }
 .green-block-content {
@@ -76,7 +75,7 @@
   color: $dark_gray;
 }
 .purple-block-content {
-  background-color: $dark_purple;
+  background-color: $light_purple;
 }
 
 /////////////////

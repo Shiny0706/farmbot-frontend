@@ -39,22 +39,6 @@ $peach:          #fc9;
 $red:            #f00;
 $dark_red:       #900;
 
-%greenish {
-  float: right;
-  background-color: $green;
-  color: $off_white;
-  font-weight: bold;
-  border-bottom: 3px solid $dark_green;
-}
-
-%reddish {
-  background-color: $dark_pink;
-  float: right;
-  color: $off_white;
-  font-weight: bold;
-  border-bottom: 3px solid $dark_red;
-}
-
 %extend_1 {
   background-color: $white;
   padding-top: 15px;

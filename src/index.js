@@ -8,19 +8,22 @@ import { loadFromCdn } from './load_from_cdn';
 
 const store = configureStore();
 
-require("!style!css!sass!./css/farm_designer.scss");
-require("!style!css!sass!./css/move_widget.scss");
-require("!style!css!sass!./css/plants_panel.scss");
 require("!style!css!sass!./css/alerts.scss");
 require("!style!css!sass!./css/blocks.scss");
 require("!style!css!sass!./css/buttons.scss");
 require("!style!css!sass!./css/calendar.scss");
+require("!style!css!sass!./css/farm_designer.scss");
 require("!style!css!sass!./css/farmbot.scss");
 require("!style!css!sass!./css/inputs.scss");
 require("!style!css!sass!./css/navbar.scss");
+require("!style!css!sass!./css/plants_panel.scss");
 require("!style!css!sass!./css/tables.scss");
 require("!style!css!sass!./css/tooltips.scss");
+
 require("!style!css!sass!./css/widgets.scss");
+require("!style!css!sass!./css/widget_move.scss");
+require("!style!css!sass!./css/widget_tool_control.scss");
+
 loadFromCdn(
   "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
   "css");

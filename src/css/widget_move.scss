@@ -1,11 +1,16 @@
 // Styles for the MOVE Widget
 
 @import 'colors';
-@import 'fonts';
 
 ///////////////////////////////
 // MOVE AMOUNT (mm) selector //
 ///////////////////////////////
+
+
+.text-center {
+  text-align: center;
+  width: 100%;
+}
 
 .move-amount {
   background-color: $white;
@@ -23,7 +28,7 @@
   float: left;
       transition: 0s;
   &:hover {
-    background-color: $medium_gray;
+    background-color: darken($white, 40%);
     color: $off_white;
   }
   &:nth-child(n+2) {
@@ -41,7 +46,7 @@
 }
 
 .move-amount-selected {
-  background-color: $medium_gray;
+  background-color: $medium_gray!important;
   color: $off_white;
 }
 
@@ -57,7 +62,7 @@
 
 .arrow-button {
   background-color: $medium_gray;
-  border-bottom: 3px solid $dark_gray;
+  border-bottom: 2px solid $dark_gray;
   color: $off_white;
   font-size: 16px!important;
   height: 40px;
@@ -65,11 +70,7 @@
   padding: 12px;
   text-align: center;
   width: 40px;
-  &:active {
-    border-bottom-width: 1px!important;
-        transform: translateY(2px);
-  }
   &:hover {
-    background-color: $medium_gray;
+    background-color: darken($medium_gray, 5%);
   }
 }

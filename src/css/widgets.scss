@@ -1,14 +1,13 @@
 // Styles for ALL WIDGETS
 
 @import 'colors';
-@import 'fonts';
 
 .widget-wrapper {
   box-shadow: 0px 0px 10px $gray;
   margin-bottom: 3rem;
 }
 
-.header-wrapper {
+.widget-header {
   background: $dark_gray;
   letter-spacing: .05rem;
   padding: .75rem 1rem;
@@ -24,14 +23,20 @@
   }
 }
 
-.content-wrapper {
+.widget-control {
+  margin-top: 0.7rem;
+  margin-right: 1.5rem;
+}
+
+.widget-content {
   background: $off_white;
-  border-style: none;
-  border-top-width: 0;
   border-color: $light_gray;
   color: $dark_gray;
   padding: 1.25rem;
   &.calendar-wrapper {
     padding-bottom: 20px;
+  }
+  &.no-bottom-padding {
+    padding-bottom: 0px;
   }
 }

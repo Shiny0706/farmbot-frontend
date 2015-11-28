@@ -16,138 +16,135 @@ export var Devices = React.createClass({
                       <div className="col-sm-12">
                         <div className="row">
                           <div className="col-sm-12">
-                            <button className="button-like yellow ng-binding" style={{margin: 4}}>
-                              Update FarmBot
+                            <button className="button-like green widget-control">
+                              Save
                             </button>
-                            <div className="header-wrapper">
+                            <div className="widget-header">
                               <h5>DEVICE</h5>
                             </div>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-sm-12">
-                            <form ng_submit="createDevice()" className="ng-pristine ng-valid ng-valid-required">
-                              <fieldset>
-                                <div className="row">
-                                  <div className="col-md-12">
-                                    <label>FARMBOT NAME *</label>
-                                    <input id="botname" ng_model="device.name" placeholder="Brocolli Overlord" required type="text" className="ng-pristine ng-untouched ng-valid ng-valid-required" />
+                            <div className="widget-content">
+                              <form ng_submit="createDevice()" className="ng-pristine ng-valid ng-valid-required">
+                                <fieldset>
+                                  <div className="row">
+                                    <div className="col-md-12">
+                                      <label>FARMBOT NAME *</label>
+                                      <input id="botname" ng_model="device.name" placeholder="Brocolli Overlord" required type="text" className="ng-pristine ng-untouched ng-valid ng-valid-required" />
+                                    </div>
                                   </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-md-6">
-                                    <label>UUID *</label>
-                                    <input ng_model="device.uuid" placeholder="ad698900-2546-11e3-87fb-c560cb0ca47b" required type="text" className="ng-pristine ng-untouched ng-valid ng-valid-required" />
+                                  <div className="row">
+                                    <div className="col-md-6">
+                                      <label>UUID *</label>
+                                      <input ng_model="device.uuid" placeholder="ad698900-2546-11e3-87fb-c560cb0ca47b" required type="text" className="ng-pristine ng-untouched ng-valid ng-valid-required" />
+                                    </div>
+                                    <div className="col-md-6">
+                                      <label>SECURITY TOKEN *</label>
+                                      <input ng_model="device.token" placeholder="4bbd2jm242dl5wmimbwz4rvlu77m0a4i" required type="text" className="ng-pristine ng-untouched ng-valid ng-valid-required" />
+                                    </div>
                                   </div>
-                                  <div className="col-md-6">
-                                    <label>SECURITY TOKEN *</label>
-                                    <input ng_model="device.token" placeholder="4bbd2jm242dl5wmimbwz4rvlu77m0a4i" required type="text" className="ng-pristine ng-untouched ng-valid ng-valid-required" />
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <button className="button-like yellow ng-binding" style={{margin: 9}}>
-                                    Update FarmBot
-                                  </button>
-                                </div>
-                              </fieldset>
-                            </form>
-                            <table className="plain">
-                              <tbody>
-                                <tr>
-                                  <td>
-                                    <label>FARMBOT NAME</label>
-                                  </td>
-                                  <td colSpan={2}>
-                                    <p>Broccoli Overlord</p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <label>UUID</label>
-                                  </td>
-                                  <td colSpan={2}>
-                                    <p>12345678-1234-1234-1234-123456789abc</p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <label>SECURITY TOKEN</label>
-                                  </td>
-                                  <td colSpan={2}>
-                                    <p>1a17aacb03981542b892ccb1gf19e13d2b980dc2</p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <label>NETWORK</label>
-                                  </td>
-                                  <td colSpan={2}>
-                                    <p>Ethernet</p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <label>IP ADDRESS</label>
-                                  </td>
-                                  <td colSpan={2}>
-                                    <p>0.0.0.0</p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <label>MAC ADDRESS</label>
-                                  </td>
-                                  <td colSpan={2}>
-                                    <p>00:00:00:00:00:00</p>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <label>COMPUTER</label>
-                                  </td>
-                                  <td>
-                                    <p>Raspberry Pi 2 Model B+ running farmbot-raspberry-pi-controller V1.233</p>
-                                  </td>
-                                  <td>
-                                    <button className="button-like yellow">UPDATE TO V1.234</button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <label>MICROCONTROLLER</label>
-                                  </td>
-                                  <td>
-                                    <p>Arduino MEGA 2560 running farmbot-arduino-firmware V1.233</p>
-                                  </td>
-                                  <td>
-                                    <button className="button-like yellow">UPDATE TO V1.234</button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <label>POWER</label>
-                                  </td>
-                                  <td>
-                                    <button className="button-like yellow left">RESTART</button>
-                                    <button className="button-like red left">SHUTDOWN</button>
-                                  </td>
-                                  {/* / TODO: Make this real ^ */}
-                                  <td />
-                                  {/* / TODO: Make this real ^ */}
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <label>DELETE FARMBOT</label>
-                                  </td>
-                                  <td>
-                                    <button className="button-like red left">DELETE</button>
-                                    <p>Caution! This cannot be undone</p>
-                                  </td>
-                                  <td />
-                                  {/* / TODO: Make this real ^ */}
-                                </tr>
-                              </tbody>
-                            </table>
+                                </fieldset>
+                              </form>
+                              <table className="plain">
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      <label>FARMBOT NAME</label>
+                                    </td>
+                                    <td colSpan={2}>
+                                      <p>Broccoli Overlord</p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <label>UUID</label>
+                                    </td>
+                                    <td colSpan={2}>
+                                      <p>12345678-1234-1234-1234-123456789abc</p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <label>SECURITY TOKEN</label>
+                                    </td>
+                                    <td colSpan={2}>
+                                      <p>1a17aacb03981542b892ccb1gf19e13d2b980dc2</p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <label>NETWORK</label>
+                                    </td>
+                                    <td colSpan={2}>
+                                      <p>Ethernet</p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <label>IP ADDRESS</label>
+                                    </td>
+                                    <td colSpan={2}>
+                                      <p>0.0.0.0</p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <label>MAC ADDRESS</label>
+                                    </td>
+                                    <td colSpan={2}>
+                                      <p>00:00:00:00:00:00</p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <label>COMPUTER</label>
+                                    </td>
+                                    <td>
+                                      <p>Raspberry Pi 2 Model B+ running farmbot-raspberry-pi-controller V1.233</p>
+                                    </td>
+                                    <td>
+                                      <button className="button-like yellow">UPDATE TO V1.234</button>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <label>MICROCONTROLLER</label>
+                                    </td>
+                                    <td>
+                                      <p>Arduino MEGA 2560 running farmbot-arduino-firmware V1.233</p>
+                                    </td>
+                                    <td>
+                                      <button className="button-like yellow">UPDATE TO V1.234</button>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <label>POWER</label>
+                                    </td>
+                                    <td>
+                                      <button className="button-like yellow left">RESTART</button>
+                                      <button className="button-like red left">SHUTDOWN</button>
+                                    </td>
+                                    {/* / TODO: Make this real ^ */}
+                                    <td />
+                                    {/* / TODO: Make this real ^ */}
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <label>DELETE FARMBOT</label>
+                                    </td>
+                                    <td>
+                                      <button className="button-like red left">DELETE</button>
+                                      <p>Caution! This cannot be undone</p>
+                                    </td>
+                                    <td />
+                                    {/* / TODO: Make this real ^ */}
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -160,9 +157,9 @@ export var Devices = React.createClass({
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <button className="yellow button-like" ng_click="updateCalibration()" style={{margin: 4}}>UPDATE FARMBOT</button>
+                        <button className="yellow button-like widget-control">UPDATE FARMBOT</button>
                         {/* / TODO: Hide the save button ^ until a value in the table has been changed and needs saving. Once the user presses the button, change the text to 'UPDATING' (while the update is happening, just like the sync button). Once the update is complete, change it to 'UPDATED :checkmark:' and make it green. */}
-                        <div className="header-wrapper">
+                        <div className="widget-header">
                           <h5>Hardware</h5>
                         </div>
                         <div className="row">
@@ -313,7 +310,7 @@ export var Devices = React.createClass({
                       <div className="col-sm-12">
                         <div className="row">
                           <div className="col-sm-12">
-                            <div className="header-wrapper">
+                            <div className="widget-header">
                               <h5>Logs</h5>
                             </div>
                           </div>

@@ -14,12 +14,13 @@ render: function() {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <div className="header-wrapper">
+                        <stopbutton className="ng-isolate-scope"><button className="red button-like widget-control" type="button">E-STOP</button></stopbutton>
+                        <div className="widget-header">
                           <h5>Move</h5>
                         </div>
                       </div>
                       <div className="col-sm-12">
-                        <div className="content-wrapper">
+                        <div className="widget-content">
                           <label className="text-center ng-binding">MOVE AMOUNT (mm) Busy</label>
                           <div className="row">
                             <div className="col-sm-12">
@@ -36,12 +37,12 @@ render: function() {
                                   <td />
                                   <td />
                                   <td>
-                                    <directionbutton axis="y" direction="up" className="ng-isolate-scope fa fa-2x fa-arrow-up arrow-button radius"><i /></directionbutton>
+                                    <directionbutton axis="y" direction="up" className="button-like fa fa-2x fa-arrow-up arrow-button radius"><i /></directionbutton>
                                   </td>
                                   <td />
                                   <td />
                                   <td>
-                                    <directionbutton axis="z" direction="up" className="ng-isolate-scope fa fa-2x fa-arrow-up arrow-button radius"><i /></directionbutton>
+                                    <directionbutton axis="z" direction="up" className="button-like fa fa-2x fa-arrow-up arrow-button radius"><i /></directionbutton>
                                   </td>
                                 </tr>
                                 <tr>
@@ -50,17 +51,17 @@ render: function() {
                                   </td>
                                   <td />
                                   <td>
-                                    <directionbutton axis="x" direction="up" className="ng-isolate-scope fa fa-2x fa-arrow-left arrow-button radius"><i /></directionbutton>
+                                    <directionbutton axis="x" direction="up" className="button-like fa fa-2x fa-arrow-left arrow-button radius"><i /></directionbutton>
                                   </td>
                                   <td>
-                                    <directionbutton axis="y" direction="down" className="ng-isolate-scope fa fa-2x fa-arrow-down arrow-button radius"><i /></directionbutton>
+                                    <directionbutton axis="y" direction="down" className="button-like fa fa-2x fa-arrow-down arrow-button radius"><i /></directionbutton>
                                   </td>
                                   <td>
-                                    <directionbutton axis="x" direction="down" className="ng-isolate-scope fa fa-2x fa-arrow-right arrow-button radius"><i /></directionbutton>
+                                    <directionbutton axis="x" direction="down" className="button-like fa fa-2x fa-arrow-right arrow-button radius"><i /></directionbutton>
                                   </td>
                                   <td />
                                   <td>
-                                    <directionbutton axis="z" direction="down" className="ng-isolate-scope fa fa-2x fa-arrow-down arrow-button radius"><i /></directionbutton>
+                                    <directionbutton axis="z" direction="down" className="button-like fa fa-2x fa-arrow-down arrow-button radius"><i /></directionbutton>
                                   </td>
                                 </tr>
                                 <tr>
@@ -92,11 +93,8 @@ render: function() {
                               <manualmovementinput axis="z" axisdata="axisdata" className="ng-isolate-scope"><input className="move-input ng-pristine ng-untouched ng-valid" ng_blur="buffer.out()" placeholder={0} ng_style="buffer.dirty ? {'border-color':'red'} : {}" ng_focus="buffer.in()" ng_model="buffer.val" ng_model_options="{ getterSetter: true }" type="text" /></manualmovementinput>
                             </div>
                           </div>
-                          <div className="row padding-bottom">
-                            <div className="col-md-6 col-sm-7 col-md-offset-1">
-                              <stopbutton className="left ng-isolate-scope"><button className="red button-like" type="button">Stop</button></stopbutton>
-                            </div>
-                            <div className="col-md-4 col-sm-5 end">
+                          <div className="row">
+                            <div className="col-md-4 col-sm-5 col-md-offset-7 end">
                               <button className="full-width green button-like" ng_click="manualMovement()">GO</button>
                             </div>
                           </div>
@@ -109,18 +107,18 @@ render: function() {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <div className="header-wrapper">
+                        <div className="widget-header">
                           <h5>Tool Control</h5>
                         </div>
                       </div>
                       <div className="col-sm-12">
-                        <div className="content-wrapper">
+                        <div className="widget-content no-bottom-padding">
                           <div className="row">
                             <div className="col-sm-6">
                               <label className="inline">VACUUM PUMP</label>
                             </div>
                             <div className="col-sm-6">
-                              <togglebutton peripheral="vacuum" className="ng-scope"><button className="xx-small button radius red ng-binding green" ng-class="{red: !pinStatus, green: pinStatus}"> LOADING </button></togglebutton>
+                              <togglebutton peripheral="vacuum"><button className="button tool-toggle radius red green" ng-class="{red: !pinStatus, green: pinStatus}"> LOADING </button></togglebutton>
                             </div>
                           </div>
                           <div className="row">
@@ -128,7 +126,7 @@ render: function() {
                               <label className="inline">WATER VALVE</label>
                             </div>
                             <div className="col-sm-6">
-                              <togglebutton peripheral="water" className="ng-scope"><button className="xx-small button radius red ng-binding green" ng-class="{red: !pinStatus, green: pinStatus}"> LOADING </button></togglebutton>
+                              <togglebutton peripheral="water"><button className="button tool-toggle radius red green" ng-class="{red: !pinStatus, green: pinStatus}"> LOADING </button></togglebutton>
                             </div>
                           </div>
                           <div className="row">
@@ -136,7 +134,7 @@ render: function() {
                               <label className="inline">LED</label>
                             </div>
                             <div className="col-sm-6">
-                              <togglebutton peripheral="led" className="ng-scope"><button className="xx-small button radius red ng-binding green" ng-class="{red: !pinStatus, green: pinStatus}"> LOADING </button></togglebutton>
+                              <togglebutton peripheral="led"><button className="button tool-toggle radius red green" ng-class="{red: !pinStatus, green: pinStatus}"> LOADING </button></togglebutton>
                             </div>
                           </div>
                         </div>
@@ -150,7 +148,7 @@ render: function() {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <div className="header-wrapper">
+                        <div className="widget-header">
                           <h5>Camera</h5>
                         </div>
                       </div>

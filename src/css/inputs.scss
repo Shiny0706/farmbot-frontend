@@ -1,7 +1,6 @@
 // Styles for INPUTS
 
 @import 'colors';
-@import 'fonts';
 
 input {
   font-size: 1.2rem;
@@ -33,12 +32,7 @@ input[type="submit"] {
 input {
   &.move-input {
     font-size: 1rem;
-  }
-  &.green {
-    @extend %greenish;
-  }
-  &.red {
-    @extend %reddish;
+    margin-bottom: 1.5rem;
   }
 }
 input[type="text"][readonly] {
