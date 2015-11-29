@@ -2,6 +2,21 @@
 
 @import 'colors';
 
+.widget-header {
+  &.calendar-widget {
+    background-color: $magenta;
+    h5 {
+      color: $off-white;
+    }
+  }
+}
+
+.widget-content {
+  &.calendar-widget {
+    background-color: $light_magenta;
+  }
+}
+
 .event {
   @extend %extend_1;
   &.past {

@@ -79,3 +79,14 @@
     background-color: darken($medium_gray, 5%);
   }
 }
+
+////////////////////
+// ABSOLUTE MOVES //
+////////////////////
+
+input {
+  &.move-input {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}

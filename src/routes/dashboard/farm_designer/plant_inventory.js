@@ -21,7 +21,7 @@ class Groups extends React.Component {
   render() {
     return(
       <div className="designer-info">
-        <h6>My Groups</h6>
+        <label>My Groups</label>
         <ul>
           <li>
             <a href="#">Lucky Cabages</a>
@@ -32,7 +32,7 @@ class Groups extends React.Component {
             <p>5 Plants</p>
           </li>
         </ul>
-        <h6>Zone Auto-Groups</h6>
+        <label>Zone Auto-Groups</label>
         <ul>
           <li>
             <a href="#">Plants in "Broccoli Overlord"</a>
@@ -43,7 +43,7 @@ class Groups extends React.Component {
             <p>7 Plants</p>
           </li>
         </ul>
-        <h6>Crop Auto-Groups</h6>
+        <label>Crop Auto-Groups</label>
         <ul>
           <li>
             <a href="#">All Strawberries</a>
@@ -127,10 +127,7 @@ export class PlantInventory extends React.Component {
   render() {
     return (
       <div>
-        <div className="green-content">
-          <div className="search-box-wrapper">
-            <input className="search" placeholder="Search"/>
-          </div>
+        <div className="plant-panel-header">
           <ul className="tabs">
             {
               [
@@ -148,6 +145,11 @@ export class PlantInventory extends React.Component {
 
             }.bind(this))}
           </ul>
+        </div>
+        <div className="search-box-wrapper">
+          <i class="fa fa-search"></i>
+          <input className="search" placeholder="Search"/>
+          <div className="search-underline"></div>
         </div>
         { this.content }
       </div>

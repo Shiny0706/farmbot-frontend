@@ -6,20 +6,23 @@
   cursor: pointer;
 }
 
-.plus-circle{
-  border-radius: 50%;
-  width: 52px;
-  height: 52px;
-  padding: 13px;
-  font-family: FontAwesome;
-  color: $off_white;
-  font-size: 20px;
-  text-align: center;
-  display: inline-block;
-  font-style: normal;
-  cursor: pointer;
-  &:after {
-    content: '\f067';
+.plant-panel-header {
+  background-color: $dark_green;
+}
+
+button {
+  &.add-plant {
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    padding: 13px;
+    font-family: FontAwesome;
+    color: $off_white;
+    font-size: 20px;
+    text-align: center;
+    display: inline-block;
+    font-style: normal;
+    cursor: pointer;
   }
 }
 
@@ -57,32 +60,6 @@
   .garden-view {
   }
   margin-top: -4px;
-  .search-box-wrapper {
-    padding: 6px;
-
-    p {
-      color: $light_gray;
-      margin: auto 0 auto 0;
-    }
-    a {
-      color: $light_gray;
-      margin: 2px;
-    }
-  }
-  .search {
-    &::-webkit-input-placeholder { color: $light_gray; }
-    &:-moz-placeholder { color: $light_gray; }
-    &::-moz-placeholder { color: $light_gray; }
-    &:-ms-input-placeholder { color: $light_gray; }
-    color: $light_gray;
-    display: block;
-    background-color: transparent;
-    border: 0;
-    border-bottom: 1px solid $light_gray;
-    margin: 0 auto 9px auto;
-    padding: 10px 0px 5px 0px;
-    width: 90%;
-  }
   .tabs{
     display: table;
     width: 100%;
