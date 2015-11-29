@@ -8,7 +8,7 @@ export class Plants extends React.Component {
       <div className="object-list">
         <label>Current Plants</label>
         <List plants={ this.props.plants.all } />
-        <div className="plus-button add-plant" data-toggle="tooltip" title="Add plant" href="/dashboard/designer?left_tab=SpeciesCatalog">
+        <div className="plus-button add-plant button-like" data-toggle="tooltip" title="Add plant" href="/dashboard/designer?left_tab=SpeciesCatalog">
           <i className="fa fa-2x fa-plus" />
         </div>
       </div>

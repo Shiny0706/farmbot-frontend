@@ -43,7 +43,7 @@ export class Groups extends React.Component {
             </li>
           </ul>
         </div>
-        <div className="plus-button add-group" data-toggle="tooltip" title="Add group" href="/dashboard/designer?left_tab=AddGroup">
+        <div className="plus-button add-group button-like" data-toggle="tooltip" title="Add group" href="/dashboard/designer?left_tab=AddGroup">
           <i className="fa fa-2x fa-plus" />
         </div>
       </div>

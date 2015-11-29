@@ -26,7 +26,7 @@ export class Zones extends React.Component {
             </li>
           </ul>
         </div>
-        <div className="plus-button add-zone" data-toggle="tooltip" title="Add zone" href="/dashboard/designer?left_tab=AddZone">
+        <div className="plus-button add-zone button-like" data-toggle="tooltip" title="Add zone" href="/dashboard/designer?left_tab=AddZone">
           <i className="fa fa-2x fa-plus" />
         </div>
       </div>

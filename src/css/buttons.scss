@@ -33,7 +33,7 @@ button {
   &.green {
     background-color: $green;
     color: $off_white;
-    border-bottom: 3px solid $dark_green;
+    border-bottom: solid $dark_green;
     &:hover {
       background-color: darken($green, 5%);
     }
@@ -41,7 +41,7 @@ button {
   &.red {
     background-color: $red;
     color: $off_white;
-    border-bottom: 3px solid $dark_red;
+    border-bottom: solid $dark_red;
     &:hover {
       background-color: darken($red, 5%);
     }

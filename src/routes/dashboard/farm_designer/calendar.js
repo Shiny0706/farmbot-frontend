@@ -46,7 +46,7 @@ export class Calendar extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="plus-button add-event" data-toggle="tooltip" title="Add event" href="/dashboard/designer?designer_right_menu=AddEvent">
+                <div className="plus-button add-event button-like" data-toggle="tooltip" title="Add event" href="/dashboard/designer?designer_right_menu=AddEvent">
                   <i className="fa fa-2x fa-plus" />
                 </div>
               </div>
