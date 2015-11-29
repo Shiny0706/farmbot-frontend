@@ -10,9 +10,9 @@ export class Plants extends React.Component {
       <div className="object-list">
         <label>Current Plants</label>
         <List plants={ this.props.plants.all } />
-        <ToolTip href="/dashboard/designer?designer_left_menu=SpeciesCatalog"
-                 desc="Add plant"
-                 color="dark-green"/>
+        <div className="plus-button add-plant" data-toggle="tooltip" title="Add plant" href="/dashboard/designer?designer_left_menu=SpeciesCatalog">
+          <i className="fa fa-2x fa-plus" />
+        </div>
       </div>
     );
   }
@@ -61,10 +61,8 @@ class Groups extends React.Component {
             </li>
           </ul>
         </div>
-        <div className="plus-button">
-          <ToolTip action={ renderCatalog }
-                      desc="Add group"
-                      color="dark-green"/>
+        <div className="plus-button add-group" data-toggle="tooltip" title="Add group" href="/dashboard/designer?designer_left_menu=AddGroup">
+          <i className="fa fa-2x fa-plus" />
         </div>
       </div>
     )
@@ -97,10 +95,8 @@ export class Zones extends React.Component {
             </li>
           </ul>
         </div>
-        <div>
-          <ToolTip action={ renderCatalog }
-                      desc="Add zone"
-                      color="dark-green"/>
+        <div className="plus-button add-zone" data-toggle="tooltip" title="Add zone" href="/dashboard/designer?designer_left_menu=AddZone">
+          <i className="fa fa-2x fa-plus" />
         </div>
       </div>
     )

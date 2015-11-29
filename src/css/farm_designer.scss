@@ -66,3 +66,29 @@
     text-transform: uppercase;
   }
 }
+
+.plus-button {
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  color: $off_white;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  cursor: pointer;
+  i {
+    line-height: 5rem;
+  }
+  &.add-plant {
+    background-color: $dark_green;
+  }
+  &.add-group {
+    background-color: $cyan;
+  }
+  &.add-zone {
+    background-color: $dark_brown;
+  }
+  &.add-event {
+    background-color: $magenta;
+  }
+}
