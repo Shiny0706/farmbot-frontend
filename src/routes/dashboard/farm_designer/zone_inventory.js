@@ -1,9 +1,26 @@
 import React from "react";
+import { Link } from 'react-router';
 
 export class Zones extends React.Component {
   render() {
     return(
       <div>
+        <ul className="tabs zones-active">
+          <li>
+            <Link to={ "/dashboard/designer?left_tab=Plants" }>Plants</Link>
+          </li>
+          <li>
+            <Link to={ "/dashboard/designer?left_tab=Groups" }>Groups</Link>
+          </li>
+          <li>
+            <Link to={ "/dashboard/designer?left_tab=Zones" } className={ "active" }>Zones</Link>
+          </li>
+        </ul>
+        <div className="search-box-wrapper">
+          <i class="fa fa-search"></i>
+          <input className="search" placeholder="Search"/>
+          <div className="search-underline"></div>
+        </div>
         <div className="object-list">
           <label>My Zones</label>
           <ul>

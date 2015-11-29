@@ -6,10 +6,6 @@
   cursor: pointer;
 }
 
-.plant-panel-header {
-  background-color: $dark_green;
-}
-
 button {
   &.add-plant {
     border-radius: 50%;
@@ -40,25 +36,6 @@ button {
 .farm-designer {
   display: flex;
   flex-direction: column;
-  .tabs{
-    display: table;
-    width: 100%;
-    list-style: none;
-    padding: 1rem 0rem;
-    a {
-      color: $light_gray;
-    }
-    li {
-      display: table-cell;
-      text-align: center;
-      text-transform: uppercase;
-      color: $light_gray;
-    }
-    .active {
-      color: $light_gray;
-      font-weight: bold;
-    }
-  }
 }
 
 .plant-block {

@@ -1,0 +1,40 @@
+// Styles for the farm designer left panel
+
+@import 'colors';
+
+.tabs{
+  display: table;
+  width: 100%;
+  list-style: none;
+  padding: 1rem 0rem;
+  text-transform: uppercase;
+  a {
+    color: $light_gray;
+    &:hover {
+      color: $light_gray;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    &:focus {
+      color: $light_gray;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+  li {
+    display: table-cell;
+    text-align: center;
+    .active {
+      font-weight: bold;
+    }
+  }
+  &.plants-active {
+    background-color: $dark_green;
+  }
+  &.groups-active {
+    background-color: $cyan;
+  }
+  &.zones-active {
+    background-color: $dark_brown;
+  }
+}

@@ -1,53 +1,32 @@
 import React from "react";
 import { Link } from 'react-router';
-import { Plants } from './plant_inventory';
-import { Groups } from './group_inventory';
-import { Zones } from './zone_inventory';
 import { renderCatalog } from './species_catalog';
+// Import all of the Plant (green) panel views
+import { Plants } from './plant_inventory';
+import { SpeciesCatalog } from './species_catalog';
+import { SpeciesInfo } from './species_info';
+import { PlantInfo } from './plant_info';
+// Import all of the Group (blue) panel views
+import { Groups } from './group_inventory';
+// Import all of the Zone (brown) panel views
+import { Zones } from './zone_inventory';
 
+
+// Dynamically determine what to render in the designer's left panel
+// based on the value of hash fragment left_tab
 export class LeftPanel extends React.Component {
   get tabName() {
     return (this.props.location.query.left_tab || "Plants")
   }
 
   get content() {
-    var component = {Plants, Groups, Zones}[this.tabName];
+    var component = {Plants, SpeciesCatalog, SpeciesInfo, PlantInfo, Groups, Zones}[this.tabName];
     return React.createElement(component, this.props);
   }
-
-  isActive(item) {
-    var currentTab = this.props.location.query.left_tab;
-    var defaultTab = "Plants";
-    return (currentTab || defaultTab) === item
-  };
 
   render() {
     return (
       <div>
-        <div className="plant-panel-header">
-          <ul className="tabs">
-            {
-              [
-                "Plants",
-                "Groups",
-                "Zones"
-              ].map(function(item, i) {
-                var url = "/dashboard/designer?left_tab=" + (item || 'Plants');
-                return  <li key={i}>
-                          <Link to={ url }
-                                className={this.isActive(item) ? "active" : ""}>
-                            { item }
-                          </Link>
-                        </li>;
-
-            }.bind(this))}
-          </ul>
-        </div>
-        <div className="search-box-wrapper">
-          <i class="fa fa-search"></i>
-          <input className="search" placeholder="Search"/>
-          <div className="search-underline"></div>
-        </div>
         { this.content }
       </div>
     )

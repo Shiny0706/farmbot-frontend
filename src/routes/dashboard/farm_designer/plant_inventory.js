@@ -5,11 +5,29 @@ import { Plant } from '../../../models/plant'
 export class Plants extends React.Component {
   render() {
     return(
-      <div className="object-list">
-        <label>Current Plants</label>
-        <List plants={ this.props.plants.all } />
-        <div className="plus-button add-plant button-like" data-toggle="tooltip" title="Add plant" href="/dashboard/designer?left_tab=SpeciesCatalog">
-          <i className="fa fa-2x fa-plus" />
+      <div>
+        <ul className="tabs plants-active">
+          <li>
+            <Link to={ "/dashboard/designer?left_tab=Plants" } className={ "active" }>Plants</Link>
+          </li>
+          <li>
+            <Link to={ "/dashboard/designer?left_tab=Groups" }>Groups</Link>
+          </li>
+          <li>
+            <Link to={ "/dashboard/designer?left_tab=Zones" }>Zones</Link>
+          </li>
+        </ul>
+        <div className="search-box-wrapper">
+          <i class="fa fa-search"></i>
+          <input className="search" placeholder="Search"/>
+          <div className="search-underline"></div>
+        </div>
+        <div className="object-list">
+          <label>Current Plants</label>
+          <List plants={ this.props.plants.all } />
+          <div className="plus-button add-plant button-like" data-toggle="tooltip" title="Add plant" href="/dashboard/designer?left_tab=SpeciesCatalog">
+            <i className="fa fa-2x fa-plus" />
+          </div>
         </div>
       </div>
     );

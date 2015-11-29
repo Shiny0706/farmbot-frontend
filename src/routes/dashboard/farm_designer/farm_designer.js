@@ -4,15 +4,11 @@ import { connect } from 'react-redux';
 import { Calendar } from './calendar';
 import { GardenMap } from './garden_map';
 import { Navbar } from '../../../components/navbar';
-import { SpeciesCatalog } from './species_catalog';
-import { PlantInfo } from './plant_info';
-import { SpeciesInfo } from './species_info';
 import { LeftPanel } from './left_panel';
 import { ScheduleCreation } from './schedule_creation';
 import { fetchAllPlants } from '../../../actions/plant_actions';
 
-const MENU_CHOICES = {LeftPanel, SpeciesCatalog,
-                      PlantInfo, SpeciesInfo, Calendar, ScheduleCreation};
+const MENU_CHOICES = {LeftPanel, Calendar, ScheduleCreation};
 
 function mapStateToProps(state) {
   return { global: state.global,
