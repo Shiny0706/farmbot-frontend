@@ -9,7 +9,7 @@ var routeInitialState = {
     designer_right_menu: 'Calendar',
     designer_left_menu: 'LeftPanel',
     left_tab: 'Plants',
-    selected_plant_id: 0
+    plant: 0
 };
 
 
