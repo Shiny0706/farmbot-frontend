@@ -81,14 +81,26 @@
   }
   &.add-plant {
     background-color: $dark_green;
+    &:hover {
+    background-color: darken($dark_green, 5%);
+    }
   }
   &.add-group {
     background-color: $cyan;
+    &:hover {
+    background-color: darken($cyan, 5%);
+    }
   }
   &.add-zone {
     background-color: $dark_brown;
+    &:hover {
+    background-color: darken($dark_brown, 5%);
+    }
   }
   &.add-event {
     background-color: $magenta;
+    &:hover {
+    background-color: darken($magenta, 5%);
+    }
   }
 }
