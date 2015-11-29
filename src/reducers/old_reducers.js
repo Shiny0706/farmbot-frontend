@@ -7,8 +7,8 @@ import { Species } from '../models/species'
 // redux-router.
 var routeInitialState = {
     designer_right_menu: 'Calendar',
-    designer_left_menu: 'PlantInventory',
-    designer_left_tab: 'Plants',
+    designer_left_menu: 'LeftPanel',
+    left_tab: 'Plants',
     selected_plant_id: 0
 };
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderScheduleCreation } from './schedule_creation'
-import { ToolTip } from '../../../components/tooltip'
 import { Schedule } from '../../../models/schedule'
 
 export class ScheduleEvent extends React.Component {

@@ -7,12 +7,12 @@ import { Navbar } from '../../../components/navbar';
 import { SpeciesCatalog } from './species_catalog';
 import { PlantInfo } from './plant_info';
 import { SpeciesInfo } from './species_info';
-import { PlantInventory } from './plant_inventory';
+import { LeftPanel } from './left_panel';
 import { ScheduleCreation } from './schedule_creation';
 import { fetchAllPlants } from '../../../actions/plant_actions';
 
-const MENU_CHOICES = {PlantInventory, SpeciesCatalog, PlantInfo, SpeciesInfo,
-                      Calendar, ScheduleCreation};
+const MENU_CHOICES = {LeftPanel, SpeciesCatalog,
+                      PlantInfo, SpeciesInfo, Calendar, ScheduleCreation};
 
 function mapStateToProps(state) {
   return { global: state.global,
@@ -24,7 +24,7 @@ export class FarmDesigner extends React.Component {
 
   componentDidMount() { this.props.dispatch(fetchAllPlants()); }
   // Dynamically determine what to render on the left side of the designer,
-  // based on the value of hash fragment designer_left_menu
+  // based on the value of hash fragment left_tab
   renderPanel(selectedComponent) {
     var component = MENU_CHOICES[selectedComponent];
     if (!component) {
@@ -45,7 +45,7 @@ export class FarmDesigner extends React.Component {
               <div id="designer-left">
                 {
                   this.renderPanel(
-                    this.props.location.query.designer_left_menu || "PlantInventory"
+                    this.props.location.query.designer_left_tab || "LeftPanel"
                   )
                 }
               </div>
