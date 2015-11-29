@@ -10,7 +10,7 @@ export class Plants extends React.Component {
       <div>
         <List plants={ this.props.plants.all } />
         <ToolTip href="/dashboard/designer?designer_left_menu=SpeciesCatalog"
-                 desc="Add a new plant"
+                 desc="Add plant"
                  color="dark-green"/>
       </div>
     );
@@ -55,7 +55,7 @@ class Groups extends React.Component {
           </li>
         </ul>
         <ToolTip action={ renderCatalog }
-                    desc="Add a new group"
+                    desc="Add group"
                     color="dark-green"/>
       </div>
     )
@@ -66,7 +66,7 @@ export class Zones extends React.Component {
   render() {
     return(
       <div className="designer-info">
-        <h6>My Zones</h6>
+        <label>My Zones</label>
         <ul>
           <li>
             <a href="#">Front area</a>
@@ -77,7 +77,7 @@ export class Zones extends React.Component {
             <p>5 Square Feet</p>
           </li>
         </ul>
-        <h6>Auto-Zones</h6>
+        <label>Auto-Zones</label>
         <ul>
           <li>
             <a href="#">Broccoli Overlord</a>
@@ -85,7 +85,7 @@ export class Zones extends React.Component {
           </li>
         </ul>
         <ToolTip action={ renderCatalog }
-                    desc="Add New Zone"
+                    desc="Add zone"
                     color="dark-green"/>
       </div>
     )

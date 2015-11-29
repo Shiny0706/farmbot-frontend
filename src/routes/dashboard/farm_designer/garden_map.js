@@ -38,9 +38,9 @@ export class GardenMap extends React.Component {
 
   render() {
     var style = {
-      fill:        'rgb(136, 119, 102)',
-      strokeWidth: 1,
-      stroke:      'rgb(0,0,0)'
+      fill:        'rgba(0,0,0,0.1)',
+      strokeWidth: 5,
+      stroke:      'rgba(0,0,0,0.1)'
     }
     var {width, length} = this.props.planting_area;
 

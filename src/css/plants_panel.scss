@@ -26,40 +26,28 @@ button {
   }
 }
 
-  .farm-designer-body {
-    display: flex;
-    flex-direction: column;
-  }
+.farm-designer-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 
-  .farm-designer-left {
-    order: -1;
-    background-color: $light_green;
-  }
-  .farm-designer-body {
-    flex-direction: row;
-    flex: 1;
-  }
-  .farm-designer-middle {
-    flex: 1;
-    background-color: $brown;
-  }
-  .farm-designer-left, .farm-designer-right {
-    /* 12em is the width of the columns */
-    flex: 0 0 20em;
-  }
+.farm-designer-left {
+  background-color: $light_green;
+  flex: 0 0 20em;
+  order: -1;
+}
+
   .farm-designer-right {
-    background-color: $light_purple;
+    background-color: $light_magenta;
+    flex: 0 0 20em;
   }
 
 .farm-designer {
   display: flex;
   flex-direction: column;
-  .calendar{
-    padding-top: 10px;
-  }
   .garden-view {
   }
-  margin-top: -4px;
   .tabs{
     display: table;
     width: 100%;

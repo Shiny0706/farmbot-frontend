@@ -2,6 +2,11 @@
 
 @import 'colors';
 
+.farm-designer-middle {
+  background-color: $brown;
+  flex: 1;
+}
+
 .designer-info {
   .crop-drag-info-image {
     max-width: 98%;
