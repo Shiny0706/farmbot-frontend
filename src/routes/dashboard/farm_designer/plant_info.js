@@ -23,7 +23,7 @@ export class PlantInfo extends React.Component {
                 </p>
               </div>
             </div>
-            <div className="designer-info">
+            <div className="designer-info-panel">
               <div className="crop-drag-info-tile">
                 <h6>Photos of this Plant</h6>
                 <img className="crop-drag-info-image"

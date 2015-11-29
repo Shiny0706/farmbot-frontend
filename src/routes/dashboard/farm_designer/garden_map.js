@@ -38,14 +38,14 @@ export class GardenMap extends React.Component {
 
   render() {
     var style = {
-      fill:        'rgba(0,0,0,0.1)',
+      fill:        'rgba(0,0,0,0.05)',
       strokeWidth: 5,
-      stroke:      'rgba(0,0,0,0.1)'
+      stroke:      'rgba(0,0,0,0.15)'
     }
     var {width, length} = this.props.planting_area;
 
     return <div>
-             <div id="drop-area" style={ {marginLeft: '10px', marginTop: '10px'} }>
+             <div className="drop-area" id="drop-area" style={ {marginLeft: '10px', marginTop: '10px'} }>
               <svg width={ width }
                    height={ length } >
                 <rect width={ width }

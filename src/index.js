@@ -15,6 +15,7 @@ require("!style!css!sass!./css/calendar.scss");
 require("!style!css!sass!./css/farm_designer.scss");
 require("!style!css!sass!./css/farmbot.scss");
 require("!style!css!sass!./css/inputs.scss");
+require("!style!css!sass!./css/map.scss");
 require("!style!css!sass!./css/navbar.scss");
 require("!style!css!sass!./css/plants_panel.scss");
 require("!style!css!sass!./css/search.scss");

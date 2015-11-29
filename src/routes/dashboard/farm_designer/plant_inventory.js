@@ -7,7 +7,8 @@ import { renderCatalog } from './species_catalog';
 export class Plants extends React.Component {
   render() {
     return(
-      <div>
+      <div className="object-list">
+        <label>Current Plants</label>
         <List plants={ this.props.plants.all } />
         <ToolTip href="/dashboard/designer?designer_left_menu=SpeciesCatalog"
                  desc="Add plant"
@@ -20,43 +21,51 @@ export class Plants extends React.Component {
 class Groups extends React.Component {
   render() {
     return(
-      <div className="designer-info">
-        <label>My Groups</label>
-        <ul>
-          <li>
-            <a href="#">Lucky Cabages</a>
-            <p>5 Plants</p>
-          </li>
-          <li>
-            <a href="#">Lucky Cabages</a>
-            <p>5 Plants</p>
-          </li>
-        </ul>
-        <label>Zone Auto-Groups</label>
-        <ul>
-          <li>
-            <a href="#">Plants in "Broccoli Overlord"</a>
-            <p>10 Plants</p>
-          </li>
-          <li>
-            <a href="#">Plants in "Flower Patch"</a>
-            <p>7 Plants</p>
-          </li>
-        </ul>
-        <label>Crop Auto-Groups</label>
-        <ul>
-          <li>
-            <a href="#">All Strawberries</a>
-            <p>1 plant</p>
-          </li>
-          <li>
-            <a href="#">All Flowers</a>
-            <p>42 plants</p>
-          </li>
-        </ul>
-        <ToolTip action={ renderCatalog }
-                    desc="Add group"
-                    color="dark-green"/>
+      <div>
+        <div className="object-list">
+          <label>My Groups</label>
+          <ul>
+            <li>
+              <a href="#">Lucky Cabages</a>
+              <p>18 Plants</p>
+            </li>
+            <li>
+              <a href="#">Sandwich Sprouts</a>
+              <p>142 Plants</p>
+            </li>
+          </ul>
+        </div>
+        <div className="object-list">
+          <label>Zone Auto-Groups</label>
+          <ul>
+            <li>
+              <a href="#">Plants in Broccoli Overlord</a>
+              <p>459 Plants</p>
+            </li>
+            <li>
+              <a href="#">Plants in Flower Patch</a>
+              <p>22 Plants</p>
+            </li>
+          </ul>
+        </div>
+        <div className="object-list">
+          <label>Crop Auto-Groups</label>
+          <ul>
+            <li>
+              <a href="#">All Strawberries</a>
+              <p>13 Plants</p>
+            </li>
+            <li>
+              <a href="#">All Flowers</a>
+              <p>68 Plants</p>
+            </li>
+          </ul>
+        </div>
+        <div className="plus-button">
+          <ToolTip action={ renderCatalog }
+                      desc="Add group"
+                      color="dark-green"/>
+        </div>
       </div>
     )
   }
@@ -65,28 +74,34 @@ class Groups extends React.Component {
 export class Zones extends React.Component {
   render() {
     return(
-      <div className="designer-info">
-        <label>My Zones</label>
-        <ul>
-          <li>
-            <a href="#">Front area</a>
-            <p>18 Square Feet</p>
-          </li>
-          <li>
-            <a href="#">Needs Compost</a>
-            <p>5 Square Feet</p>
-          </li>
-        </ul>
-        <label>Auto-Zones</label>
-        <ul>
-          <li>
-            <a href="#">Broccoli Overlord</a>
-            <p>60 Square Feet</p>
-          </li>
-        </ul>
-        <ToolTip action={ renderCatalog }
-                    desc="Add zone"
-                    color="dark-green"/>
+      <div>
+        <div className="object-list">
+          <label>My Zones</label>
+          <ul>
+            <li>
+              <a href="#">Front area</a>
+              <p>18 Square Feet</p>
+            </li>
+            <li>
+              <a href="#">Needs Compost</a>
+              <p>5 Square Feet</p>
+            </li>
+          </ul>
+        </div>
+        <div className="object-list">
+          <label>Auto-Zones</label>
+          <ul>
+            <li>
+              <a href="#">Broccoli Overlord</a>
+              <p>60 Square Feet</p>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ToolTip action={ renderCatalog }
+                      desc="Add zone"
+                      color="dark-green"/>
+        </div>
       </div>
     )
   }
@@ -98,11 +113,11 @@ export class List extends React.Component {
       return(
         <li key={ key } >
           <Link to={ Plant.designerUrl(plant) }> { plant.name } </Link>
-          <div>{plant.age} days old</div>
+          <p>{plant.age} days old</p>
         </li>);
     };
 
-    return(<ul className="crop-inventory">
+    return(<ul>
              { this.props.plants.map(mapper) }
            </ul>);
   }
