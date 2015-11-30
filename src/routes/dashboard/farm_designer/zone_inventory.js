@@ -8,13 +8,13 @@ export class Zones extends React.Component {
         <div className="panel-header brown-panel">
           <ul className="panel-tabs">
             <li>
-              <Link to={ "/dashboard/designer?left_tab=Plants" }>Plants</Link>
+                <Link to={ "/dashboard/designer?left_tab=Plants" }>Plants</Link>
             </li>
             <li>
-              <Link to={ "/dashboard/designer?left_tab=Groups" }>Groups</Link>
+                <Link to={ "/dashboard/designer?left_tab=Groups" }>Groups</Link>
             </li>
-            <li>
-              <Link to={ "/dashboard/designer?left_tab=Zones" } className={ "active" }>Zones</Link>
+            <li className={"active"}>
+                <Link to={ "/dashboard/designer?left_tab=Zones" }>Zones</Link>
             </li>
           </ul>
         </div>

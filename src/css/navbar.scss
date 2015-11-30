@@ -40,13 +40,16 @@ button.navbar-toggle {
   float: left;
   margin: 0;
   border: none;
+  color: $gray;
   font-size: 1.6rem!important;
   padding: 1.5rem 2rem;
   line-height: 1.6rem;
   &:hover {
     background-color: transparent!important;
+    color: $off_white
   }
   &:focus {
     background-color: transparent!important;
+    color: $off_white
   }
 }

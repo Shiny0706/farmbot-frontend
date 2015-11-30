@@ -37,28 +37,34 @@
   display: table;
   width: 100%;
   list-style: none;
-  padding: 1rem 0rem;
+  padding: 0rem;
   text-transform: uppercase;
   margin-bottom: 0px!important;
   a {
     font-size: 1.4rem;
+    padding: 1rem;
     color: $light_gray;
     &:hover {
-      color: $light_gray;
+      color: $off_white;
       text-decoration: none;
       font-weight: bold;
     }
     &:focus {
-      color: $light_gray;
+      color: $off_white;
       text-decoration: none;
       font-weight: bold;
     }
   }
   li {
     display: table-cell;
+    padding: 1rem 0rem;
     text-align: center;
-    .active {
+    &.active {
       font-weight: bold;
+      border-bottom: 2px solid $off_white;
+      a {
+        color: $off_white;
+      }
     }
   }
 }

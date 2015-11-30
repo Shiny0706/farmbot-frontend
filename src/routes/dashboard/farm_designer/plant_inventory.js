@@ -8,14 +8,14 @@ export class Plants extends React.Component {
       <div className="panel-container green-panel">
         <div className="panel-header green-panel">
           <ul className="panel-tabs">
-            <li>
-              <Link to={ "/dashboard/designer?left_tab=Plants" } className={ "active" }>Plants</Link>
+            <li className={"active"}>
+                <Link to={ "/dashboard/designer?left_tab=Plants" }>Plants</Link>
             </li>
             <li>
-              <Link to={ "/dashboard/designer?left_tab=Groups" }>Groups</Link>
+                <Link to={ "/dashboard/designer?left_tab=Groups" }>Groups</Link>
             </li>
             <li>
-              <Link to={ "/dashboard/designer?left_tab=Zones" }>Zones</Link>
+                <Link to={ "/dashboard/designer?left_tab=Zones" }>Zones</Link>
             </li>
           </ul>
         </div>
