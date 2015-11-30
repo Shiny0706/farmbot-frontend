@@ -1,0 +1,18 @@
+// Mobile Styles for the Farm Designer
+
+@import 'colors';
+
+@media screen and (max-width: 767px) {
+  .farm-designer-right {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .farm-designer-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}

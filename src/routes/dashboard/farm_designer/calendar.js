@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderScheduleCreation } from './schedule_creation'
-import { ToolTip } from '../../../components/tooltip'
 import { Schedule } from '../../../models/schedule'
 
 export class ScheduleEvent extends React.Component {
@@ -27,42 +26,30 @@ export class Calendar extends React.Component {
                    .map((s, k) => <ScheduleEvent scheduledEvent={s} key={k}/>)
                    .value();
 
-    return <div>
-             <div className="search-box-wrapper purple-content">
-              <input className="search" placeholder="Search"/>
-             </div>
-             <div className="calendar">
-               <div className="widget-wrapper">
-                 <div className="row">
-                   <div className="small-12 columns">
-                     <div className="header-wrapper">
-                       <h5>Calendar</h5>
-                     </div>
-                   </div>
-                 </div>
-                 <div className="row">
-                   <div className="small-12 columns">
-                     <div className="content-wrapper calendar-wrapper">
-                       <div className="row date-flipper">
-                         <div className="small-2 columns">
-                           <i className="fa fa-arrow-left arrow-button radius"></i>
-                         </div>
-                         <div className="small-8 columns">
-                           <h6 className="date">Feb 28</h6>
-                         </div>
-                         <div className="small-2 columns">
-                           <i className="fa fa-arrow-right arrow-button radius right"></i>
-                         </div>
-                       </div>
-                       { events }
-                     </div>
-                   </div>
-                 </div>
-               </div>
-               <ToolTip href="?designer_right_menu=ScheduleCreation"
-                        desc="Schedule new event"
-                        color="dark-purple"/>
-             </div>
+     return <div className="panel-container magenta-panel">
+              <div className="calendar">
+                <div className="row">
+                  <div className="small-12 columns">
+                    <div className="widget-header calendar-widget">
+                      <h5>Calendar</h5>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="small-12 columns">
+                    <div className="widget-content calendar-widget">
+                      <div className="search-box-wrapper">
+                        <input className="search" placeholder="Search"/>
+                        <div className="search-underline"></div>
+                      </div>
+                      { events }
+                    </div>
+                  </div>
+                </div>
+                <div className="plus-button add-event button-like" data-toggle="tooltip" title="Add event" href="/dashboard/designer?designer_right_menu=AddEvent">
+                  <i className="fa fa-2x fa-plus" />
+                </div>
+              </div>
             </div>
   }
 }

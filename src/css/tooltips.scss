@@ -1,27 +1,16 @@
 // Styles for TOOLTIPS
 
 @import 'colors';
-@import 'fonts';
 
-.fb-tooltip{
+.tooltip{
   padding: 2px;
   display: inline;
-  font-style: normal;
   .tooltip-text {
     font-style: normal;
     display: inline;
     background-color: $dark_gray;
     color: $off_white;
     border-radius: 3px;
-    padding: 3px;
-  }
-  &:after {
-    display: inline-block;
-    content: ' ';
-    width: 0;
-    height: 0;
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-left: 6px solid $dark_gray;
+    padding: .5rem .8rem;
   }
 }

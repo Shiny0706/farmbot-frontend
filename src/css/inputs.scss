@@ -1,9 +1,8 @@
-// Styles for ALL INPUTS
+// Styles for INPUTS
 
 @import 'colors';
-@import 'fonts';
 
-input, input[type="text"] {
+input {
   font-size: 1.2rem;
   color: $dark_gray;
   height: auto;
@@ -15,84 +14,4 @@ input, input[type="text"] {
     background-color: $white;
     box-shadow: 0px 0px 10px $translucent;
   }
-}
-input[type="password"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="date"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="datetime"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="datetime-local"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="month"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="week"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="email"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="number"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="search"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="tel"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="time"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="url"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="color"] {
-  font-size: 1.2rem;
-  height: auto;
-}
-input[type="submit"] {
-  font-size: 0.9rem;
-  float: right;
-  background-color: $green;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: $off-white;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 12px;
-  padding-right: 12px;
-  border: none;
-  border-radius: 4px;
-}
-input {
-  &.move-input {
-    font-size: 1rem;
-  }
-  &.green {
-    @extend %greenish;
-  }
-  &.red {
-    @extend %reddish;
-  }
-}
-input[type="text"][readonly] {
-  background-color: $white;
 }

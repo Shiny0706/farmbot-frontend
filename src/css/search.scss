@@ -1,0 +1,34 @@
+// Styles for Search Bars
+
+@import 'colors';
+
+.search-box-wrapper {
+  padding: .5rem 1rem;
+}
+
+input {
+  &.search {
+    background-color: transparent!important;
+    box-shadow: none;
+    &::-webkit-input-placeholder {
+      color: $dark_gray;
+    }
+    &:-moz-placeholder {
+      color: $dark_gray;
+    }
+    &::-moz-placeholder {
+      color: $dark_gray;
+    }
+    &:-ms-input-placeholder {
+      color: $dark_gray;
+    }
+  }
+}
+
+.search-underline {
+  border: 1px solid $dark_gray;
+  border-top-width: 0px;
+  height: 3px;
+  margin-top: -5px;
+  width: 100%;
+}

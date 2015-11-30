@@ -1,7 +1,21 @@
 // Styles for the CALENDAR Widget
 
 @import 'colors';
-@import 'fonts';
+
+.widget-header {
+  &.calendar-widget {
+    background-color: $magenta;
+    h5 {
+      color: $off-white;
+    }
+  }
+}
+
+.widget-content {
+  &.calendar-widget {
+    background-color: $light_magenta;
+  }
+}
 
 .event {
   @extend %extend_1;

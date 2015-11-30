@@ -1,9 +1,53 @@
 // Styles for the Farm Designer
 
 @import 'colors';
-@import 'fonts';
 
-.designer-info {
+.farm-designer-body {
+  display: flex;
+}
+
+.farm-designer, .farm-designer-body {
+  height: 100vh;
+  padding-bottom: 5rem;
+  overflow: hidden;
+}
+
+.farm-designer-map {
+  width: 100%;
+  overflow: scroll;
+}
+
+.farm-designer-left, .farm-designer-right {
+  width: 25rem;
+  min-width: 25rem;
+}
+
+.panel-container {
+  height: 100vh;
+  padding-bottom: 5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.object-list {
+  a {
+    color: $dark_gray;
+    text-decoration: underline;
+  }
+  ul {
+    padding-left: 1rem;
+    list-style-type: none;
+  }
+  li {
+    margin-bottom: 0.5rem;
+  }
+  label {
+    padding-left: 1rem;
+    padding-top: 2rem;
+  }
+}
+
+.designer-info-panel {
   .crop-drag-info-image {
     max-width: 98%;
     padding: 0 auto 0 auto;
@@ -28,21 +72,18 @@
     color: $dark_gray;
     padding: 0 0 0 4px;
     text-transform: none;
-    text-decoration: underline;
     font-weight: normal;
-    font-size: 0.75rem;
+    font-size: 1.4rem;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   li {
     padding: 2px;
   }
   h6 {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
   }
-}
-
-.farmdesigner-left-menu {
-  border: 1px $black dashed;
-  background-color: $blue;
 }

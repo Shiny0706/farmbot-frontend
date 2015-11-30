@@ -1,0 +1,15 @@
+// Styles for the Farm Designer Plants Inventory Panel
+
+@import 'colors';
+
+.plantCatalogTile{
+  cursor: pointer;
+}
+
+.plant-block {
+  @extend %extend_1;
+  padding-top: 0;
+  &:hover {
+    @extend %extend_2;
+  }
+}

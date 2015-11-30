@@ -8,8 +8,8 @@ var fakeHeaders = { // TODO: Add auth scheme.
 };
 
 Plant.designerUrl = function(plant) {
-  return '/dashboard/designer?designer_left_menu=PlantInfo' +
-         '&selected_plant_id=' + plant._id;
+  return '/dashboard/designer?left_tab=PlantInfo' +
+         '&plant=' + plant._id;
 }
 
 Plant.fakes = [

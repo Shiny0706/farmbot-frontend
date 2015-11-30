@@ -4,15 +4,9 @@ import { connect } from 'react-redux';
 import { Calendar } from './calendar';
 import { GardenMap } from './garden_map';
 import { Navbar } from '../../../components/navbar';
-import { SpeciesCatalog } from './species_catalog';
-import { PlantInfo } from './plant_info';
-import { SpeciesInfo } from './species_info';
-import { PlantInventory } from './plant_inventory';
+import { LeftPanel } from './left_panel';
 import { ScheduleCreation } from './schedule_creation';
 import { fetchAllPlants } from '../../../actions/plant_actions';
-
-const MENU_CHOICES = {PlantInventory, SpeciesCatalog, PlantInfo, SpeciesInfo,
-                      Calendar, ScheduleCreation};
 
 function mapStateToProps(state) {
   return { global: state.global,
@@ -23,17 +17,14 @@ function mapStateToProps(state) {
 export class FarmDesigner extends React.Component {
 
   componentDidMount() { this.props.dispatch(fetchAllPlants()); }
-  // Dynamically determine what to render on the left side of the designer,
-  // based on the value of hash fragment designer_left_menu
-  renderPanel(selectedComponent) {
-    var component = MENU_CHOICES[selectedComponent];
-    if (!component) {
-      var msg = `Cant render '${selectedComponent}', valid choices are:`
-      var choices = Object.keys(MENU_CHOICES);
-      console.warn(msg, choices);
-    } else {
-      return React.createElement(component, this.props);
-    };
+
+// Is there anyway to do this in one step down in the render section?
+  renderLeftPanel() {
+    return React.createElement(LeftPanel, this.props);
+  }
+
+  renderRightPanel() {
+    return React.createElement(Calendar, this.props);
   }
 
   render() {
@@ -42,16 +33,10 @@ export class FarmDesigner extends React.Component {
           <Navbar/>
           <div className="farm-designer-body">
             <div className="farm-designer-left">
-              <div id="designer-left">
-                {
-                  this.renderPanel(
-                    this.props.location.query.designer_left_menu || "PlantInventory"
-                  )
-                }
-              </div>
+              { this.renderLeftPanel() }
             </div>
 
-            <div className="farm-designer-middle">
+            <div className="farm-designer-map">
               <GardenMap dispath={this.props.dispatch}
                          route={this.props.route}
                          location={this.props.location}
@@ -60,13 +45,7 @@ export class FarmDesigner extends React.Component {
             </div>
 
             <div className="farm-designer-right">
-              <div id="designer-right">
-                {
-                  this.renderPanel(
-                    this.props.location.query.designer_right_menu || "Calendar"
-                  )
-                }
-              </div>
+              { this.renderRightPanel() }
             </div>
           </div>
         </div>

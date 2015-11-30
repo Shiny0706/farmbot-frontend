@@ -26,7 +26,7 @@ export class GardenMap extends React.Component {
   plants() {
     return this.props.plants.all.map(
       function (p, k) {
-        var selected = (this.props.location.query.selected_plant_id === p._id);
+        var selected = (this.props.location.query.plant === p._id);
         return <MapPoint plant={ p }
                   key={ k }
                   planting_area={ this.props.planting_area }
@@ -38,14 +38,14 @@ export class GardenMap extends React.Component {
 
   render() {
     var style = {
-      fill:        'rgb(136, 119, 102)',
-      strokeWidth: 1,
-      stroke:      'rgb(0,0,0)'
+      fill:        'rgba(0,0,0,0.05)',
+      strokeWidth: 5,
+      stroke:      'rgba(0,0,0,0.15)'
     }
     var {width, length} = this.props.planting_area;
 
     return <div>
-             <div id="drop-area" style={ {marginLeft: '10px', marginTop: '10px'} }>
+             <div className="drop-area" id="drop-area" style={ {marginLeft: '10px', marginTop: '10px'} }>
               <svg width={ width }
                    height={ length } >
                 <rect width={ width }

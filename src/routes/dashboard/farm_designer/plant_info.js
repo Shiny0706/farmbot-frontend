@@ -10,31 +10,27 @@ export class PlantInfo extends React.Component {
 
   get plant() {
     return _(this.props.plants.all)
-             .find({_id: this.props.route.selected_plant_id}) || {};
+             .find({_id: this.props.route.plant}) || {};
 
   }
 
   render() {
-    return <div>
-            <div className="green-content">
-              <div className="search-box-wrapper">
-                <p>
-                  <BackArrow /> Plant { this.plant._id || "" }
-                </p>
-              </div>
+    return <div className="panel-container green-panel">
+            <div className="panel-header green-panel">
+              <p className="panel-title">
+                <BackArrow /> Plant { this.plant._id || "" }
+              </p>
             </div>
-            <div className="designer-info">
+            <div className="plant-info">
               <div className="crop-drag-info-tile">
-                <h6>Photos of this Plant</h6>
-                <img className="crop-drag-info-image"
+                <label>Photos of this Plant</label>
+                <img className="plant-image"
                      src={this.plant.imgUrl || '/img/placeholder_berries.jpg'} />
                 </div>
               </div>
               <div>
-                <h6>
-                  Plant Info
-                  <span><a href="#">Edit</a></span>
-                </h6>
+                <label>Plant Info</label>
+                <span><a href="#">Edit</a></span>
                 <ul>
                   <li> Expected height: 28 inches </li>
                   <li> Expected diameter: 44 inches </li>
@@ -42,10 +38,8 @@ export class PlantInfo extends React.Component {
                 </ul>
               </div>
               <div>
-                <h6>
-                  Planting Tips
+                <label>Planting Tips</label>
                   <span><a href="#">Edit</a></span>
-                </h6>
                 <ul>
                   <li> Plant in full sun </li>
                   <li> Fruits most in acidic soil </li>
@@ -53,24 +47,20 @@ export class PlantInfo extends React.Component {
                 </ul>
               </div>
               <div>
-                <h6>
-                  Default Regimens
+                <label>Default Regimens</label>
                   <span><a href="#">Edit</a></span>
-                </h6>
                 <ul>
                   <li> Blueberries by OpenFarm</li>
                   <li> Soil Acidifier </li>
                 </ul>
               </div>
               <div>
-                <h6>
-                  Delete This Plant
-                </h6>
+                <label>Delete This Plant</label>
                 <p>
                   Note: You will no longer be able to plant this plant.
                 </p>
                 <span>
-                  <button className="red" onClick={this.removePlant.bind(this)}>
+                  <button className="red button-like left" onClick={this.removePlant.bind(this)}>
                     Delete
                   </button>
                 </span>

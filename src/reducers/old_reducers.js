@@ -7,9 +7,9 @@ import { Species } from '../models/species'
 // redux-router.
 var routeInitialState = {
     designer_right_menu: 'Calendar',
-    designer_left_menu: 'PlantInventory',
-    designer_left_tab: 'Plants',
-    selected_plant_id: 0
+    designer_left_menu: 'LeftPanel',
+    left_tab: 'Plants',
+    plant: 0
 };
 
 
@@ -21,8 +21,8 @@ var globalInitialState = {
     planting_area: {  // Just a stub for now. See backend API for more info.
       _id: "56154f3e766f6c5789020000",
       device_id: "56154f2f766f6c5789010000",
-      length: 300,
-      width: 600
+      length: 600,
+      width: 1000
     },
   };
 
