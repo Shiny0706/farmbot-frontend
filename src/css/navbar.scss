@@ -36,6 +36,8 @@ nav.navbar {
   float: right;
 }
 
+// Mobile Nav Styles
+
 button.navbar-toggle {
   float: left;
   margin: 0;
@@ -51,5 +53,17 @@ button.navbar-toggle {
   &:focus {
     background-color: transparent!important;
     color: $off_white
+  }
+}
+
+div#navbar.navbar-collapse {
+  z-index: 9999;
+  left: 1rem;
+  top: 5rem;
+  background: #434343;
+  width: 100%;
+  @media screen and (max-width: 768px) {
+    padding: 0 2rem;
+    position: absolute;
   }
 }
