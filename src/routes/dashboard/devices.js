@@ -4,7 +4,7 @@ import { Navbar } from '../../components/navbar';
 export var Devices = React.createClass({
   render: function() {
     return (
-      <div className="farm-designer">
+      <div>
         <Navbar/>
         <div className="all-content-wrapper">
           <div ng-view className="ng-scope">
