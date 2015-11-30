@@ -6,7 +6,9 @@ import { ReduxRouter } from 'redux-router';
 import configureStore from './configureStore';
 import { loadFromCdn } from './load_from_cdn';
 
-const store = configureStore();
+// Bootstrap.js doesn't use ES6 modules yet. Need to globally export.
+// Know a more ES6 compliant way to do this? Submit a PR!
+require("exports?$!jquery");
 
 require("!style!css!sass!./css/alerts.scss");
 require("!style!css!sass!./css/blocks.scss");
@@ -35,11 +37,10 @@ loadFromCdn(
   "//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
   "css");
 loadFromCdn(
-  "//code.jquery.com/jquery-2.1.4.min.js",
-  "js");
-loadFromCdn(
   "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",
   "js");
+
+const store = configureStore();
 
 class Root extends Component {
   render() {
@@ -57,4 +58,3 @@ class Root extends Component {
 }
 
 ReactDOM.render(<Root/>, document.getElementById('root'));
-

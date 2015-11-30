@@ -29,7 +29,7 @@ export class Groups extends React.Component {
           </div>
         </div>
         <div className="search-box-wrapper">
-          <i class="fa fa-search"></i>
+          <i className="fa fa-search"></i>
           <input className="search" placeholder="Search"/>
           <div className="search-underline"></div>
         </div>
