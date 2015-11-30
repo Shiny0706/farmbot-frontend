@@ -15,13 +15,11 @@ export class PlantInfo extends React.Component {
   }
 
   render() {
-    return <div>
-            <div className="green-content">
-              <div className="search-box-wrapper">
-                <p>
-                  <BackArrow /> Plant { this.plant._id || "" }
-                </p>
-              </div>
+    return <div className="panel-container green-panel">
+            <div className="panel-header green-panel">
+              <p className="panel-title">
+                <BackArrow /> Plant { this.plant._id || "" }
+              </p>
             </div>
             <div className="plant-info">
               <div className="crop-drag-info-tile">

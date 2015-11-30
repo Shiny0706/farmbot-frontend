@@ -8,8 +8,6 @@ import { LeftPanel } from './left_panel';
 import { ScheduleCreation } from './schedule_creation';
 import { fetchAllPlants } from '../../../actions/plant_actions';
 
-const MENU_CHOICES = {LeftPanel, Calendar, ScheduleCreation};
-
 function mapStateToProps(state) {
   return { global: state.global,
            plants: state.plants };

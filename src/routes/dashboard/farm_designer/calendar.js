@@ -26,7 +26,7 @@ export class Calendar extends React.Component {
                    .map((s, k) => <ScheduleEvent scheduledEvent={s} key={k}/>)
                    .value();
 
-     return <div>
+     return <div className="panel-container magenta-panel">
               <div className="calendar">
                 <div className="row">
                   <div className="small-12 columns">

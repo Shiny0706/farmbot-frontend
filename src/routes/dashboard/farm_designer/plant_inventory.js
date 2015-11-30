@@ -5,18 +5,20 @@ import { Plant } from '../../../models/plant'
 export class Plants extends React.Component {
   render() {
     return(
-      <div>
-        <ul className="tabs plants-active">
-          <li>
-            <Link to={ "/dashboard/designer?left_tab=Plants" } className={ "active" }>Plants</Link>
-          </li>
-          <li>
-            <Link to={ "/dashboard/designer?left_tab=Groups" }>Groups</Link>
-          </li>
-          <li>
-            <Link to={ "/dashboard/designer?left_tab=Zones" }>Zones</Link>
-          </li>
-        </ul>
+      <div className="panel-container green-panel">
+        <div className="panel-header green-panel">
+          <ul className="panel-tabs">
+            <li>
+              <Link to={ "/dashboard/designer?left_tab=Plants" } className={ "active" }>Plants</Link>
+            </li>
+            <li>
+              <Link to={ "/dashboard/designer?left_tab=Groups" }>Groups</Link>
+            </li>
+            <li>
+              <Link to={ "/dashboard/designer?left_tab=Zones" }>Zones</Link>
+            </li>
+          </ul>
+        </div>
         <div className="search-box-wrapper">
           <i class="fa fa-search"></i>
           <input className="search" placeholder="Search"/>

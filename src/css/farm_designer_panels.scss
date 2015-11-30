@@ -1,0 +1,76 @@
+// Styles for the farm designer panels
+
+@import 'colors';
+
+.panel-container {
+  &.green-panel {
+    background-color: $light_green;
+  }
+  &.cyan-panel {
+    background-color: $light_cyan;
+  }
+  &.brown-panel {
+    background-color: $brown;
+  }
+  &.magenta-panel {
+    background-color: $light_magenta;
+  }
+}
+
+.panel-header {
+  color: $light_gray;
+  &.green-panel {
+    background-color: $dark_green;
+  }
+  &.cyan-panel {
+    background-color: $cyan;
+  }
+  &.brown-panel {
+    background-color: $dark_brown;
+  }
+  &.magenta-panel {
+    background-color: $magenta;
+  }
+}
+
+.panel-tabs {
+  display: table;
+  width: 100%;
+  list-style: none;
+  padding: 1rem 0rem;
+  text-transform: uppercase;
+  margin-bottom: 0px!important;
+  a {
+    font-size: 1.4rem;
+    color: $light_gray;
+    &:hover {
+      color: $light_gray;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    &:focus {
+      color: $light_gray;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+  li {
+    display: table-cell;
+    text-align: center;
+    .active {
+      font-weight: bold;
+    }
+  }
+}
+
+.back-arrow {
+  width: 5rem;
+  float: left;
+  text-align: center;
+}
+
+.panel-title {
+  font-size: 1.6rem;
+  line-height: 4rem;
+  font-weight: bold;
+}

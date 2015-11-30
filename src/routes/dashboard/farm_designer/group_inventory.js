@@ -4,18 +4,20 @@ import { Link } from 'react-router';
 export class Groups extends React.Component {
   render() {
     return(
-      <div>
-        <ul className="tabs groups-active">
-          <li>
-            <Link to={ "/dashboard/designer?left_tab=Plants" }>Plants</Link>
-          </li>
-          <li>
-            <Link to={ "/dashboard/designer?left_tab=Groups" } className={ "active" }>Groups</Link>
-          </li>
-          <li>
-            <Link to={ "/dashboard/designer?left_tab=Zones" }>Zones</Link>
-          </li>
-        </ul>
+      <div className="panel-container cyan-panel">
+        <div className="panel-header cyan-panel">
+          <ul className="panel-tabs">
+            <li>
+              <Link to={ "/dashboard/designer?left_tab=Plants" }>Plants</Link>
+            </li>
+            <li>
+              <Link to={ "/dashboard/designer?left_tab=Groups" } className={ "active" }>Groups</Link>
+            </li>
+            <li>
+              <Link to={ "/dashboard/designer?left_tab=Zones" }>Zones</Link>
+            </li>
+          </ul>
+        </div>
         <div className="search-box-wrapper">
           <i class="fa fa-search"></i>
           <input className="search" placeholder="Search"/>
