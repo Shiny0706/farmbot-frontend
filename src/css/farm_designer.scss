@@ -4,22 +4,28 @@
 
 .farm-designer-body {
   display: flex;
-  flex-direction: row;
-  flex: 1;
 }
 
-.farm-designer-left {
-  flex: 0 0 20em;
-  order: -1;
+.farm-designer, .farm-designer-left, .farm-designer-body, .farm-designer-right {
+  height: 100vh;
+  padding-bottom: 5rem;
+  overflow: hidden;
 }
 
-.farm-designer-right {
-  flex: 0 0 20em;
+.farm-designer-map {
+  width: 100%;
+  overflow: scroll;
 }
 
-.farm-designer {
-  display: flex;
-  flex-direction: column;
+.farm-designer-left, .farm-designer-right {
+  width: 25em;
+}
+
+.panel-container {
+  height: 100vh;
+  padding-bottom: 5rem;
+  overflow: hidden;
+  position: relative;
 }
 
 .object-list {

@@ -33,9 +33,7 @@ export class FarmDesigner extends React.Component {
           <Navbar/>
           <div className="farm-designer-body">
             <div className="farm-designer-left">
-              <div id="designer-left">
-                { this.renderLeftPanel() }
-              </div>
+              { this.renderLeftPanel() }
             </div>
 
             <div className="farm-designer-map">
@@ -47,9 +45,7 @@ export class FarmDesigner extends React.Component {
             </div>
 
             <div className="farm-designer-right">
-              <div id="designer-right">
-                { this.renderRightPanel() }
-              </div>
+              { this.renderRightPanel() }
             </div>
           </div>
         </div>

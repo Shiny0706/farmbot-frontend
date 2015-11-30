@@ -76,6 +76,8 @@ button {
 
 .plus-button {
   border-radius: 50%;
+  bottom: 7rem;
+  left: 10rem;
   width: 5rem;
   height: 5rem;
   color: $off_white;
@@ -84,6 +86,7 @@ button {
   text-align: center;
   cursor: pointer;
   border-bottom-width: 3px!important;
+  position: absolute;
   i {
     line-height: 5rem;
   }
