@@ -8,7 +8,7 @@ import { Species } from '../models/species'
 var routeInitialState = {
     designer_right_menu: 'Calendar',
     designer_left_menu: 'LeftPanel',
-    left_tab: 'Plants',
+    Info: 'Plants',
     plant: 0
 };
 
