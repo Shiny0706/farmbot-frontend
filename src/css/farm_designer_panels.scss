@@ -44,6 +44,7 @@
     font-size: 1.4rem;
     padding: 1rem;
     color: $light_gray;
+    display: block;
     &:hover {
       color: $off_white;
       text-decoration: none;
@@ -57,14 +58,11 @@
   }
   li {
     display: table-cell;
-    padding: 1rem 0rem;
     text-align: center;
-    &.active {
+    .active {
       font-weight: bold;
+      color: $off_white;
       border-bottom: 2px solid $off_white;
-      a {
-        color: $off_white;
-      }
     }
   }
 }

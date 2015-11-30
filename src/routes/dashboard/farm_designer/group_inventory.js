@@ -10,8 +10,8 @@ export class Groups extends React.Component {
             <li>
                 <Link to={ "/dashboard/designer?left_tab=Plants" }>Plants</Link>
             </li>
-            <li className={"active"}>
-                <Link to={ "/dashboard/designer?left_tab=Groups" }>Groups</Link>
+            <li>
+                <Link to={ "/dashboard/designer?left_tab=Groups" } className={"active"}>Groups</Link>
             </li>
             <li>
                 <Link to={ "/dashboard/designer?left_tab=Zones" }>Zones</Link>

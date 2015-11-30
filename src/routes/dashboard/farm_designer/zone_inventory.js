@@ -13,8 +13,8 @@ export class Zones extends React.Component {
             <li>
                 <Link to={ "/dashboard/designer?left_tab=Groups" }>Groups</Link>
             </li>
-            <li className={"active"}>
-                <Link to={ "/dashboard/designer?left_tab=Zones" }>Zones</Link>
+            <li>
+                <Link to={ "/dashboard/designer?left_tab=Zones" } className={"active"}>Zones</Link>
             </li>
           </ul>
         </div>
