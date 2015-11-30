@@ -33,6 +33,11 @@ loadFromCdn(
 loadFromCdn(
   "//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
   "css");
+loadFromCdn(
+  "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",
+  "js");
+
+
 
 
 class Root extends Component {
