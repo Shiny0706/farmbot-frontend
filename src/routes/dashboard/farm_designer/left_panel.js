@@ -14,10 +14,10 @@ import { Zones } from './zone_inventory';
 
 
 // Dynamically determine what to render in the designer's left panel
-// based on the value of hash fragment left_tab
+// based on the value of hash fragment 'Info'
 export class LeftPanel extends React.Component {
   get tabName() {
-    return (this.props.location.query.left_tab || "Plants")
+    return (this.props.location.query.Info || "Plants")
   }
 
   get content() {

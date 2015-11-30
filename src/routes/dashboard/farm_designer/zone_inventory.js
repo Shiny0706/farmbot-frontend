@@ -13,16 +13,16 @@ export class Zones extends React.Component {
               </button>
             </li>
             <li className="hidden-sm hidden-md hidden-lg">
-                <Link to={ "/dashboard/designer?left_tab=NoTab" }>Designer</Link>
+                <Link to={ "/dashboard/designer?Info=NoTab" }>Designer</Link>
             </li>
             <li>
-                <Link to={ "/dashboard/designer?left_tab=Plants" }>Plants</Link>
+                <Link to={ "/dashboard/designer?Info=Plants" }>Plants</Link>
             </li>
             <li>
-                <Link to={ "/dashboard/designer?left_tab=Groups" }>Groups</Link>
+                <Link to={ "/dashboard/designer?Info=Groups" }>Groups</Link>
             </li>
             <li>
-                <Link to={ "/dashboard/designer?left_tab=Zones" } className={"active"}>Zones</Link>
+                <Link to={ "/dashboard/designer?Info=Zones" } className={"active"}>Zones</Link>
             </li>
           </ul>
         </div>

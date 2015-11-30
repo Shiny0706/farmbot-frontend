@@ -7,7 +7,7 @@ import { BackArrow } from './back_arrow';
 export class SpeciesCatalogTile extends React.Component {
   render() {
     var specimen = this.props.specimen;
-    var url = "?left_tab=SpeciesInfo&selected_specimen_id="
+    var url = "?Info=SpeciesInfo&selected_specimen_id="
                 + specimen._id;
     return(
       <div className="plantCatalogTile">
