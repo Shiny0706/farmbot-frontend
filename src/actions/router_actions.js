@@ -1,4 +1,5 @@
 import { pushState } from 'redux-router';
+import { Plant } from '../models/plant';
 
 export function navigateNextPath(defaultRoute) {
   return (dispatch, getState) => {
@@ -22,4 +23,8 @@ export function navigateLogin(nextState) {
 
 export function navigateDashboard() {
   return pushState(null, '/');
+}
+
+export function navigateSelectedPlant(plant) {
+  return pushState(null, Plant.designerUrl(plant));
 }
