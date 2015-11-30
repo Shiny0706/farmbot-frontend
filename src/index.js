@@ -13,6 +13,7 @@ require("!style!css!sass!./css/blocks.scss");
 require("!style!css!sass!./css/buttons.scss");
 require("!style!css!sass!./css/calendar.scss");
 require("!style!css!sass!./css/farm_designer.scss");
+require("!style!css!sass!./css/farm_designer_mobile.scss");
 require("!style!css!sass!./css/farmbot.scss");
 require("!style!css!sass!./css/inputs.scss");
 require("!style!css!sass!./css/farm_designer_panels.scss");
@@ -34,10 +35,10 @@ loadFromCdn(
   "//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
   "css");
 loadFromCdn(
-  "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",
+  "//code.jquery.com/jquery-2.1.4.min.js",
   "js");
 loadFromCdn(
-  "//code.jquery.com/jquery-2.1.4.min.js",
+  "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",
   "js");
 
 class Root extends Component {

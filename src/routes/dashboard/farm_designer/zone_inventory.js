@@ -7,6 +7,14 @@ export class Zones extends React.Component {
       <div className="panel-container brown-panel">
         <div className="panel-header brown-panel">
           <ul className="panel-tabs">
+            <li className="hidden-sm hidden-md hidden-lg">
+              <button className="navbar-toggle" data-target="#navbar" data-toggle="collapse" type="button">
+                <span className="glyphicon glyphicon-menu-hamburger" />
+              </button>
+            </li>
+            <li className="hidden-sm hidden-md hidden-lg">
+                <Link to={ "/dashboard/designer?left_tab=NoTab" }>Designer</Link>
+            </li>
             <li>
                 <Link to={ "/dashboard/designer?left_tab=Plants" }>Plants</Link>
             </li>
