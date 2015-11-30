@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-var links = {
-  "/dashboard/designer" : "Farm Designer",
-  "/dashboard/controls" : "Controls",
-  "/dashboard/devices"  : "Devices",
-  "/dashboard/sequences": "Sequences",
-  "/dashboard/schedules": "Schedules"
-}
-
-
 export var Navbar = React.createClass({
+  links: {
+    "Farm Designer" : "/dashboard/designer" ,
+    "Controls"      : "/dashboard/controls" ,
+    "Devices"       : "/dashboard/devices"  ,
+    "Sequences"     : "/dashboard/sequences",
+    "Schedules"     : "/dashboard/schedules"
+  },
+
   render: function() {
     return (
       <nav className="navbar navbar-default drop-shadow" role="navigation">
@@ -23,10 +22,10 @@ export var Navbar = React.createClass({
           <div className="collapse navbar-collapse" id="navbar">
             <ul className="nav navbar-nav">
               {
-                Object.keys(links).map(function (url) {
-                  var description = links[url];
+                Object.keys(this.links).map((description) => {
+                  var url = this.links[description];
                   return (
-                          <li>
+                          <li key={url}>
                             <Link to={url}>{description}</Link>
                           </li>
                          )

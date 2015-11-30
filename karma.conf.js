@@ -25,7 +25,7 @@ module.exports = function(config) {
     },
 
     reporters: ['dots'],
-    singleRun: true,
+    singleRun: false,
 
     webpackMiddleware: {
       noInfo: true
