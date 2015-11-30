@@ -9,8 +9,8 @@ import { Schedules } from './dashboard/schedules/schedules';
 import { FarmDesigner } from './dashboard/farm_designer/farm_designer';
 
 export function getRoutes(store) {
-  console.warn('Errors dealing with ReduxRouterContext Prop/Context types on ' +
-               'the first render are currently expected.');
+  // console.warn('Errors dealing with ReduxRouterContext Prop/Context types on ' +
+  //              'the first render are currently expected.');
 
   return (
     <Route path="/" component={App}>
