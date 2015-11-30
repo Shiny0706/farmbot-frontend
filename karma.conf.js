@@ -2,7 +2,7 @@ var webpackConfig = require('./webpack.config.js')
 
 module.exports = function(config) {
   config.set({
-    browsers: ['PhantomJS', 'Chrome'],
+    browsers: ['Chrome'],
     frameworks: ['jasmine'],
 
     basePath: 'test',
@@ -15,7 +15,7 @@ module.exports = function(config) {
     plugins: [
       require("karma-webpack"),
       'karma-jasmine',
-      'karma-phantomjs-launcher',
+      'karma-chrome-launcher',
     ],
 
     webpack: webpackConfig,
@@ -25,12 +25,12 @@ module.exports = function(config) {
     },
 
     reporters: ['dots'],
-    singleRun: true,
+    singleRun: false,
 
     webpackMiddleware: {
       noInfo: true
     },
 
-    browserNoActivityTimeout: 60000,
+    browserNoActivityTimeout: 30000,
   });
 }
