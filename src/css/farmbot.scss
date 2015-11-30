@@ -2,6 +2,10 @@
 
 @import 'colors';
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .all-content-wrapper {
   padding: 3rem 3rem 0rem 3rem;
   margin-left: auto;
