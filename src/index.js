@@ -36,9 +36,9 @@ loadFromCdn(
 loadFromCdn(
   "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",
   "js");
-
-
-
+loadFromCdn(
+  "//code.jquery.com/jquery-2.1.4.min.js",
+  "js");
 
 class Root extends Component {
   render() {
