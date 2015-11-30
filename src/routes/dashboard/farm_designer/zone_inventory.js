@@ -6,25 +6,27 @@ export class Zones extends React.Component {
     return(
       <div className="panel-container brown-panel">
         <div className="panel-header brown-panel">
-          <ul className="panel-tabs">
-            <li className="hidden-sm hidden-md hidden-lg">
-              <button className="navbar-toggle" data-target="#navbar" data-toggle="collapse" type="button">
-                <span className="glyphicon glyphicon-menu-hamburger" />
-              </button>
-            </li>
-            <li className="hidden-sm hidden-md hidden-lg">
-                <Link to={ "/dashboard/designer?Info=NoTab" }>Designer</Link>
-            </li>
-            <li>
-                <Link to={ "/dashboard/designer?Info=Plants" }>Plants</Link>
-            </li>
-            <li>
-                <Link to={ "/dashboard/designer?Info=Groups" }>Groups</Link>
-            </li>
-            <li>
-                <Link to={ "/dashboard/designer?Info=Zones" } className={"active"}>Zones</Link>
-            </li>
-          </ul>
+          <div className="main-nav-button">
+            <button className="navbar-toggle hidden-sm hidden-md hidden-lg" data-target="#navbar" data-toggle="collapse" type="button">
+              <span className="glyphicon glyphicon-menu-hamburger" />
+            </button>
+          </div>
+          <div className="panel-tabs">
+            <ul>
+              <li className="hidden-sm hidden-md hidden-lg">
+                  <Link to={ "/dashboard/designer?Info=NoTab" }>Designer</Link>
+              </li>
+              <li>
+                  <Link to={ "/dashboard/designer?Info=Plants" }>Plants</Link>
+              </li>
+              <li>
+                  <Link to={ "/dashboard/designer?Info=Groups" }>Groups</Link>
+              </li>
+              <li>
+                  <Link to={ "/dashboard/designer?Info=Zones" } className={"active"}>Zones</Link>
+              </li>
+            </ul>
+          </div>
         </div>
         <div className="search-box-wrapper">
           <i class="fa fa-search"></i>

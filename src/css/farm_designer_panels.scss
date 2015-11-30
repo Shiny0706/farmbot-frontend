@@ -36,8 +36,13 @@
   }
 }
 
+.main-nav-button {
+  display: inline;
+  height: 5rem;
+}
+
 .panel-tabs {
-  display: table;
+  display: inline;
   width: 100%;
   list-style: none;
   padding: 0rem;
@@ -45,7 +50,9 @@
   margin-bottom: 0px!important;
   a {
     font-size: 1.4rem;
-    padding: 1rem;
+    padding: 0 1.2rem;
+    line-height: 5rem;
+    height: 5rem;
     color: $light_gray;
     display: block;
     &:hover {
@@ -57,6 +64,14 @@
       color: $off_white;
       text-decoration: none;
       font-weight: bold;
+    }
+  }
+  ul {
+    display: table;
+    margin-bottom: 0;
+    padding: 0;
+    @media screen and (min-width: 768px) {
+      width: 100%;
     }
   }
   li {

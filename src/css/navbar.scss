@@ -22,6 +22,7 @@ nav.navbar {
   color: $gray!important;
   &:hover, :active, :focus {
     color: $off_white!important;
+    font-weight: bold;
   }
 }
 
@@ -36,14 +37,16 @@ nav.navbar {
   float: right;
 }
 
+// Mobile Nav Styles
+
 button.navbar-toggle {
   float: left;
   margin: 0;
   border: none;
   color: $gray;
   font-size: 1.6rem!important;
-  padding: 1.5rem 2rem;
-  line-height: 1.6rem;
+  padding: .4rem 2rem 0 2rem;
+  line-height: 4.6rem;
   &:hover {
     background-color: transparent!important;
     color: $off_white
@@ -51,5 +54,19 @@ button.navbar-toggle {
   &:focus {
     background-color: transparent!important;
     color: $off_white
+  }
+}
+
+div#navbar.navbar-collapse {
+  z-index: 9999;
+  left: 1rem;
+  top: 5rem;
+  background: #434343;
+  border: 0px;
+  width: 100%;
+  box-shadow: 0 4px 10px $translucent;
+  @media screen and (max-width: 768px) {
+    padding: 0 2rem;
+    position: absolute;
   }
 }
