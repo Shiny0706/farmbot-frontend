@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { signup } from '../../actions/FarmbotActions';
-import { navigateDashboard } from '../../actions/RouterActions';
+import { navigateDashboard } from '../../actions/router_actions';
 
 const formOptions = {
   form: 'signup',

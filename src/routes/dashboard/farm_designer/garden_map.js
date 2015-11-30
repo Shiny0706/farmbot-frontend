@@ -1,10 +1,10 @@
 import React from 'react';
 import { Plant } from '../../../models/plant';
+import { navigateSelectedPlant } from '../../../actions/router_actions';
 
 export class MapPoint extends React.Component {
   select() {
-    // SVG elements can't have an href= attr, so we need to jump through hoops.
-    window.location.href = Plant.designerUrl(this.props.plant);
+    this.props.dispatch(navigateSelectedPlant(this.props.plant));
   }
 
   selected() {

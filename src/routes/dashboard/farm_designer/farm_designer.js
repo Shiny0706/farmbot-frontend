@@ -37,7 +37,7 @@ export class FarmDesigner extends React.Component {
             </div>
 
             <div className="farm-designer-map">
-              <GardenMap dispath={this.props.dispatch}
+              <GardenMap dispatch={this.props.dispatch}
                          route={this.props.route}
                          location={this.props.location}
                          {...this.props.global}
