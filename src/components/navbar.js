@@ -13,9 +13,9 @@ var links = {
 export var Navbar = React.createClass({
   render: function() {
     return (
-      <nav className="navbar navbar-default drop-shadow" role="navigation">
+      <nav className="navbar navbar-default" role="navigation">
         <div className="container-fluid">
-          <div className="navbar-header">
+          <div className="navbar-header drop-shadow">
             <button className="navbar-toggle" data-target="#navbar" data-toggle="collapse" type="button">
               <span className="glyphicon glyphicon-menu-hamburger" />
             </button>
