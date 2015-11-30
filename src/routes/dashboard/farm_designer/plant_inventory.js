@@ -36,7 +36,7 @@ export class Plants extends React.Component {
           <label>Current Plants</label>
           <List plants={ this.props.plants.all } />
         </div>
-        <div className="plus-button add-plant button-like" data-toggle="tooltip" title="Add plant" href="/dashboard/designer?left_tab=SpeciesCatalog">
+        <div className="plus-button add-plant button-like" data-toggle="tooltip" title="Add plant" href="/dashboard/designer?Info=SpeciesCatalog">
           <i className="fa fa-2x fa-plus" />
         </div>
       </div>
