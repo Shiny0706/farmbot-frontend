@@ -35,3 +35,18 @@ nav.navbar {
   margin-right: 30px;
   float: right;
 }
+
+button.navbar-toggle {
+  float: left;
+  margin: 0;
+  border: none;
+  font-size: 1.6rem!important;
+  padding: 1.5rem 2rem;
+  line-height: 1.6rem;
+  &:hover {
+    background-color: transparent!important;
+  }
+  &:focus {
+    background-color: transparent!important;
+  }
+}
