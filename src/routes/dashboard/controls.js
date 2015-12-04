@@ -73,31 +73,31 @@ render: function() {
                               </tbody></table>
                           </div>
                           <div className="row">
-                            <div className="col-md-6 col-sm-7 col-md-offset-1">
+                            <div className="col-xs-7 col-sm-6 col-sm-offset-1">
                               <label>GANTRY (X)</label>
                             </div>
-                            <div className="col-md-4 col-sm-5 end">
+                            <div className="col-xs-5 col-sm-4 end">
                               <manualmovementinput axis="x" axisdata="axisdata" className="ng-isolate-scope"><input className="move-input ng-pristine ng-untouched ng-valid" ng_blur="buffer.out()" placeholder={0} ng_style="buffer.dirty ? {'border-color':'red'} : {}" ng_focus="buffer.in()" ng_model="buffer.val" ng_model_options="{ getterSetter: true }" type="text" /></manualmovementinput>
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-md-6 col-sm-7 col-md-offset-1">
+                            <div className="col-xs-7 col-sm-6 col-sm-offset-1">
                               <label>CROSS-SLIDE (Y)</label>
                             </div>
-                            <div className="col-md-4 col-sm-5 end">
+                            <div className="col-xs-5 col-sm-4 end">
                               <manualmovementinput axis="y" axisdata="axisdata" className="ng-isolate-scope"><input className="move-input ng-pristine ng-untouched ng-valid" ng_blur="buffer.out()" placeholder={0} ng_style="buffer.dirty ? {'border-color':'red'} : {}" ng_focus="buffer.in()" ng_model="buffer.val" ng_model_options="{ getterSetter: true }" type="text" /></manualmovementinput>
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-md-6 col-sm-7 col-md-offset-1">
+                            <div className="col-xs-7 col-sm-6 col-sm-offset-1">
                               <label>Z-AXIS (Z)</label>
                             </div>
-                            <div className="col-md-4 col-sm-5 end">
+                            <div className="col-xs-5 col-sm-4 end">
                               <manualmovementinput axis="z" axisdata="axisdata" className="ng-isolate-scope"><input className="move-input ng-pristine ng-untouched ng-valid" ng_blur="buffer.out()" placeholder={0} ng_style="buffer.dirty ? {'border-color':'red'} : {}" ng_focus="buffer.in()" ng_model="buffer.val" ng_model_options="{ getterSetter: true }" type="text" /></manualmovementinput>
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-md-4 col-sm-5 col-md-offset-7 end">
+                            <div className="col-xs-5 col-sm-4 col-xs-offset-7 end">
                               <button className="full-width green button-like" ng_click="manualMovement()">GO</button>
                             </div>
                           </div>
