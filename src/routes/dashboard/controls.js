@@ -14,14 +14,14 @@ render: function() {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <stopbutton className="ng-isolate-scope"><button className="red button-like widget-control" type="button">E-STOP</button></stopbutton>
+                        <stopbutton><button className="red button-like widget-control" type="button">E-STOP</button></stopbutton>
                         <div className="widget-header">
                           <h5>Move</h5>
                         </div>
                       </div>
                       <div className="col-sm-12">
                         <div className="widget-content">
-                          <label className="text-center ng-binding">MOVE AMOUNT (mm) Busy</label>
+                          <label className="text-center">MOVE AMOUNT (mm) Busy</label>
                           <div className="row">
                             <div className="col-sm-12">
                               <div className="move-amount-wrapper">

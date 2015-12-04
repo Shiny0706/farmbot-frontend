@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderScheduleCreation } from './schedule_creation'
 import { Schedule } from '../../../models/schedule'
+import { Link } from 'react-router';
 
 export class ScheduleEvent extends React.Component {
   render () {
@@ -27,28 +28,40 @@ export class Calendar extends React.Component {
                    .value();
 
      return <div className="panel-container magenta-panel">
-              <div className="calendar">
-                <div className="row">
-                  <div className="small-12 columns">
-                    <div className="widget-header calendar-widget">
-                      <h5>Calendar</h5>
-                    </div>
-                  </div>
+              <div className="panel-header magenta-panel">
+                <div className="main-nav-button">
+                  <button className="navbar-toggle hidden-sm hidden-md hidden-lg" data-target="#navbar" data-toggle="collapse" type="button">
+                    <span className="glyphicon glyphicon-menu-hamburger" />
+                  </button>
                 </div>
-                <div className="row">
-                  <div className="small-12 columns">
-                    <div className="widget-content calendar-widget">
-                      <div className="search-box-wrapper">
-                        <input className="search" placeholder="Search"/>
-                        <div className="search-underline"></div>
-                      </div>
-                      { events }
-                    </div>
-                  </div>
+                <div className="panel-tabs hidden-sm hidden-md hidden-lg">
+                  <ul>
+                    <li>
+                        <Link to={ "/dashboard/designer?Info=NoTab" }>Designer</Link>
+                    </li>
+                    <li>
+                        <Link to={ "/dashboard/designer?Info=Plants" }>Plants</Link>
+                    </li>
+                    <li>
+                        <Link to={ "/dashboard/designer?Info=Groups" }>Groups</Link>
+                    </li>
+                    <li>
+                        <Link to={ "/dashboard/designer?Info=Zones" }>Zones</Link>
+                    </li>
+                    <li>
+                        <Link to={ "/dashboard/designer?Info=Calendar" } className={"active"}>Calendar</Link>
+                    </li>
+                  </ul>
                 </div>
-                <div className="plus-button add-event button-like" data-toggle="tooltip" title="Add event" href="/dashboard/designer?designer_right_menu=AddEvent">
-                  <i className="fa fa-2x fa-plus" />
-                </div>
+              </div>
+              <div className="search-box-wrapper">
+                <i className="fa fa-search"></i>
+                <input className="search" placeholder="Search"/>
+                <div className="search-underline"></div>
+              </div>
+              { events }
+              <div className="plus-button add-event button-like" data-toggle="tooltip" title="Add event" href="/dashboard/designer?designer_right_menu=AddEvent">
+                <i className="fa fa-2x fa-plus" />
               </div>
             </div>
   }

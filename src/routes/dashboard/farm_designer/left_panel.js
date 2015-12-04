@@ -11,6 +11,8 @@ import { PlantInfo } from './plant_info';
 import { Groups } from './group_inventory';
 // Import all of the Zone (brown) panel views
 import { Zones } from './zone_inventory';
+// Import all of the Calendar (magenta) panel views
+import { Calendar } from './calendar';
 
 
 // Dynamically determine what to render in the designer's left panel
@@ -21,7 +23,7 @@ export class LeftPanel extends React.Component {
   }
 
   get content() {
-    var component = {Plants, NoTab, SpeciesCatalog, SpeciesInfo, PlantInfo, Groups, Zones}[this.tabName];
+    var component = {Plants, NoTab, SpeciesCatalog, SpeciesInfo, PlantInfo, Groups, Zones, Calendar}[this.tabName];
     return React.createElement(component, this.props);
   }
 
