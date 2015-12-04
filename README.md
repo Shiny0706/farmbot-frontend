@@ -6,8 +6,8 @@ HTML, CSS, JS. Mostly React / WebPack
 
  0. `git clone https://github.com/FarmBot/farmbot-web-frontend.git`
  0. `cd farmbot-web-frontend`
- 0. `npm install`
- 0. Move a copy of `src/js/config.example.js` over to `src/js/config.js`
+ 0. `sudo npm install`
+ 0. Move a copy of `src/config.example.js` over to `src/config.js`
  0. `npm start`
  0. `Visit http://localhost:3001`
  0. Explore the codebase! `js/app.js` and `js/app.js` are a great place to start looking around.
