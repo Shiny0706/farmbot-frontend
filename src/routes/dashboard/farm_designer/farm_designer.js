@@ -1,11 +1,10 @@
 import _ from 'lodash';
 import React from "react";
 import { connect } from 'react-redux';
-import { Calendar } from './calendar';
-import { GardenMap } from './garden_map';
 import { Navbar } from '../../../components/navbar';
 import { LeftPanel } from './left_panel';
-import { ScheduleCreation } from './schedule_creation';
+import { GardenMap } from './garden_map';
+import { RightPanel } from './right_panel';
 import { fetchAllPlants } from '../../../actions/plant_actions';
 
 function mapStateToProps(state) {
@@ -24,7 +23,7 @@ export class FarmDesigner extends React.Component {
   }
 
   renderRightPanel() {
-    return React.createElement(Calendar, this.props);
+    return React.createElement(RightPanel, this.props);
   }
 
   render() {

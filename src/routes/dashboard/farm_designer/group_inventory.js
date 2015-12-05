@@ -25,6 +25,9 @@ export class Groups extends React.Component {
               <li>
                   <Link to={ "/dashboard/designer?Info=Zones" }>Zones</Link>
               </li>
+              <li className="hidden-sm hidden-md hidden-lg">
+                  <Link to={ "/dashboard/designer?Info=RightPanel" }>Calendar</Link>
+              </li>
             </ul>
           </div>
         </div>
