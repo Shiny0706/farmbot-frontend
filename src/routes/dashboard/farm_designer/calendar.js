@@ -37,19 +37,19 @@ export class Calendar extends React.Component {
                 <div className="panel-tabs hidden-sm hidden-md hidden-lg">
                   <ul>
                     <li>
-                        <Link to={ "/dashboard/designer?Info=NoTab" }>Designer</Link>
+                      <Link to={ "/dashboard/designer?Info=NoTab" }>Designer</Link>
                     </li>
                     <li>
-                        <Link to={ "/dashboard/designer?Info=Plants" }>Plants</Link>
+                      <Link to={ "/dashboard/designer?Info=Plants" }>Plants</Link>
                     </li>
                     <li>
-                        <Link to={ "/dashboard/designer?Info=Groups" }>Groups</Link>
+                      <Link to={ "/dashboard/designer?Info=Groups" }>Groups</Link>
                     </li>
                     <li>
-                        <Link to={ "/dashboard/designer?Info=Zones" }>Zones</Link>
+                      <Link to={ "/dashboard/designer?Info=Zones" }>Zones</Link>
                     </li>
                     <li>
-                        <Link to={ "/dashboard/designer?Info=Calendar" } className={"active"}>Calendar</Link>
+                      <Link to={ "/dashboard/designer?Info=RightPanel" } className={"active"}>Calendar</Link>
                     </li>
                   </ul>
                 </div>

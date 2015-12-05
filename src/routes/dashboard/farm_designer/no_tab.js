@@ -25,7 +25,7 @@ export class NoTab extends React.Component {
                   <Link to={ "/dashboard/designer?Info=Zones" }>Zones</Link>
               </li>
               <li className="hidden-sm hidden-md hidden-lg">
-                  <Link to={ "/dashboard/designer?Info=Calendar" }>Calendar</Link>
+                  <Link to={ "/dashboard/designer?Info=RightPanel" }>Calendar</Link>
               </li>
             </ul>
           </div>

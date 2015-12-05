@@ -26,7 +26,7 @@ export class Zones extends React.Component {
                   <Link to={ "/dashboard/designer?Info=Zones" } className={"active"}>Zones</Link>
               </li>
               <li className="hidden-sm hidden-md hidden-lg">
-                  <Link to={ "/dashboard/designer?Info=Calendar" }>Calendar</Link>
+                  <Link to={ "/dashboard/designer?Info=RightPanel" }>Calendar</Link>
               </li>
             </ul>
           </div>
