@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from 'react-router';
 // Import all of the Calendar (magenta) panel views
 import { Calendar } from './calendar';
+import { CreateEvent } from './create_event';
 
 
 // Dynamically determine what to render in the designer's right panel
@@ -12,7 +13,7 @@ export class RightPanel extends React.Component {
   }
 
   get content() {
-    var component = {Calendar, }[this.tabName];
+    var component = {Calendar, CreateEvent}[this.tabName];
     return React.createElement(component, this.props);
   }
 
