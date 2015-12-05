@@ -1,5 +1,4 @@
 import React from 'react';
-import { renderScheduleCreation } from './schedule_creation'
 import { Schedule } from '../../../models/schedule'
 import { Link } from 'react-router';
 import { BackArrow } from './back_arrow';
