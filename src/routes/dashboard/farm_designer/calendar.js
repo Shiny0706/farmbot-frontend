@@ -2,6 +2,7 @@ import React from 'react';
 import { renderScheduleCreation } from './schedule_creation'
 import { Schedule } from '../../../models/schedule'
 import { Link } from 'react-router';
+import { BackArrow } from './back_arrow';
 
 export class ScheduleEvent extends React.Component {
   render () {
@@ -29,6 +30,9 @@ export class Calendar extends React.Component {
 
      return <div className="panel-container magenta-panel">
               <div className="panel-header magenta-panel">
+                <p className="panel-title hidden-xs">
+                  Calendar
+                </p>
                 <div className="main-nav-button">
                   <button className="navbar-toggle hidden-sm hidden-md hidden-lg" data-target="#navbar" data-toggle="collapse" type="button">
                     <span className="glyphicon glyphicon-menu-hamburger" />
