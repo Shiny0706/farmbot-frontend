@@ -1,13 +1,13 @@
 import React from 'react';
 import { BackArrow } from './back_arrow';
 
-export class ScheduleCreation extends React.Component {
+export class AddEvent extends React.Component {
   render() {
     return <div>
             <div>
               <div className="search-box-wrapper purple-content">
                 <p>
-                  <BackArrow /> Schedule Event
+                  <BackArrow /> Add Event
                 </p>
               </div>
             </div>

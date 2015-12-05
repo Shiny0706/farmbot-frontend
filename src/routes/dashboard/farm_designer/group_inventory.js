@@ -14,19 +14,19 @@ export class Groups extends React.Component {
           <div className="panel-tabs">
             <ul>
               <li className="hidden-sm hidden-md hidden-lg">
-                  <Link to={ "/dashboard/designer?Info=NoTab" }>Designer</Link>
+                  <Link to={ "/dashboard/designer?p1=NoTab" }>Designer</Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?Info=Plants" }>Plants</Link>
+                  <Link to={ "/dashboard/designer?p1=Plants" }>Plants</Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?Info=Groups" } className={"active"}>Groups</Link>
+                  <Link to={ "/dashboard/designer?p1=Groups" } className={"active"}>Groups</Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?Info=Zones" }>Zones</Link>
+                  <Link to={ "/dashboard/designer?p1=Zones" }>Zones</Link>
               </li>
               <li className="hidden-sm hidden-md hidden-lg">
-                  <Link to={ "/dashboard/designer?Info=RightPanel" }>Calendar</Link>
+                  <Link to={ "/dashboard/designer?p1=Panel2" }>Calendar</Link>
               </li>
             </ul>
           </div>
@@ -76,9 +76,11 @@ export class Groups extends React.Component {
               </li>
             </ul>
           </div>
-          <div className="plus-button add-group button-like" data-toggle="tooltip" title="Add group" href="/dashboard/designer?Info=AddGroup">
-            <i className="fa fa-2x fa-plus" />
-          </div>
+          <Link to="/dashboard/designer?p1=AddGroup">
+            <div className="plus-button add-group button-like" data-toggle="tooltip" title="Add group">
+              <i className="fa fa-2x fa-plus" />
+            </div>
+          </Link>
         </div>
       </div>
     )
