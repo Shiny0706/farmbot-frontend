@@ -7,7 +7,7 @@ import { BackArrow } from './back_arrow';
 export class SpeciesCatalogTile extends React.Component {
   render() {
     var specimen = this.props.specimen;
-    var url = "?Info=SpeciesInfo&selected_specimen_id="
+    var url = "/dashboard/designer?p1=SpeciesInfo&id="
                 + specimen._id;
     return(
       <div className="plantCatalogTile">
@@ -41,18 +41,16 @@ export class SpeciesCatalog extends React.Component {
                                        key={ k }
                                        dispatch={ this.props.dispatch } />
      );
-    return <div id="designer-left">
-            <div className="green-content">
-              <div className="search-box-wrapper">
-                <p>
-                  <BackArrow/> Choose a Species
-                </p>
-              </div>
+    return <div className="panel-container green-panel">
+            <div className="panel-header green-panel">
+              <p className="panel-title">
+                <BackArrow/> Choose a Species
+              </p>
             </div>
             <div>
               <br/>
               { species }
             </div>
-           </div>
+          </div>
   }
 }

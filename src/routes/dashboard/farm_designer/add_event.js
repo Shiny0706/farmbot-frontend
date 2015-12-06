@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { BackArrow } from './back_arrow';
 
 export class AddEvent extends React.Component {
   render() {
     return <div>
-            <div>
-              <div className="search-box-wrapper purple-content">
-                <p>
-                  <BackArrow /> Add Event
+            <div className="panel-container magenta-panel">
+              <div className="panel-header magenta-panel">
+                <p className="panel-title">
+                  <BackArrow/>Add Event
                 </p>
               </div>
             </div>

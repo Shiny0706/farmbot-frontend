@@ -1,5 +1,6 @@
 import React from 'react';
 import { Plant } from '../../../models/plant'
+import { Link } from 'react-router';
 import { BackArrow } from './back_arrow';
 
 export class PlantInfo extends React.Component {
@@ -18,7 +19,7 @@ export class PlantInfo extends React.Component {
     return <div className="panel-container green-panel">
             <div className="panel-header green-panel">
               <p className="panel-title">
-                <BackArrow /> Plant { this.plant._id || "" }
+                <BackArrow/>Plant { this.plant._id || "" }
               </p>
             </div>
             <div className="plant-info">

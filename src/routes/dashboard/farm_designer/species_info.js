@@ -15,17 +15,15 @@ export class SpeciesInfo extends React.Component {
   }
 
   render() {
-    var query = {_id: this.props.location.query.selected_specimen_id};
+    var query = {_id: this.props.location.query.id};
     var all = this.props.global.species;
     // TODO REAL ERROR HANDLER ZOMG
     var specimen = _(all).find(query) || (function(){ alert("Invalid plant id")})();
-    return  <div>
-              <div className="green-content">
-                <div className="search-box-wrapper">
-                  <p>
-                    <BackArrow /> { specimen.name }
-                  </p>
-                </div>
+    return  <div className="panel-container green-panel">
+              <div className="panel-header green-panel">
+                <p className="panel-title">
+                   <BackArrow /> { specimen.name }
+                </p>
               </div>
               <div className="designer-info">
                 <div className="crop-drag-info-tile">
