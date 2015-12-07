@@ -11,23 +11,15 @@ export class SpeciesCatalogTile extends React.Component {
                 + specimen._id;
     return(
       <div className="plantCatalogTile">
-        <div className="row">
-          <div className="small-12 columns">
-            <div className="small-header-wrapper">
-              <h5>{ specimen.name }</h5>
-            </div>
-          </div>
+        <div className="small-header-wrapper">
+          <label>{ specimen.name }</label>
         </div>
-        <div className="row">
-          <div className="small-12 columns">
-            <div className="content-wrapper">
-              <p>
-                <Link to={ url }>
-                  <img src={ specimen.imgUrl } />
-                </Link>
-              </p>
-            </div>
-          </div>
+        <div>
+          <p>
+            <Link to={ url }>
+              <img className="crop-drag-info-image" src={ specimen.imgUrl } />
+            </Link>
+          </p>
         </div>
       </div>
     );
@@ -47,8 +39,7 @@ export class SpeciesCatalog extends React.Component {
                 <BackArrow/> Choose a Species
               </p>
             </div>
-            <div>
-              <br/>
+            <div className="panel-content">
               { species }
             </div>
           </div>

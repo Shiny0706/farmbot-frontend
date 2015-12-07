@@ -22,51 +22,41 @@ export class PlantInfo extends React.Component {
                 <BackArrow/>Plant { this.plant._id || "" }
               </p>
             </div>
-            <div className="plant-info">
-              <div className="crop-drag-info-tile">
-                <label>Photos of this Plant</label>
-                <img className="plant-image"
-                     src={this.plant.imgUrl || '/img/placeholder_berries.jpg'} />
-                </div>
-              </div>
-              <div>
-                <label>Plant Info</label>
+            <div className="panel-content">
+              <label>Photos of this Plant</label>
+              <img className="crop-drag-info-image"
+                   src={this.plant.imgUrl || '/img/placeholder_berries.jpg'} />
+              <label>Plant Info</label>
+              <span><a href="#">Edit</a></span>
+              <ul>
+                <li> Expected height: 28 inches </li>
+                <li> Expected diameter: 44 inches </li>
+                <li> Life Expectancy: 8 years </li>
+              </ul>
+              <label>Planting Tips</label>
                 <span><a href="#">Edit</a></span>
-                <ul>
-                  <li> Expected height: 28 inches </li>
-                  <li> Expected diameter: 44 inches </li>
-                  <li> Life Expectancy: 8 years </li>
-                </ul>
-              </div>
-              <div>
-                <label>Planting Tips</label>
-                  <span><a href="#">Edit</a></span>
-                <ul>
-                  <li> Plant in full sun </li>
-                  <li> Fruits most in acidic soil </li>
-                  <li> Plant near melons </li>
-                </ul>
-              </div>
-              <div>
-                <label>Default Regimens</label>
-                  <span><a href="#">Edit</a></span>
-                <ul>
-                  <li> Blueberries by OpenFarm</li>
-                  <li> Soil Acidifier </li>
-                </ul>
-              </div>
-              <div>
-                <label>Delete This Plant</label>
-                <p>
-                  Note: You will no longer be able to plant this plant.
-                </p>
-                <span>
-                  <button className="red button-like left" onClick={this.removePlant.bind(this)}>
-                    Delete
-                  </button>
-                </span>
-              </div>
+              <ul>
+                <li> Plant in full sun </li>
+                <li> Fruits most in acidic soil </li>
+                <li> Plant near melons </li>
+              </ul>
+              <label>Default Regimens</label>
+                <span><a href="#">Edit</a></span>
+              <ul>
+                <li> Blueberries by OpenFarm</li>
+                <li> Soil Acidifier </li>
+              </ul>
+              <label>Delete This Plant</label>
+              <p>
+                Note: You will no longer be able to plant this plant.
+              </p>
+              <span>
+                <button className="red button-like left" onClick={this.removePlant.bind(this)}>
+                  Delete
+                </button>
+              </span>
             </div>
+          </div>
 
   }
 }

@@ -35,55 +35,33 @@
     text-decoration: underline;
   }
   ul {
-    padding-left: 1rem;
     list-style-type: none;
+    padding-left: 0;
   }
   li {
     margin-bottom: 0.5rem;
   }
   label {
-    padding-left: 1rem;
     padding-top: 2rem;
   }
 }
 
-.designer-info-panel {
-  .crop-drag-info-image {
-    max-width: 98%;
-    padding: 0 auto 0 auto;
-    background-color: $translucent;
-  }
-  .crop-info-overlay {
-    position: relative;
-    bottom: 3rem;
-    z-index: 3;
-    background-color: $dark_gray;
-    font-style: italic;
-    color: $off_white;
-    display: flex;
-    justify-content: center; /* align horizontal */
-    align-items: center; /* align vertical */
-    height: 3rem;
-    max-width: 98%;
-  }
-  padding: 0 5px 0 5px;
-  color: $dark_gray;
-  a {
-    color: $dark_gray;
-    padding: 0 0 0 4px;
-    text-transform: none;
-    font-weight: normal;
-    font-size: 1.4rem;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  li {
-    padding: 2px;
-  }
-  h6 {
-    font-size: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
+.crop-drag-info-image {
+  width: 100%;
+  padding: 0 auto 0 auto;
+  background-color: $translucent;
+}
+
+.crop-info-overlay {
+  position: relative;
+  bottom: 3rem;
+  z-index: 3;
+  background-color: $dark_gray;
+  font-style: italic;
+  color: $off_white;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  height: 3rem;
+  width: 100%;
 }

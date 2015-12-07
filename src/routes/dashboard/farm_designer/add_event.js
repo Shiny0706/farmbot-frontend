@@ -10,15 +10,15 @@ export class AddEvent extends React.Component {
                   <BackArrow/>Add Event
                 </p>
               </div>
-              <div className="designer-info">
-                <h6>Chose a Sequence or Regimen</h6>
+              <div className="panel-content">
+                <label>Chose a Sequence or Regimen</label>
                 <select>
                   <option value="volvo">Volvo</option>
                   <option value="saab">Saab</option>
                   <option value="mercedes">Mercedes</option>
                   <option value="audi">Audi</option>
                 </select>
-                <h6>Starts</h6>
+                <label>Starts</label>
                 <div className="flex">
                   <input placeholder="Today"
                          type="text"
@@ -28,7 +28,7 @@ export class AddEvent extends React.Component {
                     <option value="saab">12:00</option>
                   </select>
                 </div>
-                <h6>Repeats</h6>
+                <label>Repeats</label>
                 <div className="flex">
                   <input placeholder="2"
                          type="text"
@@ -39,7 +39,7 @@ export class AddEvent extends React.Component {
                   </select>
                   <input type="checkbox" name="wow" value="no"/>Does not repeat
                 </div>
-                <h6>Ends</h6>
+                <label>Ends</label>
                 <div className="flex">
                   <input placeholder="Today"
                          type="text"

@@ -25,9 +25,9 @@ export class SpeciesInfo extends React.Component {
                    <BackArrow /> { specimen.name }
                 </p>
               </div>
-              <div className="designer-info">
+              <div className="panel-content">
                 <div className="crop-drag-info-tile">
-                  <h6>Species Image</h6>
+                  <label>Species Image</label>
                   <img className="crop-drag-info-image"
                        src={ specimen.imgUrl }
                        onDragEnd={ this.drop.bind(this) }/>
@@ -36,10 +36,10 @@ export class SpeciesInfo extends React.Component {
                   </div>
                 </div>
                 <div>
-                  <h6>
+                  <label>
                     Plant Info
                     <span><a href="#">Edit</a></span>
-                  </h6>
+                  </label>
                   <ul>
                     <li> Expected height: 28 inches </li>
                     <li> Expected diameter: 44 inches </li>
@@ -47,10 +47,10 @@ export class SpeciesInfo extends React.Component {
                   </ul>
                 </div>
                 <div>
-                  <h6>
+                  <label>
                     Planting Tips
                     <span><a href="#">Edit</a></span>
-                  </h6>
+                  </label>
                   <ul>
                     <li> Plant in full sun </li>
                     <li> Fruits most in acidic soil </li>
@@ -58,19 +58,19 @@ export class SpeciesInfo extends React.Component {
                   </ul>
                 </div>
                 <div>
-                  <h6>
+                  <label>
                     Default Regimens
                     <span><a href="#">Edit</a></span>
-                  </h6>
+                  </label>
                   <ul>
                     <li> Blueberries by OpenFarm</li>
                     <li> Soil Acidifier </li>
                   </ul>
                 </div>
                 <div>
-                  <h6>
+                  <label>
                     Delete This Crop
-                  </h6>
+                  </label>
                   <p>
                     Note: You will no longer be able to plant this crop.
                   </p>

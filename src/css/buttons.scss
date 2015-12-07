@@ -64,6 +64,30 @@ button {
       background-color: darken($yellow, 10%);
     }
   }
+  &.cyan {
+    background-color: $cyan;
+    float: right;
+    color: $off_white;
+    border-bottom: solid darken($cyan, 10%);
+    &:hover {
+      background-color: darken($cyan, 3%);
+    }
+    &:active {
+      background-color: darken($cyan, 5%);
+    }
+  }
+  &.brown {
+    background-color: $dark_brown;
+    float: right;
+    color: $off_white;
+    border-bottom: solid darken($dark_brown, 10%);
+    &:hover {
+      background-color: darken($dark_brown, 3%);
+    }
+    &:active {
+      background-color: darken($dark_brown, 5%);
+    }
+  }
 }
 
 .button-like {
