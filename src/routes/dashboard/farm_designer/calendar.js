@@ -57,17 +57,19 @@ export class Calendar extends React.Component {
                   </ul>
                 </div>
               </div>
-              <div className="search-box-wrapper">
-                <i className="fa fa-search"></i>
-                <input className="search" placeholder="Search"/>
-                <div className="search-underline"></div>
-              </div>
-              { events }
-              <Link to="/dashboard/designer?p2=AddEvent">
-                <div className="plus-button add-event button-like" data-toggle="tooltip" title="Add event">
-                  <i className="fa fa-2x fa-plus" />
+              <div className="panel-content">
+                <div className="search-box-wrapper">
+                  <i className="fa fa-search"></i>
+                  <input className="search" placeholder="Search"/>
+                  <div className="search-underline"></div>
                 </div>
-              </Link>
+                { events }
+                <Link to="/dashboard/designer?p2=AddEvent">
+                  <div className="plus-button add-event button-like" data-toggle="tooltip" title="Add event">
+                    <i className="fa fa-2x fa-plus" />
+                  </div>
+                </Link>
+              </div>
             </div>
   }
 }

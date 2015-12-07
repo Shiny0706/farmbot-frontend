@@ -9,8 +9,10 @@ import { SpeciesInfo } from './species_info';
 import { PlantInfo } from './plant_info';
 // Import all of the Group (blue) panel views
 import { Groups } from './group_inventory';
+import { AddGroup } from './add_group';
 // Import all of the Zone (brown) panel views
 import { Zones } from './zone_inventory';
+import { AddZone } from './add_zone';
 // Import the right panel (for display on mobile)
 import { Panel2 } from './panel_2';
 
@@ -23,7 +25,7 @@ export class Panel1 extends React.Component {
   }
 
   get content() {
-    var component = {Plants, NoTab, SpeciesCatalog, SpeciesInfo, PlantInfo, Groups, Zones, Panel2}[this.tabName];
+    var component = {Plants, NoTab, SpeciesCatalog, SpeciesInfo, PlantInfo, Groups, AddGroup, Zones, AddZone, Panel2}[this.tabName];
     return React.createElement(component, this.props);
   }
 

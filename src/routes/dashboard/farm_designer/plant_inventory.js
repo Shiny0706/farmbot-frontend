@@ -32,14 +32,14 @@ export class Plants extends React.Component {
             </ul>
           </div>
         </div>
-        <div className="search-box-wrapper">
+        <div className="panel-content">
           <i className="fa fa-search"></i>
           <input className="search" placeholder="Search"/>
           <div className="search-underline"></div>
-        </div>
-        <div className="object-list">
-          <label>Current Plants</label>
-          <List plants={ this.props.plants.all } />
+          <div className="object-list">
+            <label>Current Plants</label>
+            <List plants={ this.props.plants.all } />
+          </div>
         </div>
         <Link to="/dashboard/designer?p1=SpeciesCatalog">
           <div className="plus-button add-plant button-like" data-toggle="tooltip" title="Add plant">
