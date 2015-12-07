@@ -40,31 +40,35 @@ export class Calendar extends React.Component {
                 <div className="panel-tabs hidden-sm hidden-md hidden-lg">
                   <ul>
                     <li>
-                      <Link to={ "/dashboard/designer?Info=NoTab" }>Designer</Link>
+                      <Link to={ "/dashboard/designer?p1=NoTab" }>Designer</Link>
                     </li>
                     <li>
-                      <Link to={ "/dashboard/designer?Info=Plants" }>Plants</Link>
+                      <Link to={ "/dashboard/designer?p1=Plants" }>Plants</Link>
                     </li>
                     <li>
-                      <Link to={ "/dashboard/designer?Info=Groups" }>Groups</Link>
+                      <Link to={ "/dashboard/designer?p1=Groups" }>Groups</Link>
                     </li>
                     <li>
-                      <Link to={ "/dashboard/designer?Info=Zones" }>Zones</Link>
+                      <Link to={ "/dashboard/designer?p1=Zones" }>Zones</Link>
                     </li>
                     <li>
-                      <Link to={ "/dashboard/designer?Info=RightPanel" } className={"active"}>Calendar</Link>
+                      <Link to={ "/dashboard/designer?p1=Panel2" } className={"active"}>Calendar</Link>
                     </li>
                   </ul>
                 </div>
               </div>
-              <div className="search-box-wrapper">
-                <i className="fa fa-search"></i>
-                <input className="search" placeholder="Search"/>
-                <div className="search-underline"></div>
-              </div>
-              { events }
-              <div className="plus-button add-event button-like" data-toggle="tooltip" title="Add event" href="/dashboard/designer?designer_right_menu=AddEvent">
-                <i className="fa fa-2x fa-plus" />
+              <div className="panel-content">
+                <div className="search-box-wrapper">
+                  <i className="fa fa-search"></i>
+                  <input className="search" placeholder="Search"/>
+                  <div className="search-underline"></div>
+                </div>
+                { events }
+                <Link to="/dashboard/designer?p2=AddEvent">
+                  <div className="plus-button add-event button-like" data-toggle="tooltip" title="Add event">
+                    <i className="fa fa-2x fa-plus" />
+                  </div>
+                </Link>
               </div>
             </div>
   }

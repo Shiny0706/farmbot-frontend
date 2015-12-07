@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React from "react";
 import { connect } from 'react-redux';
 import { Navbar } from '../../../components/navbar';
-import { LeftPanel } from './left_panel';
+import { Panel1 } from './panel_1';
 import { GardenMap } from './garden_map';
-import { RightPanel } from './right_panel';
+import { Panel2 } from './panel_2';
 import { fetchAllPlants } from '../../../actions/plant_actions';
 
 function mapStateToProps(state) {
@@ -18,12 +18,12 @@ export class FarmDesigner extends React.Component {
   componentDidMount() { this.props.dispatch(fetchAllPlants()); }
 
 // Is there anyway to do this in one step down in the render section?
-  renderLeftPanel() {
-    return React.createElement(LeftPanel, this.props);
+  renderPanel1() {
+    return React.createElement(Panel1, this.props);
   }
 
-  renderRightPanel() {
-    return React.createElement(RightPanel, this.props);
+  renderPanel2() {
+    return React.createElement(Panel2, this.props);
   }
 
   render() {
@@ -32,7 +32,7 @@ export class FarmDesigner extends React.Component {
           <Navbar/>
           <div className="farm-designer-body">
             <div className="farm-designer-left">
-              { this.renderLeftPanel() }
+              { this.renderPanel1() }
             </div>
 
             <div className="farm-designer-map">
@@ -44,7 +44,7 @@ export class FarmDesigner extends React.Component {
             </div>
 
             <div className="farm-designer-right">
-              { this.renderRightPanel() }
+              { this.renderPanel2() }
             </div>
           </div>
         </div>

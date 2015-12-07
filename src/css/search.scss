@@ -2,10 +2,6 @@
 
 @import 'colors';
 
-.search-box-wrapper {
-  padding: .5rem 1rem;
-}
-
 input {
   &.search {
     background-color: transparent!important;
@@ -31,4 +27,5 @@ input {
   height: 3px;
   margin-top: -5px;
   width: 100%;
+  margin-bottom: 1.5rem;
 }

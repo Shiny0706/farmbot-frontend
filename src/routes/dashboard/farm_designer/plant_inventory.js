@@ -15,35 +15,37 @@ export class Plants extends React.Component {
           <div className="panel-tabs">
             <ul>
               <li className="hidden-sm hidden-md hidden-lg">
-                  <Link to={ "/dashboard/designer?Info=NoTab" }>Designer</Link>
+                  <Link to={ "/dashboard/designer?p1=NoTab" }>Designer</Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?Info=Plants" } className={"active"}>Plants</Link>
+                  <Link to={ "/dashboard/designer?p1=Plants" } className={"active"}>Plants</Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?Info=Groups" }>Groups</Link>
+                  <Link to={ "/dashboard/designer?p1=Groups" }>Groups</Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?Info=Zones" }>Zones</Link>
+                  <Link to={ "/dashboard/designer?p1=Zones" }>Zones</Link>
               </li>
               <li className="hidden-sm hidden-md hidden-lg">
-                  <Link to={ "/dashboard/designer?Info=RightPanel" }>Calendar</Link>
+                  <Link to={ "/dashboard/designer?p1=Panel2" }>Calendar</Link>
               </li>
             </ul>
           </div>
         </div>
-        <div className="search-box-wrapper">
+        <div className="panel-content">
           <i className="fa fa-search"></i>
           <input className="search" placeholder="Search"/>
           <div className="search-underline"></div>
+          <div className="object-list">
+            <label>Current Plants</label>
+            <List plants={ this.props.plants.all } />
+          </div>
         </div>
-        <div className="object-list">
-          <label>Current Plants</label>
-          <List plants={ this.props.plants.all } />
-        </div>
-        <div className="plus-button add-plant button-like" data-toggle="tooltip" title="Add plant" href="/dashboard/designer?Info=SpeciesCatalog">
-          <i className="fa fa-2x fa-plus" />
-        </div>
+        <Link to="/dashboard/designer?p1=SpeciesCatalog">
+          <div className="plus-button add-plant button-like" data-toggle="tooltip" title="Add plant">
+            <i className="fa fa-2x fa-plus" />
+          </div>
+        </Link>
       </div>
     );
   }

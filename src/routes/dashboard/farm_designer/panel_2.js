@@ -2,18 +2,18 @@ import React from "react";
 import { Link } from 'react-router';
 // Import all of the Calendar (magenta) panel views
 import { Calendar } from './calendar';
-import { CreateEvent } from './create_event';
+import { AddEvent } from './add_event';
 
 
-// Dynamically determine what to render in the designer's right panel
-// based on the value of hash fragment 'Calendar'
-export class RightPanel extends React.Component {
+// Dynamically determine what to render in the designer's second panel
+// based on the value of hash fragment 'p2'
+export class Panel2 extends React.Component {
   get tabName() {
-    return (this.props.location.query.Calendar || "Calendar")
+    return (this.props.location.query.p2 || "Calendar")
   }
 
   get content() {
-    var component = {Calendar, CreateEvent}[this.tabName];
+    var component = {Calendar, AddEvent}[this.tabName];
     return React.createElement(component, this.props);
   }
 

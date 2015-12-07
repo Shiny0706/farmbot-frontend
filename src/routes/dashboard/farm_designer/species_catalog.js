@@ -7,27 +7,19 @@ import { BackArrow } from './back_arrow';
 export class SpeciesCatalogTile extends React.Component {
   render() {
     var specimen = this.props.specimen;
-    var url = "?Info=SpeciesInfo&selected_specimen_id="
+    var url = "/dashboard/designer?p1=SpeciesInfo&id="
                 + specimen._id;
     return(
       <div className="plantCatalogTile">
-        <div className="row">
-          <div className="small-12 columns">
-            <div className="small-header-wrapper">
-              <h5>{ specimen.name }</h5>
-            </div>
-          </div>
+        <div className="small-header-wrapper">
+          <label>{ specimen.name }</label>
         </div>
-        <div className="row">
-          <div className="small-12 columns">
-            <div className="content-wrapper">
-              <p>
-                <Link to={ url }>
-                  <img src={ specimen.imgUrl } />
-                </Link>
-              </p>
-            </div>
-          </div>
+        <div>
+          <p>
+            <Link to={ url }>
+              <img className="crop-drag-info-image" src={ specimen.imgUrl } />
+            </Link>
+          </p>
         </div>
       </div>
     );
@@ -41,18 +33,15 @@ export class SpeciesCatalog extends React.Component {
                                        key={ k }
                                        dispatch={ this.props.dispatch } />
      );
-    return <div id="designer-left">
-            <div className="green-content">
-              <div className="search-box-wrapper">
-                <p>
-                  <BackArrow/> Choose a Species
-                </p>
-              </div>
+    return <div className="panel-container green-panel">
+            <div className="panel-header green-panel">
+              <p className="panel-title">
+                <BackArrow/> Choose a Species
+              </p>
             </div>
-            <div>
-              <br/>
+            <div className="panel-content">
               { species }
             </div>
-           </div>
+          </div>
   }
 }
