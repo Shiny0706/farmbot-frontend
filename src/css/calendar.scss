@@ -2,22 +2,8 @@
 
 @import 'colors';
 
-.widget-header {
-  &.calendar-widget {
-    background-color: $magenta;
-    h5 {
-      color: $off-white;
-    }
-  }
-}
-
-.widget-content {
-  &.calendar-widget {
-    background-color: $light_magenta;
-  }
-}
-
 .event {
+  padding: 1rem;
   @extend %extend_1;
   &.past {
     color: $light_gray;
@@ -31,9 +17,6 @@
   }
   &:hover {
     @extend %extend_2;
-    .edit-icon {
-      display: inherit;
-    }
   }
 }
 
@@ -41,31 +24,27 @@
   &.date-flipper {
     margin-bottom: 20px;
   }
-  &.event {
-    margin-left: 0;
-    margin-right: 0;
-  }
 }
 
-.edit-icon {
-  float: left;
-  display: none;
-}
-.event-icon {
-  float: left;
-  width: 30px;
-}
 .event-time {
   float: left;
-  width: 90px;
+  width: 3.5rem;
 }
-.event-title {
+
+.event-icon {
   float: left;
+  width: 2.5rem;
+  line-height: 2rem!important;
+}
+
+.event-title {
+  margin-left: 6rem;
 }
 
 .picker__day {
   text-align: center;
 }
+
 .picker__weekday {
   text-align: center;
 }

@@ -35,39 +35,39 @@ export class SpeciesInfo extends React.Component {
                     To plant, drag and drop into map
                   </div>
                 </div>
-                <div>
+                <div className="object-list">
                   <label>
                     Plant Info
-                    <span><a href="#">Edit</a></span>
                   </label>
+                  <span className="edit-link"><a href="#">Edit</a></span>
                   <ul>
-                    <li> Expected height: 28 inches </li>
-                    <li> Expected diameter: 44 inches </li>
-                    <li> Life Expectancy: 8 years </li>
+                    <li>Expected height: 28 inches</li>
+                    <li>Expected diameter: 44 inches</li>
+                    <li>Life Expectancy: 8 years</li>
                   </ul>
                 </div>
-                <div>
+                <div className="object-list">
                   <label>
                     Planting Tips
-                    <span><a href="#">Edit</a></span>
                   </label>
+                  <span className="edit-link"><a href="#">Edit</a></span>
                   <ul>
-                    <li> Plant in full sun </li>
-                    <li> Fruits most in acidic soil </li>
-                    <li> Plant near melons </li>
+                    <li>Plant in full sun</li>
+                    <li>Fruits most in acidic soil</li>
+                    <li>Plant near melons</li>
                   </ul>
                 </div>
-                <div>
+                <div className="object-list">
                   <label>
                     Default Regimens
-                    <span><a href="#">Edit</a></span>
                   </label>
+                  <span className="edit-link"><a href="#">Edit</a></span>
                   <ul>
-                    <li> Blueberries by OpenFarm</li>
-                    <li> Soil Acidifier </li>
+                    <li>Blueberries by OpenFarm</li>
+                    <li>Soil Acidifier</li>
                   </ul>
                 </div>
-                <div>
+                <div className="object-list">
                   <label>
                     Delete This Crop
                   </label>

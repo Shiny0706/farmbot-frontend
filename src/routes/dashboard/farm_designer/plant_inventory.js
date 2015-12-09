@@ -56,7 +56,7 @@ export class List extends React.Component {
     var mapper = function(plant, key) {
       return(
         <li key={ key } >
-          <Link to={ Plant.designerUrl(plant) }> { plant.name } </Link>
+          <Link to={ Plant.designerUrl(plant) }>{ plant.name }</Link>
           <p>{plant.age} days old</p>
         </li>);
     };

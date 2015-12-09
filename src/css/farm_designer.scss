@@ -30,19 +30,19 @@
 }
 
 .object-list {
+  padding-bottom: 2rem;
   a {
     color: $dark_gray;
-    text-decoration: underline;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   ul {
-    list-style-type: none;
-    padding-left: 0;
+    padding-left: 2rem;
   }
   li {
     margin-bottom: 0.5rem;
-  }
-  label {
-    padding-top: 2rem;
   }
 }
 

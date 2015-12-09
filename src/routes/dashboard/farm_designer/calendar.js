@@ -7,15 +7,12 @@ export class ScheduleEvent extends React.Component {
   render () {
     var evnt = this.props.scheduledEvent;
 
-    return <div className="row event { this.hasPassed() ? 'past' : '' }">
-              <div className="small-12 columns">
-                <div className="event-time">
-                  { evnt.formatTime() }
-                </div>
-                <i className="event-icon fi-camera"></i>
-                <div className="event-title">{ evnt.desc }</div>
-                <i className="edit-icon fi-pencil right"></i>
-              </div>
+    return <div className="event { this.hasPassed() ? 'past' : '' }">
+            <div className="event-time">
+              { evnt.formatTime() }
+            </div>
+            <i className="event-icon fa fa-camera"></i>
+            <div className="event-title">{ evnt.desc }</div>
            </div>;
   }
 }

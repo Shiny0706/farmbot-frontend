@@ -6,6 +6,7 @@ input {
   &.search {
     background-color: transparent!important;
     box-shadow: none;
+    width: 85%;
     &::-webkit-input-placeholder {
       color: $dark_gray;
     }
@@ -28,4 +29,9 @@ input {
   margin-top: -5px;
   width: 100%;
   margin-bottom: 1.5rem;
+}
+
+.fa-search {
+  margin-left: 1rem;
+  margin-right: 0.2rem;
 }
