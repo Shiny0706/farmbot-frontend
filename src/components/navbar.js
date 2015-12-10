@@ -7,6 +7,7 @@ export var Navbar = React.createClass({
     "Controls"      : "/dashboard/controls" ,
     "Devices"       : "/dashboard/devices"  ,
     "Sequences"     : "/dashboard/sequences",
+    "Regimens"     : "/dashboard/regimens",
     "Schedules"     : "/dashboard/schedules"
   },
 
