@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar } from '../../../components/navbar';
+import { Link } from 'react-router';
 
 export var Regimens = React.createClass({
   render: function() {
