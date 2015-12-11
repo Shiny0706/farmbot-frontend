@@ -88,6 +88,11 @@ button {
       background-color: darken($dark_brown, 5%);
     }
   }
+  &.login, &.create-account{
+    margin-top: 1.5rem;
+    padding: .5rem 1.6rem;
+    font-size: 1.2rem!important;
+  }
 }
 
 .button-like {
