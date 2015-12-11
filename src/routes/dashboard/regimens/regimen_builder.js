@@ -13,7 +13,7 @@ export var Regimens = React.createClass({
 
               <div className="col-md-3 col-sm-12 col-md-offset-1">
                 <div>
-                  <div className="widget-wrapper">
+                  <div className="widget-wrapper operations-widget">
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="widget-header">
@@ -101,7 +101,7 @@ export var Regimens = React.createClass({
                     </div>
                   </div>
 
-                  <div className="widget-wrapper">
+                  <div className="widget-wrapper sequences-widget">
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="widget-header">
@@ -130,7 +130,7 @@ export var Regimens = React.createClass({
 
               <div className="col-md-4 col-sm-12">
                 <div>
-                  <div className="widget-wrapper">
+                  <div className="widget-wrapper regimen-editor-widget">
                     <div className="row">
                       <div className="col-sm-12">
                         <button className="green button-like widget-control">
@@ -173,9 +173,14 @@ export var Regimens = React.createClass({
 
               <div className="col-md-3 col-sm-12">
                 <div>
-                  <div className="widget-wrapper">
+                  <div className="widget-wrapper regimens-widget">
                     <div className="row">
                       <div className="col-sm-12">
+                        <div className="main-nav-button">
+                          <button className="navbar-toggle hidden-sm hidden-md hidden-lg" data-target="#navbar" data-toggle="collapse" type="button">
+                            <span className="glyphicon glyphicon-menu-hamburger" />
+                          </button>
+                        </div>
                         <button className="gray button-like widget-control">
                           Add
                         </button>
