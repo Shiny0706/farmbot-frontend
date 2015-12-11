@@ -1,8 +1,8 @@
 import React from 'react';
-import { Navbar } from '../../components/navbar';
+import { Navbar } from '../components/navbar';
 import { Link } from 'react-router';
 
-export var GIVETHISANAME = React.createClass({
+export var Login = React.createClass({
   render: function() {
     return (
       <div>
