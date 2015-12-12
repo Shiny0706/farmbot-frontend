@@ -12,11 +12,11 @@ export var Regimens = React.createClass({
         <Navbar/>
         <div className="all-content-wrapper">
           <div className="row">
-            <div className="col-md-3 col-sm-12 col-md-offset-1">
+            <div className="col-md-3 col-sm-12 col-md-offset-1 hidden-xs">
               <OperationsWidget/>
               <SequencesWidget/>
             </div>
-            <div className="col-md-4 col-sm-12">
+            <div className="col-md-4 col-sm-12 hidden-xs">
               <RegimenEditorWidget/>
             </div>
             <div className="col-md-3 col-sm-12">
