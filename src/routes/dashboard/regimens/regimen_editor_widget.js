@@ -20,21 +20,13 @@ export class RegimenEditorWidget extends React.Component {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="widget-content">
-                      <div className="row">
-                        <div className="col-sm-12">
-                          <input id="right-label" placeholder="Regimen Name" type="text" />
-                        </div>
-                      </div>
+                      <input id="right-label" placeholder="Regimen Name" type="text" />
                       <div className="regimen-day">
                         <label>Day 1</label>
                         <div className="drag-drop-area padding">DROP HERE</div>
                       </div>
                       <div className="regimen-day">
                         <label>Day 2</label>
-                        <div className="drag-drop-area padding">DROP HERE</div>
-                      </div>
-                      <div className="regimen-day">
-                        <label>Day 3</label>
                         <div className="drag-drop-area padding">DROP HERE</div>
                       </div>
                     </div>

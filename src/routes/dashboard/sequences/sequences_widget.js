@@ -16,9 +16,10 @@ export class SequencesWidget extends React.Component {
                     <div className="widget-content">
                       <div className="block-wrapper">
                         <div>
-                          <button className="block full-width no-radius text-left purple-block block-header">
+                          <button className="block full-width text-left purple-block block-header">
                             Untitled Sequence
                             <i className="fa fa-arrows block-control" />
+                            <i className="fa fa-pencil block-control" />
                           </button>
                         </div>
                       </div>
