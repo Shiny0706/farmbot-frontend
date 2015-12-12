@@ -10,20 +10,15 @@ export var Sequences = React.createClass({
       <div>
         <Navbar/>
         <div className="all-content-wrapper">
-          <div>
-            <div className="row">
-              <div className="col-md-3 col-sm-12">
-                <OperationsWidget/>
-              </div>
-
-              <div className="col-md-6 col-sm-12">
-                <SequenceEditorWidget/>
-              </div>
-
-              <div className="col-md-3 col-sm-12">
-                <SequencesWidget/>
-              </div>
-
+          <div className="row">
+            <div className="col-md-3 col-sm-12">
+              <OperationsWidget/>
+            </div>
+            <div className="col-md-6 col-sm-12">
+              <SequenceEditorWidget/>
+            </div>
+            <div className="col-md-3 col-sm-12">
+              <SequencesWidget/>
             </div>
           </div>
         </div>
