@@ -1,4 +1,5 @@
 import Farmbot from '../api/Farmbot';
+import { CONFIG } from '../config'
 
 export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
@@ -6,7 +7,7 @@ export const AUTH_SIGNUP = 'AUTH_SIGNUP';
 
 export function requestToken(email, password) {
   return $.ajax({
-      url: "http://localhost:3000/api/tokens",
+      url: CONFIG.FARMBOT_API_URL + "/api/tokens",
       type: "POST",
       data: JSON.stringify({user: {email: email, password: password}}),
       contentType: "application/json"
@@ -24,7 +25,6 @@ export function loginStart() {
 }
 
 export function loginError(err) {
-  console.log("NO!!!")
   return {
     type: AUTH_LOGIN,
     payload: err,
@@ -36,7 +36,6 @@ export function loginError(err) {
 }
 
 export function loginComplete(token) {
-  console.log("OK!!!")
   return {
     type: AUTH_LOGIN,
     payload: {
