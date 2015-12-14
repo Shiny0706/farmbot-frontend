@@ -1,4 +1,3 @@
-import Farmbot from '../api/Farmbot';
 import { CONFIG } from '../config'
 
 export const AUTH_LOGIN = 'AUTH_LOGIN';

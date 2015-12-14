@@ -1,8 +1,4 @@
 import { Plant } from '../models/plant'
-import {
-  ADD_PLANT_SUCCESS,
-  ADD_PLANT_FAILURE
-} from '../actions/plant_actions';
 
 const initialState = {
   all: Plant.fakes

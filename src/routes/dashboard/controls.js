@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar } from '../../components/navbar';
+import { fetchDevice } from '../../actions/bot_actions'
 // import Farmbot from 'farmbot';
 
 // var myBot = Farmbot({
@@ -8,8 +9,17 @@ import { Navbar } from '../../components/navbar';
 // });
 
 // myBot.connect().then(function(b){ var qqq = myBot; var zzz = b; debugger; });
-export var Controls = React.createClass({
-render: function() {
+import { connect } from 'react-redux';
+
+function mapStateToProps(state) {
+  return { global: state.global,
+           bot: state.bot };
+}
+
+@connect(mapStateToProps)
+export class Controls extends React.Component {
+render() {
+  if (!this.props.bot._id) { this.props.dispatch(fetchDevice()); };
   return (
       <div>
         <Navbar/>
@@ -177,4 +187,4 @@ render: function() {
       </div>
   );
 }
-});
+};

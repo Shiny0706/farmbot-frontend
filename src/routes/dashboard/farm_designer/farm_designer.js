@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import React from "react";
-import { connect } from 'react-redux';
 import { Navbar } from '../../../components/navbar';
 import { Panel1 } from './panel_1';
 import { GardenMap } from './garden_map';
 import { Panel2 } from './panel_2';
 import { fetchAllPlants } from '../../../actions/plant_actions';
+import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
   return { global: state.global,

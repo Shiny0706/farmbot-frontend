@@ -1,6 +1,5 @@
 import React from 'react';
 import { Plant } from '../../../models/plant';
-import { fromScreenToGarden } from '../../../geometry/coordinates'
 import { addPlant } from '../../../actions/plant_actions';
 import { BackArrow } from './back_arrow';
 
@@ -84,3 +83,10 @@ export class SpeciesInfo extends React.Component {
             </div>
   }
 }
+
+function fromScreenToGarden(mouseX, mouseY, boxX, boxY) {
+  var rawX = mouseX - boxX;
+  var rawY = boxY - mouseY;
+
+  return {x: rawX, y: rawY};
+};

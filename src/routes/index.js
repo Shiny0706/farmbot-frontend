@@ -1,6 +1,6 @@
 import React from 'react';
 import { IndexRedirect, IndexRoute, Route } from 'react-router';
-import App from './App';
+import App from './app';
 import Dashboard from './dashboard/dashboard';
 import { Controls } from './dashboard/controls';
 import { Devices } from './dashboard/devices';

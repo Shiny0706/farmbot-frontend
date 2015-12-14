@@ -1,18 +1,26 @@
 import {
   AUTH_LOGIN,
   AUTH_LOGOUT,
-  AUTH_SIGNUP,
 } from '../actions/auth_actions';
 
-const initialState = {
-  token: null,
-  authenticated: false//true // Comment this to 'false' when ready to implement auth.
-};
+var token = localStorage["FB_TOKEN_STORE"];
+
+var initialState = {
+    token: token,
+    authenticated: !!token
+  }
+import $ from 'jquery';
+// This is bad!
+$.ajaxSetup({beforeSend: function (xhr) {
+           xhr.setRequestHeader("Authorization", token);
+        }
+      });
 
 export function authReducer(state = initialState, action) {
-  if ((action.type === AUTH_LOGIN || AUTH_SIGNUP)
-      && action.sequence && action.sequence.type === 'complete') {
 
+  if ((action.type === AUTH_LOGIN)
+      && action.sequence && action.sequence.type === 'complete') {
+    localStorage["FB_TOKEN_STORE"] = action.payload.token;
     return {
       ...state,
       token: action.payload.token,
