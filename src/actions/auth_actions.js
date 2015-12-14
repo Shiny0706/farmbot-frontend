@@ -1,15 +1,18 @@
 import Farmbot from '../api/Farmbot';
+import { CONFIG } from '../config'
 
 export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_SIGNUP = 'AUTH_SIGNUP';
 
-export const BOT_MOVE_FORWARD = 'BOT_MOVE_FORWARD';
-export const BOT_MOVE_BACKWARD = 'BOT_MOVE_BACKWARD';
-export const BOT_MOVE_LEFT = 'BOT_MOVE_LEFT';
-export const BOT_MOVE_RIGHT = 'BOT_MOVE_RIGHT';
-export const BOT_RAISE = 'BOT_RAISE';
-export const BOT_LOWER = 'BOT_LOWER';
+export function requestToken(email, password) {
+  return $.ajax({
+      url: CONFIG.FARMBOT_API_URL + "/api/tokens",
+      type: "POST",
+      data: JSON.stringify({user: {email: email, password: password}}),
+      contentType: "application/json"
+    })
+}
 
 export function loginStart() {
   return {
@@ -48,8 +51,8 @@ export function login(username, password) {
   return dispatch => {
     dispatch(loginStart());
 
-    return Farmbot.login(username, password).then(
-      (res) => dispatch(loginComplete(res.token)),
+    return requestToken(username, password).then(
+      (res) => dispatch(loginComplete(res.token.encoded)),
       (err) => dispatch(loginError(err))
     );
   };
@@ -102,41 +105,5 @@ export function signup(email, username, password, passwordConfirmation) {
       (res) => dispatch(signupComplete(res.token)),
       (err) => dispatch(signupError(err))
     );
-  };
-}
-
-export function moveForward() {
-  return {
-    type: BOT_MOVE_FORWARD,
-  };
-}
-
-export function moveBackward() {
-  return {
-    type: BOT_MOVE_BACKWARD,
-  };
-}
-
-export function moveLeft() {
-  return {
-    type: BOT_MOVE_LEFT,
-  };
-}
-
-export function moveRight() {
-  return {
-    type: BOT_MOVE_RIGHT,
-  };
-}
-
-export function raise() {
-  return {
-    type: BOT_RAISE,
-  };
-}
-
-export function lower() {
-  return {
-    type: BOT_LOWER,
   };
 }

@@ -5,7 +5,7 @@ import {
   BOT_MOVE_RIGHT,
   BOT_RAISE,
   BOT_LOWER,
-} from '../actions/FarmbotActions';
+} from '../actions/auth_actions';
 
 const X_MAX = 128;
 const Y_MAX = 128;

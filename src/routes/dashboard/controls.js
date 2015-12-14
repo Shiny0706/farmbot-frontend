@@ -1,6 +1,13 @@
 import React from 'react';
 import { Navbar } from '../../components/navbar';
+// import Farmbot from 'farmbot';
 
+// var myBot = Farmbot({
+//   uuid: "0c055759-33f2-4cec-bb06-11163e0d6e80",
+//   token: "f0de44ca799af47f91873bc7abe59987f95f0953"
+// });
+
+// myBot.connect().then(function(b){ var qqq = myBot; var zzz = b; debugger; });
 export var Controls = React.createClass({
 render: function() {
   return (
