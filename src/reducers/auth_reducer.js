@@ -2,12 +2,11 @@ import {
   AUTH_LOGIN,
   AUTH_LOGOUT,
   AUTH_SIGNUP,
-} from '../actions/FarmbotActions';
+} from '../actions/auth_actions';
 
 const initialState = {
   token: null,
-  authenticated: true // Comment this to 'false' when ready to implement auth.
-      // State stored in the URL hash for bookmarks / sharing / back button use.
+  authenticated: false//true // Comment this to 'false' when ready to implement auth.
 };
 
 export function authReducer(state = initialState, action) {

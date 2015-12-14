@@ -1,6 +1,6 @@
 // import React, { Component, PropTypes } from 'react';
 // import { reduxForm } from 'redux-form';
-// import { login } from '../../actions/FarmbotActions';
+// import { login } from '../../actions/auth_actions';
 // import { navigateNextPathOrDashboard } from '../../actions/router_actions';
 
 // const formOptions = {
