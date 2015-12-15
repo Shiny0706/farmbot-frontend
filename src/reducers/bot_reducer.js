@@ -1,4 +1,5 @@
 const initialState = {};
+import { error, warning } from '../logger';
 
 var action_handlers = {
   DEFAULT: function(state, action) {
@@ -12,7 +13,13 @@ var action_handlers = {
     return state;
   },
   FETCH_DEVICE_ERR: function(state, action) {
-    console.log("NO!!");
+    if (action.payload.status === 404) {
+      warning("<a href='/dashboard/devices'>You need to <u>add a device</u>"+
+              " to your account!</a>",
+              "No device found!");
+    } else{
+      error("Unable to download device data from server. Check your internet connection.")
+    };
     return state;
   },
 }
