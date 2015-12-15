@@ -13,12 +13,13 @@ import { LOGIN_OK } from '../actions/auth_actions'
 
 export function getRoutes(store) {
   function requireAuth(nextState, replaceState, cb) {
+    // This is so unfortunate.
     setTimeout(() => {
       const { auth } = store.getState();
       // TODO refactor this pyramid.
       if (!auth.authenticated) {
         if (localStorage['farmbot_token']) {
-          store.dispatch(LOGIN_OK(localStorage['farmbot_token']))
+          store.dispatch(LOGIN_OK(localStorage['farmbot_token']));
         } else {
           replaceState({ nextPath: nextState.location.pathname }, '/login');
         }
