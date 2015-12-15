@@ -1,5 +1,13 @@
 import { Device } from '../models/device'
 
+export function CHANGE_DEVICE(attributesThatWillChange = {}) {
+  attributesThatWillChange.dirty = true;
+  return {
+    type: "CHANGE_DEVICE",
+    payload: attributesThatWillChange
+  }
+}
+
 export function fetchDevice() {
   return dispatch => {
     return Device.fetch().then(

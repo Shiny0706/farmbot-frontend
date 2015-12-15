@@ -5,6 +5,12 @@ var action_handlers = {
   DEFAULT: function(state, action) {
     return state;
   },
+  CHANGE_DEVICE: function(state, action) {
+    return {
+      ...state,
+      ...action.payload
+    }
+  },
   FETCH_DEVICE: function(state, action) {
     return state;
   },
@@ -39,7 +45,11 @@ var action_handlers = {
   },
   SAVE_DEVICE_OK: function(state, action) {
     success("Device saved.")
-    return state;
+    return {
+      ...state,
+      ...action.payload,
+      dirty: false
+    };
   }
 }
 

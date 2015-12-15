@@ -6,18 +6,16 @@ var action_handlers = {
     return state;
   },
   LOGIN_ERR: function(state, action) {
-      error("Login failed.");
-      unsetToken();
-      return {
-        ...state,
-        token: '',
-        authenticated: false,
-      };
+    error("Login failed.");
+    unsetToken();
+    return {
+      ...state,
+      token: '',
+      authenticated: false,
+    };
   },
   LOGIN_OK: function(state, action) {
-
     setToken(action.payload.token);
-
     return {
       ...state,
       token: action.payload.token,

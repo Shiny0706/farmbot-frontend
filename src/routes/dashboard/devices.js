@@ -3,7 +3,7 @@ import { Navbar } from '../../components/navbar';
 import { addDevice } from '../../actions/bot_actions';
 import { connect } from 'react-redux';
 import { convertFormToObject } from '../../util.js';
-import { fetchDevice } from '../../actions/bot_actions'
+import { fetchDevice, CHANGE_DEVICE } from '../../actions/bot_actions'
 
 function mapStateToProps(state) {
   return { bot: state.bot };
@@ -11,6 +11,11 @@ function mapStateToProps(state) {
 
 @connect(mapStateToProps)
 export class Devices extends React.Component {
+  changeBot(e) {
+    var updates = _.object([[e.target.name, e.target.value]]) // {name: "value"}
+    this.props.dispatch(CHANGE_DEVICE(updates));
+  }
+
   saveBot(e) {
     e.preventDefault();
     this.props.dispatch(addDevice(convertFormToObject(e.target)));
@@ -18,7 +23,7 @@ export class Devices extends React.Component {
 
   render() {
     if (!this.props.bot._id) { this.props.dispatch(fetchDevice()); };
-    console.log(this.props.bot);
+    console.log(this.props.bot)
     return (
       <div>
         <Navbar/>
@@ -33,7 +38,7 @@ export class Devices extends React.Component {
                       <form onSubmit={ this.saveBot.bind(this) }>
                           <div className="row">
                             <div className="col-sm-12">
-                              <button type="submit" className="button-like green widget-control">Save</button>
+                              <button type="submit" className="button-like green widget-control">SAVE { this.props.bot.dirty ? "*" : "" }</button>
                               <button type="button" className="button-like yellow widget-control">RESTART</button>
                               <button type="button" className="button-like red widget-control">SHUTDOWN</button>
                               <div className="widget-header">
@@ -51,7 +56,7 @@ export class Devices extends React.Component {
                                         <label>FARMBOT NAME</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="name" value={ this.props.bot.name } />
+                                        <input name="name" onChange={ this.changeBot.bind(this) } value={ this.props.bot.name } />
                                       </td>
                                     </tr>
                                     <tr>
@@ -59,7 +64,7 @@ export class Devices extends React.Component {
                                         <label>UUID</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="uuid" value={ this.props.bot.uuid }/>
+                                        <input name="uuid" onChange={ this.changeBot.bind(this) } value={ this.props.bot.uuid }/>
                                       </td>
                                     </tr>
                                     <tr>
@@ -67,7 +72,7 @@ export class Devices extends React.Component {
                                         <label>SECURITY TOKEN</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="token" value={ this.props.bot.token }/>
+                                        <input name="token" onChange={ this.changeBot.bind(this) } value={ this.props.bot.token }/>
                                       </td>
                                     </tr>
                                     <tr>
@@ -143,7 +148,7 @@ export class Devices extends React.Component {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <button className="green button-like widget-control">SAVE</button>
+                        <button className="green button-like widget-control">SAVE { this.props.bot.dirty ? "*" : "" }</button>
                         {/* / TODO: Hide the save button ^ until a value in the table has been changed and needs saving. Once the user presses the button, change the text to 'UPDATING' (while the update is happening, just like the sync button). Once the update is complete, change it to 'UPDATED :checkmark:' and make it green. */}
                         <div className="widget-header">
                           <h5>Hardware</h5>
