@@ -8,14 +8,20 @@ import { Sequences } from './dashboard/sequences/sequences';
 import { Regimens } from './dashboard/regimens/regimen_builder';
 import { Schedules } from './dashboard/schedules/schedules';
 import { FarmDesigner } from './dashboard/farm_designer/farm_designer';
-import { Login } from './login'
+import { Login } from './login';
+import { LOGIN_OK } from '../actions/auth_actions'
+
 export function getRoutes(store) {
   function requireAuth(nextState, replaceState, cb) {
-    // debugger;
     setTimeout(() => {
       const { auth } = store.getState();
+      // TODO refactor this pyramid.
       if (!auth.authenticated) {
-        replaceState({ nextPath: nextState.location.pathname }, '/login');
+        if (localStorage['farmbot_token']) {
+          store.dispatch(LOGIN_OK(localStorage['farmbot_token']))
+        } else {
+          replaceState({ nextPath: nextState.location.pathname }, '/login');
+        }
       }
       cb();
     }, 0);

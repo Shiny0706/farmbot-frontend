@@ -1,121 +1,139 @@
 import React from 'react';
 import { Navbar } from '../../components/navbar';
+import { addDevice } from '../../actions/bot_actions';
+import { connect } from 'react-redux';
+import { convertFormToObject } from '../../util.js';
+import { fetchDevice } from '../../actions/bot_actions'
 
-export var Devices = React.createClass({
-  render: function() {
+function mapStateToProps(state) {
+  return { bot: state.bot };
+}
+
+@connect(mapStateToProps)
+export class Devices extends React.Component {
+  saveBot(e) {
+    e.preventDefault();
+    this.props.dispatch(addDevice(convertFormToObject(e.target)));
+  }
+
+  render() {
+    if (!this.props.bot._id) { this.props.dispatch(fetchDevice()); };
+    console.log(this.props.bot);
     return (
       <div>
         <Navbar/>
         <div className="all-content-wrapper">
-          <div ng-view className="ng-scope">
-            <div className="row ng-scope">
+          <div>
+            <div className="row">
               <div className="col-md-5 col-sm-6 col-xs-12 col-md-offset-1">
                 <div>
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <div className="row">
-                          <div className="col-sm-12">
-                            <button className="button-like green widget-control">Save</button>
-                            <button className="button-like yellow widget-control">RESTART</button>
-                            <button className="button-like red widget-control">SHUTDOWN</button>
-                            <div className="widget-header">
-                              <h5>DEVICE</h5>
+                      <form onSubmit={ this.saveBot.bind(this) }>
+                          <div className="row">
+                            <div className="col-sm-12">
+                              <button type="submit" className="button-like green widget-control">Save</button>
+                              <button type="button" className="button-like yellow widget-control">RESTART</button>
+                              <button type="button" className="button-like red widget-control">SHUTDOWN</button>
+                              <div className="widget-header">
+                                <h5>DEVICE</h5>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-12">
-                            <div className="widget-content">
-                              <table className="plain">
-                                <tbody>
-                                  <tr>
-                                    <td>
-                                      <label>FARMBOT NAME</label>
-                                    </td>
-                                    <td colSpan={2}>
-                                      <input ng_model="device.name" />
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>UUID</label>
-                                    </td>
-                                    <td colSpan={2}>
-                                      <input ng_model="device.uuid" />
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>SECURITY TOKEN</label>
-                                    </td>
-                                    <td colSpan={2}>
-                                      <input ng_model="device.token" />
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>NETWORK</label>
-                                    </td>
-                                    <td colSpan={2}>
-                                      <p>Ethernet</p>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>IP ADDRESS</label>
-                                    </td>
-                                    <td colSpan={2}>
-                                      <p>0.0.0.0</p>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>MAC ADDRESS</label>
-                                    </td>
-                                    <td colSpan={2}>
-                                      <p>00:00:00:00:00:00</p>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>COMPUTER</label>
-                                    </td>
-                                    <td>
-                                      <p>Raspberry Pi 2 Model B+ running farmbot-raspberry-pi-controller V1.233</p>
-                                    </td>
-                                    <td>
-                                      <button className="button-like yellow">UPDATE TO V1.234</button>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>MICROCONTROLLER</label>
-                                    </td>
-                                    <td>
-                                      <p>Arduino MEGA 2560 running farmbot-arduino-firmware V1.233</p>
-                                    </td>
-                                    <td>
-                                      <button className="button-like yellow">UPDATE TO V1.234</button>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>DELETE FARMBOT</label>
-                                    </td>
-                                    <td>
-                                      <p>Caution! This cannot be undone</p>
-                                    </td>
-                                    <td>
-                                      <button className="button-like red">DELETE FARMBOT</button>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
+                          <div className="row">
+                            <div className="col-sm-12">
+                              <div className="widget-content">
+                                <table className="plain">
+                                  <tbody>
+                                    <tr>
+                                      <td>
+                                        <label>FARMBOT NAME</label>
+                                      </td>
+                                      <td colSpan={2}>
+                                        <input name="name" value={ this.props.bot.name } />
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <label>UUID</label>
+                                      </td>
+                                      <td colSpan={2}>
+                                        <input name="uuid" value={ this.props.bot.uuid }/>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <label>SECURITY TOKEN</label>
+                                      </td>
+                                      <td colSpan={2}>
+                                        <input name="token" value={ this.props.bot.token }/>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <label>NETWORK</label>
+                                      </td>
+                                      <td colSpan={2}>
+                                        <p>Ethernet</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <label>IP ADDRESS</label>
+                                      </td>
+                                      <td colSpan={2}>
+                                        <p>0.0.0.0</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <label>MAC ADDRESS</label>
+                                      </td>
+                                      <td colSpan={2}>
+                                        <p>00:00:00:00:00:00</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <label>COMPUTER</label>
+                                      </td>
+                                      <td>
+                                        <p>Raspberry Pi 2 Model B+ running farmbot-raspberry-pi-controller V1.233</p>
+                                      </td>
+                                      <td>
+                                        <button className="button-like yellow">UPDATE TO V1.234</button>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <label>MICROCONTROLLER</label>
+                                      </td>
+                                      <td>
+                                        <p>Arduino MEGA 2560 running farmbot-arduino-firmware V1.233</p>
+                                      </td>
+                                      <td>
+                                        <button className="button-like yellow">UPDATE TO V1.234</button>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <label>DELETE FARMBOT</label>
+                                      </td>
+                                      <td>
+                                        <p>Caution! This cannot be undone</p>
+                                      </td>
+                                      <td>
+                                        <button type="button" className="button-like red">DELETE FARMBOT</button>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
                             </div>
                           </div>
+                      </form>
                         </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -153,13 +171,13 @@ export var Devices = React.createClass({
                                     <label>LENGTH (m)</label>
                                   </td>
                                   <td>
-                                    <input ng_model="device.LENGTH_X" />
+                                    <input />
                                   </td>
                                   <td>
-                                    <input ng_model="device.LENGTH_Y" />
+                                    <input />
                                   </td>
                                   <td>
-                                    <input ng_model="device.LENGTH_Z" />
+                                    <input />
                                   </td>
                                 </tr>
                                 <tr>
@@ -167,13 +185,13 @@ export var Devices = React.createClass({
                                     <label>MAX SPEED (mm/s)</label>
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_MAX_SPD_X" />
+                                    <input />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_MAX_SPD_Y" />
+                                    <input />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_MAX_SPD_Z" />
+                                    <input />
                                   </td>
                                 </tr>
                                 <tr>
@@ -181,13 +199,13 @@ export var Devices = React.createClass({
                                     <label>ACCELERATE FOR (steps)</label>
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_ACC_DEC_X" />
+                                    <input />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_ACC_DEC_Y" />
+                                    <input />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_ACC_DEC_Z" />
+                                    <input />
                                   </td>
                                 </tr>
                                 <tr>
@@ -195,13 +213,13 @@ export var Devices = React.createClass({
                                     <label>TIMEOUT AFTER (seconds)</label>
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_TIMEOUT_X" />
+                                    <input />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_TIMEOUT_Y" />
+                                    <input />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_TIMEOUT_Z" />
+                                    <input />
                                   </td>
                                 </tr>
                                 <tr>
@@ -209,13 +227,13 @@ export var Devices = React.createClass({
                                     <label>STEPS PER MM</label>
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_PER_MM_X" />
+                                    <input />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_PER_MM_Y" />
+                                    <input />
                                   </td>
                                   <td>
-                                    <input ng_model="device.MOVEMENT_STEPS_PER_MM_Z" />
+                                    <input />
                                   </td>
                                 </tr>
                                 <tr>
@@ -223,13 +241,13 @@ export var Devices = React.createClass({
                                     <label>INVERT ENDPOINTS</label>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left ng-isolate-scope" toggleval="MOVEMENT_INVERT_ENDPOINTS_X"><button className="button-like ng-binding red" ng-class="{red: !isTrue(), green: isTrue()}" type="button"> NO </button></calibrationbutton>
+                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_ENDPOINTS_X"><button className="button-like red"> NO </button></calibrationbutton>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left ng-isolate-scope" toggleval="MOVEMENT_INVERT_ENDPOINTS_Y"><button className="button-like ng-binding red" ng-class="{red: !isTrue(), green: isTrue()}" type="button"> NO </button></calibrationbutton>
+                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_ENDPOINTS_Y"><button className="button-like red"> NO </button></calibrationbutton>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left ng-isolate-scope" toggleval="MOVEMENT_INVERT_ENDPOINTS_Z"><button className="button-like ng-binding red" ng-class="{red: !isTrue(), green: isTrue()}" type="button"> NO </button></calibrationbutton>
+                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_ENDPOINTS_Z"><button className="button-like red"> NO </button></calibrationbutton>
                                   </td>
                                 </tr>
                                 <tr>
@@ -237,13 +255,13 @@ export var Devices = React.createClass({
                                     <label>INVERT MOTOR</label>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left ng-isolate-scope" toggleval="MOVEMENT_INVERT_MOTOR_X"><button className="button-like ng-binding red" ng-class="{red: !isTrue(), green: isTrue()}" type="button"> NO </button></calibrationbutton>
+                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_MOTOR_X"><button className="button-like red"> NO </button></calibrationbutton>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left ng-isolate-scope" toggleval="MOVEMENT_INVERT_MOTOR_Y"><button className="button-like ng-binding red" ng-class="{red: !isTrue(), green: isTrue()}" type="button"> NO </button></calibrationbutton>
+                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_MOTOR_Y"><button className="button-like red"> NO </button></calibrationbutton>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left ng-isolate-scope" toggleval="MOVEMENT_INVERT_MOTOR_Z"><button className="button-like ng-binding red" ng-class="{red: !isTrue(), green: isTrue()}" type="button"> NO </button></calibrationbutton>
+                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_MOTOR_Z"><button className="button-like red"> NO </button></calibrationbutton>
                                   </td>
                                 </tr>
                                 <tr>
@@ -251,13 +269,13 @@ export var Devices = React.createClass({
                                     <label>NEGATIVES</label>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left ng-isolate-scope" toggleval="MOVEMENT_NEGATIVE_X"><button className="button-like ng-binding red" ng-class="{red: !isTrue(), green: isTrue()}" type="button"> NO </button></calibrationbutton>
+                                    <calibrationbutton className="left" toggleval="MOVEMENT_NEGATIVE_X"><button className="button-like red"> NO </button></calibrationbutton>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left ng-isolate-scope" toggleval="MOVEMENT_NEGATIVE_Y"><button className="button-like ng-binding red" ng-class="{red: !isTrue(), green: isTrue()}" type="button"> NO </button></calibrationbutton>
+                                    <calibrationbutton className="left" toggleval="MOVEMENT_NEGATIVE_Y"><button className="button-like red"> NO </button></calibrationbutton>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left ng-isolate-scope" toggleval="MOVEMENT_NEGATIVE_Z"><button className="button-like ng-binding red" ng-class="{red: !isTrue(), green: isTrue()}" type="button"> NO </button></calibrationbutton>
+                                    <calibrationbutton className="left" toggleval="MOVEMENT_NEGATIVE_Z"><button className="button-like red"> NO </button></calibrationbutton>
                                   </td>
                                 </tr>
                               </tbody>
@@ -270,7 +288,7 @@ export var Devices = React.createClass({
                 </div>
               </div>
             </div>
-            <div className="row ng-scope">
+            <div className="row">
               <div className="col-md-10 col-sm-12 col-xs-12 col-md-offset-1">
                 <div>
                   <div className="widget-wrapper">
@@ -300,7 +318,7 @@ export var Devices = React.createClass({
                                 </tr>
                               </thead>
                               {/* ngIf: logs.length > 1 */}
-                              {/* ngIf: logs.length < 1 */}<tbody ng_if="logs.length < 1" className="ng-scope">
+                              {/* ngIf: logs.length < 1 */}<tbody>
                                 <tr>
                                   <td colSpan={3}>
                                     <p>We cant find any logs. Are your FarmBot device credentials correct?</p>
@@ -321,4 +339,4 @@ export var Devices = React.createClass({
       </div>
     );
   }
-});
+};

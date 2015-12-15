@@ -5,7 +5,7 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import { ReduxRouter } from 'redux-router';
 import configureStore from './configureStore';
 import { loadFromCdn } from './load_from_cdn';
-import { warnn } from './logger';
+
 // Bootstrap.js doesn't use ES6 modules yet. Need to globally export.
 // Know a more ES6 compliant way to do this? Submit a PR!
 import $ from 'jquery';

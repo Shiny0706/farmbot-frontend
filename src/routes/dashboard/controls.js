@@ -8,7 +8,7 @@ import { fetchDevice } from '../../actions/bot_actions'
 //   token: "f0de44ca799af47f91873bc7abe59987f95f0953"
 // });
 
-// myBot.connect().then(function(b){ var qqq = myBot; var zzz = b; debugger; });
+// myBot.connect().then(function(b){ var qqq = myBot; var zzz = b; });
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {

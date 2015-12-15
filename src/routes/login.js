@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar } from '../components/navbar';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { login } from '../actions/auth_actions';
+import { LOGIN } from '../actions/auth_actions';
 import { pushState } from 'redux-router';
 
 const AFTER_LOGIN = '/dashboard';
@@ -29,7 +29,7 @@ export class Login extends React.Component {
     e.preventDefault();
     var password = (this.state || {}).loginPassword;
     var email = (this.state || {}).loginEmail;
-    return this.props.dispatch(login(email, password));
+    return this.props.dispatch(LOGIN(email, password));
   }
 
   render() {
