@@ -13,18 +13,19 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'wow.js',
+    filename: 'production.js',
     publicPath: '/public/'
   },
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
         loaders: ['babel?stage=0&optional=runtime'],
       },
     ],
   },
-  plugins: [],
-  devtool: 'source-map',
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({minimize: true})
+  ]
 };
