@@ -8,7 +8,7 @@ module.exports = {
   },
   entry: {
     app: [
-      'webpack-hot-middleware/client',
+      // 'webpack-hot-middleware/client',
       './src/index.js',
     ]
   },
@@ -27,7 +27,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
   ],
   devtool: 'source-map',
