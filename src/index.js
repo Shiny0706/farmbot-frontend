@@ -19,6 +19,7 @@ import { Login } from './routes/login';
 import { CONFIG } from './config';
 
 function requireAuth(){
+  debugger;
   console.log("REQUIRING AUTH, CAP'N!! ")
 }
 
@@ -33,7 +34,7 @@ class Root extends Component {
       <div>
         <Provider store={store}>
           <Router history={history}>
-            <Route path={CONFIG.ROOT_PATH || "src"} component={App}>
+            <Route path={CONFIG.ROOT_PATH || "/src"} component={App}>
               <Route path="login" component={Login}/>
               <Route path="dashboard" component={Dashboard} onEnter={requireAuth}>
                 <Route path="designer" component={FarmDesigner}/>
