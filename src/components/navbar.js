@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { CONFIG } from '../config';
+
 
 export var Navbar = React.createClass({
   links: {
-    "Farm Designer" : "/dashboard/designer" ,
-    "Controls"      : "/dashboard/controls" ,
-    "Devices"       : "/dashboard/devices"  ,
-    "Sequences"     : "/dashboard/sequences",
-    "Regimens"      : "/dashboard/regimens",
-    "Schedules"     : "/dashboard/schedules"
+    "Farm Designer" : CONFIG.ROOT_URL || "/src" + "/dashboard/designer" ,
+    "Controls"      : CONFIG.ROOT_URL || "/src" + "/dashboard/controls" ,
+    "Devices"       : CONFIG.ROOT_URL || "/src" + "/dashboard/devices"  ,
+    "Sequences"     : CONFIG.ROOT_URL || "/src" + "/dashboard/sequences",
+    "Regimens"      : CONFIG.ROOT_URL || "/src" + "/dashboard/regimens",
+    "Schedules"     : CONFIG.ROOT_URL || "/src" + "/dashboard/schedules"
   },
 
   render: function() {

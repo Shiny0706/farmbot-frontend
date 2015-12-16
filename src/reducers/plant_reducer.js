@@ -1,9 +1,5 @@
-import { Plant } from '../models/plant'
-import {
-  ADD_PLANT_SUCCESS,
-  ADD_PLANT_FAILURE
-} from '../actions/plant_actions';
-
+import { Plant } from '../models/plant';
+import { error, warn } from '../logger';
 const initialState = {
   all: Plant.fakes
 };
@@ -18,6 +14,7 @@ var action_handlers = {
     return state;
   },
   ADD_PLANT_FAILURE: function(state, action) {
+    error("Unable to add plant.");
     return state;
   },
   FETCH_PLANTS_SUCCESS: function(state, action) {
@@ -26,6 +23,7 @@ var action_handlers = {
     return state;
   },
   FETCH_PLANTS_FAILURE: function(state, action) {
+    warn("Unable to download plants. Check your internet connection.");
     return state;
   },
 }

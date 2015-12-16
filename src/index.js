@@ -2,9 +2,61 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
-import { ReduxRouter } from 'redux-router';
 import configureStore from './configureStore';
 import { loadFromCdn } from './load_from_cdn';
+import { createHistory } from 'history'
+import { syncReduxAndRouter } from 'redux-simple-router'
+import { IndexRedirect, IndexRoute, Route, Router } from 'react-router';
+import App from './routes/app';
+import Dashboard from './routes/dashboard/dashboard';
+import { Controls } from './routes/dashboard/controls';
+import { Devices } from './routes/dashboard/devices';
+import { Sequences } from './routes/dashboard/sequences/sequences';
+import { Regimens } from './routes/dashboard/regimens/regimen_builder';
+import { Schedules } from './routes/dashboard/schedules/schedules';
+import { FarmDesigner } from './routes/dashboard/farm_designer/farm_designer';
+import { Login } from './routes/login';
+import { CONFIG } from './config';
+
+function requireAuth(){
+  console.log("REQUIRING AUTH, CAP'N!! ")
+}
+
+const store = configureStore();
+const history = createHistory();
+
+syncReduxAndRouter(history, store);
+
+class Root extends Component {
+  render() {
+    return (
+      <div>
+        <Provider store={store}>
+          <Router history={history}>
+            <Route path={CONFIG.ROOT_PATH || "src"} component={App}>
+              <Route path="login" component={Login}/>
+              <Route path="dashboard" component={Dashboard} onEnter={requireAuth}>
+                <Route path="designer" component={FarmDesigner}/>
+                <Route path="controls" component={Controls}/>
+                <Route path="devices" component={Devices}/>
+                <Route path="sequences" component={Sequences}/>
+                <Route path="regimens" component={Regimens}/>
+                <Route path="schedules" component={Schedules} />
+                <IndexRoute component={Controls}/>
+              </Route>
+              <IndexRedirect to="dashboard"/>
+            </Route>
+          </Router>
+        </Provider>
+        <DebugPanel top right bottom>
+          <DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />
+        </DebugPanel>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<Root/>, document.getElementById('root'));
 
 // Bootstrap.js doesn't use ES6 modules yet. Need to globally export.
 // Know a more ES6 compliant way to do this? Submit a PR!
@@ -12,6 +64,7 @@ import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
 
+require("!style!css!sass!./css/toastr.scss");
 require("!style!css!sass!./css/alerts.scss");
 require("!style!css!sass!./css/auth.scss");
 require("!style!css!sass!./css/blocks.scss");
@@ -27,7 +80,6 @@ require("!style!css!sass!./css/navbar.scss");
 require("!style!css!sass!./css/search.scss");
 require("!style!css!sass!./css/tables.scss");
 require("!style!css!sass!./css/tooltips.scss");
-
 require("!style!css!sass!./css/widgets.scss");
 require("!style!css!sass!./css/widget_move.scss");
 require("!style!css!sass!./css/widget_tool_control.scss");
@@ -42,21 +94,3 @@ loadFromCdn(
   "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",
   "js");
 
-const store = configureStore();
-
-class Root extends Component {
-  render() {
-    return (
-      <div>
-        <Provider store={store}>
-          <ReduxRouter/>
-        </Provider>
-        <DebugPanel top right bottom>
-          <DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />
-        </DebugPanel>
-      </div>
-    );
-  }
-}
-
-ReactDOM.render(<Root/>, document.getElementById('root'));

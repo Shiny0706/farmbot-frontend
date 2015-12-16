@@ -9,6 +9,10 @@
   jgs     '-------'
 */
 export var CONFIG = {
+  // The REST API endpoint that stores user auth, device settings, etc.
   FARMBOT_API_URL: "//my.farmbot.io",
-  MESHBLU_URL:     "//mesh.farmbot.io"
+  // The Websocket gateway for IoT communication.
+  MESHBLU_URL:     "//mesh.farmbot.io",
+  // The URL that the app file (index.html) will be mounted on the server.
+  ROOT_PATH: "/src"
 };

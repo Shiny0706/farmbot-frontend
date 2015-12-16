@@ -1,26 +1,51 @@
-import {
-  AUTH_LOGIN,
-  AUTH_LOGOUT,
-  AUTH_SIGNUP,
-} from '../actions/auth_actions';
+import { error } from '../logger';
+import $ from 'jquery';
 
-const initialState = {
-  token: null,
-  authenticated: false//true // Comment this to 'false' when ready to implement auth.
-};
-
-export function authReducer(state = initialState, action) {
-  if ((action.type === AUTH_LOGIN || AUTH_SIGNUP)
-      && action.sequence && action.sequence.type === 'complete') {
-
+var action_handlers = {
+  DEFAULT: function(state, action) {
+    return state;
+  },
+  LOGIN_ERR: function(state, action) {
+    error("Login failed.");
+    unsetToken();
+    return {
+      ...state,
+      token: '',
+      authenticated: false,
+    };
+  },
+  LOGIN_OK: function(state, action) {
+    setToken(action.payload.token);
     return {
       ...state,
       token: action.payload.token,
       authenticated: true,
     };
-  } else if (action.type === AUTH_LOGOUT) {
-    return initialState;
+  }
+}
+
+var initialState = {
+    token: '',
+    authenticated: false
   }
 
-  return state;
+export function authReducer(state = initialState, action) {
+  var handler = (action_handlers[action.type] || action_handlers.DEFAULT);
+  return handler(state, action);
+}
+
+export function setToken(token) {
+  localStorage['farmbot_token'] = token || '';
+  $.ajaxSetup({beforeSend: function (xhr) {
+       xhr.setRequestHeader("Authorization", token);
+    }
+  });
+}
+
+function unsetToken() {
+    localStorage['farmbot_token'] = '';
+    $.ajaxSetup({beforeSend: function (xhr) {
+         xhr.setRequestHeader("Authorization", '');
+      }
+    });
 }

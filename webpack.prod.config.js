@@ -13,19 +13,19 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'production.js',
     publicPath: '/public/'
   },
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
         loaders: ['babel?stage=0&optional=runtime'],
       },
     ],
   },
   plugins: [
-    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({minimize: true})
   ]
 };
