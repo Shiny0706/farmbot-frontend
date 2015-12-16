@@ -1,21 +1,9 @@
-var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  resolve: {
-    extensions: ['', '.js'],
-    modulesDirectories: ['node_modules', 'src'],
-  },
-  entry: {
-    app: [
-      // 'webpack-hot-middleware/client',
-      './src/index.js',
-    ]
-  },
+  entry: './src/index.js',
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/public/'
+    filename: "./src/bundle.js"
   },
   module: {
     loaders: [
@@ -26,9 +14,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    // new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-  ],
   devtool: 'source-map',
 };

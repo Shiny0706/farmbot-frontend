@@ -1,4 +1,3 @@
-import React from 'react';
 import { IndexRedirect, IndexRoute, Route } from 'react-router';
 import App from './app';
 import Dashboard from './dashboard/dashboard';
@@ -9,25 +8,12 @@ import { Regimens } from './dashboard/regimens/regimen_builder';
 import { Schedules } from './dashboard/schedules/schedules';
 import { FarmDesigner } from './dashboard/farm_designer/farm_designer';
 import { Login } from './login';
-import { LOGIN_OK } from '../actions/auth_actions'
 
-export function getRoutes(store) {
-  function requireAuth(nextState, replaceState, cb) {
-    // This is so unfortunate.
-    setTimeout(() => {
-      const { auth } = store.getState();
-      // TODO refactor this pyramid.
-      if (!auth.authenticated) {
-        if (localStorage['farmbot_token']) {
-          store.dispatch(LOGIN_OK(localStorage['farmbot_token']));
-        } else {
-          replaceState({ nextPath: nextState.location.pathname }, '/login');
-        }
-      }
-      cb();
-    }, 0);
-  }
+function requireAuth(){
+  console.log("REQUIRING AUTH, CAP'N!! ")
+}
 
+export function whatever(history) {
   return (
     <Route path="/" component={App}>
       <Route path="login" component={Login}/>

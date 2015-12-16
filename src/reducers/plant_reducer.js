@@ -1,5 +1,5 @@
 import { Plant } from '../models/plant';
-import { error } from '../logger';
+import { error, warn } from '../logger';
 const initialState = {
   all: Plant.fakes
 };
@@ -23,7 +23,7 @@ var action_handlers = {
     return state;
   },
   FETCH_PLANTS_FAILURE: function(state, action) {
-    error("Unable to download plants. Check your internet connection.");
+    warn("Unable to download plants. Check your internet connection.");
     return state;
   },
 }

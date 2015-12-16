@@ -10,6 +10,8 @@ export function success(message, title = "Success") {
   lastMsg = message;
 }
 
+// Warnings fire once, to avoid bombarding the user with repetitious errors
+// Eg: "Can't connect to server!" might get repetitive.
 export function warning(message, title = "Warning") {
   if (lastMsg === message) {
     console.warning(message);
@@ -19,8 +21,7 @@ export function warning(message, title = "Warning") {
   lastMsg = message;
 }
 
-// Errors always play twice.
-// This is a must for situations such as password guessing
+// Errors can fire multiple times for situations such as password guessing
 export function error(message, title = "Error") {
   toast.error(message, title);
 }
