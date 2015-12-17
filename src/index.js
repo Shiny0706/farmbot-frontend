@@ -25,6 +25,7 @@ syncReduxAndRouter(history, store);
 
 class Root extends Component {
   requireAuth(){
+    debugger;
     console.log("REQUIRING AUTH, CAP'N!! ")
   }
 
