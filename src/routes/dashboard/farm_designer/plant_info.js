@@ -2,7 +2,7 @@ import React from 'react';
 import { Plant } from '../../../models/plant'
 import { Link } from 'react-router';
 import { BackArrow } from './back_arrow';
-
+import { getParam } from '../../../util';
 export class PlantInfo extends React.Component {
   removePlant() {
    this.props.dispatch({type: "PLANT_REMOVE_REQUEST",
@@ -11,7 +11,7 @@ export class PlantInfo extends React.Component {
 
   get plant() {
     return _(this.props.plants.all)
-             .find({_id: this.props.route.plant}) || {};
+             .find({_id: getParam("id")}) || {};
 
   }
 

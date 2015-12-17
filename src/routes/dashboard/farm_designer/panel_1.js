@@ -15,13 +15,14 @@ import { Zones } from './zone_inventory';
 import { AddZone } from './add_zone';
 // Import the right panel (for display on mobile)
 import { Panel2 } from './panel_2';
+import { getParam } from '../../../util.js';
 
 
 // Dynamically determine what to render in the designer's first panel
 // based on the value of hash fragment 'p1'
 export class Panel1 extends React.Component {
   get tabName() {
-    return (this.props.location.query.p1 || "Plants")
+    return (getParam("p1") || "Plants")
   }
 
   get content() {
