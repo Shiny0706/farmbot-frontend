@@ -1,19 +1,11 @@
 import React from 'react';
 import { Navbar } from '../components/navbar';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import { LOGIN } from '../actions/auth_actions';
 import { pushState } from 'redux-router';
 
 const AFTER_LOGIN = '/dashboard';
 
-function mapStateToProps(state) {
-  return {
-    auth: state.auth
-  };
-}
-
-@connect(mapStateToProps)
 export class Login extends React.Component {
   setPassword(event) {
     // I *THINK* this is an anti-pattern in Redux. Peer review requested.

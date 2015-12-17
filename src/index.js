@@ -17,15 +17,23 @@ import { Schedules } from './routes/dashboard/schedules/schedules';
 import { FarmDesigner } from './routes/dashboard/farm_designer/farm_designer';
 import { Login } from './routes/login';
 import { CONFIG } from './config';
+import { connect } from 'react-redux';
 
 const store = configureStore();
 const history = createHistory();
 
 syncReduxAndRouter(history, store);
 
+var wrap = function(Component, props) {
+  return React.createClass({
+    render: function() {
+      return React.createElement(Component, props);
+    }
+  });
+};
+
 class Root extends Component {
   requireAuth(){
-    debugger;
     console.log("REQUIRING AUTH, CAP'N!! ")
   }
 
@@ -34,16 +42,16 @@ class Root extends Component {
       <div>
         <Provider store={store}>
           <Router history={history}>
-            <Route path={CONFIG.ROOT_PATH || "/src"} component={App}>
+            <Route path={CONFIG.ROOT_PATH || "/"} component={App}>
               <Route path="login" component={Login}/>
-              <Route path="dashboard" component={Dashboard} onEnter={ this.requireAuth.bind(this) }>
-                <Route path="designer" component={FarmDesigner}/>
-                <Route path="controls" component={Controls}/>
-                <Route path="devices" component={Devices}/>
-                <Route path="sequences" component={Sequences}/>
-                <Route path="regimens" component={Regimens}/>
-                <Route path="schedules" component={Schedules} />
-                <IndexRoute component={Controls}/>
+              <Route path="dashboard" component={ Dashboard } onEnter={ this.requireAuth.bind(this) }>
+                <Route path="designer" component={ wrap(FarmDesigner, this.props) }/>
+                <Route path="controls" component={ wrap(Controls, this.props) }/>
+                <Route path="devices" component={ wrap(Devices, this.props) }/>
+                <Route path="sequences" component={ wrap(Sequences, this.props) }/>
+                <Route path="regimens" component={ wrap(Regimens, this.props) }/>
+                <Route path="schedules" component={ wrap(Schedules, this.props) } />
+                <IndexRoute component={wrap(Controls, this.props)}/>
               </Route>
               <IndexRedirect to="dashboard"/>
             </Route>
@@ -57,7 +65,9 @@ class Root extends Component {
   }
 }
 
-ReactDOM.render(<Root/>, document.getElementById('root'));
+var ConnectedRoot = connect(state => state)(Root);
+ReactDOM.render(<ConnectedRoot store={ store } />,
+                document.getElementById('root'));
 
 // Bootstrap.js doesn't use ES6 modules yet. Need to globally export.
 // Know a more ES6 compliant way to do this? Submit a PR!

@@ -9,14 +9,7 @@ import { fetchDevice } from '../../actions/bot_actions'
 // });
 
 // myBot.connect().then(function(b){ var qqq = myBot; var zzz = b; });
-import { connect } from 'react-redux';
 
-function mapStateToProps(state) {
-  return { global: state.global,
-           bot: state.bot };
-}
-
-@connect(mapStateToProps)
 export class Controls extends React.Component {
 render() {
   if (!this.props.bot._id) { this.props.dispatch(fetchDevice()); };

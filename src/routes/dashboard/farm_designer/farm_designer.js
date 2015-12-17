@@ -7,12 +7,6 @@ import { Panel2 } from './panel_2';
 import { fetchAllPlants } from '../../../actions/plant_actions';
 import { connect } from 'react-redux';
 
-function mapStateToProps(state) {
-  return { global: state.global,
-           plants: state.plants };
-}
-
-@connect(mapStateToProps)
 export class FarmDesigner extends React.Component {
 
   componentDidMount() { this.props.dispatch(fetchAllPlants()); }

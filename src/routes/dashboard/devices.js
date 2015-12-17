@@ -5,11 +5,6 @@ import { connect } from 'react-redux';
 import { convertFormToObject } from '../../util.js';
 import { fetchDevice, CHANGE_DEVICE } from '../../actions/bot_actions'
 
-function mapStateToProps(state) {
-  return { bot: state.bot };
-}
-
-@connect(mapStateToProps)
 export class Devices extends React.Component {
   changeBot(e) {
     var updates = _.object([[e.target.name, e.target.value]]) // {name: "value"}
