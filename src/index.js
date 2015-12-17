@@ -18,17 +18,16 @@ import { FarmDesigner } from './routes/dashboard/farm_designer/farm_designer';
 import { Login } from './routes/login';
 import { CONFIG } from './config';
 
-function requireAuth(){
-  debugger;
-  console.log("REQUIRING AUTH, CAP'N!! ")
-}
-
 const store = configureStore();
 const history = createHistory();
 
 syncReduxAndRouter(history, store);
 
 class Root extends Component {
+  requireAuth(){
+    console.log("REQUIRING AUTH, CAP'N!! ")
+  }
+
   render() {
     return (
       <div>
@@ -36,7 +35,7 @@ class Root extends Component {
           <Router history={history}>
             <Route path={CONFIG.ROOT_PATH || "/src"} component={App}>
               <Route path="login" component={Login}/>
-              <Route path="dashboard" component={Dashboard} onEnter={requireAuth}>
+              <Route path="dashboard" component={Dashboard} onEnter={ this.requireAuth.bind(this) }>
                 <Route path="designer" component={FarmDesigner}/>
                 <Route path="controls" component={Controls}/>
                 <Route path="devices" component={Devices}/>

@@ -18,6 +18,8 @@ export class FarmDesigner extends React.Component {
   componentDidMount() { this.props.dispatch(fetchAllPlants()); }
 
 // Is there anyway to do this in one step down in the render section?
+// Yes, https://facebook.github.io/react/docs/transferring-props.html
+// TODO: convert it over to that ^
   renderPanel1() {
     return React.createElement(Panel1, this.props);
   }
