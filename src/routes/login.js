@@ -2,8 +2,6 @@ import React from 'react';
 import { Navbar } from '../components/navbar';
 import { Link } from 'react-router';
 import { LOGIN } from '../actions/auth_actions';
-import { pushState } from 'redux-router';
-
 const AFTER_LOGIN = '/dashboard';
 
 export class Login extends React.Component {
@@ -26,7 +24,7 @@ export class Login extends React.Component {
 
   render() {
     if (this.props.auth.authenticated) {
-      this.props.dispatch(pushState(null, AFTER_LOGIN))
+      console.warn('Already logged in.');
     };
     return (
       <div>

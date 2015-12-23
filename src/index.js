@@ -5,7 +5,7 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import configureStore from './configureStore';
 import { loadFromCdn } from './load_from_cdn';
 import { createHistory } from 'history'
-import { syncReduxAndRouter } from 'redux-simple-router'
+import { syncReduxAndRouter, pushPath } from 'redux-simple-router'
 import { IndexRedirect, IndexRoute, Route, Router } from 'react-router';
 import App from './routes/app';
 import Dashboard from './routes/dashboard/dashboard';
@@ -18,6 +18,7 @@ import { FarmDesigner } from './routes/dashboard/farm_designer/farm_designer';
 import { Login } from './routes/login';
 import { CONFIG } from './config';
 import { connect } from 'react-redux';
+import { error } from './logger';
 
 const store = configureStore();
 const history = createHistory();
@@ -33,8 +34,13 @@ var wrap = function(Component, props) {
 };
 
 class Root extends Component {
-  requireAuth(){
-    console.log("REQUIRING AUTH, CAP'N!! ")
+  requireAuth(nextState, replaceState){
+    var s = {...this.props};
+    if (s.auth.authenticated) {
+      this.props.dispatch(pushPath(nextState.location.pathname));
+    } else {
+      this.props.dispatch(pushPath('/login'));
+    };
   }
 
   render() {
@@ -43,10 +49,10 @@ class Root extends Component {
         <Provider store={store}>
           <Router history={history}>
             <Route path={CONFIG.ROOT_PATH || "/"} component={App}>
-              <Route path="login" component={Login}/>
+              <Route path="login" component={ wrap(Login, this.props) }/>
               <Route path="dashboard" component={ Dashboard } onEnter={ this.requireAuth.bind(this) }>
-                <Route path="designer" component={ wrap(FarmDesigner, this.props) }/>
-                <Route path="controls" component={ wrap(Controls, this.props) }/>
+                <Route path="designer" component={ wrap(FarmDesigner, this.props) } onEnter={ this.requireAuth.bind(this) }/>
+                <Route path="controls" component={ wrap(Controls, this.props) } onEnter={ this.requireAuth.bind(this) } />
                 <Route path="devices" component={ wrap(Devices, this.props) }/>
                 <Route path="sequences" component={ wrap(Sequences, this.props) }/>
                 <Route path="regimens" component={ wrap(Regimens, this.props) }/>
