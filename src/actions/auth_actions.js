@@ -1,9 +1,7 @@
 import { CONFIG } from '../config'
 
 export function LOGIN(username, password) {
-  console.log(1, username, password);
   return dispatch => {
-    console.log(2, username, password);
     return requestToken(username, password).then(
       (res) => dispatch(LOGIN_OK(res.token.encoded)),
       (err) => dispatch(LOGIN_ERR(err))
