@@ -15,7 +15,6 @@ var action_handlers = {
     };
   },
   LOGIN_OK: function(state, action) {
-    success("Successfully logged in.");
     setToken(action.payload.token);
     return {
       ...state,

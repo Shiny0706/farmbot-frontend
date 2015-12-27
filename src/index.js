@@ -37,14 +37,19 @@ class Root extends Component {
   requireAuth(nextState, replaceState){
     var auth = {...this.props.auth};
     var that = this;
-    // Is this seriously the solution? This is so hacky.
-    setTimeout(function() {
+    var attemptedURL = nextState.location.pathname;
+    // setTimeout(function() {
       if (auth.authenticated) {
-        that.props.dispatch(pushPath(nextState.location.pathname));
+        return nextState;
+        // that.props.dispatch(pushPath(attemptedURL));
       } else {
+        that.props.dispatch({
+          type: "LOGIN_REQUIRED",
+          payload: { attemptedURL }
+        });
         that.props.dispatch(pushPath('/login'));
       };
-    }, 0);
+    // }, 0);
   }
 
   render() {
@@ -57,10 +62,10 @@ class Root extends Component {
               <Route path="dashboard" component={ Dashboard } onEnter={ this.requireAuth.bind(this) }>
                 <Route path="designer" component={ wrap(FarmDesigner, this.props) } onEnter={ this.requireAuth.bind(this) }/>
                 <Route path="controls" component={ wrap(Controls, this.props) } onEnter={ this.requireAuth.bind(this) } />
-                <Route path="devices" component={ wrap(Devices, this.props) }/>
-                <Route path="sequences" component={ wrap(Sequences, this.props) }/>
-                <Route path="regimens" component={ wrap(Regimens, this.props) }/>
-                <Route path="schedules" component={ wrap(Schedules, this.props) } />
+                <Route path="devices" component={ wrap(Devices, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="sequences" component={ wrap(Sequences, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="regimens" component={ wrap(Regimens, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="schedules" component={ wrap(Schedules, this.props) } onEnter={ this.requireAuth.bind(this) } />
                 <IndexRoute component={wrap(Controls, this.props)}/>
               </Route>
               <IndexRedirect to="dashboard"/>
