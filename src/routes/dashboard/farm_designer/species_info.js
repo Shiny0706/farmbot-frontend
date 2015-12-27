@@ -2,6 +2,7 @@ import React from 'react';
 import { Plant } from '../../../models/plant';
 import { addPlant } from '../../../actions/plant_actions';
 import { BackArrow } from './back_arrow';
+import { getParam } from '../../../util';
 
 export class SpeciesInfo extends React.Component {
   drop (e) {
@@ -14,7 +15,7 @@ export class SpeciesInfo extends React.Component {
   }
 
   render() {
-    var query = {_id: this.props.location.query.id};
+    var query = {_id: getParam("id")};
     var all = this.props.global.species;
     // TODO REAL ERROR HANDLER ZOMG
     var specimen = _(all).find(query) || (function(){ alert("Invalid plant id")})();

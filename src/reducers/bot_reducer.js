@@ -22,8 +22,7 @@ var action_handlers = {
   },
   FETCH_DEVICE_ERR: function(state, action) {
     if (action.payload.status === 404) {
-      warning("<a href='/dashboard/devices'>You need to <u>add a device</u>"+
-              " to your account.</a>",
+      warning("You need to add a device to your account.",
               "No device found!");
     } else{
       error("Unable to download device data from server. " +

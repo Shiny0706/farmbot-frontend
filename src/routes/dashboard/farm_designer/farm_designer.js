@@ -7,17 +7,13 @@ import { Panel2 } from './panel_2';
 import { fetchAllPlants } from '../../../actions/plant_actions';
 import { connect } from 'react-redux';
 
-function mapStateToProps(state) {
-  return { global: state.global,
-           plants: state.plants };
-}
-
-@connect(mapStateToProps)
 export class FarmDesigner extends React.Component {
 
   componentDidMount() { this.props.dispatch(fetchAllPlants()); }
 
 // Is there anyway to do this in one step down in the render section?
+// Yes, https://facebook.github.io/react/docs/transferring-props.html
+// TODO: convert it over to that ^
   renderPanel1() {
     return React.createElement(Panel1, this.props);
   }
@@ -36,11 +32,7 @@ export class FarmDesigner extends React.Component {
             </div>
 
             <div className="farm-designer-map">
-              <GardenMap dispatch={this.props.dispatch}
-                         route={this.props.route}
-                         location={this.props.location}
-                         {...this.props.global}
-                         plants={this.props.plants}/>
+              <GardenMap {...this.props}/>
             </div>
 
             <div className="farm-designer-right">

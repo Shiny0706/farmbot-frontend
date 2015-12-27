@@ -11,7 +11,7 @@ HTML, CSS, JS. Mostly React / WebPack
  0. `npm start`
  0. `Visit http://localhost:3001`
  0. Explore the codebase! `js/app.js` and `js/app.js` are a great place to start looking around.
- 0. Ready to deploy your bundle? `webpack --config webpack.prod.config.js`
+ 0. Build a deployable file with `npm compile`.
 
 **Notes:** Make sure you have [node installed](https://docs.npmjs.com/getting-started/installing-node).
 

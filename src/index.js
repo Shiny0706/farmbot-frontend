@@ -5,7 +5,7 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import configureStore from './configureStore';
 import { loadFromCdn } from './load_from_cdn';
 import { createHistory } from 'history'
-import { syncReduxAndRouter } from 'redux-simple-router'
+import { syncReduxAndRouter, pushPath } from 'redux-simple-router'
 import { IndexRedirect, IndexRoute, Route, Router } from 'react-router';
 import App from './routes/app';
 import Dashboard from './routes/dashboard/dashboard';
@@ -17,32 +17,59 @@ import { Schedules } from './routes/dashboard/schedules/schedules';
 import { FarmDesigner } from './routes/dashboard/farm_designer/farm_designer';
 import { Login } from './routes/login';
 import { CONFIG } from './config';
-
-function requireAuth(){
-  console.log("REQUIRING AUTH, CAP'N!! ")
-}
+import { connect } from 'react-redux';
+import { error } from './logger';
 
 const store = configureStore();
 const history = createHistory();
 
 syncReduxAndRouter(history, store);
 
+var wrap = function(Component, props) {
+  return React.createClass({
+    render: function() {
+      return React.createElement(Component, props);
+    }
+  });
+};
+
 class Root extends Component {
+  componentDidMount() {
+    this.props.dispatch(pushPath('/login'));
+  }
+
+  requireAuth(nextState, replaceState){
+    var auth = {...this.props.auth};
+    var that = this;
+    var attemptedURL = nextState.location.pathname;
+    // setTimeout(function() {
+      if (auth.authenticated) {
+        return nextState;
+        // that.props.dispatch(pushPath(attemptedURL));
+      } else {
+        that.props.dispatch({
+          type: "LOGIN_REQUIRED",
+          payload: { attemptedURL }
+        });
+      };
+    // }, 0);
+  }
+
   render() {
     return (
       <div>
         <Provider store={store}>
           <Router history={history}>
-            <Route path={CONFIG.ROOT_PATH || "src"} component={App}>
-              <Route path="login" component={Login}/>
-              <Route path="dashboard" component={Dashboard} onEnter={requireAuth}>
-                <Route path="designer" component={FarmDesigner}/>
-                <Route path="controls" component={Controls}/>
-                <Route path="devices" component={Devices}/>
-                <Route path="sequences" component={Sequences}/>
-                <Route path="regimens" component={Regimens}/>
-                <Route path="schedules" component={Schedules} />
-                <IndexRoute component={Controls}/>
+            <Route path={CONFIG.ROOT_PATH || "/"} component={App}>
+              <Route path="login" component={ wrap(Login, this.props) }/>
+              <Route path="dashboard" component={ Dashboard } onEnter={ this.requireAuth.bind(this) }>
+                <Route path="designer" component={ wrap(FarmDesigner, this.props) } onEnter={ this.requireAuth.bind(this) }/>
+                <Route path="controls" component={ wrap(Controls, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="devices" component={ wrap(Devices, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="sequences" component={ wrap(Sequences, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="regimens" component={ wrap(Regimens, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="schedules" component={ wrap(Schedules, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <IndexRoute component={wrap(Controls, this.props)}/>
               </Route>
               <IndexRedirect to="dashboard"/>
             </Route>
@@ -56,7 +83,9 @@ class Root extends Component {
   }
 }
 
-ReactDOM.render(<Root/>, document.getElementById('root'));
+var ConnectedRoot = connect(state => state)(Root);
+ReactDOM.render(<ConnectedRoot store={ store } />,
+                document.getElementById('root'));
 
 // Bootstrap.js doesn't use ES6 modules yet. Need to globally export.
 // Know a more ES6 compliant way to do this? Submit a PR!

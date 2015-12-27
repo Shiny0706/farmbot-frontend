@@ -8,8 +8,9 @@
   "description": "",
   "main": "./src/index.js",
   "scripts": {
-    "start": "node ./devServer.js",
-    "test": "karma start karma.conf.js"
+    "start": "node dev_server.js",
+    "test": "karma start karma.conf.js",
+    "compile": "webpack --config webpack.prod.config.js"
   },
   "author": "",
   "license": "ISC",

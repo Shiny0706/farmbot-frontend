@@ -1,4 +1,4 @@
-import { error } from '../logger';
+import { error, success } from '../logger';
 import $ from 'jquery';
 
 var action_handlers = {
@@ -35,7 +35,7 @@ export function authReducer(state = initialState, action) {
 }
 
 export function setToken(token) {
-  localStorage['farmbot_token'] = token || '';
+  // localStorage['farmbot_token'] = token || '';
   $.ajaxSetup({beforeSend: function (xhr) {
        xhr.setRequestHeader("Authorization", token);
     }
@@ -43,7 +43,7 @@ export function setToken(token) {
 }
 
 function unsetToken() {
-    localStorage['farmbot_token'] = '';
+    // localStorage['farmbot_token'] = '';
     $.ajaxSetup({beforeSend: function (xhr) {
          xhr.setRequestHeader("Authorization", '');
       }

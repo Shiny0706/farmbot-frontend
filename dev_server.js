@@ -14,7 +14,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
   port: SERVER_PORT
 }));
 
-// app.use(require('webpack-hot-middleware')(compiler, { port: SERVER_PORT }));
+app.use(require('webpack-hot-middleware')(compiler, { port: SERVER_PORT }));
 
 // ?? ¯\_(ツ)_/¯
 app.get('/img/*', function(req, res) {

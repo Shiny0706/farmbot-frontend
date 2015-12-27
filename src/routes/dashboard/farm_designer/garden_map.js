@@ -1,6 +1,7 @@
 import React from 'react';
 import { Plant } from '../../../models/plant';
 import { navigateSelectedPlant } from '../../../actions/router_actions';
+import { getParam } from '../../../util.js';
 
 export class MapPoint extends React.Component {
   select() {
@@ -12,7 +13,7 @@ export class MapPoint extends React.Component {
   }
 
   render() {
-    var length = this.props.planting_area.length;
+    var length = this.props.global.planting_area.length;
     var fill = this.selected() ? "red" : "black";
     return <circle cx={ this.props.plant.x }
                    cy={ (-1 * this.props.plant.y) + length - 30 }
@@ -26,12 +27,10 @@ export class GardenMap extends React.Component {
   plants() {
     return this.props.plants.all.map(
       function (p, k) {
-        var selected = (this.props.location.query.plant === p._id);
+        var selected = (getParam("plant") === p._id);
         return <MapPoint plant={ p }
                   key={ k }
-                  planting_area={ this.props.planting_area }
-                  selected={ selected }
-                  dispatch={ this.props.dispatch }/>
+                  { ...this.props }/>
       }.bind(this)
     );
   }
@@ -42,7 +41,8 @@ export class GardenMap extends React.Component {
       strokeWidth: 5,
       stroke:      'rgba(0,0,0,0.15)'
     }
-    var {width, length} = this.props.planting_area;
+
+    var {width, length} = this.props.global.planting_area;
 
     return <div>
              <div className="drop-area" id="drop-area" style={ {marginLeft: '10px', marginTop: '10px'} }>
