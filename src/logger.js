@@ -14,7 +14,7 @@ export function success(message, title = "Success") {
 // Eg: "Can't connect to server!" might get repetitive.
 export function warning(message, title = "Warning") {
   if (lastMsg === message) {
-    console.warning(message);
+    console.warn(message);
   } else{
     toast.warning(message, title);
   };

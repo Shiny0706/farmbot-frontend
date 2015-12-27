@@ -1,4 +1,4 @@
-import { error } from '../logger';
+import { error, success } from '../logger';
 import $ from 'jquery';
 
 var action_handlers = {
@@ -15,6 +15,7 @@ var action_handlers = {
     };
   },
   LOGIN_OK: function(state, action) {
+    success("Successfully logged in.");
     setToken(action.payload.token);
     return {
       ...state,

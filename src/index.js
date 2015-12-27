@@ -35,12 +35,16 @@ var wrap = function(Component, props) {
 
 class Root extends Component {
   requireAuth(nextState, replaceState){
-    var s = {...this.props};
-    if (s.auth.authenticated) {
-      this.props.dispatch(pushPath(nextState.location.pathname));
-    } else {
-      this.props.dispatch(pushPath('/login'));
-    };
+    var auth = {...this.props.auth};
+    var that = this;
+    // Is this seriously the solution? This is so hacky.
+    setTimeout(function() {
+      if (auth.authenticated) {
+        that.props.dispatch(pushPath(nextState.location.pathname));
+      } else {
+        that.props.dispatch(pushPath('/login'));
+      };
+    }, 0);
   }
 
   render() {
