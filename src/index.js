@@ -34,6 +34,10 @@ var wrap = function(Component, props) {
 };
 
 class Root extends Component {
+  componentDidMount() {
+    this.props.dispatch(pushPath('/login'));
+  }
+
   requireAuth(nextState, replaceState){
     var auth = {...this.props.auth};
     var that = this;
@@ -47,7 +51,6 @@ class Root extends Component {
           type: "LOGIN_REQUIRED",
           payload: { attemptedURL }
         });
-        that.props.dispatch(pushPath('/login'));
       };
     // }, 0);
   }

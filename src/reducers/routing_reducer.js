@@ -22,7 +22,13 @@ export function routeReducer(state=initialState, { type, payload }) {
       })
       break;
     case "LOGIN_REQUIRED":
-      var newState = Object.assign({}, state, payload);
+
+      var newState = Object.assign({}, state, {
+        path: "/login",
+        attemptedURL: payload.attemptedURL,
+        changeId: state.changeId + 1
+      });
+
       break;
     default:
   }
