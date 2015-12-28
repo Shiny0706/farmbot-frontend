@@ -6,6 +6,10 @@ import { convertFormToObject } from '../../util.js';
 import { fetchDevice, CHANGE_DEVICE } from '../../actions/bot_actions'
 
 export class Devices extends React.Component {
+  componentDidMount(){
+    if (!this.props.bot._id) { this.props.dispatch(fetchDevice()); };
+  }
+
   changeBot(e) {
     var updates = _.object([[e.target.name, e.target.value]]) // {name: "value"}
     this.props.dispatch(CHANGE_DEVICE(updates));
@@ -17,8 +21,7 @@ export class Devices extends React.Component {
   }
 
   render() {
-    if (!this.props.bot._id) { this.props.dispatch(fetchDevice()); };
-    console.log(this.props.bot)
+    var {name, uuid, token} = this.props.bot;
     return (
       <div>
         <Navbar/>
@@ -51,7 +54,7 @@ export class Devices extends React.Component {
                                         <label>FARMBOT NAME</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="name" onChange={ this.changeBot.bind(this) } value={ this.props.bot.name } />
+                                        <input name="name" onChange={ this.changeBot.bind(this) } value={ name } />
                                       </td>
                                     </tr>
                                     <tr>

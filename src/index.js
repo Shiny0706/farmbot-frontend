@@ -42,17 +42,14 @@ class Root extends Component {
     var auth = {...this.props.auth};
     var that = this;
     var attemptedURL = nextState.location.pathname;
-    // setTimeout(function() {
       if (auth.authenticated) {
-        return nextState;
-        // that.props.dispatch(pushPath(attemptedURL));
+        return nextState; // TODO Delete this?
       } else {
         that.props.dispatch({
           type: "LOGIN_REQUIRED",
           payload: { attemptedURL }
         });
       };
-    // }, 0);
   }
 
   render() {

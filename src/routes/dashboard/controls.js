@@ -11,8 +11,10 @@ import { fetchDevice } from '../../actions/bot_actions'
 // myBot.connect().then(function(b){ var qqq = myBot; var zzz = b; });
 
 export class Controls extends React.Component {
+  componentDidMount(){
+    if (!this.props.bot._id) { this.props.dispatch(fetchDevice()); };
+  }
 render() {
-  if (!this.props.bot._id) { this.props.dispatch(fetchDevice()); };
   return (
       <div>
         <Navbar/>

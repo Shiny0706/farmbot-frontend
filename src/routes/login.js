@@ -1,18 +1,19 @@
 import React from 'react';
 import { Navbar } from '../components/navbar';
 import { Link } from 'react-router';
-import { LOGIN } from '../actions/auth_actions';
+import { LOGIN, REGISTER } from '../actions/auth_actions';
 const AFTER_LOGIN = '/dashboard';
 
 export class Login extends React.Component {
-  setPassword(event) {
-    // I *THINK* this is an anti-pattern in Redux. Peer review requested.
-    this.setState({loginPassword: event.target.value});
-  }
-
-  setEmail(event) {
-    // I *THINK* this is an anti-pattern in Redux. Peer review requested.
-    this.setState({loginEmail: event.target.value});
+  // I *THINK* this is an anti-pattern in Redux. Peer review requested.
+  // Somewhat conflicted because this form handles passwords, and I don't want
+  // to persist them in the state tree.
+  set(name) {
+    return function(event){
+      var state = {}
+      state[name] = event.target.value;
+      this.setState(state);
+    };
   }
 
   submitLogin(e) {
@@ -20,6 +21,18 @@ export class Login extends React.Component {
     var password = (this.state || {}).loginPassword;
     var email = (this.state || {}).loginEmail;
     return this.props.dispatch(LOGIN(email, password));
+  }
+
+  submitRegistration(e) {
+    e.preventDefault();
+    var state = this.state || {};
+
+    var name = state.regName;
+    var email = state.regEmail;
+    var password = state.regPass;
+    var confirmation = state.regConfirmation;
+
+    return this.props.dispatch(REGISTER(name, email, password, confirmation));
   }
 
   render() {
@@ -46,17 +59,14 @@ export class Login extends React.Component {
                       <div className="widget-content">
                         <div className="input-group">
                           <label>Email</label>
-                          <input type="text"  onChange={ this.setEmail.bind(this) }></input>
+                          <input type="text"  onChange={ this.set("loginEmail").bind(this) }></input>
                           <label>Password</label>
-                          <input type="password" onChange={ this.setPassword.bind(this) }></input>
+                          <input type="password" onChange={ this.set("loginPassword").bind(this) }></input>
                         </div>
                         <div className="row">
                           <div className="col-xs-6">
                             <p className="auth-link">
                               <Link to={ "route_for_resetting_password" }>Reset password</Link>
-                            </p>
-                            <p className="auth-link">
-                              <Link to={ "create_account" }>Create an account</Link>
                             </p>
                           </div>
                           <div className="col-xs-6">
@@ -84,30 +94,31 @@ export class Login extends React.Component {
                 </div>
                 <div className="row">
                   <div className="col-sm-12">
-                    <div className="widget-content">
-                      <div className="input-group">
-                        <label>Email</label>
-                        <input type="text"></input>
-                        <label>Password</label>
-                        <input type="password"></input>
-                        <label>Verfy Password</label>
-                        <input type="password"></input>
-                      </div>
-                      <div className="row">
-                        <div className="col-xs-6">
-                          <p className="auth-link">
-                            Already have an account? <Link to={ "login" }>Login here</Link>
-                          </p>
+                    <form onSubmit={ this.submitRegistration.bind(this) } >
+                      <div className="widget-content">
+                        <div className="input-group">
+                          <label>Email</label>
+                          <input type="email" onChange={ this.set("regEmail").bind(this) } ></input>
+                          <label>Name</label>
+                          <input type="text" onChange={ this.set("regName").bind(this) }></input>
+                          <label>Password</label>
+                          <input type="password" onChange={ this.set("regPass").bind(this) }></input>
+                          <label>Verfy Password</label>
+                          <input type="password" onChange={ this.set("regConfirmation").bind(this) }></input>
                         </div>
-                        <div className="col-xs-6">
-                          <div className="auth-button">
-                            <button className="button-like button green create-account">
-                              Create Account
-                            </button>
+                        <div className="row">
+                          <div className="col-xs-6">
+                          </div>
+                          <div className="col-xs-6">
+                            <div className="auth-button">
+                              <button className="button-like button green create-account">
+                                Create Account
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </div>
