@@ -1,4 +1,8 @@
-const initialState = {};
+const initialState = {
+  name:  "---",
+  token: "---",
+  uuid:  "---"
+};
 import { error, warning, success } from '../logger';
 
 var action_handlers = {
@@ -14,10 +18,10 @@ var action_handlers = {
   FETCH_DEVICE: function(state, action) {
     return state;
   },
-  FETCH_DEVICE_OK: function(state, action) {
+  FETCH_DEVICE_OK: function(state, {action, payload}) {
     return {
       ...state,
-      ...action.payload
+      ...payload
     };
   },
   FETCH_DEVICE_ERR: function(state, action) {
@@ -54,5 +58,6 @@ var action_handlers = {
 
 export function botReducer(state = initialState, action) {
   var handler = (action_handlers[action.type] || action_handlers.DEFAULT);
+  console.log(state.name, action.type);
   return handler(state, action);
 }
