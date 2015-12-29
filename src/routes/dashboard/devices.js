@@ -11,7 +11,9 @@ export class Devices extends React.Component {
   }
 
   changeBot(e) {
+    e.preventDefault();
     var updates = _.object([[e.target.name, e.target.value]]) // {name: "value"}
+    console.log(updates)
     this.props.dispatch(CHANGE_DEVICE(updates));
   }
 
@@ -54,7 +56,7 @@ export class Devices extends React.Component {
                                         <label>FARMBOT NAME</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="name" onChange={ this.changeBot.bind(this) } value={ name } />
+                                        <input name="name" value={ name }  onChange={ this.changeBot.bind(this) } />
                                       </td>
                                     </tr>
                                     <tr>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import configureStore from './configureStore';
 import { loadFromCdn } from './load_from_cdn';
 import { createHistory } from 'history'
@@ -72,9 +71,6 @@ class Root extends Component {
             </Route>
           </Router>
         </Provider>
-        <DebugPanel top right bottom>
-          <DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />
-        </DebugPanel>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import { routeReducer as routing } from 'redux-simple-router';
 import { CONFIG } from '../config';
 
-var DEFAULT_WELCOME_PAGE = "/dashboard";
+var DEFAULT_WELCOME_PAGE = CONFIG.ROOT_PATH + "dashboard";
 let initialState = {
   changeId: 1,
   path: undefined,

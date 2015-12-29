@@ -10,10 +10,12 @@ var action_handlers = {
     return state;
   },
   CHANGE_DEVICE: function(state, action) {
-    return {
+    var debug = {
       ...state,
       ...action.payload
     }
+    console.log(debug)
+    return debug
   },
   FETCH_DEVICE: function(state, action) {
     return state;
