@@ -35,7 +35,7 @@ var wrap = function(Component, props) {
 
 class Root extends Component {
   componentDidMount() {
-    this.props.dispatch(pushPath('/login'));
+    this.props.dispatch(pushPath(CONFIG.ROOT_PATH + 'login'));
   }
 
   requireAuth(nextState, replaceState){
