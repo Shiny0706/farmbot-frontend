@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import configureStore from './configureStore';
-import { loadFromCdn } from './load_from_cdn';
+import * as assets from './assets';
 import { createHistory } from 'history'
 import { syncReduxAndRouter, pushPath } from 'redux-simple-router'
 import { IndexRedirect, IndexRoute, Route, Router } from 'react-router';
@@ -19,7 +18,8 @@ import { CONFIG } from './config';
 import { connect } from 'react-redux';
 import { error } from './logger';
 
-export const store = configureStore();
+import { store } from './store';
+
 const history = createHistory();
 
 syncReduxAndRouter(history, store);
@@ -77,42 +77,9 @@ class Root extends Component {
 }
 
 var ConnectedRoot = connect(state => state)(Root);
+// var ConnectedRoot = connect()(Root);
 ReactDOM.render(<ConnectedRoot store={ store } />,
                 document.getElementById('root'));
 
-// Bootstrap.js doesn't use ES6 modules yet. Need to globally export.
-// Know a more ES6 compliant way to do this? Submit a PR!
-import $ from 'jquery';
-window.$ = $;
-window.jQuery = $;
 
-require("!style!css!sass!./css/toastr.scss");
-require("!style!css!sass!./css/alerts.scss");
-require("!style!css!sass!./css/auth.scss");
-require("!style!css!sass!./css/blocks.scss");
-require("!style!css!sass!./css/buttons.scss");
-require("!style!css!sass!./css/calendar.scss");
-require("!style!css!sass!./css/farm_designer.scss");
-require("!style!css!sass!./css/farm_designer_mobile.scss");
-require("!style!css!sass!./css/farmbot.scss");
-require("!style!css!sass!./css/inputs.scss");
-require("!style!css!sass!./css/farm_designer_panels.scss");
-require("!style!css!sass!./css/map.scss");
-require("!style!css!sass!./css/navbar.scss");
-require("!style!css!sass!./css/search.scss");
-require("!style!css!sass!./css/tables.scss");
-require("!style!css!sass!./css/tooltips.scss");
-require("!style!css!sass!./css/widgets.scss");
-require("!style!css!sass!./css/widget_move.scss");
-require("!style!css!sass!./css/widget_tool_control.scss");
-
-loadFromCdn(
-  "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
-  "css");
-loadFromCdn(
-  "//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
-  "css");
-loadFromCdn(
-  "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",
-  "js");
 
