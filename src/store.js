@@ -10,7 +10,7 @@ var lastState = JSON.parse(localStorage["farmbot"] || '{"auth": {}}');
 
 console.dir(lastState);
 
-export var store = compose(applyMiddleware(thunk))(createStore)(reducers, lastState);
+export var store = compose(applyMiddleware(thunk))(createStore)(reducers, {auth: lastState.auth });
 
 if (lastState.auth.authenticated) {
   store.dispatch({ type: "LOGIN_OK", payload: lastState.auth });

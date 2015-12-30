@@ -10,10 +10,7 @@ var bot; // So bad... Why doesn't this page work? :(
 
 export class Devices extends React.Component {
   componentDidMount(){
-    if (!bot._id) {
-      // Lazy load the bot as needed.
-      this.props.dispatch(fetchDevice());
-    };
+    if (!bot.connected) { this.props.dispatch(fetchDevice()); };
   }
 
   changeBot(e) {

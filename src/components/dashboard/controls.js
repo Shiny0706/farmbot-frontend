@@ -3,6 +3,28 @@ import { Navbar } from '../../components/navbar';
 import { fetchDevice } from '../../actions/bot_actions';
 import { maybeConnectBot } from 'bot_rpc';
 
+class DirectionButton extends React.Component {
+  sendCommand() {
+    var payload = { name: "moveRelative", speed: 100 };
+    var multiplier = (this.props.direction == "up") ? 1 : -1;
+    payload[this.props.axis] = 250 * multiplier;
+    this.props.dispatch({
+      type: "SEND_COMMAND",
+      payload
+    });
+  }
+
+  render() {
+    var classes =
+      "button-like fa fa-2x arrow-button radius fa-arrow-" +
+      this.props.direction;
+    return <button onClick={this.sendCommand.bind(this)}
+                   className={classes}>
+             <i />
+           </button>
+  }
+}
+
 export class Controls extends React.Component {
   componentDidMount(){
     if (!this.props.bot._id) {
@@ -48,12 +70,14 @@ render() {
                                   <td />
                                   <td />
                                   <td>
-                                    <directionbutton axis="y" direction="up" className="button-like fa fa-2x fa-arrow-up arrow-button radius"><i /></directionbutton>
+                                    <DirectionButton axis="y" direction="up" {...this.props}>
+                                    </DirectionButton>
                                   </td>
                                   <td />
                                   <td />
                                   <td>
-                                    <directionbutton axis="z" direction="up" className="button-like fa fa-2x fa-arrow-up arrow-button radius"><i /></directionbutton>
+                                    <DirectionButton axis="z" direction="up" {...this.props}>
+                                    </DirectionButton>
                                   </td>
                                 </tr>
                                 <tr>
@@ -62,17 +86,17 @@ render() {
                                   </td>
                                   <td />
                                   <td>
-                                    <directionbutton axis="x" direction="up" className="button-like fa fa-2x fa-arrow-left arrow-button radius"><i /></directionbutton>
+                                    <button axis="x" direction="up" className="button-like fa fa-2x fa-arrow-left arrow-button radius"><i /></button>
                                   </td>
                                   <td>
-                                    <directionbutton axis="y" direction="down" className="button-like fa fa-2x fa-arrow-down arrow-button radius"><i /></directionbutton>
+                                    <button axis="y" direction="down" className="button-like fa fa-2x fa-arrow-down arrow-button radius"><i /></button>
                                   </td>
                                   <td>
-                                    <directionbutton axis="x" direction="down" className="button-like fa fa-2x fa-arrow-right arrow-button radius"><i /></directionbutton>
+                                    <button axis="x" direction="down" className="button-like fa fa-2x fa-arrow-right arrow-button radius"><i /></button>
                                   </td>
                                   <td />
                                   <td>
-                                    <directionbutton axis="z" direction="down" className="button-like fa fa-2x fa-arrow-down arrow-button radius"><i /></directionbutton>
+                                    <button axis="z" direction="down" className="button-like fa fa-2x fa-arrow-down arrow-button radius"><i /></button>
                                   </td>
                                 </tr>
                                 <tr>

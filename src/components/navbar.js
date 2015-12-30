@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { CONFIG } from '../config';
+import { store } from '../store';
 
 export var Navbar = React.createClass({
   links: {
@@ -34,6 +35,7 @@ export var Navbar = React.createClass({
                 })
               }
             </ul>
+            { store.getState().bot.status }
           </div>
         </div>
       </nav>
