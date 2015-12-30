@@ -36,9 +36,7 @@ export class Login extends React.Component {
   }
 
   render() {
-    if (this.props.auth.authenticated) {
-      console.warn('Already logged in.');
-    };
+
     return (
       <div>
         <Navbar/>

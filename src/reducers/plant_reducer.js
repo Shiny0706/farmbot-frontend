@@ -1,5 +1,6 @@
 import { Plant } from '../models/plant';
 import { error, warning } from '../logger';
+
 const initialState = {
   all: Plant.fakes
 };
@@ -30,5 +31,6 @@ var action_handlers = {
 
 export function plantReducer(state = initialState, action) {
   var handler = (action_handlers[action.type] || action_handlers.DEFAULT);
+  console.log(action.type, state.all)
   return handler(state, action);
 }

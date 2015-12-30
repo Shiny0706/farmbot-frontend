@@ -3,15 +3,15 @@ import { Provider } from 'react-redux';
 import * as assets from './assets';
 import { syncReduxAndRouter, pushPath } from 'redux-simple-router'
 import { IndexRedirect, IndexRoute, Route, Router } from 'react-router';
-import App from './routes/app';
-import Dashboard from './routes/dashboard/dashboard';
-import { Controls } from './routes/dashboard/controls';
-import { Devices } from './routes/dashboard/devices';
-import { Sequences } from './routes/dashboard/sequences/sequences';
-import { Regimens } from './routes/dashboard/regimens/regimen_builder';
-import { Schedules } from './routes/dashboard/schedules/schedules';
-import { FarmDesigner } from './routes/dashboard/farm_designer/farm_designer';
-import { Login } from './routes/login';
+import App from './components/app';
+import Dashboard from './components/dashboard/dashboard';
+import { Controls } from './components/dashboard/controls';
+import { Devices } from './components/dashboard/devices';
+import { Sequences } from './components/dashboard/sequences/sequences';
+import { Regimens } from './components/dashboard/regimens/regimen_builder';
+import { Schedules } from './components/dashboard/schedules/schedules';
+import { FarmDesigner } from './components/dashboard/farm_designer/farm_designer';
+import { Login } from './components/login';
 import { CONFIG } from './config';
 import { connect } from 'react-redux';
 
