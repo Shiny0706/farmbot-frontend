@@ -19,7 +19,7 @@ import { CONFIG } from './config';
 import { connect } from 'react-redux';
 import { error } from './logger';
 
-const store = configureStore();
+export const store = configureStore();
 const history = createHistory();
 
 syncReduxAndRouter(history, store);

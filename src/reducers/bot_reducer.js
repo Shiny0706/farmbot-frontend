@@ -57,6 +57,5 @@ export function botReducer(state, action) {
   var state = Object.assign({}, state);
   var handler = (action_handlers[action.type] || action_handlers.DEFAULT);
   var newState = Object.assign({}, handler(state, action));
-  console.log(action.type, newState)
   return newState;
 }
