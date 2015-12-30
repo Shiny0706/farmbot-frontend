@@ -2,8 +2,18 @@ import { compose, createStore } from 'redux';
 import middleware from './middleware';
 import reducers from './reducers';
 
-function configureStore() {
-  return compose(middleware)(createStore)(reducers);
+// Poor man's hot reloader.
+
+var lastState = JSON.parse(localStorage["farmbot"] || "{auth: {}}");
+
+export var store = compose(middleware)(createStore)(reducers, lastState);
+
+if (lastState.auth.authenticated) {
+  store.dispatch({ type: "LOGIN_OK", payload: lastState.auth });
+};
+
+function saveState(){
+  localStorage["farmbot"] = JSON.stringify(store.getState());
 }
 
-export var store = configureStore();
+store.subscribe(saveState);
