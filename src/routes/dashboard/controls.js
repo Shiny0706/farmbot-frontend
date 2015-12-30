@@ -18,7 +18,6 @@ render() {
   return (
       <div>
         <Navbar/>
-          <pre>{ JSON.stringify(this.props.auth) }</pre>
           <div className="all-content-wrapper">
           <div ng-view className="ng-scope">
             <div className="row ng-scope">
