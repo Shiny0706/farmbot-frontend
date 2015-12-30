@@ -1,8 +1,3 @@
-const initialState = {
-  name:  "---",
-  token: "---",
-  uuid:  "---"
-};
 import { error, warning, success } from '../logger';
 
 var action_handlers = {
@@ -10,15 +5,15 @@ var action_handlers = {
     return state;
   },
   CHANGE_DEVICE: function(state, action) {
-    var debug = {
+    return {
       ...state,
       ...action.payload
-    }
-    console.log(debug)
-    return debug
+    };
   },
   FETCH_DEVICE: function(state, action) {
-    return state;
+    return {
+      ...state
+    };
   },
   FETCH_DEVICE_OK: function(state, {action, payload}) {
     return {
@@ -58,8 +53,10 @@ var action_handlers = {
   }
 }
 
-export function botReducer(state = initialState, action) {
+export function botReducer(state, action) {
+  var state = Object.assign({}, state);
   var handler = (action_handlers[action.type] || action_handlers.DEFAULT);
-  console.log(state.name, action.type);
-  return handler(state, action);
+  var newState = Object.assign({}, handler(state, action));
+  console.log(action.type, newState)
+  return newState;
 }

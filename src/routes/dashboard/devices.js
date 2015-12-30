@@ -7,13 +7,16 @@ import { fetchDevice, CHANGE_DEVICE } from '../../actions/bot_actions'
 
 export class Devices extends React.Component {
   componentDidMount(){
-    if (!this.props.bot._id) { this.props.dispatch(fetchDevice()); };
+    if (!this.props.bot._id) {
+      this.props.dispatch(fetchDevice());
+    } else {
+      debugger;
+    };
   }
 
   changeBot(e) {
     e.preventDefault();
     var updates = _.object([[e.target.name, e.target.value]]) // {name: "value"}
-    console.log(updates)
     this.props.dispatch(CHANGE_DEVICE(updates));
   }
 
@@ -29,6 +32,7 @@ export class Devices extends React.Component {
         <Navbar/>
         <div className="all-content-wrapper">
           <div>
+            <pre>{ JSON.stringify(this.props.bot) }</pre>
             <div className="row">
               <div className="col-md-5 col-sm-6 col-xs-12 col-md-offset-1">
                 <div>

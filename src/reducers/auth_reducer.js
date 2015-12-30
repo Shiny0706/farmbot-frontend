@@ -25,9 +25,9 @@ var action_handlers = {
 }
 
 var initialState = {
-    token: '',
-    authenticated: false
-  }
+  token: '',
+  authenticated: false
+}
 
 export function authReducer(state = initialState, action) {
   var handler = (action_handlers[action.type] || action_handlers.DEFAULT);
