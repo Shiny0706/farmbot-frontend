@@ -1,11 +1,8 @@
 import { Device } from '../models/device';
-import { getBot } from '../bot_rpc';
 import Farmbot from 'farmbot';
-
-function NullBot() {
-}
-
-export var bot = new NullBot();
+import { store } from '../store';
+import { bot } from '../bot';
+import { success, error } from '../logger';
 
 export function CHANGE_DEVICE(attributesThatWillChange = {}) {
   attributesThatWillChange.dirty = true;
@@ -16,12 +13,34 @@ export function CHANGE_DEVICE(attributesThatWillChange = {}) {
 }
 
 export function fetchDevice() {
-  return dispatch => {
-    return Device.fetch().then(
-      (res) => dispatch(FETCH_DEVICE_OK(res)),
-      (err) => dispatch(FETCH_DEVICE_ERR(err))
-    );
+  if (!bot.current.offline()) {
+    return {type: "FETCH_DEVICE", payload: {}};
+  } else{
+    return function(dispatch) {
+      return Device.fetch().then(
+        function(res){ dispatch(FETCH_DEVICE_OK(res)) },
+        function(err){ dispatch(FETCH_DEVICE_ERR(err)) });
+    }
   };
+};
+
+export function sendCommand(payload) {
+  if (!bot.current.offline()) {
+    var method = bot.current[payload.name];
+    var result = method.call(bot.current, payload);
+    return function(dispatch) {
+      return result.then(
+        function (res) {
+          success((payload.name || "Command") + " request received.","Farmbot Heard You!")
+          dispatch({type: "COMMAND_OK", payload: res });
+        }, function(e) {
+          error((payload.name || "Command") + " request failed.","Farmbot Didn't Get That!")
+          dispatch({type: "COMMAND_ERR", payload: e });
+        })
+    };
+  } else {
+    return fetchDevice();
+  }
 }
 
 export function addDevice(deviceAttrs) {
@@ -48,9 +67,15 @@ function SAVE_DEVICE_ERR(err) {
 }
 
 function FETCH_DEVICE_OK(resp) {
-  bot = Farmbot(resp);
+  bot.replace(
+    Farmbot(
+      Object.assign(
+        {}, resp, {timeout: 2500}
+        )
+      )
+    );
   return dispatch => {
-    return bot.connect().then(
+    return bot.current.connect().then(
       (res) => dispatch(CONNECT_OK(resp)),
       (err) => dispatch(CONNECT_ERR(err)),
     );
@@ -58,6 +83,11 @@ function FETCH_DEVICE_OK(resp) {
 }
 
 function CONNECT_OK(res) {
+    function onChange(data){
+      console.log("Change!", data)
+      store.dispatch({ type: "BOT_CHANGE", payload: data });
+    }
+    bot.current.on("*", onChange);
    return {
     type: "CONNECT_OK",
     payload: res

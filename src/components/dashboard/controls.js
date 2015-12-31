@@ -1,17 +1,14 @@
 import React from 'react';
 import { Navbar } from '../../components/navbar';
-import { fetchDevice } from '../../actions/bot_actions';
-import { maybeConnectBot } from 'bot_rpc';
+import { fetchDevice, sendCommand } from '../../actions/bot_actions';
 
 class DirectionButton extends React.Component {
   sendCommand() {
     var payload = { name: "moveRelative", speed: 100 };
-    var multiplier = (this.props.direction == "up") ? 1 : -1;
+    var multiplier = ((this.props.direction == "up") ||
+                      (this.props.direction == "right")) ? 1 : -1;
     payload[this.props.axis] = 250 * multiplier;
-    this.props.dispatch({
-      type: "SEND_COMMAND",
-      payload
-    });
+    this.props.dispatch(sendCommand(payload));
   }
 
   render() {
@@ -27,12 +24,9 @@ class DirectionButton extends React.Component {
 
 export class Controls extends React.Component {
   componentDidMount(){
-    if (!this.props.bot._id) {
-      this.props.dispatch(fetchDevice());
-    };
+    this.props.dispatch(fetchDevice())
   }
 render() {
-  maybeConnectBot(this.props.store)
   return (
       <div>
         <Navbar/>
@@ -86,17 +80,21 @@ render() {
                                   </td>
                                   <td />
                                   <td>
-                                    <button axis="x" direction="up" className="button-like fa fa-2x fa-arrow-left arrow-button radius"><i /></button>
+                                    <DirectionButton axis="x" direction="left" { ...this.props }>
+                                    </DirectionButton>
                                   </td>
                                   <td>
-                                    <button axis="y" direction="down" className="button-like fa fa-2x fa-arrow-down arrow-button radius"><i /></button>
+                                    <DirectionButton axis="y" direction="down" { ...this.props }>
+                                    </DirectionButton>
                                   </td>
                                   <td>
-                                    <button axis="x" direction="down" className="button-like fa fa-2x fa-arrow-right arrow-button radius"><i /></button>
+                                    <DirectionButton axis="x" direction="right" { ...this.props }>
+                                    </DirectionButton>
                                   </td>
                                   <td />
                                   <td>
-                                    <button axis="z" direction="down" className="button-like fa fa-2x fa-arrow-down arrow-button radius"><i /></button>
+                                    <DirectionButton axis="z" direction="down" { ...this.props }>
+                                    </DirectionButton>
                                   </td>
                                 </tr>
                                 <tr>

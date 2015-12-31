@@ -1,5 +1,5 @@
 import { error, warning, success } from '../logger';
-import { bot } from '../actions/bot_actions';
+import { bot } from '../bot';
 
 var status = {
   NOT_READY: "never connected to device",
@@ -8,7 +8,7 @@ var status = {
   API_ERROR: "Unable to download device credentials",
   AWAITING_WEBSOCKET: "calling FarmBot with credentials",
   WEBSOCKET_ERR: "Error establishing socket connection",
-  CONNECTED: "successfully connected to FarmBot"
+  CONNECTED: "Socket Connection Established"
 }
 
 var initialState = {
@@ -20,17 +20,6 @@ var action_handlers = {
 
   DEFAULT: function(state, action) {
     return state;
-  },
-
-  SEND_COMMAND: function(state, action) {
-    var method = bot[action.payload.name];
-    var result = method.call(bot, action.payload);
-    return dispatch => {
-      return result.then(
-        (res) => dispatch({type: "COMMAND_OK"}),
-        (err) => dispatch({type: "COMMAND_ERR"})
-      );
-    };
   },
 
   COMMAND_ERR: function(s, a) {
@@ -66,10 +55,7 @@ var action_handlers = {
   },
 
   FETCH_DEVICE: function(state, action) {
-    return {
-      ...state,
-      status: status.CONNECTING
-    };
+    return state;
   },
   FETCH_DEVICE_OK: function(state, {action, payload}) {
     return {
@@ -116,6 +102,10 @@ var action_handlers = {
 export function botReducer(state = initialState, action) {
   var handler = (action_handlers[action.type] || action_handlers.DEFAULT);
   var newState = Object.assign({}, handler(state, action));
-  console.log(action.type, state)
+  if (!action.type[0] === "@") {
+    console.log(action.type, state)
+  } else{
+    console.log(action.type, state)
+  };
   return newState;
 }

@@ -3,11 +3,7 @@ import * as toast from 'toastr';
 var lastMsg = "Prevent Annoying Duplicates";
 
 export function success(message, title = "Success") {
-  if (lastMsg === message) {
-  } else{
     toast.success(message, title);
-  };
-  lastMsg = message;
 }
 
 // Warnings fire once, to avoid bombarding the user with repetitious errors

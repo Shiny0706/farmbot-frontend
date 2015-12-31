@@ -10,7 +10,7 @@ var bot; // So bad... Why doesn't this page work? :(
 
 export class Devices extends React.Component {
   componentDidMount(){
-    if (!bot.connected) { this.props.dispatch(fetchDevice()); };
+    this.props.dispatch(fetchDevice());
   }
 
   changeBot(e) {
