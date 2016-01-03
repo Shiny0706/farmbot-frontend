@@ -23,7 +23,7 @@ export var Schedules = React.createClass({
                     </div>
                     <div className="row">
                       <div className="col-sm-12">
-                        <form className="widget-content ng-pristine ng-invalid ng-invalid-required" name="form" ng-submit="submit()">
+                        <form className="widget-content" name="form">
                           <div className="row padding-bottom">
                             <div className="col-sm-4">
                               <p>Choose a Sequence</p>

@@ -1,0 +1,26 @@
+// Mobile Styles for the Regimen Builder
+
+@media screen and (max-width: 767px) {
+  .operations-widget {
+  }
+  .sequences-widget {
+  }
+  .regimen-editor-widget {
+    position: absolute!important;
+    top: -68px;
+    left: 0;
+    width: 100%;
+  }
+  .regimens-widget {
+    position: absolute!important;
+    top: -68px;
+    left: 0;
+    width: 100%;
+    .widget-header {
+      h5 {
+        line-height: 3rem;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
