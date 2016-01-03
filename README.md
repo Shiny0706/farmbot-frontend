@@ -15,7 +15,7 @@ HTML, CSS, JS. Mostly React / WebPack
 # Build / Deploy
 
  0. Change `config.js` to settings that are relevant to host environment.
- 0. Run `webpack --config webpack.prod.config.js`.
+ 0. Run `npm run-script compile`.
  0. Compiled output is in `dist/production.js`
 
 **Notes:** Make sure you have [node installed](https://docs.npmjs.com/getting-started/installing-node).
