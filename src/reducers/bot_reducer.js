@@ -1,27 +1,65 @@
-const initialState = {
-  name:  "---",
-  token: "---",
-  uuid:  "---"
-};
 import { error, warning, success } from '../logger';
+import { bot } from '../bot';
+
+var status = {
+  NOT_READY: "never connected to device",
+  CONNECTING: "initiating connection",
+  AWAITING_API: "downloading device credentials",
+  API_ERROR: "Unable to download device credentials",
+  AWAITING_WEBSOCKET: "calling FarmBot with credentials",
+  WEBSOCKET_ERR: "Error establishing socket connection",
+  CONNECTED: "Socket Connection Established"
+}
+
+var initialState = {
+  status: status.NOT_READY
+}
+
 
 var action_handlers = {
+
   DEFAULT: function(state, action) {
     return state;
+  },
+
+  COMMAND_ERR: function(s, a) {
+    return s;
+  },
+
+  COMMAND_OK: function(s, a) {
+    return s;
+  },
+
+  CONNECT_OK: function(state, action) {
+    return {
+      ...state,
+      ...action.payload,
+      status: status.CONNECTED,
+      connected: true
+    };
+  },
+
+  CONNECT_ERR: function(state, action) {
+    return {
+      ...state,
+      status: status.WEBSOCKET_ERR
+    };
   },
   CHANGE_DEVICE: function(state, action) {
     return {
       ...state,
       ...action.payload
-    }
+    };
   },
+
   FETCH_DEVICE: function(state, action) {
     return state;
   },
   FETCH_DEVICE_OK: function(state, {action, payload}) {
     return {
       ...state,
-      ...payload
+      ...payload,
+      status: status.AWAITING_WEBSOCKET
     };
   },
   FETCH_DEVICE_ERR: function(state, action) {
@@ -32,7 +70,10 @@ var action_handlers = {
       error("Unable to download device data from server. " +
             "Check your internet connection.");
     };
-    return state;
+    return {
+      ...state,
+      status: status.API_ERROR
+    };
   },
   SAVE_DEVICE_ERR: function(state, action) {
     switch(action.payload.status) {
@@ -58,6 +99,11 @@ var action_handlers = {
 
 export function botReducer(state = initialState, action) {
   var handler = (action_handlers[action.type] || action_handlers.DEFAULT);
-  console.log(state.name, action.type);
-  return handler(state, action);
+  var newState = Object.assign({}, handler(state, action));
+  if (!action.type[0] === "@") {
+    console.log(action.type, state)
+  } else{
+    console.log(action.type, state)
+  };
+  return newState;
 }

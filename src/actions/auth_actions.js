@@ -1,33 +1,38 @@
-import { CONFIG } from '../config'
+import { CONFIG } from '../config';
+import { fetchDevice } from './bot_actions';
 
-export function LOGIN(username, password) {
+export function login(username, password) {
   return dispatch => {
+
     return requestToken(username, password).then(
-      (res) => dispatch(LOGIN_OK(res.token.encoded)),
-      (err) => dispatch(LOGIN_ERR(err))
+      function (res) {
+        dispatch(fetchDevice());
+        dispatch(loginOk(res.token.encoded));
+      },
+      (err) => dispatch(loginErr(err))
     );
   };
 }
 
-function LOGIN_ERR(err) {
+function loginErr(err) {
   return {
     type: "LOGIN_ERR",
     payload: err
   };
 }
 
-export function LOGIN_OK(token) {
+export function loginOk(token) {
   return {
     type: "LOGIN_OK",
     payload: { token }
   };
 }
 
-export function REGISTER(name, email, password, confirmation) {
+export function register(name, email, password, confirmation) {
   return dispatch => {
     return requestRegistration(name, email, password, confirmation).then(
-      (res) => dispatch(LOGIN_OK(res.token.encoded)),
-      (err) => dispatch(LOGIN_ERR(err))
+      (res) => dispatch(loginOk(res.token.encoded)),
+      (err) => dispatch(loginErr(err))
     );
   };
 }

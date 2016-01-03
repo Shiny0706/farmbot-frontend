@@ -1,19 +1,28 @@
 import React from 'react';
 import { Navbar } from '../../components/navbar';
-import { fetchDevice } from '../../actions/bot_actions'
-// import Farmbot from 'farmbot';
+import { fetchDevice, sendCommand } from '../../actions/bot_actions';
 
-// var myBot = Farmbot({
-//   uuid: "0c055759-33f2-4cec-bb06-11163e0d6e80",
-//   token: "f0de44ca799af47f91873bc7abe59987f95f0953"
-// });
+class DirectionButton extends React.Component {
+  sendCommand() {
+    var payload = { name: "moveRelative", speed: 100 };
+    var multiplier = ((this.props.direction == "up") ||
+                      (this.props.direction == "right")) ? 1 : -1;
+    payload[this.props.axis] = 250 * multiplier;
+    this.props.dispatch(sendCommand(payload));
+  }
 
-// myBot.connect().then(function(b){ var qqq = myBot; var zzz = b; });
+  render() {
+    var classes =
+      "button-like fa fa-2x arrow-button radius fa-arrow-" +
+      this.props.direction;
+    return <button onClick={this.sendCommand.bind(this)}
+                   className={classes}>
+             <i />
+           </button>
+  }
+}
 
 export class Controls extends React.Component {
-  componentDidMount(){
-    if (!this.props.bot._id) { this.props.dispatch(fetchDevice()); };
-  }
 render() {
   return (
       <div>
@@ -52,12 +61,14 @@ render() {
                                   <td />
                                   <td />
                                   <td>
-                                    <directionbutton axis="y" direction="up" className="button-like fa fa-2x fa-arrow-up arrow-button radius"><i /></directionbutton>
+                                    <DirectionButton axis="y" direction="up" {...this.props}>
+                                    </DirectionButton>
                                   </td>
                                   <td />
                                   <td />
                                   <td>
-                                    <directionbutton axis="z" direction="up" className="button-like fa fa-2x fa-arrow-up arrow-button radius"><i /></directionbutton>
+                                    <DirectionButton axis="z" direction="up" {...this.props}>
+                                    </DirectionButton>
                                   </td>
                                 </tr>
                                 <tr>
@@ -66,17 +77,21 @@ render() {
                                   </td>
                                   <td />
                                   <td>
-                                    <directionbutton axis="x" direction="up" className="button-like fa fa-2x fa-arrow-left arrow-button radius"><i /></directionbutton>
+                                    <DirectionButton axis="x" direction="left" { ...this.props }>
+                                    </DirectionButton>
                                   </td>
                                   <td>
-                                    <directionbutton axis="y" direction="down" className="button-like fa fa-2x fa-arrow-down arrow-button radius"><i /></directionbutton>
+                                    <DirectionButton axis="y" direction="down" { ...this.props }>
+                                    </DirectionButton>
                                   </td>
                                   <td>
-                                    <directionbutton axis="x" direction="down" className="button-like fa fa-2x fa-arrow-right arrow-button radius"><i /></directionbutton>
+                                    <DirectionButton axis="x" direction="right" { ...this.props }>
+                                    </DirectionButton>
                                   </td>
                                   <td />
                                   <td>
-                                    <directionbutton axis="z" direction="down" className="button-like fa fa-2x fa-arrow-down arrow-button radius"><i /></directionbutton>
+                                    <DirectionButton axis="z" direction="down" { ...this.props }>
+                                    </DirectionButton>
                                   </td>
                                 </tr>
                                 <tr>

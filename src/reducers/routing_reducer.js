@@ -1,5 +1,7 @@
 import { routeReducer as routing } from 'redux-simple-router';
-var DEFAULT_WELCOME_PAGE = "/dashboard";
+import { CONFIG } from '../config';
+
+var DEFAULT_WELCOME_PAGE = CONFIG.ROOT_PATH + "dashboard";
 let initialState = {
   changeId: 1,
   path: undefined,
@@ -24,7 +26,7 @@ export function routeReducer(state=initialState, { type, payload }) {
     case "LOGIN_REQUIRED":
 
       var newState = Object.assign({}, state, {
-        path: "/login",
+        path: CONFIG.ROOT_PATH + 'login',
         attemptedURL: payload.attemptedURL,
         changeId: state.changeId + 1
       });

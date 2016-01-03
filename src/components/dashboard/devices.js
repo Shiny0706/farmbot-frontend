@@ -3,16 +3,16 @@ import { Navbar } from '../../components/navbar';
 import { addDevice } from '../../actions/bot_actions';
 import { connect } from 'react-redux';
 import { convertFormToObject } from '../../util.js';
-import { fetchDevice, CHANGE_DEVICE } from '../../actions/bot_actions'
+import { fetchDevice, changeDevice } from '../../actions/bot_actions';
+import { store } from '../../index';
+
+var bot; // So bad... Why doesn't this page work? :(
 
 export class Devices extends React.Component {
-  componentDidMount(){
-    if (!this.props.bot._id) { this.props.dispatch(fetchDevice()); };
-  }
-
   changeBot(e) {
+    e.preventDefault();
     var updates = _.object([[e.target.name, e.target.value]]) // {name: "value"}
-    this.props.dispatch(CHANGE_DEVICE(updates));
+    this.props.dispatch(changeDevice(updates));
   }
 
   saveBot(e) {
@@ -21,7 +21,7 @@ export class Devices extends React.Component {
   }
 
   render() {
-    var {name, uuid, token} = this.props.bot;
+    bot = this.props.store.getState().bot;
     return (
       <div>
         <Navbar/>
@@ -36,7 +36,7 @@ export class Devices extends React.Component {
                       <form onSubmit={ this.saveBot.bind(this) }>
                           <div className="row">
                             <div className="col-sm-12">
-                              <button type="submit" className="button-like green widget-control">SAVE { this.props.bot.dirty ? "*" : "" }</button>
+                              <button type="submit" className="button-like green widget-control">SAVE { bot.dirty ? "*" : "" }</button>
                               <button type="button" className="button-like yellow widget-control">RESTART</button>
                               <button type="button" className="button-like red widget-control">SHUTDOWN</button>
                               <div className="widget-header">
@@ -54,7 +54,7 @@ export class Devices extends React.Component {
                                         <label>FARMBOT NAME</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="name" onChange={ this.changeBot.bind(this) } value={ name } />
+                                        <input name="name" onChange={ this.changeBot.bind(this) } value={ bot.name } />
                                       </td>
                                     </tr>
                                     <tr>
@@ -62,7 +62,7 @@ export class Devices extends React.Component {
                                         <label>UUID</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="uuid" onChange={ this.changeBot.bind(this) } value={ this.props.bot.uuid }/>
+                                        <input name="uuid" onChange={ this.changeBot.bind(this) } value={ bot.uuid }/>
                                       </td>
                                     </tr>
                                     <tr>
@@ -70,7 +70,7 @@ export class Devices extends React.Component {
                                         <label>SECURITY TOKEN</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="token" onChange={ this.changeBot.bind(this) } value={ this.props.bot.token }/>
+                                        <input name="token" onChange={ this.changeBot.bind(this) } value={ bot.token }/>
                                       </td>
                                     </tr>
                                     <tr>
@@ -146,7 +146,7 @@ export class Devices extends React.Component {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <button className="green button-like widget-control">SAVE { this.props.bot.dirty ? "*" : "" }</button>
+                        <button className="green button-like widget-control">SAVE { bot.dirty ? "*" : "" }</button>
                         {/* / TODO: Hide the save button ^ until a value in the table has been changed and needs saving. Once the user presses the button, change the text to 'UPDATING' (while the update is happening, just like the sync button). Once the update is complete, change it to 'UPDATED :checkmark:' and make it green. */}
                         <div className="widget-header">
                           <h5>Hardware</h5>
