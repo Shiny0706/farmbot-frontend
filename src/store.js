@@ -5,16 +5,17 @@ import thunk from 'redux-thunk';
 
 // Poor man's hot reloader.
 
-var lastState = JSON.parse(localStorage["farmbot"] || '{"auth": {}}');
+// var lastState = JSON.parse(localStorage["farmbot"] || '{"auth": {}}');
 
-export var store = compose(applyMiddleware(thunk))(createStore)(reducers, {auth: lastState.auth });
+// export var store = compose(applyMiddleware(thunk))(createStore)(reducers, {auth: lastState.auth });
+export var store = compose(applyMiddleware(thunk))(createStore)(reducers);
 
-if (lastState.auth.authenticated) {
-  store.dispatch({ type: "LOGIN_OK", payload: lastState.auth });
-};
+// if (lastState.auth.authenticated) {
+//   store.dispatch({ type: "LOGIN_OK", payload: lastState.auth });
+// };
 
-function saveState(){
-  localStorage["farmbot"] = JSON.stringify(store.getState());
-}
+// function saveState(){
+//   localStorage["farmbot"] = JSON.stringify(store.getState());
+// }
 
-store.subscribe(saveState);
+// store.subscribe(saveState);

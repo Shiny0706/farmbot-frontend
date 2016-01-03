@@ -6,8 +6,8 @@ export function login(username, password) {
 
     return requestToken(username, password).then(
       function (res) {
-        dispatch(fetchDevice());
         dispatch(loginOk(res.token.encoded));
+        dispatch(fetchDevice());
       },
       (err) => dispatch(loginErr(err))
     );
