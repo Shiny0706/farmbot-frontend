@@ -1,4 +1,5 @@
-import { CONFIG } from '../config'
+import { CONFIG } from '../config';
+import { fetchDevice } from './bot_actions';
 
 export function login(username, password) {
   return dispatch => {
