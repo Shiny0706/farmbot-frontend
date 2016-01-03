@@ -23,12 +23,10 @@ var action_handlers = {
   },
 
   COMMAND_ERR: function(s, a) {
-    debugger;
     return s;
   },
 
   COMMAND_OK: function(s, a) {
-    debugger;
     return s;
   },
 

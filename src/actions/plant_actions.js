@@ -1,8 +1,4 @@
 import { Plant } from '../models/plant'
-export const ADD_PLANT_SUCCESS = "ADD_PLANT_SUCCESS";
-export const ADD_PLANT_FAILURE = "ADD_PLANT_FAILURE";
-export const FETCH_PLANTS_SUCCESS = "FETCH_PLANTS_SUCCESS";
-export const FETCH_PLANTS_FAILURE = "FETCH_PLANTS_FAILURE";
 
 export function addPlant(plant) {
   return dispatch => {
@@ -24,28 +20,28 @@ export function fetchAllPlants() {
 
 function addPlantSuccess(plant) {
   return {
-    type: ADD_PLANT_SUCCESS,
+    type: "ADD_PLANT_SUCCESS",
     payload: plant
   }
 }
 
 function addPlantFailure(err) {
   return {
-    type: ADD_PLANT_FAILURE,
+    type: "ADD_PLANT_FAILURE",
     payload: err
   }
 }
 
 function fetchPlantsSuccess(plants){
   return {
-    type: FETCH_PLANTS_SUCCESS,
+    type: "FETCH_PLANTS_SUCCESS",
     payload: plants
   }
 }
 
 function fetchPlantsFailure(err){
   return {
-    type: FETCH_PLANTS_FAILURE,
+    type: "FETCH_PLANTS_FAILURE",
     payload: err
   }
 }

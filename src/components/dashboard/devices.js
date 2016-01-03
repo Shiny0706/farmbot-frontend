@@ -3,20 +3,16 @@ import { Navbar } from '../../components/navbar';
 import { addDevice } from '../../actions/bot_actions';
 import { connect } from 'react-redux';
 import { convertFormToObject } from '../../util.js';
-import { fetchDevice, CHANGE_DEVICE } from '../../actions/bot_actions';
+import { fetchDevice, changeDevice } from '../../actions/bot_actions';
 import { store } from '../../index';
 
 var bot; // So bad... Why doesn't this page work? :(
 
 export class Devices extends React.Component {
-  componentDidMount(){
-    this.props.dispatch(fetchDevice());
-  }
-
   changeBot(e) {
     e.preventDefault();
     var updates = _.object([[e.target.name, e.target.value]]) // {name: "value"}
-    this.props.dispatch(CHANGE_DEVICE(updates));
+    this.props.dispatch(changeDevice(updates));
   }
 
   saveBot(e) {

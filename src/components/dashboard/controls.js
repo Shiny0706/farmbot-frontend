@@ -23,9 +23,6 @@ class DirectionButton extends React.Component {
 }
 
 export class Controls extends React.Component {
-  componentDidMount(){
-    this.props.dispatch(fetchDevice())
-  }
 render() {
   return (
       <div>

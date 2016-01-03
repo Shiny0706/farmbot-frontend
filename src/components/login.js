@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar } from '../components/navbar';
 import { Link } from 'react-router';
-import { LOGIN, REGISTER } from '../actions/auth_actions';
+import { login, register } from '../actions/auth_actions';
 const AFTER_LOGIN = '/dashboard';
 
 export class Login extends React.Component {
@@ -20,7 +20,7 @@ export class Login extends React.Component {
     e.preventDefault();
     var password = (this.state || {}).loginPassword;
     var email = (this.state || {}).loginEmail;
-    return this.props.dispatch(LOGIN(email, password));
+    return this.props.dispatch(login(email, password));
   }
 
   submitRegistration(e) {
@@ -32,7 +32,7 @@ export class Login extends React.Component {
     var password = state.regPass;
     var confirmation = state.regConfirmation;
 
-    return this.props.dispatch(REGISTER(name, email, password, confirmation));
+    return this.props.dispatch(register(name, email, password, confirmation));
   }
 
   render() {

@@ -4,7 +4,7 @@ import { store } from '../store';
 import { bot } from '../bot';
 import { success, error } from '../logger';
 
-export function CHANGE_DEVICE(attributesThatWillChange = {}) {
+export function changeDevice(attributesThatWillChange = {}) {
   attributesThatWillChange.dirty = true;
   return {
     type: "CHANGE_DEVICE",
@@ -18,8 +18,8 @@ export function fetchDevice() {
   } else{
     return function(dispatch) {
       return Device.fetch().then(
-        function(res){ dispatch(FETCH_DEVICE_OK(res)) },
-        function(err){ dispatch(FETCH_DEVICE_ERR(err)) });
+        function(res){ dispatch(fetchDeviceOk(res)) },
+        function(err){ dispatch(fetchDeviceErr(err)) });
     }
   };
 };
@@ -28,45 +28,50 @@ export function sendCommand(payload) {
   if (!bot.current.offline()) {
     var method = bot.current[payload.name];
     var result = method.call(bot.current, payload);
-    return function(dispatch) {
+    return (dispatch) => {
       return result.then(
-        function (res) {
-          success((payload.name || "Command") + " request received.","Farmbot Heard You!")
-          dispatch({type: "COMMAND_OK", payload: res });
-        }, function(e) {
-          error((payload.name || "Command") + " request failed.","Farmbot Didn't Get That!")
-          dispatch({type: "COMMAND_ERR", payload: e });
-        })
+        (res) => sendCommandOk(res, payload, dispatch),
+        (e) => sendCommandErr(e, payload, dispatch))
     };
   } else {
     return fetchDevice();
   }
 }
 
+function sendCommandOk(res, payload, dispatch) {
+  dispatch({type: "COMMAND_OK", payload: res });
+}
+
+function sendCommandErr(e, payload, dispatch) {
+  var msg = (payload.name || "Command") + " request failed.";
+  error(msg, "Farmbot Didn't Get That!");
+  dispatch({type: "COMMAND_ERR", payload: e });
+}
+
 export function addDevice(deviceAttrs) {
   return dispatch => {
     return Device.save(deviceAttrs).then(
-      (res) => dispatch(SAVE_DEVICE_OK(res)),
-      (err) => dispatch(SAVE_DEVICE_ERR(err)),
+      (res) => dispatch(saveDeviceOk(res)),
+      (err) => dispatch(saveDeviceErr(err)),
     );
   };
 }
 
-function SAVE_DEVICE_OK(resp) {
+function saveDeviceOk(resp) {
   return {
     type: "SAVE_DEVICE_OK",
     payload: resp.data
   }
 }
 
-function SAVE_DEVICE_ERR(err) {
+function saveDeviceErr(err) {
   return {
     type: "SAVE_DEVICE_ERR",
     payload: err
   }
 }
 
-function FETCH_DEVICE_OK(resp) {
+function fetchDeviceOk(resp) {
   bot.replace(
     Farmbot(
       Object.assign(
@@ -101,7 +106,7 @@ function CONNECT_ERR(err) {
   }
 };
 
-function FETCH_DEVICE_ERR(err) {
+function fetchDeviceErr(err) {
   return {
     type: "FETCH_DEVICE_ERR",
     payload: err

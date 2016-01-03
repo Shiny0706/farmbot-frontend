@@ -41,6 +41,7 @@ require("!style!css!sass!./css/tooltips.scss");
 require("!style!css!sass!./css/widgets.scss");
 require("!style!css!sass!./css/widget_move.scss");
 require("!style!css!sass!./css/widget_tool_control.scss");
+require("!style!css!sass!./css/regimen_builder_mobile.scss");
 
 loadFromCdn(
   "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",

@@ -7,4 +7,3 @@ import { store } from './store';
 render(<RootComponent store={ store } />, document.getElementById('root'));
 
 
-
