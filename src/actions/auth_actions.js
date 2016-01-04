@@ -2,19 +2,10 @@ import { CONFIG } from '../config';
 import { fetchDevice } from './bot_actions';
 
 export function loginFromToken(token) {
-  // Acrobatic act to reuse prexisting action creators (loginok, fetchdevice)
-  var p = new Promise(function(resolve, reject) {
-    setTimeout(function() {
-      console.log("??")
-      resolve(token);
-    }, 10);
-  });
-  console.log("???")
+  var promise = Promise.resolve();
   return dispatch => {
-      console.log("?")
-    return p.then(
-      function (res) {
-        console.log("!")
+    return promise.then(
+      function () {
         dispatch(loginOk(token));
         dispatch(fetchDevice());
       },
