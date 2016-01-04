@@ -4,6 +4,28 @@ import { store } from '../store';
 import { bot } from '../bot';
 import { success, error } from '../logger';
 
+export function readStatus() {
+  var promise = bot.current.readStatus();
+  return function(dispatch) {
+    return promise.then(function(resp){
+      dispatch(readStatusOk(resp));
+    }, readStatusErr)
+  }
+}
+
+function readStatusOk(status){
+  return {
+    type: "READ_STATUS_OK",
+    payload: status.result
+  }
+}
+
+function readStatusErr(error) {
+  error(
+    "I failed to get a status update from the bot.",
+    "Read Status Error")
+}
+
 export function changeDevice(attributesThatWillChange = {}) {
   attributesThatWillChange.dirty = true;
   return {
@@ -82,25 +104,26 @@ function fetchDeviceOk(resp) {
     );
   return dispatch => {
     return bot.current.connect().then(
-      (res) => dispatch(CONNECT_OK(resp)),
-      (err) => dispatch(CONNECT_ERR(err)),
+      (res) => dispatch(connectOk(resp)),
+      (err) => dispatch(connectErr(err)),
     );
   };
 }
 
-function CONNECT_OK(res) {
-    function onChange(data){
-      console.log("Change!", data)
-      store.dispatch({ type: "BOT_CHANGE", payload: data });
-    }
-    bot.current.on("*", onChange);
-   return {
-    type: "CONNECT_OK",
-    payload: res
-   }
+function connectOk(res) {
+  bot.current.on("*", function onChange(data){
+    store.dispatch({ type: "BOT_CHANGE", payload: data });
+  });
+
+  return function(dispatch) {
+    return Promise.resolve().then( function() {
+      dispatch(readStatus());
+      dispatch({ type: "CONNECT_OK", payload: res });
+    })
+  }
 };
 
-function CONNECT_ERR(err) {
+function connectErr(err) {
   return {
     type: "CONNECT_OK",
     payload: {}

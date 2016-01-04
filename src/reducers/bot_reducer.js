@@ -18,6 +18,19 @@ var initialState = {
 
 var action_handlers = {
 
+  READ_STATUS_OK: function(state, action) {
+    console.log("!!!");
+    return {
+      ...state,
+      ...action.payload
+    }
+  },
+
+  BOT_CHANGE: function(state, action) {
+    console.log("CHANGE EVENT FIRED");
+    return state;
+  },
+
   DEFAULT: function(state, action) {
     return state;
   },

@@ -11,11 +11,11 @@ delete lastState.bot;
 delete lastState.routing;
 
 export var store = compose(applyMiddleware(thunk))(createStore)(reducers, lastState);
+
 var token = store.getState().auth.token;
-if (token) {
-  // If the user already had an auth token, log in.
-  store.dispatch(loginFromToken(token));
-}
+
+// If the user already had an auth token, log in.
+if (token) { store.dispatch(loginFromToken(token)); };
 
 function saveState(){
   console.log(store.getState());
