@@ -19,7 +19,7 @@ var initialState = {
 var action_handlers = {
 
   READ_STATUS_OK: function(state, action) {
-    console.log("!!!");
+    delete action.payload.method
     return {
       ...state,
       ...action.payload

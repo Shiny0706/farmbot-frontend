@@ -20,10 +20,10 @@ function readStatusOk(status){
   }
 }
 
-function readStatusErr(error) {
-  error(
-    "I failed to get a status update from the bot.",
-    "Read Status Error")
+function readStatusErr(msg) {
+  error("Attempted to read status, but failed. See logs for details.",
+        "Read Status Error");
+  console.warn("READSTATUSERR", msg);
 }
 
 export function changeDevice(attributesThatWillChange = {}) {
