@@ -98,7 +98,7 @@ function fetchDeviceOk(resp) {
   bot.replace(
     Farmbot(
       Object.assign(
-        {}, resp, {timeout: 2500}
+        {}, resp, {timeout: 5000}
         )
       )
     );
