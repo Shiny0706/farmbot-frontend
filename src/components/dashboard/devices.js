@@ -8,6 +8,38 @@ import { store } from '../../index';
 
 var bot; // So bad... Why doesn't this page work? :(
 
+class ToggleButton extends React.Component {
+  caption() {
+    var captions = {
+      "0":     "no",
+      "false": "no",
+      "1":     "yes",
+      "true":  "yes",
+    }
+
+    return captions[String(this.props.toggleval)] || "---"
+  }
+
+  css() {
+    var redCSS    = "button-like red";
+    var greenCSS  = "button-like green";
+    var yellowCSS = "button-like yellow";
+
+    var cssClasses = {
+      "0":     redCSS,
+      "false": redCSS,
+      "1":     greenCSS,
+      "true":  greenCSS,
+    }
+
+    return cssClasses[String(this.props.toggleval)] || yellowCSS;
+  }
+
+  render() {
+    return <button className={ this.css() }> { this.caption() }</button>
+  }
+}
+
 export class Devices extends React.Component {
   changeBot(e) {
     e.preventDefault();
@@ -86,7 +118,7 @@ export class Devices extends React.Component {
                                         <label>IP ADDRESS</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <p>0.0.0.0</p>
+                                        <p>{ bot.hardware.IP_ADDRESS}</p>
                                       </td>
                                     </tr>
                                     <tr>
@@ -113,7 +145,7 @@ export class Devices extends React.Component {
                                         <label>MICROCONTROLLER</label>
                                       </td>
                                       <td>
-                                        <p>Arduino MEGA 2560 running farmbot-arduino-firmware V1.233</p>
+                                        <p>Version { String(bot.hardware.PARAM_VERSION) || "information is loading." }</p>
                                       </td>
                                       <td>
                                         <button className="button-like yellow">UPDATE TO V1.234</button>
@@ -243,13 +275,13 @@ export class Devices extends React.Component {
                                     <label>INVERT ENDPOINTS</label>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_ENDPOINTS_X"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_ENDPOINTS_X } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_ENDPOINTS_Y"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_ENDPOINTS_Y } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_ENDPOINTS_Z"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_ENDPOINTS_Z } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -257,13 +289,13 @@ export class Devices extends React.Component {
                                     <label>INVERT MOTOR</label>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_MOTOR_X"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_MOTOR_X } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_MOTOR_Y"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_MOTOR_X } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_MOTOR_Z"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_MOTOR_X } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -271,13 +303,13 @@ export class Devices extends React.Component {
                                     <label>NEGATIVES</label>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_NEGATIVE_X"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_HOME_UP_X } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_NEGATIVE_Y"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_HOME_UP_Y } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_NEGATIVE_Z"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_HOME_UP_Z } />
                                   </td>
                                 </tr>
                               </tbody>
