@@ -4,6 +4,28 @@ import { store } from '../store';
 import { bot } from '../bot';
 import { success, error } from '../logger';
 
+export function readStatus() {
+  var promise = bot.current.readStatus();
+  return function(dispatch) {
+    return promise.then(function(resp){
+      dispatch(readStatusOk(resp));
+    }, readStatusErr)
+  }
+}
+
+function readStatusOk(status){
+  return {
+    type: "READ_STATUS_OK",
+    payload: status.result
+  }
+}
+
+function readStatusErr(msg) {
+  error("Attempted to read status, but failed. See logs for details.",
+        "Read Status Error");
+  console.warn("READSTATUSERR", msg);
+}
+
 export function changeDevice(attributesThatWillChange = {}) {
   attributesThatWillChange.dirty = true;
   return {
@@ -14,6 +36,7 @@ export function changeDevice(attributesThatWillChange = {}) {
 
 export function fetchDevice() {
   if (!bot.current.offline()) {
+    // Do nothing if its already online.
     return {type: "FETCH_DEVICE", payload: {}};
   } else{
     return function(dispatch) {
@@ -75,31 +98,32 @@ function fetchDeviceOk(resp) {
   bot.replace(
     Farmbot(
       Object.assign(
-        {}, resp, {timeout: 2500}
+        {}, resp, {timeout: 5000}
         )
       )
     );
   return dispatch => {
     return bot.current.connect().then(
-      (res) => dispatch(CONNECT_OK(resp)),
-      (err) => dispatch(CONNECT_ERR(err)),
+      (res) => dispatch(connectOk(resp)),
+      (err) => dispatch(connectErr(err)),
     );
   };
 }
 
-function CONNECT_OK(res) {
-    function onChange(data){
-      console.log("Change!", data)
-      store.dispatch({ type: "BOT_CHANGE", payload: data });
-    }
-    bot.current.on("*", onChange);
-   return {
-    type: "CONNECT_OK",
-    payload: res
-   }
+function connectOk(res) {
+  bot.current.on("*", function onChange(data){
+    store.dispatch({ type: "BOT_CHANGE", payload: data });
+  });
+
+  return function(dispatch) {
+    return Promise.resolve().then( function() {
+      dispatch(readStatus());
+      dispatch({ type: "CONNECT_OK", payload: res });
+    })
+  }
 };
 
-function CONNECT_ERR(err) {
+function connectErr(err) {
   return {
     type: "CONNECT_OK",
     payload: {}

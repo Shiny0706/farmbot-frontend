@@ -147,7 +147,6 @@ export class Devices extends React.Component {
                     <div className="row">
                       <div className="col-sm-12">
                         <button className="green button-like widget-control">SAVE { bot.dirty ? "*" : "" }</button>
-                        {/* / TODO: Hide the save button ^ until a value in the table has been changed and needs saving. Once the user presses the button, change the text to 'UPDATING' (while the update is happening, just like the sync button). Once the update is complete, change it to 'UPDATED :checkmark:' and make it green. */}
                         <div className="widget-header">
                           <h5>Hardware</h5>
                         </div>
@@ -174,13 +173,13 @@ export class Devices extends React.Component {
                                     <label>LENGTH (m)</label>
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ "---" } />
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ "---" } />
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ "---" } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -188,13 +187,13 @@ export class Devices extends React.Component {
                                     <label>MAX SPEED (mm/s)</label>
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ bot.hardware.MOVEMENT_MAX_SPD_X || "---" } />
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ bot.hardware.MOVEMENT_MAX_SPD_Y || "---" } />
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ bot.hardware.MOVEMENT_MAX_SPD_Z || "---" } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -202,13 +201,13 @@ export class Devices extends React.Component {
                                     <label>ACCELERATE FOR (steps)</label>
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ bot.hardware.MOVEMENT_STEPS_ACC_DEC_X || "---" } />
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ bot.hardware.MOVEMENT_STEPS_ACC_DEC_Y || "---" } />
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ bot.hardware.MOVEMENT_STEPS_ACC_DEC_Z || "---" } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -216,13 +215,13 @@ export class Devices extends React.Component {
                                     <label>TIMEOUT AFTER (seconds)</label>
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ bot.hardware.MOVEMENT_TIMEOUT_X || "---" } />
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ bot.hardware.MOVEMENT_TIMEOUT_Y || "---" } />
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ bot.hardware.MOVEMENT_TIMEOUT_Z || "---" } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -230,13 +229,13 @@ export class Devices extends React.Component {
                                     <label>STEPS PER MM</label>
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ "---" } />
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ "---" } />
                                   </td>
                                   <td>
-                                    <input />
+                                    <input value={ "---" } />
                                   </td>
                                 </tr>
                                 <tr>

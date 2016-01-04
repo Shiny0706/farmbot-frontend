@@ -12,11 +12,26 @@ var status = {
 }
 
 var initialState = {
-  status: status.NOT_READY
+  status: status.NOT_READY,
+  hardware: {}
 }
 
 
 var action_handlers = {
+
+  READ_STATUS_OK: function(state, action) {
+    delete action.payload.method
+    var hardware = action.payload
+    return {
+      ...state,
+      ...{ hardware }
+    }
+  },
+
+  BOT_CHANGE: function(state, action) {
+    console.log("CHANGE EVENT FIRED");
+    return state;
+  },
 
   DEFAULT: function(state, action) {
     return state;

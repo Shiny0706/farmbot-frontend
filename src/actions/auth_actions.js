@@ -1,13 +1,27 @@
 import { CONFIG } from '../config';
 import { fetchDevice } from './bot_actions';
 
+export function loginFromToken(token) {
+  var promise = Promise.resolve();
+  return dispatch => {
+    return promise.then(
+      function () {
+        dispatch(loginOk(token));
+        dispatch(fetchDevice());
+      },
+      (err) => dispatch(loginErr(err))
+    );
+  };
+}
+
+
 export function login(username, password) {
   return dispatch => {
 
     return requestToken(username, password).then(
       function (res) {
-        dispatch(fetchDevice());
         dispatch(loginOk(res.token.encoded));
+        dispatch(fetchDevice());
       },
       (err) => dispatch(loginErr(err))
     );
