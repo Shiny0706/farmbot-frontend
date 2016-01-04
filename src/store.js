@@ -2,20 +2,24 @@ import { compose, createStore } from 'redux';
 import reducers from './reducers';
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { loginFromToken } from './actions/auth_actions';
 
 // Poor man's hot reloader.
+var lastState = JSON.parse(localStorage["farmbot"] || '{}');
 
-// var lastState = JSON.parse(localStorage["farmbot"] || '{"auth": {}}');
+delete lastState.bot;
+delete lastState.routing;
 
-// export var store = compose(applyMiddleware(thunk))(createStore)(reducers, {auth: lastState.auth });
-export var store = compose(applyMiddleware(thunk))(createStore)(reducers);
+export var store = compose(applyMiddleware(thunk))(createStore)(reducers, lastState);
+var token = store.getState().auth.token;
+if (token) {
+  // If the user already had an auth token, log in.
+  store.dispatch(loginFromToken(token));
+}
 
-// if (lastState.auth.authenticated) {
-//   store.dispatch({ type: "LOGIN_OK", payload: lastState.auth });
-// };
+function saveState(){
+  console.log(store.getState());
+  localStorage["farmbot"] = JSON.stringify(store.getState());
+}
 
-// function saveState(){
-//   localStorage["farmbot"] = JSON.stringify(store.getState());
-// }
-
-// store.subscribe(saveState);
+store.subscribe(saveState);

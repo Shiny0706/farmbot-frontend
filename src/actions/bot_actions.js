@@ -14,6 +14,7 @@ export function changeDevice(attributesThatWillChange = {}) {
 
 export function fetchDevice() {
   if (!bot.current.offline()) {
+    // Do nothing if its already online.
     return {type: "FETCH_DEVICE", payload: {}};
   } else{
     return function(dispatch) {
