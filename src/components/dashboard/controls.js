@@ -44,7 +44,14 @@ render() {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <stopbutton><button className="red button-like widget-control" type="button">E-STOP</button></stopbutton>
+                        <button
+                          className="red button-like widget-control"
+                          type="button"
+                          onClick={ () => this.props.dispatch(sendCommand({name: "emergencyStop" })) } >
+
+                          E-STOP
+
+                        </button>
                         <div className="widget-header">
                           <h5>Move</h5>
                         </div>
