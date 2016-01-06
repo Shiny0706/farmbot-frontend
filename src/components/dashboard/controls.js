@@ -4,19 +4,24 @@ import { fetchDevice, sendCommand, changeStepSize } from '../../actions/bot_acti
 import { ToggleButton } from './toggle_button';
 import { store } from '../../store';
 import { DirectionButton } from './direction_button';
-
 export class StepSizeSelector extends React.Component {
   cssForIndex(num) {
     var choices = this.props.choices;
     var css = "move-amount no-radius ";
-    if(num === _.first(choices)) { css += "leftmost " }
-    if(num === _.last(choices)) { css += "rightmost " }
-    if(num === this.props.selected ) { css += "move-amount-selected " }
+    if(num === _.first(choices)) {
+      css += "leftmost "
+    }
+    if(num === _.last(choices)) {
+      css += "rightmost "
+    }
+    if(num === this.props.selected) {
+      css += "move-amount-selected "
+    }
     return css;
   }
 
   render() {
-    return (<div className="move-amount-wrapper">
+    return(<div className="move-amount-wrapper">
               {
                 this.props.choices.map(
                   (item, inx) => <button
@@ -30,10 +35,12 @@ export class StepSizeSelector extends React.Component {
 }
 
 export class Controls extends React.Component {
-render() {
-  var bot = store.getState().bot || {};
 
-  return (
+  render() {
+    var bot = store.getState()
+      .bot || {};
+
+    return(
       <div>
         <Navbar/>
           <div className="all-content-wrapper">
@@ -202,8 +209,7 @@ render() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-  );
-}
+        </div> < /div>
+    );
+  }
 };
