@@ -1,26 +1,31 @@
 import React from 'react';
 import { Navbar } from '../../components/navbar';
-import { fetchDevice, sendCommand } from '../../actions/bot_actions';
+import { fetchDevice, sendCommand, changeStepSize } from '../../actions/bot_actions';
 import { ToggleButton } from './toggle_button';
 import { store } from '../../store';
+import { DirectionButton } from './direction_button';
 
-class DirectionButton extends React.Component {
-  sendCommand() {
-    var payload = { name: "moveRelative", speed: 100 };
-    var multiplier = ((this.props.direction == "up") ||
-                      (this.props.direction == "right")) ? 1 : -1;
-    payload[this.props.axis] = 250 * multiplier;
-    this.props.dispatch(sendCommand(payload));
+export class StepSizeSelector extends React.Component {
+  cssForIndex(num) {
+    var choices = this.props.choices;
+    var css = "move-amount no-radius ";
+    if(num === _.first(choices)) { css += "leftmost " }
+    if(num === _.last(choices)) { css += "rightmost " }
+    if(num === this.props.selected ) { css += "move-amount-selected " }
+    return css;
   }
 
   render() {
-    var classes =
-      "button-like fa fa-2x arrow-button radius fa-arrow-" +
-      this.props.direction;
-    return <button onClick={this.sendCommand.bind(this)}
-                   className={classes}>
-             <i />
-           </button>
+    return (<div className="move-amount-wrapper">
+              {
+                this.props.choices.map(
+                  (item, inx) => <button
+                              className={ this.cssForIndex(item) }
+                              onClick={ () => this.props.selector(item) }
+                              key={ inx } >{ item }</button>
+                )
+              }
+            </div>)
   }
 }
 
@@ -49,13 +54,10 @@ render() {
                           <label className="text-center">MOVE AMOUNT (mm) Busy</label>
                           <div className="row">
                             <div className="col-sm-12">
-                              <div className="move-amount-wrapper">
-                                <button className="move-amount no-radius leftmost" stepsize={1}>1</button>
-                                <button className="move-amount no-radius" stepsize={10}>10</button>
-                                <button className="move-amount no-radius" stepsize={100}>100</button>
-                                <button className="move-amount no-radius move-amount-selected" stepsize={1000}>1,000</button>
-                                <button className="move-amount no-radius rightmost" stepsize={10000}>10,000</button>
-                              </div>
+                              <StepSizeSelector
+                                choices={ [1,10,100,1000,10000] }
+                                selector={ (num) => this.props.dispatch(changeStepSize(num)) }
+                                selected={ bot.stepSize } />
                             </div>
                           </div>
                           <div className="row">
@@ -65,40 +67,33 @@ render() {
                                   <td />
                                   <td />
                                   <td>
-                                    <DirectionButton axis="y" direction="up" {...this.props}>
-                                    </DirectionButton>
+                                    <DirectionButton axis="y" direction="up" steps={ bot.stepSize || 1000 } {...this.props} />
                                   </td>
                                   <td />
                                   <td />
                                   <td>
-                                    <DirectionButton axis="z" direction="up" {...this.props}>
-                                    </DirectionButton>
+                                    <DirectionButton axis="z" direction="up" steps={ bot.stepSize || 1000 } {...this.props} />
                                   </td>
                                 </tr>
                                 <tr>
                                   <td>
                                     <button
                                      className="button-like i fa fa-home arrow-button"
-                                     onClick={ () => this.props.dispatch(sendCommand({name: "homeAll", speed: (bot.hardware.s || 100) })) }
-                                     ng_click="home()" />
+                                     onClick={ () => this.props.dispatch(sendCommand({name: "homeAll", speed: (bot.hardware.s || 100) })) } />
                                   </td>
                                   <td />
                                   <td>
-                                    <DirectionButton axis="x" direction="left" { ...this.props }>
-                                    </DirectionButton>
+                                    <DirectionButton axis="x" direction="left" steps={ bot.stepSize || 1000 } {...this.props} />
                                   </td>
                                   <td>
-                                    <DirectionButton axis="y" direction="down" { ...this.props }>
-                                    </DirectionButton>
+                                    <DirectionButton axis="y" direction="down" steps={ bot.stepSize || 1000 } {...this.props} />
                                   </td>
                                   <td>
-                                    <DirectionButton axis="x" direction="right" { ...this.props }>
-                                    </DirectionButton>
+                                    <DirectionButton axis="x" direction="right" steps={ bot.stepSize || 1000 } {...this.props} />
                                   </td>
                                   <td />
                                   <td>
-                                    <DirectionButton axis="z" direction="down" { ...this.props }>
-                                    </DirectionButton>
+                                    <DirectionButton axis="z" direction="down" steps={ bot.stepSize || 1000 } {...this.props} />
                                   </td>
                                 </tr>
                                 <tr>

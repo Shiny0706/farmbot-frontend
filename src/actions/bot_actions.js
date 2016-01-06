@@ -4,6 +4,13 @@ import { store } from '../store';
 import { bot } from '../bot';
 import { success, error } from '../logger';
 
+export function changeStepSize(integer) {
+  return {
+    type: "CHANGE_STEP_SIZE",
+    payload: integer
+  }
+}
+
 export function readStatus() {
   var promise = bot.current.readStatus();
   return function(dispatch) {

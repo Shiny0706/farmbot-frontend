@@ -13,11 +13,19 @@ var status = {
 
 var initialState = {
   status: status.NOT_READY,
+  stepSize: 1000,
   hardware: {}
 }
 
 
 var action_handlers = {
+
+  CHANGE_STEP_SIZE: function(state, action) {
+  return {
+      ...state,
+      stepSize: action.payload
+    };
+  },
 
   READ_STATUS_OK: function(state, action) {
     var hardware = Object.assign({}, action.payload);
