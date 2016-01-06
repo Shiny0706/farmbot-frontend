@@ -4,6 +4,52 @@ import { store } from '../store';
 import { bot } from '../bot';
 import { success, error } from '../logger';
 
+export function changeStepSize(integer) {
+  return {
+    type: "CHANGE_STEP_SIZE",
+    payload: integer
+  }
+}
+
+export function changeAxisBuffer(key, val) {
+  return {
+    type: "CHANGE_AXIS_BUFFER",
+    payload: { key, val }
+  }
+}
+
+
+export function commitAxisChanges() {
+  var {axisBuffer, hardware} = store.getState().bot;
+  var packet = _({})
+                 .assign(hardware)
+                 .assign(axisBuffer)
+                 .assign({speed: hardware.s})
+                 .pick("x", "y", "z", "speed")
+                 .transform((a, b, c) => a[c] = Number(b) , {})
+                 .value()
+  var promise = bot.current.moveAbsolute(packet);
+  return function(dispatch) {
+    return promise.then(
+      (resp) => dispatch(commitAxisChangesOk(resp)),
+      (err)  => dispatch(commitAxisChangesErr(resp)))
+    }
+  }
+
+function commitAxisChangesErr(err) {
+  return {
+    type: "COMMIT_AXIS_CHANGE_ERR",
+    payload: err
+  }
+}
+
+function commitAxisChangesOk(resp) {
+  return {
+    type: "COMMIT_AXIS_CHANGE_OK",
+    payload: resp.result
+  }
+}
+
 export function readStatus() {
   var promise = bot.current.readStatus();
   return function(dispatch) {

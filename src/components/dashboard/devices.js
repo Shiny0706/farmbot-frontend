@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { convertFormToObject } from '../../util.js';
 import { fetchDevice, changeDevice } from '../../actions/bot_actions';
 import { store } from '../../index';
+import { ToggleButton } from './toggle_button';
 
 var bot; // So bad... Why doesn't this page work? :(
 
@@ -78,7 +79,7 @@ export class Devices extends React.Component {
                                         <label>NETWORK</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <p>Ethernet</p>
+                                        <p>---</p>
                                       </td>
                                     </tr>
                                     <tr>
@@ -86,7 +87,7 @@ export class Devices extends React.Component {
                                         <label>IP ADDRESS</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <p>0.0.0.0</p>
+                                        <p>{ bot.hardware.ip_address}</p>
                                       </td>
                                     </tr>
                                     <tr>
@@ -113,7 +114,7 @@ export class Devices extends React.Component {
                                         <label>MICROCONTROLLER</label>
                                       </td>
                                       <td>
-                                        <p>Arduino MEGA 2560 running farmbot-arduino-firmware V1.233</p>
+                                        <p>Version { String(bot.hardware.param_version) || "information is loading." }</p>
                                       </td>
                                       <td>
                                         <button className="button-like yellow">UPDATE TO V1.234</button>
@@ -187,13 +188,13 @@ export class Devices extends React.Component {
                                     <label>MAX SPEED (mm/s)</label>
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_MAX_SPD_X || "---" } />
+                                    <input value={ bot.hardware.movement_max_spd_x || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_MAX_SPD_Y || "---" } />
+                                    <input value={ bot.hardware.movement_max_spd_y || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_MAX_SPD_Z || "---" } />
+                                    <input value={ bot.hardware.movement_max_spd_z || "---" } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -201,13 +202,13 @@ export class Devices extends React.Component {
                                     <label>ACCELERATE FOR (steps)</label>
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_STEPS_ACC_DEC_X || "---" } />
+                                    <input value={ bot.hardware.movement_steps_acc_dec_x || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_STEPS_ACC_DEC_Y || "---" } />
+                                    <input value={ bot.hardware.movement_steps_acc_dec_y || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_STEPS_ACC_DEC_Z || "---" } />
+                                    <input value={ bot.hardware.movement_steps_acc_dec_z || "---" } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -215,13 +216,13 @@ export class Devices extends React.Component {
                                     <label>TIMEOUT AFTER (seconds)</label>
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_TIMEOUT_X || "---" } />
+                                    <input value={ bot.hardware.movement_timeout_x || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_TIMEOUT_Y || "---" } />
+                                    <input value={ bot.hardware.movement_timeout_y || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_TIMEOUT_Z || "---" } />
+                                    <input value={ bot.hardware.movement_timeout_z || "---" } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -243,13 +244,13 @@ export class Devices extends React.Component {
                                     <label>INVERT ENDPOINTS</label>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_ENDPOINTS_X"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_x } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_ENDPOINTS_Y"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_y } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_ENDPOINTS_Z"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_z } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -257,13 +258,13 @@ export class Devices extends React.Component {
                                     <label>INVERT MOTOR</label>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_MOTOR_X"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_motor_x } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_MOTOR_Y"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_motor_x } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_INVERT_MOTOR_Z"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_motor_x } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -271,13 +272,13 @@ export class Devices extends React.Component {
                                     <label>NEGATIVES</label>
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_NEGATIVE_X"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.movement_home_up_x } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_NEGATIVE_Y"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.movement_home_up_y } />
                                   </td>
                                   <td>
-                                    <calibrationbutton className="left" toggleval="MOVEMENT_NEGATIVE_Z"><button className="button-like red"> NO </button></calibrationbutton>
+                                    <ToggleButton toggleval={ bot.hardware.movement_home_up_z } />
                                   </td>
                                 </tr>
                               </tbody>

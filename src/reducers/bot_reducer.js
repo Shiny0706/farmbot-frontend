@@ -13,15 +13,46 @@ var status = {
 
 var initialState = {
   status: status.NOT_READY,
+  axisBuffer: {},
+  stepSize: 1000,
   hardware: {}
 }
 
 
 var action_handlers = {
+  COMMIT_AXIS_CHANGE_OK: function(state, action) {
+    // READ_STATUS_OK + reset axisBuffer. That's it.
+    var state = this.READ_STATUS_OK(state, action) // Dat reuse, tho.
+    return {
+      ...state,
+      axisBuffer: {}
+    }
+  },
+
+  COMMIT_AXIS_CHANGE_ERR: function(state, action) {
+    return state;
+  },
+
+  CHANGE_AXIS_BUFFER: function(state, action) {
+    var axisBuffer = Object.assign({}, state.axisBuffer);
+    axisBuffer[action.payload.key] = action.payload.val;
+
+    return {
+      ...state,
+      ...{ axisBuffer }
+    }
+  },
+
+  CHANGE_STEP_SIZE: function(state, action) {
+  return {
+      ...state,
+      stepSize: action.payload
+    };
+  },
 
   READ_STATUS_OK: function(state, action) {
-    delete action.payload.method
-    var hardware = action.payload
+    var hardware = Object.assign({}, action.payload);
+    delete hardware.method
     return {
       ...state,
       ...{ hardware }
@@ -30,7 +61,17 @@ var action_handlers = {
 
   BOT_CHANGE: function(state, action) {
     console.log("CHANGE EVENT FIRED");
-    return state;
+    var statuses = Object.assign({}, action.payload.result);
+    delete statuses.name;
+    delete statuses.method;
+    var newState = {
+      ...state
+    };
+    newState.hardware = {
+      ...state.hardware,
+      ...statuses
+    }
+    return newState;
   },
 
   DEFAULT: function(state, action) {
@@ -114,7 +155,8 @@ var action_handlers = {
 
 export function botReducer(state = initialState, action) {
   var handler = (action_handlers[action.type] || action_handlers.DEFAULT);
-  var newState = Object.assign({}, handler(state, action));
+  var result = handler.call(action_handlers, state, action);
+  var newState = Object.assign({}, result);
   if (!action.type[0] === "@") {
     console.log(action.type, state)
   } else{
