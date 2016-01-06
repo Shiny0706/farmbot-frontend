@@ -1,27 +1,42 @@
 import React from 'react';
 import { Navbar } from '../../components/navbar';
-import { fetchDevice, sendCommand, changeStepSize } from '../../actions/bot_actions';
 import { ToggleButton } from './toggle_button';
 import { store } from '../../store';
 import { DirectionButton } from './direction_button';
+import { fetchDevice,
+         sendCommand,
+         changeStepSize,
+         changeAxisBuffer,
+         commitAxisChanges } from '../../actions/bot_actions';
 
 export class AxisInputBox extends React.Component {
-  componentWillMount() {
-    this.setState({value: 0});
+
+  bot() {
+    // Dumb hacks for impossible bugs.
+    return this.props.store.getState().bot
   }
 
-  onChange(event) {
-    this.setState({value: event.target.value || ""})
+  primary() {
+    return this.bot().axisBuffer[this.props.axis];
+  }
+
+  secondary() {
+    return this.bot().hardware[this.props.axis];
   }
 
   style() {
-    return {
-      border: (this.state.value) ? "1px solid red" : ""
-    };
+    return { border: (this.primary()) ? "1px solid red" : "" };
   }
 
+  change(key, dispatch) {
+    return function(event) {
+      dispatch(changeAxisBuffer(key, event.target.value));
+    }
+  }
+
+
+
   render() {
-    var val = this.state.value || this.props.value || '---' ;
     return  <div className="row">
               <div className="col-xs-7 col-sm-6 col-sm-offset-1">
                 <label>{ this.props.label }</label>
@@ -30,8 +45,8 @@ export class AxisInputBox extends React.Component {
                 <input className="move-input"
                        type="text"
                        style={ this.style() }
-                       onChange={ this.onChange.bind(this) }
-                       value={ val } />
+                       onChange={ this.change(this.props.axis, this.props.dispatch) }
+                       value={ this.primary() || this.secondary() || "---" } />
               </div>
             </div>
   }
@@ -67,13 +82,6 @@ export class StepSizeSelector extends React.Component {
 }
 
 export class Controls extends React.Component {
-  editAxis(name) {
-    return function(event) {
-      var state = {}
-      state[name] = event.target.value;
-      this.setState(state);
-    };
-  }
 
   render() {
     var bot = store.getState()
@@ -154,12 +162,13 @@ export class Controls extends React.Component {
                                 </tr>
                               </tbody></table>
                           </div>
-                          <AxisInputBox label="GANTRY (X)" value={ bot.hardware.x } />
-                          <AxisInputBox label="CROSS-SLIDE (Y)" value={ bot.hardware.y } />
-                          <AxisInputBox label="Z-AXIS (Z)" value={ bot.hardware.z } />
+                          <AxisInputBox axis="x" label="GANTRY (X)" {...this.props} />
+                          <AxisInputBox axis="y" label="CROSS-SLIDE (Y)" {...this.props} />
+                          <AxisInputBox axis="z" label="Z-AXIS (Z)" {...this.props} />
                           <div className="row">
                             <div className="col-xs-5 col-sm-4 col-xs-offset-7 end">
-                              <button className="full-width green button-like">
+                              <button className="full-width green button-like"
+                                      onClick={ () => this.props.dispatch(commitAxisChanges()) } >
                                 GO
                               </button>
                             </div>
@@ -184,7 +193,7 @@ export class Controls extends React.Component {
                               <label className="inline">VACUUM PUMP</label>
                             </div>
                             <div className="col-sm-6">
-                              <ToggleButton toggleval={ bot.hardware.pin0 } />
+                              <ToggleButton toggleval={ bot.hardware.pin9 } />
                             </div>
                           </div>
                           <div className="row">
@@ -192,7 +201,7 @@ export class Controls extends React.Component {
                               <label className="inline">WATER VALVE</label>
                             </div>
                             <div className="col-sm-6">
-                              <ToggleButton toggleval={ bot.hardware.pin12 } />
+                              <ToggleButton toggleval={ bot.hardware.pin10 } />
                             </div>
                           </div>
                           <div className="row">
