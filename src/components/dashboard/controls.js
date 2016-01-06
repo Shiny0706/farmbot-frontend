@@ -1,6 +1,8 @@
 import React from 'react';
 import { Navbar } from '../../components/navbar';
 import { fetchDevice, sendCommand } from '../../actions/bot_actions';
+import { ToggleButton } from './toggle_button';
+import { store } from '../../store';
 
 class DirectionButton extends React.Component {
   sendCommand() {
@@ -24,6 +26,8 @@ class DirectionButton extends React.Component {
 
 export class Controls extends React.Component {
 render() {
+  var bot = store.getState().bot || {};
+  console.log(bot.hardware);
   return (
       <div>
         <Navbar/>
@@ -104,7 +108,7 @@ render() {
                               <label>GANTRY (X)</label>
                             </div>
                             <div className="col-xs-5 col-sm-4 end">
-                              <manualmovementinput axis="x" axisdata="axisdata" className="ng-isolate-scope"><input className="move-input ng-pristine ng-untouched ng-valid" ng_blur="buffer.out()" placeholder={0} ng_style="buffer.dirty ? {'border-color':'red'} : {}" ng_focus="buffer.in()" ng_model="buffer.val" ng_model_options="{ getterSetter: true }" type="text" /></manualmovementinput>
+                              <input className="move-input ng-pristine ng-untouched ng-valid" ng_blur="buffer.out()" placeholder={0} ng_style="buffer.dirty ? {'border-color':'red'} : {}" ng_focus="buffer.in()" ng_model="buffer.val" ng_model_options="{ getterSetter: true }" type="text" />
                             </div>
                           </div>
                           <div className="row">
@@ -148,7 +152,7 @@ render() {
                               <label className="inline">VACUUM PUMP</label>
                             </div>
                             <div className="col-sm-6">
-                              <togglebutton peripheral="vacuum"><button className="button tool-toggle radius red green" ng-class="{red: !pinStatus, green: pinStatus}"> LOADING </button></togglebutton>
+                              <ToggleButton toggleval={ bot.hardware.PIN14 } />
                             </div>
                           </div>
                           <div className="row">
@@ -156,7 +160,7 @@ render() {
                               <label className="inline">WATER VALVE</label>
                             </div>
                             <div className="col-sm-6">
-                              <togglebutton peripheral="water"><button className="button tool-toggle radius red green" ng-class="{red: !pinStatus, green: pinStatus}"> LOADING </button></togglebutton>
+                              <ToggleButton toggleval={ bot.hardware.PIN12 } />
                             </div>
                           </div>
                           <div className="row">
@@ -164,7 +168,7 @@ render() {
                               <label className="inline">LED</label>
                             </div>
                             <div className="col-sm-6">
-                              <togglebutton peripheral="led"><button className="button tool-toggle radius red green" ng-class="{red: !pinStatus, green: pinStatus}"> LOADING </button></togglebutton>
+                              <ToggleButton toggleval={ bot.hardware.PIN13 } />
                             </div>
                           </div>
                         </div>

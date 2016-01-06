@@ -5,40 +5,9 @@ import { connect } from 'react-redux';
 import { convertFormToObject } from '../../util.js';
 import { fetchDevice, changeDevice } from '../../actions/bot_actions';
 import { store } from '../../index';
+import { ToggleButton } from './toggle_button';
 
 var bot; // So bad... Why doesn't this page work? :(
-
-class ToggleButton extends React.Component {
-  caption() {
-    var captions = {
-      "0":     "no",
-      "false": "no",
-      "1":     "yes",
-      "true":  "yes",
-    }
-
-    return captions[String(this.props.toggleval)] || "---"
-  }
-
-  css() {
-    var redCSS    = "button-like red";
-    var greenCSS  = "button-like green";
-    var yellowCSS = "button-like yellow";
-
-    var cssClasses = {
-      "0":     redCSS,
-      "false": redCSS,
-      "1":     greenCSS,
-      "true":  greenCSS,
-    }
-
-    return cssClasses[String(this.props.toggleval)] || yellowCSS;
-  }
-
-  render() {
-    return <button className={ this.css() }> { this.caption() }</button>
-  }
-}
 
 export class Devices extends React.Component {
   changeBot(e) {
@@ -110,7 +79,7 @@ export class Devices extends React.Component {
                                         <label>NETWORK</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <p>Ethernet</p>
+                                        <p>---</p>
                                       </td>
                                     </tr>
                                     <tr>
