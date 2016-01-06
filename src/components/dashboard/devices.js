@@ -87,7 +87,7 @@ export class Devices extends React.Component {
                                         <label>IP ADDRESS</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <p>{ bot.hardware.IP_ADDRESS}</p>
+                                        <p>{ bot.hardware.ip_address}</p>
                                       </td>
                                     </tr>
                                     <tr>
@@ -114,7 +114,7 @@ export class Devices extends React.Component {
                                         <label>MICROCONTROLLER</label>
                                       </td>
                                       <td>
-                                        <p>Version { String(bot.hardware.PARAM_VERSION) || "information is loading." }</p>
+                                        <p>Version { String(bot.hardware.param_version) || "information is loading." }</p>
                                       </td>
                                       <td>
                                         <button className="button-like yellow">UPDATE TO V1.234</button>
@@ -188,13 +188,13 @@ export class Devices extends React.Component {
                                     <label>MAX SPEED (mm/s)</label>
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_MAX_SPD_X || "---" } />
+                                    <input value={ bot.hardware.movement_max_spd_x || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_MAX_SPD_Y || "---" } />
+                                    <input value={ bot.hardware.movement_max_spd_y || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_MAX_SPD_Z || "---" } />
+                                    <input value={ bot.hardware.movement_max_spd_z || "---" } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -202,13 +202,13 @@ export class Devices extends React.Component {
                                     <label>ACCELERATE FOR (steps)</label>
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_STEPS_ACC_DEC_X || "---" } />
+                                    <input value={ bot.hardware.movement_steps_acc_dec_x || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_STEPS_ACC_DEC_Y || "---" } />
+                                    <input value={ bot.hardware.movement_steps_acc_dec_y || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_STEPS_ACC_DEC_Z || "---" } />
+                                    <input value={ bot.hardware.movement_steps_acc_dec_z || "---" } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -216,13 +216,13 @@ export class Devices extends React.Component {
                                     <label>TIMEOUT AFTER (seconds)</label>
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_TIMEOUT_X || "---" } />
+                                    <input value={ bot.hardware.movement_timeout_x || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_TIMEOUT_Y || "---" } />
+                                    <input value={ bot.hardware.movement_timeout_y || "---" } />
                                   </td>
                                   <td>
-                                    <input value={ bot.hardware.MOVEMENT_TIMEOUT_Z || "---" } />
+                                    <input value={ bot.hardware.movement_timeout_z || "---" } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -244,13 +244,13 @@ export class Devices extends React.Component {
                                     <label>INVERT ENDPOINTS</label>
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_ENDPOINTS_X } />
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_x } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_ENDPOINTS_Y } />
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_y } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_ENDPOINTS_Z } />
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_z } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -258,13 +258,13 @@ export class Devices extends React.Component {
                                     <label>INVERT MOTOR</label>
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_MOTOR_X } />
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_motor_x } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_MOTOR_X } />
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_motor_x } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_INVERT_MOTOR_X } />
+                                    <ToggleButton toggleval={ bot.hardware.movement_invert_motor_x } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -272,13 +272,13 @@ export class Devices extends React.Component {
                                     <label>NEGATIVES</label>
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_HOME_UP_X } />
+                                    <ToggleButton toggleval={ bot.hardware.movement_home_up_x } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_HOME_UP_Y } />
+                                    <ToggleButton toggleval={ bot.hardware.movement_home_up_y } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.MOVEMENT_HOME_UP_Z } />
+                                    <ToggleButton toggleval={ bot.hardware.movement_home_up_z } />
                                   </td>
                                 </tr>
                               </tbody>

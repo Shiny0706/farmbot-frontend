@@ -20,8 +20,8 @@ var initialState = {
 var action_handlers = {
 
   READ_STATUS_OK: function(state, action) {
-    delete action.payload.method
-    var hardware = action.payload
+    var hardware = Object.assign({}, action.payload);
+    delete hardware.method
     return {
       ...state,
       ...{ hardware }
@@ -30,7 +30,17 @@ var action_handlers = {
 
   BOT_CHANGE: function(state, action) {
     console.log("CHANGE EVENT FIRED");
-    return state;
+    var statuses = Object.assign({}, action.payload.result);
+    delete statuses.name;
+    delete statuses.method;
+    var newState = {
+      ...state
+    };
+    newState.hardware = {
+      ...state.hardware,
+      ...statuses
+    }
+    return newState;
   },
 
   DEFAULT: function(state, action) {

@@ -27,7 +27,7 @@ class DirectionButton extends React.Component {
 export class Controls extends React.Component {
 render() {
   var bot = store.getState().bot || {};
-  console.log(bot.hardware);
+
   return (
       <div>
         <Navbar/>
@@ -77,7 +77,10 @@ render() {
                                 </tr>
                                 <tr>
                                   <td>
-                                    <button className="button-like i fa fa-home arrow-button" ng_click="home()" />
+                                    <button
+                                     className="button-like i fa fa-home arrow-button"
+                                     onClick={ () => this.props.dispatch(sendCommand({name: "homeAll", speed: (bot.hardware.s || 100) })) }
+                                     ng_click="home()" />
                                   </td>
                                   <td />
                                   <td>
@@ -108,7 +111,7 @@ render() {
                               <label>GANTRY (X)</label>
                             </div>
                             <div className="col-xs-5 col-sm-4 end">
-                              <input className="move-input ng-pristine ng-untouched ng-valid" ng_blur="buffer.out()" placeholder={0} ng_style="buffer.dirty ? {'border-color':'red'} : {}" ng_focus="buffer.in()" ng_model="buffer.val" ng_model_options="{ getterSetter: true }" type="text" />
+                              <input className="move-input" type="text" value={ bot.hardware.x } />
                             </div>
                           </div>
                           <div className="row">
@@ -116,7 +119,7 @@ render() {
                               <label>CROSS-SLIDE (Y)</label>
                             </div>
                             <div className="col-xs-5 col-sm-4 end">
-                              <manualmovementinput axis="y" axisdata="axisdata" className="ng-isolate-scope"><input className="move-input ng-pristine ng-untouched ng-valid" ng_blur="buffer.out()" placeholder={0} ng_style="buffer.dirty ? {'border-color':'red'} : {}" ng_focus="buffer.in()" ng_model="buffer.val" ng_model_options="{ getterSetter: true }" type="text" /></manualmovementinput>
+                              <input className="move-input" type="text" value={ bot.hardware.y } />
                             </div>
                           </div>
                           <div className="row">
@@ -124,7 +127,7 @@ render() {
                               <label>Z-AXIS (Z)</label>
                             </div>
                             <div className="col-xs-5 col-sm-4 end">
-                              <manualmovementinput axis="z" axisdata="axisdata" className="ng-isolate-scope"><input className="move-input ng-pristine ng-untouched ng-valid" ng_blur="buffer.out()" placeholder={0} ng_style="buffer.dirty ? {'border-color':'red'} : {}" ng_focus="buffer.in()" ng_model="buffer.val" ng_model_options="{ getterSetter: true }" type="text" /></manualmovementinput>
+                              <input className="move-input" type="text" value={ bot.hardware.z } />
                             </div>
                           </div>
                           <div className="row">
@@ -152,7 +155,7 @@ render() {
                               <label className="inline">VACUUM PUMP</label>
                             </div>
                             <div className="col-sm-6">
-                              <ToggleButton toggleval={ bot.hardware.PIN14 } />
+                              <ToggleButton toggleval={ bot.hardware.pin0 } />
                             </div>
                           </div>
                           <div className="row">
@@ -160,7 +163,7 @@ render() {
                               <label className="inline">WATER VALVE</label>
                             </div>
                             <div className="col-sm-6">
-                              <ToggleButton toggleval={ bot.hardware.PIN12 } />
+                              <ToggleButton toggleval={ bot.hardware.pin12 } />
                             </div>
                           </div>
                           <div className="row">
@@ -168,7 +171,7 @@ render() {
                               <label className="inline">LED</label>
                             </div>
                             <div className="col-sm-6">
-                              <ToggleButton toggleval={ bot.hardware.PIN13 } />
+                              <ToggleButton toggleval={ bot.hardware.pin13 } />
                             </div>
                           </div>
                         </div>
