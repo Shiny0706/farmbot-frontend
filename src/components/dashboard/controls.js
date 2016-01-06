@@ -4,6 +4,38 @@ import { fetchDevice, sendCommand, changeStepSize } from '../../actions/bot_acti
 import { ToggleButton } from './toggle_button';
 import { store } from '../../store';
 import { DirectionButton } from './direction_button';
+
+export class AxisInputBox extends React.Component {
+  componentWillMount() {
+    this.setState({value: 0});
+  }
+
+  onChange(event) {
+    this.setState({value: event.target.value || ""})
+  }
+
+  style() {
+    return {
+      border: (this.state.value) ? "1px solid red" : ""
+    };
+  }
+
+  render() {
+    var val = this.state.value || this.props.value || '---' ;
+    return  <div className="row">
+              <div className="col-xs-7 col-sm-6 col-sm-offset-1">
+                <label>{ this.props.label }</label>
+              </div>
+              <div className="col-xs-5 col-sm-4 end">
+                <input className="move-input"
+                       type="text"
+                       style={ this.style() }
+                       onChange={ this.onChange.bind(this) }
+                       value={ val } />
+              </div>
+            </div>
+  }
+}
 export class StepSizeSelector extends React.Component {
   cssForIndex(num) {
     var choices = this.props.choices;
@@ -35,6 +67,13 @@ export class StepSizeSelector extends React.Component {
 }
 
 export class Controls extends React.Component {
+  editAxis(name) {
+    return function(event) {
+      var state = {}
+      state[name] = event.target.value;
+      this.setState(state);
+    };
+  }
 
   render() {
     var bot = store.getState()
@@ -115,33 +154,14 @@ export class Controls extends React.Component {
                                 </tr>
                               </tbody></table>
                           </div>
-                          <div className="row">
-                            <div className="col-xs-7 col-sm-6 col-sm-offset-1">
-                              <label>GANTRY (X)</label>
-                            </div>
-                            <div className="col-xs-5 col-sm-4 end">
-                              <input className="move-input" type="text" value={ bot.hardware.x } />
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-xs-7 col-sm-6 col-sm-offset-1">
-                              <label>CROSS-SLIDE (Y)</label>
-                            </div>
-                            <div className="col-xs-5 col-sm-4 end">
-                              <input className="move-input" type="text" value={ bot.hardware.y } />
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-xs-7 col-sm-6 col-sm-offset-1">
-                              <label>Z-AXIS (Z)</label>
-                            </div>
-                            <div className="col-xs-5 col-sm-4 end">
-                              <input className="move-input" type="text" value={ bot.hardware.z } />
-                            </div>
-                          </div>
+                          <AxisInputBox label="GANTRY (X)" value={ bot.hardware.x } />
+                          <AxisInputBox label="CROSS-SLIDE (Y)" value={ bot.hardware.y } />
+                          <AxisInputBox label="Z-AXIS (Z)" value={ bot.hardware.z } />
                           <div className="row">
                             <div className="col-xs-5 col-sm-4 col-xs-offset-7 end">
-                              <button className="full-width green button-like" ng_click="manualMovement()">GO</button>
+                              <button className="full-width green button-like">
+                                GO
+                              </button>
                             </div>
                           </div>
                         </div>
