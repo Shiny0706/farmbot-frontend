@@ -22,6 +22,9 @@ var initialState = {
 
 
 var action_handlers = {
+  SETTING_TOGGLE_OK: function(state, action) {
+    return this.READ_STATUS_OK(state, action);
+  },
   COMMIT_SETTINGS_OK: function(state, action) {
     return {
       ...state,
@@ -83,7 +86,7 @@ var action_handlers = {
   },
 
   BOT_CHANGE: function(state, action) {
-    console.log("CHANGE EVENT FIRED");
+    console.log("CHANGE EVENT FIRED", action.payload);
     var statuses = Object.assign({}, action.payload.result);
     delete statuses.name;
     delete statuses.method;

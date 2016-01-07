@@ -4,6 +4,64 @@ import { store } from '../store';
 import { bot } from '../bot';
 import { success, error } from '../logger';
 
+const ON = 1, OFF = 0, DIGITAL = 0;
+
+export function settingToggle(name) {
+  var currentValue = store.getState().bot.hardware[name];
+  var newsettingValue = (currentValue === 0) ? ON : OFF;
+  var packet = {};
+  packet[name] = newsettingValue;
+  var promise = bot.current.updateCalibration(packet)
+
+  return function(dispatch) {
+    promise.then(res => dispatch(settingToggleOk(res)),
+                 err => dispatch(settingToggleErr(err)))
+  }
+}
+
+export function settingToggleOk(res) {
+  return {
+    type: "SETTING_TOGGLE_OK",
+    payload: res.result
+  }
+}
+
+export function settingToggleErr(err) {
+  error("Refresh browser or restart bot.", "Error while toggling setting");
+  return {
+    type: "SETTING_TOGGLE_ERR",
+    payload: {}
+  }
+}
+
+
+export function pinToggle(num) {
+  var currentValue = store.getState().bot.hardware[`pin${num}`];
+  var newPinValue = (currentValue === "on") ? OFF : ON;
+  var promise = bot
+    .current
+    .pinWrite({pin: num, value1: newPinValue, mode: DIGITAL});
+  return function(dispatch) {
+    promise.then(res => dispatch(pinToggleOk(res)),
+                 err => dispatch(pinToggleErr(err)))
+  }
+}
+
+export function pinToggleOk(res) {
+  return {
+    type: "PIN_TOGGLE_OK",
+    payload: res.result
+  }
+}
+
+export function pinToggleErr(err) {
+  error("Refresh browser or restart bot.", "Error while toggling pin");
+  return {
+    type: "PIN_TOGGLE_ERR",
+    payload: {}
+  }
+}
+
 export function changeStepSize(integer) {
   return {
     type: "CHANGE_STEP_SIZE",
@@ -31,10 +89,7 @@ export function commitSettingsChanges() {
                  .assign(hardware)
                  .assign(settingsBuffer)
                  .value()
-  // var promise = bot.current.updateCalibration(packet);
-  var promise = bot
-    .current
-    .send({ params: packet, method: "update_calibration" })
+  var promise = bot.current.updateCalibration(packet);
   return function(dispatch) {
     return promise.then(
       (resp) => dispatch(commitSettingsChangesOk(resp)),

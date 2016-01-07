@@ -7,7 +7,8 @@ import { fetchDevice,
          sendCommand,
          changeStepSize,
          changeAxisBuffer,
-         commitAxisChanges } from '../../actions/bot_actions';
+         commitAxisChanges,
+         pinToggle } from '../../actions/bot_actions';
 
 export class AxisInputBox extends React.Component {
 
@@ -198,7 +199,8 @@ export class Controls extends React.Component {
                               <label className="inline">VACUUM PUMP</label>
                             </div>
                             <div className="col-sm-6">
-                              <ToggleButton toggleval={ bot.hardware.pin9 } />
+                              <ToggleButton toggleval={ bot.hardware.pin9 }
+                                            toggleAction={ () => this.props.dispatch(pinToggle(9)) } />
                             </div>
                           </div>
                           <div className="row">
@@ -206,7 +208,8 @@ export class Controls extends React.Component {
                               <label className="inline">WATER VALVE</label>
                             </div>
                             <div className="col-sm-6">
-                              <ToggleButton toggleval={ bot.hardware.pin10 } />
+                              <ToggleButton toggleval={ bot.hardware.pin10 }
+                                            toggleAction={ () => this.props.dispatch(pinToggle(10)) } />
                             </div>
                           </div>
                           <div className="row">
@@ -214,7 +217,8 @@ export class Controls extends React.Component {
                               <label className="inline">LED</label>
                             </div>
                             <div className="col-sm-6">
-                              <ToggleButton toggleval={ bot.hardware.pin13 } />
+                              <ToggleButton toggleval={ bot.hardware.pin13 }
+                                            toggleAction={ () => this.props.dispatch(pinToggle(13)) } />
                             </div>
                           </div>
                         </div>

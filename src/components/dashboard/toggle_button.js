@@ -32,6 +32,7 @@ export class ToggleButton extends React.Component {
   }
 
   render() {
-    return <button className={ this.css() }> { this.caption() }</button>
+    return <button className={ this.css() }
+                   onClick={ this.props.toggleAction }> { this.caption() }</button>
   }
 }
