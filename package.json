@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git://github.com/FarmBot/farmbot-web-frontend"
   },
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "main": "./src/index.js",
   "scripts": {
@@ -40,7 +40,6 @@
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.1.1",
     "requirejs": "^2.1.22",
-    "webpack": "^1.12.6",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-dev-server": "^1.12.1",
     "webpack-hot-middleware": "^2.4.1"
@@ -48,7 +47,7 @@
   "dependencies": {
     "@grove/react-font-awesome": "^1.1.4",
     "css-loader": "^0.23.0",
-    "farmbot": "0.0.6",
+    "farmbot": "0.1.2",
     "history": "^1.12.6",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",

@@ -8,18 +8,29 @@ var status = {
   API_ERROR: "Unable to download device credentials",
   AWAITING_WEBSOCKET: "calling FarmBot with credentials",
   WEBSOCKET_ERR: "Error establishing socket connection",
-  CONNECTED: "Socket Connection Established"
+  CONNECTED: "Socket Connection Established",
+  READY: "Bot ready"
 }
 
 var initialState = {
   status: status.NOT_READY,
   axisBuffer: {},
+  settingsBuffer: {},
   stepSize: 1000,
   hardware: {}
 }
 
 
 var action_handlers = {
+  SETTING_TOGGLE_OK: function(state, action) {
+    return this.READ_STATUS_OK(state, action);
+  },
+  COMMIT_SETTINGS_OK: function(state, action) {
+    return {
+      ...state,
+      settingsBuffer: {}
+    }
+  },
   COMMIT_AXIS_CHANGE_OK: function(state, action) {
     // READ_STATUS_OK + reset axisBuffer. That's it.
     var state = this.READ_STATUS_OK(state, action) // Dat reuse, tho.
@@ -43,6 +54,20 @@ var action_handlers = {
     }
   },
 
+  CHANGE_SETTINGS_BUFFER: function(state, action) {
+    var settingsBuffer = Object.assign({}, state.settingsBuffer);
+    var newVal = Number(action.payload.val);
+    if(newVal) {
+      settingsBuffer[action.payload.key] = action.payload.val;
+    } else {
+      delete settingsBuffer[action.payload.key]
+    }
+    return {
+      ...state,
+      ...{ settingsBuffer }
+    }
+  },
+
   CHANGE_STEP_SIZE: function(state, action) {
   return {
       ...state,
@@ -55,12 +80,13 @@ var action_handlers = {
     delete hardware.method
     return {
       ...state,
-      ...{ hardware }
+      ...{ hardware },
+      status: status.READY
     }
   },
 
   BOT_CHANGE: function(state, action) {
-    console.log("CHANGE EVENT FIRED");
+    console.log("CHANGE EVENT FIRED", action.payload);
     var statuses = Object.assign({}, action.payload.result);
     delete statuses.name;
     delete statuses.method;
