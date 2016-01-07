@@ -15,12 +15,19 @@ var status = {
 var initialState = {
   status: status.NOT_READY,
   axisBuffer: {},
+  settingsBuffer: {},
   stepSize: 1000,
   hardware: {}
 }
 
 
 var action_handlers = {
+  COMMIT_SETTINGS_OK: function(state, action) {
+    return {
+      ...state,
+      settingsBuffer: {}
+    }
+  },
   COMMIT_AXIS_CHANGE_OK: function(state, action) {
     // READ_STATUS_OK + reset axisBuffer. That's it.
     var state = this.READ_STATUS_OK(state, action) // Dat reuse, tho.
@@ -41,6 +48,20 @@ var action_handlers = {
     return {
       ...state,
       ...{ axisBuffer }
+    }
+  },
+
+  CHANGE_SETTINGS_BUFFER: function(state, action) {
+    var settingsBuffer = Object.assign({}, state.settingsBuffer);
+    var newVal = Number(action.payload.val);
+    if(newVal) {
+      settingsBuffer[action.payload.key] = action.payload.val;
+    } else {
+      delete settingsBuffer[action.payload.key]
+    }
+    return {
+      ...state,
+      ...{ settingsBuffer }
     }
   },
 

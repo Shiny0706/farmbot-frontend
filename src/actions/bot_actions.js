@@ -18,6 +18,45 @@ export function changeAxisBuffer(key, val) {
   }
 }
 
+export function changeSettingsBuffer(key, val) {
+  return {
+    type: "CHANGE_SETTINGS_BUFFER",
+    payload: { key, val }
+  }
+}
+
+export function commitSettingsChanges() {
+  var { settingsBuffer, hardware } = store.getState().bot;
+  var packet = _({})
+                 .assign(hardware)
+                 .assign(settingsBuffer)
+                 .value()
+  // var promise = bot.current.updateCalibration(packet);
+  var promise = bot
+    .current
+    .send({ params: packet, method: "update_calibration" })
+  return function(dispatch) {
+    return promise.then(
+      (resp) => dispatch(commitSettingsChangesOk(resp)),
+      (err)  => dispatch(commitSettingsChangesErr(err)))
+    }
+  }
+
+function commitSettingsChangesOk(resp) {
+  return {
+    type: "COMMIT_SETTINGS_OK",
+    payload: {}
+  }
+}
+
+function commitSettingsChangesErr(err) {
+  return {
+    type: "COMMIT_SETTINGS_ERR",
+    payload: {
+
+    }
+  }
+}
 
 export function commitAxisChanges() {
   var {axisBuffer, hardware} = store.getState().bot;

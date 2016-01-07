@@ -1,6 +1,8 @@
 import React from 'react';
 import { Navbar } from '../../components/navbar';
-import { addDevice } from '../../actions/bot_actions';
+import { addDevice,
+         changeSettingsBuffer,
+         commitSettingsChanges } from '../../actions/bot_actions';
 import { connect } from 'react-redux';
 import { convertFormToObject } from '../../util.js';
 import { fetchDevice, changeDevice } from '../../actions/bot_actions';
@@ -8,6 +10,53 @@ import { store } from '../../index';
 import { ToggleButton } from './toggle_button';
 
 var bot; // So bad... Why doesn't this page work? :(
+
+
+
+export class SettingsInputBox extends React.Component {
+
+  bot() {
+    // Dumb hacks for impossible bugs.
+    return this.props.store.getState().bot;
+  }
+
+  primary() {
+    return this.bot().settingsBuffer[this.props.setting];
+  }
+
+  secondary() {
+    var num = this.bot().hardware[this.props.setting];
+    if (_.isNumber(num)) {
+      return String(num); // Prevent 0 from being falsy.
+    } else {
+      return num;
+    }
+  }
+
+  style() {
+    return {
+      border: (this.primary()) ? "1px solid red" : ""
+    };
+  }
+
+  change(key, dispatch) {
+    return function(event) {
+      dispatch(changeSettingsBuffer(key, event.target.value));
+    }
+  }
+
+  render() {
+    return(
+      <td>
+        <input type="text"
+               style={ this.style() }
+               onChange={ this.change(this.props.setting, this.props.dispatch) }
+               value={ this.primary() || this.secondary() || "---" } />
+      </td>)
+
+  }
+}
+
 
 export class Devices extends React.Component {
   changeBot(e) {
@@ -147,7 +196,10 @@ export class Devices extends React.Component {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <button className="green button-like widget-control">SAVE { bot.dirty ? "*" : "" }</button>
+                        <button className="green button-like widget-control"
+                                onClick={ () => this.props.dispatch(commitSettingsChanges()) } >
+                          SAVE { Object.keys(bot.settingsBuffer).length ? "*" : "" }
+                        </button>
                         <div className="widget-header">
                           <h5>Hardware</h5>
                         </div>
@@ -171,63 +223,45 @@ export class Devices extends React.Component {
                               <tbody>
                                 <tr>
                                   <td>
-                                    <label>LENGTH (m)</label>
-                                  </td>
-                                  <td>
-                                    <input value="---" />
-                                  </td>
-                                  <td>
-                                    <input value="---" />
-                                  </td>
-                                  <td>
-                                    <input value="---" />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
                                     <label>MAX SPEED (mm/s)</label>
                                   </td>
-                                  <td>
-                                    <input value={ bot.hardware.movement_max_spd_x || "---" } />
-                                  </td>
-                                  <td>
-                                    <input value={ bot.hardware.movement_max_spd_y || "---" } />
-                                  </td>
-                                  <td>
-                                    <input value={ bot.hardware.movement_max_spd_z || "---" } />
-                                  </td>
+                                  <SettingsInputBox setting="movement_max_spd_x" {...this.props} />
+                                  <SettingsInputBox setting="movement_max_spd_y" {...this.props} />
+                                  <SettingsInputBox setting="movement_max_spd_z" {...this.props} />
                                 </tr>
                                 <tr>
                                   <td>
                                     <label>ACCELERATE FOR (steps)</label>
                                   </td>
-                                  <td>
-                                    <input value={ bot.hardware.movement_steps_acc_dec_x || "---" } />
-                                  </td>
-                                  <td>
-                                    <input value={ bot.hardware.movement_steps_acc_dec_y || "---" } />
-                                  </td>
-                                  <td>
-                                    <input value={ bot.hardware.movement_steps_acc_dec_z || "---" } />
-                                  </td>
+                                  <SettingsInputBox setting="movement_steps_acc_dec_x" {...this.props} />
+                                  <SettingsInputBox setting="movement_steps_acc_dec_y" {...this.props} />
+                                  <SettingsInputBox setting="movement_steps_acc_dec_z" {...this.props} />
                                 </tr>
                                 <tr>
                                   <td>
                                     <label>TIMEOUT AFTER (seconds)</label>
                                   </td>
-                                  <td>
-                                    <input value={ bot.hardware.movement_timeout_x || "---" } />
-                                  </td>
-                                  <td>
-                                    <input value={ bot.hardware.movement_timeout_y || "---" } />
-                                  </td>
-                                  <td>
-                                    <input value={ bot.hardware.movement_timeout_z || "---" } />
-                                  </td>
+                                  <SettingsInputBox setting="movement_timeout_x" {...this.props} />
+                                  <SettingsInputBox setting="movement_timeout_y" {...this.props} />
+                                  <SettingsInputBox setting="movement_timeout_z" {...this.props} />
                                 </tr>
                                 <tr>
                                   <td>
                                     <label>STEPS PER MM</label>
+                                  </td>
+                                  <td>
+                                    <input value="---" />
+                                  </td>
+                                  <td>
+                                    <input value="---" />
+                                  </td>
+                                  <td>
+                                    <input value="---" />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <label>LENGTH (m)</label>
                                   </td>
                                   <td>
                                     <input value="---" />
