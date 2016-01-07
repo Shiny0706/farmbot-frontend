@@ -8,7 +8,8 @@ var status = {
   API_ERROR: "Unable to download device credentials",
   AWAITING_WEBSOCKET: "calling FarmBot with credentials",
   WEBSOCKET_ERR: "Error establishing socket connection",
-  CONNECTED: "Socket Connection Established"
+  CONNECTED: "Socket Connection Established",
+  READY: "Bot ready"
 }
 
 var initialState = {
@@ -55,7 +56,8 @@ var action_handlers = {
     delete hardware.method
     return {
       ...state,
-      ...{ hardware }
+      ...{ hardware },
+      status: status.READY
     }
   },
 

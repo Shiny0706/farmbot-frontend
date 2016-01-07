@@ -21,7 +21,12 @@ export class AxisInputBox extends React.Component {
   }
 
   secondary() {
-    return this.bot().hardware[this.props.axis];
+    var num = this.bot().hardware[this.props.axis];
+    if (_.isNumber(num)) {
+      return String(num); // Prevent 0 from being falsy.
+    } else {
+      return num;
+    };
   }
 
   style() {

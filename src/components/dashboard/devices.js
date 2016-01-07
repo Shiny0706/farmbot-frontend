@@ -174,13 +174,13 @@ export class Devices extends React.Component {
                                     <label>LENGTH (m)</label>
                                   </td>
                                   <td>
-                                    <input value={ "---" } />
+                                    <input value="---" />
                                   </td>
                                   <td>
-                                    <input value={ "---" } />
+                                    <input value="---" />
                                   </td>
                                   <td>
-                                    <input value={ "---" } />
+                                    <input value="---" />
                                   </td>
                                 </tr>
                                 <tr>
@@ -230,13 +230,13 @@ export class Devices extends React.Component {
                                     <label>STEPS PER MM</label>
                                   </td>
                                   <td>
-                                    <input value={ "---" } />
+                                    <input value="---" />
                                   </td>
                                   <td>
-                                    <input value={ "---" } />
+                                    <input value="---" />
                                   </td>
                                   <td>
-                                    <input value={ "---" } />
+                                    <input value="---" />
                                   </td>
                                 </tr>
                                 <tr>
@@ -320,14 +320,13 @@ export class Devices extends React.Component {
                                   </th>
                                 </tr>
                               </thead>
-                              {/* ngIf: logs.length > 1 */}
-                              {/* ngIf: logs.length < 1 */}<tbody>
+                              <tbody>
                                 <tr>
                                   <td colSpan={3}>
                                     <p>We cant find any logs. Are your FarmBot device credentials correct?</p>
                                   </td>
                                 </tr>
-                              </tbody>{/* end ngIf: logs.length < 1 */}
+                              </tbody>
                             </table>
                           </div>
                         </div>
