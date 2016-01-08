@@ -1,5 +1,5 @@
 // import { describe, it, expect } from 'jasmine-core';
-import { bot } from 'bot';
+// var bot = require('bot');
 
 describe("wowee", function(){
   it("yippee skipee", function(){

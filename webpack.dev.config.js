@@ -25,6 +25,9 @@ module.exports = {
       },
     ],
   },
+  preLoaders: [
+    { test: /\.js|jsx$/, include: /(src)/, loaders: ['isparta'] }
+  ],
   plugins: [],
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 };
