@@ -1,4 +1,3 @@
-
 webpackConf = Object.assign({}, require('./webpack.dev.config'));
 webpackConf.entry = {}; // don't need to specify the entry option
 
@@ -19,9 +18,14 @@ module.exports = function(config) {
     webpack: webpackConf,
     webpackMiddleware: { },
     plugins: [
+        require("karma-jasmine"),
+        require("karma-spec-reporter"),
+        require("karma-chrome-launcher"),
         require("karma-webpack")
     ],
-    reporters: ['progress'],
+    reporters: [
+      'spec'
+    ],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
