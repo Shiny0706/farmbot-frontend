@@ -86,7 +86,6 @@ var action_handlers = {
   },
 
   BOT_CHANGE: function(state, action) {
-    console.log("CHANGE EVENT FIRED", action.payload);
     var statuses = Object.assign({}, action.payload.result);
     delete statuses.name;
     delete statuses.method;
@@ -184,9 +183,7 @@ export function botReducer(state = initialState, action) {
   var handler = (action_handlers[action.type] || action_handlers.DEFAULT);
   var result = handler.call(action_handlers, state, action);
   var newState = Object.assign({}, result);
-  if (!action.type[0] === "@") {
-    console.log(action.type, state)
-  } else{
+  if (action.type[0] !== "@") {
     console.log(action.type, state)
   };
   return newState;

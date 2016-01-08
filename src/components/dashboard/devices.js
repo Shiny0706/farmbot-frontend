@@ -8,7 +8,7 @@ import { addDevice,
          changeDevice } from '../../actions/bot_actions';
 import { connect } from 'react-redux';
 import { convertFormToObject } from '../../util.js';
-import { store } from '../../index';
+import { store } from '../../store';
 import { ToggleButton } from './toggle_button';
 
 var bot; // So bad... Why doesn't this page work? :(

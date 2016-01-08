@@ -1,32 +1,13 @@
-// var webpack = require('webpack');
-
-// module.exports = {
-//   entry: './src/index.js',
-//   output: {
-//     filename: "./src/bundle.js"
-//   },
-//   module: {
-//     loaders: [
-//       {
-//         test: /\.jsx?$/,
-//         exclude: /node_modules/,
-//         loaders: ['babel?stage=0&optional=runtime'],
-//       },
-//     ],
-//   },
-//   devtool: 'source-map',
-// };
 var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['', '.js'], // Why does it break without element 0 ('')?
     modulesDirectories: ['node_modules', 'src'],
   },
   entry: {
     app: [
-      'webpack-hot-middleware/client',
       './src/index.js',
     ]
   },
@@ -44,9 +25,6 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-  ],
+  plugins: [],
   devtool: 'source-map',
 };
