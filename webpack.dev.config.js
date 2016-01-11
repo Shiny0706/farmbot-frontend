@@ -3,13 +3,11 @@ var webpack = require('webpack');
 
 module.exports = {
   resolve: {
-    extensions: ['', '.js'], // Why does it break without element 0 ('')?
+    extensions: ['', '.js'],
     modulesDirectories: ['node_modules', 'src'],
   },
   entry: {
-    app: [
-      './src/index.js',
-    ]
+    app: [ './src/index.js' ]
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -25,9 +23,7 @@ module.exports = {
       },
     ],
   },
-  preLoaders: [
-    { test: /\.js|jsx$/, include: /(src)/, loaders: ['isparta'] }
+  plugins: [
   ],
-  plugins: [],
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
 };
