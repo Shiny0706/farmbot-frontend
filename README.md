@@ -15,17 +15,13 @@ HTML, CSS, JS. Mostly React / WebPack
 # Build / Deploy
 
  0. Change `config.js` to settings that are relevant to host environment.
+ 0. Make sure you have [node installed](https://docs.npmjs.com/getting-started/installing-node).
  0. Run `npm run-script compile`.
  0. Compiled output is in `dist/production.js`
 
-**Notes:** Make sure you have [node installed](https://docs.npmjs.com/getting-started/installing-node).
 
 # TODO / Refinements:
 
- * Port device management page business logic over.
- * Implement `PLANT_FETCH_REQUEST` at application start.
- * Integrate Immutable.js into action creators / dispatchers.
  * Add URL route helpers to keep things DRY (repetition of strings everywhere, eg: `#s/designer?blah=`).
  * Add test suite.
- * Add global error handler.
- * Get sourcemaps working
+ * URL router is broke.

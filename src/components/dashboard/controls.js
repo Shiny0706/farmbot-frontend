@@ -14,7 +14,10 @@ export class AxisInputBox extends React.Component {
 
   bot() {
     // Dumb hacks for impossible bugs.
-    return this.props.store.getState().bot
+    var bot = this.props.store.getState().bot;
+    var bot2 = this.props.bot.hardware.z;
+    console.log(`${ bot.hardware.z || "null" } vs. ${ bot2 || "null"}`)
+    return bot
   }
 
   primary() {
@@ -139,7 +142,7 @@ export class Controls extends React.Component {
                                   <td />
                                   <td />
                                   <td>
-                                    <DirectionButton axis="z" direction="up" steps={ bot.stepSize || 1000 } {...this.props} />
+                                    <DirectionButton axis="z" direction="down" steps={ bot.stepSize || 1000 } {...this.props} />
                                   </td>
                                 </tr>
                                 <tr>
@@ -160,7 +163,7 @@ export class Controls extends React.Component {
                                   </td>
                                   <td />
                                   <td>
-                                    <DirectionButton axis="z" direction="down" steps={ bot.stepSize || 1000 } {...this.props} />
+                                    <DirectionButton axis="z" direction="up" steps={ bot.stepSize || 1000 } {...this.props} />
                                   </td>
                                 </tr>
                                 <tr>
