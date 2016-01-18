@@ -148,7 +148,6 @@ var action_handlers = {
       warning("You need to add a device to your account.",
               "No device found!");
     } else{
-      debugger;
       error("Unable to download device data from server. " +
             "Check your internet connection.");
     };
