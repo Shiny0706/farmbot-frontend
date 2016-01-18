@@ -14,9 +14,6 @@ app.use(require('webpack-dev-middleware')(compiler, {
   port: SERVER_PORT
 }));
 
-app.use(require('webpack-hot-middleware')(compiler, { port: SERVER_PORT }));
-
-// ?? ¯\_(ツ)_/¯
 app.get('/img/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'src', req.url));
 });
@@ -27,8 +24,7 @@ app.get('*', function(req, res) {
 
 app.listen(SERVER_PORT, 'localhost', function(err) {
   if (err) {
-    console.log(err);
-    return;
+    return console.log(err);
   }
 
   console.log('Listening on port ' + SERVER_PORT);

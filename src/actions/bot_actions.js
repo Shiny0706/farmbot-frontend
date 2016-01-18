@@ -238,7 +238,7 @@ function fetchDeviceOk(resp) {
   bot.replace(
     Farmbot(
       Object.assign(
-        {}, resp, {timeout: 5000}
+        {}, resp, {timeout: 7000}
         )
       )
     );
@@ -250,10 +250,31 @@ function fetchDeviceOk(resp) {
   };
 }
 
+function onChange(data) {
+
+  function isResponse(data) {
+    console.log(data.result.method);
+    console.dir(data.result)
+    store.dispatch({
+      type: "BOT_CHANGE",
+      payload: data
+    });
+  }
+
+  function isBroadcast(data) {
+    console.log("broadcast / log");
+    console.dir(data.payload);
+    store.dispatch({
+      type: "BOT_CHANGE",
+      payload: (data.payload || data)
+    });
+  }
+
+  return data.result ? isResponse(data) : isBroadcast(data);
+}
+
 function connectOk(res) {
-  bot.current.on("*", function onChange(data){
-    store.dispatch({ type: "BOT_CHANGE", payload: data });
-  });
+  bot.current.on("*", onChange);
 
   return function(dispatch) {
     return Promise.resolve().then( function() {

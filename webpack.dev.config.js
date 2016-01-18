@@ -1,21 +1,3 @@
-// var webpack = require('webpack');
-
-// module.exports = {
-//   entry: './src/index.js',
-//   output: {
-//     filename: "./src/bundle.js"
-//   },
-//   module: {
-//     loaders: [
-//       {
-//         test: /\.jsx?$/,
-//         exclude: /node_modules/,
-//         loaders: ['babel?stage=0&optional=runtime'],
-//       },
-//     ],
-//   },
-//   devtool: 'source-map',
-// };
 var path = require('path');
 var webpack = require('webpack');
 
@@ -25,10 +7,7 @@ module.exports = {
     modulesDirectories: ['node_modules', 'src'],
   },
   entry: {
-    app: [
-      'webpack-hot-middleware/client',
-      './src/index.js',
-    ]
+    app: [ './src/index.js' ]
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -45,8 +24,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
   ],
   devtool: 'source-map',
 };
