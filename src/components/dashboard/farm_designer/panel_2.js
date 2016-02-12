@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 // Import all of the Calendar (magenta) panel views
 import { Calendar } from './calendar';
 import { AddEvent } from './add_event';
-import { getParam } from '../../../util.js';
+import { getParam } from '../../../util';
 
 
 // Dynamically determine what to render in the designer's second panel

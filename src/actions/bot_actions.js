@@ -212,12 +212,9 @@ function sendCommandErr(e, payload, dispatch) {
 }
 
 export function addDevice(deviceAttrs) {
-  return dispatch => {
-    return Device.save(deviceAttrs).then(
-      (res) => dispatch(saveDeviceOk(res)),
-      (err) => dispatch(saveDeviceErr(err)),
-    );
-  };
+  var cb2 = (err) => dispatch(saveDeviceErr(err));
+  var cb1 = (res) => dispatch(saveDeviceOk(res));
+  return (dispatch) => { Device.save(deviceAttrs).then(cb1, cb2) }
 }
 
 function saveDeviceOk(resp) {
@@ -243,10 +240,9 @@ function fetchDeviceOk(resp) {
       )
     );
   return dispatch => {
-    return bot.current.connect().then(
-      (res) => dispatch(connectOk(resp)),
-      (err) => dispatch(connectErr(err)),
-    );
+    var cb1 = (res) => dispatch(connectOk(resp));
+    var cb2 = (err) => dispatch(connectErr(err));
+    return bot.current.connect().then(cb1, cb2);
   };
 }
 

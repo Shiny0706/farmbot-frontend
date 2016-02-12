@@ -250,7 +250,8 @@ export class Controls extends React.Component {
               </div>
             </div>
           </div>
-        </div> < /div>
+        </div>
+        </div>
     );
   }
 };

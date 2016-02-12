@@ -7,7 +7,7 @@ import { addDevice,
          fetchDevice,
          changeDevice } from '../../actions/bot_actions';
 import { connect } from 'react-redux';
-import { convertFormToObject } from '../../util.js';
+import { convertFormToObject } from '../../util';
 import { store } from '../../store';
 import { ToggleButton } from './toggle_button';
 

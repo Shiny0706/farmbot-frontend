@@ -1,25 +1,22 @@
-import { compose, createStore } from 'redux';
-import reducers from './reducers';
-import { applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { loginFromToken } from './actions/auth_actions';
+import thunk                          from 'redux-thunk';
+import { compose, createStore }       from 'redux';
+import { applyMiddleware }            from 'redux';
+import { loginFromToken }             from './actions/auth_actions';
+import { combineReducers }            from 'redux';
+import { authReducer as auth }        from './reducers/auth_reducer';
+import { botReducer as bot }          from './reducers/bot_reducer';
+import { plantReducer as plants }     from './reducers/plant_reducer'
+import { oldGlobalReducer as global } from './reducers/old_reducers';
+import { routeReducer as routing }    from './reducers/routing_reducer';
 
-// Poor man's hot reloader.
-// var lastState = JSON.parse(localStorage["farmbot"] || '{}');
 var lastState = {};
-// delete lastState.bot;
-// delete lastState.routing;
+
+var reducers = combineReducers({
+  routing,
+  auth,
+  bot,
+  plants,
+  global
+});
 
 export var store = compose(applyMiddleware(thunk))(createStore)(reducers, lastState);
-
-// var token = store.getState().auth.token;
-
-// // If the user already had an auth token, log in.
-// if (token) { store.dispatch(loginFromToken(token)); };
-
-// function saveState(){
-//   console.log(store.getState());
-//   localStorage["farmbot"] = JSON.stringify(store.getState());
-// }
-
-// store.subscribe(saveState);

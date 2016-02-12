@@ -1,5 +1,6 @@
 import { error, warning, success } from '../logger';
 import { bot } from '../bot';
+import _ from 'lodash';
 
 var status = {
   NOT_READY: "never connected to device",
@@ -20,24 +21,23 @@ var initialState = {
   hardware: {}
 }
 
-
 var action_handlers = {
   SETTING_TOGGLE_OK: function(state, action) {
     return this.READ_STATUS_OK(state, action);
   },
+
   COMMIT_SETTINGS_OK: function(state, action) {
-    return {
-      ...state,
+    return _.assign({}, state, {
       settingsBuffer: {}
-    }
+    });
   },
+
   COMMIT_AXIS_CHANGE_OK: function(state, action) {
     // READ_STATUS_OK + reset axisBuffer. That's it.
     var state = this.READ_STATUS_OK(state, action) // Dat reuse, tho.
-    return {
-      ...state,
+    return _.assign({}, state, {
       axisBuffer: {}
-    }
+    });
   },
 
   COMMIT_AXIS_CHANGE_ERR: function(state, action) {
@@ -48,10 +48,9 @@ var action_handlers = {
     var axisBuffer = Object.assign({}, state.axisBuffer);
     axisBuffer[action.payload.key] = action.payload.val;
 
-    return {
-      ...state,
-      ...{ axisBuffer }
-    }
+    return _.assign({}, state, {
+      axisBuffer: axisBuffer
+    });
   },
 
   CHANGE_SETTINGS_BUFFER: function(state, action) {
@@ -62,41 +61,36 @@ var action_handlers = {
     } else {
       delete settingsBuffer[action.payload.key]
     }
-    return {
-      ...state,
-      ...{ settingsBuffer }
-    }
+    return _.assign({}, state, {
+      settingsBuffer: settingsBuffer
+    });
   },
 
   CHANGE_STEP_SIZE: function(state, action) {
-  return {
-      ...state,
+    return _.assign({}, state, {
       stepSize: action.payload
-    };
+    });
   },
 
   READ_STATUS_OK: function(state, action) {
     var hardware = Object.assign({}, action.payload);
     delete hardware.method
-    return {
-      ...state,
-      ...{ hardware },
-      status: status.READY
-    }
+    return _.assign({},
+      state, {
+        hardware: hardware
+      }, {
+        status: status.READY
+      });
   },
 
   BOT_CHANGE: function(state, action) {
     var statuses = Object.assign({}, action.payload.result);
     delete statuses.name;
     delete statuses.method;
-    var newState = {
-      ...state
-    };
-    newState.hardware = {
-      ...state.hardware,
-      ...statuses
-    }
-    return newState;
+    var newState = _.assign({}, state);
+    newState.hardware = _.assign({}, state.hardware, statuses);
+
+    return _.assign({}, newState);
   },
 
   DEFAULT: function(state, action) {
@@ -112,55 +106,57 @@ var action_handlers = {
   },
 
   CONNECT_OK: function(state, action) {
-    return {
-      ...state,
-      ...action.payload,
-      status: status.CONNECTED,
-      connected: true
-    };
+    return _.assign({},
+      state,
+      action.payload, {
+        status: status.CONNECTED,
+        connected: true
+      });
   },
 
   CONNECT_ERR: function(state, action) {
-    return {
-      ...state,
-      status: status.WEBSOCKET_ERR
-    };
+    return _.assign({},
+      state, {
+        status: status.WEBSOCKET_ERR
+      });
   },
   CHANGE_DEVICE: function(state, action) {
-    return {
-      ...state,
-      ...action.payload
-    };
+    return _.assign({},
+      state,
+      action.payload);
   },
 
   FETCH_DEVICE: function(state, action) {
     return state;
   },
-  FETCH_DEVICE_OK: function(state, {action, payload}) {
-    return {
-      ...state,
-      ...payload,
-      status: status.AWAITING_WEBSOCKET
-    };
+  FETCH_DEVICE_OK: function(state, {
+    action,
+    payload
+  }) {
+    return _.assign({},
+      state,
+      payload, {
+        status: status.AWAITING_WEBSOCKET
+      });
   },
   FETCH_DEVICE_ERR: function(state, action) {
-    if (action.payload.status === 404) {
+    if(action.payload.status === 404) {
       warning("You need to add a device to your account.",
-              "No device found!");
-    } else{
-      debugger;
+        "No device found!");
+    } else {
       error("Unable to download device data from server. " +
-            "Check your internet connection.");
+        "Check your internet connection.");
     };
-    return {
-      ...state,
-      status: status.API_ERROR
-    };
+    return _.assign({},
+      state, {
+        status: status.API_ERROR
+      });
   },
   SAVE_DEVICE_ERR: function(state, action) {
     switch(action.payload.status) {
       case 422:
-        var errors = _.map(action.payload.responseJSON, v => v ).join(". ");
+        var errors = _.map(action.payload.responseJSON, v => v)
+          .join(". ");
         error(errors, "Couldn't save device.");
         break;
       default:
@@ -171,19 +167,20 @@ var action_handlers = {
   },
   SAVE_DEVICE_OK: function(state, action) {
     success("Device saved.")
-    return {
-      ...state,
-      ...action.payload,
+    return _.assign({}, state, action.payload, {
       dirty: false
-    };
+    });
   }
 }
 
 export function botReducer(state = initialState, action) {
   var handler = (action_handlers[action.type] || action_handlers.DEFAULT);
+  if(!handler) {
+    debugger;
+  };
   var result = handler.call(action_handlers, state, action);
   var newState = Object.assign({}, result);
-  if (action.type[0] !== "@") {
+  if(action.type[0] !== "@") {
     console.log(action.type, state)
   };
   return newState;
