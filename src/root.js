@@ -14,6 +14,7 @@ import { FarmDesigner } from './components/dashboard/farm_designer/farm_designer
 import { Login } from './components/login';
 import { CONFIG } from './config';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import { store } from './store';
 import { createHistory } from 'history'
@@ -35,7 +36,7 @@ class Root extends Component {
   }
 
   requireAuth(nextState, replaceState){
-    var auth = {...this.props.auth};
+    var auth = _.assign({}, this.props.auth);
     var that = this;
     var attemptedURL = nextState.location.pathname;
       if (auth.authenticated) {

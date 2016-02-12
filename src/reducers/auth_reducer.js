@@ -1,5 +1,6 @@
 import { error, success } from '../logger';
 import $ from 'jquery';
+import _ from 'lodash';
 
 var action_handlers = {
   DEFAULT: function(state, action) {
@@ -8,19 +9,19 @@ var action_handlers = {
   LOGIN_ERR: function(state, action) {
     error("Login failed.");
     unsetToken();
-    return {
-      ...state,
-      token: '',
-      authenticated: false,
-    };
+    return _.assign({},
+                    state,
+                    { token: '',
+                      authenticated: false });
   },
   LOGIN_OK: function(state, action) {
     setToken(action.payload.token);
-    return {
-      ...state,
-      token: action.payload.token,
-      authenticated: true,
-    };
+    return _.assign({},
+                    state,
+                    {
+                      token: action.payload.token,
+                      authenticated: true,
+                    });
   }
 }
 
