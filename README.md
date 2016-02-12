@@ -1,27 +1,18 @@
-# FarmBot Frontend
+# ES6 Karma Jasmine Webpack Boilerplate
 
-HTML, CSS, JS. Mostly React / WebPack
+_No Grunt/Gulp required!_
 
-# Develop
+Boilerplate for building a client-based JavaScript library in ES6 using the following components:
 
- 0. `git clone https://github.com/FarmBot/farmbot-web-frontend.git`
- 0. `cd farmbot-web-frontend`
- 0. `sudo npm install`
- 0. Move a copy of `src/config.example.js` over to `src/config.js`
- 0. `npm start`
- 0. `Visit http://localhost:3001`
- 0. Explore the codebase! `js/app.js` and `js/app.js` are a great place to start looking around.
-
-# Build / Deploy
-
- 0. Change `config.js` to settings that are relevant to host environment.
- 0. Make sure you have [node installed](https://docs.npmjs.com/getting-started/installing-node).
- 0. Run `npm run-script compile`.
- 0. Compiled output is in `dist/production.js`
+* [Babel](https://babeljs.io/)
+* [webpack](https://webpack.github.io/)
+* [Jasmine](http://jasmine.github.io/)
+* [Karma](http://karma-runner.github.io/)
+* [babel-istanbul](https://github.com/ambitioninc/babel-istanbul)
+* [ESLint](http://eslint.org/) with [eslint-config-airbnb](https://github.com/airbnb/javascript)
 
 
-# TODO / Refinements:
-
- * Add URL route helpers to keep things DRY (repetition of strings everywhere, eg: `#s/designer?blah=`).
- * Add test suite.
- * URL router is broke.
+## Credits
+* https://medium.com/@gunnarlium/es6-code-coverage-with-babel-jspm-karma-jasmine-and-istanbul-2c1918c5bb23
+* https://github.com/mvader/react-es6-webpack-karma-boilerplate
+* https://github.com/rackt/redux

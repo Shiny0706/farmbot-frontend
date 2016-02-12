@@ -1,40 +1,59 @@
 {
-  "name": "farmbot-web-frontend",
+  "name": "es6-karma-jasmine-webpack-boilerplate",
+  "version": "0.2.0",
+  "description": "Boilerplate for ES6 client-based library. Uses Babel and webpack for transpiling and building, Karma and Jasmine for unit testing, and Istanbul/Isparta for code coverage.",
+  "main": "dist/fb_frontend.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/FarmBot/farmbot-web-frontend"
+    "url": "https://github.com/zyml/es6-karma-jasmine-webpack-boilerplate"
   },
-  "version": "0.1.0",
-  "description": "",
-  "main": "./src/index.js",
   "scripts": {
-    "start": "node dev_server.js",
-    "test": "karma start karma.conf.js",
-    "compile": "webpack --config webpack.prod.config.js"
+    "build": "npm run clean && npm run build:dev && npm run build:prd",
+    "build:dev": "webpack src/fb_frontend.js dist/fb_frontend.js --config tools/webpack.config.dev.js",
+    "build:prd": "webpack src/fb_frontend.js dist/fb_frontend.min.js --config tools/webpack.config.prd.js",
+    "prepublish": "npm run build",
+    "clean": "rimraf dist build",
+    "lint": "eslint src",
+    "test": "karma start --single-run --no-auto-watch karma.config.js"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "es6",
+    "babel",
+    "webpack",
+    "jasmine",
+    "karma",
+    "istanbul",
+    "boilerplate"
+  ],
+  "author": "Melvin Lee (http://www.zy.sg/)",
+  "license": "MIT",
   "devDependencies": {
-    "babel": "^5.8.29",
-    "babel-core": "^5.8.29",
-    "babel-loader": "^5.3.2",
-    "babel-plugin-react-transform": "^1.1.1",
-    "babel-runtime": "^5.8.29",
-    "express": "^4.13.3",
-    "jasmine-core": "^2.3.4",
-    "karma": "^0.13.15",
-    "karma-babel-preprocessor": "^6.0.1",
-    "karma-chrome-launcher": "^0.2.1",
+    "babel-core": "^6.4.0",
+    "babel-eslint": "^4.1.6",
+    "babel-istanbul": "^0.6.0",
+    "babel-istanbul-loader": "0.0.1",
+    "babel-loader": "^6.2.1",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^3.1.0",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.19",
+    "karma-chrome-launcher": "^0.2.2",
     "karma-coverage": "^0.5.3",
     "karma-jasmine": "^0.3.6",
-    "karma-sourcemap-loader": "^0.3.6",
-    "karma-spec-reporter": "0.0.23",
+    "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
-    "webpack-dev-middleware": "^1.2.0",
-    "webpack-dev-server": "^1.12.1"
+    "loader-utils": "^0.2.12",
+    "node-sass": "^3.4.2",
+    "rimraf": "^2.5.0",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.11"
   },
   "dependencies": {
-    "css-loader": "^0.23.0",
     "farmbot": "0.1.2",
     "history": "^1.12.6",
     "jquery": "^2.1.4",
@@ -46,9 +65,6 @@
     "redux": "^3.0.4",
     "redux-simple-router": "^1.0.0",
     "redux-thunk": "^1.0.0",
-    "sass-loader": "^3.1.2",
-    "style-loader": "^0.13.0",
-    "toastr": "^2.1.2",
-    "webpack": "^1.12.8"
+    "toastr": "^2.1.2"
   }
 }
