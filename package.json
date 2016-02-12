@@ -1,11 +1,11 @@
 {
-  "name": "es6-karma-jasmine-webpack-boilerplate",
+  "name": "farmbot-web-frontend",
   "version": "0.2.0",
-  "description": "Boilerplate for ES6 client-based library. Uses Babel and webpack for transpiling and building, Karma and Jasmine for unit testing, and Istanbul/Isparta for code coverage.",
+  "description": "Farmbot web frontend.",
   "main": "dist/fb_frontend.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zyml/es6-karma-jasmine-webpack-boilerplate"
+    "url": "https://github.com/farmbot/farmbot-web-frontend"
   },
   "scripts": {
     "build": "npm run clean && npm run build:dev && npm run build:prd",
@@ -17,15 +17,9 @@
     "test": "karma start --single-run --no-auto-watch karma.config.js"
   },
   "keywords": [
-    "es6",
-    "babel",
-    "webpack",
-    "jasmine",
-    "karma",
-    "istanbul",
-    "boilerplate"
+    "farmbot"
   ],
-  "author": "Melvin Lee (http://www.zy.sg/)",
+  "author": "farmbot.io",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.4.0",
