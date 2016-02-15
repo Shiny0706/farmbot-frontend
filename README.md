@@ -1,18 +1,12 @@
-# ES6 Karma Jasmine Webpack Boilerplate
+# Farmbot Web Frontend
 
-_No Grunt/Gulp required!_
+ This is the Javascript / HTML / CSS related to Farmbot's browser control app. It depends on a [backend API](https://github.com/FarmBot/farmbot-web-app) (my.farmbot.io by default).
 
-Boilerplate for building a client-based JavaScript library in ES6 using the following components:
+# Up and Running
 
-* [Babel](https://babeljs.io/)
-* [webpack](https://webpack.github.io/)
-* [Jasmine](http://jasmine.github.io/)
-* [Karma](http://karma-runner.github.io/)
-* [babel-istanbul](https://github.com/ambitioninc/babel-istanbul)
-* [ESLint](http://eslint.org/) with [eslint-config-airbnb](https://github.com/airbnb/javascript)
+1. git clone https://github.com/FarmBot/farmbot-web-frontend.git
+2. cd farmbot-web-frontend
+3. npm install
+4. npm run build
 
-
-## Credits
-* https://medium.com/@gunnarlium/es6-code-coverage-with-babel-jspm-karma-jasmine-and-istanbul-2c1918c5bb23
-* https://github.com/mvader/react-es6-webpack-karma-boilerplate
-* https://github.com/rackt/redux
+Production and development version of the app will be available in `/dist/`
