@@ -10,3 +10,9 @@
 4. npm run build
 
 Production and development version of the app will be available in `/dist/`
+
+# TODO
+
+ - [ ] Package images into `/dist` folder
+ - [ ] Switch to back to RLite for routing
+ - [ ]
