@@ -12,7 +12,7 @@
     "build:dev": "webpack src/fb_frontend.js dist/fb_frontend.js --config tools/webpack.config.dev.js",
     "build:prd": "webpack src/fb_frontend.js dist/fb_frontend.min.js --config tools/webpack.config.prd.js",
     "prepublish": "npm run build",
-    "start": "webpack-dev-server --config tools/webpack.config.dev.js --watch",
+    "start": "webpack-dev-server --config tools/webpack.config.dev.js",
     "clean": "rimraf dist build",
     "lint": "eslint src",
     "test": "karma start --single-run --no-auto-watch karma.config.js"
