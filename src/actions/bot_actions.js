@@ -253,10 +253,9 @@ function fetchDeviceOk(resp) {
 }
 
 function onChange(data) {
+  data = (data || {});
 
   function isResponse(data) {
-    console.log(data.result.method);
-    console.dir(data.result)
     store.dispatch({
       type: "BOT_CHANGE",
       payload: data
@@ -264,8 +263,6 @@ function onChange(data) {
   }
 
   function isBroadcast(data) {
-    console.log("broadcast / log");
-    console.dir(data.payload);
     store.dispatch({
       type: "BOT_CHANGE",
       payload: (data.payload || data)
