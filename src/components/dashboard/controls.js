@@ -15,8 +15,6 @@ export class AxisInputBox extends React.Component {
   bot() {
     // Dumb hacks for impossible bugs.
     var bot = this.props.store.getState().bot;
-    var bot2 = this.props.bot.hardware.z;
-    console.log(`${ bot.hardware.z || "null" } vs. ${ bot2 || "null"}`)
     return bot
   }
 

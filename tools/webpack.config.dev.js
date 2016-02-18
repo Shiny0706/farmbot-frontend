@@ -20,4 +20,8 @@ config.output = {
     filename: "bundle.js"
 };
 
+// If this is not set, dev server will complain about 404 errors.
+// TODO: Just use a hash fragment.
+config.devServer = { historyApiFallback: true };
+
 module.exports = config;
