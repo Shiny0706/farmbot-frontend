@@ -8,16 +8,26 @@
 2. cd farmbot-web-frontend
 3. npm install
 3. Copy `src/config.example.js` to `src/config.js` (these are your private configs)
-4. npm run build
-5. Try it out at `localhost:8080`
-6. Deploy it by uploading `dist/fb_frontend.min.js` to a web server. Any web server will do.
+4. run `npm start`
+5. Visit `http://localhost:8080/webpack-dev-server/src/bundle`
 
-#
+# Deploy to Production
 
-Production and development version of the app will be available in `/dist/`
+1. run `npm run build`
+2. Upload `dist/fb_frontend.min.js` to your server.
+3. Add `<script src="fb_frontend.min.js">` to the page
+4. It should work now. Raise an issue if you have any trouble.
+
+# Configuration
+
+All config is in `src/config.js`. It points to a number of things like:
+
+ 0. `FARMBOT_API_URL`: URL of the [farmbot-web-app](https://github.com/FarmBot/farmbot-web-app) API endpoint.,
+ 0. `MESHBLU_URL`: URL for the [MeshBlu](https://github.com/octoblu/meshblu) IoT messaging gateway you will use. Default: "wss://meshblu.octoblu.com/ws/v2",
+ 0. `ROOT_PATH`: Sometimes, you will mount the farmbot app on a non-root URL. The app must know where it is mounted in order to find assets. **If `ROOT_PATH` is incorrect, you will have issues loading images and assets**. Default: "/app/"
+
 
 # TODO
 
- - [ ] Package images into `/dist` folder
- - [ ] Switch to back to RLite for routing
- - [ ]
+ - [ ] Add images to webpack build
+ - [ ] Switch to back to RLite for routing?
