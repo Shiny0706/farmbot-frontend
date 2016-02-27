@@ -189,35 +189,49 @@ export class Controls extends React.Component {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
+                        <button
+                          className="gray button-like widget-control"
+                          type="button">
+                          EDIT
+                        </button>
                         <div className="widget-header">
-                          <h5>Tool Control</h5>
+                          <h5>Tools</h5>
                         </div>
                       </div>
                       <div className="col-sm-12">
                         <div className="widget-content no-bottom-padding">
                           <div className="row">
-                            <div className="col-sm-6">
-                              <label className="inline">VACUUM PUMP</label>
+                            <div className="col-sm-4">
+                              <label>VACUUM PUMP</label>
                             </div>
-                            <div className="col-sm-6">
+                            <div className="col-sm-4">
+                              <p>Pin 9</p>
+                            </div>
+                            <div className="col-sm-4">
                               <ToggleButton toggleval={ bot.hardware.pin9 }
                                             toggleAction={ () => this.props.dispatch(pinToggle(9)) } />
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-sm-6">
-                              <label className="inline">WATER VALVE</label>
+                            <div className="col-sm-4">
+                              <label>WATER VALVE</label>
                             </div>
-                            <div className="col-sm-6">
+                            <div className="col-sm-4">
+                              <p>Pin 10</p>
+                            </div>
+                            <div className="col-sm-4">
                               <ToggleButton toggleval={ bot.hardware.pin10 }
                                             toggleAction={ () => this.props.dispatch(pinToggle(10)) } />
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-sm-6">
-                              <label className="inline">LED</label>
+                            <div className="col-sm-4">
+                              <label>LED</label>
                             </div>
-                            <div className="col-sm-6">
+                            <div className="col-sm-4">
+                              <p>Pin 13</p>
+                            </div>
+                            <div className="col-sm-4">
                               <ToggleButton toggleval={ bot.hardware.pin13 }
                                             toggleAction={ () => this.props.dispatch(pinToggle(13)) } />
                             </div>
@@ -233,6 +247,11 @@ export class Controls extends React.Component {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
+                        <button
+                          className="gray button-like widget-control"
+                          type="button">
+                          EDIT
+                        </button>
                         <div className="widget-header">
                           <h5>Camera</h5>
                         </div>
