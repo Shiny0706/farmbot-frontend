@@ -9,7 +9,6 @@ import { Controls } from './components/dashboard/controls';
 import { Devices } from './components/dashboard/devices';
 import { Sequences } from './components/dashboard/sequences/sequences';
 import { Regimens } from './components/dashboard/regimens/regimen_builder';
-import { Schedules } from './components/dashboard/schedules/schedules';
 import { FarmDesigner } from './components/dashboard/farm_designer/farm_designer';
 import { Login } from './components/login';
 import { CONFIG } from './config';
@@ -62,7 +61,6 @@ class Root extends Component {
                 <Route path="devices" component={ wrap(Devices, this.props) } onEnter={ this.requireAuth.bind(this) } />
                 <Route path="sequences" component={ wrap(Sequences, this.props) } onEnter={ this.requireAuth.bind(this) } />
                 <Route path="regimens" component={ wrap(Regimens, this.props) } onEnter={ this.requireAuth.bind(this) } />
-                <Route path="schedules" component={ wrap(Schedules, this.props) } onEnter={ this.requireAuth.bind(this) } />
                 <IndexRoute component={wrap(Controls, this.props)}/>
               </Route>
               <IndexRedirect to="dashboard"/>
