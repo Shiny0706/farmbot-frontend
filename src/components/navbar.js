@@ -7,7 +7,7 @@ export var Navbar = React.createClass({
   links: {
     "Farm Designer" : (CONFIG.ROOT_PATH || "/") + "dashboard/designer",
     "Controls"      : (CONFIG.ROOT_PATH || "/") + "dashboard/controls",
-    "Device"       : (CONFIG.ROOT_PATH || "/") + "dashboard/devices",
+    "Device"        : (CONFIG.ROOT_PATH || "/") + "dashboard/devices",
     "Sequences"     : (CONFIG.ROOT_PATH || "/") + "dashboard/sequences",
     "Regimens"      : (CONFIG.ROOT_PATH || "/") + "dashboard/regimens"
   },

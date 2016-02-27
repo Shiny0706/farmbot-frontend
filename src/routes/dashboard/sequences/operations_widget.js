@@ -80,7 +80,7 @@ export class OperationsWidget extends React.Component {
                         <div className="col-sm-6 col-md-6">
                           <div className="block-wrapper">
                             <button className="full-width text-left purple-block block-header block">
-                              TAKE PICTURE*
+                              EXECUTE
                               <i className="fa fa-arrows block-control" />
                             </button>
                           </div>
