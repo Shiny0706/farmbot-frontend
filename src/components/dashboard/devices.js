@@ -202,6 +202,7 @@ export class Devices extends React.Component {
                                 onClick={ () => this.props.dispatch(commitSettingsChanges()) } >
                           SAVE { Object.keys(bot.settingsBuffer).length ? "*" : "" }
                         </button>
+                        <button type="button" className="button-like yellow widget-control">CALIBRATE</button>
                         <div className="widget-header">
                           <h5>Hardware</h5>
                         </div>
