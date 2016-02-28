@@ -231,13 +231,13 @@ export class Devices extends React.Component {
                                 <tr>
                                   <th width="32%" />
                                   <th width="22%">
-                                    <label>GANTRY (X)</label>
+                                    <label>X AXIS</label>
                                   </th>
                                   <th width="22%">
-                                    <label>CROSS-SLIDE (Y)</label>
+                                    <label>Y AXIS</label>
                                   </th>
                                   <th width="22%">
-                                    <label>Z-AXIS (Z)</label>
+                                    <label>Z AXIS</label>
                                   </th>
                                 </tr>
                               </thead>

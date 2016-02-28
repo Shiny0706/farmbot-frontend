@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar } from '../../../components/navbar';
-import { OperationsWidget } from '../../../routes/dashboard/sequences/operations_widget';
 import { SequencesWidget } from '../../../routes/dashboard/sequences/sequences_widget';
+import { OperationsWidget } from '../../../routes/dashboard/sequences/operations_widget';
 import { SequenceEditorWidget } from '../../../routes/dashboard/sequences/sequence_editor_widget';
 
 export var Sequences = React.createClass({

@@ -14,7 +14,7 @@ export var Navbar = React.createClass({
 
   render: function() {
     return (
-      <nav className="navbar navbar-default" role="navigation">
+      <nav className="navbar navbar-default navbar-fixed-top" role="navigation">
         <div className="container-fluid">
           <div className="navbar-header drop-shadow">
             <button className="navbar-toggle" data-target="#navbar" data-toggle="collapse" type="button">

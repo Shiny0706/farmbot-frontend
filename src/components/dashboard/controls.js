@@ -44,17 +44,13 @@ export class AxisInputBox extends React.Component {
 
 
   render() {
-    return  <div className="row">
-              <div className="col-xs-7 col-sm-6 col-sm-offset-1">
-                <label>{ this.props.label }</label>
-              </div>
-              <div className="col-xs-5 col-sm-4 end">
-                <input className="move-input"
-                       type="text"
-                       style={ this.style() }
-                       onChange={ this.change(this.props.axis, this.props.dispatch) }
-                       value={ this.primary() || this.secondary() || "---" } />
-              </div>
+    return  <div className="col-xs-3">
+              <label>{ this.props.label }</label>
+              <input className="move-input"
+                     type="text"
+                     style={ this.style() }
+                     onChange={ this.change(this.props.axis, this.props.dispatch) }
+                     value={ this.primary() || this.secondary() || "---" } />
             </div>
   }
 }
@@ -169,12 +165,12 @@ export class Controls extends React.Component {
                                 </tr>
                               </tbody></table>
                           </div>
-                          <AxisInputBox axis="x" label="GANTRY (X)" {...this.props} />
-                          <AxisInputBox axis="y" label="CROSS-SLIDE (Y)" {...this.props} />
-                          <AxisInputBox axis="z" label="Z-AXIS (Z)" {...this.props} />
                           <div className="row">
-                            <div className="col-xs-5 col-sm-4 col-xs-offset-7 end">
-                              <button className="full-width green button-like"
+                            <AxisInputBox axis="x" label="X AXIS" {...this.props} />
+                            <AxisInputBox axis="y" label="Y AXIS" {...this.props} />
+                            <AxisInputBox axis="z" label="Z AXIS" {...this.props} />
+                            <div className="col-xs-3">
+                              <button className="full-width green button-like go"
                                       onClick={ () => this.props.dispatch(commitAxisChanges()) } >
                                 GO
                               </button>
