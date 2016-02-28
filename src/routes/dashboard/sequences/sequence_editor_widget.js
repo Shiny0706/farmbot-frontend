@@ -26,18 +26,6 @@ export class SequenceEditorWidget extends React.Component {
                       <input placeholder="Sequence Name" type="text" />
                       <div className="row">
                         <div className="col-sm-12">
-                          <label>Parameters</label>
-                          <p>PLANT-ID/PLANT-GROUP-ID</p>
-                          <input placeholder="1234" type="text" />
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-sm-12">
-                          <label>Sequence</label>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-sm-12">
                           <div className="drag-drop-area padding">DROP OPERATIONS HERE</div>
                         </div>
                       </div>

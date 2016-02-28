@@ -20,7 +20,6 @@ export class OperationsWidget extends React.Component {
                             <button className="full-width text-left blue-block block-header block">
                               MOVE ABSOLUTE
                               <i className="fa fa-arrows block-control" />
-                              <i className="fa fa-plus block-control" />
                             </button>
                           </div>
                         </div>
@@ -29,7 +28,6 @@ export class OperationsWidget extends React.Component {
                             <button className="full-width text-left green-block block-header block">
                               MOVE RELATIVE
                               <i className="fa fa-arrows block-control" />
-                              <i className="fa fa-plus block-control" />
                             </button>
                           </div>
                         </div>
@@ -38,7 +36,6 @@ export class OperationsWidget extends React.Component {
                             <button className="full-width text-left orange-block block-header block">
                               WRITE PIN
                               <i className="fa fa-arrows block-control" />
-                              <i className="fa fa-plus block-control" />
                             </button>
                           </div>
                         </div>
@@ -47,7 +44,6 @@ export class OperationsWidget extends React.Component {
                             <button className="full-width text-left yellow-block block-header block">
                               READ PIN
                               <i className="fa fa-arrows block-control" />
-                              <i className="fa fa-plus block-control" />
                             </button>
                           </div>
                         </div>
@@ -56,7 +52,6 @@ export class OperationsWidget extends React.Component {
                             <button className="full-width text-left brown-block block-header block">
                               WAIT
                               <i className="fa fa-arrows block-control" />
-                              <i className="fa fa-plus block-control" />
                             </button>
                           </div>
                         </div>
@@ -65,7 +60,6 @@ export class OperationsWidget extends React.Component {
                             <button className="full-width text-left red-block block-header">
                               SEND MESSAGE
                               <i className="fa fa-arrows block-control" />
-                              <i className="fa fa-plus block-control" />
                             </button>
                           </div>
                         </div>
@@ -74,7 +68,6 @@ export class OperationsWidget extends React.Component {
                             <button className="full-width text-left purple-block block-header block">
                               IF STATEMENT
                               <i className="fa fa-arrows block-control" />
-                              <i className="fa fa-plus block-control" />
                             </button>
                           </div>
                         </div>
@@ -83,7 +76,6 @@ export class OperationsWidget extends React.Component {
                             <button className="full-width text-left gray-block block-header block">
                               EXECUTE
                               <i className="fa fa-arrows block-control" />
-                              <i className="fa fa-plus block-control" />
                             </button>
                           </div>
                         </div>
