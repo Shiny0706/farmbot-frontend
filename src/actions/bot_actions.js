@@ -1,5 +1,5 @@
 import { Device } from '../models/device';
-import Farmbot from 'farmbot';
+import { Farmbot } from 'farmbot';
 import { store } from '../store';
 import { bot } from '../bot';
 import { success, error } from '../logger';
@@ -236,13 +236,10 @@ function saveDeviceErr(err) {
 }
 
 function fetchDeviceOk(resp) {
-  bot.replace(
-    Farmbot(
-      Object.assign(
-        {}, resp, {timeout: 7000}
-        )
-      )
-    );
+  let token = store.getState().auth.token
+  let config = Object.assign({}, resp, {timeout: 7000, token: token});
+  let newBot = Farmbot(config);
+  bot.replace(newBot); // <= I hate everything about this and need to remove it.
   return dispatch => {
     return bot
       .current

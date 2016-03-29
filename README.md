@@ -20,11 +20,11 @@
 
 # Configuration
 
-All config is in `src/config.js`. It points to a number of things like:
+All config is in `src/config.js`. It points to configurations like:
 
  0. `FARMBOT_API_URL`: URL of the [farmbot-web-app](https://github.com/FarmBot/farmbot-web-app) API endpoint.,
  0. `MESHBLU_URL`: URL for the [MeshBlu](https://github.com/octoblu/meshblu) IoT messaging gateway you will use. Default: "wss://meshblu.octoblu.com/ws/v2",
- 0. `ROOT_PATH`: Sometimes, you will mount the farmbot app on a non-root URL. The app must know where it is mounted in order to find assets. **If `ROOT_PATH` is incorrect, you will have issues loading images and assets**. Default: "/app/"
+ 0. `ROOT_PATH`: For use cases where you are mounting the farmbot app on a non-root URL. The app must have a mount point (URL) to find assets. **If `ROOT_PATH` is incorrect, you will have issues loading images and assets**. Default: "/app/"
 
 
 # TODO
