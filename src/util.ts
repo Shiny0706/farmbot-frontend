@@ -8,7 +8,7 @@ export function convertFormToObject(formEl) {
 }
 
 // http://stackoverflow.com/a/901144/1064917
-// Grab a query string param by name, because redux-simple-router doesn't
+// Grab a query string param by name, because react-router-redux doesn't
 // support query strings yet.
 export function getParam(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");

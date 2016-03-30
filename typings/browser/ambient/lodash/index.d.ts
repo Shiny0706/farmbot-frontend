@@ -5,7 +5,7 @@
 // Definitions by: Brian Zengel <https://github.com/bczengel>, Ilya Mochalov <https://github.com/chrootsu>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-declare var _: _.LoDashStatic;
+declare let _: _.LoDashStatic;
 
 declare module _ {
     interface LoDashStatic {

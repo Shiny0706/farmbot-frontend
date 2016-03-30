@@ -30,7 +30,7 @@ declare namespace __React {
 
         function unmountComponentAtNode(container: Element): boolean;
 
-        var version: string;
+        let version: string;
 
         function unstable_batchedUpdates<A, B>(callback: (a: A, b: B) => any, a: A, b: B): void;
         function unstable_batchedUpdates<A>(callback: (a: A) => any, a: A): void;
@@ -61,7 +61,7 @@ declare namespace __React {
     namespace __DOMServer {
         function renderToString(element: ReactElement<any>): string;
         function renderToStaticMarkup(element: ReactElement<any>): string;
-        var version: string;
+        let version: string;
     }
 }
 

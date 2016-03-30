@@ -1,4 +1,4 @@
-import thunk                          from 'redux-thunk';
+import * as thunk                     from 'redux-thunk';
 import { compose, createStore }       from 'redux';
 import { applyMiddleware }            from 'redux';
 import { loginFromToken }             from './actions/auth_actions';
@@ -9,9 +9,9 @@ import { plantReducer as plants }     from './reducers/plant_reducer'
 import { oldGlobalReducer as global } from './reducers/old_reducers';
 import { routeReducer as routing }    from './reducers/routing_reducer';
 
-var lastState = {};
+let lastState = {};
 
-var reducers = combineReducers({
+let reducers = combineReducers({
   routing,
   auth,
   bot,
@@ -19,4 +19,4 @@ var reducers = combineReducers({
   global
 });
 
-export var store = compose(applyMiddleware(thunk))(createStore)(reducers, lastState);
+export let store = compose(applyMiddleware(thunk))(createStore)(reducers, lastState);

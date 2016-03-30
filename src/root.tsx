@@ -2,7 +2,7 @@ import * as React from "react";
 import { Component } from "react";
 import { Provider } from "react-redux";
 import * as assets from "./assets";
-import { syncReduxAndRouter, pushPath } from "redux-simple-router"
+import { syncReduxAndRouter, pushPath } from "react-router-redux"
 import { IndexRedirect, IndexRoute, Route, Router } from "react-router";
 import App from "./components/app";
 import Dashboard from "./components/dashboard/dashboard";
@@ -15,7 +15,7 @@ import { FarmDesigner } from "./components/dashboard/farm_designer/farm_designer
 import { Login } from "./components/login";
 import { CONFIG } from "./config";
 import { connect } from "react-redux";
-import _ from "lodash";
+import * as _ from "lodash";
 
 import { store } from "./store";
 import { createHistory } from "history"

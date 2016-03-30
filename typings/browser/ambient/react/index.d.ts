@@ -148,9 +148,9 @@ declare namespace __React {
 
     function isValidElement<P>(object: {}): object is ReactElement<P>;
 
-    var DOM: ReactDOM;
-    var PropTypes: ReactPropTypes;
-    var Children: ReactChildren;
+    let DOM: ReactDOM;
+    let PropTypes: ReactPropTypes;
+    let Children: ReactChildren;
 
     //
     // Component API
@@ -386,8 +386,8 @@ declare namespace __React {
      * `createElement` or a factory, use `ClassAttributes<T>`:
      *
      * ```ts
-     * var b: Button;
-     * var props: ButtonProps & ClassAttributes<Button> = {
+     * let b: Button;
+     * let props: ButtonProps & ClassAttributes<Button> = {
      *     ref: b => button = b, // ok!
      *     label: "I'm a Button"
      * };
