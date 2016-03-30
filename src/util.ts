@@ -1,6 +1,9 @@
+import * as _ from "lodash";
+import * as $ from "jquery";
+
 export function convertFormToObject(formEl) {
-  var inputs = $(formEl.querySelectorAll("input"));
-  var values = $.map(inputs, function(d) { return [[d.name, d.value]] });
+  let inputs = $(formEl.querySelectorAll("input"));
+  let values = $.map(inputs, function(d) { return [[d.name, d.value]]; });
   return _.object(values);
 }
 
@@ -9,7 +12,7 @@ export function convertFormToObject(formEl) {
 // support query strings yet.
 export function getParam(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         r = regex.exec(location.search);
     return r === null ? "" : decodeURIComponent(r[1].replace(/\+/g, " "));
 }

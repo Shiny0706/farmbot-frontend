@@ -12,7 +12,7 @@ config.plugins = [
   }),
 ];
 
-config.entry = { app: './src/fb_frontend.js' };
+config.entry = { app: './src/fb_frontend.tsx' };
 
 config.output = {
     path: path.resolve(__dirname, "src"),

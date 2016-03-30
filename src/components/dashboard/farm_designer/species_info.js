@@ -2,7 +2,7 @@ import React from 'react';
 import { Plant } from '../../../models/plant';
 import { addPlant } from '../../../actions/plant_actions';
 import { BackArrow } from './back_arrow';
-import { getParam } from '../../../util';
+import { getParam } from '../../../util.ts';
 
 export class SpeciesInfo extends React.Component {
   drop (e) {

@@ -2,6 +2,8 @@ var path = require('path');
 
 module.exports = function (config) {
   config.set({
+    singleRun: false,
+    autoWatch: true,
     browsers: ['Chrome'],
     coverageReporter: {
       reporters: [

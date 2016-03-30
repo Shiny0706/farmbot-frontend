@@ -7,7 +7,7 @@ import { addDevice,
          fetchDevice,
          changeDevice } from '../../actions/bot_actions';
 import { connect } from 'react-redux';
-import { convertFormToObject } from '../../util';
+import { convertFormToObject } from '../../util.ts';
 import { store } from '../../store';
 import { ToggleButton } from './toggle_button';
 
@@ -73,7 +73,7 @@ export class Devices extends React.Component {
   }
 
   render() {
-    bot = this.props.store.getState().bot;
+    bot = this.props.store.getState().bot.current;
     return (
       <div>
         <Navbar/>
@@ -281,15 +281,15 @@ export class Devices extends React.Component {
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_x }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_x")) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_x", bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_y }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_y")) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_y", bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_z }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_z")) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_z", bot)) } />
                                   </td>
                                 </tr>
                                 <tr>

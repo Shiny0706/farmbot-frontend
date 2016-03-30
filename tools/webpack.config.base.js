@@ -5,6 +5,11 @@ module.exports = {
       exclude: /(bower_components|node_modules)/,
       loader: 'babel',
       query: { presets: ['react', 'es2015'] }
+    },
+    {
+      test: /\.ts$/,
+      exclude: /(bower_components|node_modules)/,
+      loader: 'ts'
     }],
   },
   output: {
@@ -15,6 +20,7 @@ module.exports = {
     extensions: [
       '',
       '.js',
+      '.ts'
     ],
   },
 };

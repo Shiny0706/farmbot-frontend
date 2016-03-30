@@ -9,13 +9,13 @@
   },
   "scripts": {
     "build": "npm run clean && npm run build:dev && npm run build:prd",
-    "build:dev": "webpack src/fb_frontend.js dist/fb_frontend.js --config tools/webpack.config.dev.js",
-    "build:prd": "webpack src/fb_frontend.js dist/fb_frontend.min.js --config tools/webpack.config.prd.js",
+    "build:dev": "webpack src/fb_frontend.tsx dist/fb_frontend.js --config tools/webpack.config.dev.js",
+    "build:prd": "webpack src/fb_frontend.tsx dist/fb_frontend.min.js --config tools/webpack.config.prd.js",
     "prepublish": "npm run build",
     "start": "webpack-dev-server --config tools/webpack.config.dev.js",
     "clean": "rimraf dist build",
     "lint": "eslint src",
-    "test": "karma start --single-run --no-auto-watch karma.config.js"
+    "test": "karma start karma.config.js"
   },
   "keywords": [
     "farmbot"
@@ -46,6 +46,7 @@
     "rimraf": "^2.5.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
+    "ts-loader": "^0.8.1",
     "webpack": "^1.12.11",
     "webpack-dev-server": "^1.14.1"
   },

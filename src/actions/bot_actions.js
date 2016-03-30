@@ -6,15 +6,14 @@ import { success, error } from '../logger';
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
-export function settingToggle(name) {
-  var currentValue = store.getState().bot.hardware[name];
-  var newsettingValue = (currentValue === 0) ? ON : OFF;
-  var packet = {};
-  packet[name] = newsettingValue;
-  var promise = bot.current.updateCalibration(packet)
-
+export function settingToggle(name, bot) {
   return function(dispatch) {
-    promise.then(res => dispatch(settingToggleOk(res)),
+    var currentValue = bot.hardware[name];
+    var packet = {
+      name: (currentValue === 0) ? ON : OFF
+    };
+    var promise = bot.updateCalibration(packet)
+    return promise.then(res => dispatch(settingToggleOk(res)),
                  err => dispatch(settingToggleErr(err)))
   }
 }
@@ -238,6 +237,9 @@ function saveDeviceErr(err) {
 function fetchDeviceOk(resp) {
   let token = store.getState().auth.token
   let config = Object.assign({}, resp, {timeout: 7000, token: token});
+  try {
+    console.log(`Logining in to ${JSON.parse(atob(token.split('.')[1])).iss}`)
+  } catch (e) { };
   let newBot = Farmbot(config);
   bot.replace(newBot); // <= I hate everything about this and need to remove it.
   return dispatch => {
