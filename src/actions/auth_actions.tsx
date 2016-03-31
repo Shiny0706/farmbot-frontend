@@ -2,6 +2,7 @@ import { CONFIG } from '../config';
 import { fetchDevice } from './bot_actions';
 
 export function loginFromToken(token) {
+  // Wait, why use a thunk at all here???
   let promise = Promise.resolve();
   return dispatch => {
     return promise.then(

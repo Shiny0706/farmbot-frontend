@@ -1,6 +1,6 @@
 import { settingToggle } from '../../actions/bot_actions';
 
-let createSpy = window.jasmine.createSpy;
+let createSpy = jasmine.createSpy;
 
 describe('bot_actions.js', () => {
   it('toggles settings', (done) => {
