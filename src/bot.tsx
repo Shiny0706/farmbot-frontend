@@ -1,17 +1,14 @@
-let devices;
 
 function NullBot() {
   this.name = "Null bot"
 }
 
-devices = {
+export var devices = {
   current: new NullBot(),
-  add: function(newBot) {
+  add: (newBot) => {
     // Add aditional behavior to the bot.
     // TODO add this to Farmbot.js
     newBot.offline = function(){ return false } ;
-    bot.current = newBot;
+    this.current = newBot;
   }
 };
-
-module.exports = devices

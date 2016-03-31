@@ -31,13 +31,13 @@ let wrap = function(Component, props) {
   });
 };
 
-class Root extends Component {
+class Root extends Component<any, any> {
   componentDidMount() {
     this.props.dispatch(pushPath(CONFIG.ROOT_PATH + "login"));
   }
 
   requireAuth(nextState, replaceState) {
-    let auth = _.assign({}, this.props.auth);
+    let auth = _.assign<{}, {}>({}, this.props.auth);
     let that = this;
     let attemptedURL = nextState.location.pathname;
       if (auth.authenticated) {

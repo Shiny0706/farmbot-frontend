@@ -7,7 +7,7 @@ export class AddEvent extends React.Component {
     return  <div className="panel-container magenta-panel">
               <div className="panel-header magenta-panel">
                 <p className="panel-title">
-                  <BackArrow/>Add Event
+                  <BackArrow></BackArrow>Add Event
                 </p>
               </div>
               <div className="panel-content">

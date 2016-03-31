@@ -1,5 +1,5 @@
 import { error, warning, success } from '../logger';
-import { bot } from '../bot';
+import { devices as bot } from '../bot';
 import * as _ from 'lodash';
 
 let status = {
@@ -45,7 +45,7 @@ let action_handlers = {
   },
 
   CHANGE_AXIS_BUFFER: function(state, action) {
-    let axisBuffer = Object.assign({}, state.axisBuffer);
+    let axisBuffer = _.assign({}, state.axisBuffer);
     axisBuffer[action.payload.key] = action.payload.val;
 
     return _.assign({}, state, {
@@ -54,7 +54,7 @@ let action_handlers = {
   },
 
   CHANGE_SETTINGS_BUFFER: function(state, action) {
-    let settingsBuffer = Object.assign({}, state.settingsBuffer);
+    let settingsBuffer = _.assign({}, state.settingsBuffer);
     let newVal = Number(action.payload.val);
     if(newVal) {
       settingsBuffer[action.payload.key] = action.payload.val;
@@ -73,7 +73,7 @@ let action_handlers = {
   },
 
   READ_STATUS_OK: function(state, action) {
-    let hardware = Object.assign({}, action.payload);
+    let hardware = _.assign({}, action.payload);
     delete hardware.method
     return _.assign({},
       state, {
@@ -84,7 +84,7 @@ let action_handlers = {
   },
 
   BOT_CHANGE: function(state, action) {
-    let statuses = Object.assign({}, action.payload.result);
+    let statuses = _.assign({}, action.payload.result);
     delete statuses.name;
     delete statuses.method;
     let newState = _.assign({}, state);
@@ -179,7 +179,7 @@ export function botReducer(state = initialState, action) {
     debugger;
   };
   let result = handler.call(action_handlers, state, action);
-  let newState = Object.assign({}, result);
+  let newState = _.assign({}, result);
   if(action.type[0] !== "@") {
     console.log(action.type, state)
   };

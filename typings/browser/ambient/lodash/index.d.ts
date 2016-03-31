@@ -12255,7 +12255,7 @@ declare module _ {
          * assigned values. The customizer is bound to thisArg and invoked with five arguments:
          * (objectValue, sourceValue, key, object, source).
          *
-         * Note: This method mutates object and is based on Object.assign.
+         * Note: This method mutates object and is based on _.assign.
          *
          * @alias _.extend
          *

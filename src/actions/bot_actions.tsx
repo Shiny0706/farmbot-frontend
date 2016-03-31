@@ -236,7 +236,7 @@ function saveDeviceErr(err) {
 
 function fetchDeviceOk(resp) {
   let token = store.getState().auth.token
-  let config = Object.assign({}, resp, {timeout: 7000, token: token});
+  let config = _.assign({}, resp, {timeout: 7000, token: token});
   try {
     console.log(`Logining in to ${JSON.parse(atob(token.split('.')[1])).iss}`)
   } catch (e) { };

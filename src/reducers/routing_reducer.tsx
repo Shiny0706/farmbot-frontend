@@ -15,7 +15,7 @@ export function routeReducer(state=initialState, { type, payload }) {
   let newState;
   switch(type) {
     case "LOGIN_OK":
-      let newState = Object.assign({}, state, {
+      newState = _.assign({}, state, {
         attemptedURL: null,
         path: state.attemptedURL || DEFAULT_WELCOME_PAGE,
         changeId: state.changeId + 1,
@@ -24,8 +24,7 @@ export function routeReducer(state=initialState, { type, payload }) {
       })
       break;
     case "LOGIN_REQUIRED":
-
-      let newState = Object.assign({}, state, {
+      newState = _.assign({}, state, {
         path: CONFIG.ROOT_PATH + 'login',
         attemptedURL: payload.attemptedURL,
         changeId: state.changeId + 1
