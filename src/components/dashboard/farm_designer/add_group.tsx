@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router';
 import { BackArrow } from './back_arrow';
 
-export class AddGroup extends React.Component {
+export class AddGroup extends React.Component<any, any> {
   render() {
     return  <div className="panel-container cyan-panel">
               <div className="panel-header cyan-panel">
@@ -25,6 +25,6 @@ export class AddGroup extends React.Component {
                   Save
                 </button>
               </div>
-            </div>
+            </div>;
   }
 }

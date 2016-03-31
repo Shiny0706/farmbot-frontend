@@ -20,7 +20,7 @@ import { getParam } from '../../../util.ts';
 
 // Dynamically determine what to render in the designer's first panel
 // based on the value of hash fragment 'p1'
-export class Panel1 extends React.Component {
+export class Panel1 extends React.Component<any, any> {
   get tabName() {
     return (getParam("p1") || "Plants")
   }

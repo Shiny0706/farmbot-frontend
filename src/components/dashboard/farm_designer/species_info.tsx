@@ -4,7 +4,7 @@ import { addPlant } from '../../../actions/plant_actions';
 import { BackArrow } from './back_arrow';
 import { getParam } from '../../../util.ts';
 
-export class SpeciesInfo extends React.Component {
+export class SpeciesInfo extends React.Component<any, any> {
   drop (e) {
     let box = document
       .querySelector('#drop-area > svg > rect')

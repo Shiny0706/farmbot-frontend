@@ -10,7 +10,7 @@ import { fetchDevice,
          commitAxisChanges,
          pinToggle } from '../../actions/bot_actions';
 
-export class AxisInputBox extends React.Component {
+export class AxisInputBox extends React.Component<any, any> {
 
   bot() {
     // Dumb hacks for impossible bugs.
@@ -58,7 +58,7 @@ export class AxisInputBox extends React.Component {
             </div>
   }
 }
-export class StepSizeSelector extends React.Component {
+export class StepSizeSelector extends React.Component<any, any> {
   cssForIndex(num) {
     let choices = this.props.choices;
     let css = "move-amount no-radius ";
@@ -88,7 +88,7 @@ export class StepSizeSelector extends React.Component {
   }
 }
 
-export class Controls extends React.Component {
+export class Controls extends React.Component<any, any> {
 
   render() {
     let bot = store.getState()

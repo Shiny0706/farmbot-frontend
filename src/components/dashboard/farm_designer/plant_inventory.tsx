@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from 'react-router';
 import { Plant } from '../../../models/plant'
 
-export class Plants extends React.Component {
+export class Plants extends React.Component<any, any> {
   render() {
     return(
       <div className="panel-container green-panel">
@@ -51,7 +51,7 @@ export class Plants extends React.Component {
   }
 };
 
-export class List extends React.Component {
+export class List extends React.Component<any, any> {
   render() {
     let mapper = function(plant, key) {
       return(

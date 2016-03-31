@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router';
 import { BackArrow } from './back_arrow';
 
-export class AddZone extends React.Component {
+export class AddZone extends React.Component<any, any> {
   render() {
     return  <div className="panel-container brown-panel">
               <div className="panel-header brown-panel">

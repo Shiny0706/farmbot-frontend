@@ -23,7 +23,7 @@ export class ScheduleEvent extends React.Component<ICalendarProps, void> {
   }
 }
 
-export class Calendar extends React.Component {
+export class Calendar extends React.Component<any, any> {
   render () {
     let events = _(Schedule.fakes)
                    .sortBy('time')

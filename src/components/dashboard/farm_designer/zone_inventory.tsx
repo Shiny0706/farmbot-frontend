@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from 'react-router';
 
-export class Zones extends React.Component {
+export class Zones extends React.Component<any, any> {
   render() {
     return(
       <div className="panel-container brown-panel">

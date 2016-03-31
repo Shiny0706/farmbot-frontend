@@ -7,7 +7,7 @@ import { Panel2 } from './panel_2';
 import { fetchAllPlants } from '../../../actions/plant_actions';
 import { connect } from 'react-redux';
 
-export class FarmDesigner extends React.Component {
+export class FarmDesigner extends React.Component<any, any> {
 
   componentDidMount() { this.props.dispatch(fetchAllPlants()); }
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export class ToggleButton extends React.Component {
+export class ToggleButton extends React.Component<any, any> {
   caption() {
     let captions = {
       "0":     "no",

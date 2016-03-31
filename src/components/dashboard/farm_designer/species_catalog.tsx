@@ -4,7 +4,7 @@ import { Plant } from '../../../models/plant';
 import { Species } from '../../../models/species';
 import { BackArrow } from './back_arrow';
 
-export class SpeciesCatalogTile extends React.Component {
+export class SpeciesCatalogTile extends React.Component<any, any> {
   render() {
     let specimen = this.props.specimen;
     let url = "/dashboard/designer?p1=SpeciesInfo&id="
@@ -26,7 +26,7 @@ export class SpeciesCatalogTile extends React.Component {
   }
 };
 
-export class SpeciesCatalog extends React.Component {
+export class SpeciesCatalog extends React.Component<any, any> {
   render() {
     let species = this.props.global.species.map(
        (specimen, k) => <SpeciesCatalogTile specimen={ specimen }

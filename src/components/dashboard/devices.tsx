@@ -15,7 +15,7 @@ let bot; // So bad... Why doesn't this page work? :(
 
 
 
-export class SettingsInputBox extends React.Component {
+export class SettingsInputBox extends React.Component<any, any> {
 
   bot() {
     // Dumb hacks for impossible bugs.
@@ -60,7 +60,7 @@ export class SettingsInputBox extends React.Component {
 }
 
 
-export class Devices extends React.Component {
+export class Devices extends React.Component<any, any> {
   changeBot(e) {
     e.preventDefault();
     let updates = _.object([[e.target.name, e.target.value]]) // {name: "value"}

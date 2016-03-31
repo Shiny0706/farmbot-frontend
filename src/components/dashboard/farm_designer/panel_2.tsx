@@ -8,7 +8,7 @@ import { getParam } from '../../../util.ts';
 
 // Dynamically determine what to render in the designer's second panel
 // based on the value of hash fragment 'p2'
-export class Panel2 extends React.Component {
+export class Panel2 extends React.Component<any, any> {
   get tabName() {
     return (getParam("p2") || "Calendar")
   }

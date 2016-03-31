@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export class SequenceEditorWidget extends React.Component {
+export class SequenceEditorWidget extends React.Component<any, any> {
   render() {
     return( <div>
               <div className="widget-wrapper">

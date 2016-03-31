@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export class RegimenEditorWidget extends React.Component {
+export class RegimenEditorWidget extends React.Component<any, any> {
   render() {
     return( <div>
               <div className="widget-wrapper regimen-editor-widget">

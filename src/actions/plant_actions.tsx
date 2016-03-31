@@ -1,4 +1,4 @@
-import { Plant } from '../models/plant'
+import { Plant } from "../models/plant";
 
 export function addPlant(plant) {
   return dispatch => {
@@ -22,26 +22,26 @@ function addPlantSuccess(plant) {
   return {
     type: "ADD_PLANT_SUCCESS",
     payload: plant
-  }
+  };
 }
 
 function addPlantFailure(err) {
   return {
     type: "ADD_PLANT_FAILURE",
     payload: err
-  }
+  };
 }
 
-function fetchPlantsSuccess(plants){
+function fetchPlantsSuccess(plants) {
   return {
     type: "FETCH_PLANTS_SUCCESS",
     payload: plants
-  }
+  };
 }
 
-function fetchPlantsFailure(err){
+function fetchPlantsFailure(err) {
   return {
     type: "FETCH_PLANTS_FAILURE",
     payload: err
-  }
+  };
 }

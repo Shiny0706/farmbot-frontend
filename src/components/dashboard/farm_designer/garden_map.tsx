@@ -3,7 +3,7 @@ import { Plant } from '../../../models/plant';
 import { navigateSelectedPlant } from '../../../actions/router_actions';
 import { getParam } from '../../../util.ts';
 
-export class MapPoint extends React.Component {
+export class MapPoint extends React.Component<any, any> {
   select() {
     this.props.dispatch(navigateSelectedPlant(this.props.plant));
   }
@@ -23,7 +23,7 @@ export class MapPoint extends React.Component {
   }
 };
 
-export class GardenMap extends React.Component {
+export class GardenMap extends React.Component<any, any> {
   plants() {
     return this.props.plants.all.map(
       function (p, k) {

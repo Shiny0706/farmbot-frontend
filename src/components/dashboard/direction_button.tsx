@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { sendCommand } from '../../actions/bot_actions';
 
-export class DirectionButton extends React.Component {
+export class DirectionButton extends React.Component<any, any> {
   sendCommand() {
     let payload = { name: "moveRelative", speed: 100 };
     let isNegative = (this.props.direction == "up") ||

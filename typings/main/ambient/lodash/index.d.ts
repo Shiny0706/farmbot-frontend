@@ -45,7 +45,7 @@ declare module _ {
         (value: boolean): LoDashImplicitWrapper<boolean>;
         (value: Array<number>): LoDashImplicitNumberArrayWrapper;
         <T>(value: Array<T>): LoDashImplicitArrayWrapper<T>;
-        <T extends {}>(value: T): LoDashImplicitObjectWrapper<T>;
+        <T extends React.Component<any, any> {}>(value: T): LoDashImplicitObjectWrapper<T>;
         (value: any): LoDashImplicitWrapper<any>;
 
         /**
@@ -1634,7 +1634,7 @@ declare module _ {
         /**
          * @see _.zipObject
          */
-        object<TValues, TResult extends {}>(
+        object<TValues, TResult extends React.Component<any, any> {}>(
             props: List<StringRepresentable>|List<List<any>>,
             values?: List<TValues>
         ): TResult;
@@ -1642,7 +1642,7 @@ declare module _ {
         /**
          * @see _.zipObject
          */
-        object<TResult extends {}>(
+        object<TResult extends React.Component<any, any> {}>(
             props: List<StringRepresentable>|List<List<any>>,
             values?: List<any>
         ): TResult;
@@ -1660,14 +1660,14 @@ declare module _ {
         /**
          * @see _.zipObject
          */
-        object<TValues, TResult extends {}>(
+        object<TValues, TResult extends React.Component<any, any> {}>(
             values?: List<TValues>
         ): _.LoDashImplicitObjectWrapper<TResult>;
 
         /**
          * @see _.zipObject
          */
-        object<TResult extends {}>(
+        object<TResult extends React.Component<any, any> {}>(
             values?: List<any>
         ): _.LoDashImplicitObjectWrapper<TResult>;
 
@@ -1683,14 +1683,14 @@ declare module _ {
         /**
          * @see _.zipObject
          */
-        object<TValues, TResult extends {}>(
+        object<TValues, TResult extends React.Component<any, any> {}>(
             values?: List<TValues>
         ): _.LoDashImplicitObjectWrapper<TResult>;
 
         /**
          * @see _.zipObject
          */
-        object<TResult extends {}>(
+        object<TResult extends React.Component<any, any> {}>(
             values?: List<any>
         ): _.LoDashImplicitObjectWrapper<TResult>;
 
@@ -1706,14 +1706,14 @@ declare module _ {
         /**
          * @see _.zipObject
          */
-        object<TValues, TResult extends {}>(
+        object<TValues, TResult extends React.Component<any, any> {}>(
             values?: List<TValues>
         ): _.LoDashExplicitObjectWrapper<TResult>;
 
         /**
          * @see _.zipObject
          */
-        object<TResult extends {}>(
+        object<TResult extends React.Component<any, any> {}>(
             values?: List<any>
         ): _.LoDashExplicitObjectWrapper<TResult>;
 
@@ -1729,14 +1729,14 @@ declare module _ {
         /**
          * @see _.zipObject
          */
-        object<TValues, TResult extends {}>(
+        object<TValues, TResult extends React.Component<any, any> {}>(
             values?: List<TValues>
         ): _.LoDashExplicitObjectWrapper<TResult>;
 
         /**
          * @see _.zipObject
          */
-        object<TResult extends {}>(
+        object<TResult extends React.Component<any, any> {}>(
             values?: List<any>
         ): _.LoDashExplicitObjectWrapper<TResult>;
 
@@ -3069,7 +3069,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        uniq<TWhere extends {}, T>(
+        uniq<TWhere extends React.Component<any, any> {}, T>(
             array: List<T>,
             isSorted?: boolean,
             iteratee?: TWhere
@@ -3086,7 +3086,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        uniq<TWhere extends {}, T>(
+        uniq<TWhere extends React.Component<any, any> {}, T>(
             array: List<T>,
             iteratee?: TWhere
         ): T[];
@@ -3149,7 +3149,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        uniq<TWhere extends {}>(
+        uniq<TWhere extends React.Component<any, any> {}>(
             isSorted?: boolean,
             iteratee?: TWhere
         ): LoDashImplicitArrayWrapper<T>;
@@ -3157,7 +3157,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        uniq<TWhere extends {}>(
+        uniq<TWhere extends React.Component<any, any> {}>(
             iteratee?: TWhere
         ): LoDashImplicitArrayWrapper<T>;
     }
@@ -3222,7 +3222,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        uniq<TWhere extends {}, T>(
+        uniq<TWhere extends React.Component<any, any> {}, T>(
             isSorted?: boolean,
             iteratee?: TWhere
         ): LoDashImplicitArrayWrapper<T>;
@@ -3237,7 +3237,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        uniq<TWhere extends {}, T>(
+        uniq<TWhere extends React.Component<any, any> {}, T>(
             iteratee?: TWhere
         ): LoDashImplicitArrayWrapper<T>;
     }
@@ -3299,7 +3299,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        uniq<TWhere extends {}>(
+        uniq<TWhere extends React.Component<any, any> {}>(
             isSorted?: boolean,
             iteratee?: TWhere
         ): LoDashExplicitArrayWrapper<T>;
@@ -3307,7 +3307,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        uniq<TWhere extends {}>(
+        uniq<TWhere extends React.Component<any, any> {}>(
             iteratee?: TWhere
         ): LoDashExplicitArrayWrapper<T>;
     }
@@ -3372,7 +3372,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        uniq<TWhere extends {}, T>(
+        uniq<TWhere extends React.Component<any, any> {}, T>(
             isSorted?: boolean,
             iteratee?: TWhere
         ): LoDashExplicitArrayWrapper<T>;
@@ -3387,7 +3387,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        uniq<TWhere extends {}, T>(
+        uniq<TWhere extends React.Component<any, any> {}, T>(
             iteratee?: TWhere
         ): LoDashExplicitArrayWrapper<T>;
     }
@@ -3463,7 +3463,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        unique<TWhere extends {}, T>(
+        unique<TWhere extends React.Component<any, any> {}, T>(
             array: List<T>,
             isSorted?: boolean,
             iteratee?: TWhere
@@ -3480,7 +3480,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        unique<TWhere extends {}, T>(
+        unique<TWhere extends React.Component<any, any> {}, T>(
             array: List<T>,
             iteratee?: TWhere
         ): T[];
@@ -3543,7 +3543,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        unique<TWhere extends {}>(
+        unique<TWhere extends React.Component<any, any> {}>(
             isSorted?: boolean,
             iteratee?: TWhere
         ): LoDashImplicitArrayWrapper<T>;
@@ -3551,7 +3551,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        unique<TWhere extends {}>(
+        unique<TWhere extends React.Component<any, any> {}>(
             iteratee?: TWhere
         ): LoDashImplicitArrayWrapper<T>;
     }
@@ -3616,7 +3616,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        unique<TWhere extends {}, T>(
+        unique<TWhere extends React.Component<any, any> {}, T>(
             isSorted?: boolean,
             iteratee?: TWhere
         ): LoDashImplicitArrayWrapper<T>;
@@ -3631,7 +3631,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        unique<TWhere extends {}, T>(
+        unique<TWhere extends React.Component<any, any> {}, T>(
             iteratee?: TWhere
         ): LoDashImplicitArrayWrapper<T>;
     }
@@ -3693,7 +3693,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        unique<TWhere extends {}>(
+        unique<TWhere extends React.Component<any, any> {}>(
             isSorted?: boolean,
             iteratee?: TWhere
         ): LoDashExplicitArrayWrapper<T>;
@@ -3701,7 +3701,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        unique<TWhere extends {}>(
+        unique<TWhere extends React.Component<any, any> {}>(
             iteratee?: TWhere
         ): LoDashExplicitArrayWrapper<T>;
     }
@@ -3766,7 +3766,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        unique<TWhere extends {}, T>(
+        unique<TWhere extends React.Component<any, any> {}, T>(
             isSorted?: boolean,
             iteratee?: TWhere
         ): LoDashExplicitArrayWrapper<T>;
@@ -3781,7 +3781,7 @@ declare module _ {
         /**
          * @see _.uniq
          */
-        unique<TWhere extends {}, T>(
+        unique<TWhere extends React.Component<any, any> {}, T>(
             iteratee?: TWhere
         ): LoDashExplicitArrayWrapper<T>;
     }
@@ -4000,7 +4000,7 @@ declare module _ {
          * @param values The property values.
          * @return Returns the new object.
          */
-        zipObject<TValues, TResult extends {}>(
+        zipObject<TValues, TResult extends React.Component<any, any> {}>(
             props: List<StringRepresentable>|List<List<any>>,
             values?: List<TValues>
         ): TResult;
@@ -4008,7 +4008,7 @@ declare module _ {
         /**
          * @see _.zipObject
          */
-        zipObject<TResult extends {}>(
+        zipObject<TResult extends React.Component<any, any> {}>(
             props: List<StringRepresentable>|List<List<any>>,
             values?: List<any>
         ): TResult;
@@ -4026,14 +4026,14 @@ declare module _ {
         /**
          * @see _.zipObject
          */
-        zipObject<TValues, TResult extends {}>(
+        zipObject<TValues, TResult extends React.Component<any, any> {}>(
             values?: List<TValues>
         ): _.LoDashImplicitObjectWrapper<TResult>;
 
         /**
          * @see _.zipObject
          */
-        zipObject<TResult extends {}>(
+        zipObject<TResult extends React.Component<any, any> {}>(
             values?: List<any>
         ): _.LoDashImplicitObjectWrapper<TResult>;
 
@@ -4049,14 +4049,14 @@ declare module _ {
         /**
          * @see _.zipObject
          */
-        zipObject<TValues, TResult extends {}>(
+        zipObject<TValues, TResult extends React.Component<any, any> {}>(
             values?: List<TValues>
         ): _.LoDashImplicitObjectWrapper<TResult>;
 
         /**
          * @see _.zipObject
          */
-        zipObject<TResult extends {}>(
+        zipObject<TResult extends React.Component<any, any> {}>(
             values?: List<any>
         ): _.LoDashImplicitObjectWrapper<TResult>;
 
@@ -4072,14 +4072,14 @@ declare module _ {
         /**
          * @see _.zipObject
          */
-        zipObject<TValues, TResult extends {}>(
+        zipObject<TValues, TResult extends React.Component<any, any> {}>(
             values?: List<TValues>
         ): _.LoDashExplicitObjectWrapper<TResult>;
 
         /**
          * @see _.zipObject
          */
-        zipObject<TResult extends {}>(
+        zipObject<TResult extends React.Component<any, any> {}>(
             values?: List<any>
         ): _.LoDashExplicitObjectWrapper<TResult>;
 
@@ -4095,14 +4095,14 @@ declare module _ {
         /**
          * @see _.zipObject
          */
-        zipObject<TValues, TResult extends {}>(
+        zipObject<TValues, TResult extends React.Component<any, any> {}>(
             values?: List<TValues>
         ): _.LoDashExplicitObjectWrapper<TResult>;
 
         /**
          * @see _.zipObject
          */
-        zipObject<TResult extends {}>(
+        zipObject<TResult extends React.Component<any, any> {}>(
             values?: List<any>
         ): _.LoDashExplicitObjectWrapper<TResult>;
 
@@ -4151,7 +4151,7 @@ declare module _ {
         chain(value: string): LoDashExplicitWrapper<string>;
         chain(value: boolean): LoDashExplicitWrapper<boolean>;
         chain<T>(value: T[]): LoDashExplicitArrayWrapper<T>;
-        chain<T extends {}>(value: T): LoDashExplicitObjectWrapper<T>;
+        chain<T extends React.Component<any, any> {}>(value: T): LoDashExplicitObjectWrapper<T>;
         chain(value: any): LoDashExplicitWrapper<any>;
     }
 
@@ -4264,7 +4264,7 @@ declare module _ {
         /**
          * @see _.thru
          */
-        thru<TResult extends {}>(
+        thru<TResult extends React.Component<any, any> {}>(
             interceptor: (value: T) => TResult,
             thisArg?: any): LoDashImplicitObjectWrapper<TResult>;
 
@@ -4304,7 +4304,7 @@ declare module _ {
         /**
          * @see _.thru
          */
-        thru<TResult extends {}>(
+        thru<TResult extends React.Component<any, any> {}>(
             interceptor: (value: T) => TResult,
             thisArg?: any
         ): LoDashExplicitObjectWrapper<TResult>;
@@ -4395,7 +4395,7 @@ declare module _ {
         /**
          * @see _.plant
          */
-        plant<T extends {}>(value: T): LoDashImplicitObjectWrapper<T>;
+        plant<T extends React.Component<any, any> {}>(value: T): LoDashImplicitObjectWrapper<T>;
 
         /**
          * @see _.plant
@@ -4432,7 +4432,7 @@ declare module _ {
         /**
          * @see _.plant
          */
-        plant<T extends {}>(value: T): LoDashExplicitObjectWrapper<T>;
+        plant<T extends React.Component<any, any> {}>(value: T): LoDashExplicitObjectWrapper<T>;
 
         /**
          * @see _.plant
@@ -4542,7 +4542,7 @@ declare module _ {
         /**
          * @see _.every
          */
-        all<TObject extends {}, T>(
+        all<TObject extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>,
             predicate?: TObject
         ): boolean;
@@ -4568,7 +4568,7 @@ declare module _ {
         /**
          * @see _.every
          */
-        all<TObject extends {}>(
+        all<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): boolean;
     }
@@ -4593,7 +4593,7 @@ declare module _ {
         /**
          * @see _.every
          */
-        all<TObject extends {}>(
+        all<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): boolean;
     }
@@ -4618,7 +4618,7 @@ declare module _ {
         /**
          * @see _.every
          */
-        all<TObject extends {}>(
+        all<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): LoDashExplicitWrapper<boolean>;
     }
@@ -4643,7 +4643,7 @@ declare module _ {
         /**
          * @see _.every
          */
-        all<TObject extends {}>(
+        all<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): LoDashExplicitWrapper<boolean>;
     }
@@ -4707,7 +4707,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        any<TObject extends {}, T>(
+        any<TObject extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>|NumericDictionary<T>,
             predicate?: TObject
         ): boolean;
@@ -4723,7 +4723,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        any<TObject extends {}>(
+        any<TObject extends React.Component<any, any> {}>(
             collection: Object,
             predicate?: TObject
         ): boolean;
@@ -4749,7 +4749,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        any<TObject extends {}>(
+        any<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): boolean;
     }
@@ -4774,7 +4774,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        any<TObject extends {}>(
+        any<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): boolean;
     }
@@ -4799,7 +4799,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        any<TObject extends {}>(
+        any<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): LoDashExplicitWrapper<boolean>;
     }
@@ -4824,7 +4824,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        any<TObject extends {}>(
+        any<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): LoDashExplicitWrapper<boolean>;
     }
@@ -4887,7 +4887,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        collect<T extends {}, TResult>(
+        collect<T extends React.Component<any, any> {}, TResult>(
             collection: Dictionary<T>,
             iteratee?: DictionaryIterator<T, TResult>,
             thisArg?: any
@@ -4904,7 +4904,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        collect<T, TObject extends {}>(
+        collect<T, TObject extends React.Component<any, any> {}>(
             collection: List<T>|Dictionary<T>,
             iteratee?: TObject
         ): boolean[];
@@ -4929,7 +4929,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        collect<TObject extends {}>(
+        collect<TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashImplicitArrayWrapper<boolean>;
     }
@@ -4953,7 +4953,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        collect<TObject extends {}>(
+        collect<TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashImplicitArrayWrapper<boolean>;
     }
@@ -4977,7 +4977,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        collect<TObject extends {}>(
+        collect<TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashExplicitArrayWrapper<boolean>;
     }
@@ -5001,7 +5001,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        collect<TObject extends {}>(
+        collect<TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashExplicitArrayWrapper<boolean>;
     }
@@ -5311,7 +5311,7 @@ declare module _ {
         /**
          * @see _.find
          */
-        detect<TObject extends {}, T>(
+        detect<TObject extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>,
             predicate?: TObject
         ): T;
@@ -5337,7 +5337,7 @@ declare module _ {
         /**
          * @see _.find
          */
-        detect<TObject extends {}>(
+        detect<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): T;
     }
@@ -5362,7 +5362,7 @@ declare module _ {
         /**
          * @see _.find
          */
-        detect<TObject extends {}, TResult>(
+        detect<TObject extends React.Component<any, any> {}, TResult>(
             predicate?: TObject
         ): TResult;
     }
@@ -5399,7 +5399,7 @@ declare module _ {
         /**
          * @see _.forEach
          */
-        each<T extends {}>(
+        each<T extends React.Component<any, any> {}>(
             collection: T,
             iteratee?: ObjectIterator<any, any>,
             thisArgs?: any
@@ -5408,7 +5408,7 @@ declare module _ {
         /**
          * @see _.forEach
          */
-        each<T extends {}, TValue>(
+        each<T extends React.Component<any, any> {}, TValue>(
             collection: T,
             iteratee?: ObjectIterator<TValue, any>,
             thisArgs?: any
@@ -5507,7 +5507,7 @@ declare module _ {
         /**
          * @see _.forEachRight
          */
-        eachRight<T extends {}>(
+        eachRight<T extends React.Component<any, any> {}>(
             collection: T,
             iteratee?: ObjectIterator<any, any>,
             thisArgs?: any
@@ -5516,7 +5516,7 @@ declare module _ {
         /**
          * @see _.forEachRight
          */
-        eachRight<T extends {}, TValue>(
+        eachRight<T extends React.Component<any, any> {}, TValue>(
             collection: T,
             iteratee?: ObjectIterator<TValue, any>,
             thisArgs?: any
@@ -5632,7 +5632,7 @@ declare module _ {
         /**
          * @see _.every
          */
-        every<TObject extends {}, T>(
+        every<TObject extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>,
             predicate?: TObject
         ): boolean;
@@ -5658,7 +5658,7 @@ declare module _ {
         /**
          * @see _.every
          */
-        every<TObject extends {}>(
+        every<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): boolean;
     }
@@ -5683,7 +5683,7 @@ declare module _ {
         /**
          * @see _.every
          */
-        every<TObject extends {}>(
+        every<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): boolean;
     }
@@ -5708,7 +5708,7 @@ declare module _ {
         /**
          * @see _.every
          */
-        every<TObject extends {}>(
+        every<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): LoDashExplicitWrapper<boolean>;
     }
@@ -5733,7 +5733,7 @@ declare module _ {
         /**
          * @see _.every
          */
-        every<TObject extends {}>(
+        every<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): LoDashExplicitWrapper<boolean>;
     }
@@ -5796,7 +5796,7 @@ declare module _ {
         /**
          * @see _.filter
          */
-        filter<W extends {}, T>(
+        filter<W extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>,
             predicate: W
         ): T[];
@@ -5963,7 +5963,7 @@ declare module _ {
         /**
          * @see _.find
          */
-        find<TObject extends {}, T>(
+        find<TObject extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>,
             predicate?: TObject
         ): T;
@@ -5989,7 +5989,7 @@ declare module _ {
         /**
          * @see _.find
          */
-        find<TObject extends {}>(
+        find<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): T;
     }
@@ -6014,7 +6014,7 @@ declare module _ {
         /**
          * @see _.find
          */
-        find<TObject extends {}, TResult>(
+        find<TObject extends React.Component<any, any> {}, TResult>(
             predicate?: TObject
         ): TResult;
     }
@@ -6239,7 +6239,7 @@ declare module _ {
         /**
          * @see _.forEach
          */
-        forEach<T extends {}>(
+        forEach<T extends React.Component<any, any> {}>(
             collection: T,
             iteratee?: ObjectIterator<any, any>,
             thisArgs?: any
@@ -6248,7 +6248,7 @@ declare module _ {
         /**
          * @see _.forEach
          */
-        forEach<T extends {}, TValue>(
+        forEach<T extends React.Component<any, any> {}, TValue>(
             collection: T,
             iteratee?: ObjectIterator<TValue, any>,
             thisArgs?: any
@@ -6353,7 +6353,7 @@ declare module _ {
         /**
          * @see _.forEachRight
          */
-        forEachRight<T extends {}>(
+        forEachRight<T extends React.Component<any, any> {}>(
             collection: T,
             iteratee?: ObjectIterator<any, any>,
             thisArgs?: any
@@ -6362,7 +6362,7 @@ declare module _ {
         /**
          * @see _.forEachRight
          */
-        forEachRight<T extends {}, TValue>(
+        forEachRight<T extends React.Component<any, any> {}, TValue>(
             collection: T,
             iteratee?: ObjectIterator<TValue, any>,
             thisArgs?: any
@@ -7072,7 +7072,7 @@ declare module _ {
         * @param methodName The name of the method to invoke.
         * @param args Arguments to invoke the method with.
         **/
-        invoke<T extends {}>(
+        invoke<T extends React.Component<any, any> {}>(
             collection: Array<T>,
             methodName: string,
             ...args: any[]): any;
@@ -7080,7 +7080,7 @@ declare module _ {
         /**
         * @see _.invoke
         **/
-        invoke<T extends {}>(
+        invoke<T extends React.Component<any, any> {}>(
             collection: List<T>,
             methodName: string,
             ...args: any[]): any;
@@ -7088,7 +7088,7 @@ declare module _ {
         /**
         * @see _.invoke
         **/
-        invoke<T extends {}>(
+        invoke<T extends React.Component<any, any> {}>(
             collection: Dictionary<T>,
             methodName: string,
             ...args: any[]): any;
@@ -7096,7 +7096,7 @@ declare module _ {
         /**
         * @see _.invoke
         **/
-        invoke<T extends {}>(
+        invoke<T extends React.Component<any, any> {}>(
             collection: Array<T>,
             method: Function,
             ...args: any[]): any;
@@ -7104,7 +7104,7 @@ declare module _ {
         /**
         * @see _.invoke
         **/
-        invoke<T extends {}>(
+        invoke<T extends React.Component<any, any> {}>(
             collection: List<T>,
             method: Function,
             ...args: any[]): any;
@@ -7112,7 +7112,7 @@ declare module _ {
         /**
         * @see _.invoke
         **/
-        invoke<T extends {}>(
+        invoke<T extends React.Component<any, any> {}>(
             collection: Dictionary<T>,
             method: Function,
             ...args: any[]): any;
@@ -7157,7 +7157,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        map<T extends {}, TResult>(
+        map<T extends React.Component<any, any> {}, TResult>(
             collection: Dictionary<T>,
             iteratee?: DictionaryIterator<T, TResult>,
             thisArg?: any
@@ -7174,7 +7174,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        map<T, TObject extends {}>(
+        map<T, TObject extends React.Component<any, any> {}>(
             collection: List<T>|Dictionary<T>,
             iteratee?: TObject
         ): boolean[];
@@ -7199,7 +7199,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        map<TObject extends {}>(
+        map<TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashImplicitArrayWrapper<boolean>;
     }
@@ -7223,7 +7223,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        map<TObject extends {}>(
+        map<TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashImplicitArrayWrapper<boolean>;
     }
@@ -7247,7 +7247,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        map<TObject extends {}>(
+        map<TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashExplicitArrayWrapper<boolean>;
     }
@@ -7271,7 +7271,7 @@ declare module _ {
         /**
          * @see _.map
          */
-        map<TObject extends {}>(
+        map<TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashExplicitArrayWrapper<boolean>;
     }
@@ -7433,7 +7433,7 @@ declare module _ {
          * @param path The path of the property to pluck.
          * @return A new array of property values.
          */
-        pluck<T extends {}>(
+        pluck<T extends React.Component<any, any> {}>(
             collection: List<T>|Dictionary<T>,
             path: StringRepresentable|StringRepresentable[]
         ): any[];
@@ -7441,7 +7441,7 @@ declare module _ {
         /**
          * @see _.pluck
          */
-        pluck<T extends {}, TResult>(
+        pluck<T extends React.Component<any, any> {}, TResult>(
             collection: List<T>|Dictionary<T>,
             path: StringRepresentable|StringRepresentable[]
         ): TResult[];
@@ -7892,7 +7892,7 @@ declare module _ {
         /**
          * @see _.reject
          */
-        reject<W extends {}, T>(
+        reject<W extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>,
             predicate: W
         ): T[];
@@ -8051,7 +8051,7 @@ declare module _ {
         /**
          * @see _.filter
          */
-        select<W extends {}, T>(
+        select<W extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>,
             predicate: W
         ): T[];
@@ -8498,7 +8498,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        some<TObject extends {}, T>(
+        some<TObject extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>|NumericDictionary<T>,
             predicate?: TObject
         ): boolean;
@@ -8514,7 +8514,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        some<TObject extends {}>(
+        some<TObject extends React.Component<any, any> {}>(
             collection: Object,
             predicate?: TObject
         ): boolean;
@@ -8540,7 +8540,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        some<TObject extends {}>(
+        some<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): boolean;
     }
@@ -8565,7 +8565,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        some<TObject extends {}>(
+        some<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): boolean;
     }
@@ -8590,7 +8590,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        some<TObject extends {}>(
+        some<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): LoDashExplicitWrapper<boolean>;
     }
@@ -8615,7 +8615,7 @@ declare module _ {
         /**
          * @see _.some
          */
-        some<TObject extends {}>(
+        some<TObject extends React.Component<any, any> {}>(
             predicate?: TObject
         ): LoDashExplicitWrapper<boolean>;
     }
@@ -8668,7 +8668,7 @@ declare module _ {
         /**
          * @see _.sortBy
          */
-        sortBy<W extends {}, T>(
+        sortBy<W extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>,
             whereValue: W
         ): T[];
@@ -8698,7 +8698,7 @@ declare module _ {
         /**
          * @see _.sortBy
          */
-        sortBy<W extends {}>(whereValue: W): LoDashImplicitArrayWrapper<T>;
+        sortBy<W extends React.Component<any, any> {}>(whereValue: W): LoDashImplicitArrayWrapper<T>;
 
         /**
          * @see _.sortBy
@@ -8723,7 +8723,7 @@ declare module _ {
         /**
          * @see _.sortBy
          */
-        sortBy<W extends {}, T>(whereValue: W): LoDashImplicitArrayWrapper<T>;
+        sortBy<W extends React.Component<any, any> {}, T>(whereValue: W): LoDashImplicitArrayWrapper<T>;
 
         /**
          * @see _.sortBy
@@ -8748,7 +8748,7 @@ declare module _ {
         /**
          * @see _.sortBy
          */
-        sortBy<W extends {}>(whereValue: W): LoDashExplicitArrayWrapper<T>;
+        sortBy<W extends React.Component<any, any> {}>(whereValue: W): LoDashExplicitArrayWrapper<T>;
 
         /**
          * @see _.sortBy
@@ -8773,7 +8773,7 @@ declare module _ {
         /**
          * @see _.sortBy
          */
-        sortBy<W extends {}, T>(whereValue: W): LoDashExplicitArrayWrapper<T>;
+        sortBy<W extends React.Component<any, any> {}, T>(whereValue: W): LoDashExplicitArrayWrapper<T>;
 
         /**
          * @see _.sortBy
@@ -9075,21 +9075,21 @@ declare module _ {
         * @param properties The object of property values to filter by.
         * @return A new array of elements that have the given properties.
         **/
-        where<T, U extends {}>(
+        where<T, U extends React.Component<any, any> {}>(
             list: Array<T>,
             properties: U): T[];
 
         /**
         * @see _.where
         **/
-        where<T, U extends {}>(
+        where<T, U extends React.Component<any, any> {}>(
             list: List<T>,
             properties: U): T[];
 
         /**
         * @see _.where
         **/
-        where<T, U extends {}>(
+        where<T, U extends React.Component<any, any> {}>(
             list: Dictionary<T>,
             properties: U): T[];
     }
@@ -9098,7 +9098,7 @@ declare module _ {
         /**
         * @see _.where
         **/
-        where<U extends {}>(properties: U): LoDashImplicitArrayWrapper<T>;
+        where<U extends React.Component<any, any> {}>(properties: U): LoDashImplicitArrayWrapper<T>;
     }
 
     /********
@@ -11654,14 +11654,14 @@ declare module _ {
          * @param value The value to convert.
          * @return Returns the converted plain object.
          */
-        toPlainObject<TResult extends {}>(value?: any): TResult;
+        toPlainObject<TResult extends React.Component<any, any> {}>(value?: any): TResult;
     }
 
     interface LoDashImplicitWrapperBase<T, TWrapper> {
         /**
          * @see _.toPlainObject
          */
-        toPlainObject<TResult extends {}>(): LoDashImplicitObjectWrapper<TResult>;
+        toPlainObject<TResult extends React.Component<any, any> {}>(): LoDashImplicitObjectWrapper<TResult>;
     }
 
     /********
@@ -11803,7 +11803,7 @@ declare module _ {
         /**
          * @see _.max
          */
-        max<TObject extends {}, T>(
+        max<TObject extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>,
             whereValue?: TObject
         ): T;
@@ -11829,7 +11829,7 @@ declare module _ {
         /**
          * @see _.max
          */
-        max<TObject extends {}>(
+        max<TObject extends React.Component<any, any> {}>(
             whereValue?: TObject
         ): T;
     }
@@ -11854,7 +11854,7 @@ declare module _ {
         /**
          * @see _.max
          */
-        max<TObject extends {}, T>(
+        max<TObject extends React.Component<any, any> {}, T>(
             whereValue?: TObject
         ): T;
     }
@@ -11907,7 +11907,7 @@ declare module _ {
         /**
          * @see _.min
          */
-        min<TObject extends {}, T>(
+        min<TObject extends React.Component<any, any> {}, T>(
             collection: List<T>|Dictionary<T>,
             whereValue?: TObject
         ): T;
@@ -11933,7 +11933,7 @@ declare module _ {
         /**
          * @see _.min
          */
-        min<TObject extends {}>(
+        min<TObject extends React.Component<any, any> {}>(
             whereValue?: TObject
         ): T;
     }
@@ -11958,7 +11958,7 @@ declare module _ {
         /**
          * @see _.min
          */
-        min<TObject extends {}, T>(
+        min<TObject extends React.Component<any, any> {}, T>(
             whereValue?: TObject
         ): T;
     }
@@ -12265,7 +12265,7 @@ declare module _ {
          * @param thisArg The this binding of callback.
          * @return The destination object.
          */
-        assign<TObject extends {}, TSource extends {}, TResult extends {}>(
+        assign<TObject extends React.Component<any, any> {}, TSource extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: TObject,
             source: TSource,
             customizer?: AssignCustomizer,
@@ -12275,7 +12275,7 @@ declare module _ {
         /**
          * @see assign
          */
-        assign<TObject extends {}, TSource1 extends {}, TSource2 extends {}, TResult extends {}>(
+        assign<TObject extends React.Component<any, any> {}, TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: TObject,
             source1: TSource1,
             source2: TSource2,
@@ -12286,7 +12286,7 @@ declare module _ {
         /**
          * @see assign
          */
-        assign<TObject extends {}, TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TResult extends {}>(
+        assign<TObject extends React.Component<any, any> {}, TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: TObject,
             source1: TSource1,
             source2: TSource2,
@@ -12298,8 +12298,8 @@ declare module _ {
         /**
          * @see assign
          */
-        assign<TObject extends {}, TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TSource4 extends {},
-            TResult extends {}>
+        assign<TObject extends React.Component<any, any> {}, TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TSource4 extends React.Component<any, any> {},
+            TResult extends React.Component<any, any> {}>
         (
             object: TObject,
             source1: TSource1,
@@ -12313,12 +12313,12 @@ declare module _ {
         /**
          * @see _.assign
          */
-        assign<TObject extends {}>(object: TObject): TObject;
+        assign<TObject extends React.Component<any, any> {}>(object: TObject): TObject;
 
         /**
          * @see _.assign
          */
-        assign<TObject extends {}, TResult extends {}>(
+        assign<TObject extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: TObject, ...otherArgs: any[]
         ): TResult;
     }
@@ -12327,7 +12327,7 @@ declare module _ {
         /**
          * @see _.assign
          */
-        assign<TSource extends {}, TResult extends {}>(
+        assign<TSource extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source: TSource,
             customizer?: AssignCustomizer,
             thisArg?: any
@@ -12336,7 +12336,7 @@ declare module _ {
         /**
          * @see assign
          */
-        assign<TSource1 extends {}, TSource2 extends {}, TResult extends {}>(
+        assign<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             customizer?: AssignCustomizer,
@@ -12346,7 +12346,7 @@ declare module _ {
         /**
          * @see assign
          */
-        assign<TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TResult extends {}>(
+        assign<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             source3: TSource3,
@@ -12357,7 +12357,7 @@ declare module _ {
         /**
          * @see assign
          */
-        assign<TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TSource4 extends {}, TResult extends {}>(
+        assign<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TSource4 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             source3: TSource3,
@@ -12374,14 +12374,14 @@ declare module _ {
         /**
          * @see _.assign
          */
-        assign<TResult extends {}>(...otherArgs: any[]): LoDashImplicitObjectWrapper<TResult>;
+        assign<TResult extends React.Component<any, any> {}>(...otherArgs: any[]): LoDashImplicitObjectWrapper<TResult>;
     }
 
     interface LoDashExplicitObjectWrapper<T> {
         /**
          * @see _.assign
          */
-        assign<TSource extends {}, TResult extends {}>(
+        assign<TSource extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source: TSource,
             customizer?: AssignCustomizer,
             thisArg?: any
@@ -12390,7 +12390,7 @@ declare module _ {
         /**
          * @see assign
          */
-        assign<TSource1 extends {}, TSource2 extends {}, TResult extends {}>(
+        assign<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             customizer?: AssignCustomizer,
@@ -12400,7 +12400,7 @@ declare module _ {
         /**
          * @see assign
          */
-        assign<TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TResult extends {}>(
+        assign<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             source3: TSource3,
@@ -12411,7 +12411,7 @@ declare module _ {
         /**
          * @see assign
          */
-        assign<TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TSource4 extends {}, TResult extends {}>(
+        assign<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TSource4 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             source3: TSource3,
@@ -12428,7 +12428,7 @@ declare module _ {
         /**
          * @see _.assign
          */
-        assign<TResult extends {}>(...otherArgs: any[]): LoDashExplicitObjectWrapper<TResult>;
+        assign<TResult extends React.Component<any, any> {}>(...otherArgs: any[]): LoDashExplicitObjectWrapper<TResult>;
     }
 
     //_.create
@@ -12474,7 +12474,7 @@ declare module _ {
          * @param sources The source objects.
          * @return The destination object.
          */
-        defaults<Obj extends {}, TResult extends {}>(
+        defaults<Obj extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: Obj,
             ...sources: {}[]
         ): TResult;
@@ -12482,7 +12482,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<Obj extends {}, S1 extends {}, TResult extends {}>(
+        defaults<Obj extends React.Component<any, any> {}, S1 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: Obj,
             source1: S1,
             ...sources: {}[]
@@ -12491,7 +12491,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<Obj extends {}, S1 extends {}, S2 extends {}, TResult extends {}>(
+        defaults<Obj extends React.Component<any, any> {}, S1 extends React.Component<any, any> {}, S2 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: Obj,
             source1: S1,
             source2: S2,
@@ -12501,7 +12501,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<Obj extends {}, S1 extends {}, S2 extends {}, S3 extends {}, TResult extends {}>(
+        defaults<Obj extends React.Component<any, any> {}, S1 extends React.Component<any, any> {}, S2 extends React.Component<any, any> {}, S3 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: Obj,
             source1: S1,
             source2: S2,
@@ -12512,7 +12512,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<Obj extends {}, S1 extends {}, S2 extends {}, S3 extends {}, S4 extends {}, TResult extends {}>(
+        defaults<Obj extends React.Component<any, any> {}, S1 extends React.Component<any, any> {}, S2 extends React.Component<any, any> {}, S3 extends React.Component<any, any> {}, S4 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: Obj,
             source1: S1,
             source2: S2,
@@ -12524,7 +12524,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<TResult extends {}>(
+        defaults<TResult extends React.Component<any, any> {}>(
             object: {},
             ...sources: {}[]
         ): TResult;
@@ -12534,7 +12534,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<S1 extends {}, TResult extends {}>(
+        defaults<S1 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: S1,
             ...sources: {}[]
         ): LoDashImplicitObjectWrapper<TResult>;
@@ -12542,7 +12542,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<S1 extends {}, S2 extends {}, TResult extends {}>(
+        defaults<S1 extends React.Component<any, any> {}, S2 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: S1,
             source2: S2,
             ...sources: {}[]
@@ -12551,7 +12551,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<S1 extends {}, S2 extends {}, S3 extends {}, TResult extends {}>(
+        defaults<S1 extends React.Component<any, any> {}, S2 extends React.Component<any, any> {}, S3 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: S1,
             source2: S2,
             source3: S3,
@@ -12561,7 +12561,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<S1 extends {}, S2 extends {}, S3 extends {}, S4 extends {}, TResult extends {}>(
+        defaults<S1 extends React.Component<any, any> {}, S2 extends React.Component<any, any> {}, S3 extends React.Component<any, any> {}, S4 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: S1,
             source2: S2,
             source3: S3,
@@ -12584,7 +12584,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<S1 extends {}, TResult extends {}>(
+        defaults<S1 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: S1,
             ...sources: {}[]
         ): LoDashExplicitObjectWrapper<TResult>;
@@ -12592,7 +12592,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<S1 extends {}, S2 extends {}, TResult extends {}>(
+        defaults<S1 extends React.Component<any, any> {}, S2 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: S1,
             source2: S2,
             ...sources: {}[]
@@ -12601,7 +12601,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<S1 extends {}, S2 extends {}, S3 extends {}, TResult extends {}>(
+        defaults<S1 extends React.Component<any, any> {}, S2 extends React.Component<any, any> {}, S3 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: S1,
             source2: S2,
             source3: S3,
@@ -12611,7 +12611,7 @@ declare module _ {
         /**
          * @see _.defaults
          */
-        defaults<S1 extends {}, S2 extends {}, S3 extends {}, S4 extends {}, TResult extends {}>(
+        defaults<S1 extends React.Component<any, any> {}, S2 extends React.Component<any, any> {}, S3 extends React.Component<any, any> {}, S4 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: S1,
             source2: S2,
             source3: S3,
@@ -12655,7 +12655,7 @@ declare module _ {
         /**
          * @see assign
          */
-        extend<TObject extends {}, TSource extends {}, TResult extends {}>(
+        extend<TObject extends React.Component<any, any> {}, TSource extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: TObject,
             source: TSource,
             customizer?: AssignCustomizer,
@@ -12665,7 +12665,7 @@ declare module _ {
         /**
          * @see assign
          */
-        extend<TObject extends {}, TSource1 extends {}, TSource2 extends {}, TResult extends {}>(
+        extend<TObject extends React.Component<any, any> {}, TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: TObject,
             source1: TSource1,
             source2: TSource2,
@@ -12676,7 +12676,7 @@ declare module _ {
         /**
          * @see assign
          */
-        extend<TObject extends {}, TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TResult extends {}>(
+        extend<TObject extends React.Component<any, any> {}, TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: TObject,
             source1: TSource1,
             source2: TSource2,
@@ -12688,8 +12688,8 @@ declare module _ {
         /**
          * @see assign
          */
-        extend<TObject extends {}, TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TSource4 extends {},
-            TResult extends {}>
+        extend<TObject extends React.Component<any, any> {}, TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TSource4 extends React.Component<any, any> {},
+            TResult extends React.Component<any, any> {}>
             (
                 object: TObject,
                 source1: TSource1,
@@ -12703,12 +12703,12 @@ declare module _ {
         /**
          * @see _.assign
          */
-        extend<TObject extends {}>(object: TObject): TObject;
+        extend<TObject extends React.Component<any, any> {}>(object: TObject): TObject;
 
         /**
          * @see _.assign
          */
-        extend<TObject extends {}, TResult extends {}>(
+        extend<TObject extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: TObject, ...otherArgs: any[]
         ): TResult;
     }
@@ -12717,7 +12717,7 @@ declare module _ {
         /**
          * @see _.assign
          */
-        extend<TSource extends {}, TResult extends {}>(
+        extend<TSource extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source: TSource,
             customizer?: AssignCustomizer,
             thisArg?: any
@@ -12726,7 +12726,7 @@ declare module _ {
         /**
          * @see assign
          */
-        extend<TSource1 extends {}, TSource2 extends {}, TResult extends {}>(
+        extend<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             customizer?: AssignCustomizer,
@@ -12736,7 +12736,7 @@ declare module _ {
         /**
          * @see assign
          */
-        extend<TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TResult extends {}>(
+        extend<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             source3: TSource3,
@@ -12747,7 +12747,7 @@ declare module _ {
         /**
          * @see assign
          */
-        extend<TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TSource4 extends {}, TResult extends {}>(
+        extend<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TSource4 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             source3: TSource3,
@@ -12764,14 +12764,14 @@ declare module _ {
         /**
          * @see _.assign
          */
-        extend<TResult extends {}>(...otherArgs: any[]): LoDashImplicitObjectWrapper<TResult>;
+        extend<TResult extends React.Component<any, any> {}>(...otherArgs: any[]): LoDashImplicitObjectWrapper<TResult>;
     }
 
     interface LoDashExplicitObjectWrapper<T> {
         /**
          * @see _.assign
          */
-        extend<TSource extends {}, TResult extends {}>(
+        extend<TSource extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source: TSource,
             customizer?: AssignCustomizer,
             thisArg?: any
@@ -12780,7 +12780,7 @@ declare module _ {
         /**
          * @see assign
          */
-        extend<TSource1 extends {}, TSource2 extends {}, TResult extends {}>(
+        extend<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             customizer?: AssignCustomizer,
@@ -12790,7 +12790,7 @@ declare module _ {
         /**
          * @see assign
          */
-        extend<TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TResult extends {}>(
+        extend<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             source3: TSource3,
@@ -12801,7 +12801,7 @@ declare module _ {
         /**
          * @see assign
          */
-        extend<TSource1 extends {}, TSource2 extends {}, TSource3 extends {}, TSource4 extends {}, TResult extends {}>(
+        extend<TSource1 extends React.Component<any, any> {}, TSource2 extends React.Component<any, any> {}, TSource3 extends React.Component<any, any> {}, TSource4 extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             source1: TSource1,
             source2: TSource2,
             source3: TSource3,
@@ -12818,7 +12818,7 @@ declare module _ {
         /**
          * @see _.assign
          */
-        extend<TResult extends {}>(...otherArgs: any[]): LoDashExplicitObjectWrapper<TResult>;
+        extend<TResult extends React.Component<any, any> {}>(...otherArgs: any[]): LoDashExplicitObjectWrapper<TResult>;
     }
 
     //_.findKey
@@ -13079,7 +13079,7 @@ declare module _ {
         /**
          * @see _.forIn
          */
-        forIn<T extends {}>(
+        forIn<T extends React.Component<any, any> {}>(
             object: T,
             iteratee?: ObjectIterator<any, any>,
             thisArg?: any
@@ -13125,7 +13125,7 @@ declare module _ {
         /**
          * @see _.forInRight
          */
-        forInRight<T extends {}>(
+        forInRight<T extends React.Component<any, any> {}>(
             object: T,
             iteratee?: ObjectIterator<any, any>,
             thisArg?: any
@@ -13173,7 +13173,7 @@ declare module _ {
         /**
          * @see _.forOwn
          */
-        forOwn<T extends {}>(
+        forOwn<T extends React.Component<any, any> {}>(
             object: T,
             iteratee?: ObjectIterator<any, any>,
             thisArg?: any
@@ -13219,7 +13219,7 @@ declare module _ {
         /**
          * @see _.forOwnRight
          */
-        forOwnRight<T extends {}>(
+        forOwnRight<T extends React.Component<any, any> {}>(
             object: T,
             iteratee?: ObjectIterator<any, any>,
             thisArg?: any
@@ -13256,7 +13256,7 @@ declare module _ {
          * @param object The object to inspect.
          * @return Returns the new array of property names.
          */
-        functions<T extends {}>(object: any): string[];
+        functions<T extends React.Component<any, any> {}>(object: any): string[];
     }
 
     interface LoDashImplicitObjectWrapper<T> {
@@ -13369,7 +13369,7 @@ declare module _ {
          * @param path The path to check.
          * @return Returns true if path is a direct property, else false.
          */
-        has<T extends {}>(
+        has<T extends React.Component<any, any> {}>(
             object: T,
             path: StringRepresentable|StringRepresentable[]
         ): boolean;
@@ -13399,7 +13399,7 @@ declare module _ {
          * @param multiValue Allow multiple values per key.
          * @return Returns the new inverted object.
          */
-        invert<T extends {}, TResult extends {}>(
+        invert<T extends React.Component<any, any> {}, TResult extends React.Component<any, any> {}>(
             object: T,
             multiValue?: boolean
         ): TResult;
@@ -13407,7 +13407,7 @@ declare module _ {
         /**
          * @see _.invert
          */
-        invert<TResult extends {}>(
+        invert<TResult extends React.Component<any, any> {}>(
             object: Object,
             multiValue?: boolean
         ): TResult;
@@ -13417,14 +13417,14 @@ declare module _ {
         /**
          * @see _.invert
          */
-        invert<TResult extends {}>(multiValue?: boolean): LoDashImplicitObjectWrapper<TResult>;
+        invert<TResult extends React.Component<any, any> {}>(multiValue?: boolean): LoDashImplicitObjectWrapper<TResult>;
     }
 
     interface LoDashExplicitObjectWrapper<T> {
         /**
          * @see _.invert
          */
-        invert<TResult extends {}>(multiValue?: boolean): LoDashExplicitObjectWrapper<TResult>;
+        invert<TResult extends React.Component<any, any> {}>(multiValue?: boolean): LoDashExplicitObjectWrapper<TResult>;
     }
 
     //_.keys
@@ -13510,7 +13510,7 @@ declare module _ {
         /**
          * @see _.mapKeys
          */
-        mapKeys<T, TObject extends {}>(
+        mapKeys<T, TObject extends React.Component<any, any> {}>(
             object: List<T>|Dictionary<T>,
             iteratee?: TObject
         ): Dictionary<T>;
@@ -13537,7 +13537,7 @@ declare module _ {
         /**
          * @see _.mapKeys
          */
-        mapKeys<TObject extends {}>(
+        mapKeys<TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashImplicitObjectWrapper<Dictionary<T>>;
 
@@ -13562,7 +13562,7 @@ declare module _ {
         /**
          * @see _.mapKeys
          */
-        mapKeys<TResult, TObject extends {}>(
+        mapKeys<TResult, TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashImplicitObjectWrapper<Dictionary<TResult>>;
 
@@ -13587,7 +13587,7 @@ declare module _ {
         /**
          * @see _.mapKeys
          */
-        mapKeys<TObject extends {}>(
+        mapKeys<TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashExplicitObjectWrapper<Dictionary<T>>;
 
@@ -13612,7 +13612,7 @@ declare module _ {
         /**
          * @see _.mapKeys
          */
-        mapKeys<TResult, TObject extends {}>(
+        mapKeys<TResult, TObject extends React.Component<any, any> {}>(
             iteratee?: TObject
         ): LoDashExplicitObjectWrapper<Dictionary<TResult>>;
 
@@ -13809,7 +13809,7 @@ declare module _ {
         /**
          * @see _.functions
          */
-        methods<T extends {}>(object: any): string[];
+        methods<T extends React.Component<any, any> {}>(object: any): string[];
     }
 
     interface LoDashImplicitObjectWrapper<T> {
@@ -13838,7 +13838,7 @@ declare module _ {
          * @param thisArg The this binding of predicate.
          * @return Returns the new object.
          */
-        omit<TResult extends {}, T extends {}>(
+        omit<TResult extends React.Component<any, any> {}, T extends React.Component<any, any> {}>(
             object: T,
             predicate: ObjectIterator<any, boolean>,
             thisArg?: any
@@ -13847,7 +13847,7 @@ declare module _ {
         /**
          * @see _.omit
          */
-        omit<TResult extends {}, T extends {}>(
+        omit<TResult extends React.Component<any, any> {}, T extends React.Component<any, any> {}>(
             object: T,
             ...predicate: (StringRepresentable|StringRepresentable[])[]
         ): TResult;
@@ -13857,7 +13857,7 @@ declare module _ {
         /**
          * @see _.omit
          */
-        omit<TResult extends {}>(
+        omit<TResult extends React.Component<any, any> {}>(
             predicate: ObjectIterator<any, boolean>,
             thisArg?: any
         ): LoDashImplicitObjectWrapper<TResult>;
@@ -13865,7 +13865,7 @@ declare module _ {
         /**
          * @see _.omit
          */
-        omit<TResult extends {}>(
+        omit<TResult extends React.Component<any, any> {}>(
             ...predicate: (StringRepresentable|StringRepresentable[])[]
         ): LoDashImplicitObjectWrapper<TResult>;
     }
@@ -13874,7 +13874,7 @@ declare module _ {
         /**
          * @see _.omit
          */
-        omit<TResult extends {}>(
+        omit<TResult extends React.Component<any, any> {}>(
             predicate: ObjectIterator<any, boolean>,
             thisArg?: any
         ): LoDashExplicitObjectWrapper<TResult>;
@@ -13882,7 +13882,7 @@ declare module _ {
         /**
          * @see _.omit
          */
-        omit<TResult extends {}>(
+        omit<TResult extends React.Component<any, any> {}>(
             ...predicate: (StringRepresentable|StringRepresentable[])[]
         ): LoDashExplicitObjectWrapper<TResult>;
     }
@@ -13895,9 +13895,9 @@ declare module _ {
          * @param object The object to query.
          * @return Returns the new array of key-value pairs.
          */
-        pairs<T extends {}>(object?: T): any[][];
+        pairs<T extends React.Component<any, any> {}>(object?: T): any[][];
 
-        pairs<T extends {}, TResult>(object?: T): TResult[][];
+        pairs<T extends React.Component<any, any> {}, TResult>(object?: T): TResult[][];
     }
 
     interface LoDashImplicitObjectWrapper<T> {
@@ -13928,7 +13928,7 @@ declare module _ {
          * @param thisArg The this binding of predicate.
          * @return Returns the new object.
          */
-        pick<TResult extends {}, T extends {}>(
+        pick<TResult extends React.Component<any, any> {}, T extends React.Component<any, any> {}>(
             object: T,
             predicate: ObjectIterator<any, boolean>,
             thisArg?: any
@@ -13937,7 +13937,7 @@ declare module _ {
         /**
          * @see _.pick
          */
-        pick<TResult extends {}, T extends {}>(
+        pick<TResult extends React.Component<any, any> {}, T extends React.Component<any, any> {}>(
             object: T,
             ...predicate: (StringRepresentable|StringRepresentable[])[]
         ): TResult;
@@ -13947,7 +13947,7 @@ declare module _ {
         /**
          * @see _.pick
          */
-        pick<TResult extends {}>(
+        pick<TResult extends React.Component<any, any> {}>(
             predicate: ObjectIterator<any, boolean>,
             thisArg?: any
         ): LoDashImplicitObjectWrapper<TResult>;
@@ -13955,7 +13955,7 @@ declare module _ {
         /**
          * @see _.pick
          */
-        pick<TResult extends {}>(
+        pick<TResult extends React.Component<any, any> {}>(
             ...predicate: (StringRepresentable|StringRepresentable[])[]
         ): LoDashImplicitObjectWrapper<TResult>;
     }
@@ -13964,7 +13964,7 @@ declare module _ {
         /**
          * @see _.pick
          */
-        pick<TResult extends {}>(
+        pick<TResult extends React.Component<any, any> {}>(
             predicate: ObjectIterator<any, boolean>,
             thisArg?: any
         ): LoDashExplicitObjectWrapper<TResult>;
@@ -13972,7 +13972,7 @@ declare module _ {
         /**
          * @see _.pick
          */
-        pick<TResult extends {}>(
+        pick<TResult extends React.Component<any, any> {}>(
             ...predicate: (StringRepresentable|StringRepresentable[])[]
         ): LoDashExplicitObjectWrapper<TResult>;
     }
@@ -15408,7 +15408,7 @@ declare module _ {
          * @param args The arguments to invoke the method with.
          * @return Returns the new function.
          */
-        methodOf<TObject extends {}, TResult>(
+        methodOf<TObject extends React.Component<any, any> {}, TResult>(
             object: TObject,
             ...args: any[]
         ): (path: StringRepresentable|StringRepresentable[]) => TResult;
@@ -15604,7 +15604,7 @@ declare module _ {
          * @param object The object to query.
          * @return Returns the new function.
          */
-        propertyOf<T extends {}>(object: T): (path: string|string[]) => any;
+        propertyOf<T extends React.Component<any, any> {}>(object: T): (path: string|string[]) => any;
     }
 
     interface LoDashImplicitObjectWrapper<T> {
