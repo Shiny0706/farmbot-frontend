@@ -12,13 +12,13 @@ export let Sequences = React.createClass({
         <div className="all-content-wrapper">
           <div className="row">
             <div className="col-md-3 col-sm-12">
-              <OperationsWidget/>
+              <OperationsWidget />
             </div>
             <div className="col-md-6 col-sm-12">
-              <SequenceEditorWidget/>
+              <SequenceEditorWidget />
             </div>
             <div className="col-md-3 col-sm-12">
-              <SequencesWidget/>
+              <SequencesWidget />
             </div>
           </div>
         </div>

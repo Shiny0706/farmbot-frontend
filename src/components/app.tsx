@@ -1,6 +1,7 @@
-import * as React, { Component, PropTypes } from 'react';
+import * as React from 'react';
+import { Component, PropTypes } from 'react';
 
-export default class App extends Component {
+export default class App extends Component<any, any> {
   // static propTypes = {
   //   children: PropTypes.element,
   // };

@@ -11,14 +11,15 @@ import { convertFormToObject } from '../../util.ts';
 import { store } from '../../store';
 import { ToggleButton } from './toggle_button';
 
-let bot; // So bad... Why doesn't this page work? :(
-
-
+// Almost certainly wrong.
+// TODO: Remove this.
+let bot;
 
 export class SettingsInputBox extends React.Component<any, any> {
 
   bot() {
     // Dumb hacks for impossible bugs.
+    // This is probably what's causing the bug
     return this.props.store.getState().bot;
   }
 
@@ -55,7 +56,6 @@ export class SettingsInputBox extends React.Component<any, any> {
                onChange={ this.change(this.props.setting, this.props.dispatch) }
                value={ this.primary() || this.secondary() || "---" } />
       </td>)
-
   }
 }
 
@@ -298,15 +298,15 @@ export class Devices extends React.Component<any, any> {
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ bot.hardware.movement_invert_motor_x }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_x")) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_x", bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ bot.hardware.movement_invert_motor_y }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_y")) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_y", bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ bot.hardware.movement_invert_motor_z }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_z")) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_z", bot)) } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -315,15 +315,15 @@ export class Devices extends React.Component<any, any> {
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ bot.hardware.movement_home_up_x }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_x")) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_x", bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ bot.hardware.movement_home_up_y }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_y")) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_y", bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ bot.hardware.movement_home_up_z }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_z")) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_z", bot)) } />
                                   </td>
                                 </tr>
                               </tbody>

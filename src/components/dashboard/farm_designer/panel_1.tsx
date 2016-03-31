@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Link } from 'react-router';
-import { renderCatalog } from './species_catalog';
 // Import all of the Plant (green) panel views
 import { Plants } from './plant_inventory';
 import { NoTab } from './no_tab';

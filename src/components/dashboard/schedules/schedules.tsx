@@ -5,7 +5,7 @@ export let Schedules = React.createClass({
   render: function() {
     return (
       <div>
-        <Navbar/>
+        <Navbar>
           <div className="all-content-wrapper">
           <div ng-view className="ng-scope">
             <div className="row ng-scope">
@@ -127,7 +127,6 @@ export let Schedules = React.createClass({
                               <i className="fa fa-2x fa-arrow-right arrow-button radius right" ng_click="shiftDate(1)" />
                             </div>
                           </div>
-                          {/* ngRepeat: schedule in prettyDates */}
                         </div>
                       </div>
                     </div>
@@ -136,7 +135,8 @@ export let Schedules = React.createClass({
               </div>
             </div>
           </div>
-        </div>
+          </div>
+        </Navbar>
       </div>
     );
   }

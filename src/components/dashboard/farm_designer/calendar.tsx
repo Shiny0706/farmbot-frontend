@@ -3,13 +3,7 @@ import { Schedule } from '../../../models/schedule'
 import { Link } from 'react-router';
 import { BackArrow } from './back_arrow';
 
-interface ICalendarProps {
-  scheduledEvent: {
-    formatTime: () => Date;
-  };
-  desc: String;
-}
-export class ScheduleEvent extends React.Component<ICalendarProps, void> {
+export class ScheduleEvent extends React.Component<any, any> {
   render () {
     let evnt = this.props.scheduledEvent;
 

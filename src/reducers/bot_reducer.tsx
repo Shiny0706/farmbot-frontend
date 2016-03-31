@@ -32,9 +32,9 @@ let action_handlers = {
     });
   },
 
-  COMMIT_AXIS_CHANGE_OK: function(state, action) {
+  COMMIT_AXIS_CHANGE_OK: function(oldState, action) {
     // READ_STATUS_OK + reset axisBuffer. That's it.
-    let state = this.READ_STATUS_OK(state, action) // Dat reuse, tho.
+    let state = this.READ_STATUS_OK(oldState, action) // Dat reuse, tho.
     return _.assign({}, state, {
       axisBuffer: {}
     });

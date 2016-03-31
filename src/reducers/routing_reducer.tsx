@@ -6,7 +6,8 @@ let initialState = {
   changeId: 1,
   path: undefined,
   state: undefined,
-  replace: false
+  replace: false,
+  attemptedURL: '' // To quiet the type checker for now.
 }
 
 // I needed to sprinkle some extra magic ontop of react-router-redux, so I

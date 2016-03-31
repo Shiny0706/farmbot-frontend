@@ -13,14 +13,14 @@ export let Regimens = React.createClass({
         <div className="all-content-wrapper">
           <div className="row">
             <div className="col-md-3 col-sm-12 col-md-offset-1 hidden-xs">
-              <OperationsWidget/>
-              <SequencesWidget/>
+              <OperationsWidget />
+              <SequencesWidget />
             </div>
             <div className="col-md-4 col-sm-12 hidden-xs">
-              <RegimenEditorWidget/>
+              <RegimenEditorWidget />
             </div>
             <div className="col-md-3 col-sm-12">
-              <RegimensWidget/>
+              <RegimensWidget />
             </div>
           </div>
         </div>
