@@ -53,4 +53,7 @@ module.exports = {
       '.tsx'
     ],
   },
+  devServer: {
+    historyApiFallback: true
+  }
 };

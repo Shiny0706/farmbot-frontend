@@ -9,5 +9,6 @@ let node = document.createElement("DIV");
 node.id = "root";
 
 document.body.appendChild(node);
-// render(<RootComponent store={ store } />, document.getElementById("root"));
-render(<RootComponent />, document.getElementById("root"));
+
+var elem = React.createElement(RootComponent, {store});
+render(elem, document.getElementById("root"));

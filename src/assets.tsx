@@ -1,7 +1,11 @@
 // Bootstrap.js doesn't use ES6 modules yet. Need to globally export.
 // Know a more ES6 compliant way to do this? Submit a PR!
 import * as $ from 'jquery';
-eval("window.$ = $; window.jQuery = $;");
+
+// What you see below is one of the most glorious hacks to get a bootstrap
+// plugin to play nice while simultaneously keeping typescript happy.
+var qqq = $;
+eval("window.$ = qqq; window.jQuery = $;");
 
 // Programmatically add *.css and *.js from CDN to dom.
 // If there's a way to (easily) do this with WebPack, submit a PR!

@@ -1,7 +1,7 @@
+import "./assets"; // I'll just take the side effects, thanks.
 import * as React from "react";
 import { Component } from "react";
 import { Provider } from "react-redux";
-import * as assets from "./assets";
 import { syncHistoryWithStore, push } from "react-router-redux"
 import { IndexRedirect, IndexRoute, Route, Router } from "react-router";
 import App from "./components/app";
@@ -16,7 +16,6 @@ import { Login } from "./components/login";
 import { CONFIG } from "./config";
 import { connect } from "react-redux";
 import * as _ from "lodash";
-
 import { store } from "./store";
 import { createHistory } from "history"
 const history = createHistory();
@@ -53,7 +52,22 @@ class Root extends Component<any, any> {
   render() {
     return (
       <div>
-        OMG!
+        <Provider store={store}>
+          <Router history={history}>
+            <Route path="/" component={App}>
+              <Route path="login" component={ wrap(Login, this.props) }/>
+              <Route path="dashboard" component={ Dashboard } onEnter={ this.requireAuth.bind(this) }>
+                <Route path="designer" component={ wrap(FarmDesigner, this.props) } onEnter={ this.requireAuth.bind(this) }/>
+                <Route path="controls" component={ wrap(Controls, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="devices" component={ wrap(Devices, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="sequences" component={ wrap(Sequences, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="regimens" component={ wrap(Regimens, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <IndexRoute component={wrap(Controls, this.props)}/>
+              </Route>
+              <IndexRedirect to="dashboard"/>
+            </Route>
+          </Router>
+        </Provider>
       </div>
     );
   }
