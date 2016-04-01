@@ -63,7 +63,7 @@ export class SettingsInputBox extends React.Component<any, any> {
 export class Devices extends React.Component<any, any> {
   changeBot(e) {
     e.preventDefault();
-    let updates = _.object([[e.target.name, e.target.value]]) // {name: "value"}
+    let updates: any = _.object([[e.target.name, e.target.value]]) // {name: "value"}
     this.props.dispatch(changeDevice(updates));
   }
 

@@ -5,11 +5,7 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /(bower_components|node_modules)/,
         loader: 'ts'
-      },{
-        test: /\.tsx?$/,
-        exclude: /(bower_components|node_modules)/,
-        loader: 'ts'
-    }],
+      }],
   },
   output: {
     libraryTarget: 'umd',
