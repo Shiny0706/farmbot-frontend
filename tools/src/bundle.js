@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	(function webpackMissingModule() { throw new Error("Cannot find module \"/home/rick/code/farmbot/farmbot-web-frontend/src/fb_frontend.js\""); }());
+	(function webpackMissingModule() { throw new Error("Cannot find module \"/home/rick/code/farmbot/farmbot-web-frontend/src/fb_frontend.tsx\""); }());
 	(function webpackMissingModule() { throw new Error("Cannot find module \"dist/fb_frontend.js\""); }());
 
 

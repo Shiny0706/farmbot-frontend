@@ -18,7 +18,7 @@ export class SpeciesInfo extends React.Component<any, any> {
     let query = {_id: getParam("id")};
     let all = this.props.global.species;
     // TODO REAL ERROR HANDLER ZOMG
-    let specimen = _(all).find(query);
+    let specimen: any = _(all).find(query);
     return  <div className="panel-container green-panel">
               <div className="panel-header green-panel">
                 <p className="panel-title">

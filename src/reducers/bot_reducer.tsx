@@ -73,7 +73,7 @@ let action_handlers = {
   },
 
   READ_STATUS_OK: function(state, action) {
-    let hardware = _.assign({}, action.payload);
+    let hardware: any = _.assign({}, action.payload);
     delete hardware.method
     return _.assign({},
       state, {
@@ -84,10 +84,10 @@ let action_handlers = {
   },
 
   BOT_CHANGE: function(state, action) {
-    let statuses = _.assign({}, action.payload.result);
+    let statuses: any = _.assign({}, action.payload.result);
     delete statuses.name;
     delete statuses.method;
-    let newState = _.assign({}, state);
+    let newState: any = _.assign({}, state);
     newState.hardware = _.assign({}, state.hardware, statuses);
 
     return _.assign({}, newState);

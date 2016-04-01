@@ -37,7 +37,7 @@ class Root extends Component<any, any> {
   }
 
   requireAuth(nextState, replaceState) {
-    let auth: any = _.assign({}, this.props.auth);
+    let auth = _.assign<{}, {}>({}, this.props.auth);
     let that = this;
     let attemptedURL = nextState.location.pathname;
       if (auth.authenticated) {
@@ -53,10 +53,26 @@ class Root extends Component<any, any> {
   render() {
     return (
       <div>
-        OMG!
+        <Provider store={store}>
+          <Router history={history}>
+            <Route path={CONFIG.ROOT_PATH || "/"} component={App}>
+              <Route path="login" component={ wrap(Login, this.props) }/>
+              <Route path="dashboard" component={ Dashboard } onEnter={ this.requireAuth.bind(this) }>
+                <Route path="designer" component={ wrap(FarmDesigner, this.props) } onEnter={ this.requireAuth.bind(this) }/>
+                <Route path="controls" component={ wrap(Controls, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="devices" component={ wrap(Devices, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="sequences" component={ wrap(Sequences, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="regimens" component={ wrap(Regimens, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="schedules" component={ wrap(Schedules, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <IndexRoute component={wrap(Controls, this.props)}/>
+              </Route>
+              <IndexRedirect to="dashboard"/>
+            </Route>
+          </Router>
+        </Provider>
       </div>
     );
   }
 }
 
-export let RootComponent = connect(state => state)(Root);
+export let RootComponent = connect(((state) => ({}), (dispatch) => ({})))(Root);

@@ -1,4 +1,4 @@
-import * as thunk                     from 'redux-thunk';
+import thunk                          from 'redux-thunk';
 import { compose, createStore }       from 'redux';
 import { applyMiddleware }            from 'redux';
 import { loginFromToken }             from './actions/auth_actions';
