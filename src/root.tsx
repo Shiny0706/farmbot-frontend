@@ -2,7 +2,7 @@ import * as React from "react";
 import { Component } from "react";
 import { Provider } from "react-redux";
 import * as assets from "./assets";
-import { syncReduxAndRouter, pushPath } from "react-router-redux"
+import { syncHistoryWithStore, push } from "react-router-redux"
 import { IndexRedirect, IndexRoute, Route, Router } from "react-router";
 import App from "./components/app";
 import Dashboard from "./components/dashboard/dashboard";
@@ -21,7 +21,7 @@ import { store } from "./store";
 import { createHistory } from "history"
 const history = createHistory();
 
-syncReduxAndRouter(history, store);
+syncHistoryWithStore(history, store);
 
 let wrap = function(Component, props) {
   return React.createClass({
@@ -33,7 +33,7 @@ let wrap = function(Component, props) {
 
 class Root extends Component<any, any> {
   componentDidMount() {
-    this.props.dispatch(pushPath(CONFIG.ROOT_PATH + "login"));
+    this.props.dispatch(push(CONFIG.ROOT_PATH + "login"));
   }
 
   requireAuth(nextState, replaceState) {

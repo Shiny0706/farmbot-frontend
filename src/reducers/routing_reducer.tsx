@@ -1,4 +1,4 @@
-import { routeReducer as routing } from 'react-router-redux';
+import { routerReducer as routing } from 'react-router-redux';
 import { CONFIG } from '../config';
 
 let DEFAULT_WELCOME_PAGE = CONFIG.ROOT_PATH + "dashboard";
