@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "farmbot": "0.3.2",
-    "history": "^2.0.1",
+    "history": "1.13.1",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
     "react": "^0.14.0",

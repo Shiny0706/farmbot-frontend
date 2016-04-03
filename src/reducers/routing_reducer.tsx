@@ -35,5 +35,5 @@ export function routeReducer(state=initialState, { type, payload }) {
     default:
   }
 
-  return routing(newState || state, { type, payload });
+  return routing((newState || state), { type, payload });
 }

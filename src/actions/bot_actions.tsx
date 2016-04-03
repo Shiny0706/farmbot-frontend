@@ -173,7 +173,7 @@ export function changeDevice(attributesThatWillChange = { dirty: true }) {
 }
 
 export function fetchDevice(): {}|((dispatch: any) => any) {
-    if (!devices.current.offline()) {
+    if (devices.current.client) {
         // Do nothing if its already online.
         return { type: "FETCH_DEVICE", payload: {} };
     } else {
@@ -186,7 +186,7 @@ export function fetchDevice(): {}|((dispatch: any) => any) {
 };
 
 export function sendCommand(payload) {
-    if (!devices.current.offline()) {
+    if (devices.current.client) {
         let method = devices.current[payload.name];
         let result = method.call(devices.current, payload);
         return (dispatch) => {
@@ -242,9 +242,8 @@ function fetchDeviceOk(resp) {
     let newBot = new Farmbot(config);
     devices.add(newBot); // <= I hate everything about this and need to remove it.
     return dispatch => {
-        return devices
-            .current
-            .connect()
+        return Promise
+            .resolve(devices.current)
             .then(function(res) { dispatch(connectOk(resp)); },
             function(err) { dispatch(connectErr(err)); });
     };

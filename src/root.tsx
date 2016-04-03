@@ -31,40 +31,29 @@ let wrap = function(Component, props) {
 };
 
 class Root extends Component<any, any> {
-  componentDidMount() {
-    this.props.dispatch(push(CONFIG.ROOT_PATH + "login"));
+  requireAuth(nextState, transition) {
+    debugger;
   }
 
-  requireAuth(nextState, replaceState) {
-    let auth: any = _.assign({}, this.props.auth);
-    let that = this;
-    let attemptedURL = nextState.location.pathname;
-      if (auth.authenticated) {
-        return nextState; // TODO Delete this?
-      } else {
-        that.props.dispatch({
-          type: "LOGIN_REQUIRED",
-          payload: { attemptedURL }
-        });
-      };
-  }
 
   render() {
+    let path = ((CONFIG.ROOT_PATH || "") + "/");
+
     return (
       <div>
         <Provider store={store}>
           <Router history={history}>
-            <Route path="/" component={App}>
-              <Route path="login" component={ wrap(Login, this.props) }/>
-              <Route path="dashboard" component={ Dashboard } onEnter={ this.requireAuth.bind(this) }>
-                <Route path="designer" component={ wrap(FarmDesigner, this.props) } onEnter={ this.requireAuth.bind(this) }/>
-                <Route path="controls" component={ wrap(Controls, this.props) } onEnter={ this.requireAuth.bind(this) } />
-                <Route path="devices" component={ wrap(Devices, this.props) } onEnter={ this.requireAuth.bind(this) } />
-                <Route path="sequences" component={ wrap(Sequences, this.props) } onEnter={ this.requireAuth.bind(this) } />
-                <Route path="regimens" component={ wrap(Regimens, this.props) } onEnter={ this.requireAuth.bind(this) } />
+            <Route path={ "/" } component={App}>
+              <IndexRedirect to="/login"/>
+              <Route path="/login" component={ wrap(Login, this.props) }/>
+              <Route path="/dashboard" component={ Dashboard } onEnter={ this.requireAuth.bind(this) }>
+                <Route path="/designer" component={ wrap(FarmDesigner, this.props) } onEnter={ this.requireAuth.bind(this) }/>
+                <Route path="/controls" component={ wrap(Controls, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="/devices" component={ wrap(Devices, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="/sequences" component={ wrap(Sequences, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="/regimens" component={ wrap(Regimens, this.props) } onEnter={ this.requireAuth.bind(this) } />
                 <IndexRoute component={wrap(Controls, this.props)}/>
               </Route>
-              <IndexRedirect to="dashboard"/>
             </Route>
           </Router>
         </Provider>
