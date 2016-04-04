@@ -44,17 +44,13 @@ export class AxisInputBox extends React.Component<any, any> {
 
 
   render() {
-    return  <div className="row">
-              <div className="col-xs-7 col-sm-6 col-sm-offset-1">
-                <label>{ this.props.label }</label>
-              </div>
-              <div className="col-xs-5 col-sm-4 end">
-                <input className="move-input"
-                       type="text"
-                       style={ this.style() }
-                       onChange={ this.change(this.props.axis, this.props.dispatch) }
-                       value={ this.primary() || this.secondary() || "---" } />
-              </div>
+    return  <div className="col-xs-3">
+              <label>{ this.props.label }</label>
+              <input className="move-input"
+                     type="text"
+                     style={ this.style() }
+                     onChange={ this.change(this.props.axis, this.props.dispatch) }
+                     value={ this.primary() || this.secondary() || "---" } />
             </div>
   }
 }
@@ -169,12 +165,12 @@ export class Controls extends React.Component<any, any> {
                                 </tr>
                               </tbody></table>
                           </div>
-                          <AxisInputBox axis="x" label="GANTRY (X)" {...this.props} />
-                          <AxisInputBox axis="y" label="CROSS-SLIDE (Y)" {...this.props} />
-                          <AxisInputBox axis="z" label="Z-AXIS (Z)" {...this.props} />
                           <div className="row">
-                            <div className="col-xs-5 col-sm-4 col-xs-offset-7 end">
-                              <button className="full-width green button-like"
+                            <AxisInputBox axis="x" label="X AXIS" {...this.props} />
+                            <AxisInputBox axis="y" label="Y AXIS" {...this.props} />
+                            <AxisInputBox axis="z" label="Z AXIS" {...this.props} />
+                            <div className="col-xs-3">
+                              <button className="full-width green button-like go"
                                       onClick={ () => this.props.dispatch(commitAxisChanges()) } >
                                 GO
                               </button>
@@ -189,35 +185,49 @@ export class Controls extends React.Component<any, any> {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
+                        <button
+                          className="gray button-like widget-control"
+                          type="button">
+                          EDIT
+                        </button>
                         <div className="widget-header">
-                          <h5>Tool Control</h5>
+                          <h5>Tools</h5>
                         </div>
                       </div>
                       <div className="col-sm-12">
                         <div className="widget-content no-bottom-padding">
                           <div className="row">
-                            <div className="col-sm-6">
-                              <label className="inline">VACUUM PUMP</label>
+                            <div className="col-sm-4">
+                              <label>VACUUM PUMP</label>
                             </div>
-                            <div className="col-sm-6">
+                            <div className="col-sm-4">
+                              <p>Pin 9</p>
+                            </div>
+                            <div className="col-sm-4">
                               <ToggleButton toggleval={ bot.hardware.pin9 }
                                             toggleAction={ () => this.props.dispatch(pinToggle(9)) } />
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-sm-6">
-                              <label className="inline">WATER VALVE</label>
+                            <div className="col-sm-4">
+                              <label>WATER VALVE</label>
                             </div>
-                            <div className="col-sm-6">
+                            <div className="col-sm-4">
+                              <p>Pin 10</p>
+                            </div>
+                            <div className="col-sm-4">
                               <ToggleButton toggleval={ bot.hardware.pin10 }
                                             toggleAction={ () => this.props.dispatch(pinToggle(10)) } />
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-sm-6">
-                              <label className="inline">LED</label>
+                            <div className="col-sm-4">
+                              <label>LED</label>
                             </div>
-                            <div className="col-sm-6">
+                            <div className="col-sm-4">
+                              <p>Pin 13</p>
+                            </div>
+                            <div className="col-sm-4">
                               <ToggleButton toggleval={ bot.hardware.pin13 }
                                             toggleAction={ () => this.props.dispatch(pinToggle(13)) } />
                             </div>
@@ -233,6 +243,11 @@ export class Controls extends React.Component<any, any> {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
+                        <button
+                          className="gray button-like widget-control"
+                          type="button">
+                          EDIT
+                        </button>
                         <div className="widget-header">
                           <h5>Camera</h5>
                         </div>

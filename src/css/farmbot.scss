@@ -89,6 +89,10 @@ label {
   font-size: 1.2rem;
   font-weight: bold;
   text-transform: uppercase;
+  &.center {
+    display: block;
+    text-align: center;
+  }
 }
 
 .padding-bottom-large {

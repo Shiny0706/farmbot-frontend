@@ -11,7 +11,7 @@ export class RegimensWidget extends React.Component<any, any> {
                         <span className="glyphicon glyphicon-menu-hamburger" />
                       </button>
                     </div>
-                    <button className="gray button-like widget-control">
+                    <button className="green button-like widget-control">
                       Add
                     </button>
                     <div className="widget-header">

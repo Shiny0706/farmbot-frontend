@@ -89,8 +89,6 @@ export class Devices extends React.Component<any, any> {
                           <div className="row">
                             <div className="col-sm-12">
                               <button type="submit" className="button-like green widget-control">SAVE { bot.dirty ? "*" : "" }</button>
-                              <button type="button" className="button-like yellow widget-control">RESTART</button>
-                              <button type="button" className="button-like red widget-control">SHUTDOWN</button>
                               <div className="widget-header">
                                 <h5>DEVICE</h5>
                               </div>
@@ -157,7 +155,7 @@ export class Devices extends React.Component<any, any> {
                                         <p>Raspberry Pi 2 Model B+ running farmbot-raspberry-pi-controller V1.233</p>
                                       </td>
                                       <td>
-                                        <button className="button-like yellow">UPDATE TO V1.234</button>
+                                        <button className="button-like green">UPDATE TO V1.234</button>
                                       </td>
                                     </tr>
                                     <tr>
@@ -165,10 +163,31 @@ export class Devices extends React.Component<any, any> {
                                         <label>MICROCONTROLLER</label>
                                       </td>
                                       <td>
-                                        <p>Version { String(bot.hardware.param_version) || "information is loading." }</p>
+                                        <p>Version { String(bot.hardware.param_version) || "information is loading..." }</p>
                                       </td>
                                       <td>
-                                        <button className="button-like yellow">UPDATE TO V1.234</button>
+                                        <button className="button-like green">UPDATE TO V1.234</button>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <label>RESTART FARMBOT</label>
+                                      </td>
+                                      <td>
+                                        <p>This will restart FarmBot's Raspberry Pi and controller software</p>
+                                      </td>
+                                      <td>
+                                        <button type="button" className="button-like yellow">RESTART</button>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <label>SHUTDOWN FARMBOT</label>
+                                      </td>
+                                      <td>
+                                        <p>This will shutdown FarmBot's Raspberry Pi. To turn it back on, unplug FarmBot and plug it back in.</p>                                                                         </td>
+                                      <td>
+                                        <button type="button" className="button-like red">SHUTDOWN</button>
                                       </td>
                                     </tr>
                                     <tr>
@@ -179,7 +198,7 @@ export class Devices extends React.Component<any, any> {
                                         <p>Caution! This cannot be undone</p>
                                       </td>
                                       <td>
-                                        <button type="button" className="button-like red">DELETE FARMBOT</button>
+                                        <button type="button" className="button-like red">DELETE</button>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -212,13 +231,13 @@ export class Devices extends React.Component<any, any> {
                                 <tr>
                                   <th width="32%" />
                                   <th width="22%">
-                                    <label>GANTRY (X)</label>
+                                    <label>X AXIS</label>
                                   </th>
                                   <th width="22%">
-                                    <label>CROSS-SLIDE (Y)</label>
+                                    <label>Y AXIS</label>
                                   </th>
                                   <th width="22%">
-                                    <label>Z-AXIS (Z)</label>
+                                    <label>Z AXIS</label>
                                   </th>
                                 </tr>
                               </thead>
@@ -277,6 +296,20 @@ export class Devices extends React.Component<any, any> {
                                 </tr>
                                 <tr>
                                   <td>
+                                    <label>CALIBRATION</label>
+                                  </td>
+                                  <td>
+                                    <button type="button" className="button-like yellow">CALIBRATE X</button>
+                                  </td>
+                                  <td>
+                                    <button type="button" className="button-like yellow">CALIBRATE Y</button>
+                                  </td>
+                                  <td>
+                                    <button type="button" className="button-like yellow">CALIBRATE Z</button>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
                                     <label>INVERT ENDPOINTS</label>
                                   </td>
                                   <td>
@@ -311,7 +344,7 @@ export class Devices extends React.Component<any, any> {
                                 </tr>
                                 <tr>
                                   <td>
-                                    <label>NEGATIVES</label>
+                                    <label>ALLOW NEGATIVES</label>
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ bot.hardware.movement_home_up_x }

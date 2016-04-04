@@ -26,6 +26,9 @@ button {
   }
   &.go {
     background-color: $green;
+    margin-top: 24px;
+    padding: .4rem .8rem;
+    font-size: 1.2rem!important;
   }
   &.restart {
     background-color: $orange;

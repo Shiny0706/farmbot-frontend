@@ -6,6 +6,9 @@ export class SequencesWidget extends React.Component<any, any> {
               <div className="widget-wrapper sequences-widget">
                 <div className="row">
                   <div className="col-sm-12">
+                    <button className="green button-like widget-control">
+                      Add
+                    </button>
                     <div className="widget-header">
                       <h5>Sequences</h5>
                     </div>
@@ -17,8 +20,7 @@ export class SequencesWidget extends React.Component<any, any> {
                       <div className="block-wrapper">
                         <div>
                           <button className="block full-width text-left purple-block block-header">
-                            Untitled Sequence
-                            <i className="fa fa-arrows block-control" />
+                            Saved Sequence 1
                             <i className="fa fa-pencil block-control" />
                           </button>
                         </div>

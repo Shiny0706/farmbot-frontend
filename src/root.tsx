@@ -45,7 +45,7 @@ let wrap = function(Comp, props) {
 
 class Root extends React.Component<any, any> {
   requireAuth(nextState: RouterState, transition: RedirectFunction) {
-    let isAuthed: boolean = this.props.auth.authenticated;
+    let isAuthed = this.props.auth.authenticated;
     if (isAuthed) {
       transition(nextState);
     } else {
