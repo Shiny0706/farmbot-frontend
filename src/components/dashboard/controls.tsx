@@ -1,21 +1,22 @@
-import * as React from 'react';
-import { Navbar } from '../../components/navbar';
-import { ToggleButton } from './toggle_button';
-import { store } from '../../store';
-import { DirectionButton } from './direction_button';
+import * as React from "react";
+import { Navbar } from "../../components/navbar";
+import { ToggleButton } from "./toggle_button";
+import { store } from "../../store";
+import { DirectionButton } from "./direction_button";
 import { fetchDevice,
          sendCommand,
          changeStepSize,
          changeAxisBuffer,
          commitAxisChanges,
-         pinToggle } from '../../actions/bot_actions';
+         pinToggle } from "../../actions/bot_actions";
+import { connect } from "react-redux";
 
 export class AxisInputBox extends React.Component<any, any> {
 
   bot() {
-    // Dumb hacks for impossible bugs.
-    let bot = this.props.store.getState().bot;
-    return bot
+    // Better idea: getState / setState.
+    let bot = this.props.bot;
+    return bot;
   }
 
   primary() {
@@ -38,7 +39,7 @@ export class AxisInputBox extends React.Component<any, any> {
   change(key, dispatch) {
     return function(event) {
       dispatch(changeAxisBuffer(key, event.target.value));
-    }
+    };
   }
 
 
@@ -51,21 +52,21 @@ export class AxisInputBox extends React.Component<any, any> {
                      style={ this.style() }
                      onChange={ this.change(this.props.axis, this.props.dispatch) }
                      value={ this.primary() || this.secondary() || "---" } />
-            </div>
+            </div>;
   }
 }
 export class StepSizeSelector extends React.Component<any, any> {
   cssForIndex(num) {
     let choices = this.props.choices;
     let css = "move-amount no-radius ";
-    if(num === _.first(choices)) {
-      css += "leftmost "
+    if (num === _.first(choices)) {
+      css += "leftmost ";
     }
-    if(num === _.last(choices)) {
-      css += "rightmost "
+    if (num === _.last(choices)) {
+      css += "rightmost ";
     }
-    if(num === this.props.selected) {
-      css += "move-amount-selected "
+    if (num === this.props.selected) {
+      css += "move-amount-selected ";
     }
     return css;
   }
@@ -80,12 +81,11 @@ export class StepSizeSelector extends React.Component<any, any> {
                               key={ inx } >{ item }</button>
                 )
               }
-            </div>)
+            </div>);
   }
 }
 
-export class Controls extends React.Component<any, any> {
-
+class ControlsPage extends React.Component<any, any> {
   render() {
     let bot = store.getState()
       .bot || {};
@@ -255,7 +255,7 @@ export class Controls extends React.Component<any, any> {
                     </div>
                     <div className="row">
                       <div className="col-sm-12">
-                        <img className="padding-bottom" src="http://108.90.200.9:8080/?action=stream" style={{width: '100%', height: 'auto', paddingBottom: 0}} />
+                        <img className="padding-bottom" src="http://108.90.200.9:8080/?action=stream" style={{width: "100%", height: "auto", paddingBottom: 0}} />
                       </div>
                     </div>
                   </div>
@@ -268,3 +268,5 @@ export class Controls extends React.Component<any, any> {
     );
   }
 };
+
+export let Controls = connect(state => state)(ControlsPage);

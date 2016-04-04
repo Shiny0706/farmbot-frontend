@@ -1,6 +1,6 @@
-import { error, warning, success } from '../logger';
-import { devices as bot } from '../bot';
-import * as _ from 'lodash';
+import { error, warning, success } from "../logger";
+import { devices as bot } from "../bot";
+import * as _ from "lodash";
 
 let status = {
   NOT_READY: "never connected to device",
@@ -11,7 +11,7 @@ let status = {
   WEBSOCKET_ERR: "Error establishing socket connection",
   CONNECTED: "Socket Connection Established",
   READY: "Bot ready"
-}
+};
 
 let initialState = {
   status: status.NOT_READY,
@@ -19,7 +19,7 @@ let initialState = {
   settingsBuffer: {},
   stepSize: 1000,
   hardware: {}
-}
+};
 
 let action_handlers = {
   SETTING_TOGGLE_OK: function(state, action) {
@@ -33,8 +33,8 @@ let action_handlers = {
   },
 
   COMMIT_AXIS_CHANGE_OK: function(oldState, action) {
-    // READ_STATUS_OK + reset axisBuffer. That's it.
-    let state = this.READ_STATUS_OK(oldState, action) // Dat reuse, tho.
+    // READ_STATUS_OK + reset axisBuffer. That"s it.
+    let state = this.READ_STATUS_OK(oldState, action); // Dat reuse, tho.
     return _.assign({}, state, {
       axisBuffer: {}
     });
@@ -56,10 +56,10 @@ let action_handlers = {
   CHANGE_SETTINGS_BUFFER: function(state, action) {
     let settingsBuffer = _.assign({}, state.settingsBuffer);
     let newVal = Number(action.payload.val);
-    if(newVal) {
+    if (newVal) {
       settingsBuffer[action.payload.key] = action.payload.val;
     } else {
-      delete settingsBuffer[action.payload.key]
+      delete settingsBuffer[action.payload.key];
     }
     return _.assign({}, state, {
       settingsBuffer: settingsBuffer
@@ -74,7 +74,7 @@ let action_handlers = {
 
   READ_STATUS_OK: function(state, action) {
     let hardware: any = _.assign({}, action.payload);
-    delete hardware.method
+    delete hardware.method;
     return _.assign({},
       state, {
         hardware: hardware
@@ -140,7 +140,7 @@ let action_handlers = {
       });
   },
   FETCH_DEVICE_ERR: function(state, action) {
-    if(action.payload.status === 404) {
+    if (action.payload.status === 404) {
       warning("You need to add a device to your account.",
         "No device found!");
     } else {
@@ -153,11 +153,11 @@ let action_handlers = {
       });
   },
   SAVE_DEVICE_ERR: function(state, action) {
-    switch(action.payload.status) {
+    switch (action.payload.status) {
       case 422:
         let errors = _.map(action.payload.responseJSON, v => v)
           .join(". ");
-        error(errors, "Couldn't save device.");
+        error(errors, "Couldn\'t save device.");
         break;
       default:
         error("Error while saving device.");
@@ -166,22 +166,22 @@ let action_handlers = {
     return state;
   },
   SAVE_DEVICE_OK: function(state, action) {
-    success("Device saved.")
+    success("Device saved.");
     return _.assign({}, state, action.payload, {
       dirty: false
     });
   }
-}
+};
 
 export function botReducer(state = initialState, action) {
   let handler = (action_handlers[action.type] || action_handlers.DEFAULT);
-  if(!handler) {
+  if (!handler) {
     debugger;
   };
   let result = handler.call(action_handlers, state, action);
   let newState = _.assign({}, result);
-  if(action.type[0] !== "@") {
-    console.log(action.type, state)
+  if (action.type[0] !== "@") {
+    console.log(action.type, state);
   };
   return newState;
 }

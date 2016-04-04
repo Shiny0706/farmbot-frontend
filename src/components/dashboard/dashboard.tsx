@@ -1,11 +1,9 @@
-import * as React from 'react';
-import { Component, PropTypes } from 'react';
+import * as React from "react";
+import { Component, PropTypes } from "react";
+import { connect } from "react-redux";
 
+@connect(state => state)
 export default class Dashboard extends Component<any, any> {
-  // static propTypes = {
-  //   children: PropTypes.element,
-  // };
-
   render() {
     return <div className="dashboard">
         {this.props.children}

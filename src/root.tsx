@@ -7,22 +7,18 @@ import {
 } from "react-redux";
 
 import {
-  syncHistoryWithStore,
-  push
-} from "react-router-redux";
-
-import {
   IndexRedirect,
   IndexRoute,
   Route,
   Router,
   RedirectFunction,
   RouterState,
-  browserHistory
+  Link
 } from "react-router";
 
 import App from "./components/app";
 import Dashboard from "./components/dashboard/dashboard";
+// TODO connect() all of these instead of that wrap() stuff.
 import { Controls } from "./components/dashboard/controls";
 import { Devices } from "./components/dashboard/devices";
 import { Sequences } from "./components/dashboard/sequences/sequences";
@@ -32,64 +28,56 @@ import { FarmDesigner } from "./components/dashboard/farm_designer/farm_designer
 import { Login } from "./components/login";
 import { CONFIG } from "./config";
 import { store } from "./store";
+import { history } from "./history";
 
-let history = syncHistoryWithStore(browserHistory, store);
+let BASE = CONFIG.ROOT_PATH;
 
-let wrap = function(Comp, props) {
-  return React.createClass({
-    render: function() {
-      return React.createElement(Comp, props);
-    }
-  });
-};
+export class RootComponent extends React.Component<any, any> {
 
-class Root extends React.Component<any, any> {
-  requireAuth(nextState: RouterState, transition: RedirectFunction) {
-    let isAuthed = this.props.auth.authenticated;
-    if (isAuthed) {
-      transition(nextState);
-    } else {
-      transition("/login");
-    }
-  }
-
+  requireAuth(nextState: RouterState, replace: RedirectFunction) {
+      let isAuthed = this
+                      .props
+                      .store
+                      .getState()
+                      .auth
+                      .authenticated;
+      if (!isAuthed) { replace("/login"); }
+  };
+  // Thanks @noahMiller and @jpierson (Github) for this wonderful fix!
+  // Reference:
+  //  https://github.com/reactjs/react-router/issues/2704#issuecomment-174067923
+  routes = (<Route path="/" component={App}>
+              <Route path="login" component={ Login }/>
+              <Route path="/dashboard"
+                  component={ Dashboard }
+                  onEnter={ this.requireAuth.bind(this) }>
+                <Route path="designer"
+                  component={ FarmDesigner }
+                  onEnter={ this.requireAuth.bind(this) }/>
+                <Route path="controls"
+                  component={ Controls }
+                  onEnter={ this.requireAuth.bind(this) } />
+                <Route path="devices"
+                  component={ Devices }
+                  onEnter={ this.requireAuth.bind(this) } />
+                <Route path="sequences"
+                  component={ Sequences }
+                  onEnter={ this.requireAuth.bind(this) } />
+                <Route path="regimens"
+                  component={ Regimens }
+                  onEnter={ this.requireAuth.bind(this) } />
+                <IndexRoute
+                  component={ Controls } />
+                  <IndexRedirect to="controls" />
+              </Route>
+              <IndexRedirect to="/dashboard/controls" />
+            </Route>);
 
   render() {
-    let path = ((CONFIG.ROOT_PATH || "") + "/");
-
-    return (
-      <div>
-        <Provider store={store}>
-          <Router history={history}>
-            <Route path={ "/" } component={App}>
-              <Route path="login" component={ wrap(Login, this.props) }/>
-              <Route path="dashboard"
-                     component={ Dashboard }
-                     onEnter={ this.requireAuth.bind(this) }>
-                <Route path="designer"
-                       component={ wrap(FarmDesigner, this.props) }
-                       onEnter={ this.requireAuth.bind(this) }/>
-                <Route path="controls"
-                       component={ wrap(Controls, this.props) }
-                       onEnter={ this.requireAuth.bind(this) } />
-                <Route path="devices"
-                       component={ wrap(Devices, this.props) }
-                       onEnter={ this.requireAuth.bind(this) } />
-                <Route path="sequences"
-                       component={ wrap(Sequences, this.props) }
-                       onEnter={ this.requireAuth.bind(this) } />
-                <Route path="regimens"
-                       component={ wrap(Regimens, this.props) }
-                       onEnter={ this.requireAuth.bind(this) } />
-                <IndexRoute component={wrap(Controls, this.props) }/>
-                <IndexRedirect to="controls"/>
-              </Route>
-            </Route>
-          </Router>
-        </Provider>
-      </div>
-    );
+        return (<Provider store={store}>
+                  <Router history={history}>
+                      { this.routes }
+                  </Router>
+                </Provider>);
   }
 }
-
-export let RootComponent = connect(state => state)(Root);
