@@ -3,13 +3,14 @@ import { Link } from 'react-router';
 import { CONFIG } from '../config';
 import { store } from '../store';
 
+// TODO: Convert to ES6 class or stateless component and add a display name.
 export let Navbar = React.createClass({
   links: {
-    "Farm Designer" : (CONFIG.ROOT_PATH || "/") + "dashboard/designer",
-    "Controls"      : (CONFIG.ROOT_PATH || "/") + "dashboard/controls",
-    "Device"        : (CONFIG.ROOT_PATH || "/") + "dashboard/devices",
-    "Sequences"     : (CONFIG.ROOT_PATH || "/") + "dashboard/sequences",
-    "Regimens"      : (CONFIG.ROOT_PATH || "/") + "dashboard/regimens"
+    "Farm Designer" : "/dashboard/designer",
+    "Controls"      : "/dashboard/controls",
+    "Device"        : "/dashboard/devices",
+    "Sequences"     : "/dashboard/sequences",
+    "Regimens"      : "/dashboard/regimens"
   },
 
   render: function() {

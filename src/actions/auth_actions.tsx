@@ -1,6 +1,6 @@
 import { CONFIG } from "../config";
 import { fetchDevice } from "./bot_actions";
-import { push } from "react-router-redux";
+import { push } from "../history";
 
 export function login(username, password) {
   return dispatch => {
@@ -8,8 +8,9 @@ export function login(username, password) {
       function (res) {
         dispatch(loginOk(res.token.encoded));
         dispatch(fetchDevice());
-        console.warn("This hardcoded URL needs to be made dynamic.");
-        dispatch(push("/dashboard/controls"));
+        console.warn("URL needs to be dynamic, more Redux-y.");
+        // Why doesn't push() from react-router-redux work? :(
+        push("/dashboard/controls");
       },
       (err) => dispatch(loginErr(err))
     );

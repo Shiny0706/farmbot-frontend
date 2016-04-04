@@ -9,7 +9,7 @@ import { authReducer as auth }        from "./reducers/auth_reducer";
 import { botReducer as bot }          from "./reducers/bot_reducer";
 import { plantReducer as plants }     from "./reducers/plant_reducer";
 import { oldGlobalReducer as global } from "./reducers/old_reducers";
-import { routerReducer }   from "react-router-redux";
+import { routerReducer }              from "react-router-redux";
 
 let lastState = {};
 
@@ -21,4 +21,4 @@ let reducers = combineReducers({
   global
 });
 
-export let store = compose(applyMiddleware(thunk))(createStore)(reducers, lastState);
+export let store = createStore(reducers, lastState, applyMiddleware(thunk));
