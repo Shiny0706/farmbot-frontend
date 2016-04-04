@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { Navbar } from '../components/navbar';
-import { Link } from 'react-router';
-import { login, register } from '../actions/auth_actions';
-const AFTER_LOGIN = '/dashboard';
+import * as React from "react";
+import { Navbar } from "../components/navbar";
+import { Link } from "react-router";
+import { login, register } from "../actions/auth_actions";
+const AFTER_LOGIN = "/dashboard";
 
 export class Login extends React.Component<any, any> {
   // I *THINK* this is an anti-pattern in Redux. Peer review requested.
-  // Somewhat conflicted because this form handles passwords, and I don't want
+  // Somewhat conflicted because this form handles passwords, and I don"t want
   // to persist them in the state tree.
   set(name) {
     return function(event){
-      let state = {}
+      let state = {};
       state[name] = event.target.value;
       this.setState(state);
     };
@@ -127,4 +127,3 @@ export class Login extends React.Component<any, any> {
     );
   }
 }
-

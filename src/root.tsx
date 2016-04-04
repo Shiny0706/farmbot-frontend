@@ -2,8 +2,15 @@ import "./assets"; // I'll just take the side effects, thanks.
 import * as React from "react";
 import { Component } from "react";
 import { Provider } from "react-redux";
-import { syncHistoryWithStore, push } from "react-router-redux"
-import { IndexRedirect, IndexRoute, Route, Router } from "react-router";
+import { syncHistoryWithStore, push } from "react-router-redux";
+import {
+  IndexRedirect,
+  IndexRoute,
+  Route,
+  Router,
+  RedirectFunction,
+  RouterState
+} from "react-router";
 import App from "./components/app";
 import Dashboard from "./components/dashboard/dashboard";
 import { Controls } from "./components/dashboard/controls";
@@ -17,7 +24,7 @@ import { CONFIG } from "./config";
 import { connect } from "react-redux";
 import * as _ from "lodash";
 import { store } from "./store";
-import { createHistory } from "history"
+import { createHistory } from "history";
 const history = createHistory();
 
 syncHistoryWithStore(history, store);
@@ -31,8 +38,13 @@ let wrap = function(Component, props) {
 };
 
 class Root extends Component<any, any> {
-  requireAuth(nextState, transition) {
-    debugger;
+  requireAuth(nextState: RouterState, transition: RedirectFunction) {
+    let isAuthed: boolean = this.props.auth.authenticated;
+    if (isAuthed) {
+      transition(nextState);
+    } else {
+      transition("/login");
+    }
   }
 
 
@@ -44,15 +56,15 @@ class Root extends Component<any, any> {
         <Provider store={store}>
           <Router history={history}>
             <Route path={ "/" } component={App}>
-              <IndexRedirect to="/login"/>
-              <Route path="/login" component={ wrap(Login, this.props) }/>
-              <Route path="/dashboard" component={ Dashboard } onEnter={ this.requireAuth.bind(this) }>
-                <Route path="/designer" component={ wrap(FarmDesigner, this.props) } onEnter={ this.requireAuth.bind(this) }/>
-                <Route path="/controls" component={ wrap(Controls, this.props) } onEnter={ this.requireAuth.bind(this) } />
-                <Route path="/devices" component={ wrap(Devices, this.props) } onEnter={ this.requireAuth.bind(this) } />
-                <Route path="/sequences" component={ wrap(Sequences, this.props) } onEnter={ this.requireAuth.bind(this) } />
-                <Route path="/regimens" component={ wrap(Regimens, this.props) } onEnter={ this.requireAuth.bind(this) } />
+              <Route path="login" component={ wrap(Login, this.props) }/>
+              <Route path="dashboard" component={ Dashboard } onEnter={ this.requireAuth.bind(this) }>
+                <Route path="designer" component={ wrap(FarmDesigner, this.props) } onEnter={ this.requireAuth.bind(this) }/>
+                <Route path="controls" component={ wrap(Controls, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="devices" component={ wrap(Devices, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="sequences" component={ wrap(Sequences, this.props) } onEnter={ this.requireAuth.bind(this) } />
+                <Route path="regimens" component={ wrap(Regimens, this.props) } onEnter={ this.requireAuth.bind(this) } />
                 <IndexRoute component={wrap(Controls, this.props)}/>
+                <IndexRedirect to="controls"/>
               </Route>
             </Route>
           </Router>

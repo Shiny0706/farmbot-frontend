@@ -1,6 +1,6 @@
-import { error, success } from '../logger';
-import * as $ from 'jquery';
-import * as _ from 'lodash';
+import { error, success } from "../logger";
+import * as $ from "jquery";
+import * as _ from "lodash";
 
 let action_handlers = {
   DEFAULT: function(state, action) {
@@ -11,7 +11,7 @@ let action_handlers = {
     unsetToken();
     return _.assign({},
                     state,
-                    { token: '',
+                    { token: "",
                       authenticated: false });
   },
   LOGIN_OK: function(state, action) {
@@ -23,12 +23,12 @@ let action_handlers = {
                       authenticated: true,
                     });
   }
-}
+};
 
 let initialState = {
-  token: '',
+  token: "---",
   authenticated: false
-}
+};
 
 export function authReducer(state = initialState, action) {
   let handler = (action_handlers[action.type] || action_handlers.DEFAULT);
@@ -36,7 +36,7 @@ export function authReducer(state = initialState, action) {
 }
 
 export function setToken(token) {
-  // localStorage['farmbot_token'] = token || '';
+  // localStorage["farmbot_token"] = token || "";
   $.ajaxSetup({beforeSend: function (xhr) {
        xhr.setRequestHeader("Authorization", token);
     }
@@ -44,9 +44,9 @@ export function setToken(token) {
 }
 
 function unsetToken() {
-    // localStorage['farmbot_token'] = '';
+    // localStorage["farmbot_token"] = "";
     $.ajaxSetup({beforeSend: function (xhr) {
-         xhr.setRequestHeader("Authorization", '');
+         xhr.setRequestHeader("Authorization", "");
       }
     });
 }

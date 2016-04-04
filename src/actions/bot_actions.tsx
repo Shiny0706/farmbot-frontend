@@ -8,7 +8,8 @@ const ON = 1, OFF = 0, DIGITAL = 0;
 
 export function settingToggle(name, bot) {
     return function(dispatch) {
-        let currentValue = devices.current.hardware[name];
+        console.warn("This does not work. Fix ASAP.");
+        let currentValue: any = 0; // devices.current.hardware[name];
         let packet = {
             name: (currentValue === 0) ? ON : OFF
         };
@@ -242,8 +243,9 @@ function fetchDeviceOk(resp) {
     let newBot = new Farmbot(config);
     devices.add(newBot); // <= I hate everything about this and need to remove it.
     return dispatch => {
-        return Promise
-            .resolve(devices.current)
+        return devices
+            .current
+            .connect(() => console.log("Awww yeah!"))
             .then(function(res) { dispatch(connectOk(resp)); },
             function(err) { dispatch(connectErr(err)); });
     };
@@ -270,6 +272,7 @@ function onChange(data) {
 }
 
 function connectOk(res) {
+    debugger;
     devices.current.on("*", onChange);
 
     return function(dispatch) {
