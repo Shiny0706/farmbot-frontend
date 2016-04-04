@@ -10,5 +10,5 @@ node.id = "root";
 
 document.body.appendChild(node);
 
-var elem = React.createElement(RootComponent, {store});
+let elem = React.createElement(RootComponent, {store});
 render(elem, document.getElementById("root"));

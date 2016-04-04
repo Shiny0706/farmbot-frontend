@@ -1,6 +1,5 @@
 /// <reference path="main/ambient/es6-promise/index.d.ts" />
 /// <reference path="main/ambient/farmbot/farmbot.d.ts" />
-/// <reference path="main/ambient/history/index.d.ts" />
 /// <reference path="main/ambient/jasmine/index.d.ts" />
 /// <reference path="main/ambient/jquery/index.d.ts" />
 /// <reference path="main/ambient/lodash/index.d.ts" />
