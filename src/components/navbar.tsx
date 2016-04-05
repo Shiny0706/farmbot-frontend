@@ -5,12 +5,13 @@ import { store } from "../store";
 
 // TODO: Convert to ES6 class or stateless component and add a display name.
 export let Navbar = React.createClass({
+  // TODO HACK : Add CONFIG.BASE_URL instead of hardcoding /app.
   links: {
-    "Farm Designer" : "/dashboard/designer",
-    "Controls"      : "/dashboard/controls",
-    "Device"        : "/dashboard/devices",
-    "Sequences"     : "/dashboard/sequences",
-    "Regimens"      : "/dashboard/regimens"
+    "Farm Designer" : "/app/dashboard/designer",
+    "Controls"      : "/app/dashboard/controls",
+    "Device"        : "/app/dashboard/devices",
+    "Sequences"     : "/app/dashboard/sequences",
+    "Regimens"      : "/app/dashboard/regimens"
   },
 
   render: function() {
