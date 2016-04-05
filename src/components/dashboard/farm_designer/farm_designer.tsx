@@ -1,13 +1,14 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 import * as React from "react";
-import { Navbar } from '../../../components/navbar';
-import { Panel1 } from './panel_1';
-import { GardenMap } from './garden_map';
-import { Panel2 } from './panel_2';
-import { fetchAllPlants } from '../../../actions/plant_actions';
-import { connect } from 'react-redux';
+import { Navbar } from "../../../components/navbar";
+import { Panel1 } from "./panel_1";
+import { GardenMap } from "./garden_map";
+import { Panel2 } from "./panel_2";
+import { fetchAllPlants } from "../../../actions/plant_actions";
+import { connect } from "react-redux";
 
-export class FarmDesigner extends React.Component<any, any> {
+
+class FarmDesignerPage extends React.Component<any, any> {
 
   componentDidMount() { this.props.dispatch(fetchAllPlants()); }
 
@@ -43,3 +44,5 @@ export class FarmDesigner extends React.Component<any, any> {
     );
   }
 }
+
+export let FarmDesigner = connect(state => state)(FarmDesignerPage);

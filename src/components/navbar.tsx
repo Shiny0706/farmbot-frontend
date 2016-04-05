@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Link } from 'react-router';
-import { CONFIG } from '../config';
-import { store } from '../store';
+import * as React from "react";
+import { Link } from "react-router";
+import { CONFIG } from "../config";
+import { store } from "../store";
 
 // TODO: Convert to ES6 class or stateless component and add a display name.
 export let Navbar = React.createClass({
@@ -31,7 +31,7 @@ export let Navbar = React.createClass({
                           <li key={url}>
                             <Link to={url}>{description}</Link>
                           </li>
-                         )
+                        );
                 })
               }
             </ul>
