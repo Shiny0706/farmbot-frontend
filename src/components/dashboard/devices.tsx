@@ -1,34 +1,31 @@
-import * as React from 'react';
-import { Navbar } from '../../components/navbar';
+import * as React from "react";
+import { Navbar } from "../../components/navbar";
 import { addDevice,
          changeSettingsBuffer,
          commitSettingsChanges,
          settingToggle,
          fetchDevice,
-         changeDevice } from '../../actions/bot_actions';
-import { connect } from 'react-redux';
-import { convertFormToObject } from '../../util.ts';
-import { store } from '../../store';
-import { ToggleButton } from './toggle_button';
-
-// Almost certainly wrong.
-// TODO: Remove this.
-let bot;
+         changeDevice } from "../../actions/bot_actions";
+import { connect } from "react-redux";
+import { convertFormToObject } from "../../util.ts";
+import { store } from "../../store";
+import { ToggleButton } from "./toggle_button";
+import { devices } from "../../device";
 
 export class SettingsInputBox extends React.Component<any, any> {
 
   bot() {
     // Dumb hacks for impossible bugs.
-    // This is probably what's causing the bug
-    return this.props.store.getState().bot;
+    // This is probably what"s causing the bug
+    return this.props.bot;
   }
 
   primary() {
-    return this.bot().settingsBuffer[this.props.setting];
+    return this.props.bot.settingsBuffer[this.props.setting];
   }
 
   secondary() {
-    let num = this.bot().hardware[this.props.setting];
+    let num = this.props.bot.hardware[this.props.setting];
     if (_.isNumber(num)) {
       return String(num); // Prevent 0 from being falsy.
     } else {
@@ -45,7 +42,7 @@ export class SettingsInputBox extends React.Component<any, any> {
   change(key, dispatch) {
     return function(event) {
       dispatch(changeSettingsBuffer(key, event.target.value));
-    }
+    };
   }
 
   render() {
@@ -55,25 +52,35 @@ export class SettingsInputBox extends React.Component<any, any> {
                style={ this.style() }
                onChange={ this.change(this.props.setting, this.props.dispatch) }
                value={ this.primary() || this.secondary() || "---" } />
-      </td>)
+      </td>);
   }
 }
 
+// TODO HACK : This is the biggest refactor target in the app right now.
+// Numerous issues: uses local variables instead of component state, references
+// Farmbot object and Redux .bot property (redundant).
+class DevicesPage extends React.Component<any, any> {
 
-export class Devices extends React.Component<any, any> {
+  constructor() {
+    super();
+    this.state = {bot: devices.current};
+  }
+
   changeBot(e) {
+    // THIS IS THE CAUSE OF THE "STALE DATA" BUG: Fix me!
     e.preventDefault();
-    let updates: any = _.object([[e.target.name, e.target.value]]) // {name: "value"}
+    let updates: any = _.object([[e.target.name, e.target.value]]); // {name: "value"}
     this.props.dispatch(changeDevice(updates));
   }
 
   saveBot(e) {
+    // THIS IS THE CAUSE OF THE "STALE DATA" BUG: Fix me!
     e.preventDefault();
     this.props.dispatch(addDevice(convertFormToObject(e.target)));
   }
 
   render() {
-    bot = this.props.store.getState().bot.current;
+    let bot = this.state.bot;
     return (
       <div>
         <Navbar/>
@@ -104,7 +111,7 @@ export class Devices extends React.Component<any, any> {
                                         <label>FARMBOT NAME</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="name" onChange={ this.changeBot.bind(this) } value={ bot.name } />
+                                        <input name="name" onChange={ this.changeBot.bind(this) } value={ bot.name || "Fix me!"} />
                                       </td>
                                     </tr>
                                     <tr>
@@ -136,7 +143,7 @@ export class Devices extends React.Component<any, any> {
                                         <label>IP ADDRESS</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <p>{ bot.hardware.ip_address}</p>
+                                        <p>{ (this.props.bot.hardware || {}).ip_address}</p>
                                       </td>
                                     </tr>
                                     <tr>
@@ -163,7 +170,7 @@ export class Devices extends React.Component<any, any> {
                                         <label>MICROCONTROLLER</label>
                                       </td>
                                       <td>
-                                        <p>Version { String(bot.hardware.param_version) || "information is loading..." }</p>
+                                        <p>Version { String(this.props.bot.hardware.param_version) || "information is loading..." }</p>
                                       </td>
                                       <td>
                                         <button className="button-like green">UPDATE TO V1.234</button>
@@ -174,7 +181,7 @@ export class Devices extends React.Component<any, any> {
                                         <label>RESTART FARMBOT</label>
                                       </td>
                                       <td>
-                                        <p>This will restart FarmBot's Raspberry Pi and controller software</p>
+                                        <p>This will restart FarmBot"s Raspberry Pi and controller software</p>
                                       </td>
                                       <td>
                                         <button type="button" className="button-like yellow">RESTART</button>
@@ -185,7 +192,7 @@ export class Devices extends React.Component<any, any> {
                                         <label>SHUTDOWN FARMBOT</label>
                                       </td>
                                       <td>
-                                        <p>This will shutdown FarmBot's Raspberry Pi. To turn it back on, unplug FarmBot and plug it back in.</p>                                                                         </td>
+                                        <p>This will shutdown FarmBot"s Raspberry Pi. To turn it back on, unplug FarmBot and plug it back in.</p>                                                                         </td>
                                       <td>
                                         <button type="button" className="button-like red">SHUTDOWN</button>
                                       </td>
@@ -219,7 +226,7 @@ export class Devices extends React.Component<any, any> {
                       <div className="col-sm-12">
                         <button className="green button-like widget-control"
                                 onClick={ () => this.props.dispatch(commitSettingsChanges()) } >
-                          SAVE { Object.keys(bot.settingsBuffer).length ? "*" : "" }
+                          SAVE { Object.keys(this.props.bot.settingsBuffer).length ? "*" : "" }
                         </button>
                         <div className="widget-header">
                           <h5>Hardware</h5>
@@ -313,15 +320,15 @@ export class Devices extends React.Component<any, any> {
                                     <label>INVERT ENDPOINTS</label>
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_x }
+                                    <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_x }
                                                   toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_x", bot)) } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_y }
+                                    <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_y }
                                                   toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_y", bot)) } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.movement_invert_endpoints_z }
+                                    <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_z }
                                                   toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_z", bot)) } />
                                   </td>
                                 </tr>
@@ -330,15 +337,15 @@ export class Devices extends React.Component<any, any> {
                                     <label>INVERT MOTOR</label>
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.movement_invert_motor_x }
+                                    <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_motor_x }
                                                   toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_x", bot)) } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.movement_invert_motor_y }
+                                    <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_motor_y }
                                                   toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_y", bot)) } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.movement_invert_motor_z }
+                                    <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_motor_z }
                                                   toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_z", bot)) } />
                                   </td>
                                 </tr>
@@ -347,15 +354,15 @@ export class Devices extends React.Component<any, any> {
                                     <label>ALLOW NEGATIVES</label>
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.movement_home_up_x }
+                                    <ToggleButton toggleval={ this.props.bot.hardware.movement_home_up_x }
                                                   toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_x", bot)) } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.movement_home_up_y }
+                                    <ToggleButton toggleval={ this.props.bot.hardware.movement_home_up_y }
                                                   toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_y", bot)) } />
                                   </td>
                                   <td>
-                                    <ToggleButton toggleval={ bot.hardware.movement_home_up_z }
+                                    <ToggleButton toggleval={ this.props.bot.hardware.movement_home_up_z }
                                                   toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_z", bot)) } />
                                   </td>
                                 </tr>
@@ -420,3 +427,5 @@ export class Devices extends React.Component<any, any> {
     );
   }
 };
+
+export let Devices = connect(state => state)(DevicesPage);

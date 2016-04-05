@@ -8,13 +8,8 @@
     "url": "https://github.com/farmbot/farmbot-web-frontend"
   },
   "scripts": {
-    "build": "npm run clean && npm run build:dev && npm run build:prd",
-    "build:dev": "webpack src/fb_frontend.tsx dist/fb_frontend.js --config tools/webpack.config.dev.js",
-    "build:prd": "webpack src/fb_frontend.tsx dist/fb_frontend.min.js --config tools/webpack.config.prd.js",
-    "prepublish": "npm run build",
+    "build": "webpack --config tools/webpack.config.prd.js",
     "start": "webpack-dev-server --config tools/webpack.config.dev.js",
-    "clean": "rimraf dist build",
-    "lint": "eslint src",
     "test": "karma start karma.config.js"
   },
   "keywords": [
@@ -33,7 +28,6 @@
     "karma-webpack": "^1.7.0",
     "loader-utils": "^0.2.12",
     "node-sass": "^3.4.2",
-    "rimraf": "^2.5.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "ts-loader": "^0.8.1",

@@ -30,8 +30,6 @@ import { CONFIG } from "./config";
 import { store } from "./store";
 import { history } from "./history";
 
-let BASE = CONFIG.ROOT_PATH;
-
 export class RootComponent extends React.Component<any, any> {
 
   requireAuth(nextState: RouterState, replace: RedirectFunction) {
@@ -41,12 +39,12 @@ export class RootComponent extends React.Component<any, any> {
                       .getState()
                       .auth
                       .authenticated;
-      if (!isAuthed) { replace("/login"); }
+      if (!isAuthed) { replace("/app/login"); }
   };
   // Thanks @noahMiller and @jpierson (Github) for this wonderful fix!
   // Reference:
   //  https://github.com/reactjs/react-router/issues/2704#issuecomment-174067923
-  routes = (<Route path="/" component={App}>
+  routes = (<Route path="/app" component={App}>
               <Route path="login" component={ Login }/>
               <Route path="/dashboard"
                   component={ Dashboard }
