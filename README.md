@@ -23,9 +23,8 @@
 All config is in `src/config.js`. It points to configurations like:
 
  0. `FARMBOT_API_URL`: URL of the [farmbot-web-app](https://github.com/FarmBot/farmbot-web-app) API endpoint.,
- 0. `MESHBLU_URL`: URL for the [MeshBlu](https://github.com/octoblu/meshblu) IoT messaging gateway you will use. Default: "wss://meshblu.octoblu.com/ws/v2",
- 0. `ROOT_PATH`: For use cases where you are mounting the farmbot app on a non-root URL. The app must have a mount point (URL) to find assets. **If `ROOT_PATH` is incorrect, you will have issues loading images and assets**. Default: "/app/"
 
+**Note:** There's no need to point to an MQTT URL. That is contained in your auth token.
 
 # TODO
 

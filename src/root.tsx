@@ -30,8 +30,6 @@ import { CONFIG } from "./config";
 import { store } from "./store";
 import { history } from "./history";
 
-let BASE = CONFIG.ROOT_PATH;
-
 export class RootComponent extends React.Component<any, any> {
 
   requireAuth(nextState: RouterState, replace: RedirectFunction) {
