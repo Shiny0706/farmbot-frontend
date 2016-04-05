@@ -29,5 +29,4 @@ All config is in `src/config.js`. It points to configurations like:
 
 # TODO
 
- - [ ] Add images to webpack build
- - [ ] Switch to back to RLite for routing?
+ - [ ] Set `noImplicitAny: true` in `tsconfig.json` once things stabilize.

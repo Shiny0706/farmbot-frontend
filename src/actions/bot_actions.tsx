@@ -1,7 +1,7 @@
 import { Device } from "../models/device";
 import { Farmbot } from "farmbot";
 import { store } from "../store";
-import { devices } from "../bot";
+import { devices } from "../device";
 import { success, error } from "../logger";
 
 const ON = 1, OFF = 0, DIGITAL = 0;
