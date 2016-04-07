@@ -10,7 +10,7 @@ export function login(username, password) {
         dispatch(fetchDevice());
         console.warn("URL needs to be dynamic, more Redux-y.");
         // Why doesn't push() from react-router-redux work? :(
-        push("/dashboard/controls");
+        push("/app/dashboard/controls");
       },
       (err) => dispatch(loginErr(err))
     );
