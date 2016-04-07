@@ -30,6 +30,8 @@ import { CONFIG } from "./config";
 import { store } from "./store";
 import { history } from "./history";
 
+console.log("Version 0.2.0");
+
 export class RootComponent extends React.Component<any, any> {
 
   requireAuth(nextState: RouterState, replace: RedirectFunction) {

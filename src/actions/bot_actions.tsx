@@ -272,7 +272,6 @@ function onChange(data) {
 }
 
 function connectOk(res) {
-    debugger;
     devices.current.on("*", onChange);
 
     return function(dispatch) {
