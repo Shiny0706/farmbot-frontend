@@ -173,21 +173,18 @@ export function changeDevice(attributesThatWillChange = { dirty: true }) {
     };
 }
 
-export function fetchDevice(): {}|((dispatch: any) => any) {
-    if (devices.current.client) {
-        // Do nothing if its already online.
-        return { type: "FETCH_DEVICE", payload: {} };
-    } else {
-        return function(dispatch) {
-            return Device.fetch().then(
-                function(res) { dispatch(fetchDeviceOk(res)); },
-                function(err) { dispatch(fetchDeviceErr(err)); });
-        };
+export function fetchDevice(token: String): {}|((dispatch: any) => any) {
+    return (dispatch) => {
+      return (new Farmbot({token}))
+        .connect(() => {}) // TODO: Make this param optional.
+        .then((bot: Farmbot) => {
+          devices.current = bot;
+          dispatch(fetchDeviceOk(bot));
+        }, (err) => dispatch(fetchDeviceErr(err)));
     };
 };
 
 export function sendCommand(payload) {
-    if (devices.current.client) {
         let method = devices.current[payload.name];
         let result = method.call(devices.current, payload);
         return (dispatch) => {
@@ -195,9 +192,6 @@ export function sendCommand(payload) {
                 (res) => sendCommandOk(res, payload, dispatch),
                 (e) => sendCommandErr(e, payload, dispatch));
         };
-    } else {
-        return fetchDevice();
-    }
 }
 
 function sendCommandOk(res, payload, dispatch) {
@@ -234,21 +228,11 @@ function saveDeviceErr(err) {
     };
 }
 
-function fetchDeviceOk(resp) {
-    let token = store.getState().auth.token;
-    let config = _.assign({}, resp, { timeout: 7000, token: token });
-    try {
-        console.log(`Logining in to ${JSON.parse(atob(token.split(".")[1])).iss}`);
-    } catch (e) { };
-    let newBot = new Farmbot(config);
-    devices.add(newBot); // <= I hate everything about this and need to remove it.
-    return dispatch => {
-        return devices
-            .current
-            .connect(() => console.log("Awww yeah!"))
-            .then(function(res) { dispatch(connectOk(resp)); },
-            function(err) { dispatch(connectErr(err)); });
-    };
+function fetchDeviceOk(bot) {
+  return {
+      type: "FETCH_DEVICE_OK",
+      payload: bot
+  };
 }
 
 function onChange(data) {
@@ -272,7 +256,6 @@ function onChange(data) {
 }
 
 function connectOk(res) {
-    debugger;
     devices.current.on("*", onChange);
 
     return function(dispatch) {

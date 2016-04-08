@@ -18,5 +18,5 @@ function NullBot(): Farmbot {
 
 export var devices: Devices = {
   current: NullBot(),
-  add: (newBot => this.current = newBot)
+  add: (newBot) => { this.current = newBot; }
 };

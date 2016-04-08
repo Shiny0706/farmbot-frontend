@@ -11,7 +11,7 @@ module.exports = {
   entry: { app: './src/fb_frontend.tsx' },
   output: {
       path: path.resolve(__dirname, "dist"),
-      publicPath: "../src/",
+      publicPath: "/src/",
       filename: "bundle.js"
   },
   ts: {
@@ -28,9 +28,6 @@ module.exports = {
   devServer: {
     historyApiFallback: {
       index: 'default.html',
-      rewrites: [
-        { from: /\/soccer/, to: '/soccer.html'}
-      ]
     }
   }
 };
