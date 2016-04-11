@@ -7,7 +7,8 @@ export function login(username, password) {
     return requestToken(username, password).then(
       function (res) {
         dispatch(loginOk(res.token.encoded));
-        dispatch(fetchDevice(res.token.encoded));
+        let token = res.token.encoded;
+        dispatch(fetchDevice(token));
         console.warn("URL needs to be dynamic, more Redux-y.");
         // Why doesn't push() from react-router-redux work? :(
         push("/app/dashboard/controls");

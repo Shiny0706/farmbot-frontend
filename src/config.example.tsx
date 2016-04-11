@@ -10,5 +10,5 @@
 */
 export let CONFIG = {
   // The REST API endpoint that stores user auth, device settings, etc.
-  FARMBOT_API_URL: "//staging.farmbot.io",
+  FARMBOT_API_URL: "//localhost:3000",
 };

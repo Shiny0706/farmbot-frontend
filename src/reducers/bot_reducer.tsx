@@ -84,9 +84,7 @@ let action_handlers = {
   },
 
   BOT_CHANGE: function(state, action) {
-    let statuses: any = _.assign({}, action.payload.result);
-    delete statuses.name;
-    delete statuses.method;
+    let statuses: any = _.assign({}, action.payload);
     let newState: any = _.assign({}, state);
     newState.hardware = _.assign({}, state.hardware, statuses);
 
@@ -175,9 +173,6 @@ let action_handlers = {
 
 export function botReducer(state = initialState, action) {
   let handler = (action_handlers[action.type] || action_handlers.DEFAULT);
-  if (!handler) {
-    debugger;
-  };
   let result = handler.call(action_handlers, state, action);
   let newState = _.assign({}, result);
   if (action.type[0] !== "@") {
