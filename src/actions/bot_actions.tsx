@@ -36,13 +36,13 @@ export function settingToggleErr(err) {
 
 
 export function pinToggle(num) {
-    let currentValue = store.getState().devices.hardware[`pin${num}`];
-    let newPinValue = (currentValue === "on") ? OFF : ON;
-    let promise = devices
-        .current
-        .pinWrite({ pin: num, value1: newPinValue, mode: DIGITAL });
     return function(dispatch) {
-        promise.then(res => dispatch(pinToggleOk(res)),
+        let currentValue = store.getState().bot.hardware[`pin${num}`];
+        let newPinValue = (currentValue === "on") ? OFF : ON;
+        return devices
+            .current
+            .pinWrite({ pin: num, value1: newPinValue, mode: DIGITAL })
+            .then(res => dispatch(pinToggleOk(res)),
             err => dispatch(pinToggleErr(err)));
     };
 }
@@ -173,25 +173,31 @@ export function changeDevice(attributesThatWillChange = { dirty: true }) {
     };
 }
 
-export function fetchDevice(token: String): {}|((dispatch: any) => any) {
+export function fetchDevice(token: String): {} | ((dispatch: any) => any) {
     return (dispatch) => {
-      return (new Farmbot({token}))
-        .connect(() => {}) // TODO: Make this param optional.
-        .then((bot: Farmbot) => {
-          devices.current = bot;
-          dispatch(fetchDeviceOk(bot));
-        }, (err) => dispatch(fetchDeviceErr(err)));
+        return (new Farmbot({ token }))
+            .connect(() => { }) // TODO: Make this param optional.
+            .then((bot: Farmbot) => {
+                devices.current = bot;
+                bot.readStatus();
+                bot.on("*", function(resp) {
+                    if (resp.error) { alert("The Farmbot device hit an error."); };
+                    let botState = resp.result || resp.error;
+                    dispatch(botChange(botState));
+                });
+                dispatch(fetchDeviceOk(bot));
+            }, (err) => dispatch(fetchDeviceErr(err)));
     };
 };
 
 export function sendCommand(payload) {
-        let method = devices.current[payload.name];
-        let result = method.call(devices.current, payload);
-        return (dispatch) => {
-            return result.then(
-                (res) => sendCommandOk(res, payload, dispatch),
-                (e) => sendCommandErr(e, payload, dispatch));
-        };
+    let method = devices.current[payload.name];
+    let result = method.call(devices.current, payload);
+    return (dispatch) => {
+        return result.then(
+            (res) => sendCommandOk(res, payload, dispatch),
+            (e) => sendCommandErr(e, payload, dispatch));
+    };
 }
 
 function sendCommandOk(res, payload, dispatch) {
@@ -229,49 +235,18 @@ function saveDeviceErr(err) {
 }
 
 function fetchDeviceOk(bot) {
-  return {
-      type: "FETCH_DEVICE_OK",
-      payload: bot
-  };
-}
-
-function onChange(data) {
-    data = (data || {});
-
-    function isResponse(data) {
-        store.dispatch({
-            type: "BOT_CHANGE",
-            payload: data
-        });
-    }
-
-    function isBroadcast(data) {
-        store.dispatch({
-            type: "BOT_CHANGE",
-            payload: (data.payload || data)
-        });
-    }
-
-    return data.result ? isResponse(data) : isBroadcast(data);
-}
-
-function connectOk(res) {
-    devices.current.on("*", onChange);
-
-    return function(dispatch) {
-        return Promise.resolve().then(function() {
-            dispatch(readStatus());
-            dispatch({ type: "CONNECT_OK", payload: res });
-        });
-    };
-};
-
-function connectErr(err) {
     return {
-        type: "CONNECT_OK",
-        payload: {}
+        type: "FETCH_DEVICE_OK",
+        payload: bot
     };
-};
+}
+
+function botChange(botState) {
+    return {
+        type: "BOT_CHANGE",
+        payload: botState
+    };
+}
 
 function fetchDeviceErr(err) {
     return {
