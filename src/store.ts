@@ -20,5 +20,7 @@ let reducers = combineReducers({
   plants,
   global
 });
-
-export let store = createStore(reducers, lastState, applyMiddleware(thunk));
+declare var devToolsExtension: any;
+let middleware = compose(applyMiddleware(thunk),
+                         devToolsExtension ? devToolsExtension() : f => f);
+export let store = createStore(reducers, lastState, middleware);

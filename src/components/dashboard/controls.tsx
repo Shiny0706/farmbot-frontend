@@ -87,8 +87,8 @@ export class StepSizeSelector extends React.Component<any, any> {
 
 class ControlsPage extends React.Component<any, any> {
   render() {
-    let bot = store.getState()
-      .bot || {};
+
+    let bot = this.props.bot;
 
     return(
       <div>

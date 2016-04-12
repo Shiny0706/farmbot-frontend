@@ -87,7 +87,6 @@ let action_handlers = {
     let statuses: any = _.assign({}, action.payload);
     let newState: any = _.assign({}, state);
     newState.hardware = _.assign({}, state.hardware, statuses);
-
     return _.assign({}, newState);
   },
 

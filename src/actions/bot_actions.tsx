@@ -118,15 +118,16 @@ export function commitAxisChanges() {
     let packet = _({})
         .assign(hardware)
         .assign(axisBuffer)
-        .assign({ speed: hardware.s })
+        .assign({ speed: devices.current.getState("speed") })
         .pick("x", "y", "z", "speed")
         .transform((a, b, c) => a[c] = Number(b), {})
         .value();
-    let promise = devices.current.moveAbsolute(packet);
     return function(dispatch) {
-        return promise.then(
-            (resp) => dispatch(commitAxisChangesOk(resp)),
-            (err) => dispatch(commitAxisChangesErr(err)));
+        return devices
+          .current
+          .moveAbsolute(packet)
+          .then((resp) => dispatch(commitAxisChangesOk(resp)),
+                (err) => dispatch(commitAxisChangesErr(err)));
     };
 }
 
