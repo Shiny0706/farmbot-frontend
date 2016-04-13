@@ -118,15 +118,16 @@ export function commitAxisChanges() {
     let packet = _({})
         .assign(hardware)
         .assign(axisBuffer)
-        .assign({ speed: hardware.s })
+        .assign({ speed: devices.current.getState("speed") })
         .pick("x", "y", "z", "speed")
         .transform((a, b, c) => a[c] = Number(b), {})
         .value();
-    let promise = devices.current.moveAbsolute(packet);
     return function(dispatch) {
-        return promise.then(
-            (resp) => dispatch(commitAxisChangesOk(resp)),
-            (err) => dispatch(commitAxisChangesErr(err)));
+        return devices
+          .current
+          .moveAbsolute(packet)
+          .then((resp) => dispatch(commitAxisChangesOk(resp)),
+                (err) => dispatch(commitAxisChangesErr(err)));
     };
 }
 
@@ -175,14 +176,14 @@ export function changeDevice(attributesThatWillChange = { dirty: true }) {
 
 export function fetchDevice(token: String): {} | ((dispatch: any) => any) {
     return (dispatch) => {
-        return (new Farmbot({ token }))
+        let bot = new Farmbot({ token });
+        return bot
             .connect(() => { }) // TODO: Make this param optional.
-            .then((bot: Farmbot) => {
+            .then(() => {
                 devices.current = bot;
                 bot.readStatus();
                 bot.on("*", function(resp) {
-                    if (resp.error) { alert("The Farmbot device hit an error."); };
-                    let botState = resp.result || resp.error;
+                    let botState = resp.result || resp.error || {};
                     dispatch(botChange(botState));
                 });
                 dispatch(fetchDeviceOk(bot));
@@ -194,9 +195,8 @@ export function sendCommand(payload) {
     let method = devices.current[payload.name];
     let result = method.call(devices.current, payload);
     return (dispatch) => {
-        return result.then(
-            (res) => sendCommandOk(res, payload, dispatch),
-            (e) => sendCommandErr(e, payload, dispatch));
+        return result.then((res) => sendCommandOk(res, payload, dispatch),
+                           (e) => sendCommandErr(e, payload, dispatch));
     };
 }
 

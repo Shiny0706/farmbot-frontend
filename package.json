@@ -35,7 +35,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "farmbot": "0.3.2",
+    "farmbot": "0.4.1",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
     "redux": "^3.3.1",

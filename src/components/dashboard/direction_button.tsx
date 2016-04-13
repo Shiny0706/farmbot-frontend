@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { sendCommand } from '../../actions/bot_actions';
+import * as React from "react";
+import { sendCommand } from "../../actions/bot_actions";
 
 export class DirectionButton extends React.Component<any, any> {
   sendCommand() {
     let payload = { name: "moveRelative", speed: 100 };
-    let isNegative = (this.props.direction == "up") ||
-                      (this.props.direction == "right");
+    let isNegative = (this.props.direction === "up") ||
+                      (this.props.direction === "right");
     let multiplier = (isNegative) ? -1 : 1;
     payload[this.props.axis] = (this.props.steps || 250 ) * multiplier;
     this.props.dispatch(sendCommand(payload));
@@ -18,7 +18,6 @@ export class DirectionButton extends React.Component<any, any> {
     return <button onClick={this.sendCommand.bind(this)}
                    className={classes}>
              <i />
-           </button>
+           </button>;
   }
 }
-

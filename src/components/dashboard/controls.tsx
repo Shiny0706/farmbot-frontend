@@ -13,18 +13,12 @@ import { connect } from "react-redux";
 
 export class AxisInputBox extends React.Component<any, any> {
 
-  bot() {
-    // Better idea: getState / setState.
-    let bot = this.props.bot;
-    return bot;
-  }
-
   primary() {
-    return this.bot().axisBuffer[this.props.axis];
+    return this.props.bot.axisBuffer[this.props.axis];
   }
 
   secondary() {
-    let num = this.bot().hardware[this.props.axis];
+    let num = this.props.bot.hardware[this.props.axis];
     if (_.isNumber(num)) {
       return String(num); // Prevent 0 from being falsy.
     } else {
@@ -87,8 +81,8 @@ export class StepSizeSelector extends React.Component<any, any> {
 
 class ControlsPage extends React.Component<any, any> {
   render() {
-    let bot = store.getState()
-      .bot || {};
+
+    let bot = this.props.bot;
 
     return(
       <div>
