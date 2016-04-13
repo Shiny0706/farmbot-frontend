@@ -15,13 +15,15 @@ let action_handlers = {
                       authenticated: false });
   },
   LOGIN_OK: function(state, action) {
-    setToken(action.payload.token);
+    let token = action.payload.encoded;
+    let info = action.payload.unencoded;
+    // TODO : Move side effects into Thunk / Action creator.
+    setToken(token);
     return _.assign({},
                     state,
-                    {
-                      token: action.payload.token,
-                      authenticated: true,
-                    });
+                    { token },
+                    {authenticated: true},
+                    info);
   }
 };
 
@@ -34,7 +36,7 @@ export function authReducer(state = initialState, action) {
   let handler = (action_handlers[action.type] || action_handlers.DEFAULT);
   return handler(state, action);
 }
-
+// TODO Side effects belong in action creators (thunks), not the dispatcher.
 export function setToken(token) {
   // localStorage["farmbot_token"] = token || "";
   $.ajaxSetup({beforeSend: function (xhr) {
@@ -43,6 +45,7 @@ export function setToken(token) {
   });
 }
 
+// TODO Side effects belong in action creators (thunks), not the dispatcher.
 function unsetToken() {
     // localStorage["farmbot_token"] = "";
     $.ajaxSetup({beforeSend: function (xhr) {

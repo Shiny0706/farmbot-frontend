@@ -81,6 +81,7 @@ class DevicesPage extends React.Component<any, any> {
 
   render() {
     let bot = this.state.bot;
+    let auth = this.props.auth;
     return (
       <div>
         <Navbar/>
@@ -119,7 +120,7 @@ class DevicesPage extends React.Component<any, any> {
                                         <label>UUID</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="uuid" onChange={ this.changeBot.bind(this) } value={ bot.uuid }/>
+                                        <input name="uuid" onChange={ this.changeBot.bind(this) } value={ auth.bot }/>
                                       </td>
                                     </tr>
                                     <tr>
@@ -127,7 +128,7 @@ class DevicesPage extends React.Component<any, any> {
                                         <label>SECURITY TOKEN</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="token" onChange={ this.changeBot.bind(this) } value={ bot.token }/>
+                                        <input name="token" onChange={ this.changeBot.bind(this) } value={ auth.token }/>
                                       </td>
                                     </tr>
                                     <tr>
