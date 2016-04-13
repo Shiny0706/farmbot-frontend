@@ -13,6 +13,7 @@
 
 # Deploy to Production
 
+0. MAKE SURE `src/config` is set to the correct server. (Eg: my.farmbot.io)
 1. run `npm run build`
 2. Upload `dist/fb_frontend.min.js` to your server.
 3. Add `<script src="fb_frontend.min.js">` to the page

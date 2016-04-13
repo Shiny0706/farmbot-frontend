@@ -30,7 +30,7 @@ import { CONFIG } from "./config";
 import { store } from "./store";
 import { history } from "./history";
 
-console.log("Version 0.2.0");
+console.log("Version 0.2.1");
 
 export class RootComponent extends React.Component<any, any> {
 

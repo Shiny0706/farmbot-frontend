@@ -6,7 +6,7 @@ export function login(username, password) {
   return dispatch => {
     return requestToken(username, password).then(
       function (res) {
-        dispatch(loginOk(res.token.encoded));
+        dispatch(loginOk(res.token));
         let token = res.token.encoded;
         dispatch(fetchDevice(token));
         console.warn("URL needs to be dynamic, more Redux-y.");
@@ -28,14 +28,14 @@ function loginErr(err) {
 export function loginOk(token) {
   return {
     type: "LOGIN_OK",
-    payload: { token }
+    payload: token
   };
 }
 
 export function register(name, email, password, confirmation) {
   return dispatch => {
     return requestRegistration(name, email, password, confirmation).then(
-      (res) => dispatch(loginOk(res.token.encoded)),
+      (res) => dispatch(loginOk(res.token)),
       (err) => dispatch(loginErr(err))
     );
   };

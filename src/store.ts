@@ -22,5 +22,5 @@ let reducers = combineReducers({
 });
 declare var devToolsExtension: any;
 let middleware = compose(applyMiddleware(thunk),
-                         devToolsExtension ? devToolsExtension() : f => f);
+                         !!window["devToolsExtension"] ? devToolsExtension() : f => f);
 export let store = createStore(reducers, lastState, middleware);
