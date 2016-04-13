@@ -33,10 +33,12 @@ let action_handlers = {
   },
 
   COMMIT_AXIS_CHANGE_OK: function(oldState, action) {
-    // READ_STATUS_OK + reset axisBuffer. That"s it.
-    let state = this.READ_STATUS_OK(oldState, action); // Dat reuse, tho.
+    let hardware = _.assign({}, oldState.hardware, action.payload);
+    let state = _.assign({}, oldState);
+
     return _.assign({}, state, {
-      axisBuffer: {}
+      axisBuffer: {},
+      hardware
     });
   },
 

@@ -176,14 +176,14 @@ export function changeDevice(attributesThatWillChange = { dirty: true }) {
 
 export function fetchDevice(token: String): {} | ((dispatch: any) => any) {
     return (dispatch) => {
-        return (new Farmbot({ token }))
+        let bot = new Farmbot({ token });
+        return bot
             .connect(() => { }) // TODO: Make this param optional.
-            .then((bot: Farmbot) => {
+            .then(() => {
                 devices.current = bot;
                 bot.readStatus();
                 bot.on("*", function(resp) {
-                    if (resp.error) { alert("The Farmbot device hit an error."); };
-                    let botState = resp.result || resp.error;
+                    let botState = resp.result || resp.error || {};
                     dispatch(botChange(botState));
                 });
                 dispatch(fetchDeviceOk(bot));
@@ -195,9 +195,8 @@ export function sendCommand(payload) {
     let method = devices.current[payload.name];
     let result = method.call(devices.current, payload);
     return (dispatch) => {
-        return result.then(
-            (res) => sendCommandOk(res, payload, dispatch),
-            (e) => sendCommandErr(e, payload, dispatch));
+        return result.then((res) => sendCommandOk(res, payload, dispatch),
+                           (e) => sendCommandErr(e, payload, dispatch));
     };
 }
 
