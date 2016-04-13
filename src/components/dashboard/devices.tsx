@@ -321,15 +321,15 @@ class DevicesPage extends React.Component<any, any> {
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_x }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_x", bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_x", this.props.bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_y }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_y", bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_y", this.props.bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_z }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_z", bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_z", this.props.bot)) } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -338,15 +338,15 @@ class DevicesPage extends React.Component<any, any> {
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_motor_x }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_x", bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_x", this.props.bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_motor_y }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_y", bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_y", this.props.bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_motor_z }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_z", bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_z", this.props.bot)) } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -355,15 +355,15 @@ class DevicesPage extends React.Component<any, any> {
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_home_up_x }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_x", bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_x", this.props.bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_home_up_y }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_y", bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_y", this.props.bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_home_up_z }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_z", bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_z", this.props.bot)) } />
                                   </td>
                                 </tr>
                               </tbody>

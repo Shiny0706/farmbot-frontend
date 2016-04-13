@@ -8,14 +8,12 @@ const ON = 1, OFF = 0, DIGITAL = 0;
 
 export function settingToggle(name, bot) {
     return function(dispatch) {
-        console.warn("This does not work. Fix ASAP.");
-        let currentValue: any = 0; // devices.current.hardware[name];
-        let packet = {
-            name: (currentValue === 0) ? ON : OFF
-        };
-        let promise = devices.current.updateCalibration(packet);
-        return promise.then(res => dispatch(settingToggleOk(res)),
-            err => dispatch(settingToggleErr(err)));
+        let currentValue = bot.hardware[name];
+        return devices
+          .current
+          .updateCalibration({ [name]: (currentValue === 0) ? ON : OFF })
+          .then(res => dispatch(settingToggleOk(res)),
+                err => dispatch(settingToggleErr(err)));
     };
 }
 
@@ -146,11 +144,12 @@ function commitAxisChangesOk(resp) {
 }
 
 export function readStatus() {
-    let promise = devices.current.readStatus();
     return function(dispatch) {
-        return promise.then(function(resp) {
-            dispatch(readStatusOk(resp));
-        }, readStatusErr);
+        return devices
+          .current
+          .readStatus()
+          .then((resp) => dispatch(readStatusOk(resp)),
+                (errr) => dispatch(readStatusErr(errr)));
     };
 }
 
@@ -181,7 +180,7 @@ export function fetchDevice(token: String): {} | ((dispatch: any) => any) {
             .connect(() => { }) // TODO: Make this param optional.
             .then(() => {
                 devices.current = bot;
-                bot.readStatus();
+                dispatch(readStatus());
                 bot.on("*", function(resp) {
                     let botState = resp.result || resp.error || {};
                     dispatch(botChange(botState));
