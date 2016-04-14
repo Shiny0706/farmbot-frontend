@@ -2,15 +2,15 @@ var path = require('path');
 
 module.exports = function (config) {
   config.set({
-    singleRun: false,
+    singleRun: true,
     autoWatch: true,
     browsers: ['Chrome'],
     files: [ 'tests.webpack.js' ],
     frameworks: [ 'jasmine' ],
     preprocessors: {
-      'tests.webpack.js': ['webpack', 'sourcemap'],
+      'tests.webpack.js': ['coverage', 'webpack', 'sourcemap'],
     },
-    reporters: [ 'progress' ],
+    reporters: [ 'progress' , 'coverage' ],
     webpack: {
       resolve: {
           extensions: ["", ".js", ".ts", ".tsx"]
@@ -18,6 +18,14 @@ module.exports = function (config) {
       cache: true,
       devtool: 'inline-source-map',
       module: {
+        postLoaders: [
+            {
+                test: /\.(ts|tsx)?$/,
+                include: path.resolve(__dirname, 'src'),
+                exclude: path.resolve(__dirname, 'src/__tests__'),
+                loader: 'istanbul-instrumenter'
+            }
+        ],
         loaders: [
           {
             test: /\.tsx?$/,
