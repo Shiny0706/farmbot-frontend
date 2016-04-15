@@ -30,11 +30,12 @@ import { CONFIG } from "./config";
 import { store } from "./store";
 import { history } from "./history";
 
-console.log("Version 0.2.1");
+console.info(`Pointing at ${CONFIG.FARMBOT_API_URL} .`);
 
 export class RootComponent extends React.Component<any, any> {
 
   requireAuth(nextState: RouterState, replace: RedirectFunction) {
+    // Why didn't I just write this.props.auth here...?
       let isAuthed = this
                       .props
                       .store
@@ -42,7 +43,6 @@ export class RootComponent extends React.Component<any, any> {
                       .auth
                       .authenticated;
       if (!isAuthed) {
-        console.warn("Log in first.");
         replace("/app/login");
       }
   };
