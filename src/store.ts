@@ -11,7 +11,9 @@ import { plantReducer as plants }     from "./reducers/plant_reducer";
 import { oldGlobalReducer as global } from "./reducers/old_reducers";
 import { routerReducer }              from "react-router-redux";
 
-let lastState = {};
+let storageKey = "lastState";
+let stateAsAString = localStorage[storageKey] || "{}";
+let lastState = (JSON.parse(stateAsAString));
 
 let reducers = combineReducers({
   routing: routerReducer,
@@ -24,3 +26,6 @@ declare var devToolsExtension: any;
 let middleware = compose(applyMiddleware(thunk),
                          !!window["devToolsExtension"] ? devToolsExtension() : f => f);
 export let store = createStore(reducers, lastState, middleware);
+store.subscribe(function(){
+  localStorage[storageKey] = JSON.stringify(store.getState());
+});

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Navbar } from "../../components/navbar";
-import { OperationsWidget } from "../../routes/dashboard/sequences/operations_widget";
-import { SequencesWidget } from "../../routes/dashboard/sequences/sequences_widget";
-import { RegimensWidget } from "../../routes/dashboard/regimens/regimens_widget";
-import { RegimenEditorWidget } from "../../routes/dashboard/regimens/regimen_editor_widget";
+import { OperationsWidget } from "../sequences/operations_widget";
+import { SequencesWidget } from "../sequences/sequences_widget";
+import { RegimensWidget } from "./regimens_widget";
+import { RegimenEditorWidget } from "./regimen_editor_widget";
 
 export let Regimens = React.createClass({
   render: function() {
