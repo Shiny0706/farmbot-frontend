@@ -5,7 +5,8 @@ import {
   applyMiddleware,
   combineReducers
 } from "redux";
-import { authReducer as auth }        from "./reducers/auth_reducer";
+import { authReducer as auth } from "./reducers/auth_reducer";
+import { sequenceReducer as sequences } from "./components/sequences/sequence_reducer";
 import { botReducer as bot }          from "./reducers/bot_reducer";
 import { plantReducer as plants }     from "./reducers/plant_reducer";
 import { oldGlobalReducer as global } from "./reducers/old_reducers";
@@ -20,6 +21,7 @@ let reducers = combineReducers({
   auth,
   bot,
   plants,
+  sequences,
   global
 });
 declare var devToolsExtension: any;

@@ -1,7 +1,21 @@
 import { error, warning } from "../../logger";
+interface InitialState {
+  current: Sequence;
+};
 
-const initialState = {
-  current: []
+const initialState: InitialState = {
+  current: {
+    name: "This is hardcoded.",
+    color: "red",
+    steps: [
+      {
+        message_type: "move_relative"
+      },
+      {
+        message_type: "move_relative"
+      }
+    ]
+  }
 };
 
 let action_handlers = {
@@ -14,7 +28,7 @@ let action_handlers = {
   },
 };
 
-export function plantReducer(state = initialState, action) {
+export function sequenceReducer(state = initialState, action) {
   let handler = (action_handlers[action.type] || action_handlers.DEFAULT);
   return handler(state, action);
 }
