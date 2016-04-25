@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Navbar } from '../../../components/navbar';
+import { Navbar } from '../../components/navbar';
 
 export let Schedules = React.createClass({
   render: function() {

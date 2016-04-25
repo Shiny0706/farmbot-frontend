@@ -1,16 +1,16 @@
 import * as React from "react";
-import { Navbar } from "../../components/navbar";
+import { Navbar } from "../components/navbar";
 import { addDevice,
          changeSettingsBuffer,
          commitSettingsChanges,
          settingToggle,
          fetchDevice,
-         changeDevice } from "../../actions/bot_actions";
+         changeDevice } from "../actions/bot_actions";
 import { connect } from "react-redux";
-import { convertFormToObject } from "../../util.ts";
-import { store } from "../../store";
+import { convertFormToObject } from "../util.ts";
+import { store } from "../store";
 import { ToggleButton } from "./toggle_button";
-import { devices } from "../../device";
+import { devices } from "../device";
 
 export class SettingsInputBox extends React.Component<any, any> {
 

@@ -1,10 +1,10 @@
 import * as _ from "lodash";
 import * as React from "react";
-import { Navbar } from "../../../components/navbar";
+import { Navbar } from "../../components/navbar";
 import { Panel1 } from "./panel_1";
 import { GardenMap } from "./garden_map";
 import { Panel2 } from "./panel_2";
-import { fetchAllPlants } from "../../../actions/plant_actions";
+import { fetchAllPlants } from "../../actions/plant_actions";
 import { connect } from "react-redux";
 
 

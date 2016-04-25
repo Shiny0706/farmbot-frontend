@@ -1,14 +1,14 @@
 import * as React from "react";
-import { Navbar } from "../../components/navbar";
+import { Navbar } from "../components/navbar";
 import { ToggleButton } from "./toggle_button";
-import { store } from "../../store";
+import { store } from "../store";
 import { DirectionButton } from "./direction_button";
 import { fetchDevice,
          sendCommand,
          changeStepSize,
          changeAxisBuffer,
          commitAxisChanges,
-         pinToggle } from "../../actions/bot_actions";
+         pinToggle } from "../actions/bot_actions";
 import { connect } from "react-redux";
 
 export class AxisInputBox extends React.Component<any, any> {

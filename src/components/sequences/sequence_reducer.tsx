@@ -1,6 +1,4 @@
-import { error, warning } from "../logger";
-
-
+import { error, warning } from "../../logger";
 
 const initialState = {
   current: []
@@ -11,10 +9,10 @@ let action_handlers = {
     return state;
   },
   MY_SPECIAL_SEQUENCE: function(state, action) {
-    warning("Unable to download plants. Check your internet connection.");
+    warning("You should never see this message.");
     return state;
   },
-}
+};
 
 export function plantReducer(state = initialState, action) {
   let handler = (action_handlers[action.type] || action_handlers.DEFAULT);

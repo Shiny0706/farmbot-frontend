@@ -14,7 +14,7 @@ import { Zones } from './zone_inventory';
 import { AddZone } from './add_zone';
 // Import the right panel (for display on mobile)
 import { Panel2 } from './panel_2';
-import { getParam } from '../../../util.ts';
+import { getParam } from '../../util.ts';
 
 
 // Dynamically determine what to render in the designer's first panel

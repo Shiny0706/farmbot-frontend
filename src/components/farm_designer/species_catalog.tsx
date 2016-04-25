@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router';
-import { Plant } from '../../../models/plant';
-import { Species } from '../../../models/species';
+import { Plant } from '../../models/plant';
+import { Species } from '../../models/species';
 import { BackArrow } from './back_arrow';
 
 export class SpeciesCatalogTile extends React.Component<any, any> {

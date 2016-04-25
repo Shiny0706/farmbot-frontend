@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Schedule } from '../../../models/schedule'
+import { Schedule } from '../../models/schedule'
 import { Link } from 'react-router';
 import { BackArrow } from './back_arrow';
 

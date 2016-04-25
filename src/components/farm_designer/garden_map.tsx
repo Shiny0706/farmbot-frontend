@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Plant } from '../../../models/plant';
-import { navigateSelectedPlant } from '../../../actions/router_actions';
-import { getParam } from '../../../util.ts';
+import { Plant } from '../../models/plant';
+import { navigateSelectedPlant } from '../../actions/router_actions';
+import { getParam } from '../../util.ts';
 
 export class MapPoint extends React.Component<any, any> {
   select() {

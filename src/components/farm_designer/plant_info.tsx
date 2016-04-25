@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Plant } from '../../../models/plant'
+import { Plant } from '../../models/plant'
 import { Link } from 'react-router';
 import { BackArrow } from './back_arrow';
-import { getParam } from '../../../util.ts';
+import { getParam } from '../../util.ts';
 export class PlantInfo extends React.Component<any, any> {
   removePlant() {
    this.props.dispatch({type: "PLANT_REMOVE_REQUEST",

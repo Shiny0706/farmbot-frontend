@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Plant } from '../../../models/plant';
-import { addPlant } from '../../../actions/plant_actions';
+import { Plant } from '../../models/plant';
+import { addPlant } from '../../actions/plant_actions';
 import { BackArrow } from './back_arrow';
-import { getParam } from '../../../util.ts';
+import { getParam } from '../../util.ts';
 
 export class SpeciesInfo extends React.Component<any, any> {
   drop (e) {

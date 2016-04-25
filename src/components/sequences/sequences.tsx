@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Navbar } from '../../../components/navbar';
-import { SequencesWidget } from '../../../routes/dashboard/sequences/sequences_widget';
-import { OperationsWidget } from '../../../routes/dashboard/sequences/operations_widget';
-import { SequenceEditorWidget } from '../../../routes/dashboard/sequences/sequence_editor_widget';
+import { Navbar } from '../../components/navbar';
+import { SequencesWidget } from '../../routes/dashboard/sequences/sequences_widget';
+import { OperationsWidget } from '../../routes/dashboard/sequences/operations_widget';
+import { SequenceEditorWidget } from '../../routes/dashboard/sequences/sequence_editor_widget';
 
 export let Sequences = React.createClass({
   render: function() {

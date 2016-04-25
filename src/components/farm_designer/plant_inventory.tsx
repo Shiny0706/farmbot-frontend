@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from 'react-router';
-import { Plant } from '../../../models/plant'
+import { Plant } from '../../models/plant'
 
 export class Plants extends React.Component<any, any> {
   render() {

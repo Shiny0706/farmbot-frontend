@@ -26,7 +26,7 @@ export class SequenceEditorWidget extends React.Component<any, any> {
                       <input placeholder="Sequence Name" type="text" />
                       <div className="row">
                         <div className="col-sm-12">
-                          <div className="drag-drop-area padding">DROP OPERATIONS HERE</div>
+                          <div className="drag-drop-area padding">CLICK ON A SEQUENCE STEP</div>
                         </div>
                       </div>
                     </div>
@@ -37,4 +37,3 @@ export class SequenceEditorWidget extends React.Component<any, any> {
 
   }
 }
-

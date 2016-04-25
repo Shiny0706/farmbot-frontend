@@ -17,14 +17,14 @@ import {
 } from "react-router";
 
 import App from "./components/app";
-import Dashboard from "./components/dashboard/dashboard";
+import Dashboard from "./components/dashboard";
 // TODO connect() all of these instead of that wrap() stuff.
-import { Controls } from "./components/dashboard/controls";
-import { Devices } from "./components/dashboard/devices";
-import { Sequences } from "./components/dashboard/sequences/sequences";
-import { Regimens } from "./components/dashboard/regimens/regimen_builder";
-import { Schedules } from "./components/dashboard/schedules/schedules";
-import { FarmDesigner } from "./components/dashboard/farm_designer/farm_designer";
+import { Controls } from "./components/controls";
+import { Devices } from "./components/devices";
+import { Sequences } from "./components/sequences/sequences";
+import { Regimens } from "./components/regimens/regimen_builder";
+import { Schedules } from "./components/schedules/schedules";
+import { FarmDesigner } from "./components/farm_designer/farm_designer";
 import { Login } from "./components/login";
 import { CONFIG } from "./config";
 import { store } from "./store";
