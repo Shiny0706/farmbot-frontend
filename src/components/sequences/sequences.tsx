@@ -3,9 +3,11 @@ import { Navbar } from "../../components/navbar";
 import { SequencesWidget } from "./sequences_widget";
 import { OperationsWidget } from "./operations_widget";
 import { SequenceEditorWidget } from "./sequence_editor_widget";
+import { connect } from "react-redux";
 
-export let Sequences = React.createClass({
-  render: function() {
+@connect(state => state)
+export class Sequences  extends React.Component<any, any> {
+  render() {
     return (
       <div>
         <Navbar/>
@@ -15,7 +17,7 @@ export let Sequences = React.createClass({
               <OperationsWidget />
             </div>
             <div className="col-md-6 col-sm-12">
-              <SequenceEditorWidget />
+              <SequenceEditorWidget { ...this.props } />
             </div>
             <div className="col-md-3 col-sm-12">
               <SequencesWidget />
@@ -25,4 +27,4 @@ export let Sequences = React.createClass({
       </div>
     );
   }
-});
+};
