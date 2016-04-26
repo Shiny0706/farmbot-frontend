@@ -1,9 +1,12 @@
 import { error, warning } from "../../logger";
-interface InitialState {
+import { assign } from "lodash";
+import { EditCurrentSequence } from "./sequence_actions";
+
+interface SequenceReducerState {
   current: Sequence;
 };
 
-const initialState: InitialState = {
+const initialState: SequenceReducerState = {
   current: {
     name: "This is hardcoded.",
     color: "red",
@@ -22,9 +25,14 @@ let action_handlers = {
   DEFAULT: function(state, action) {
     return state;
   },
-  MY_SPECIAL_SEQUENCE: function(state, action) {
-    warning("You should never see this message.");
-    return state;
+  EDIT_CURRENT_SEQUENCE: function(state: SequenceReducerState,
+                                  action: EditCurrentSequence) {
+    let newSequence = assign<{}, Sequence>({}, state.current, action.payload);
+    let newState = assign<{}, SequenceReducerState>({},
+                                                    state,
+                                                    { current: newSequence });
+    newState.current.dirty = true;
+    return newState;
   },
 };
 

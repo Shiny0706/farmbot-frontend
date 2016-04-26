@@ -11,6 +11,7 @@ interface Sequence {
   color: "blue"|"green"|"yellow"|"orange"|"purple"|"pink"|"gray"|"red";
   name: String;
   steps: Array<Step>;
+  dirty?: Boolean;
 }
 
 interface Step {

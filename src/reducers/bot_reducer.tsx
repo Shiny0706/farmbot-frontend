@@ -176,8 +176,5 @@ export function botReducer(state = initialState, action) {
   let handler = (action_handlers[action.type] || action_handlers.DEFAULT);
   let result = handler.call(action_handlers, state, action);
   let newState = _.assign({}, result);
-  if (action.type[0] !== "@") {
-    console.log(action.type, state);
-  };
   return newState;
 }
