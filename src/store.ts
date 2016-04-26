@@ -13,7 +13,7 @@ import { oldGlobalReducer as global } from "./reducers/old_reducers";
 import { routerReducer }              from "react-router-redux";
 
 let storageKey = "lastState";
-let stateAsAString = sessionStorage[storageKey] || "{}";
+let stateAsAString = localStorage[storageKey] || "{}";
 let lastState = (JSON.parse(stateAsAString));
 
 let reducers = combineReducers({

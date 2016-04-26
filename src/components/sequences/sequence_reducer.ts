@@ -1,6 +1,6 @@
 import { error, warning } from "../../logger";
 import { assign } from "lodash";
-import { EditCurrentSequence, PushStep } from "./sequence_actions";
+import { EditCurrentSequence, PushStep, ChangeStep } from "./sequence_actions";
 
 interface SequenceReducerState {
   current: Sequence;
@@ -45,6 +45,16 @@ let action_handlers = {
     newState.current.dirty = true;
     return newState;
   },
+
+  CHANGE_STEP: function(state: SequenceReducerState,
+                        action: ChangeStep) {
+    let newState = assign<{}, SequenceReducerState>({}, state);
+    let steps = newState.current.steps;
+    let index = action.payload.index;
+    let step = steps[index];
+    steps[index] = assign<{}, Step>(step, action.payload.step);
+    return newState;
+  }
 };
 
 export function sequenceReducer(state = initialState, action) {

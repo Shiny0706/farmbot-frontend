@@ -24,3 +24,19 @@ export function pushStep(step: Step): PushStep {
     payload: step
   };
 }
+
+type CHANGE_STEP = "CHANGE_STEP";
+export interface ChangeStep {
+  type: CHANGE_STEP;
+  payload: {
+    step: Step;
+    index: number;
+  };
+}
+
+export function changeStep(index: number, step: Step): ChangeStep {
+  return {
+    type: "CHANGE_STEP",
+    payload: {step, index}
+  };
+}

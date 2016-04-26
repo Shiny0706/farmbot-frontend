@@ -1,17 +1,22 @@
 import * as React from "react";
-import { MoveRelativeAction } from "./move_relative_action";
+import { MoveRelativeStep } from "./move_relative_step";
 import { editCurrentSequence } from "./sequence_actions";
 
-let Step = ({step}) => {
+function Step ({step, index, dispatch}) {
   return (<div>
-            <MoveRelativeAction step={step}/>
+            <MoveRelativeStep step={step} index={index} dispatch={dispatch} />
           </div>
          );
 };
 
-let Sequence = ({sequence}) => {
+let StepList = ({sequence, dispatch}) => {
   return (<div>
-            { sequence.steps.map((step, inx) => <Step step={ step } key={inx} />) }
+            { sequence.steps.map((step, inx) => {
+              return <Step step={ step }
+                           key={ inx }
+                           index={ inx }
+                           dispatch={ dispatch } />;
+            }) }
           </div>);
 };
 
@@ -47,7 +52,7 @@ export function SequenceEditorWidget({sequences, dispatch}) {
                            value={ seq.name }
                            onChange={ handleNameUpdate(dispatch) }
                            type="text" />
-                    { <Sequence sequence={ seq } /> }
+                    { <StepList sequence={ seq } dispatch={ dispatch } /> }
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="drag-drop-area padding">DRAG ACTIONS HERE</div>
