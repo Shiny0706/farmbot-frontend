@@ -1,7 +1,11 @@
 import * as React from "react";
+import { MoveRelativeAction } from "./move_relative_action";
 
 let Step = ({step}) => {
-  return (<p><strong>RORY!!!</strong>: This is where the step will go! It's a { step.message_type } step.</p>);
+  return (<div>
+            <MoveRelativeAction />
+          </div>
+         );
 };
 
 let Sequence = ({sequence}) => {
@@ -20,7 +24,7 @@ export class SequenceEditorWidget extends React.Component<any, any> {
                       Save
                     </button>
                     <button className="yellow button-like widget-control">
-                      Test
+                      Execute
                     </button>
                     <button className="red button-like widget-control">
                       Delete
@@ -37,7 +41,7 @@ export class SequenceEditorWidget extends React.Component<any, any> {
                       { <Sequence sequence={this.props.sequences.current} /> }
                       <div className="row">
                         <div className="col-sm-12">
-                          <div className="drag-drop-area padding">CLICK ON A SEQUENCE STEP TO ADD</div>
+                          <div className="drag-drop-area padding">DRAG ACTIONS HERE</div>
                         </div>
                       </div>
                     </div>

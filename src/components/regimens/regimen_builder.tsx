@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Navbar } from "../../components/navbar";
-import { OperationsWidget } from "../sequences/operations_widget";
+import { ActionsWidget } from "../sequences/actions_widget";
 import { SequencesWidget } from "../sequences/sequences_widget";
 import { RegimensWidget } from "./regimens_widget";
 import { RegimenEditorWidget } from "./regimen_editor_widget";
@@ -13,7 +13,7 @@ export let Regimens = React.createClass({
         <div className="all-content-wrapper">
           <div className="row">
             <div className="col-md-3 col-sm-12 col-md-offset-1 hidden-xs">
-              <OperationsWidget />
+              <ActionsWidget />
               <SequencesWidget />
               <SequencesWidget/>
             </div>

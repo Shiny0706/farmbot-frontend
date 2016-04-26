@@ -28,6 +28,7 @@ export function loadFromCdn(filename, filetype) {
 }
 
 require("!style!css!sass!./css/toastr.scss");
+require("!style!css!sass!./css/actions.scss");
 require("!style!css!sass!./css/alerts.scss");
 require("!style!css!sass!./css/auth.scss");
 require("!style!css!sass!./css/blocks.scss");

@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-export class OperationsWidget extends React.Component<any, any> {
+export class ActionsWidget extends React.Component<any, any> {
   render() {
     return( <div>
               <div className="widget-wrapper">
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="widget-header">
-                      <h5>Operations</h5>
+                      <h5>Actions</h5>
                     </div>
                   </div>
                 </div>
