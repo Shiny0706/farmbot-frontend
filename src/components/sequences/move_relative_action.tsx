@@ -1,7 +1,10 @@
 import * as React from "react";
 
-export class MoveRelativeAction extends React.Component<any, any> {
-  render() {
+interface MoveRelativeActionParams {
+  step: Step;
+}
+
+export function MoveRelativeAction({step}: MoveRelativeActionParams) {
     return( <div>
               <div className="action-wrapper">
                 <div className="row">
@@ -21,19 +24,19 @@ export class MoveRelativeAction extends React.Component<any, any> {
                       <div className="row">
                         <div className="col-xs-6 col-md-3">
                           <label>X</label>
-                          <input type="text" placeholder="0.123m"></input>
+                          <input type="text" placeholder="0.123m" value={ step.x } />
                         </div>
                         <div className="col-xs-6 col-md-3">
                           <label>Y</label>
-                          <input type="text" placeholder="0.123m"></input>
+                          <input type="text" placeholder="0.123m" value={ step.y } />
                         </div>
                         <div className="col-xs-6 col-md-3">
                           <label>Z</label>
-                          <input type="text" placeholder="0.123m"></input>
+                          <input type="text" placeholder="0.123m" value={ step.z }/>
                         </div>
                         <div className="col-xs-6 col-md-3">
                           <label>Speed</label>
-                          <input type="text" placeholder="Default"></input>
+                          <input type="text" placeholder="Default" value={ step.speed }/>
                         </div>
                       </div>
                     </div>
@@ -41,6 +44,4 @@ export class MoveRelativeAction extends React.Component<any, any> {
                 </div>
               </div>
             </div> );
-
-  }
 }

@@ -4,7 +4,7 @@ import { editCurrentSequence } from "./sequence_actions";
 
 let Step = ({step}) => {
   return (<div>
-            <MoveRelativeAction />
+            <MoveRelativeAction step={step}/>
           </div>
          );
 };
@@ -15,8 +15,8 @@ let Sequence = ({sequence}) => {
           </div>);
 };
 
-// ZOMG CURRYING!?! IS THIS FP!?
-let wow = (dispatch) => (event) => {
+// ZOMG CURRYING!?! IS THIS REAL FP!?
+let handleNameUpdate = (dispatch) => (event) => {
    dispatch(editCurrentSequence({name: event.target.value}));
  };
 
@@ -45,7 +45,7 @@ export function SequenceEditorWidget({sequences, dispatch}) {
                   <div className="widget-content">
                     <input placeholder="Sequence Name"
                            value={ seq.name }
-                           onChange={ wow(dispatch) }
+                           onChange={ handleNameUpdate(dispatch) }
                            type="text" />
                     { <Sequence sequence={ seq } /> }
                     <div className="row">

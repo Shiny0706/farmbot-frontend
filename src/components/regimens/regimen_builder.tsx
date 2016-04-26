@@ -13,7 +13,7 @@ export let Regimens = React.createClass({
         <div className="all-content-wrapper">
           <div className="row">
             <div className="col-md-3 col-sm-12 col-md-offset-1 hidden-xs">
-              <ActionsWidget />
+              <ActionsWidget { ...this.props }/>
               <SequencesWidget />
               <SequencesWidget/>
             </div>

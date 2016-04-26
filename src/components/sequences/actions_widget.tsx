@@ -1,7 +1,9 @@
-import * as React from 'react';
+import * as React from "react";
+import { pushStep } from "./sequence_actions";
 
-export class ActionsWidget extends React.Component<any, any> {
-  render() {
+let addStep = (dispatch, step: Step) => (event) => { dispatch(pushStep(step)); };
+
+export function ActionsWidget ({dispatch}) {
     return( <div>
               <div className="widget-wrapper">
                 <div className="row">
@@ -25,7 +27,12 @@ export class ActionsWidget extends React.Component<any, any> {
                         </div>
                         <div className="col-xs-6">
                           <div className="block-wrapper">
-                            <button className="full-width text-left green-block block-header block">
+                            <button className="full-width text-left green-block block-header block"
+                                    onClick={ addStep(dispatch, { message_type: "move_relative",
+                                                                  x: 0,
+                                                                  y: 0,
+                                                                  z: 0,
+                                                                  speed: 100 })}>
                               MOVE RELATIVE
                               <i className="fa fa-arrows block-control" />
                             </button>
@@ -86,5 +93,4 @@ export class ActionsWidget extends React.Component<any, any> {
               </div>
             </div> );
 
-  }
 }

@@ -14,7 +14,7 @@ export class Sequences  extends React.Component<any, any> {
         <div className="all-content-wrapper">
           <div className="row">
             <div className="col-md-3 col-sm-12">
-              <ActionsWidget />
+              <ActionsWidget { ...this.props }/>
             </div>
             <div className="col-md-6 col-sm-12">
               <SequenceEditorWidget { ...this.props } />
