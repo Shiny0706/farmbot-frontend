@@ -2,9 +2,9 @@ import { CONFIG } from "../config";
 import { fetchDevice } from "./bot_actions";
 import { push } from "../history";
 
-export function login(username, password) {
+export function login(username, password, url) {
   return dispatch => {
-    return requestToken(username, password).then(
+    return requestToken(username, password, url).then(
       function (res) {
         dispatch(loginOk(res.token));
         let token = res.token.encoded;
@@ -32,16 +32,16 @@ export function loginOk(token) {
   };
 }
 
-export function register(name, email, password, confirmation) {
+export function register(name, email, password, confirmation, url) {
   return dispatch => {
-    return requestRegistration(name, email, password, confirmation).then(
+    return requestRegistration(name, email, password, confirmation, url).then(
       (res) => dispatch(loginOk(res.token)),
       (err) => dispatch(loginErr(err))
     );
   };
 }
 
-function requestRegistration(name, email, password, confirmation) {
+function requestRegistration(name, email, password, confirmation, url) {
   let form = {
     user: {
       email: email,
@@ -51,7 +51,7 @@ function requestRegistration(name, email, password, confirmation) {
     }
   };
   return $.ajax({
-      url: CONFIG.FARMBOT_API_URL + "/api/users",
+      url: url + "/api/users",
       type: "POST",
       data: JSON.stringify(form),
       contentType: "application/json"
@@ -59,9 +59,9 @@ function requestRegistration(name, email, password, confirmation) {
 }
 
 
-function requestToken(email, password) {
+function requestToken(email, password, url) {
   return $.ajax({
-      url: CONFIG.FARMBOT_API_URL + "/api/tokens",
+      url: url + "/api/tokens",
       type: "POST",
       data: JSON.stringify({user: {email: email, password: password}}),
       contentType: "application/json"

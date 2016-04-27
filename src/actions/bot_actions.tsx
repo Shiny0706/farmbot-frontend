@@ -12,8 +12,8 @@ export function settingToggle(name, bot) {
         return devices
           .current
           .updateCalibration({ [name]: (currentValue === 0) ? ON : OFF })
-          .then(res => dispatch(settingToggleOk(res)),
-                err => dispatch(settingToggleErr(err)));
+          .then(res => { dispatch(settingToggleOk(res)); },
+                err => { dispatch(settingToggleErr(err)); });
     };
 }
 

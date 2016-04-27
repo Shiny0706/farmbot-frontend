@@ -18,11 +18,12 @@ nav.navbar {
   border: 0px solid;
 
 }
-.navbar-nav>li>a {
+.navbar-nav>li>a, .logout-button {
   color: $gray!important;
   &:hover, :active, :focus {
     color: $off_white!important;
     font-weight: bold;
+    text-decoration: none;
   }
 }
 
@@ -35,6 +36,13 @@ nav.navbar {
 .last-sync {
   margin-right: 30px;
   float: right;
+}
+
+.logout-button {
+  float: right;
+  display: block;
+  padding: 15px;
+  line-height: 20px;
 }
 
 // Mobile Nav Styles
