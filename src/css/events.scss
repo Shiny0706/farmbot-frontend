@@ -1,6 +1,10 @@
-// Styles for the CALENDAR Widget
+// Styles for the EVENTS Widget
 
 @import 'colors';
+
+.events-title {
+  margin-left: 1.5rem;
+}
 
 .event {
   padding: 1rem;
@@ -20,42 +24,31 @@
   }
 }
 
-.row {
-  &.date-flipper {
-    margin-bottom: 20px;
-  }
-}
-
 .event-time {
   float: left;
   width: 3.5rem;
 }
 
-.event-icon {
-  float: left;
-  width: 2.5rem;
-  line-height: 2rem!important;
-}
-
 .event-title {
-  margin-left: 6rem;
+  margin-left: 4rem;
 }
 
-.picker__day {
-  text-align: center;
-}
-
-.picker__weekday {
-  text-align: center;
-}
-
-h6.date {
-  text-align: center;
+.event-date {
   text-transform: uppercase;
+  padding-left: 8px;
   color: $dark_gray;
-  margin-bottom: 0;
-  margin-top: 0;
   font-weight: bold;
   font-size: 1.4rem;
-  line-height: 50px;
+  line-height: 40px;
+}
+
+.sequence-regimen-selector, .add-event-start-date, .add-event-start-time,
+.add-event-end-date, .add-event-end-time, .add-evet-repeat-frequency,
+.add-event-repeat-period {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.event-parameters {
+  margin-bottom: 20px!important;
 }

@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Schedule } from '../../models/schedule'
-import { Link } from 'react-router';
-import { BackArrow } from './back_arrow';
+import * as React from "react";
+import { Schedule } from "../../models/schedule";
+import { Link } from "react-router";
+import { BackArrow } from "./back_arrow";
 
 export class ScheduleEvent extends React.Component<any, any> {
   render () {
@@ -11,23 +11,22 @@ export class ScheduleEvent extends React.Component<any, any> {
             <div className="event-time">
               { evnt.formatTime() }
             </div>
-            <i className="event-icon fa fa-camera"></i>
             <div className="event-title">{ evnt.desc }</div>
            </div>;
   }
 }
 
-export class Calendar extends React.Component<any, any> {
+export class Events extends React.Component<any, any> {
   render () {
     let events = _(Schedule.fakes)
-                   .sortBy('time')
+                   .sortBy("time")
                    .map((s, k) => <ScheduleEvent scheduledEvent={s} key={k}/>)
                    .value();
 
      return <div className="panel-container magenta-panel">
               <div className="panel-header magenta-panel">
-                <p className="panel-title hidden-xs">
-                  Calendar
+                <p className="panel-title hidden-xs events-title">
+                  Events
                 </p>
                 <div className="main-nav-button">
                   <button className="navbar-toggle hidden-sm hidden-md hidden-lg" data-target="#navbar" data-toggle="collapse" type="button">
@@ -60,6 +59,9 @@ export class Calendar extends React.Component<any, any> {
                   <input className="search" placeholder="Search"/>
                   <div className="search-underline"></div>
                 </div>
+                <div className="event-date">May 9</div>
+                { events }
+                <div className="event-date">OCT 15</div>
                 { events }
                 <Link to="/dashboard/designer?p2=AddEvent">
                   <div className="plus-button add-event button-like" data-toggle="tooltip" title="Add event">
@@ -67,6 +69,6 @@ export class Calendar extends React.Component<any, any> {
                   </div>
                 </Link>
               </div>
-            </div>
+            </div>;
   }
 }

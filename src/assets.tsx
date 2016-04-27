@@ -33,7 +33,7 @@ require("!style!css!sass!./css/alerts.scss");
 require("!style!css!sass!./css/auth.scss");
 require("!style!css!sass!./css/blocks.scss");
 require("!style!css!sass!./css/buttons.scss");
-require("!style!css!sass!./css/calendar.scss");
+require("!style!css!sass!./css/events.scss");
 require("!style!css!sass!./css/farm_designer.scss");
 require("!style!css!sass!./css/farm_designer_mobile.scss");
 require("!style!css!sass!./css/farmbot.scss");
