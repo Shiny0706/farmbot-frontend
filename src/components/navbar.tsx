@@ -2,7 +2,20 @@ import * as React from "react";
 import { Link } from "react-router";
 import { CONFIG } from "../config";
 import { store } from "../store";
-
+let LogoutButton = (props) => {
+  let isAuthed = store.getState().auth.authenticated;
+  if (isAuthed) {
+    return <button className="yellow button-like widget-control"
+    onClick={() => {
+      localStorage.clear();
+      location.reload();
+    } }>
+    Log Out
+    </button>;
+  } else {
+    return <span></span>;
+  }
+};
 // TODO: Convert to ES6 class or stateless component and add a display name.
 export let Navbar = React.createClass({
   // TODO HACK : Add CONFIG.BASE_URL instead of hardcoding /app.
@@ -36,7 +49,7 @@ export let Navbar = React.createClass({
                 })
               }
             </ul>
-            { store.getState().bot.status }
+            <LogoutButton { ...this.props }/>
           </div>
         </div>
       </nav>

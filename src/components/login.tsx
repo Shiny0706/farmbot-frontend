@@ -38,7 +38,7 @@ class LoginPage extends React.Component<any, any> {
 
     return (
       <div>
-        <Navbar/>
+        <Navbar { ...this.props } />
         <div className="all-content-wrapper">
           <div className="row">
             <div className="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
