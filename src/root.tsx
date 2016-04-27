@@ -23,7 +23,6 @@ import { Controls } from "./components/controls";
 import { Devices } from "./components/devices";
 import { Sequences } from "./components/sequences/sequences";
 import { Regimens } from "./components/regimens/regimen_builder";
-import { Schedules } from "./components/schedules/schedules";
 import { FarmDesigner } from "./components/farm_designer/farm_designer";
 import { Login } from "./components/login";
 import { CONFIG } from "./config";
