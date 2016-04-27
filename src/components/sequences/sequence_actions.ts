@@ -1,4 +1,8 @@
-import { get } from "axios";
+import { post } from "axios";
+import { AuthToken } from "../../actions/auth_actions";
+import { SequenceOptions,
+         Step,
+         Sequence } from "./interfaces";
 
 export interface EditCurrentSequence {
   type: "EDIT_CURRENT_SEQUENCE";
@@ -7,7 +11,7 @@ export interface EditCurrentSequence {
   };
 };
 
-export function editCurrentSequence(updates): EditCurrentSequence {
+export function editCurrentSequence(updates: SequenceOptions): EditCurrentSequence {
   return {
     type: "EDIT_CURRENT_SEQUENCE",
     payload: updates
@@ -64,9 +68,16 @@ export interface SaveSequence {
   payload: {};
 }
 
-export function saveSequence() {
-  return {
-    type: "SAVE_SEQUENCE",
-    payload: {}
+interface SaveSequenceParams {
+  sequence: Sequence;
+  token: AuthToken;
+}
+
+export function saveSequence({sequence, token}: SaveSequenceParams): (d: Function) => Axios.IPromise<any> {
+  let url = token.iss + "api/token";
+  return dispatch => {
+    return post<Sequence>(url, {headers: {Authorization: token.token}})
+    .then((a) => { debugger; },
+    (b) => { debugger; });
   };
 };

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { changeStep, removeStep, pushStep } from "./sequence_actions";
 import { assign } from "lodash";
+import { Step, Sequence } from "./interfaces";
 
 interface CopyParams {
   dispatch: Function;

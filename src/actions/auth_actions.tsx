@@ -4,7 +4,7 @@ import { push } from "../history";
 export function login(username, password, url) {
   return dispatch => {
     return requestToken(username, password, url).then(
-      function (res) {
+      function(res) {
         dispatch(loginOk(res.token));
         let token = res.token.encoded;
         dispatch(fetchDevice(token));
@@ -24,7 +24,19 @@ function loginErr(err) {
   };
 }
 
-export function loginOk(token) {
+export interface AuthToken {
+  token: string;
+  authenticated: boolean;
+  sub: string;
+  iat: number;
+  jti: string;
+  iss: string;
+  exp: number;
+  mqtt: string;
+  bot: string;
+}
+
+export function loginOk(token: AuthToken) {
   return {
     type: "LOGIN_OK",
     payload: token
@@ -50,19 +62,19 @@ function requestRegistration(name, email, password, confirmation, url) {
     }
   };
   return $.ajax({
-      url: url + "/api/users",
-      type: "POST",
-      data: JSON.stringify(form),
-      contentType: "application/json"
-    });
+    url: url + "/api/users",
+    type: "POST",
+    data: JSON.stringify(form),
+    contentType: "application/json"
+  });
 }
 
 
 function requestToken(email, password, url) {
   return $.ajax({
-      url: url + "/api/tokens",
-      type: "POST",
-      data: JSON.stringify({user: {email: email, password: password}}),
-      contentType: "application/json"
-    });
+    url: url + "/api/tokens",
+    type: "POST",
+    data: JSON.stringify({ user: { email: email, password: password } }),
+    contentType: "application/json"
+  });
 }

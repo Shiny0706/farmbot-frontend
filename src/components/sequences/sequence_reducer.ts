@@ -1,5 +1,7 @@
 import { error, warning } from "../../logger";
 import { assign } from "lodash";
+import { Step, Sequence } from "./interfaces";
+
 import { EditCurrentSequence,
          PushStep,
          ChangeStep,

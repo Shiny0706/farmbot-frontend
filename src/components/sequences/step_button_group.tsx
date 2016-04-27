@@ -1,5 +1,6 @@
 import * as React from "react";
 import { pushStep } from "./sequence_actions";
+import { Step, Sequence } from "./interfaces";
 
 let addStep = (dispatch, step: Step) => (event) => { dispatch(pushStep(step)); };
 
