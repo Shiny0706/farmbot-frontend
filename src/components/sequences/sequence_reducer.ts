@@ -1,6 +1,9 @@
 import { error, warning } from "../../logger";
 import { assign } from "lodash";
-import { EditCurrentSequence, PushStep, ChangeStep } from "./sequence_actions";
+import { EditCurrentSequence,
+         PushStep,
+         ChangeStep,
+         RemoveStep } from "./sequence_actions";
 
 interface SequenceReducerState {
   current: Sequence;
@@ -10,6 +13,7 @@ const initialState: SequenceReducerState = {
   current: {
     name: "This is hardcoded.",
     color: "red",
+    dirty: false,
     steps: [
       {
         message_type: "move_relative",
@@ -29,9 +33,14 @@ let action_handlers = {
 
   PUSH_STEP: function(state: SequenceReducerState,
                       action: PushStep) {
-    let step = assign<{}, Step>({}, action.payload);
+    let step = assign<{}, Step>({}, action.payload.step);
     let newState = assign<{}, SequenceReducerState>({}, state);
-    newState.current.steps.push(step);
+    let index = action.payload.index;
+    if (typeof  index === "number") {
+      newState.current.steps.splice(index, 0, step);
+    } else {
+      newState.current.steps.push(step);
+    }
     newState.current.dirty = true;
     return newState;
   },
@@ -53,6 +62,15 @@ let action_handlers = {
     let index = action.payload.index;
     let step = steps[index];
     steps[index] = assign<{}, Step>(step, action.payload.step);
+    newState.current.dirty = true;
+    return newState;
+  },
+
+  REMOVE_STEP: function(state: SequenceReducerState,
+                        action: RemoveStep) {
+    let newState = assign<{}, SequenceReducerState>({}, state);
+    newState.current.steps = _.without(newState.current.steps, newState.current.steps[action.payload.index]);
+    newState.current.dirty = true;
     return newState;
   }
 };

@@ -1,7 +1,26 @@
 import * as React from "react";
-import { changeStep } from "./sequence_actions";
+import { changeStep, removeStep, pushStep } from "./sequence_actions";
 import { assign } from "lodash";
 
+interface CopyParams {
+  dispatch: Function;
+  step: Step;
+  index: number;
+}
+
+function copy({dispatch, step, index}: CopyParams) {
+  let copy = assign<{}, Step>({}, step);
+  dispatch(pushStep(copy, (index + 1)));
+};
+
+interface RemoveParams {
+  index: number;
+  dispatch: Function;
+}
+
+function remove({dispatch, index}: RemoveParams) {
+  dispatch(removeStep(index));
+}
 
 interface UpdateStepParams {
   dispatch: Function;
@@ -50,8 +69,10 @@ export function MoveRelativeStep({dispatch,
                     <div className="action-header move-relative-action">
                       <h5>Move Relative</h5>
                       <i className="fa fa-arrows-v action-control" />
-                      <i className="fa fa-clone action-control" />
-                      <i className="fa fa-trash action-control" />
+                      <i className="fa fa-clone action-control"
+                         onClick={ () => copy({dispatch, step, index}) } />
+                      <i className="fa fa-trash action-control"
+                         onClick={ () => remove({dispatch, index}) } />
                       <i className="fa fa-angle-up action-control" />
                     </div>
                   </div>

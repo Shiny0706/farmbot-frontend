@@ -3,7 +3,7 @@ import { pushStep } from "./sequence_actions";
 
 let addStep = (dispatch, step: Step) => (event) => { dispatch(pushStep(step)); };
 
-export function ActionsWidget ({dispatch}) {
+export function StepButtonGroup ({dispatch}) {
     return( <div>
               <div className="widget-wrapper">
                 <div className="row">

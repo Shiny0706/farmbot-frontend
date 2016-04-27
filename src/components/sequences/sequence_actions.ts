@@ -15,13 +15,16 @@ export function editCurrentSequence(updates): EditCurrentSequence {
 
 export interface PushStep {
   type: "PUSH_STEP";
-  payload: Step;
+  payload: {
+    step: Step;
+    index?: number;
+  };
 }
 
-export function pushStep(step: Step): PushStep {
+export function pushStep(step: Step, index?: number): PushStep {
   return {
     type: "PUSH_STEP",
-    payload: step
+    payload: {step, index}
   };
 }
 
@@ -38,5 +41,19 @@ export function changeStep(index: number, step: Step): ChangeStep {
   return {
     type: "CHANGE_STEP",
     payload: {step, index}
+  };
+}
+
+export interface RemoveStep {
+  type: "REMOVE_STEP";
+  payload: {
+    index: number;
+  };
+};
+
+export function removeStep(index: number): RemoveStep {
+  return {
+    type: "REMOVE_STEP",
+    payload: {index}
   };
 }
