@@ -5,8 +5,9 @@ import { login, register } from "../actions/auth_actions";
 const AFTER_LOGIN = "/dashboard";
 import { connect } from "react-redux";
 import { CONFIG } from "../config";
+import { changeApiUrl } from "./config/config_actions";
 
-
+let setUrl = (dispatch) => (e) => { dispatch(changeApiUrl(e.target.value)); };
 
 class LoginPage extends React.Component<any, any> {
   set(name) {
@@ -21,7 +22,8 @@ class LoginPage extends React.Component<any, any> {
     e.preventDefault();
     let password = (this.state || {}).loginPassword;
     let email = (this.state || {}).loginEmail;
-    return this.props.dispatch(login(email, password));
+    let url = this.props.config.farmbotApiUrl;
+    return this.props.dispatch(login(email, password, url));
   }
 
   submitRegistration(e) {
@@ -32,12 +34,13 @@ class LoginPage extends React.Component<any, any> {
     let email = state.regEmail;
     let password = state.regPass;
     let confirmation = state.regConfirmation;
+    let url = this.props.config.farmbotApiUrl;
+    let action = register(name, email, password, confirmation, url);
 
-    return this.props.dispatch(register(name, email, password, confirmation));
+    return this.props.dispatch(action);
   }
 
   render() {
-
     return (
       <div>
         <Navbar { ...this.props } />
@@ -78,8 +81,8 @@ class LoginPage extends React.Component<any, any> {
                           <div className="col-xs-12">
                           <label>Server URL (Advanced)</label>
                           <input type="text"
-                                 value={ CONFIG.FARMBOT_API_URL }
-                                 disabled/>
+                                 value={ this.props.config.farmbotApiUrl }
+                                 onChange={ setUrl(this.props.dispatch) } />
                           </div>
                         </div>
                       </div>

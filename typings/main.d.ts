@@ -1,3 +1,4 @@
+/// <reference path="main/ambient/axios/index.d.ts" />
 /// <reference path="main/ambient/es6-promise/index.d.ts" />
 /// <reference path="main/ambient/farmbot/farmbot.d.ts" />
 /// <reference path="main/ambient/jasmine/index.d.ts" />

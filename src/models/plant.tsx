@@ -24,7 +24,7 @@ export class Plant {
     return $.ajax({
       method: "GET",
       headers: fakeHeaders,
-      url: CONFIG.FARMBOT_API_URL + "/api/plants"
+      url: "//THIS_URL_MUST_CHANGE" + "/api/plants"
     });
   };
 
@@ -32,7 +32,7 @@ export class Plant {
     return $.ajax({
       method: "POST",
       headers: fakeHeaders,
-      url: CONFIG.FARMBOT_API_URL + "/api/plants",
+      url: "//THIS_URL_MUST_CHANGE" + "/api/plants",
       data: that
     });
   };
@@ -40,7 +40,7 @@ export class Plant {
   static destroy(that) {
     return $.ajax({
       method: "DELETE",
-      url: CONFIG.FARMBOT_API_URL + "/api/plants/" + that._id
+      url: "//THIS_URL_MUST_CHANGE" + "/api/plants/" + that._id
     });
   };
 
