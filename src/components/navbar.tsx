@@ -5,13 +5,13 @@ import { store } from "../store";
 let LogoutButton = (props) => {
   let isAuthed = store.getState().auth.authenticated;
   if (isAuthed) {
-    return <button className="yellow button-like widget-control"
+    return <a className="logout-button"
     onClick={() => {
       localStorage.clear();
       location.reload();
     } }>
     Log Out
-    </button>;
+    </a>;
   } else {
     return <span></span>;
   }
