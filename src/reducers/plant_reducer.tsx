@@ -1,5 +1,5 @@
-import { Plant } from '../models/plant';
-import { error, warning } from '../logger';
+import { Plant } from "../models/plant";
+import { error, warning } from "../logger";
 
 const initialState = {
   all: Plant.fakes
@@ -10,7 +10,7 @@ let action_handlers = {
     return state;
   },
   ADD_PLANT_SUCCESS: function(state, action) {
-    state = _.cloneDeep(state)
+    state = _.cloneDeep(state);
     state.all.push(action.payload);
     return state;
   },
@@ -19,7 +19,7 @@ let action_handlers = {
     return state;
   },
   FETCH_PLANTS_SUCCESS: function(state, action) {
-    state = _.cloneDeep(state)
+    state = _.cloneDeep(state);
     state.all = action.payload;
     return state;
   },
@@ -27,7 +27,7 @@ let action_handlers = {
     warning("Unable to download plants. Check your internet connection.");
     return state;
   },
-}
+};
 
 export function plantReducer(state = initialState, action) {
   let handler = (action_handlers[action.type] || action_handlers.DEFAULT);

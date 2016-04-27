@@ -1,3 +1,4 @@
+import { get } from "axios";
 
 export interface EditCurrentSequence {
   type: "EDIT_CURRENT_SEQUENCE";
@@ -57,3 +58,15 @@ export function removeStep(index: number): RemoveStep {
     payload: {index}
   };
 }
+
+export interface SaveSequence {
+  type: "SAVE_SEQUENCE";
+  payload: {};
+}
+
+export function saveSequence() {
+  return {
+    type: "SAVE_SEQUENCE",
+    payload: {}
+  };
+};

@@ -7,22 +7,22 @@ import {
 } from "redux";
 import { authReducer as auth } from "./reducers/auth_reducer";
 import { sequenceReducer as sequences } from "./components/sequences/sequence_reducer";
-import { botReducer as bot }          from "./reducers/bot_reducer";
-import { plantReducer as plants }     from "./reducers/plant_reducer";
-import { oldGlobalReducer as global } from "./reducers/old_reducers";
-import { routerReducer }              from "react-router-redux";
+import { botReducer as bot } from "./reducers/bot_reducer";
+import { plantReducer as plants } from "./reducers/plant_reducer";
+import { configReducer as config } from "./components/config/config_reducer";
+import { routerReducer as routing } from "react-router-redux";
 
 let storageKey = "lastState";
 let stateAsAString = localStorage[storageKey] || "{}";
 let lastState = (JSON.parse(stateAsAString));
 
 let reducers = combineReducers({
-  routing: routerReducer,
+  routing,
   auth,
   bot,
   plants,
   sequences,
-  global
+  config
 });
 declare var devToolsExtension: any;
 let middleware = compose(applyMiddleware(thunk),

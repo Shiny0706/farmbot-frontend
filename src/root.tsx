@@ -29,8 +29,6 @@ import { CONFIG } from "./config";
 import { store } from "./store";
 import { history } from "./history";
 
-console.info(`Pointing to ${CONFIG.FARMBOT_API_URL} .`);
-
 export class RootComponent extends React.Component<any, any> {
 
   requireAuth(nextState: RouterState, replace: RedirectFunction) {
