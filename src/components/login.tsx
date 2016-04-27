@@ -4,6 +4,8 @@ import { Link } from "react-router";
 import { login, register } from "../actions/auth_actions";
 const AFTER_LOGIN = "/dashboard";
 import { connect } from "react-redux";
+import { CONFIG } from "../config";
+
 
 
 class LoginPage extends React.Component<any, any> {
@@ -70,6 +72,14 @@ class LoginPage extends React.Component<any, any> {
                             <button className="button-like button green login">
                               Login
                             </button>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-xs-12">
+                          <label>Server URL (Advanced)</label>
+                          <input type="text"
+                                 value={ CONFIG.FARMBOT_API_URL }
+                                 disabled/>
                           </div>
                         </div>
                       </div>
