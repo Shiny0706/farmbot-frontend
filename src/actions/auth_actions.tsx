@@ -1,4 +1,3 @@
-import { CONFIG } from "../config";
 import { fetchDevice } from "./bot_actions";
 import { push } from "../history";
 
