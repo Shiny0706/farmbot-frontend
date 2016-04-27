@@ -1,0 +1,55 @@
+// Styles for ALL ACTIONS
+
+@import 'colors';
+
+.action-wrapper {
+  box-shadow: 0px 0px 10px $gray;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  border-radius: 3px;
+}
+
+@media (max-width: 600px) {
+  .action-wrapper {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.action-header {
+  letter-spacing: .05rem;
+  padding: .75rem 1rem;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  h5 {
+    color: $dark_gray;
+    font-size: 1.2rem;
+    margin: .25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline;
+  }
+  p {
+    font-size: 1rem;
+    font-style: italic;
+  }
+  &.move-relative-action {
+    background: $green;
+  }
+}
+
+.action-control {
+  margin-top: 0.4rem;
+  margin-left: 2rem;
+  float: right;
+}
+
+.action-content {
+  border-color: $light_gray;
+  color: $dark_gray;
+  padding: 1.25rem;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  &.move-relative-action {
+    background: $light_green;
+  }
+}

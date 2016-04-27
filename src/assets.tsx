@@ -1,37 +1,39 @@
-// Bootstrap.js doesn't use ES6 modules yet. Need to globally export.
+// Bootstrap.js doesn"t use ES6 modules yet. Need to globally export.
 // Know a more ES6 compliant way to do this? Submit a PR!
-import * as $ from 'jquery';
+import * as $ from "jquery";
 
 // What you see below is one of the most glorious hacks to get a bootstrap
 // plugin to play nice while simultaneously keeping typescript happy.
-var qqq = $;
+let qqq = $;
 eval("window.$ = qqq; window.jQuery = $;");
 
 // Programmatically add *.css and *.js from CDN to dom.
-// If there's a way to (easily) do this with WebPack, submit a PR!
-export function loadFromCdn(filename, filetype){
+// If there"s a way to (easily) do this with WebPack, submit a PR!
+export function loadFromCdn(filename, filetype) {
     let fileref;
-    if (filetype=="js"){ //if filename is a external JavaScript file
-        fileref=document.createElement('script')
-        fileref.setAttribute("type","text/javascript")
-        fileref.setAttribute("src", filename)
+    if (filetype === "js") { // if filename is a external JavaScript file
+        fileref = document.createElement("script");
+        fileref.setAttribute("type", "text/javascript");
+        fileref.setAttribute("src", filename);
     }
-    else if (filetype=="css"){ //if filename is an external CSS file
-        fileref=document.createElement("link")
-        fileref.setAttribute("rel", "stylesheet")
-        fileref.setAttribute("type", "text/css")
-        fileref.setAttribute("href", filename)
+    else if (filetype === "css") { // if filename is an external CSS file
+        fileref = document.createElement("link");
+        fileref.setAttribute("rel", "stylesheet");
+        fileref.setAttribute("type", "text/css");
+        fileref.setAttribute("href", filename);
     }
-    if (typeof fileref!="undefined")
-        document.getElementsByTagName("head")[0].appendChild(fileref)
+    if (typeof fileref !== "undefined") {
+      document.getElementsByTagName("head")[0].appendChild(fileref);
+    };
 }
 
 require("!style!css!sass!./css/toastr.scss");
+require("!style!css!sass!./css/actions.scss");
 require("!style!css!sass!./css/alerts.scss");
 require("!style!css!sass!./css/auth.scss");
 require("!style!css!sass!./css/blocks.scss");
 require("!style!css!sass!./css/buttons.scss");
-require("!style!css!sass!./css/calendar.scss");
+require("!style!css!sass!./css/events.scss");
 require("!style!css!sass!./css/farm_designer.scss");
 require("!style!css!sass!./css/farm_designer_mobile.scss");
 require("!style!css!sass!./css/farmbot.scss");
