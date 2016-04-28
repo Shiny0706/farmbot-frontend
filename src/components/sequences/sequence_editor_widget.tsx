@@ -38,7 +38,8 @@ export function SequenceEditorWidget({sequences, dispatch, auth}) {
         <div className="widget-wrapper">
             <div className="row">
                 <div className="col-sm-12">
-                    <button className="green button-like widget-control">
+                    <button className="green button-like widget-control"
+                            onClick={ save(dispatch, sequence, token) }>
                         Save { sequence.dirty ? " *" : "" }
                     </button>
                     <button className="yellow button-like widget-control">
