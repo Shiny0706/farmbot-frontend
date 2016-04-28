@@ -1,9 +1,12 @@
 import { error, warning } from "../../logger";
 import { assign } from "lodash";
+import { Step, Sequence } from "./interfaces";
+
 import { EditCurrentSequence,
          PushStep,
          ChangeStep,
-         RemoveStep } from "./sequence_actions";
+         RemoveStep,
+         SaveSequenceOk } from "./sequence_actions";
 
 interface SequenceReducerState {
   current: Sequence;
@@ -11,18 +14,10 @@ interface SequenceReducerState {
 
 const initialState: SequenceReducerState = {
   current: {
-    name: "This is hardcoded.",
+    name: "",
     color: "red",
     dirty: false,
-    steps: [
-      {
-        message_type: "move_relative",
-        x: 0,
-        y: 0,
-        z: 1,
-        speed: 100
-      }
-    ]
+    steps: []
   }
 };
 
@@ -72,7 +67,21 @@ let action_handlers = {
     newState.current.steps = _.without(newState.current.steps, newState.current.steps[action.payload.index]);
     newState.current.dirty = true;
     return newState;
-  }
+  },
+  SAVE_SEQUENCE_OK: function(state: SequenceReducerState,
+                             action: SaveSequenceOk) {
+    let newState = assign<{}, SequenceReducerState>({}, state);
+    newState.current = assign<{}, Sequence>({},
+                                            newState.current,
+                                            action.payload);
+    newState.current.dirty = false;
+    return newState;
+  },
+  SAVE_SEQUENCE_NO: function(state: SequenceReducerState, action) {
+    let newState = assign<{}, SequenceReducerState>({}, state);
+    debugger;
+    return newState;
+  },
 };
 
 export function sequenceReducer(state = initialState, action) {

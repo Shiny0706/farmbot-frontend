@@ -1,8 +1,5 @@
-import * as _ from 'lodash';
-import * as $ from 'jquery';
-import { CONFIG } from '../config'
-
-
+import * as _ from "lodash";
+import * as $ from "jquery";
 
 export class Device {
   static fetch = function() {
@@ -25,7 +22,7 @@ export class Device {
       method: "DELETE",
       url: "//THIS_URL_MUST_CHANGE" + "/api/device"
     });
-  }
+  };
   public _id: String;
   public name: String;
 

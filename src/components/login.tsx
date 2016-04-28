@@ -4,7 +4,6 @@ import { Link } from "react-router";
 import { login, register } from "../actions/auth_actions";
 const AFTER_LOGIN = "/dashboard";
 import { connect } from "react-redux";
-import { CONFIG } from "../config";
 import { changeApiUrl } from "./config/config_actions";
 
 let setUrl = (dispatch) => (e) => { dispatch(changeApiUrl(e.target.value)); };

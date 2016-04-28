@@ -1,6 +1,5 @@
-import * as _ from 'lodash';
-import * as $ from 'jquery';
-import { CONFIG } from '../config'
+import * as _ from "lodash";
+import * as $ from "jquery";
 
 let fakeHeaders = { // TODO: Add auth scheme.
       bot_uuid: "c3c854e5-5508-49f9-8348-725bee7d392c",
@@ -9,9 +8,9 @@ let fakeHeaders = { // TODO: Add auth scheme.
 
 export class Plant {
   static designerUrl = function(plant) {
-    return '/dashboard/designer?p1=PlantInfo' +
-           '&id=' + plant._id;
-  }
+    return "/dashboard/designer?p1=PlantInfo" +
+           "&id=" + plant._id;
+  };
 
   static fakes = [
     new Plant({name: "Blueberry", imgUrl: "/img/blueberry.svg"}),

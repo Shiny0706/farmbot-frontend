@@ -1,6 +1,7 @@
 import * as React from "react";
 import { changeStep, removeStep, pushStep } from "./sequence_actions";
 import { assign } from "lodash";
+import { Step, Sequence } from "./interfaces";
 
 interface CopyParams {
   dispatch: Function;
@@ -34,7 +35,8 @@ let updateStep = function ({ dispatch,
                              index,
                              field }: UpdateStepParams) {
   return (e) => {
-    let update = assign<{}, Step>({}, step, { [field]: e.target.value });
+    let update = assign<{}, Step>({}, step);
+    update.command[field] = e.target.value;
     let action = changeStep(index, update);
     dispatch(action);
   };
@@ -47,10 +49,9 @@ interface IStepInputBox {
   index: number;
 }
 function StepInputBox({step, field, dispatch, index}: IStepInputBox) {
-
   return <input type="text"
                 placeholder="0.123m"
-                value={ step[field] }
+                value={ step.command[field] }
                 onChange={ updateStep({dispatch, step, index, field}) } />;
 }
 

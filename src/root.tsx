@@ -25,7 +25,6 @@ import { Sequences } from "./components/sequences/sequences";
 import { Regimens } from "./components/regimens/regimen_builder";
 import { FarmDesigner } from "./components/farm_designer/farm_designer";
 import { Login } from "./components/login";
-import { CONFIG } from "./config";
 import { store } from "./store";
 import { history } from "./history";
 

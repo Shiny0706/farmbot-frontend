@@ -1,4 +1,9 @@
-import { get } from "axios";
+import { post } from "axios";
+import { AuthToken } from "../../actions/auth_actions";
+import { SequenceOptions,
+         Step,
+         Sequence } from "./interfaces";
+import { success, error } from "../../logger";
 
 export interface EditCurrentSequence {
   type: "EDIT_CURRENT_SEQUENCE";
@@ -7,7 +12,7 @@ export interface EditCurrentSequence {
   };
 };
 
-export function editCurrentSequence(updates): EditCurrentSequence {
+export function editCurrentSequence(updates: SequenceOptions): EditCurrentSequence {
   return {
     type: "EDIT_CURRENT_SEQUENCE",
     payload: updates
@@ -59,14 +64,42 @@ export function removeStep(index: number): RemoveStep {
   };
 }
 
-export interface SaveSequence {
-  type: "SAVE_SEQUENCE";
-  payload: {};
+interface SaveSequenceParams {
+  sequence: Sequence;
+  token: AuthToken;
 }
 
-export function saveSequence() {
-  return {
-    type: "SAVE_SEQUENCE",
-    payload: {}
+export function saveSequence({sequence, token}: SaveSequenceParams): (d: Function) => Axios.IPromise<any> {
+  let url = token.iss + "api/sequences";
+  return dispatch => {
+    let headers = {headers: {Authorization: token.token}};
+    return post<Sequence>(url, sequence, headers)
+    .then(function(resp) {
+      let seq = resp.data;
+      success(`Saved ${("'" + seq.name + "'") || "sequence"}`);
+      dispatch(saveSequenceOk(seq));
+    },
+    function(error) {
+      error(`Unable to save ${ ("'" + sequence.name + "''") }.`);
+      dispatch(saveSequenceNo(error));
+    });
   };
 };
+
+export interface SaveSequenceOk {
+  type: string;
+  payload: Sequence;
+}
+export function saveSequenceOk(sequence: Sequence) {
+  return {
+    type: "SAVE_SEQUENCE_OK",
+    payload: sequence
+  };
+}
+
+export function saveSequenceNo(error: any) {
+  return {
+    type: "SAVE_SEQUENCE_NO",
+    payload: error
+  };
+}
