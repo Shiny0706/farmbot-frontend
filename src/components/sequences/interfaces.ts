@@ -7,6 +7,7 @@ type Color = "blue"|"green"|"yellow"|"orange"|"purple"|"pink"|"gray"|"red";
 type Steps = Array<Step>;
 
 export interface Sequence {
+  _id?: string;
   color: Color;
   name: String;
   steps: Steps;
@@ -34,5 +35,6 @@ type messageType = "emergency_stop"|"home_all"|"home_x"|"home_y"|"home_z"|"move_
 export interface Step {
   message_type: messageType;
   position?: number;
+  _id?: string;
   command: StepCommand;
 };

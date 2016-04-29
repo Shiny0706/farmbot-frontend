@@ -1,11 +1,28 @@
 import * as React from "react";
+import { selectSequence } from "./sequence_actions";
 import { SequenceReducerState } from "./sequence_reducer";
 import { Sequence } from "./interfaces";
 
+let buttonList = (dispatch: Function) => (seq: Sequence, index: number) => {
+  let css = ["block",
+             "full-width",
+             "text-left",
+             `${ seq.color || "purple" }-block`,
+             "block-header"];
+  let click = () => { dispatch(selectSequence(index)); };
+  return <button key={ seq._id || index }
+                 onClick={ click }
+                 className={ css.join(" ") }>
+    { seq.name + (seq.dirty ? "*" : "") }
+    <i className="fa fa-pencil block-control" />
+  </button>;
+};
+
 interface SequencesListProps {
   sequences: SequenceReducerState;
+  dispatch: Function;
 }
-export function SequencesList({sequences}: SequencesListProps) {
+export function SequencesList({sequences, dispatch}: SequencesListProps) {
     return( <div>
               <div className="widget-wrapper sequences-widget">
                 <div className="row">
@@ -23,12 +40,7 @@ export function SequencesList({sequences}: SequencesListProps) {
                     <div className="widget-content">
                       <div className="block-wrapper">
                         <div>
-                          { sequences.all.map(function(seq: Sequence, index: number) {
-                            <button className="block full-width text-left purple-block block-header">
-                              { seq.name }
-                              <i className="fa fa-pencil block-control" />
-                            </button>;
-                          })}
+                          { sequences.all.map(buttonList(dispatch))}
                         </div>
                       </div>
                     </div>

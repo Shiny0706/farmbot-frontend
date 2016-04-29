@@ -2,18 +2,20 @@ import { fetchDevice } from "./bot_actions";
 import { push } from "../history";
 import { fetchSequences } from "../components/sequences/sequence_actions";
 
-interface AuthResponse {
-  token: {
+export interface AuthResponseToken {
     unencoded: AuthToken;
     encoded: string;
-  };
+};
+
+export interface AuthResponse {
+  token: AuthResponseToken;
 };
 
 // We need to handle OK logins for numerous use cases (Ex: login AND registration)
 let onLogin = (dispatch: Function) => ({token}: AuthResponse) => {
   dispatch(loginOk(token.unencoded));
   dispatch(fetchDevice(token.encoded));
-  dispatch(fetchSequences(token.unencoded));
+  dispatch(fetchSequences(token));
   // Why doesn't push() from react-router-redux work? :(
   push("/app/dashboard/controls");
 };

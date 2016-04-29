@@ -1,13 +1,41 @@
-import { post } from "axios";
-import { AuthToken } from "../../actions/auth_actions";
+import { post, get } from "axios";
+import { AuthToken, AuthResponseToken } from "../../actions/auth_actions";
 import { SequenceOptions,
          Step,
          Sequence } from "./interfaces";
 import { success, error } from "../../logger";
 
-export function fetchSequences(token: AuthToken) {
+
+function fetchSequencesNo(err: Error) {
+  return {
+    type: "FETCH_SEQUENCE_NO",
+    payload: {}
+  };
+}
+
+export interface FetchSequencesOk {
+  type: "FETCH_SEQUENCES_OK";
+  payload: Array<Sequence>;
+};
+
+function fetchSequencesOk(sequences: Array<Sequence>): FetchSequencesOk {
+  return {
+    type: "FETCH_SEQUENCES_OK",
+    payload: sequences
+  };
+}
+
+export function fetchSequences(token: AuthResponseToken) {
   return (dispatch: Function) => {
-    alert("TODO");
+    let headers = {headers: {Authorization: token.encoded}};
+    let url = token.unencoded.iss;
+    get<Array<Sequence>>(`${url}api/sequences`, headers)
+      .then(({data}) => {
+        dispatch(fetchSequencesOk(data));
+      }, (e: Error) => {
+        error("Could not download sequences");
+        dispatch(fetchSequencesNo(e));
+      });
   };
 };
 
@@ -107,5 +135,17 @@ export function saveSequenceNo(error: any) {
   return {
     type: "SAVE_SEQUENCE_NO",
     payload: error
+  };
+}
+
+export interface SelectSequence {
+  type: "SELECT_SEQUENCE";
+  payload: number;
+};
+
+export function selectSequence(index: number): SelectSequence {
+  return {
+    type: "SELECT_SEQUENCE",
+    payload: index
   };
 }
