@@ -13,6 +13,14 @@ import { EditCurrentSequence,
          SelectSequence,
          DeleteSequenceOk } from "./sequence_actions";
 
+function populate(state: SequenceReducerState): Sequence {
+  // This worries me. What if #current and #all get out of sync?
+  let current_sequence = nullSequence();
+  state.all.unshift(current_sequence);
+  state.current = 0;
+  return current_sequence;
+}
+
 const initialState: SequenceReducerState = {
     all: [
       {
@@ -35,15 +43,7 @@ let action_handlers = {
         let step = cloneDeep<Step>(action.payload.step);
         let newState = cloneDeep<SequenceReducerState>(state);
         let index = action.payload.index;
-        let current_sequence;
-        if (newState.all[newState.current]) {
-          current_sequence = newState.all[newState.current];
-        } else {
-          // This worries me. What if #current and #all get out of sync?
-          current_sequence = nullSequence();
-          newState.all.unshift(current_sequence);
-          newState.current = 0;
-        };
+        let current_sequence = newState.all[newState.current] || populate(newState);
         if (typeof index === "number") { // NOTE: index is optional
             current_sequence.steps.splice(index, 0, step);
         } else { //  If index unspecified, push to top of stack.
@@ -55,18 +55,17 @@ let action_handlers = {
 
     EDIT_CURRENT_SEQUENCE: function(state: SequenceReducerState,
         action: EditCurrentSequence) {
-        let newSequence = assign<{}, Sequence>({}, state.current, action.payload);
-        let newState = assign<{}, SequenceReducerState>({},
-            state,
-            { current: newSequence });
-        newState.all[newState.current].dirty = true;
+        let newState = cloneDeep<SequenceReducerState>(state);
+        let currentSequence = newState.all[newState.current] || populate(newState);
+        currentSequence.dirty = true;
+        assign<{}, Sequence>(currentSequence, action.payload);
         return newState;
     },
 
     CHANGE_STEP: function(state: SequenceReducerState,
         action: ChangeStep) {
         let newState = assign<{}, SequenceReducerState>({}, state);
-        let steps = newState.all[newState.current].steps;
+        let steps = newState.all[newState.current].steps || populate(newState).steps;
         let index = action.payload.index;
         let step = steps[index];
         steps[index] = assign<{}, Step>(step, action.payload.step);
