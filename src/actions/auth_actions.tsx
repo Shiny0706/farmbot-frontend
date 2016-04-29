@@ -1,17 +1,27 @@
 import { fetchDevice } from "./bot_actions";
 import { push } from "../history";
+import { fetchSequences } from "../components/sequences/sequence_actions";
+
+interface AuthResponse {
+  token: {
+    unencoded: AuthToken;
+    encoded: string;
+  };
+};
+
+// We need to handle OK logins for numerous use cases (Ex: login AND registration)
+let onLogin = (dispatch: Function) => ({token}: AuthResponse) => {
+  dispatch(loginOk(token.unencoded));
+  dispatch(fetchDevice(token.encoded));
+  dispatch(fetchSequences(token.unencoded));
+  // Why doesn't push() from react-router-redux work? :(
+  push("/app/dashboard/controls");
+};
 
 export function login(username, password, url) {
   return dispatch => {
     return requestToken(username, password, url).then(
-      function(res) {
-        dispatch(loginOk(res.token));
-        let token = res.token.encoded;
-        dispatch(fetchDevice(token));
-        console.warn("URL needs to be dynamic, more Redux-y.");
-        // Why doesn't push() from react-router-redux work? :(
-        push("/app/dashboard/controls");
-      },
+      onLogin(dispatch),
       (err) => dispatch(loginErr(err))
     );
   };
@@ -25,8 +35,6 @@ function loginErr(err) {
 }
 
 export interface AuthToken {
-  token: string;
-  authenticated: boolean;
   sub: string;
   iat: number;
   jti: string;
@@ -34,6 +42,8 @@ export interface AuthToken {
   exp: number;
   mqtt: string;
   bot: string;
+  token:  string;
+  authenticated: boolean;
 }
 
 export function loginOk(token: AuthToken) {
@@ -46,7 +56,7 @@ export function loginOk(token: AuthToken) {
 export function register(name, email, password, confirmation, url) {
   return dispatch => {
     return requestRegistration(name, email, password, confirmation, url).then(
-      (res) => dispatch(loginOk(res.token)),
+      onLogin(dispatch),
       (err) => dispatch(loginErr(err))
     );
   };

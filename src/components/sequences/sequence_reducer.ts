@@ -1,5 +1,5 @@
 import { error, warning } from "../../logger";
-import { assign } from "lodash";
+import { assign, cloneDeep } from "lodash";
 import { Step, Sequence } from "./interfaces";
 
 import { EditCurrentSequence,
@@ -8,17 +8,31 @@ import { EditCurrentSequence,
          RemoveStep,
          SaveSequenceOk } from "./sequence_actions";
 
-interface SequenceReducerState {
-  current: Sequence;
+export interface SequenceReducerState {
+  all: Array<Sequence>;
+  current: number;
 };
 
 const initialState: SequenceReducerState = {
-  current: {
-    name: "",
-    color: "red",
-    dirty: false,
-    steps: []
-  }
+  all: [
+    {
+      name: "First Sequence",
+      color: "red",
+      dirty: false,
+      steps: [
+        {
+          message_type: "move_relative",
+          command: {
+            x: 1,
+            y: 2,
+            z: 3,
+            speed: 4
+          }
+        }
+      ]
+    }
+  ],
+  current: 0
 };
 
 let action_handlers = {
@@ -28,15 +42,15 @@ let action_handlers = {
 
   PUSH_STEP: function(state: SequenceReducerState,
                       action: PushStep) {
-    let step = assign<{}, Step>({}, action.payload.step);
-    let newState = assign<{}, SequenceReducerState>({}, state);
+    let step = cloneDeep<Step>(action.payload.step);
+    let newState = cloneDeep<SequenceReducerState>(state);
     let index = action.payload.index;
-    if (typeof  index === "number") {
-      newState.current.steps.splice(index, 0, step);
+    if (typeof index === "number") {
+      newState.all[newState.current].steps.splice(index, 0, step);
     } else {
-      newState.current.steps.push(step);
+      newState.all[newState.current].steps.push(step);
     }
-    newState.current.dirty = true;
+    newState.all[newState.current].dirty = true;
     return newState;
   },
 
@@ -46,35 +60,38 @@ let action_handlers = {
     let newState = assign<{}, SequenceReducerState>({},
                                                     state,
                                                     { current: newSequence });
-    newState.current.dirty = true;
+    newState.all[newState.current].dirty = true;
     return newState;
   },
 
   CHANGE_STEP: function(state: SequenceReducerState,
                         action: ChangeStep) {
     let newState = assign<{}, SequenceReducerState>({}, state);
-    let steps = newState.current.steps;
+    let steps = newState.all[newState.current].steps;
     let index = action.payload.index;
     let step = steps[index];
     steps[index] = assign<{}, Step>(step, action.payload.step);
-    newState.current.dirty = true;
+    newState.all[newState.current].dirty = true;
     return newState;
   },
 
   REMOVE_STEP: function(state: SequenceReducerState,
                         action: RemoveStep) {
     let newState = assign<{}, SequenceReducerState>({}, state);
-    newState.current.steps = _.without(newState.current.steps, newState.current.steps[action.payload.index]);
-    newState.current.dirty = true;
+    let seq = newState.all[newState.current];
+    let index = action.payload.index;
+    seq.steps = _.without(seq.steps, seq.steps[index]);
+    seq.dirty = true;
     return newState;
   },
   SAVE_SEQUENCE_OK: function(state: SequenceReducerState,
                              action: SaveSequenceOk) {
     let newState = assign<{}, SequenceReducerState>({}, state);
-    newState.current = assign<{}, Sequence>({},
-                                            newState.current,
-                                            action.payload);
-    newState.current.dirty = false;
+    let seq = newState.all[newState.current];
+    newState.all[newState.current] = assign<{}, Sequence>({},
+                                                          seq,
+                                                          action.payload,
+                                                          {dirty: false});
     return newState;
   },
   SAVE_SEQUENCE_NO: function(state: SequenceReducerState, action) {

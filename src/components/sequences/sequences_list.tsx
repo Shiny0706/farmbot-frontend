@@ -1,7 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
+import { SequenceReducerState } from "./sequence_reducer";
+import { Sequence } from "./interfaces";
 
-export class SequencesWidget extends React.Component<any, any> {
-  render() {
+interface SequencesListProps {
+  sequences: SequenceReducerState;
+}
+export function SequencesList({sequences}: SequencesListProps) {
     return( <div>
               <div className="widget-wrapper sequences-widget">
                 <div className="row">
@@ -19,10 +23,12 @@ export class SequencesWidget extends React.Component<any, any> {
                     <div className="widget-content">
                       <div className="block-wrapper">
                         <div>
-                          <button className="block full-width text-left purple-block block-header">
-                            Saved Sequence 1
-                            <i className="fa fa-pencil block-control" />
-                          </button>
+                          { sequences.all.map(function(seq: Sequence, index: number) {
+                            <button className="block full-width text-left purple-block block-header">
+                              { seq.name }
+                              <i className="fa fa-pencil block-control" />
+                            </button>;
+                          })}
                         </div>
                       </div>
                     </div>
@@ -32,4 +38,3 @@ export class SequencesWidget extends React.Component<any, any> {
             </div> );
 
   }
-}

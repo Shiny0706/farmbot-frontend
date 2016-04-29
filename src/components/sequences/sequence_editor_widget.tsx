@@ -33,7 +33,7 @@ let save = function(dispatch: Function, sequence: Sequence, token: AuthToken) {
 
 export function SequenceEditorWidget({sequences, dispatch, auth}) {
     let token = auth;
-    let sequence: Sequence = sequences.current;
+    let sequence: Sequence = sequences.all[sequences.current];
     return (<div>
         <div className="widget-wrapper">
             <div className="row">

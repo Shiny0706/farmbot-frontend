@@ -5,6 +5,12 @@ import { SequenceOptions,
          Sequence } from "./interfaces";
 import { success, error } from "../../logger";
 
+export function fetchSequences(token: AuthToken) {
+  return (dispatch: Function) => {
+    alert("TODO");
+  };
+};
+
 export interface EditCurrentSequence {
   type: "EDIT_CURRENT_SEQUENCE";
   payload: {
