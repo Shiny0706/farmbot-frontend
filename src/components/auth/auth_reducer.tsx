@@ -1,6 +1,8 @@
-import { error, success } from "../logger";
+import { error, success } from "../../logger";
 import * as $ from "jquery";
 import * as _ from "lodash";
+import { LoginOk, AuthToken } from "./auth_actions";
+
 
 let action_handlers = {
   DEFAULT: function(state, action) {
@@ -14,16 +16,17 @@ let action_handlers = {
                     { token: "",
                       authenticated: false });
   },
-  LOGIN_OK: function(state, action) {
+  LOGIN_OK: function(state: AuthToken, action: LoginOk) {
     let token = action.payload.encoded;
     let info = action.payload.unencoded;
     // TODO : Move side effects into Thunk / Action creator.
     setToken(token);
-    return _.assign({},
-                    state,
-                    { token },
-                    {authenticated: true},
-                    info);
+    let newState = _.assign({},
+                            state,
+                            { token },
+                            {authenticated: true},
+                            info);
+    return newState;
   }
 };
 

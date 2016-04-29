@@ -1,6 +1,6 @@
-import { fetchDevice } from "./bot_actions";
-import { push } from "../history";
-import { fetchSequences } from "../components/sequences/sequence_actions";
+import { fetchDevice } from "../../actions/bot_actions";
+import { push } from "../../history";
+import { fetchSequences } from "../sequences/sequence_actions";
 
 export interface AuthResponseToken {
     unencoded: AuthToken;
@@ -12,10 +12,14 @@ export interface AuthResponse {
 };
 
 // We need to handle OK logins for numerous use cases (Ex: login AND registration)
-let onLogin = (dispatch: Function) => ({token}: AuthResponse) => {
-  dispatch(loginOk(token.unencoded));
-  dispatch(fetchDevice(token.encoded));
-  dispatch(fetchSequences(token));
+let onLogin = (dispatch: Function) => (response: AuthResponse) => {
+  dispatch(loginOk(response.token));
+  //
+  let soSorry = _.cloneDeep<AuthResponseToken>(response.token);
+  soSorry.unencoded.token = soSorry.encoded;
+
+  dispatch(fetchDevice(soSorry.encoded));
+  dispatch(fetchSequences(soSorry));
   // Why doesn't push() from react-router-redux work? :(
   push("/app/dashboard/controls");
 };
@@ -44,11 +48,18 @@ export interface AuthToken {
   exp: number;
   mqtt: string;
   bot: string;
-  token:  string;
+  // This value is only available after LOGIN_OK is dispatched.
+  // FIXME
+  token?:  string;
   authenticated: boolean;
 }
 
-export function loginOk(token: AuthToken) {
+export interface LoginOk {
+  type: "LOGIN_OK";
+  payload: AuthResponseToken;
+};
+
+export function loginOk(token: AuthResponseToken) {
   return {
     type: "LOGIN_OK",
     payload: token

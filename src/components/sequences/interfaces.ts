@@ -38,3 +38,9 @@ export interface Step {
   _id?: string;
   command: StepCommand;
 };
+
+
+export interface SequenceReducerState {
+    all: Array<Sequence>;
+    current: number;
+};

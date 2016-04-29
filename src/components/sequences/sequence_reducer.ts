@@ -1,38 +1,26 @@
 import { error, warning } from "../../logger";
 import { assign, cloneDeep } from "lodash";
-import { Step, Sequence } from "./interfaces";
-
+import { Step,
+         Sequence,
+         SequenceReducerState } from "./interfaces";
+import { nullSequence } from "./sequence_actions";
 import { EditCurrentSequence,
-    PushStep,
-    ChangeStep,
-    RemoveStep,
-    SaveSequenceOk,
-    FetchSequencesOk,
-    SelectSequence } from "./sequence_actions";
-
-export interface SequenceReducerState {
-    all: Array<Sequence>;
-    current: number;
-};
+         PushStep,
+         ChangeStep,
+         RemoveStep,
+         SaveSequenceOk,
+         FetchSequencesOk,
+         SelectSequence,
+         DeleteSequenceOk } from "./sequence_actions";
 
 const initialState: SequenceReducerState = {
     all: [
-        {
-            name: "First Sequence",
-            color: "red",
-            dirty: false,
-            steps: [
-                {
-                    message_type: "move_relative",
-                    command: {
-                        x: 1,
-                        y: 2,
-                        z: 3,
-                        speed: 4
-                    }
-                }
-            ]
-        }
+      {
+        color: "red",
+        name: "New Sequence",
+        steps: [],
+        dirty: true
+      }
     ],
     current: 0
 };
@@ -43,14 +31,23 @@ let action_handlers = {
     },
 
     PUSH_STEP: function(state: SequenceReducerState,
-        action: PushStep) {
+                        action: PushStep) {
         let step = cloneDeep<Step>(action.payload.step);
         let newState = cloneDeep<SequenceReducerState>(state);
         let index = action.payload.index;
-        if (typeof index === "number") {
-            newState.all[newState.current].steps.splice(index, 0, step);
+        let current_sequence;
+        if (newState.all[newState.current]) {
+          current_sequence = newState.all[newState.current];
         } else {
-            newState.all[newState.current].steps.push(step);
+          // This worries me. What if #current and #all get out of sync?
+          current_sequence = nullSequence();
+          newState.all.unshift(current_sequence);
+          newState.current = 0;
+        };
+        if (typeof index === "number") { // NOTE: index is optional
+            current_sequence.steps.splice(index, 0, step);
+        } else { //  If index unspecified, push to top of stack.
+            current_sequence.steps.push(step);
         }
         newState.all[newState.current].dirty = true;
         return newState;
@@ -97,18 +94,26 @@ let action_handlers = {
         return newState;
     },
     FETCH_SEQUENCES_OK: function(state: SequenceReducerState,
-                                action: FetchSequencesOk) {
-      let sequences = cloneDeep<Array<Sequence>>(action.payload);
-      let newState = cloneDeep<SequenceReducerState>(state);
-      newState.all = sequences;
-      return newState;
+        action: FetchSequencesOk) {
+        let sequences = cloneDeep<Array<Sequence>>(action.payload);
+        let newState = cloneDeep<SequenceReducerState>(state);
+        newState.all = sequences;
+        return newState;
     },
     SELECT_SEQUENCE: function(state: SequenceReducerState,
-                              action: SelectSequence) {
-      let newState = cloneDeep<SequenceReducerState>(state);
-      let inx = action.payload;
-      if (newState.all[inx]) { newState.current = inx; }
-      return newState;
+        action: SelectSequence) {
+        let newState = cloneDeep<SequenceReducerState>(state);
+        let inx = action.payload;
+        if (newState.all[inx]) { newState.current = inx; }
+        return newState;
+    },
+    DELETE_SEQUENCE_OK: function(state: SequenceReducerState,
+        action: DeleteSequenceOk) {
+    let newState = cloneDeep<SequenceReducerState>(state);
+    let index = newState.current;
+    _.remove(newState.all, action.payload);
+    newState.current = ((index === 0) ? index : newState.current - 1);
+    return newState;
     }
 };
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Navbar } from "../components/navbar";
 import { Link } from "react-router";
-import { login, register } from "../actions/auth_actions";
+import { login, register } from "./auth/auth_actions";
 const AFTER_LOGIN = "/dashboard";
 import { connect } from "react-redux";
 import { changeApiUrl } from "./config/config_actions";

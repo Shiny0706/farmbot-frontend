@@ -1,7 +1,8 @@
 import * as React from "react";
 import { selectSequence } from "./sequence_actions";
-import { SequenceReducerState } from "./sequence_reducer";
+import { SequenceReducerState } from "./interfaces";
 import { Sequence } from "./interfaces";
+import { AuthToken } from "../auth/auth_actions";
 
 let buttonList = (dispatch: Function) => (seq: Sequence, index: number) => {
   let css = ["block",
@@ -21,8 +22,10 @@ let buttonList = (dispatch: Function) => (seq: Sequence, index: number) => {
 interface SequencesListProps {
   sequences: SequenceReducerState;
   dispatch: Function;
+  auth: AuthToken;
 }
-export function SequencesList({sequences, dispatch}: SequencesListProps) {
+
+export function SequencesList({sequences, dispatch, auth}: SequencesListProps) {
     return( <div>
               <div className="widget-wrapper sequences-widget">
                 <div className="row">
