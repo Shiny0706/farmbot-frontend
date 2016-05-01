@@ -110,6 +110,29 @@ export function MoveAbsoluteStep({dispatch,
                                         field="speed"/>
                         </div>
                       </div>
+                      <div className="row">
+                        <div className="col-xs-6 col-md-3">
+                          <label>X-Offset</label>
+                          <StepInputBox dispatch={dispatch}
+                                        step={step}
+                                        index={index}
+                                        field="x-offset"/>
+                        </div>
+                        <div className="col-xs-6 col-md-3">
+                          <label>Y-Offset</label>
+                          <StepInputBox dispatch={dispatch}
+                                        step={step}
+                                        index={index}
+                                        field="y-offset"/>
+                        </div>
+                        <div className="col-xs-6 col-md-3">
+                          <label>Z-Offset</label>
+                          <StepInputBox dispatch={dispatch}
+                                        step={step}
+                                        index={index}
+                                        field="z-offset"/>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
