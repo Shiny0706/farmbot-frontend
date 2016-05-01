@@ -20,13 +20,28 @@
   padding: .75rem 1rem;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  h5 {
+  ::-webkit-input-placeholder {
     color: $dark_gray;
-    font-size: 1.2rem;
-    margin: .25rem;
-    font-weight: 600;
+    font-weight: bold;
     text-transform: uppercase;
-    display: inline;
+  }
+  ::-moz-placeholder {
+     color: $dark_gray;
+     font-weight: bold;
+     text-transform: uppercase;
+  }
+  :-ms-input-placeholder {
+     color: $dark_gray;
+     font-weight: bold;
+     text-transform: uppercase;
+  }
+  input {
+    width: auto;
+    padding: 0rem;
+    background-color: transparent;
+    box-shadow: none;
+    color: $dark_gray;
+    font-weight: bold;
   }
   p {
     font-size: 1rem;

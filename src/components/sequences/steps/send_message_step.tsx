@@ -67,7 +67,7 @@ export function SendMessageStep({dispatch,
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="step-header send-message-step">
-                      <h5>Send Message</h5>
+                      <input className="step-label" placeholder="Send Message"/>
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
                          onClick={ () => copy({dispatch, step, index}) } />

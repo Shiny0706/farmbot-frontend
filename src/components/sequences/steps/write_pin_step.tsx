@@ -67,7 +67,7 @@ export function WritePinStep({dispatch,
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="step-header write-pin-step">
-                      <h5>Write Pin</h5>
+                      <input placeholder="Write Pin"/>
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
                          onClick={ () => copy({dispatch, step, index}) } />

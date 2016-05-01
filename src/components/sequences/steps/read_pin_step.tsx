@@ -67,7 +67,7 @@ export function ReadPinStep({dispatch,
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="step-header read-pin-step">
-                      <h5>Read Pin</h5>
+                      <input className="step-label" placeholder="Read Pin"/>
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
                          onClick={ () => copy({dispatch, step, index}) } />

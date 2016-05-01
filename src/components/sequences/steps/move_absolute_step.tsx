@@ -67,7 +67,7 @@ export function MoveAbsoluteStep({dispatch,
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="step-header move-absolute-step">
-                      <h5>Move Absolute</h5>
+                      <input className="step-label" placeholder="Move Absolute"/>
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
                          onClick={ () => copy({dispatch, step, index}) } />
@@ -81,21 +81,21 @@ export function MoveAbsoluteStep({dispatch,
                     <div className="step-content move-absolute-step">
                       <div className="row">
                         <div className="col-xs-6 col-md-3">
-                          <label>X</label>
+                          <label>X (mm)</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="x"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Y</label>
+                          <label>Y (mm)</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="y"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Z</label>
+                          <label>Z (mm)</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
@@ -111,21 +111,21 @@ export function MoveAbsoluteStep({dispatch,
                       </div>
                       <div className="row">
                         <div className="col-xs-6 col-md-3">
-                          <label>X-Offset</label>
+                          <label>X-Offset (mm)</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="x-offset"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Y-Offset</label>
+                          <label>Y-Offset (mm)</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="y-offset"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Z-Offset</label>
+                          <label>Z-Offset (mm)</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}

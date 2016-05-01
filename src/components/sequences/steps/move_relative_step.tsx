@@ -67,7 +67,7 @@ export function MoveRelativeStep({dispatch,
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="step-header move-relative-step">
-                      <h5>Move Relative</h5>
+                      <input className="step-label" placeholder="Move Relative"/>
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
                          onClick={ () => copy({dispatch, step, index}) } />
@@ -81,21 +81,21 @@ export function MoveRelativeStep({dispatch,
                     <div className="step-content move-relative-step">
                       <div className="row">
                         <div className="col-xs-6 col-md-3">
-                          <label>X</label>
+                          <label>X (mm)</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="x"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Y</label>
+                          <label>Y (mm)</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="y"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Z</label>
+                          <label>Z (mm)</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
