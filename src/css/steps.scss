@@ -1,8 +1,8 @@
-// Styles for ALL ACTIONS
+// Styles for ALL STEPS
 
 @import 'colors';
 
-.action-wrapper {
+.step-wrapper {
   box-shadow: 0px 0px 10px $gray;
   margin-bottom: 1.5rem;
   margin-top: 1.5rem;
@@ -10,12 +10,12 @@
 }
 
 @media (max-width: 600px) {
-  .action-wrapper {
+  .step-wrapper {
     margin-bottom: 1.5rem;
   }
 }
 
-.action-header {
+.step-header {
   letter-spacing: .05rem;
   padding: .75rem 1rem;
   border-top-left-radius: 3px;
@@ -32,24 +32,54 @@
     font-size: 1rem;
     font-style: italic;
   }
-  &.move-relative-action {
+  &.move-relative-step {
     background: $green;
+  }
+  &.move-absolute-step {
+    background: $blue;
+  }
+  &.write-pin-step {
+    background: $orange;
+  }
+  &.read-pin-step {
+    background: $yellow;
+  }
+  &.wait-step {
+    background: $brown;
+  }
+  &.send-message-step {
+    background: $red;
   }
 }
 
-.action-control {
+.step-control {
   margin-top: 0.4rem;
   margin-left: 2rem;
   float: right;
 }
 
-.action-content {
+.step-content {
   border-color: $light_gray;
   color: $dark_gray;
   padding: 1.25rem;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-  &.move-relative-action {
+  &.move-relative-step {
     background: $light_green;
+  }
+  &.move-absolute-step {
+    background: $light_blue;
+  }
+  &.write-pin-step {
+    background: $light-orange;
+  }
+  &.read-pin-step {
+    background: $light-yellow;
+  }
+  &.wait-step {
+    background: $light-brown;
+  }
+  &.send-message-step {
+    background: $light-red;
   }
 }

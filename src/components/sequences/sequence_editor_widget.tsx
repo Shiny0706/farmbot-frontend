@@ -1,5 +1,10 @@
 import * as React from "react";
-import { MoveRelativeStep } from "./move_relative_step";
+import { MoveRelativeStep } from "./steps/move_relative_step";
+import { MoveAbsoluteStep } from "./steps/move_absolute_step";
+import { ReadPinStep } from "./steps/read_pin_step";
+import { WritePinStep } from "./steps/write_pin_step";
+import { WaitStep } from "./steps/wait_step";
+import { SendMessageStep } from "./steps/send_message_step";
 import { AuthToken } from "../auth/auth_actions";
 import { Step as IStep, Sequence } from "./interfaces";
 import { editCurrentSequence,
@@ -10,6 +15,11 @@ import { editCurrentSequence,
 function Step({step, index, dispatch}) {
     return (<div>
         <MoveRelativeStep step={step} index={index} dispatch={dispatch} />
+        <MoveAbsoluteStep step={step} index={index} dispatch={dispatch} />
+        <WritePinStep step={step} index={index} dispatch={dispatch} />
+        <ReadPinStep step={step} index={index} dispatch={dispatch} />
+        <WaitStep step={step} index={index} dispatch={dispatch} />
+        <SendMessageStep step={step} index={index} dispatch={dispatch} />
     </div>
     );
 };
