@@ -73,7 +73,6 @@ export function ReadPinStep({dispatch,
                          onClick={ () => copy({dispatch, step, index}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
-                      <i className="fa fa-angle-up step-control" />
                     </div>
                   </div>
                 </div>
