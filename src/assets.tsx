@@ -28,7 +28,6 @@ export function loadFromCdn(filename, filetype) {
 }
 
 require("!style!css!sass!./css/toastr.scss");
-require("!style!css!sass!./css/actions.scss");
 require("!style!css!sass!./css/alerts.scss");
 require("!style!css!sass!./css/auth.scss");
 require("!style!css!sass!./css/blocks.scss");
@@ -42,6 +41,7 @@ require("!style!css!sass!./css/farm_designer_panels.scss");
 require("!style!css!sass!./css/map.scss");
 require("!style!css!sass!./css/navbar.scss");
 require("!style!css!sass!./css/search.scss");
+require("!style!css!sass!./css/steps.scss");
 require("!style!css!sass!./css/tables.scss");
 require("!style!css!sass!./css/tooltips.scss");
 require("!style!css!sass!./css/widgets.scss");
