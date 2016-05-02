@@ -1,17 +1,33 @@
-import { fetchDevice } from "./bot_actions";
-import { push } from "../history";
+import { fetchDevice } from "../../components/devices/bot_actions";
+import { push } from "../../history";
+import { fetchSequences } from "../sequences/sequence_actions";
+
+export interface AuthResponseToken {
+    unencoded: AuthToken;
+    encoded: string;
+};
+
+export interface AuthResponse {
+  token: AuthResponseToken;
+};
+
+// We need to handle OK logins for numerous use cases (Ex: login AND registration)
+let onLogin = (dispatch: Function) => (response: AuthResponse) => {
+  dispatch(loginOk(response.token));
+  //
+  let soSorry = _.cloneDeep<AuthResponseToken>(response.token);
+  soSorry.unencoded.token = soSorry.encoded;
+
+  dispatch(fetchDevice(soSorry.encoded));
+  dispatch(fetchSequences(soSorry));
+  // Why doesn't push() from react-router-redux work? :(
+  push("/app/dashboard/controls");
+};
 
 export function login(username, password, url) {
   return dispatch => {
     return requestToken(username, password, url).then(
-      function(res) {
-        dispatch(loginOk(res.token));
-        let token = res.token.encoded;
-        dispatch(fetchDevice(token));
-        console.warn("URL needs to be dynamic, more Redux-y.");
-        // Why doesn't push() from react-router-redux work? :(
-        push("/app/dashboard/controls");
-      },
+      onLogin(dispatch),
       (err) => dispatch(loginErr(err))
     );
   };
@@ -25,8 +41,6 @@ function loginErr(err) {
 }
 
 export interface AuthToken {
-  token: string;
-  authenticated: boolean;
   sub: string;
   iat: number;
   jti: string;
@@ -34,9 +48,18 @@ export interface AuthToken {
   exp: number;
   mqtt: string;
   bot: string;
+  // This value is only available after LOGIN_OK is dispatched.
+  // FIXME
+  token?:  string;
+  authenticated: boolean;
 }
 
-export function loginOk(token: AuthToken) {
+export interface LoginOk {
+  type: "LOGIN_OK";
+  payload: AuthResponseToken;
+};
+
+export function loginOk(token: AuthResponseToken) {
   return {
     type: "LOGIN_OK",
     payload: token
@@ -46,7 +69,7 @@ export function loginOk(token: AuthToken) {
 export function register(name, email, password, confirmation, url) {
   return dispatch => {
     return requestRegistration(name, email, password, confirmation, url).then(
-      (res) => dispatch(loginOk(res.token)),
+      onLogin(dispatch),
       (err) => dispatch(loginErr(err))
     );
   };

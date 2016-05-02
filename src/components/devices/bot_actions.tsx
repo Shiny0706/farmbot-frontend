@@ -1,8 +1,9 @@
-import { Device } from "../models/device";
+import { Device } from "../../models/device";
 import { Farmbot } from "farmbot";
-import { store } from "../store";
-import { devices } from "../device";
-import { success, error } from "../logger";
+import { store } from "../../store";
+import { devices } from "../../device";
+import { success, error } from "../../logger";
+import { Sequence } from "../sequences/interfaces";
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
@@ -118,7 +119,7 @@ export function commitAxisChanges() {
         .assign(axisBuffer)
         .assign({ speed: devices.current.getState("speed") })
         .pick("x", "y", "z", "speed")
-        .transform((a, b, c) => a[c] = Number(b), {})
+        .transform((a, b, c: string) => a[c] = Number(b), {})
         .value();
     return function(dispatch) {
         return devices
@@ -253,3 +254,12 @@ function fetchDeviceErr(err) {
         payload: err
     };
 }
+
+export function execSequence(sequence: Sequence) {
+  return (dispatch) => {
+    let bot = devices.current;
+    return bot
+             .execSequence(sequence)
+             .then((ok) => { debugger; }, (no) => { debugger; });
+  };
+};

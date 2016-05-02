@@ -1,9 +1,51 @@
-import { post } from "axios";
-import { AuthToken } from "../../actions/auth_actions";
+import * as axios from "axios";
+import { AuthToken, AuthResponseToken } from "../auth/auth_actions";
+import { authHeaders } from "../auth/util";
 import { SequenceOptions,
          Step,
          Sequence } from "./interfaces";
 import { success, error } from "../../logger";
+
+export function nullSequence(): Sequence {
+  return {
+    color: "red",
+    name: "New Sequence",
+    steps: [],
+    dirty: false
+  };
+}
+function fetchSequencesNo(err: Error) {
+  return {
+    type: "FETCH_SEQUENCE_NO",
+    payload: {}
+  };
+}
+
+export interface FetchSequencesOk {
+  type: "FETCH_SEQUENCES_OK";
+  payload: Array<Sequence>;
+};
+
+function fetchSequencesOk(sequences: Array<Sequence>): FetchSequencesOk {
+  return {
+    type: "FETCH_SEQUENCES_OK",
+    payload: sequences
+  };
+}
+
+export function fetchSequences(token: AuthResponseToken) {
+  return (dispatch: Function) => {
+    let url = token.unencoded.iss;
+    let headers = authHeaders(token.unencoded);
+    axios.get<Array<Sequence>>(`${url}api/sequences`, headers)
+      .then(({data}) => {
+        dispatch(fetchSequencesOk(data));
+      }, (e: Error) => {
+        error("Could not download sequences");
+        dispatch(fetchSequencesNo(e));
+      });
+  };
+};
 
 export interface EditCurrentSequence {
   type: "EDIT_CURRENT_SEQUENCE";
@@ -72,15 +114,15 @@ interface SaveSequenceParams {
 export function saveSequence({sequence, token}: SaveSequenceParams): (d: Function) => Axios.IPromise<any> {
   let url = token.iss + "api/sequences";
   return dispatch => {
-    let headers = {headers: {Authorization: token.token}};
-    return post<Sequence>(url, sequence, headers)
+    return axios.post<Sequence>(url, sequence, authHeaders(token))
     .then(function(resp) {
       let seq = resp.data;
       success(`Saved ${("'" + seq.name + "'") || "sequence"}`);
       dispatch(saveSequenceOk(seq));
     },
-    function(error) {
-      error(`Unable to save ${ ("'" + sequence.name + "''") }.`);
+    function(err) {
+      let msg = _.values(err.data).join("\n");
+      error(`Unable to save ${ ("'" + sequence.name + "'") }.` + msg);
       dispatch(saveSequenceNo(error));
     });
   };
@@ -101,5 +143,53 @@ export function saveSequenceNo(error: any) {
   return {
     type: "SAVE_SEQUENCE_NO",
     payload: error
+  };
+}
+
+export interface SelectSequence {
+  type: "SELECT_SEQUENCE";
+  payload: number;
+};
+
+export function selectSequence(index: number): SelectSequence {
+  return {
+    type: "SELECT_SEQUENCE",
+    payload: index
+  };
+}
+
+export function deleteSequence(sequence: Sequence, token: AuthToken) {
+  return (dispatch) => {
+    let p;
+    if (sequence._id) {
+      let url = `${token.iss}api/sequences/${sequence._id}`;
+      p = axios.delete(url, authHeaders(token));
+    } else {
+      p = Promise.resolve();
+    };
+    p.then(() => {
+      dispatch(deleteSequenceOk(sequence));
+    }, (no) => {
+      error("Unable to delete sequence");
+    });
+  };
+}
+
+export interface DeleteSequenceOk {
+  type: "DELETE_SEQUENCE_OK";
+  payload: Sequence;
+}
+
+export function deleteSequenceOk(sequence: Sequence): DeleteSequenceOk {
+  return {
+    type: "DELETE_SEQUENCE_OK",
+    payload: sequence
+  };
+};
+
+export function addSequence() {
+  return {
+    type: "ADD_SEQUENCE",
+    payload: {}
   };
 }

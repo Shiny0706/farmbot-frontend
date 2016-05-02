@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Navbar } from "../../components/navbar";
-import { SequencesWidget } from "./sequences_widget";
+import { SequencesList } from "./sequences_list";
 import { StepButtonGroup } from "./step_button_group";
 import { SequenceEditorWidget } from "./sequence_editor_widget";
 import { connect } from "react-redux";
@@ -20,7 +20,7 @@ export class Sequences  extends React.Component<any, any> {
               <SequenceEditorWidget { ...this.props } />
             </div>
             <div className="col-md-3 col-sm-12">
-              <SequencesWidget />
+              <SequencesList { ...this.props }/>
             </div>
           </div>
         </div>
