@@ -257,9 +257,12 @@ function fetchDeviceErr(err) {
 
 export function execSequence(sequence: Sequence) {
   return (dispatch) => {
-    let bot = devices.current;
-    return bot
+    dispatch({type: "EXEC_SEQUENCE_START", payload: sequence});
+    return devices
+             .current
              .execSequence(sequence)
-             .then((ok) => { debugger; }, (no) => { debugger; });
+             .then(
+               (payload) => { dispatch({type: "EXEC_SEQUENCE_OK", payload}); },
+               (payload) => { dispatch({type: "EXEC_SEQUENCE_ERR", payload}); });
   };
 };
