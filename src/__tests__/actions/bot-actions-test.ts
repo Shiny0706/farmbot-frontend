@@ -1,18 +1,7 @@
-import { settingToggle, settingToggleOk } from "../../actions/bot_actions";
+import { settingToggle, settingToggleOk } from "../../components/devices/bot_actions";
 import { devices } from "../../device";
 
 let createSpy = jasmine.createSpy;
-
-// export function settingToggle(name, bot) {
-//     return function(dispatch) {
-//         let currentValue = bot.hardware[name];
-//         return devices
-//           .current
-//           .updateCalibration({ [name]: (currentValue === 0) ? ON : OFF })
-//           .then(res => dispatch(settingToggleOk(res)),
-//                 err => dispatch(settingToggleErr(err)));
-//     };
-// }
 
 describe("bot actions", () => {
   it("toggles settings", (done) => {

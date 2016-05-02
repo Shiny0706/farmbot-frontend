@@ -1,5 +1,5 @@
-import { error, warning, success } from "../logger";
-import { devices as bot } from "../device";
+import { error, warning, success } from "../../logger";
+import { devices as bot } from "../../device";
 import * as _ from "lodash";
 
 let status = {

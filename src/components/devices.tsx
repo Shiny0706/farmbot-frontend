@@ -5,7 +5,7 @@ import { addDevice,
          commitSettingsChanges,
          settingToggle,
          fetchDevice,
-         changeDevice } from "../actions/bot_actions";
+         changeDevice } from "./devices/bot_actions";
 import { connect } from "react-redux";
 import { convertFormToObject } from "../util.ts";
 import { store } from "../store";

@@ -1,4 +1,4 @@
-import { fetchDevice } from "../../actions/bot_actions";
+import { fetchDevice } from "../../components/devices/bot_actions";
 import { push } from "../../history";
 import { fetchSequences } from "../sequences/sequence_actions";
 

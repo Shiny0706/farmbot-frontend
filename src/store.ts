@@ -7,7 +7,7 @@ import {
 } from "redux";
 import { authReducer as auth } from "./components/auth/auth_reducer";
 import { sequenceReducer as sequences } from "./components/sequences/sequence_reducer";
-import { botReducer as bot } from "./reducers/bot_reducer";
+import { botReducer as bot } from "./components/devices/bot_reducer";
 import { plantReducer as plants } from "./reducers/plant_reducer";
 import { configReducer as config } from "./components/config/config_reducer";
 import { routerReducer as routing } from "react-router-redux";

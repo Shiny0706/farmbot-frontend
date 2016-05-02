@@ -7,6 +7,7 @@ import { WaitStep } from "./steps/wait_step";
 import { SendMessageStep } from "./steps/send_message_step";
 import { AuthToken } from "../auth/auth_actions";
 import { Step as IStep, Sequence } from "./interfaces";
+import { execSequence } from "../devices/bot_actions";
 import { editCurrentSequence,
          saveSequence,
          deleteSequence,
@@ -45,6 +46,10 @@ let destroy = function(dispatch: Function,
     return () => dispatch(deleteSequence(sequence, token));
 };
 
+let performSeq = (dispatch, sequence) => (e) => {
+  dispatch(execSequence(sequence));
+};
+
 export function SequenceEditorWidget({sequences, dispatch, auth}) {
     let token = auth;
     let inx = sequences.current;
@@ -57,7 +62,8 @@ export function SequenceEditorWidget({sequences, dispatch, auth}) {
                         onClick={ save(dispatch, sequence, token) }>
                         Save { sequence.dirty ? " *" : "" }
                     </button>
-                    <button className="yellow button-like widget-control">
+                    <button className="yellow button-like widget-control"
+                            onClick={ performSeq(dispatch, sequence) }>
                         Execute
                     </button>
                     <button className="red button-like widget-control"
