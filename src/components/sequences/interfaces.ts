@@ -1,7 +1,3 @@
-// interface Command {
-//   action: string; // TODO: Create a string type for these.
-// };
-
 type Color = "blue"|"green"|"yellow"|"orange"|"purple"|"pink"|"gray"|"red";
 
 type Steps = Array<Step>;

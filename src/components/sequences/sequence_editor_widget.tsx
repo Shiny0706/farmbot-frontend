@@ -15,11 +15,6 @@ import { editCurrentSequence,
 function Step({step, index, dispatch}) {
     return (<div>
         <MoveRelativeStep step={step} index={index} dispatch={dispatch} />
-        <MoveAbsoluteStep step={step} index={index} dispatch={dispatch} />
-        <WritePinStep step={step} index={index} dispatch={dispatch} />
-        <ReadPinStep step={step} index={index} dispatch={dispatch} />
-        <WaitStep step={step} index={index} dispatch={dispatch} />
-        <SendMessageStep step={step} index={index} dispatch={dispatch} />
     </div>
     );
 };

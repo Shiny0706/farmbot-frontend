@@ -118,7 +118,7 @@ export function commitAxisChanges() {
         .assign(axisBuffer)
         .assign({ speed: devices.current.getState("speed") })
         .pick("x", "y", "z", "speed")
-        .transform((a, b, c) => a[c] = Number(b), {})
+        .transform((a, b, c: string) => a[c] = Number(b), {})
         .value();
     return function(dispatch) {
         return devices
