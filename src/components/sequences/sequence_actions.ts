@@ -186,3 +186,10 @@ export function deleteSequenceOk(sequence: Sequence): DeleteSequenceOk {
     payload: sequence
   };
 };
+
+export function addSequence() {
+  return {
+    type: "ADD_SEQUENCE",
+    payload: {}
+  };
+}

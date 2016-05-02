@@ -1,5 +1,5 @@
 import * as React from "react";
-import { selectSequence } from "./sequence_actions";
+import { selectSequence, addSequence } from "./sequence_actions";
 import { SequenceReducerState } from "./interfaces";
 import { Sequence } from "./interfaces";
 import { AuthToken } from "../auth/auth_actions";
@@ -30,7 +30,8 @@ export function SequencesList({sequences, dispatch, auth}: SequencesListProps) {
               <div className="widget-wrapper sequences-widget">
                 <div className="row">
                   <div className="col-sm-12">
-                    <button className="green button-like widget-control">
+                    <button className="green button-like widget-control"
+                            onClick={ () => dispatch(addSequence()) }>
                       Add
                     </button>
                     <div className="widget-header">

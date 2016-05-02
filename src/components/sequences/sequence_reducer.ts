@@ -113,7 +113,15 @@ let action_handlers = {
     _.remove(newState.all, action.payload);
     newState.current = ((index === 0) ? index : newState.current - 1);
     return newState;
-    }
+  },
+  ADD_SEQUENCE: function(state: SequenceReducerState, _action) {
+    let newState = cloneDeep<SequenceReducerState>(state);
+    let before = cloneDeep(newState.all);
+    populate(newState);
+    let after = cloneDeep(newState.all);
+    debugger;
+    return state;
+  }
 };
 
 export function sequenceReducer(state = initialState, action) {
