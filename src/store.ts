@@ -13,7 +13,7 @@ import { configReducer as config } from "./components/config/config_reducer";
 import { routerReducer as routing } from "react-router-redux";
 
 let storageKey = "lastState";
-let stateAsAString = localStorage[storageKey] || "{}";
+let stateAsAString = sessionStorage[storageKey] || "{}";
 let lastState = (JSON.parse(stateAsAString));
 
 let reducers = combineReducers({
@@ -29,5 +29,5 @@ let middleware = compose(applyMiddleware(thunk),
                          !!window["devToolsExtension"] ? devToolsExtension() : f => f);
 export let store = createStore(reducers, lastState, middleware);
 store.subscribe(function(){
-  localStorage[storageKey] = JSON.stringify(store.getState());
+  sessionStorage[storageKey] = JSON.stringify(store.getState());
 });

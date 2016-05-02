@@ -6,7 +6,7 @@ interface ConfigReducerState {
 }
 
 let initialState: ConfigReducerState = {
-  farmbotApiUrl: "//localhost:3000"
+  farmbotApiUrl: "//staging.farmbot.io"
 };
 
 let reduce = {

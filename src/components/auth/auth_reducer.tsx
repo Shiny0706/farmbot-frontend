@@ -41,7 +41,7 @@ export function authReducer(state = initialState, action) {
 }
 // TODO Side effects belong in action creators (thunks), not the dispatcher.
 export function setToken(token) {
-  // localStorage["farmbot_token"] = token || "";
+  // sessionStorage["farmbot_token"] = token || "";
   $.ajaxSetup({beforeSend: function (xhr) {
        xhr.setRequestHeader("Authorization", token);
     }
@@ -50,7 +50,7 @@ export function setToken(token) {
 
 // TODO Side effects belong in action creators (thunks), not the dispatcher.
 function unsetToken() {
-    // localStorage["farmbot_token"] = "";
+    // sessionStorage["farmbot_token"] = "";
     $.ajaxSetup({beforeSend: function (xhr) {
          xhr.setRequestHeader("Authorization", "");
       }

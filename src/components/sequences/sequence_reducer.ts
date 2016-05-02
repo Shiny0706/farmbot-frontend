@@ -119,8 +119,7 @@ let action_handlers = {
     let before = cloneDeep(newState.all);
     populate(newState);
     let after = cloneDeep(newState.all);
-    debugger;
-    return state;
+    return newState;
   }
 };
 
