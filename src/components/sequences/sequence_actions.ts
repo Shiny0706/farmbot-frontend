@@ -3,12 +3,15 @@ import { AuthToken, AuthResponseToken } from "../auth/auth_actions";
 import { authHeaders } from "../auth/util";
 import { SequenceOptions,
          Step,
-         Sequence } from "./interfaces";
+         Sequence,
+         Color } from "./interfaces";
 import { success, error } from "../../logger";
 
+let colors: Array<Color> = ["blue", "green", "yellow", "orange", "purple", "pink", "gray", "red"];
 export function nullSequence(): Sequence {
+  let color = _.sample(colors);
   return {
-    color: "red",
+    color,
     name: "New Sequence",
     steps: [],
     dirty: false

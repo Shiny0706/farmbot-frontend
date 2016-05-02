@@ -1,4 +1,4 @@
-type Color = "blue"|"green"|"yellow"|"orange"|"purple"|"pink"|"gray"|"red";
+export type Color = "blue"|"green"|"yellow"|"orange"|"purple"|"pink"|"gray"|"red";
 
 type Steps = Array<Step>;
 
