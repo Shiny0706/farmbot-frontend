@@ -1,24 +1,26 @@
 declare module "farmbot" {
+  import Client = __mqtt.Client;
+  type FBResponse = Promise<{}>;
   export class Farmbot {
       private _events;
       private _state;
-      client: MqttClient;
+      client: Client;
       constructor(input: any);
       _decodeThatToken(): void;
       getState(key?: any): any;
       setState(key: any, val: any): any;
-      emergencyStop(): Promise<{}>;
-      execSequence(sequence: any): Promise<{}>;
-      homeAll(opts: any): Promise<{}>;
-      homeX(opts: any): Promise<{}>;
-      homeY(opts: any): Promise<{}>;
-      homeZ(opts: any): Promise<{}>;
-      moveAbsolute(opts: any): Promise<{}>;
-      moveRelative(opts: any): Promise<{}>;
-      pinWrite(opts: any): Promise<{}>;
-      readStatus(): Promise<{}>;
-      syncSequence(): Promise<{}>;
-      updateCalibration(params: any): Promise<{}>;
+      emergencyStop(): FBResponse;
+      execSequence(sequence: any): FBResponse;
+      homeAll(opts: any): FBResponse;
+      homeX(opts: any): FBResponse;
+      homeY(opts: any): FBResponse;
+      homeZ(opts: any): FBResponse;
+      moveAbsolute(opts: any): FBResponse;
+      moveRelative(opts: any): FBResponse;
+      pinWrite(opts: any): FBResponse;
+      readStatus(): FBResponse;
+      syncSequence(): FBResponse;
+      updateCalibration(params: any): FBResponse;
       static config: {
           requiredOptions: string[];
           defaultOptions: {
@@ -31,11 +33,11 @@ declare module "farmbot" {
       emit(event: any, data: any): void;
       buildMessage(input: any): any;
       channel(name: String): string;
-      send(input: any): Promise<{}>;
+      send(input: any): FBResponse;
       _onmessage(channel: String, buffer: Uint8Array, message: any): void;
-      connect(callback: any): Promise<{}>;
-      static defer(label: any): Promise<{}>;
-      static timerDefer(timeout: Number, label: String): Promise<{}>;
+      connect(callback: any): FBResponse;
+      static defer(label: any): FBResponse;
+      static timerDefer(timeout: Number, label: String): FBResponse;
       static extend(target: any, mixins: any): any;
       static requireKeys(input: any, required: any): void;
       static uuid(): string;
