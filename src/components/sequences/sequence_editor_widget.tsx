@@ -1,10 +1,4 @@
 import * as React from "react";
-import { MoveRelativeStep } from "./steps/move_relative_step";
-import { MoveAbsoluteStep } from "./steps/move_absolute_step";
-import { ReadPinStep } from "./steps/read_pin_step";
-import { WritePinStep } from "./steps/write_pin_step";
-import { WaitStep } from "./steps/wait_step";
-import { SendMessageStep } from "./steps/send_message_step";
 import { AuthToken } from "../auth/auth_actions";
 import { Step as IStep, Sequence } from "./interfaces";
 import { execSequence } from "../devices/bot_actions";
@@ -12,21 +6,16 @@ import { editCurrentSequence,
          saveSequence,
          deleteSequence,
          nullSequence } from "./sequence_actions";
-
-function Step({step, index, dispatch}) {
-    return (<div>
-        <MoveRelativeStep step={step} index={index} dispatch={dispatch} />
-    </div>
-    );
-};
-
+import { stepTiles, StepTile } from "./step_tiles";
+let Oops: StepTile = (_) => { return <div>Whoops! Not a valid message_type</div>; };
 let StepList = ({sequence, dispatch}) => {
     return (<div>
         { sequence.steps.map((step: IStep, inx: number) => {
+            let Step = stepTiles[step.message_type] || Oops;
             return <Step step={ step }
-                key={ inx }
-                index={ inx }
-                dispatch={ dispatch } />;
+                         key={ inx }
+                         index={ inx }
+                         dispatch={ dispatch } />;
         }) }
     </div>);
 };
