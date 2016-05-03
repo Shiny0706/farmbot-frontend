@@ -6,7 +6,7 @@ let LogoutButton = (props) => {
   if (isAuthed) {
     return <a className="logout-button"
     onClick={() => {
-      localStorage.clear();
+      sessionStorage.clear();
       location.reload();
     } }>
     Log Out

@@ -1,4 +1,4 @@
-type Color = "blue"|"green"|"yellow"|"orange"|"purple"|"pink"|"gray"|"red";
+export type Color = "blue"|"green"|"yellow"|"orange"|"purple"|"pink"|"gray"|"red";
 
 type Steps = Array<Step>;
 
@@ -26,7 +26,7 @@ export interface StepCommand {
   delay?: number;
 }
 
-type messageType = "emergency_stop"|"home_all"|"home_x"|"home_y"|"home_z"|"move_absolute"|"move_relative"|"pin_write"|"read_parameter"|"read_status"|"write_parameter"|"wait"|"send_message"|"if_statement"|"read_pin";
+export type messageType = "emergency_stop"|"home_all"|"home_x"|"home_y"|"home_z"|"move_absolute"|"move_relative"|"pin_write"|"read_parameter"|"read_status"|"write_parameter"|"wait"|"send_message"|"if_statement"|"read_pin";
 
 export interface Step {
   message_type: messageType;

@@ -5,8 +5,13 @@ interface ConfigReducerState {
   farmbotApiUrl: string;
 }
 
+function getApiUrl() {
+  let host = `//${location.host || "localhost"}`;
+  return (host["includes"]("//localhost")) ? "//my.farmbot.io" : host;
+}
+
 let initialState: ConfigReducerState = {
-  farmbotApiUrl: "//localhost:3000"
+  farmbotApiUrl: getApiUrl()
 };
 
 let reduce = {

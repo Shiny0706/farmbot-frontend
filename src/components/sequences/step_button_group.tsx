@@ -1,18 +1,23 @@
 import * as React from "react";
 import { pushStep } from "./sequence_actions";
-import { Step, Sequence } from "./interfaces";
+import { Step as IStep,
+         StepCommand as Command,
+         Sequence,
+         messageType } from "./interfaces";
 
-let addStep = (dispatch, step: Step) => (event) => { dispatch(pushStep(step)); };
-let emptyMoveRel: Step = {
-    message_type: "move_relative",
-    command: {
-        x: 0,
-        y: 0,
-        z: 0,
-        speed: 100
-    }
+let addStep = (dispatch) =>
+              (step: IStep) =>
+              (event) => { dispatch(pushStep(step)); };
+
+let step = function(message_type: messageType, command: Command = {}): IStep {
+    return {
+      message_type: message_type,
+      command: command
+    };
 };
+
 export function StepButtonGroup({dispatch}) {
+    let clickToAdd = addStep(dispatch);
     return (<div>
         <div className="widget-wrapper">
             <div className="row">
@@ -28,7 +33,8 @@ export function StepButtonGroup({dispatch}) {
                         <div className="row">
                             <div className="col-xs-6">
                                 <div className="block-wrapper">
-                                    <button className="full-width text-left blue-block block-header block">
+                                    <button className="full-width text-left blue-block block-header block"
+                                            onClick={ clickToAdd(step("move_absolute")) }>
                                         MOVE ABSOLUTE
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -37,7 +43,7 @@ export function StepButtonGroup({dispatch}) {
                             <div className="col-xs-6">
                                 <div className="block-wrapper">
                                     <button className="full-width text-left green-block block-header block"
-                                        onClick={ addStep(dispatch, emptyMoveRel) }>
+                                        onClick={ clickToAdd(step("move_relative")) }>
                                         MOVE RELATIVE
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -45,7 +51,8 @@ export function StepButtonGroup({dispatch}) {
                             </div>
                             <div className="col-xs-6">
                                 <div className="block-wrapper">
-                                    <button className="full-width text-left orange-block block-header block">
+                                    <button className="full-width text-left orange-block block-header block"
+                                            onClick={ clickToAdd(step("pin_write")) }>
                                         WRITE PIN
                                         </button>
                                         <i className="fa fa-arrows block-control" />
@@ -53,7 +60,8 @@ export function StepButtonGroup({dispatch}) {
                             </div>
                             <div className="col-xs-6">
                                 <div className="block-wrapper">
-                                    <button className="full-width text-left yellow-block block-header block">
+                                    <button className="full-width text-left yellow-block block-header block"
+                                            onClick={ clickToAdd(step("read_pin")) }>
                                         READ PIN
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -61,7 +69,8 @@ export function StepButtonGroup({dispatch}) {
                             </div>
                             <div className="col-xs-6">
                                 <div className="block-wrapper">
-                                    <button className="full-width text-left brown-block block-header block">
+                                    <button className="full-width text-left brown-block block-header block"
+                                            onClick={ clickToAdd(step("wait")) }>
                                         WAIT
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -69,7 +78,8 @@ export function StepButtonGroup({dispatch}) {
                             </div>
                             <div className="col-xs-6">
                                 <div className="block-wrapper">
-                                    <button className="full-width text-left red-block block-header">
+                                    <button className="full-width text-left red-block block-header"
+                                            onClick={ clickToAdd(step("send_message")) }>
                                         SEND MESSAGE
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -77,7 +87,8 @@ export function StepButtonGroup({dispatch}) {
                             </div>
                             <div className="col-xs-6">
                                 <div className="block-wrapper">
-                                    <button className="full-width text-left purple-block block-header block">
+                                    <button className="full-width text-left purple-block block-header block"
+                                            onClick={ clickToAdd(step("if_statement")) }>
                                         IF STATEMENT
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -86,7 +97,7 @@ export function StepButtonGroup({dispatch}) {
                             <div className="col-xs-6">
                                 <div className="block-wrapper">
                                     <button className="full-width text-left gray-block block-header block">
-                                        EXECUTE
+                                        EXECUTE*
                                         <i className="fa fa-arrows block-control" />
                                     </button>
                                 </div>

@@ -3,12 +3,15 @@ import { AuthToken, AuthResponseToken } from "../auth/auth_actions";
 import { authHeaders } from "../auth/util";
 import { SequenceOptions,
          Step,
-         Sequence } from "./interfaces";
+         Sequence,
+         Color } from "./interfaces";
 import { success, error } from "../../logger";
 
+let colors: Array<Color> = ["blue", "green", "yellow", "orange", "purple", "pink", "gray", "red"];
 export function nullSequence(): Sequence {
+  let color = _.sample(colors);
   return {
-    color: "red",
+    color,
     name: "New Sequence",
     steps: [],
     dirty: false
@@ -112,16 +115,22 @@ interface SaveSequenceParams {
 }
 
 export function saveSequence({sequence, token}: SaveSequenceParams): (d: Function) => Axios.IPromise<any> {
-  let url = token.iss + "api/sequences";
   return dispatch => {
-    return axios.post<Sequence>(url, sequence, authHeaders(token))
+    let url = token.iss + "api/sequences/";
+    let method;
+    if (sequence._id) {
+      url += sequence._id;
+      method = axios.put;
+    } else {
+      method = axios.post;
+    };
+    return method(url, sequence, authHeaders(token))
     .then(function(resp) {
-      let seq = resp.data;
-      success(`Saved ${("'" + seq.name + "'") || "sequence"}`);
-      dispatch(saveSequenceOk(seq));
+      let seq: Sequence = resp.data;
+      success(`Saved ${("'" + seq.name + "'") || "sequence"}`);      dispatch(saveSequenceOk(resp.data));
     },
     function(err) {
-      let msg = _.values(err.data).join("\n");
+      let msg: string = _.values(err.data).join("\n");
       error(`Unable to save ${ ("'" + sequence.name + "'") }.` + msg);
       dispatch(saveSequenceNo(error));
     });
