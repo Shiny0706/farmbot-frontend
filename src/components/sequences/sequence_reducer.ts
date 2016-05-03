@@ -84,12 +84,10 @@ let action_handlers = {
     },
     SAVE_SEQUENCE_OK: function(state: SequenceReducerState,
         action: SaveSequenceOk) {
-        let newState = assign<{}, SequenceReducerState>({}, state);
-        let seq = newState.all[newState.current];
-        newState.all[newState.current] = assign<{}, Sequence>({},
-            seq,
-            action.payload,
-            { dirty: false });
+        let newState = cloneDeep<SequenceReducerState>(state);
+        let seq = cloneDeep<Sequence>(action.payload);
+        seq.dirty = false;
+        newState.all[newState.current] =  seq;
         return newState;
     },
     FETCH_SEQUENCES_OK: function(state: SequenceReducerState,
