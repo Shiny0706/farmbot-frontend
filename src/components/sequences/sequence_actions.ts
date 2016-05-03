@@ -127,8 +127,7 @@ export function saveSequence({sequence, token}: SaveSequenceParams): (d: Functio
     return method(url, sequence, authHeaders(token))
     .then(function(resp) {
       let seq: Sequence = resp.data;
-      success(`Saved ${("'" + seq.name + "'") || "sequence"}`);
-      dispatch(saveSequenceOk(seq));
+      success(`Saved ${("'" + seq.name + "'") || "sequence"}`);      dispatch(saveSequenceOk(resp.data));
     },
     function(err) {
       let msg: string = _.values(err.data).join("\n");

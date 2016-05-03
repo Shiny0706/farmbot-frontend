@@ -83,10 +83,9 @@ let action_handlers = {
         return newState;
     },
     SAVE_SEQUENCE_OK: function(state: SequenceReducerState,
-        action: SaveSequenceOk) {
+                               action: SaveSequenceOk) {
         let newState = cloneDeep<SequenceReducerState>(state);
         let seq = cloneDeep<Sequence>(action.payload);
-        seq.dirty = false;
         newState.all[newState.current] =  seq;
         return newState;
     },
