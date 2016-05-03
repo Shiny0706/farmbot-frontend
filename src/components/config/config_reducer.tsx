@@ -7,7 +7,7 @@ interface ConfigReducerState {
 
 function getApiUrl() {
   let host = `//${location.host || "localhost"}`;
-  return (host === "//localhost") ? "//my.farmbot.io" : host;
+  return (host["includes"]("//localhost")) ? "//my.farmbot.io" : host;
 }
 
 let initialState: ConfigReducerState = {
