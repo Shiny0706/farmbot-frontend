@@ -1,5 +1,6 @@
 import { ChangeApiUrl } from "./config_actions";
 import { assign } from "lodash";
+import { ReduxAction } from "../../interfaces";
 
 interface ConfigReducerState {
   farmbotApiUrl: string;
@@ -7,7 +8,7 @@ interface ConfigReducerState {
 
 function getApiUrl() {
   let host = `//${location.host || "localhost"}`;
-  return (host["includes"]("//localhost")) ? "//my.farmbot.io" : host;
+  return (host["includes"]("//localhost")) ? "//localhost:3000" : host;
 }
 
 let initialState: ConfigReducerState = {
@@ -21,13 +22,14 @@ let reduce = {
     newState.farmbotApiUrl = action.payload.farmbotApiUrl;
     return newState;
   },
-  DEFAULT: function(state: ConfigReducerState, action): ConfigReducerState {
+  DEFAULT: function(state: ConfigReducerState,
+                    action: ReduxAction): ConfigReducerState {
     return state;
   }
 };
 
 export function configReducer(state = initialState,
-                              action): ConfigReducerState {
+                              action: ReduxAction): ConfigReducerState {
   let reduceFn = reduce[action.type] || reduce["DEFAULT"];
   let result = reduceFn(state, action);
   return result;

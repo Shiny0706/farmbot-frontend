@@ -7,8 +7,8 @@ import { Sequence } from "../sequences/interfaces";
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
-export function settingToggle(name, bot) {
-    return function(dispatch) {
+export function settingToggle(name: string, bot) {
+    return function(dispatch: Function) {
         let currentValue = bot.hardware[name];
         return devices
           .current
@@ -174,6 +174,24 @@ export function changeDevice(attributesThatWillChange = { dirty: true }) {
     };
 }
 
+interface GoodResponse {
+  id: string;
+  error?: void;
+  result: {
+    [key: string]: any;
+    method: string;
+  };
+};
+
+interface BadResponse {
+        id: string;
+        result?: void;
+        error: {
+          error: string;
+          method: string;
+        };
+};
+
 export function fetchDevice(token: String): {} | ((dispatch: any) => any) {
     return (dispatch) => {
         let bot = new Farmbot({ token });
@@ -182,8 +200,9 @@ export function fetchDevice(token: String): {} | ((dispatch: any) => any) {
             .then(() => {
                 devices.current = bot;
                 dispatch(readStatus());
-                bot.on("*", function(resp) {
-                    let botState = resp.result || resp.error || {};
+                bot.on("*", function(resp: any) {
+                    console.dir(JSON.stringify(resp));
+                    let botState = resp.result || resp.error || resp;
                     dispatch(botChange(botState));
                 });
                 dispatch(fetchDeviceOk(bot));
@@ -241,14 +260,24 @@ function fetchDeviceOk(bot) {
     };
 }
 
-function botChange(botState) {
+
+function botChange(statusMessage) {
+  let isError = typeof (statusMessage || {}).error === "object";
+  if (isError) {
+    error("wow");
     return {
-        type: "BOT_CHANGE",
-        payload: botState
+      type: "BOT_CHANGE_ERR",
+      payload: statusMessage
     };
+  } else {
+    return {
+      type: "BOT_CHANGE",
+      payload: statusMessage
+    };
+  }
 }
 
-function fetchDeviceErr(err) {
+function fetchDeviceErr(err: Error) {
     return {
         type: "FETCH_DEVICE_ERR",
         payload: err
@@ -256,7 +285,7 @@ function fetchDeviceErr(err) {
 }
 
 export function execSequence(sequence: Sequence) {
-  return (dispatch) => {
+  return (dispatch: Function) => {
     dispatch({type: "EXEC_SEQUENCE_START", payload: sequence});
     return devices
              .current
