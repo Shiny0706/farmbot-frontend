@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import * as $ from "jquery";
+import * as Joi from "joi";
 
 export function convertFormToObject(formEl) {
   let inputs = $(formEl.querySelectorAll("input"));
@@ -15,4 +16,10 @@ export function getParam(name) {
     let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         r = regex.exec(location.search);
     return r === null ? "" : decodeURIComponent(r[1].replace(/\+/g, " "));
+}
+
+/** Generate generic type guards that validate an interface against a Joi
+    object schema. Returns a new type guard function. */
+export function is<T>(schema: Joi.ObjectSchema) {
+  return (input): input is T => !Joi.validate(input, schema).error;
 }

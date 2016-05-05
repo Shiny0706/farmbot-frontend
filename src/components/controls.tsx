@@ -249,7 +249,7 @@ class ControlsPage extends React.Component<any, any> {
                     </div>
                     <div className="row">
                       <div className="col-sm-12">
-                        <img className="padding-bottom" src="http://108.90.200.9:8080/?action=stream" style={{width: "100%", height: "auto", paddingBottom: 0}} />
+                        <p> Webcam disabled </p>
                       </div>
                     </div>
                   </div>

@@ -2,13 +2,14 @@ import { Device } from "../../models/device";
 import { Farmbot } from "farmbot";
 import { store } from "../../store";
 import { devices } from "../../device";
-import { success, error } from "../../logger";
+import { success, error, warning } from "../../logger";
 import { Sequence } from "../sequences/interfaces";
+import { catchMessage, RPCError, BotErrorResponse } from "./message_catcher";
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
-export function settingToggle(name, bot) {
-    return function(dispatch) {
+export function settingToggle(name: string, bot) {
+    return function(dispatch: Function) {
         let currentValue = bot.hardware[name];
         return devices
           .current
@@ -182,11 +183,15 @@ export function fetchDevice(token: String): {} | ((dispatch: any) => any) {
             .then(() => {
                 devices.current = bot;
                 dispatch(readStatus());
-                bot.on("*", function(resp) {
-                    let botState = resp.result || resp.error || {};
-                    dispatch(botChange(botState));
+                bot.on("*", function(message: any) {
+                    let when = catchMessage(message);
+                    when({
+                      response: (r) => dispatch(botChange(r.result)),
+                      error: (r) => dispatch(botError(r.error)),
+                      notification: (r) => dispatch(botNotification(r.result)),
+                      _: (r) => dispatch(unknownMessage(r))
+                    });
                 });
-                dispatch(fetchDeviceOk(bot));
             }, (err) => dispatch(fetchDeviceErr(err)));
     };
 };
@@ -241,14 +246,39 @@ function fetchDeviceOk(bot) {
     };
 }
 
-function botChange(botState) {
+
+function botChange(statusMessage) {
     return {
-        type: "BOT_CHANGE",
-        payload: botState
+      type: "BOT_CHANGE",
+      payload: statusMessage
     };
 }
 
-function fetchDeviceErr(err) {
+function botError(statusMessage: RPCError) {
+    error(statusMessage.error);
+    return {
+      type: "BOT_ERROR",
+      payload: statusMessage
+    };
+}
+
+function botNotification(statusMessage) {
+  return {
+    type: "BOT_NOTIFICATION",
+    payload: statusMessage
+  };
+}
+
+function unknownMessage(statusMessage: any) {
+  warning("FarmBot sent an unknown message. See log for details.");
+  console.dir(statusMessage);
+  return {
+    type: "UNKNOWN_MESSAGE",
+    payload: statusMessage
+  };
+}
+
+function fetchDeviceErr(err: Error) {
     return {
         type: "FETCH_DEVICE_ERR",
         payload: err
@@ -256,13 +286,15 @@ function fetchDeviceErr(err) {
 }
 
 export function execSequence(sequence: Sequence) {
-  return (dispatch) => {
+  return (dispatch: Function) => {
     dispatch({type: "EXEC_SEQUENCE_START", payload: sequence});
     return devices
              .current
              .execSequence(sequence)
              .then(
                (payload) => { dispatch({type: "EXEC_SEQUENCE_OK", payload}); },
-               (payload) => { dispatch({type: "EXEC_SEQUENCE_ERR", payload}); });
+               // FIXME TODO HACK : Why doesn't this trigger the "*" event?
+               // I should not need to dispatch botError here :(
+               (e) => { dispatch(botError(e.error)); });
   };
 };
