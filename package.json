@@ -37,6 +37,7 @@
   "dependencies": {
     "axios": "^0.11.0",
     "farmbot": "0.4.1",
+    "joi": "^8.0.5",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
     "react": "^0.14.8",

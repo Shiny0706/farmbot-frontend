@@ -17,6 +17,12 @@ module.exports = {
   ts: {
     configFileName: "tsconfig.json"
   },
+  // See: https://github.com/hapijs/joi/issues/665
+  node: {
+      net: 'empty',
+      tls: 'empty',
+      dns: 'empty'
+  },
   resolve: {
     extensions: [
       '',
