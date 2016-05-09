@@ -2,9 +2,9 @@ import { Device } from "../../models/device";
 import { Farmbot } from "farmbot";
 import { store } from "../../store";
 import { devices } from "../../device";
-import { success, error, warning } from "../../logger";
+import { error, warning } from "../../logger";
 import { Sequence } from "../sequences/interfaces";
-import { catchMessage, RPCError, BotErrorResponse } from "./message_catcher";
+import { catchMessage, RPCError } from "./message_catcher";
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
@@ -163,8 +163,8 @@ function readStatusOk(status) {
 }
 
 function readStatusErr(msg) {
-    error("Attempted to read status, but failed. See logs for details.",
-        "Read Status Error");
+    error("Did you configure your bot? Is it online?",
+        "Can't read status");
     console.warn("READSTATUSERR", msg);
 }
 
@@ -238,14 +238,6 @@ function saveDeviceErr(err) {
         payload: err
     };
 }
-
-function fetchDeviceOk(bot) {
-    return {
-        type: "FETCH_DEVICE_OK",
-        payload: bot
-    };
-}
-
 
 function botChange(statusMessage) {
     return {

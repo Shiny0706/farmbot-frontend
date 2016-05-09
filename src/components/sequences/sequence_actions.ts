@@ -40,7 +40,7 @@ export function fetchSequences(token: AuthResponseToken) {
   return (dispatch: Function) => {
     let url = token.unencoded.iss;
     let headers = authHeaders(token.unencoded);
-    axios.get<Array<Sequence>>(`${url}api/sequences`, headers)
+    axios.get<Array<Sequence>>(`${url}/api/sequences`, headers)
       .then(({data}) => {
         dispatch(fetchSequencesOk(data));
       }, (e: Error) => {
@@ -114,9 +114,10 @@ interface SaveSequenceParams {
   token: AuthToken;
 }
 
-export function saveSequence({sequence, token}: SaveSequenceParams): (d: Function) => Axios.IPromise<any> {
+export function saveSequence({
+  sequence, token}: SaveSequenceParams): (d: Function) => Axios.IPromise<any> {
   return dispatch => {
-    let url = token.iss + "api/sequences/";
+    let url = token.iss + "/api/sequences/";
     let method;
     if (sequence._id) {
       url += sequence._id;
@@ -171,7 +172,7 @@ export function deleteSequence(sequence: Sequence, token: AuthToken) {
   return (dispatch) => {
     let p;
     if (sequence._id) {
-      let url = `${token.iss}api/sequences/${sequence._id}`;
+      let url = `${token.iss}/api/sequences/${sequence._id}`;
       p = axios.delete(url, authHeaders(token));
     } else {
       p = Promise.resolve();

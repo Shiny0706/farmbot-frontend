@@ -1,6 +1,8 @@
 import { fetchDevice } from "../../components/devices/bot_actions";
 import { push } from "../../history";
 import { fetchSequences } from "../sequences/sequence_actions";
+import { post } from "axios";
+import { error } from "../../logger";
 
 export interface AuthResponseToken {
     unencoded: AuthToken;
@@ -68,10 +70,26 @@ export function loginOk(token: AuthResponseToken) {
 
 export function register(name, email, password, confirmation, url) {
   return dispatch => {
-    return requestRegistration(name, email, password, confirmation, url).then(
-      onLogin(dispatch),
-      (err) => dispatch(loginErr(err))
-    );
+    let p = requestRegistration(name,
+                                email,
+                                password,
+                                confirmation,
+                                url);
+    return p.then((r) => onLogin(dispatch)(r.data),
+                  onRegistrationErr(dispatch));
+  };
+}
+
+export function onRegistrationErr(dispatch) {
+  return (err) => {
+    let msg = _.values(err.data)
+               .join(". ")
+               .replace(/nil/g, "empty") || "Unknown server error.";
+    error(msg);
+    dispatch({
+      type: "REGISTRATION_ERROR",
+      payload: err
+    });
   };
 }
 
@@ -84,12 +102,7 @@ function requestRegistration(name, email, password, confirmation, url) {
       name: name
     }
   };
-  return $.ajax({
-    url: url + "/api/users",
-    type: "POST",
-    data: JSON.stringify(form),
-    contentType: "application/json"
-  });
+  return post<AuthResponse>(url + "/api/users", form);
 }
 
 

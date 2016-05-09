@@ -9,7 +9,7 @@ const initialState = {
   all: Plant.fakes
 };
 
-let action_handlers = {
+let actionHandlers = {
   DEFAULT: function(state: PlantState, action) {
     return state;
   },
@@ -34,6 +34,6 @@ let action_handlers = {
 };
 
 export function plantReducer(state = initialState, action) {
-  let handler = (action_handlers[action.type] || action_handlers.DEFAULT);
+  let handler = (actionHandlers[action.type] || actionHandlers.DEFAULT);
   return handler(state, action);
 }

@@ -2,8 +2,7 @@ import "./assets"; // I'll just take the side effects, thanks.
 import * as React from "react";
 
 import {
-  Provider,
-  connect
+  Provider
 } from "react-redux";
 
 import {
@@ -12,8 +11,7 @@ import {
   Route,
   Router,
   RedirectFunction,
-  RouterState,
-  Link
+  RouterState
 } from "react-router";
 
 import App from "./components/app";

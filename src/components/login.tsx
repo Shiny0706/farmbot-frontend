@@ -2,7 +2,6 @@ import * as React from "react";
 import { Navbar } from "../components/navbar";
 import { Link } from "react-router";
 import { login, register } from "./auth/auth_actions";
-const AFTER_LOGIN = "/dashboard";
 import { connect } from "react-redux";
 import { changeApiUrl } from "./config/config_actions";
 
@@ -60,9 +59,13 @@ class LoginPage extends React.Component<any, any> {
                       <div className="widget-content">
                         <div className="input-group">
                           <label>Email</label>
-                          <input type="text"  onChange={ this.set("loginEmail").bind(this) }></input>
+                          <input type="text"
+                                 onChange={ this.set("loginEmail").bind(this) }>
+                          </input>
                           <label>Password</label>
-                          <input type="password" onChange={ this.set("loginPassword").bind(this) }></input>
+                          <input type="password"
+                                 onChange={ this.set("loginPassword").bind(this) }>
+                          </input>
                         </div>
                         <div className="row">
                           <div className="col-xs-6">
@@ -111,9 +114,14 @@ class LoginPage extends React.Component<any, any> {
                           <label>Name</label>
                           <input type="text" onChange={ this.set("regName").bind(this) }></input>
                           <label>Password</label>
-                          <input type="password" onChange={ this.set("regPass").bind(this) }></input>
+                          <input type="password"
+                                 onChange={ this.set("regPass").bind(this) }>
+                          </input>
                           <label>Verfy Password</label>
-                          <input type="password" onChange={ this.set("regConfirmation").bind(this) }></input>
+                          <input type="password"
+                                 onChange={
+                                   this.set("regConfirmation").bind(this) }>
+                          </input>
                         </div>
                         <div className="row">
                           <div className="col-xs-6">

@@ -18,6 +18,7 @@
   "author": "farmbot.io",
   "license": "MIT",
   "devDependencies": {
+    "codelyzer": "0.0.19",
     "css-loader": "^0.23.1",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.19",
