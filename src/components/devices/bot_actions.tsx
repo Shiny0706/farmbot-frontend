@@ -163,9 +163,11 @@ function readStatusOk(status) {
 }
 
 function readStatusErr(msg) {
-    error("Did you configure your bot? Is it online?",
-        "Can't read status");
-    console.warn("READSTATUSERR", msg);
+    error("Did you configure your bot? Is it online?", "Can't read status");
+    return {
+      type: "READ_STATUS_ERR",
+      payload: msg
+    };
 }
 
 export function changeDevice(attributesThatWillChange = { dirty: true }) {
