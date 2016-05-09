@@ -26,13 +26,13 @@ let handleNameUpdate = (dispatch: Function) => (event: React.SyntheticEvent) => 
 };
 
 let save = function(dispatch: Function, sequence: Sequence, token: AuthToken) {
-    return (e: React.SyntheticEvent) => dispatch(saveSequence({ sequence, token }));
+    return (e: React.SyntheticEvent) => dispatch(saveSequence(sequence));
 };
 
 let destroy = function(dispatch: Function,
                        sequence: Sequence,
                        token: AuthToken) {
-    return () => dispatch(deleteSequence(sequence, token));
+    return () => dispatch(deleteSequence(sequence));
 };
 
 let performSeq = (dispatch, sequence) => (e) => {

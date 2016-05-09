@@ -3,6 +3,7 @@ import { push } from "../../history";
 import { fetchSequences } from "../sequences/sequence_actions";
 import { post } from "axios";
 import { error } from "../../logger";
+import { AuthState } from "./auth_reducer";
 
 export interface AuthResponseToken {
     unencoded: AuthToken;
@@ -13,17 +14,31 @@ export interface AuthResponse {
   token: AuthResponseToken;
 };
 
-// We need to handle OK logins for numerous use cases (Ex: login AND registration)
-let onLogin = (dispatch: Function) => (response: AuthResponse) => {
-  dispatch(loginOk(response.token));
-  //
-  let soSorry = _.cloneDeep<AuthResponseToken>(response.token);
-  soSorry.unencoded.token = soSorry.encoded;
+export function didLogin(authState: AuthState, dispatch) {
+    setToken(authState.token);
+    dispatch(loginOk(authState));
+    dispatch(fetchDevice(authState.token));
+    dispatch(fetchSequences());
+};
 
-  dispatch(fetchDevice(soSorry.encoded));
-  dispatch(fetchSequences(soSorry));
-  // Why doesn't push() from react-router-redux work? :(
-  push("/app/dashboard/controls");
+// We need to handle OK logins for numerous use cases (Ex: login AND registration)
+export function onLogin(dispatch: Function) {
+  return (response: AuthResponse) => {
+    let tokenData: AuthResponseToken = _.cloneDeep<any>(response.token);
+    let authState: AuthState = {
+      token: tokenData.encoded,
+      sub: tokenData.unencoded.sub,
+      jti: tokenData.unencoded.jti,
+      iss: tokenData.unencoded.iss,
+      mqtt: tokenData.unencoded.mqtt,
+      bot: tokenData.unencoded.bot,
+      iat: tokenData.unencoded.iat,
+      exp: tokenData.unencoded.exp,
+      authenticated: true
+    };
+    didLogin(authState, dispatch);
+    push("/app/dashboard/controls");
+  };
 };
 
 export function login(username, password, url) {
@@ -50,18 +65,15 @@ export interface AuthToken {
   exp: number;
   mqtt: string;
   bot: string;
-  // This value is only available after LOGIN_OK is dispatched.
-  // FIXME
-  token?:  string;
   authenticated: boolean;
 }
 
 export interface LoginOk {
   type: "LOGIN_OK";
-  payload: AuthResponseToken;
+  payload: AuthState;
 };
 
-export function loginOk(token: AuthResponseToken) {
+export function loginOk(token: AuthState) {
   return {
     type: "LOGIN_OK",
     payload: token
@@ -112,5 +124,14 @@ function requestToken(email, password, url) {
     type: "POST",
     data: JSON.stringify({ user: { email: email, password: password } }),
     contentType: "application/json"
+  });
+}
+
+// TODO Someday, we will stop using jQuery. This is mostly for legacy support.
+function setToken(token) {
+  $.ajaxSetup({
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader("Authorization", token);
+    }
   });
 }

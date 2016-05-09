@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import { AuthToken, AuthResponseToken } from "../auth/auth_actions";
+import { AuthState } from "../auth/auth_reducer";
 import { authHeaders } from "../auth/util";
 import { SequenceOptions,
          Step,
@@ -36,11 +36,13 @@ function fetchSequencesOk(sequences: Array<Sequence>): FetchSequencesOk {
   };
 }
 
-export function fetchSequences(token: AuthResponseToken) {
-  return (dispatch: Function) => {
-    let url = token.unencoded.iss;
-    let headers = authHeaders(token.unencoded);
-    axios.get<Array<Sequence>>(`${url}/api/sequences`, headers)
+export function fetchSequences() {
+  return (dispatch: Function, getState) => {
+    let state: AuthState = getState().auth;
+    let { iss, token } = state;
+
+    let headers = authHeaders(token);
+    axios.get<Array<Sequence>>(`${iss}/api/sequences`, headers)
       .then(({data}) => {
         dispatch(fetchSequencesOk(data));
       }, (e: Error) => {
@@ -109,15 +111,11 @@ export function removeStep(index: number): RemoveStep {
   };
 }
 
-interface SaveSequenceParams {
-  sequence: Sequence;
-  token: AuthToken;
-}
-
-export function saveSequence({
-  sequence, token}: SaveSequenceParams): (d: Function) => Axios.IPromise<any> {
-  return dispatch => {
-    let url = token.iss + "/api/sequences/";
+export function saveSequence(sequence: Sequence) {
+  return function(dispatch, getState) {
+    let state: AuthState = getState().auth;
+    let { iss, token } = state;
+    let url = `${iss}/api/sequences/`;
     let method;
     if (sequence._id) {
       url += sequence._id;
@@ -128,7 +126,8 @@ export function saveSequence({
     return method(url, sequence, authHeaders(token))
     .then(function(resp) {
       let seq: Sequence = resp.data;
-      success(`Saved ${("'" + seq.name + "'") || "sequence"}`);      dispatch(saveSequenceOk(resp.data));
+      success(`Saved ${("'" + seq.name + "'") || "sequence"}`);
+      dispatch(saveSequenceOk(resp.data));
     },
     function(err) {
       let msg: string = _.values(err.data).join("\n");
@@ -168,11 +167,14 @@ export function selectSequence(index: number): SelectSequence {
   };
 }
 
-export function deleteSequence(sequence: Sequence, token: AuthToken) {
-  return (dispatch) => {
+export function deleteSequence(sequence: Sequence) {
+  return (dispatch, getState) => {
+    let state: AuthState = getState().auth;
+    let { iss, token } = state;
+
     let p;
     if (sequence._id) {
-      let url = `${token.iss}/api/sequences/${sequence._id}`;
+      let url = `${iss}/api/sequences/${sequence._id}`;
       p = axios.delete(url, authHeaders(token));
     } else {
       p = Promise.resolve();
