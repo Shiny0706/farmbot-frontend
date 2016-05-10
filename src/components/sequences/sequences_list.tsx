@@ -25,7 +25,7 @@ interface SequencesListProps {
   auth: AuthToken;
 }
 
-export function SequencesList({sequences, dispatch, auth}: SequencesListProps) {
+export function SequencesList({sequences, dispatch}: SequencesListProps) {
     return( <div>
               <div className="widget-wrapper sequences-widget">
                 <div className="row">

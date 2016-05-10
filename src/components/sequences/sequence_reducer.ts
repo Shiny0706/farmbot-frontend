@@ -102,10 +102,10 @@ let action_handlers = {
         return newState;
     },
     DELETE_SEQUENCE_OK: function(state: SequenceReducerState,
-        action: DeleteSequenceOk) {
-    let newState = cloneDeep<SequenceReducerState>(state);
-    let index = newState.current;
-    _.remove(newState.all, action.payload);
+                                 action: DeleteSequenceOk) {
+    let { index } = action.payload
+        , newState = cloneDeep<SequenceReducerState>(state);
+    _.pullAt(newState.all, index);
     newState.current = ((index === 0) ? index : newState.current - 1);
     return newState;
   },

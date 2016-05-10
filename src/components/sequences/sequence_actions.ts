@@ -5,7 +5,8 @@ import { SequenceOptions,
          Step,
          UnplacedStep,
          Sequence,
-         Color } from "./interfaces";
+         Color,
+         SequenceReducerState } from "./interfaces";
 import { success, error } from "../../logger";
 
 let colors: Array<Color> = ["blue", "green", "yellow", "orange", "purple", "pink", "gray", "red"];
@@ -167,35 +168,58 @@ export function selectSequence(index: number): SelectSequence {
   };
 }
 
-export function deleteSequence(sequence: Sequence) {
+export function deleteSequence(
+  seqInx: number /** Index within current selected sequence */) {
   return (dispatch, getState) => {
-    let state: AuthState = getState().auth;
-    let { iss, token } = state;
-
-    let p;
-    if (sequence._id) {
-      let url = `${iss}/api/sequences/${sequence._id}`;
-      p = axios.delete(url, authHeaders(token));
-    } else {
-      p = Promise.resolve();
-    };
-    p.then(() => {
-      dispatch(deleteSequenceOk(sequence));
-    }, (no) => {
-      error("Unable to delete sequence");
+    dispatch({ type: "DELETE_SEQUENCE_START", payload: {} });
+    let authState: AuthState = getState().auth;
+    let sequenceState: SequenceReducerState = getState().sequences;
+    let sequence = sequenceState.all[sequenceState.current];
+    let index = sequenceState.current;
+    let { iss, token } = authState;
+    let handler = (sequence._id) ? deleteSavedSequence : deleteUnsavedSequence;
+    handler({ sequence, iss, token }).then(() => {
+      dispatch(deleteSequenceOk(sequence, index));
+    }, () => {
+        error("Unable to delete sequence");
+        dispatch({type: "DELETE_SEQUENCE_ERR", payload: {}});
     });
   };
 }
 
-export interface DeleteSequenceOk {
-  type: "DELETE_SEQUENCE_OK";
-  payload: Sequence;
+
+interface SequenceDeletionParams {
+  sequence: Sequence;
+  iss: string;
+  token: string;
 }
 
-export function deleteSequenceOk(sequence: Sequence): DeleteSequenceOk {
+function deleteSavedSequence({
+                                 sequence,
+                                 iss,
+                                 token
+                               }: SequenceDeletionParams) {
+  let url = `${iss}/api/sequences/${sequence._id}`;
+  return axios.delete(url, authHeaders(token));
+};
+
+function deleteUnsavedSequence(_: SequenceDeletionParams) {
+  return Promise.resolve();
+};
+
+export interface DeleteSequenceOk {
+  type: "DELETE_SEQUENCE_OK";
+  payload: {
+    sequence: Sequence;
+    index: number;
+  };
+}
+
+export function deleteSequenceOk(sequence: Sequence,
+                                 index: number): DeleteSequenceOk {
   return {
     type: "DELETE_SEQUENCE_OK",
-    payload: sequence
+    payload: {sequence, index}
   };
 };
 

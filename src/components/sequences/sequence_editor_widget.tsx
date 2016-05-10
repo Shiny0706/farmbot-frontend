@@ -31,8 +31,9 @@ let save = function(dispatch: Function, sequence: Sequence, token: AuthToken) {
 
 let destroy = function(dispatch: Function,
                        sequence: Sequence,
-                       token: AuthToken) {
-    return () => dispatch(deleteSequence(sequence));
+                       token: AuthToken,
+                       inx: number) {
+    return () => dispatch(deleteSequence(inx));
 };
 
 let performSeq = (dispatch, sequence) => (e) => {
@@ -56,7 +57,7 @@ export function SequenceEditorWidget({sequences, dispatch, auth}) {
                         Execute
                     </button>
                     <button className="red button-like widget-control"
-                        onClick={ destroy(dispatch, sequence, token) }>
+                        onClick={ destroy(dispatch, sequence, token, inx) }>
                         Delete
                     </button>
                     <div className="widget-header">
