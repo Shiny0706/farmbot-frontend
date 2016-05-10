@@ -288,8 +288,14 @@ export function execSequence(sequence: Sequence) {
              .execSequence(sequence)
              .then(
                (payload) => { dispatch({type: "EXEC_SEQUENCE_OK", payload}); },
-               // FIXME TODO HACK : Why doesn't this trigger the "*" event?
-               // I should not need to dispatch botError here :(
-               (e) => { dispatch(botError(e.error)); });
+               (e: string) => {
+                 // This needs to be fixed. FarmbotJS timer deferred promises
+                 // should be returning type Error, never string!
+                 console.dir(e);
+                 dispatch(botError({
+                   error: "Unable to execute sequence. See log for details.",
+                   method: "TODO: Fix Farmbotjs timer defer rejection"
+                 }));
+               });
   };
 };

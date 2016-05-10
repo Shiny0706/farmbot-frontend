@@ -1,7 +1,7 @@
-import { error, warning } from "../../logger";
 import { assign, cloneDeep } from "lodash";
 import { Step,
          Sequence,
+         UnplacedStep,
          SequenceReducerState } from "./interfaces";
 import { nullSequence } from "./sequence_actions";
 import { EditCurrentSequence,
@@ -40,16 +40,13 @@ let action_handlers = {
 
     PUSH_STEP: function(state: SequenceReducerState,
                         action: PushStep) {
-        let step = cloneDeep<Step>(action.payload.step);
         let newState = cloneDeep<SequenceReducerState>(state);
-        let index = action.payload.index;
-        let current_sequence = newState.all[newState.current] || populate(newState);
-        if (typeof index === "number") { // NOTE: index is optional
-            current_sequence.steps.splice(index, 0, step);
-        } else { //  If index unspecified, push to top of stack.
-            current_sequence.steps.push(step);
-        }
-        newState.all[newState.current].dirty = true;
+        let current_sequence = newState
+                                 .all[newState.current] || populate(newState);
+        let step = assign<any, Step>({}, action.payload.step);
+        current_sequence.steps.push(step);
+        current_sequence.steps = repositionSteps(current_sequence.steps);
+        current_sequence.dirty = true;
         return newState;
     },
 
@@ -74,11 +71,12 @@ let action_handlers = {
     },
 
     REMOVE_STEP: function(state: SequenceReducerState,
-        action: RemoveStep) {
+                          action: RemoveStep) {
         let newState = assign<{}, SequenceReducerState>({}, state);
         let seq = newState.all[newState.current];
         let index = action.payload.index;
         seq.steps = _.without(seq.steps, seq.steps[index]);
+        seq.steps = repositionSteps(seq.steps);
         seq.dirty = true;
         return newState;
     },
@@ -113,9 +111,7 @@ let action_handlers = {
   },
   ADD_SEQUENCE: function(state: SequenceReducerState, _action) {
     let newState = cloneDeep<SequenceReducerState>(state);
-    let before = cloneDeep(newState.all);
     populate(newState);
-    let after = cloneDeep(newState.all);
     return newState;
   }
 };
@@ -124,4 +120,13 @@ export function sequenceReducer(state = initialState, action) {
     let handler = (action_handlers[action.type] || action_handlers.DEFAULT);
     let result: SequenceReducerState = handler(state, action);
     return result;
+}
+
+/** Transforms input array of steps into new step array where all elements have
+    a position attirbute that is equal to their `index` in the array. */
+function repositionSteps(steps: (Step|UnplacedStep)[]): Step[] {
+  let transform = (step, position): Step => {
+    return assign<any, Step>({}, step, {position});
+  };
+  return steps.map(transform);
 }

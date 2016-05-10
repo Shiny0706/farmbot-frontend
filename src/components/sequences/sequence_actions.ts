@@ -3,6 +3,7 @@ import { AuthState } from "../auth/auth_reducer";
 import { authHeaders } from "../auth/util";
 import { SequenceOptions,
          Step,
+         UnplacedStep,
          Sequence,
          Color } from "./interfaces";
 import { success, error } from "../../logger";
@@ -69,15 +70,14 @@ export function editCurrentSequence(updates: SequenceOptions): EditCurrentSequen
 export interface PushStep {
   type: "PUSH_STEP";
   payload: {
-    step: Step;
-    index?: number;
+    step: UnplacedStep;
   };
 }
 
-export function pushStep(step: Step, index?: number): PushStep {
+export function pushStep(step: UnplacedStep): PushStep {
   return {
     type: "PUSH_STEP",
-    payload: {step, index}
+    payload: {step}
   };
 }
 
