@@ -71,5 +71,5 @@ export let catchMessage = (resp) => (choices: ResponseOutcome) => {
   let result = (isAmbiguous ? "_" : results.findKey((v) => !!v)) || "_";
   console.log(result);
   console.dir(resp);
-  return result;
+  choices[result](resp, result);
 };

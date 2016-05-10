@@ -23,8 +23,8 @@ let reducers = combineReducers({
   sequences,
   config
 });
-let storageKey = "storageKey";
-let lastState = JSON.parse(sessionStorage["lastState"] || "{}");
+let storageKey = "lastState";
+let lastState = JSON.parse(sessionStorage[storageKey] || "{}");
 let middleware = compose(applyMiddleware(thunk), reduxTools);
 export let store = createStore(reducers, lastState, middleware);
 store.subscribe(function(){

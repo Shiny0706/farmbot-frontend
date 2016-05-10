@@ -264,7 +264,8 @@ function botNotification(statusMessage) {
 }
 
 function unknownMessage(statusMessage: any) {
-  warning("FarmBot sent an unknown message. See log for details.");
+  warning("FarmBot sent an unknown message. See log for details.",
+          "Malformed Message");
   console.dir(statusMessage);
   return {
     type: "UNKNOWN_MESSAGE",
