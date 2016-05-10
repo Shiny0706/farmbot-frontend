@@ -1,6 +1,6 @@
 import { error, warning, success } from "../../logger";
-import { devices as bot } from "../../device";
 import * as _ from "lodash";
+import { BotState } from "./interfaces";
 
 let status = {
   NOT_READY: "never connected to device",
@@ -13,30 +13,33 @@ let status = {
   READY: "Bot ready"
 };
 
-let initialState = {
+let initialState: BotState = {
   status: status.NOT_READY,
-  axisBuffer: {},
-  settingsBuffer: {},
   stepSize: 1000,
-  hardware: {}
+  hardware: {},
+  axisBuffer: {},
+  settingsBuffer: {}
 };
-
-let action_handlers = {
+interface ActionHandlerDictionary {
+  [name: string]: (state: BotState, action: any) => BotState;
+}
+let action_handlers: ActionHandlerDictionary = {
   SETTING_TOGGLE_OK: function(state, action) {
     return this.READ_STATUS_OK(state, action);
   },
 
   COMMIT_SETTINGS_OK: function(state, action) {
-    return _.assign({}, state, {
+    let nextState = _.assign<any, BotState>({}, state, {
       settingsBuffer: {}
     });
+    return nextState;
   },
 
   COMMIT_AXIS_CHANGE_OK: function(oldState, action) {
     let hardware = _.assign({}, oldState.hardware, action.payload);
-    let state = _.assign({}, oldState);
+    let state = _.assign<any, BotState>({}, oldState);
 
-    return _.assign({}, state, {
+    return _.assign<any, BotState>({}, state, {
       axisBuffer: {},
       hardware
     });
@@ -50,7 +53,7 @@ let action_handlers = {
     let axisBuffer = _.assign({}, state.axisBuffer);
     axisBuffer[action.payload.key] = action.payload.val;
 
-    return _.assign({}, state, {
+    return _.assign<any, BotState>({}, state, {
       axisBuffer: axisBuffer
     });
   },
@@ -63,13 +66,13 @@ let action_handlers = {
     } else {
       delete settingsBuffer[action.payload.key];
     }
-    return _.assign({}, state, {
+    return _.assign<any, BotState>({}, state, {
       settingsBuffer: settingsBuffer
     });
   },
 
   CHANGE_STEP_SIZE: function(state, action) {
-    return _.assign({}, state, {
+    return _.assign<any, BotState>({}, state, {
       stepSize: action.payload
     });
   },
@@ -77,7 +80,7 @@ let action_handlers = {
   READ_STATUS_OK: function(state, action) {
     let hardware: any = _.assign({}, action.payload);
     delete hardware.method;
-    return _.assign({},
+    return _.assign<any, BotState>({},
       state, {
         hardware: hardware
       }, {
@@ -89,7 +92,7 @@ let action_handlers = {
     let statuses: any = _.assign({}, action.payload);
     let newState: any = _.assign({}, state);
     newState.hardware = _.assign({}, state.hardware, statuses);
-    return _.assign({}, newState);
+    return _.assign<any, BotState>({}, newState);
   },
 
   DEFAULT: function(state, action) {
@@ -105,7 +108,7 @@ let action_handlers = {
   },
 
   CONNECT_OK: function(state, action) {
-    return _.assign({},
+    return _.assign<any, BotState>({},
       state,
       action.payload, {
         status: status.CONNECTED,
@@ -114,13 +117,13 @@ let action_handlers = {
   },
 
   CONNECT_ERR: function(state, action) {
-    return _.assign({},
+    return _.assign<any, BotState>({},
       state, {
         status: status.WEBSOCKET_ERR
       });
   },
   CHANGE_DEVICE: function(state, action) {
-    return _.assign({},
+    return _.assign<any, BotState>({},
       state,
       action.payload);
   },
@@ -128,11 +131,8 @@ let action_handlers = {
   FETCH_DEVICE: function(state, action) {
     return state;
   },
-  FETCH_DEVICE_OK: function(state, {
-    action,
-    payload
-  }) {
-    return _.assign({},
+  FETCH_DEVICE_OK: function(state, { payload }) {
+    return _.assign<any, BotState>({},
       state,
       payload, {
         status: status.AWAITING_WEBSOCKET
@@ -146,7 +146,7 @@ let action_handlers = {
       error("Unable to download device data from server. " +
         "Check your internet connection.");
     };
-    return _.assign({},
+    return _.assign<any, BotState>({},
       state, {
         status: status.API_ERROR
       });
@@ -165,15 +165,22 @@ let action_handlers = {
     return state;
   },
   SAVE_DEVICE_OK: function(state, action) {
+    // TODO Move this into the action creator. Does not belong in a reducer.
     success("Device saved.");
-    return _.assign({}, state, action.payload, {
+    return _.assign<any, BotState>({}, state, action.payload, {
       dirty: false
     });
+  },
+  BOT_NOTIFICATION: function(state, action) {
+    let nextState = _.cloneDeep(state);
+    let newStatus = _.cloneDeep(action.payload);
+    _.assign<any, BotState>(nextState.hardware, newStatus);
+    return nextState;
   }
 };
 
 export function botReducer(state = initialState, action) {
-  let handler = (action_handlers[action.type] || action_handlers.DEFAULT);
+  let handler = (action_handlers[action.type] || action_handlers["DEFAULT"]);
   let result = handler.call(action_handlers, state, action);
   let newState = _.assign({}, result);
   return newState;
