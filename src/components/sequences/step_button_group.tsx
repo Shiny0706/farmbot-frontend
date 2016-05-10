@@ -1,12 +1,11 @@
 import * as React from "react";
 import { pushStep } from "./sequence_actions";
-import { Step as IStep,
-         UnplacedStep,
+import { UnplacedStep,
          StepCommand as Command,
          messageType } from "./interfaces";
 
 let addStep = (dispatch) =>
-              (step: IStep) =>
+              (step: UnplacedStep) =>
               (event) => { dispatch(pushStep(step)); };
 
 let step = function(message_type: messageType,
