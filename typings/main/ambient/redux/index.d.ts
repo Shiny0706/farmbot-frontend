@@ -34,6 +34,11 @@ declare namespace Redux {
         (obj: MiddlewareArg): Function;
     }
 
+    interface Action {
+      type: string;
+      payload: any;
+    }
+
     class Store {
         getReducer(): Reducer;
         replaceReducer(nextReducer: Reducer): void;

@@ -15,8 +15,7 @@ export function loadFromCdn(filename, filetype) {
         fileref = document.createElement("script");
         fileref.setAttribute("type", "text/javascript");
         fileref.setAttribute("src", filename);
-    }
-    else if (filetype === "css") { // if filename is an external CSS file
+    } else if (filetype === "css") { // if filename is an external CSS file
         fileref = document.createElement("link");
         fileref.setAttribute("rel", "stylesheet");
         fileref.setAttribute("type", "text/css");

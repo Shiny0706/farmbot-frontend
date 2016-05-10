@@ -2,9 +2,9 @@ import { Device } from "../../models/device";
 import { Farmbot } from "farmbot";
 import { store } from "../../store";
 import { devices } from "../../device";
-import { success, error, warning } from "../../logger";
+import { error, warning } from "../../logger";
 import { Sequence } from "../sequences/interfaces";
-import { catchMessage, RPCError, BotErrorResponse } from "./message_catcher";
+import { catchMessage, RPCError } from "./message_catcher";
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
@@ -163,9 +163,11 @@ function readStatusOk(status) {
 }
 
 function readStatusErr(msg) {
-    error("Attempted to read status, but failed. See logs for details.",
-        "Read Status Error");
-    console.warn("READSTATUSERR", msg);
+    error("Did you configure your bot? Is it online?", "Can't read status");
+    return {
+      type: "READ_STATUS_ERR",
+      payload: msg
+    };
 }
 
 export function changeDevice(attributesThatWillChange = { dirty: true }) {
@@ -239,14 +241,6 @@ function saveDeviceErr(err) {
     };
 }
 
-function fetchDeviceOk(bot) {
-    return {
-        type: "FETCH_DEVICE_OK",
-        payload: bot
-    };
-}
-
-
 function botChange(statusMessage) {
     return {
       type: "BOT_CHANGE",
@@ -270,7 +264,8 @@ function botNotification(statusMessage) {
 }
 
 function unknownMessage(statusMessage: any) {
-  warning("FarmBot sent an unknown message. See log for details.");
+  warning("FarmBot sent an unknown message. See log for details.",
+          "Malformed Message");
   console.dir(statusMessage);
   return {
     type: "UNKNOWN_MESSAGE",
@@ -293,8 +288,14 @@ export function execSequence(sequence: Sequence) {
              .execSequence(sequence)
              .then(
                (payload) => { dispatch({type: "EXEC_SEQUENCE_OK", payload}); },
-               // FIXME TODO HACK : Why doesn't this trigger the "*" event?
-               // I should not need to dispatch botError here :(
-               (e) => { dispatch(botError(e.error)); });
+               (e: string) => {
+                 // This needs to be fixed. FarmbotJS timer deferred promises
+                 // should be returning type Error, never string!
+                 console.dir(e);
+                 dispatch(botError({
+                   error: "Unable to execute sequence. See log for details.",
+                   method: "TODO: Fix Farmbotjs timer defer rejection"
+                 }));
+               });
   };
 };

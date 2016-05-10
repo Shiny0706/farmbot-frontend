@@ -1,10 +1,12 @@
 import * as axios from "axios";
-import { AuthToken, AuthResponseToken } from "../auth/auth_actions";
+import { AuthState } from "../auth/auth_reducer";
 import { authHeaders } from "../auth/util";
 import { SequenceOptions,
          Step,
+         UnplacedStep,
          Sequence,
-         Color } from "./interfaces";
+         Color,
+         SequenceReducerState } from "./interfaces";
 import { success, error } from "../../logger";
 
 let colors: Array<Color> = ["blue", "green", "yellow", "orange", "purple", "pink", "gray", "red"];
@@ -36,11 +38,13 @@ function fetchSequencesOk(sequences: Array<Sequence>): FetchSequencesOk {
   };
 }
 
-export function fetchSequences(token: AuthResponseToken) {
-  return (dispatch: Function) => {
-    let url = token.unencoded.iss;
-    let headers = authHeaders(token.unencoded);
-    axios.get<Array<Sequence>>(`${url}api/sequences`, headers)
+export function fetchSequences() {
+  return (dispatch: Function, getState) => {
+    let state: AuthState = getState().auth;
+    let { iss, token } = state;
+
+    let headers = authHeaders(token);
+    axios.get<Array<Sequence>>(`${iss}/api/sequences`, headers)
       .then(({data}) => {
         dispatch(fetchSequencesOk(data));
       }, (e: Error) => {
@@ -67,15 +71,14 @@ export function editCurrentSequence(updates: SequenceOptions): EditCurrentSequen
 export interface PushStep {
   type: "PUSH_STEP";
   payload: {
-    step: Step;
-    index?: number;
+    step: UnplacedStep;
   };
 }
 
-export function pushStep(step: Step, index?: number): PushStep {
+export function pushStep(step: UnplacedStep): PushStep {
   return {
     type: "PUSH_STEP",
-    payload: {step, index}
+    payload: {step}
   };
 }
 
@@ -109,14 +112,11 @@ export function removeStep(index: number): RemoveStep {
   };
 }
 
-interface SaveSequenceParams {
-  sequence: Sequence;
-  token: AuthToken;
-}
-
-export function saveSequence({sequence, token}: SaveSequenceParams): (d: Function) => Axios.IPromise<any> {
-  return dispatch => {
-    let url = token.iss + "api/sequences/";
+export function saveSequence(sequence: Sequence) {
+  return function(dispatch, getState) {
+    let state: AuthState = getState().auth;
+    let { iss, token } = state;
+    let url = `${iss}/api/sequences/`;
     let method;
     if (sequence._id) {
       url += sequence._id;
@@ -127,7 +127,8 @@ export function saveSequence({sequence, token}: SaveSequenceParams): (d: Functio
     return method(url, sequence, authHeaders(token))
     .then(function(resp) {
       let seq: Sequence = resp.data;
-      success(`Saved ${("'" + seq.name + "'") || "sequence"}`);      dispatch(saveSequenceOk(resp.data));
+      success(`Saved ${("'" + seq.name + "'") || "sequence"}`);
+      dispatch(saveSequenceOk(resp.data));
     },
     function(err) {
       let msg: string = _.values(err.data).join("\n");
@@ -167,32 +168,58 @@ export function selectSequence(index: number): SelectSequence {
   };
 }
 
-export function deleteSequence(sequence: Sequence, token: AuthToken) {
-  return (dispatch) => {
-    let p;
-    if (sequence._id) {
-      let url = `${token.iss}api/sequences/${sequence._id}`;
-      p = axios.delete(url, authHeaders(token));
-    } else {
-      p = Promise.resolve();
-    };
-    p.then(() => {
-      dispatch(deleteSequenceOk(sequence));
-    }, (no) => {
-      error("Unable to delete sequence");
+export function deleteSequence(
+  seqInx: number /** Index within current selected sequence */) {
+  return (dispatch, getState) => {
+    dispatch({ type: "DELETE_SEQUENCE_START", payload: {} });
+    let authState: AuthState = getState().auth;
+    let sequenceState: SequenceReducerState = getState().sequences;
+    let sequence = sequenceState.all[sequenceState.current];
+    let index = sequenceState.current;
+    let { iss, token } = authState;
+    let handler = (sequence._id) ? deleteSavedSequence : deleteUnsavedSequence;
+    handler({ sequence, iss, token }).then(() => {
+      dispatch(deleteSequenceOk(sequence, index));
+    }, () => {
+        error("Unable to delete sequence");
+        dispatch({type: "DELETE_SEQUENCE_ERR", payload: {}});
     });
   };
 }
 
-export interface DeleteSequenceOk {
-  type: "DELETE_SEQUENCE_OK";
-  payload: Sequence;
+
+interface SequenceDeletionParams {
+  sequence: Sequence;
+  iss: string;
+  token: string;
 }
 
-export function deleteSequenceOk(sequence: Sequence): DeleteSequenceOk {
+function deleteSavedSequence({
+                                 sequence,
+                                 iss,
+                                 token
+                               }: SequenceDeletionParams) {
+  let url = `${iss}/api/sequences/${sequence._id}`;
+  return axios.delete(url, authHeaders(token));
+};
+
+function deleteUnsavedSequence(_: SequenceDeletionParams) {
+  return Promise.resolve();
+};
+
+export interface DeleteSequenceOk {
+  type: "DELETE_SEQUENCE_OK";
+  payload: {
+    sequence: Sequence;
+    index: number;
+  };
+}
+
+export function deleteSequenceOk(sequence: Sequence,
+                                 index: number): DeleteSequenceOk {
   return {
     type: "DELETE_SEQUENCE_OK",
-    payload: sequence
+    payload: {sequence, index}
   };
 };
 

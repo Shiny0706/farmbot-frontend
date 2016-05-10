@@ -1,4 +1,4 @@
-import thunk                          from "redux-thunk";
+import thunk from "redux-thunk";
 import {
   compose,
   createStore,
@@ -11,10 +11,9 @@ import { botReducer as bot } from "./components/devices/bot_reducer";
 import { plantReducer as plants } from "./reducers/plant_reducer";
 import { configReducer as config } from "./components/config/config_reducer";
 import { routerReducer as routing } from "react-router-redux";
-
-let storageKey = "lastState";
-let stateAsAString = sessionStorage[storageKey] || "{}";
-let lastState = (JSON.parse(stateAsAString));
+// Activate dev tools (if the browser has them).
+declare var devToolsExtension: any;
+let reduxTools = !!window["devToolsExtension"] ? devToolsExtension() : (f) => f;
 
 let reducers = combineReducers({
   routing,
@@ -24,9 +23,9 @@ let reducers = combineReducers({
   sequences,
   config
 });
-declare var devToolsExtension: any;
-let middleware = compose(applyMiddleware(thunk),
-                         !!window["devToolsExtension"] ? devToolsExtension() : f => f);
+let storageKey = "lastState";
+let lastState = JSON.parse(sessionStorage[storageKey] || "{}");
+let middleware = compose(applyMiddleware(thunk), reduxTools);
 export let store = createStore(reducers, lastState, middleware);
 store.subscribe(function(){
   sessionStorage[storageKey] = JSON.stringify(store.getState());

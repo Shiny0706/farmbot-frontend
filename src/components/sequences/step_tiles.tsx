@@ -1,17 +1,16 @@
 import * as React from "react";
 import { changeStep, removeStep, pushStep } from "./sequence_actions";
 import { assign } from "lodash";
-import { Step, Sequence, messageType } from "./interfaces";
+import { Step } from "./interfaces";
 
 interface CopyParams {
   dispatch: Function;
   step: Step;
-  index: number;
 }
 
-function copy({dispatch, step, index}: CopyParams) {
+function copy({dispatch, step}: CopyParams) {
   let copy = assign<{}, Step>({}, step);
-  dispatch(pushStep(copy, (index + 1)));
+  dispatch(pushStep(copy));
 };
 
 interface RemoveParams {
@@ -67,7 +66,7 @@ interface StepDictionary {
   [stepName: string]: StepTile;
 };
 
-let Pending = ({dispatch, step, index}: StepParams) => {
+let Pending = (_: StepParams) => {
   return <div>Coming soon!</div>;
 };
 
@@ -90,7 +89,7 @@ export let stepTiles: StepDictionary = {
                         <input className="step-label" placeholder="Move Relative"/>
                         <i className="fa fa-arrows-v step-control" />
                         <i className="fa fa-clone step-control"
-                           onClick={ () => copy({dispatch, step, index}) } />
+                           onClick={ () => copy({dispatch, step}) } />
                         <i className="fa fa-trash step-control"
                            onClick={ () => remove({dispatch, index}) } />
                       </div>
@@ -144,7 +143,7 @@ export let stepTiles: StepDictionary = {
                       <input className="step-label" placeholder="Move Absolute"/>
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
-                         onClick={ () => copy({dispatch, step, index}) } />
+                         onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
                     </div>
@@ -221,7 +220,7 @@ export let stepTiles: StepDictionary = {
                       <input placeholder="Write Pin"/>
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
-                         onClick={ () => copy({dispatch, step, index}) } />
+                         onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
                     </div>
@@ -269,7 +268,7 @@ export let stepTiles: StepDictionary = {
                       <input className="step-label" placeholder="Wait"/>
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
-                         onClick={ () => copy({dispatch, step, index}) } />
+                         onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
                     </div>
@@ -303,7 +302,7 @@ export let stepTiles: StepDictionary = {
                       <input className="step-label" placeholder="Send Message"/>
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
-                         onClick={ () => copy({dispatch, step, index}) } />
+                         onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
                     </div>
@@ -337,7 +336,7 @@ export let stepTiles: StepDictionary = {
                       <input className="step-label" placeholder="Read Pin"/>
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
-                         onClick={ () => copy({dispatch, step, index}) } />
+                         onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
                     </div>
