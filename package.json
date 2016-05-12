@@ -1,6 +1,6 @@
 {
   "name": "farmbot-web-frontend",
-  "version": "0.2.0",
+  "version": "1.1.0",
   "description": "Farmbot web frontend.",
   "main": "dist/fb_frontend.js",
   "repository": {
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "axios": "^0.11.0",
-    "farmbot": "0.4.1",
+    "farmbot": "1.1.0",
     "joi-browser": "^8.0.5",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
