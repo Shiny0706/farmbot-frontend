@@ -1,4 +1,4 @@
-import * as Joi from "joi";
+import * as Joi from "joi-browser";
 import { is } from "../../util";
 
 interface BotResponse {

@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import * as $ from "jquery";
-import * as Joi from "joi";
+import * as Joi from "joi-browser";
 
 export function convertFormToObject(formEl) {
   let inputs = $(formEl.querySelectorAll("input"));

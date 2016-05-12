@@ -2,13 +2,14 @@ import * as React from "react";
 import { changeStep, removeStep, pushStep } from "./sequence_actions";
 import { assign } from "lodash";
 import { Step } from "./interfaces";
+import { Help } from "../help";
 
 interface CopyParams {
   dispatch: Function;
   step: Step;
 }
 
-function copy({dispatch, step}: CopyParams) {
+export function copy({dispatch, step}: CopyParams) {
   let copy = assign<{}, Step>({}, step);
   dispatch(pushStep(copy));
 };
@@ -18,7 +19,7 @@ interface RemoveParams {
   dispatch: Function;
 }
 
-function remove({dispatch, index}: RemoveParams) {
+export function remove({dispatch, index}: RemoveParams) {
   dispatch(removeStep(index));
 }
 
@@ -41,20 +42,30 @@ let updateStep = function ({ dispatch,
   };
 };
 
-interface IStepInputBox {
+interface IStepInput {
   step: Step;
-  field: string;
+  field: "speed"
+         | "pin"
+         | "value"
+         | "mode"
+         | "operator"
+         | "x"
+         | "y"
+         | "z"
+         | "stub" // For unimplemented features.
+         | "variable"
+         ;
   dispatch: Function;
   index: number;
 }
 
-function StepInputBox({step, field, dispatch, index}: IStepInputBox) {
+export function StepInputBox({step, field, dispatch, index}: IStepInput) {
   return <input type="text"
                 value={ step.command[field] }
                 onChange={ updateStep({dispatch, step, index, field}) } />;
 }
 
-interface StepParams {
+export interface StepParams {
   dispatch: Function;
   step: Step;
   index: number;
@@ -66,12 +77,16 @@ interface StepDictionary {
   [stepName: string]: StepTile;
 };
 
-let Pending = (_: StepParams) => {
-  return <div>Coming soon!</div>;
+let Pending = ({ dispatch, index }: StepParams) => {
+  return <div>
+              <Help text="Not done yet :(" />
+              Coming soon!
+              Delete: <i className="fa fa-trash step-control"
+                         onClick={ () => remove({dispatch, index}) } />
+         </div>;
 };
 
 export let stepTiles: StepDictionary = {
-  "if_statement": Pending,
   "emergency_stop": Pending,
   "home_all": Pending,
   "home_x": Pending,
@@ -80,6 +95,7 @@ export let stepTiles: StepDictionary = {
   "read_status": Pending,
   "write_parameter": Pending,
   "read_parameter": Pending,
+  "if_statement": Pending,
   move_relative: function({dispatch, step, index}: StepParams) {
       return( <div>
                 <div className="step-wrapper">
@@ -188,21 +204,21 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="x-offset"/>
+                                        field="stub"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
                           <label>Y-Offset (mm)</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="y-offset"/>
+                                        field="stub"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
                           <label>Z-Offset (mm)</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="z-offset"/>
+                                        field="stub"/>
                         </div>
                       </div>
                     </div>
@@ -283,7 +299,7 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="time"/>
+                                        field="value"/>
                         </div>
                       </div>
                     </div>
@@ -317,7 +333,7 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="message"/>
+                                        field="value"/>
                         </div>
                       </div>
                     </div>
@@ -358,7 +374,7 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="label"/>
+                                        field="stub"/>
                         </div>
                       </div>
                     </div>

@@ -7,7 +7,7 @@
 
 // TODO express type of Schema in a type-parameter (.default, .valid, .example etc)
 
-declare module 'joi' {
+declare module 'joi-browser' {
 
 	export interface ValidationOptions {
 		/**

@@ -92,7 +92,7 @@ export function StepButtonGroup({dispatch}) {
                                     <button className=
                                             "full-width text-left purple-block block-header block"
                                             onClick={ clickToAdd(step("if_statement")) }>
-                                        IF STATEMENT
+                                        IF STATEMENT*
                                         <i className="fa fa-arrows block-control" />
                                     </button>
                                 </div>
