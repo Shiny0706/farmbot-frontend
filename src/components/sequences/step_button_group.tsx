@@ -100,7 +100,8 @@ export function StepButtonGroup({dispatch}) {
                             <div className="col-xs-6">
                                 <div className="block-wrapper">
                                     <button className=
-                                            "full-width text-left gray-block block-header block">
+                                            "full-width text-left gray-block block-header block"
+                                            onClick={ clickToAdd(step("if_statement")) }>
                                         EXECUTE*
                                         <i className="fa fa-arrows block-control" />
                                     </button>
