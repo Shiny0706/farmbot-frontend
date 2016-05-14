@@ -65,7 +65,7 @@ export function ExecuteBlock({dispatch, step, index, sequence, sequences}: StepP
         <div className="step-wrapper">
             <div className="row">
                 <div className="col-sm-12">
-                    <div className="step-header move-relative-step">
+                    <div className="step-header execute-step">
                         <input className="step-label" placeholder="Execute"/>
                         <i className="fa fa-arrows-v step-control" />
                         <i className="fa fa-clone step-control"
@@ -77,10 +77,10 @@ export function ExecuteBlock({dispatch, step, index, sequence, sequences}: StepP
             </div>
             <div className="row">
                 <div className="col-sm-12">
-                    <div className="step-content move-relative-step">
+                    <div className="step-content execute-step">
                         <div className="row">
-                            <div className="col-xs-8 col-md-4">
-                                <label>Sequence: </label>
+                            <div className="col-xs-12">
+                                <label>Sequence</label>
                                 <SequenceSelectBox dispatch={dispatch}
                                     step={step}
                                     sequence={sequence}

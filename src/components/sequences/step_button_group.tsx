@@ -33,7 +33,7 @@ export function StepButtonGroup({dispatch}) {
             </div>
             <div className="row">
                 <div className="col-sm-12">
-                    <div className="widget-content">
+                    <div className="widget-content no-bottom-padding">
                         <div className="row">
                             <div className="col-xs-6">
                                 <div className="block-wrapper">

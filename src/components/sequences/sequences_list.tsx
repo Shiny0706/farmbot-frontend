@@ -5,7 +5,8 @@ import { Sequence } from "./interfaces";
 import { AuthToken } from "../auth/auth_actions";
 
 let buttonList = (dispatch: Function) => (seq: Sequence, index: number) => {
-  let css = ["block",
+  let css = ["block-wrapper",
+             "block",
              "full-width",
              "text-left",
              `${ seq.color || "purple" }-block`,
@@ -39,13 +40,11 @@ export function SequencesList({sequences, dispatch}: SequencesListProps) {
                     </div>
                   </div>
                 </div>
-                <div className="row">
-                  <div className="col-sm-12">
-                    <div className="widget-content">
-                      <div className="block-wrapper">
-                        <div>
-                          { sequences.all.map(buttonList(dispatch))}
-                        </div>
+                <div className="widget-content no-bottom-padding">
+                  <div className="row">
+                    <div className="col-sm-12">
+                      <div>
+                        { sequences.all.map(buttonList(dispatch))}
                       </div>
                     </div>
                   </div>
