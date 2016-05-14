@@ -169,24 +169,37 @@ export function selectSequence(index: number): SelectSequence {
 }
 
 export function deleteSequence(
-  seqInx: number /** Index within current selected sequence */) {
+  seqInx: number) {
   return (dispatch, getState) => {
     dispatch({ type: "DELETE_SEQUENCE_START", payload: {} });
-    let authState: AuthState = getState().auth;
-    let sequenceState: SequenceReducerState = getState().sequences;
-    let sequence = sequenceState.all[sequenceState.current];
-    let index = sequenceState.current;
-    let { iss, token } = authState;
-    let handler = (sequence._id) ? deleteSavedSequence : deleteUnsavedSequence;
-    handler({ sequence, iss, token }).then(() => {
-      dispatch(deleteSequenceOk(sequence, index));
-    }, () => {
-        error("Unable to delete sequence");
-        dispatch({type: "DELETE_SEQUENCE_ERR", payload: {}});
-    });
+
+    if (!confirm("Delete sequence?")) {
+      cancelDeletion(dispatch, getState);
+    } else {
+      confirmDeletion(dispatch, getState);
+    }
   };
 }
 
+function cancelDeletion(dispatch, _) {
+  dispatch({ type: "DELETE_SEQUENCE_CANCEL", payload: {} });
+}
+
+function confirmDeletion(dispatch, getState) {
+  let authState: AuthState = getState().auth;
+  let sequenceState: SequenceReducerState = getState().sequences;
+  let sequence = sequenceState.all[sequenceState.current];
+  let index = sequenceState.current;
+  let { iss, token } = authState;
+  let handler = (sequence._id) ? deleteSavedSequence : deleteUnsavedSequence;
+
+  handler({ sequence, iss, token }).then(() => {
+    dispatch(deleteSequenceOk(sequence, index));
+  }, () => {
+      error("Unable to delete sequence");
+      dispatch({type: "DELETE_SEQUENCE_ERR", payload: {}});
+  });
+}
 
 interface SequenceDeletionParams {
   sequence: Sequence;

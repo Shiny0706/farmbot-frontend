@@ -3,6 +3,8 @@ import { changeStep, removeStep, pushStep } from "./sequence_actions";
 import { assign } from "lodash";
 import { Step } from "./interfaces";
 import { Help } from "../help";
+import { ExecuteBlock } from "./execute_block";
+import { Sequence } from "./interfaces.ts";
 
 interface CopyParams {
   dispatch: Function;
@@ -69,6 +71,8 @@ export interface StepParams {
   dispatch: Function;
   step: Step;
   index: number;
+  sequence: Sequence;
+  sequences: Sequence[];
 }
 
 export type StepTile = (input: StepParams) => JSX.Element;
@@ -87,15 +91,16 @@ let Pending = ({ dispatch, index }: StepParams) => {
 };
 
 export let stepTiles: StepDictionary = {
-  "emergency_stop": Pending,
-  "home_all": Pending,
-  "home_x": Pending,
-  "home_y": Pending,
-  "home_z": Pending,
-  "read_status": Pending,
-  "write_parameter": Pending,
-  "read_parameter": Pending,
-  "if_statement": Pending,
+  emergency_stop: Pending,
+  home_all: Pending,
+  home_x: Pending,
+  home_y: Pending,
+  home_z: Pending,
+  read_status: Pending,
+  write_parameter: Pending,
+  read_parameter: Pending,
+  if_statement: ExecuteBlock,
+  execute: Pending,
   move_relative: function({dispatch, step, index}: StepParams) {
       return( <div>
                 <div className="step-wrapper">

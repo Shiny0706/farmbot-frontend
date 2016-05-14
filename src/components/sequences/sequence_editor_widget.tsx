@@ -8,14 +8,16 @@ import { editCurrentSequence,
          nullSequence } from "./sequence_actions";
 import { stepTiles, StepTile } from "./step_tiles";
 let Oops: StepTile = (_) => { return <div>Whoops! Not a valid message_type</div>; };
-let StepList = ({sequence, dispatch}) => {
+let StepList = ({sequence, sequences, dispatch}) => {
     return (<div>
         { sequence.steps.map((step: IStep, inx: number) => {
             let Step = stepTiles[step.message_type] || Oops;
             return <Step step={ step }
                          key={ inx }
                          index={ inx }
-                         dispatch={ dispatch } />;
+                         dispatch={ dispatch }
+                         sequence={ sequence }
+                         sequences={ sequences } />;
         }) }
     </div>);
 };
@@ -67,12 +69,14 @@ export function SequenceEditorWidget({sequences, dispatch, auth}) {
             </div>
             <div className="row">
                 <div className="col-sm-12">
-                    <div className="widget-content">
+                    <div className="widget-content no-bottom-padding">
                         <input placeholder="Sequence Name"
                             value={ sequence.name }
                             onChange={ handleNameUpdate(dispatch) }
                             type="text" />
-                        { <StepList sequence={ sequence } dispatch={ dispatch } /> }
+                        { <StepList sequence={ sequence }
+                                    dispatch={ dispatch }
+                                    sequences={ sequences.all } /> }
                         <div className="row">
                             <div className="col-sm-12">
                                 <div className="drag-drop-area padding">DRAG ACTIONS HERE</div>

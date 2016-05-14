@@ -16,7 +16,6 @@ import {
 
 import App from "./components/app";
 import Dashboard from "./components/dashboard";
-// TODO connect() all of these instead of that wrap() stuff.
 import { Controls } from "./components/controls";
 import { Devices } from "./components/devices";
 import { Sequences } from "./components/sequences/sequences";
