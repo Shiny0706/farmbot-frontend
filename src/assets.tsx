@@ -42,6 +42,7 @@ require("!style!css!sass!./css/map.scss");
 require("!style!css!sass!./css/navbar.scss");
 require("!style!css!sass!./css/regimen_builder_mobile.scss");
 require("!style!css!sass!./css/search.scss");
+require("!style!css!sass!./css/status_ticker.scss");
 require("!style!css!sass!./css/steps.scss");
 require("!style!css!sass!./css/tables.scss");
 require("!style!css!sass!./css/tooltips.scss");
