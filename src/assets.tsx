@@ -36,6 +36,7 @@ require("!style!css!sass!./css/farm_designer.scss");
 require("!style!css!sass!./css/farm_designer_mobile.scss");
 require("!style!css!sass!./css/farmbot.scss");
 require("!style!css!sass!./css/inputs.scss");
+require("!style!css!sass!./css/labels.scss");
 require("!style!css!sass!./css/farm_designer_panels.scss");
 require("!style!css!sass!./css/map.scss");
 require("!style!css!sass!./css/navbar.scss");
