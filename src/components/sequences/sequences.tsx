@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Navbar } from "../../components/navbar";
+import { Navbar } from "../nav/navbar";
 import { SequencesList } from "./sequences_list";
 import { StepButtonGroup } from "./step_button_group";
 import { SequenceEditorWidget } from "./sequence_editor_widget";

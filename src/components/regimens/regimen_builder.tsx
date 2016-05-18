@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Navbar } from "../../components/navbar";
+import { Navbar } from "../nav/navbar";
 import { BulkSchedulerWidget } from "./bulk_scheduler_widget";
 import { RegimensWidget } from "./regimens_widget";
 import { RegimenEditorWidget } from "./regimen_editor_widget";

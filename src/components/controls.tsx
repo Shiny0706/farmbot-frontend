@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Navbar } from "../components/navbar";
+import { Navbar } from "../components/nav/navbar";
 import { ToggleButton } from "./toggle_button";
 import { DirectionButton } from "./direction_button";
 import { sendCommand,

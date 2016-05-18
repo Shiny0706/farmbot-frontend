@@ -1,11 +1,16 @@
 import * as React from "react";
 import { Link } from "react-router";
-import { sendCommand } from "../components/devices/bot_actions";
-import { AuthState } from "./auth/auth_reducer";
+import { sendCommand } from "../devices/bot_actions";
+import { AuthState } from "../auth/auth_reducer";
+import { BotState } from "../devices/interfaces";
 
-// TODO: Refactor getState() out of here.
-let LogoutButton = ({auth}: {auth: AuthState}) => {
+interface NavButtonState {
+  auth: AuthState;
+  dispatch: Function;
+  bot: BotState;
+}
 
+let LogoutButton = ({ auth }: NavButtonState) => {
   if (!auth.authenticated) { return <span></span>; }
   return <a className="logout-button"
       onClick={() => {
@@ -17,28 +22,31 @@ let LogoutButton = ({auth}: {auth: AuthState}) => {
 };
 
 // TODO: Rick, make this real!
-let SyncButton = ({auth}: {auth: AuthState}) => {
+let SyncButton = ({auth, dispatch}: NavButtonState) => {
   if (!auth.authenticated) { return <span></span>; }
-  return <button className="nav-sync button-like green">
-    Synced
+  return <button className="nav-sync button-like green"
+                 onClick={
+                   () => dispatch(sendCommand({name: "syncSequence"}))
+                 }>
+      Sync
     </button>;
 };
 
 // TODO: Rick, make this real!
-let StatusTicker = ({auth}: {auth: AuthState}) => {
+let StatusTicker = ({auth, bot}: NavButtonState) => {
   if (!auth.authenticated) { return <span></span>; }
   return <div className="status-ticker-wrapper">
       <div className="status-ticker-light" />
-      <label className="status-ticker-message">FarmBot is idle</label>
+      <label className="status-ticker-message">{ bot.status }</label>
     </div>;
 };
 
 // TODO: Rick, make this real!
-let EStopButton = ({auth}: {auth: AuthState}) => {
+let EStopButton = ({auth, dispatch}: NavButtonState) => {
   if (!auth.authenticated) { return <span></span>; }
   return <button className="nav-e-stop button-like red"
             type="button"
-            onClick={ () => this.props.dispatch(sendCommand({name: "emergencyStop" })) } >
+            onClick={ () => dispatch(sendCommand({name: "emergencyStop" })) } >
     E-Stop
     </button>;
 };
