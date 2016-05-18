@@ -1,14 +1,12 @@
 import * as React from "react";
-import { Navbar } from "../components/navbar";
+import { Navbar } from "../components/nav/navbar";
 import { addDevice,
          changeSettingsBuffer,
          commitSettingsChanges,
          settingToggle,
-         fetchDevice,
          changeDevice } from "./devices/bot_actions";
 import { connect } from "react-redux";
 import { convertFormToObject } from "../util.ts";
-import { store } from "../store";
 import { ToggleButton } from "./toggle_button";
 import { devices } from "../device";
 
@@ -84,7 +82,7 @@ class DevicesPage extends React.Component<any, any> {
     let auth = this.props.auth;
     return (
       <div>
-        <Navbar/>
+        <Navbar { ...this.props } />
         <div className="all-content-wrapper">
           <div>
             <div className="row">
