@@ -26,8 +26,8 @@ class FarmDesignerPage extends React.Component<any, any> {
   render() {
     return (
         <div className="farm-designer">
-          <Navbar/>
-          <div className="farm-designer-body">
+        <Navbar { ...this.props } />
+            <div className="farm-designer-body">
             <div className="farm-designer-left">
               { this.renderPanel1() }
             </div>

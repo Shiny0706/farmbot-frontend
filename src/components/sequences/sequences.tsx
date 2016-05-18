@@ -10,7 +10,7 @@ export class Sequences  extends React.Component<any, any> {
   render() {
     return (
       <div>
-        <Navbar/>
+        <Navbar {...this.props} />
         <div className="all-content-wrapper">
           <div className="row">
             <div className="col-md-3 col-sm-12">

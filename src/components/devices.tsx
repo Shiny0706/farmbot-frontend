@@ -84,7 +84,7 @@ class DevicesPage extends React.Component<any, any> {
     let auth = this.props.auth;
     return (
       <div>
-        <Navbar/>
+        <Navbar { ...this.props } />
         <div className="all-content-wrapper">
           <div>
             <div className="row">

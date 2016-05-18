@@ -17,7 +17,7 @@ class XRegimens extends React.Component<RegimenProps, {}> {
   render() {
     return (
       <div>
-        <Navbar/>
+        <Navbar {...this.props} />
         <div className="all-content-wrapper">
           <div className="row">
             <div className="col-md-3 col-sm-12 col-md-offset-1 hidden-xs">
