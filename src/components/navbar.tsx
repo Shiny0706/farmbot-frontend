@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router";
 import { store } from "../store";
+import { sendCommand } from "../components/devices/bot_actions";
 let LogoutButton = (props) => {
   let isAuthed = store.getState().auth.authenticated;
   if (isAuthed) {
@@ -15,6 +16,31 @@ let LogoutButton = (props) => {
     return <span></span>;
   }
 };
+
+// TODO: Rick, make this real!
+let SyncButton = (props) => {
+  return <button className="nav-sync button-like green">
+    Synced
+    </button>;
+};
+
+// TODO: Rick, make this real!
+let StatusTicker = (props) => {
+  return <div className="status-ticker-wrapper">
+      <div className="status-ticker-light" />
+      <label className="status-ticker-message">FarmBot is idle</label>
+    </div>;
+};
+
+// TODO: Rick, make this real!
+let EStopButton = (props) => {
+  return <button className="nav-e-stop button-like red"
+            type="button"
+            onClick={ () => this.props.dispatch(sendCommand({name: "emergencyStop" })) } >
+    E-Stop
+    </button>;
+};
+
 // TODO: Convert to ES6 class or stateless component and add a display name.
 export let Navbar = React.createClass({
   // TODO HACK : Add CONFIG.BASE_URL instead of hardcoding /app.
@@ -48,7 +74,10 @@ export let Navbar = React.createClass({
                 })
               }
             </ul>
+            <SyncButton { ...this.props }/>
+            <StatusTicker { ...this.props }/>
             <LogoutButton { ...this.props }/>
+            <EStopButton { ...this.props }/>
           </div>
         </div>
       </nav>

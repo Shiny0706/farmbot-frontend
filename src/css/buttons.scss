@@ -108,6 +108,19 @@ button {
     padding: .5rem 1.6rem;
     font-size: 1.2rem!important;
   }
+  &.nav-sync {
+    float: left;
+    margin-left: 2rem;
+    margin-top: 1.25rem;
+    padding: .3rem 1rem;
+    font-size: 1.2rem!important;
+  }
+  &.nav-e-stop {
+    margin-right: 2rem;
+    margin-top: 1.25rem;
+    padding: .3rem 1rem;
+    font-size: 1.2rem!important;
+  }
 }
 
 .button-like {
