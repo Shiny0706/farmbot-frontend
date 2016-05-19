@@ -11,6 +11,9 @@ label {
     display: block;
     text-align: center;
   }
+  &.margin-top {
+    margin-top: 2rem;
+  }
   &.day-label {
     position: absolute;
     text-align: center;

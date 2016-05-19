@@ -13,7 +13,7 @@ export class Help extends React.Component<HelpProps, HelpState> {
   /** The output of this function is what the user will see when the
       Help icon is hovered over. */
   isHovered({text}) {
-    return <div> { text } </div>;
+    return <div className="help-text"> { text } </div>;
   }
 
   /** This is what the user sees when the icon is not hovered over. */
@@ -25,11 +25,12 @@ export class Help extends React.Component<HelpProps, HelpState> {
 
   render() {
     let Comp = (this.state.isHovered ? this.isHovered : this.notHovered);
-    return <span onMouseEnter={() => { this.setState({isHovered: true});}}
-                 onMouseLeave={() => { this.setState({isHovered: false});}}>
-             <i className="fa fa-question-circle"></i>
+    return <div className="help"
+                onMouseEnter={() => { this.setState({isHovered: true});}}
+                onMouseLeave={() => { this.setState({isHovered: false});}}>
+             <i className="fa fa-question-circle help-icon"></i>
              <Comp text={ this.props.text } />
-           </span>;
+           </div>;
   };
 }
 

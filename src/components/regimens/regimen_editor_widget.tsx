@@ -23,11 +23,24 @@ export class RegimenEditorWidget extends React.Component<any, any> {
                       <input id="right-label" placeholder="Regimen Name" type="text" />
                       <div className="regimen-day">
                         <label>Day 1</label>
-                        <div className="drag-drop-area padding">DROP HERE</div>
+                        <div className="regimen-event">
+                          <span className="regimen-event-title">Sequence Name</span>
+                          <span className="regimen-event-time">10:30 AM</span>
+                          <i className="fa fa-trash regimen-control" />
+                        </div>
+                        <div className="regimen-event">
+                          <span className="regimen-event-title">Sequence Name</span>
+                          <span className="regimen-event-time">10:30 AM</span>
+                          <i className="fa fa-trash regimen-control" />
+                        </div>
                       </div>
                       <div className="regimen-day">
                         <label>Day 2</label>
-                        <div className="drag-drop-area padding">DROP HERE</div>
+                        <div className="regimen-event">
+                          <span className="regimen-event-title">Sequence Name</span>
+                          <span className="regimen-event-time">10:30 AM</span>
+                          <i className="fa fa-trash regimen-control" />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -37,4 +50,3 @@ export class RegimenEditorWidget extends React.Component<any, any> {
 
   }
 }
-

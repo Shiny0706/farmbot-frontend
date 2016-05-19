@@ -32,7 +32,7 @@ export class BulkSchedulerWidget extends React.Component<any, any> {
                       </div>
                       <div className="row">
                         <div className="col-sm-12">
-                          <label>Days</label>
+                          <label className="center margin-top">Days</label>
                           <div>
                             <input type="checkbox" id="all" className="bulk-day-selector" />
                             <input type="checkbox" id="every-7th-day-starting-with-day-1" className="bulk-day-selector" />
