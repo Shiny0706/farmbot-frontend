@@ -184,7 +184,11 @@ export let stepTiles: StepDictionary = {
                       then FarmBot will move to X=0, Y=3000. If FarmBot must move in \
                       multiple directions, it will move diagonally. If you \
                       require straight movements along one axis at a time, \
-                      use multiple Move Absolute steps." />
+                      use multiple Move Absolute steps. Coming soon: Offsets \
+                      allow you to more easily instruct FarmBot to move to a \
+                      location, but offset from it by the specified amount. For \
+                      example moving to just above where a tool is located. Using \
+                      offsets lets FarmBot do the math for you." />
                     </div>
                   </div>
                 </div>

@@ -105,11 +105,19 @@ class ControlsPage extends React.Component<any, any> {
                         </button>
                         <div className="widget-header">
                           <h5>Move</h5>
+                          <i className="fa fa-question-circle widget-help-icon">
+                            <div className="widget-help-text">Use these manual
+                            control buttons to move FarmBot in realtime. Press the
+                            arrows for relative movements or type in new
+                            coordinates and press <strong>GO</strong> for an
+                            absolute movement. Tip: Press the Home button when
+                            you are done so FarmBot is ready to get back to work.</div>
+                          </i>
                         </div>
                       </div>
                       <div className="col-sm-12">
                         <div className="widget-content">
-                          <label className="text-center">MOVE AMOUNT (mm) Busy</label>
+                          <label className="text-center">MOVE AMOUNT (mm)</label>
                           <div className="row">
                             <div className="col-sm-12">
                               <StepSizeSelector
@@ -209,6 +217,14 @@ class ControlsPage extends React.Component<any, any> {
                         </button>
                         <div className="widget-header">
                           <h5>Tools</h5>
+                          <i className="fa fa-question-circle widget-help-icon">
+                            <div className="widget-help-text">Use these toggle
+                            switches to control FarmBot's tools and peripherals
+                            in realtime. To edit and create new tools, press
+                            the <strong>EDIT</strong> button. Make sure to turn
+                            things off when you're done! Coming soon: a working
+                            edit button.</div>
+                          </i>
                         </div>
                       </div>
                       <div className="col-sm-12">
@@ -273,6 +289,11 @@ class ControlsPage extends React.Component<any, any> {
                         </button>
                         <div className="widget-header">
                           <h5>Camera</h5>
+                          <i className="fa fa-question-circle widget-help-icon">
+                            <div className="widget-help-text">Press the <strong>EDIT
+                            </strong> button to add the URL of a livestream of
+                            your FarmBot. Coming soon: A working edit button.</div>
+                          </i>
                         </div>
                       </div>
                     </div>

@@ -7,6 +7,7 @@ import { editCurrentSequence,
          deleteSequence,
          nullSequence } from "./sequence_actions";
 import { stepTiles, StepTile } from "./step_tiles";
+import { Help } from "../help";
 let Oops: StepTile = (_) => { return <div>Whoops! Not a valid message_type</div>; };
 let StepList = ({sequence, sequences, dispatch}) => {
     return (<div>
@@ -56,14 +57,20 @@ export function SequenceEditorWidget({sequences, dispatch, auth}) {
                     </button>
                     <button className="yellow button-like widget-control"
                             onClick={ performSeq(dispatch, sequence) }>
-                        Execute
+                        Test
                     </button>
                     <button className="red button-like widget-control"
                         onClick={ destroy(dispatch, sequence, token, inx) }>
                         Delete
                     </button>
                     <div className="widget-header">
-                        <h5>Sequence Editor</h5>
+                      <h5>Sequence Editor</h5>
+                      <i className="fa fa-question-circle widget-help-icon">
+                        <div className="widget-help-text">Use this widget to edit
+                        sequences. Coming soon: drag and drop steps,
+                        custom step names, sequence cloning, and inheritable
+                        step properties!</div>
+                      </i>
                     </div>
                 </div>
             </div>

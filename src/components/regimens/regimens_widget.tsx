@@ -16,6 +16,10 @@ export class RegimensWidget extends React.Component<any, any> {
                     </button>
                     <div className="widget-header">
                       <h5>Regimens</h5>
+                      <i className="fa fa-question-circle widget-help-icon">
+                        <div className="widget-help-text">This is a list of all
+                        of your regimens. Coming soon: Regimens, and regimen cloning!</div>
+                      </i>
                     </div>
                   </div>
                 </div>
