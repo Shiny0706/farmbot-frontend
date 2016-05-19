@@ -113,6 +113,16 @@ export let stepTiles: StepDictionary = {
                            onClick={ () => copy({dispatch, step}) } />
                         <i className="fa fa-trash step-control"
                            onClick={ () => remove({dispatch, index}) } />
+                        <Help text="The Move Relative step instructs FarmBot to \
+                        move the specified distance from its current location. \
+                        For example, if FarmBot is currently at X=1000, Y=1000 \
+                        and it receives a Move Relative where X=0 and Y=3000, then \
+                        FarmBot will move to X=1000, Y=4000. If FarmBot must move in \
+                        multiple directions, it will move diagonally. If you \
+                        require straight movements along one axis at a time, use \
+                        multiple Move Relative steps. Move Relative steps should \
+                        be preceded by a Move Absolute step to ensure you are \
+                        starting from a known location." />
                       </div>
                     </div>
                   </div>
@@ -167,6 +177,14 @@ export let stepTiles: StepDictionary = {
                          onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
+                      <Help text="The Move Absolute step instructs FarmBot to \
+                      move to the specified coordinate regardless of the current \
+                      position. For example, if FarmBot is currently at X=1000, \
+                      Y=1000 and it receives a Move Absolute where X=0 and Y=3000, \
+                      then FarmBot will move to X=0, Y=3000. If FarmBot must move in \
+                      multiple directions, it will move diagonally. If you \
+                      require straight movements along one axis at a time, \
+                      use multiple Move Absolute steps." />
                     </div>
                   </div>
                 </div>
@@ -244,6 +262,10 @@ export let stepTiles: StepDictionary = {
                          onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
+                      <Help text="The Write Pin step instructs FarmBot to \
+                      set the specified pin on the Arduino to the specified mode \
+                      and value. A Pin Mode of 0 is for on/off control, while \
+                      a Pin Mode of 1 is for PWM (pulse width modulation)." />
                     </div>
                   </div>
                 </div>
@@ -292,6 +314,9 @@ export let stepTiles: StepDictionary = {
                          onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
+                      <Help text="The Wait step instructs FarmBot to wait for the \
+                      specified amount of time. Use it in combination with the \
+                      Pin Write step to water for a length of time." />
                     </div>
                   </div>
                 </div>
@@ -326,6 +351,10 @@ export let stepTiles: StepDictionary = {
                          onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
+                      <Help text="The Send Message step instructs FarmBot to \
+                      send a custom message to the logs. This can help you with \
+                      debugging your sequences. Eventually you will be able to \
+                      receive push notifications and email alerts of these messages!" />
                     </div>
                   </div>
                 </div>
@@ -360,6 +389,10 @@ export let stepTiles: StepDictionary = {
                          onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
+                      <Help text="The Read Pin step instructs FarmBot to \
+                      read the current value of the specified pin. Coming soon: \
+                      This data point is given the label you specified and then \
+                      stored in your web app account to be later viewed" />
                     </div>
                   </div>
                 </div>
