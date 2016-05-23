@@ -11,6 +11,8 @@ import { botReducer as bot } from "./components/devices/bot_reducer";
 import { plantReducer as plants } from "./reducers/plant_reducer";
 import { configReducer as config } from "./components/config/config_reducer";
 import { routerReducer as routing } from "react-router-redux";
+import { regimensReducer as regimens } from "./components/regimens/reducer";
+
 // Activate dev tools (if the browser has them).
 declare var devToolsExtension: any;
 let reduxTools = !!window["devToolsExtension"] ? devToolsExtension() : (f) => f;
@@ -21,6 +23,7 @@ let reducers = combineReducers({
   bot,
   plants,
   sequences,
+  regimens,
   config
 });
 let storageKey = "lastState";
