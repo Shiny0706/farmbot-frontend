@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RegimenProps } from "./index";
+import { RegimenProps } from "../interfaces";
 import { deleteRegimen } from "../actions";
 
 function remove({regimen, dispatch}: RegimenProps) {

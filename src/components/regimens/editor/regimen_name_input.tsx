@@ -1,6 +1,6 @@
 import * as React from "react";
 import { editRegimen } from "../actions";
-import { RegimenProps } from "./index";
+import { RegimenProps } from "../interfaces";
 
 function write({dispatch, regimen}: RegimenProps) {
   return (event) => {

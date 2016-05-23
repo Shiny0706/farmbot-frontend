@@ -1,14 +1,9 @@
 import * as React from "react";
-import { RegimensState, Regimen } from "../interfaces";
+import { RegimensState } from "../interfaces";
 import { RegimenItemList } from "./regimen_item_list";
 import { RegimenNameInput } from "./regimen_name_input";
 import { SaveButton } from "./save_button";
 import { DeleteButton } from "./delete_button";
-/** Used by UI widgets that modify a regimen */
-export interface RegimenProps {
-  regimen: Regimen;
-  dispatch: Function;
-};
 
 interface RegimenEditorWidgetProps {
   regimens: RegimensState;

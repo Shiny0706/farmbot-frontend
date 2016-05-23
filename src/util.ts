@@ -1,6 +1,7 @@
 import * as _ from "lodash";
 import * as $ from "jquery";
 import * as Joi from "joi-browser";
+import { Color } from "./interfaces";
 
 export function convertFormToObject(formEl: Element) {
   let inputs = $(formEl.querySelectorAll("input"));
@@ -22,4 +23,10 @@ export function getParam(name: string) {
     object schema. Returns a new type guard function. */
 export function is<T>(schema: Joi.ObjectSchema) {
   return (input: any): input is T => !Joi.validate(input, schema).error;
+}
+
+let colors: Array<Color> = ["blue", "green", "yellow", "orange", "purple", "pink", "gray", "red"];
+/** Picks a color that is compliant with sequence / regimen color codes */
+export function randomColor(): Color {
+  return _.sample(colors);
 }

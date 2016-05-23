@@ -31,3 +31,10 @@ export function deleteRegimen(regimen: Regimen): ReduxAction<Regimen> {
     payload: regimen
   };
 }
+
+export function newRegimen(): ReduxAction<any> {
+  return {
+    type: "NEW_REGIMEN",
+    payload: {}
+  };
+}

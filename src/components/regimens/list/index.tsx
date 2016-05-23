@@ -1,6 +1,9 @@
 import * as React from "react";
+import { RegimenListItem } from "./regimen_list_item";
+import { ReduxStateAtom } from "../../interfaces";
+import { AddRegimen } from "./add_button";
 
-export function RegimensList() {
+export function RegimensList(props: ReduxStateAtom) {
     return <div>
               <div className="widget-wrapper regimens-widget">
                 <div className="row">
@@ -13,9 +16,7 @@ export function RegimensList() {
                         <span className="glyphicon glyphicon-menu-hamburger" />
                       </button>
                     </div>
-                    <button className="green button-like widget-control">
-                      Add
-                    </button>
+                    <AddRegimen dispatch={ props.dispatch }/>
                     <div className="widget-header">
                       <h5>Regimens</h5>
                       <i className="fa fa-question-circle widget-help-icon">
@@ -29,12 +30,14 @@ export function RegimensList() {
                   <div className="col-sm-12">
                     <div className="widget-content">
                       <div className="block-wrapper">
-                        <div>
-                          <button className="block full-width text-left purple-block block-header">
-                            Untitled Regimen
-                            <i className="fa fa-pencil block-control" />
-                          </button>
-                        </div>
+                        { props
+                            .regimens
+                            .all
+                            .map((regimen, inx) => <RegimenListItem
+                                                 dispatch={ props.dispatch }
+                                                 regimen={ regimen }
+                                                 key={inx} />)
+                        }
                       </div>
                     </div>
                   </div>

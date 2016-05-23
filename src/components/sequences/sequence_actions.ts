@@ -5,15 +5,14 @@ import { SequenceOptions,
          Step,
          UnplacedStep,
          Sequence,
-         Color,
          SequenceReducerState } from "./interfaces";
 import { success, error } from "../../logger";
+import { randomColor } from "../../util";
 
-let colors: Array<Color> = ["blue", "green", "yellow", "orange", "purple", "pink", "gray", "red"];
+
 export function nullSequence(): Sequence {
-  let color = _.sample(colors);
   return {
-    color,
+    color: randomColor(),
     name: "New Sequence",
     steps: [],
     dirty: false

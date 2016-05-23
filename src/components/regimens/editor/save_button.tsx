@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RegimenProps } from "./index";
+import { RegimenProps } from "../interfaces";
 import { saveRegimen } from "../actions";
 
 function save({regimen, dispatch}: RegimenProps) {

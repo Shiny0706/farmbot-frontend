@@ -1,5 +1,13 @@
 import { ReduxAction } from "../interfaces";
-import { Sequence, Color } from "../sequences/interfaces";
+import { Sequence } from "../sequences/interfaces";
+import { Color } from "../../interfaces.ts";
+
+/** Used by UI widgets that modify a regimen */
+export interface RegimenProps {
+  regimen: Regimen;
+  dispatch: Function;
+};
+
 
 /** A list of "sequences" scheduled after a starting point (epoch). */
 export interface Regimen {

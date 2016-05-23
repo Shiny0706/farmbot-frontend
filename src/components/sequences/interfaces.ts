@@ -46,8 +46,7 @@ type userVariables = "x"
                     | "pin11"
                     | "pin12"
                     | "pin13";
-
-export type Color = "blue"|"green"|"yellow"|"orange"|"purple"|"pink"|"gray"|"red";
+import { Color } from "../../interfaces";
 
 type Steps = Array<Step>;
 
