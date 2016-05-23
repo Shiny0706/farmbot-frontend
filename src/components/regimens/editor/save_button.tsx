@@ -1,0 +1,14 @@
+import * as React from "react";
+import { RegimenProps } from "./index";
+import { saveRegimen } from "../actions";
+
+function save({regimen, dispatch}: RegimenProps) {
+  return event => dispatch(saveRegimen(regimen));
+}
+
+export function SaveButton({regimen, dispatch}: RegimenProps) {
+  return <button className="green button-like widget-control"
+                 onClick={ save({dispatch, regimen}) }>
+    Save { regimen.dirty ? "*" : "" }
+  </button>;
+}

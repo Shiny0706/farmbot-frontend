@@ -1,20 +1,26 @@
 import * as React from "react";
-import { RegimensState } from "../interfaces";
+import { RegimensState, Regimen } from "../interfaces";
 import { RegimenItemList } from "./regimen_item_list";
+import { RegimenNameInput } from "./regimen_name_input";
+import { SaveButton } from "./save_button";
+/** Used by UI widgets that modify a regimen */
+export interface RegimenProps {
+  regimen: Regimen;
+  dispatch: Function;
+};
 
 interface RegimenEditorWidgetProps {
   regimens: RegimensState;
+  dispatch: Function;
 }
-export function RegimenEditorWidget({regimens}: RegimenEditorWidgetProps) {
+export function RegimenEditorWidget({regimens, dispatch}: RegimenEditorWidgetProps) {
     let regimen = regimens.all[regimens.current];
 
     return( <div>
               <div className="widget-wrapper regimen-editor-widget">
                 <div className="row">
                   <div className="col-sm-12">
-                    <button className="green button-like widget-control">
-                      Save
-                    </button>
+                    <SaveButton regimen={ regimen } dispatch={ dispatch } />
                     <button className="red button-like widget-control">
                       Delete
                     </button>
@@ -35,10 +41,7 @@ export function RegimenEditorWidget({regimens}: RegimenEditorWidgetProps) {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="widget-content">
-                      <input id="right-label"
-                             placeholder="Regimen Name"
-                             type="text"
-                             defaultValue={ regimen.name }/>
+                      <RegimenNameInput regimen={regimen} dispatch={ dispatch } />
                       <RegimenItemList items={ regimen.items } />
                     </div>
                   </div>

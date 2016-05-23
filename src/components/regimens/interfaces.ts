@@ -8,6 +8,7 @@ export interface Regimen {
     name: string;
     color: Color;
     items: RegimenItem[];
+    dirty?: boolean;
 };
 
 /** Individual step that a regimen will execute at a point in time. */

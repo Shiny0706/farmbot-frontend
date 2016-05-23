@@ -1,11 +1,28 @@
-import { RegimensState, RegimensActionHandler } from "./interfaces";
+import { RegimensState,
+         RegimensActionHandler,
+         Regimen } from "./interfaces";
 import { ReduxAction } from "../interfaces";
 import { stubs } from "./temporary_stubs";
 
 let action_handlers: RegimensActionHandler = {
     DEFAULT: function(s, a) { return s; },
     /** Currently just a stub */
-    ADD_REGIMEN: function(s, a) { return s; }
+    EDIT_REGIMEN: function(s, a) {
+      s = _.clone(s);
+      let update = _.assign<{},
+                            Regimen>({},
+                                     a.payload.regimen,
+                                     a.payload.update,
+                                     {dirty: true});
+      s.all[s.current] = update;
+      return s;
+    },
+    SAVE_REGIMEN: function(s, a) {
+      s = _.clone(s);
+      let update = _.assign<{}, Regimen>({}, a.payload, { dirty: false });
+      s.all[s.current] = update;
+      return s;
+    }
 };
 
 const initialState: RegimensState = {
