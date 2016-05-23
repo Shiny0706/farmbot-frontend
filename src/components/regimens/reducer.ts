@@ -1,5 +1,6 @@
 import { RegimensState, RegimensActionHandler } from "./interfaces";
 import { ReduxAction } from "../interfaces";
+import { stubs } from "./temporary_stubs";
 
 let action_handlers: RegimensActionHandler = {
     DEFAULT: function(s, a) { return s; },
@@ -8,11 +9,11 @@ let action_handlers: RegimensActionHandler = {
 };
 
 const initialState: RegimensState = {
-  all: [],
+  all: stubs,
   current: 0
 };
 
-export function sequenceReducer(state = initialState,
+export function regimensReducer(state = initialState,
                                 action: ReduxAction<any>) {
     let handler = (action_handlers[action.type] || action_handlers["DEFAULT"]);
     let result: RegimensState = handler(state, action);

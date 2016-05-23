@@ -39,7 +39,7 @@ function fetchSequencesOk(sequences: Array<Sequence>): FetchSequencesOk {
 }
 
 export function fetchSequences() {
-  return (dispatch: Function, getState) => {
+  return (dispatch: Function, getState: Function) => {
     let state: AuthState = getState().auth;
     let { iss, token } = state;
 
@@ -113,11 +113,11 @@ export function removeStep(index: number): RemoveStep {
 }
 
 export function saveSequence(sequence: Sequence) {
-  return function(dispatch, getState) {
+  return function(dispatch: Function, getState: Function) {
     let state: AuthState = getState().auth;
     let { iss, token } = state;
     let url = `${iss}/api/sequences/`;
-    let method;
+    let method: Function;
     if (sequence._id) {
       url += sequence._id;
       method = axios.put;
@@ -125,12 +125,12 @@ export function saveSequence(sequence: Sequence) {
       method = axios.post;
     };
     return method(url, sequence, authHeaders(token))
-    .then(function(resp) {
+    .then(function(resp: {data: Sequence; }) {
       let seq: Sequence = resp.data;
       success(`Saved ${("'" + seq.name + "'") || "sequence"}`);
       dispatch(saveSequenceOk(resp.data));
     },
-    function(err) {
+    function(err: { data: Error; }) {
       let msg: string = _.values(err.data).join("\n");
       error(`Unable to save ${ ("'" + sequence.name + "'") }.` + msg);
       dispatch(saveSequenceNo(error));
@@ -170,7 +170,7 @@ export function selectSequence(index: number): SelectSequence {
 
 export function deleteSequence(
   seqInx: number) {
-  return (dispatch, getState) => {
+  return (dispatch: Function, getState: Function) => {
     dispatch({ type: "DELETE_SEQUENCE_START", payload: {} });
 
     if (!confirm("Delete sequence?")) {
@@ -181,11 +181,11 @@ export function deleteSequence(
   };
 }
 
-function cancelDeletion(dispatch, _) {
+function cancelDeletion(dispatch: Function, _: Function) {
   dispatch({ type: "DELETE_SEQUENCE_CANCEL", payload: {} });
 }
 
-function confirmDeletion(dispatch, getState) {
+function confirmDeletion(dispatch: Function, getState: Function) {
   let authState: AuthState = getState().auth;
   let sequenceState: SequenceReducerState = getState().sequences;
   let sequence = sequenceState.all[sequenceState.current];

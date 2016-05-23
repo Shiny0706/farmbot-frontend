@@ -60,7 +60,7 @@ interface ResponseOutcome {
   _: (r: any) => any;
 }
 
-export let catchMessage = (resp) => (choices: ResponseOutcome) => {
+export let catchMessage = (resp: any) => (choices: ResponseOutcome) => {
   let results = _({
       response: isBotResponse,
       error: isBotErrorResponse,

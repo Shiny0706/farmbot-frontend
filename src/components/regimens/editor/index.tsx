@@ -1,7 +1,13 @@
-import * as React from 'react';
+import * as React from "react";
+import { RegimensState } from "../interfaces";
+import { RegimenItemList } from "./regimen_item_list";
 
-export class RegimenEditorWidget extends React.Component<any, any> {
-  render() {
+interface RegimenEditorWidgetProps {
+  regimens: RegimensState;
+}
+export function RegimenEditorWidget({regimens}: RegimenEditorWidgetProps) {
+    let regimen = regimens.all[regimens.current];
+
     return( <div>
               <div className="widget-wrapper regimen-editor-widget">
                 <div className="row">
@@ -29,28 +35,11 @@ export class RegimenEditorWidget extends React.Component<any, any> {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="widget-content">
-                      <input id="right-label" placeholder="Regimen Name" type="text" />
-                      <div className="regimen-day">
-                        <label>Day 1</label>
-                        <div className="regimen-event">
-                          <span className="regimen-event-title">Sequence Name</span>
-                          <span className="regimen-event-time">10:30 AM</span>
-                          <i className="fa fa-trash regimen-control" />
-                        </div>
-                        <div className="regimen-event">
-                          <span className="regimen-event-title">Sequence Name</span>
-                          <span className="regimen-event-time">10:30 AM</span>
-                          <i className="fa fa-trash regimen-control" />
-                        </div>
-                      </div>
-                      <div className="regimen-day">
-                        <label>Day 2</label>
-                        <div className="regimen-event">
-                          <span className="regimen-event-title">Sequence Name</span>
-                          <span className="regimen-event-time">10:30 AM</span>
-                          <i className="fa fa-trash regimen-control" />
-                        </div>
-                      </div>
+                      <input id="right-label"
+                             placeholder="Regimen Name"
+                             type="text"
+                             defaultValue={ regimen.name }/>
+                      <RegimenItemList items={ regimen.items } />
                     </div>
                   </div>
                 </div>
@@ -58,4 +47,3 @@ export class RegimenEditorWidget extends React.Component<any, any> {
             </div> );
 
   }
-}
