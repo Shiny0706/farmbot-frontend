@@ -22,6 +22,8 @@
     font-size: 1.2rem;
     margin: .25rem;
     text-transform: uppercase;
+    display: inline;
+    margin-right: 1rem;
   }
   p {
     font-size: 1rem;
@@ -32,6 +34,33 @@
 .widget-control {
   margin-top: 0.7rem;
   margin-right: 1.5rem;
+}
+
+i.widget-help-icon {
+  display: inline;
+  padding: 1rem 0;
+  color: $gray;
+  &:hover {
+    color: $off_white;
+  }
+}
+
+.widget-help-text {
+  font-style: italic;
+  color: $off_white;
+  line-height: 2rem;
+  font-family: sans-serif;
+  padding: 0 0.3rem;
+  opacity: 0;
+  max-height: 0px;
+  overflow: hidden;
+}
+
+.widget-help-icon:hover .widget-help-text {
+  opacity: 100;
+  padding: 0.5rem 0.3rem;
+  max-height: 200px;
+  transition: 0.5s;
 }
 
 .widget-content {

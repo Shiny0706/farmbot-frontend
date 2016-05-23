@@ -37,6 +37,11 @@ export function SequencesList({sequences, dispatch}: SequencesListProps) {
                     </button>
                     <div className="widget-header">
                       <h5>Sequences</h5>
+                      <i className="fa fa-question-circle widget-help-icon">
+                        <div className="widget-help-text">Here is the list of
+                        all of your sequences. Click one to edit. Coming soon:
+                        sequence cloning and custom colors!</div>
+                      </i>
                     </div>
                   </div>
                 </div>

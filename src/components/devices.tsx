@@ -97,6 +97,11 @@ class DevicesPage extends React.Component<any, any> {
                               <button type="submit" className="button-like green widget-control">SAVE { bot.dirty ? "*" : "" }</button>
                               <div className="widget-header">
                                 <h5>DEVICE</h5>
+                                <i className="fa fa-question-circle widget-help-icon">
+                                  <div className="widget-help-text">This widget
+                                  shows device information. Coming soon: update
+                                  your FarmBot's software with one click!</div>
+                                </i>
                               </div>
                             </div>
                           </div>
@@ -229,6 +234,16 @@ class DevicesPage extends React.Component<any, any> {
                         </button>
                         <div className="widget-header">
                           <h5>Hardware</h5>
+                          <i className="fa fa-question-circle widget-help-icon">
+                            <div className="widget-help-text">Change settings
+                            of your FarmBot hardware with the fields below.
+                            Caution: Changing these settings to extreme
+                            values can cause hardware malfunction. Make
+                            sure to test any new settings before letting
+                            your FarmBot use them unsupervised. Tip: Recalibrate
+                            FarmBot after changing settings and test a few sequences
+                            to verify that everything works as expected.</div>
+                          </i>
                         </div>
                         <div className="row">
                           <div className="col-sm-12">
@@ -385,6 +400,11 @@ class DevicesPage extends React.Component<any, any> {
                           <div className="col-sm-12">
                             <div className="widget-header">
                               <h5>Logs</h5>
+                              <i className="fa fa-question-circle widget-help-icon">
+                                <div className="widget-help-text">All messages from
+                                your FarmBot are stored in these logs. Coming soon:
+                                logs!</div>
+                              </i>
                             </div>
                           </div>
                         </div>

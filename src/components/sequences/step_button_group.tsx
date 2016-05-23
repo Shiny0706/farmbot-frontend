@@ -28,7 +28,14 @@ export function StepButtonGroup({dispatch}) {
             <div className="row">
                 <div className="col-sm-12">
                     <div className="widget-header">
-                        <h5>Actions</h5>
+                        <h5>Commands</h5>
+                        <i className="fa fa-question-circle widget-help-icon">
+                          <div className="widget-help-text">These commands are
+                          the most basic things FarmBot can do. Combine them into
+                          sequences to create more complex operations for
+                          watering, planting seeds, measuring soil properties,
+                          and more. Coming soon: drag and drop commands!</div>
+                        </i>
                     </div>
                 </div>
             </div>
