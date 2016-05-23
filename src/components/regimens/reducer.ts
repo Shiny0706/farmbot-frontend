@@ -5,7 +5,7 @@ import { ReduxAction } from "../interfaces";
 import { stubs } from "./temporary_stubs";
 import { randomColor } from "../../util";
 
-function emptyRegimen(): Regimen {
+export function emptyRegimen(): Regimen {
     return {
         _id: null,
         name: "Untitled Regimen",
@@ -36,19 +36,24 @@ let action_handlers: RegimensActionHandler = {
     },
     DELETE_REGIMEN: function(s, a) {
         s = _.clone(s);
-        let toBeDeleted = s.all.indexOf(a.payload);
-        if (toBeDeleted < 0) {
-            throw (new Error("Sequence not found. Can't delete."));
-        }
-        s.all.splice(toBeDeleted, 1);
+        let index = s.all.indexOf(a.payload);
+        if (index < 0) { throw (new Error("Sequence not found.")); }
+        if (index <= s.current) { s.current-- }
+        s.all.splice(index, 1);
         if (!s.all.length) { s.all.push(emptyRegimen()); }
-        return s;
+        return s; // Lol this method is gross.
     },
     NEW_REGIMEN: function(s, a) {
       s = _.clone(s);
       s.all.push(emptyRegimen());
       return s;
+    },
+    SELECT_REGIMEN: function(s, a) {
+      s = _.clone(s);
+      s.current = a.payload;
+      return s;
     }
+
 };
 
 const initialState: RegimensState = {

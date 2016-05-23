@@ -4,14 +4,14 @@ import { RegimenItemList } from "./regimen_item_list";
 import { RegimenNameInput } from "./regimen_name_input";
 import { SaveButton } from "./save_button";
 import { DeleteButton } from "./delete_button";
+import { emptyRegimen } from "../reducer";
 
 interface RegimenEditorWidgetProps {
   regimens: RegimensState;
   dispatch: Function;
 }
 export function RegimenEditorWidget({regimens, dispatch}: RegimenEditorWidgetProps) {
-    let regimen = regimens.all[regimens.current];
-
+    let regimen = regimens.all[regimens.current] || emptyRegimen();
     return( <div>
               <div className="widget-wrapper regimen-editor-widget">
                 <div className="row">
@@ -35,7 +35,7 @@ export function RegimenEditorWidget({regimens, dispatch}: RegimenEditorWidgetPro
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="widget-content">
-                      <RegimenNameInput regimen={regimen} dispatch={ dispatch } />
+                      <RegimenNameInput regimen={ regimen } dispatch={ dispatch } />
                       <RegimenItemList items={ regimen.items } />
                     </div>
                   </div>

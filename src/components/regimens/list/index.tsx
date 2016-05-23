@@ -36,6 +36,7 @@ export function RegimensList(props: ReduxStateAtom) {
                             .map((regimen, inx) => <RegimenListItem
                                                  dispatch={ props.dispatch }
                                                  regimen={ regimen }
+                                                 index={inx}
                                                  key={inx} />)
                         }
                       </div>

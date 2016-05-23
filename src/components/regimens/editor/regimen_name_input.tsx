@@ -14,5 +14,5 @@ export function RegimenNameInput({regimen, dispatch}: RegimenProps) {
                 placeholder="Regimen Name"
                 type="text"
                 onChange={ write({dispatch, regimen}) }
-                defaultValue={ regimen.name }/>;
+                value={ regimen.name }/>;
 }

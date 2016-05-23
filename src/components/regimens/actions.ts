@@ -38,3 +38,10 @@ export function newRegimen(): ReduxAction<any> {
     payload: {}
   };
 }
+
+export function selectRegimen(index: number): ReduxAction<any> {
+  return {
+    type: "SELECT_REGIMEN",
+    payload: index
+  };
+}
