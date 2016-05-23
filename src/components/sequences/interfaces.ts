@@ -100,7 +100,7 @@ export type messageType = "emergency_stop"
                           | "execute"
                           ;
 
-/** Similar to "Step", but with an optional "position" argument. */
+/** Similar to "Step", but "position" isnt mandatory. */
 export interface UnplacedStep {
   message_type: messageType;
   position?: number;
@@ -108,7 +108,7 @@ export interface UnplacedStep {
   command: StepCommand;
 };
 
-/** One step in a larger sequence of execution. */
+/** One step in a larger "Sequence". */
 export interface Step extends UnplacedStep {
   position: number;
 };

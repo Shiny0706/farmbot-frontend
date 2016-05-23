@@ -70,7 +70,11 @@ class LoginPage extends React.Component<any, any> {
                         <div className="row">
                           <div className="col-xs-6">
                             <p className="auth-link">
-                              <Link to={ "route_for_resetting_password" }>Reset password</Link>
+                              <a href={
+                                  this.props.config.farmbotApiUrl + "/users/password/new"
+                                }>
+                                Reset password
+                              </a>
                             </p>
                           </div>
                           <div className="col-xs-6">
