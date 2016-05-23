@@ -22,3 +22,12 @@ export function saveRegimen(regimen: Regimen): ReduxAction<Regimen> {
     payload: regimen
   };
 }
+
+export function deleteRegimen(regimen: Regimen): ReduxAction<Regimen> {
+  alert("Coming soon!");
+
+  return {
+    type: "DELETE_REGIMEN",
+    payload: regimen
+  };
+}

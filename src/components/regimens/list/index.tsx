@@ -1,13 +1,15 @@
-import * as React from 'react';
+import * as React from "react";
 
-export class RegimensWidget extends React.Component<any, any> {
-  render() {
-    return( <div>
+export function RegimensList() {
+    return <div>
               <div className="widget-wrapper regimens-widget">
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="main-nav-button">
-                      <button className="navbar-toggle hidden-sm hidden-md hidden-lg" data-target="#navbar" data-toggle="collapse" type="button">
+                      <button className="navbar-toggle hidden-sm hidden-md hidden-lg"
+                              data-target="#navbar"
+                              data-toggle="collapse"
+                              type="button">
                         <span className="glyphicon glyphicon-menu-hamburger" />
                       </button>
                     </div>
@@ -38,6 +40,5 @@ export class RegimensWidget extends React.Component<any, any> {
                   </div>
                 </div>
               </div>
-            </div> );
-  }
+            </div>;
 }

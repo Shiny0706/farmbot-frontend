@@ -4,6 +4,10 @@ import { RegimensState,
 import { ReduxAction } from "../interfaces";
 import { stubs } from "./temporary_stubs";
 
+function emptyRegimen(): Regimen {
+  return _.clone(stubs[0]);
+}
+
 let action_handlers: RegimensActionHandler = {
     DEFAULT: function(s, a) { return s; },
     /** Currently just a stub */
@@ -21,6 +25,16 @@ let action_handlers: RegimensActionHandler = {
       s = _.clone(s);
       let update = _.assign<{}, Regimen>({}, a.payload, { dirty: false });
       s.all[s.current] = update;
+      return s;
+    },
+    DELETE_REGIMEN: function(s, a) {
+      s = _.clone(s);
+      let toBeDeleted = s.all.indexOf(a.payload);
+      if (toBeDeleted < 0) {
+        throw(new Error("Sequence not found. Can't delete."));
+      }
+      s.all.splice(toBeDeleted, 1);
+      if (!s.all.length) { s.all.push(emptyRegimen()); }
       return s;
     }
 };

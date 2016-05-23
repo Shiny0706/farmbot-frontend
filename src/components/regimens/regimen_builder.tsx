@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Navbar } from "../nav/navbar";
 import { BulkSchedulerWidget } from "./bulk_scheduler_widget";
-import { RegimensWidget } from "./regimens_widget";
+import { RegimensList } from "./list/index";
 import { RegimenEditorWidget } from "./editor/index";
 import { connect } from "react-redux";
 import { ReduxStateAtom } from "../interfaces";
@@ -20,7 +20,7 @@ class XRegimens extends React.Component<ReduxStateAtom, {}> {
               <RegimenEditorWidget { ...this.props } />
             </div>
             <div className="col-md-3 col-sm-12">
-              <RegimensWidget />
+              <RegimensList { ...this.props }/>
             </div>
           </div>
         </div>
