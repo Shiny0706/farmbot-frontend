@@ -19,7 +19,7 @@ let action_handlers: RegimensActionHandler = {
     DEFAULT: function(s, a) { return s; },
     /** Currently just a stub */
     EDIT_REGIMEN: function(s, a) {
-        s = _.clone(s);
+        s = _.cloneDeep(s);
         let update = _.assign<{},
             Regimen>({},
             a.payload.regimen,
@@ -29,13 +29,13 @@ let action_handlers: RegimensActionHandler = {
         return s;
     },
     SAVE_REGIMEN: function(s, a) {
-        s = _.clone(s);
+        s = _.cloneDeep(s);
         let update = _.assign<{}, Regimen>({}, a.payload, { dirty: false });
         s.all[s.current] = update;
         return s;
     },
     DELETE_REGIMEN: function(s, a) {
-        s = _.clone(s);
+        s = _.cloneDeep(s);
         let index = s.all.indexOf(a.payload);
         if (index < 0) { throw (new Error("Sequence not found.")); }
         if (index <= s.current) { s.current-- }
@@ -44,12 +44,12 @@ let action_handlers: RegimensActionHandler = {
         return s; // Lol this method is gross.
     },
     NEW_REGIMEN: function(s, a) {
-      s = _.clone(s);
+      s = _.cloneDeep(s);
       s.all.push(emptyRegimen());
       return s;
     },
     SELECT_REGIMEN: function(s, a) {
-      s = _.clone(s);
+      s = _.cloneDeep(s);
       s.current = a.payload;
       return s;
     }
