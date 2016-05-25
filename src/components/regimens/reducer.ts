@@ -36,11 +36,8 @@ let action_handlers: RegimensActionHandler = {
     },
     DELETE_REGIMEN: function(s, a) {
         s = _.cloneDeep(s);
-        let index = s.all.indexOf(a.payload);
-        if (index < 0) { throw (new Error("Sequence not found.")); }
-        if (index <= s.current) { s.current-- }
-        s.all.splice(index, 1);
-        if (!s.all.length) { s.all.push(emptyRegimen()); }
+        s.all.splice(s.current, 1);
+        s.current = (s.current <= 1) ? 0 : (s.current - 1);
         return s; // Lol this method is gross.
     },
     NEW_REGIMEN: function(s, a) {

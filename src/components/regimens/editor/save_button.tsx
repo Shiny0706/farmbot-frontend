@@ -7,6 +7,7 @@ function save({regimen, dispatch}: RegimenProps) {
 }
 
 export function SaveButton({regimen, dispatch}: RegimenProps) {
+  if (!regimen) { return <span /> };
   return <button className="green button-like widget-control"
                  onClick={ save({dispatch, regimen}) }>
     Save { regimen.dirty ? "*" : "" }

@@ -4,7 +4,7 @@ import { Color } from "../../interfaces.ts";
 
 /** Used by UI widgets that modify a regimen */
 export interface RegimenProps {
-  regimen: Regimen;
+  regimen?: Regimen;
   dispatch: Function;
 };
 

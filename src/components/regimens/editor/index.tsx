@@ -1,17 +1,18 @@
 import * as React from "react";
 import { RegimensState } from "../interfaces";
-import { RegimenItemList } from "./regimen_item_list";
-import { RegimenNameInput } from "./regimen_name_input";
 import { SaveButton } from "./save_button";
 import { DeleteButton } from "./delete_button";
-import { emptyRegimen } from "../reducer";
+import { EmptyEditor } from "./empty_editor";
+import { ActiveEditor } from "./active_editor";
 
 interface RegimenEditorWidgetProps {
   regimens: RegimensState;
   dispatch: Function;
 }
 export function RegimenEditorWidget({regimens, dispatch}: RegimenEditorWidgetProps) {
-    let regimen = regimens.all[regimens.current] || emptyRegimen();
+    let regimen = regimens.all[regimens.current];
+    // Hmm... this might be "unsafe" for type checker...
+    let Wow = regimen ? ActiveEditor : EmptyEditor;
     return( <div>
               <div className="widget-wrapper regimen-editor-widget">
                 <div className="row">
@@ -35,8 +36,7 @@ export function RegimenEditorWidget({regimens, dispatch}: RegimenEditorWidgetPro
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="widget-content">
-                      <RegimenNameInput regimen={ regimen } dispatch={ dispatch } />
-                      <RegimenItemList items={ regimen.items } />
+                      <Wow regimen={ regimen } dispatch={ dispatch } />
                     </div>
                   </div>
                 </div>

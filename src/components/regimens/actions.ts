@@ -1,5 +1,6 @@
 import { Regimen } from "./interfaces";
 import { ReduxAction } from "../interfaces";
+import { warning } from "../../logger";
 
 export function editRegimen(regimen: Regimen,
                             update: Object):
@@ -15,7 +16,7 @@ export function editRegimen(regimen: Regimen,
 }
 
 export function saveRegimen(regimen: Regimen): ReduxAction<Regimen> {
-  alert("Coming soon!");
+  warning("Coming soon!");
 
   return {
     type: "SAVE_REGIMEN",
@@ -24,7 +25,7 @@ export function saveRegimen(regimen: Regimen): ReduxAction<Regimen> {
 }
 
 export function deleteRegimen(regimen: Regimen): ReduxAction<Regimen> {
-  alert("Coming soon!");
+  warning("Coming soon!");
 
   return {
     type: "DELETE_REGIMEN",
