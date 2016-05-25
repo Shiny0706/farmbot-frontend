@@ -1,12 +1,11 @@
-
 export interface BulkSchedulerState {
+  currentRegimen: number;
   form: BulkScheduleForm;
 }
 
-interface BulkScheduleForm {
-  sequence?: number;
-  timeOfDay?: TimeOfDay;
-  weeks?: Week[];
+export interface BulkScheduleForm {
+  timeOfDay: TimeOfDay;
+  weeks: Week[];
 }
 
 interface TimeOfDay {
@@ -14,7 +13,7 @@ interface TimeOfDay {
   minute: number;
 }
 
-interface Week {
+export interface Week {
   days: {
     day1: boolean;
     day2: boolean;
