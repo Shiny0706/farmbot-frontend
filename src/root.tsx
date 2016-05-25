@@ -19,7 +19,7 @@ import Dashboard from "./components/dashboard";
 import { Controls } from "./components/controls";
 import { Devices } from "./components/devices";
 import { Sequences } from "./components/sequences/sequences";
-import { Regimens } from "./components/regimens/regimen_builder";
+import { Regimens } from "./components/regimens/index";
 import { FarmDesigner } from "./components/farm_designer/farm_designer";
 import { Login } from "./components/login";
 import { store } from "./store";

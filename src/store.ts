@@ -12,10 +12,13 @@ import { plantReducer as plants } from "./reducers/plant_reducer";
 import { configReducer as config } from "./components/config/config_reducer";
 import { routerReducer as routing } from "react-router-redux";
 import { regimensReducer as regimens } from "./components/regimens/reducer";
+import {
+  BulkSchedulerReducer as bulkScheduler
+} from "./components/regimens/bulk_scheduler/reducer";
 
 // Activate dev tools (if the browser has them).
 declare var devToolsExtension: any;
-let reduxTools = !!window["devToolsExtension"] ? devToolsExtension() : (f) => f;
+let reduxTools = !!window["devToolsExtension"] ? devToolsExtension() : (f: Function) => f;
 
 let reducers = combineReducers({
   routing,
@@ -24,6 +27,7 @@ let reducers = combineReducers({
   plants,
   sequences,
   regimens,
+  bulkScheduler,
   config
 });
 let storageKey = "lastState";
