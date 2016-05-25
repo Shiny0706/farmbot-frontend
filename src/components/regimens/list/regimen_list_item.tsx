@@ -20,6 +20,6 @@ export function RegimenListItem({regimen,
     </div>;
 }
 
-function select(dispatch, index) {
-  return (event) => dispatch(selectRegimen(index));
+function select(dispatch: Function, index: number) {
+  return (event: Event) => dispatch(selectRegimen(index));
 }
