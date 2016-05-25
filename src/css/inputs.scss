@@ -15,12 +15,15 @@ input {
     box-shadow: 0px 0px 10px $translucent;
   }
   &.bulk-day-selector {
-    width:12.5%;
+    width: 10%;
     box-shadow: none;
     margin-bottom: 0.75rem!important;
     margin-top: 0.75rem!important;
     height: 1.5rem;
     vertical-align: top;
+    &.margin-left {
+      margin-left: 20%;
+    }
   }
   &.day {
     display: none;
@@ -28,7 +31,7 @@ input {
 }
 
 .day-selector-wrapper {
-  width: 12.5%;
+  width: 10%;
   height: 3rem;
   display: inline-block;
 }
