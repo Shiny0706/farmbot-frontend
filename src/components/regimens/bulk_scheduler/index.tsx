@@ -41,7 +41,8 @@ export function BulkSchedulerWidget({sequences, dispatch, editor}: BulkEditorPro
                                 <SequenceList sequences={ sequences } />
                             </div>
                             <div className="col-sm-4">
-                                <TimeInput />
+                                <TimeInput dispatch={ dispatch }
+                                           offset={ editor.form.dailyOffsetMs }/>
                             </div>
                         </div>
                     <WeekGrid weeks={ editor.form.weeks } dispatch={ dispatch }/>

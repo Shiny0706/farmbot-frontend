@@ -9,7 +9,6 @@ interface WeekGridProps {
 };
 
 export function WeekGrid({weeks, dispatch}: WeekGridProps) {
-    console.dir(weeks);
     return <div>
         <div className="row">
             <div className="col-sm-12">

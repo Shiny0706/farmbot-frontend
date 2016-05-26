@@ -4,13 +4,9 @@ export interface BulkSchedulerState {
 }
 
 export interface BulkScheduleForm {
-  timeOfDay: TimeOfDay;
+  /** Time in ms to offset each action at the start of the day. */
+  dailyOffsetMs: number;
   weeks: Week[];
-}
-
-interface TimeOfDay {
-  hour: number;
-  minute: number;
 }
 
 export interface Week {

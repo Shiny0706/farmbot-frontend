@@ -16,7 +16,7 @@ function newWeek() {
 let initialState: BulkSchedulerState = {
   currentRegimen: 0, // Sketchy.
   form: {
-    timeOfDay: {hour: 12, minute: 0},
+    dailyOffsetMs: 300000,
     weeks: _.times(10, newWeek)
   }
 };
@@ -30,6 +30,7 @@ export function BulkSchedulerReducer (state: BulkSchedulerState = initialState,
     SELECT_REGIMEN,
     PUSH_WEEK,
     POP_WEEK,
+    SET_TIME_OFFSET,
   }[action.type] || NONE)(state, action);
 };
 
@@ -55,5 +56,12 @@ function POP_WEEK(s: BulkSchedulerState,
                   a: ReduxAction<any>): BulkSchedulerState {
   s = _.cloneDeep<BulkSchedulerState>(s);
   s.form.weeks.pop();
+  return s;
+};
+
+function SET_TIME_OFFSET(s: BulkSchedulerState,
+                  a: ReduxAction<number>): BulkSchedulerState {
+  s = _.cloneDeep<BulkSchedulerState>(s);
+  s.form.dailyOffsetMs = a.payload;
   return s;
 };
