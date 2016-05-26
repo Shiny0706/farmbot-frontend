@@ -29,6 +29,7 @@ export function BulkSchedulerReducer (state: BulkSchedulerState = initialState,
   return ({
     SELECT_REGIMEN,
     PUSH_WEEK,
+    POP_WEEK,
   }[action.type] || NONE)(state, action);
 };
 
@@ -47,6 +48,12 @@ function PUSH_WEEK(s: BulkSchedulerState,
                   a: ReduxAction<any>): BulkSchedulerState {
   s = _.cloneDeep<BulkSchedulerState>(s);
   s.form.weeks.push(newWeek());
-  console.log("???")
+  return s;
+};
+
+function POP_WEEK(s: BulkSchedulerState,
+                  a: ReduxAction<any>): BulkSchedulerState {
+  s = _.cloneDeep<BulkSchedulerState>(s);
+  s.form.weeks.pop();
   return s;
 };

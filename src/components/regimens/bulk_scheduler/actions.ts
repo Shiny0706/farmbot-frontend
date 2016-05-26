@@ -6,3 +6,10 @@ export function pushWeek() {
     payload: null
   };
 }
+
+export function popWeek() {
+  return {
+    type: "POP_WEEK",
+    payload: null
+  };
+}
