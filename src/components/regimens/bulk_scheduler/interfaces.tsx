@@ -1,5 +1,14 @@
+import { RegimenItem } from "../interfaces";
+import { Sequence } from "../../sequences/interfaces";
+
+export interface BulkSchedulerOutput {
+  index: number;
+  regimenItems: RegimenItem[];
+}
+
 export interface BulkSchedulerState {
   currentRegimen: number;
+  sequence?: Sequence;
   form: BulkScheduleForm;
 }
 

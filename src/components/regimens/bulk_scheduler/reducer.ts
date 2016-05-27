@@ -1,6 +1,7 @@
 import { BulkSchedulerState } from "./interfaces";
 import { ReduxAction } from "../../interfaces";
 import { ToggleDayParams } from "./actions";
+import { Sequence } from "../../sequences/interfaces";
 
 export function BulkSchedulerReducer (state: BulkSchedulerState = initialState,
                                      action: ReduxAction<any>): BulkSchedulerState {
@@ -10,6 +11,8 @@ export function BulkSchedulerReducer (state: BulkSchedulerState = initialState,
     POP_WEEK,
     SET_TIME_OFFSET,
     TOGGLE_DAY,
+    COMMIT_BULK_EDITOR,
+    SET_SEQUENCE
   }[action.type] || NONE)(state, action);
 }
 
@@ -79,5 +82,19 @@ function TOGGLE_DAY(s: BulkSchedulerState,
   let week = s.form.weeks[a.payload.week];
   let day = `day${a.payload.day}`;
   week.days[day] = !week.days[day];
+  return s;
+}
+
+function COMMIT_BULK_EDITOR(s: BulkSchedulerState,
+                            a: ReduxAction<string>): BulkSchedulerState {
+  s = _.cloneDeep<BulkSchedulerState>(s);
+  console.warn("Coming soon!");
+  return s;
+}
+
+function SET_SEQUENCE(s: BulkSchedulerState,
+                      a: ReduxAction<Sequence>): BulkSchedulerState {
+  s = _.cloneDeep<BulkSchedulerState>(s);
+  s.sequence = a.payload;
   return s;
 }

@@ -1,6 +1,6 @@
 import { ChangeApiUrl } from "./config_actions";
 import { assign } from "lodash";
-import { ReduxAction } from "../../interfaces";
+import { ReduxAction } from "../../components/interfaces";
 
 interface ConfigReducerState {
   farmbotApiUrl: string;
@@ -23,13 +23,13 @@ let reduce = {
     return newState;
   },
   DEFAULT: function(state: ConfigReducerState,
-                    action: ReduxAction): ConfigReducerState {
+                    action: ReduxAction<any>): ConfigReducerState {
     return state;
   }
 };
 
 export function configReducer(state = initialState,
-                              action: ReduxAction): ConfigReducerState {
+                              action: ReduxAction<any>): ConfigReducerState {
   let reduceFn = reduce[action.type] || reduce["DEFAULT"];
   let result = reduceFn(state, action);
   return result;
