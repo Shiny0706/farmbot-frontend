@@ -57,8 +57,6 @@ let action_handlers: RegimensActionHandler = {
         let ok = _.cloneDeep(regimenItems);
         let hmm = s.all[index].items;
         s.all[index].items = hmm.concat(ok);
-        console.warn("STOPPED HERE");
-        // debugger;
         return s;
     },
     REMOVE_REGIMEN_ITEM: function(s: RegimensState,
@@ -67,7 +65,6 @@ let action_handlers: RegimensActionHandler = {
         let list = s.all[s.current].items;
         let index = list.indexOf(a.payload);
         list.splice(index, 1);
-        console.log("?Hello?");
         return s;
     }
 };
