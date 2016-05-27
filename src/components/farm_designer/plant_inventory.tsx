@@ -18,13 +18,19 @@ export class Plants extends React.Component<any, any> {
                   <Link to={ "/dashboard/designer?p1=NoTab" }>Designer</Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?p1=Plants" } className={"active"}>Plants</Link>
+              <Link to={ { pathname: "/dashboard/designer", query: { p1: "Plants" }} } className={"active"}>
+                Plants
+              </Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?p1=Groups" }>Groups</Link>
+                <Link to={ { pathname: "/dashboard/designer", query: { p1: "Groups" }} }>
+                  Groups
+                </Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?p1=Zones" }>Zones</Link>
+              <Link to={ { pathname: "/dashboard/designer", query: { p1: "Zones" }} } className={"active"}>
+                Zones
+              </Link>
               </li>
               <li className="hidden-sm hidden-md hidden-lg">
                   <Link to={ "/dashboard/designer?p1=Panel2" }>Calendar</Link>
