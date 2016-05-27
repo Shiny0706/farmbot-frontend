@@ -4,6 +4,7 @@ import { BulkSchedulerOutput,
 // import { RegimenItem } from "../interfaces";
 import { ReduxAction } from "../../interfaces";
 import { Sequence } from "../../sequences/interfaces";
+import { duration } from "moment";
 
 export function pushWeek() {
     return {

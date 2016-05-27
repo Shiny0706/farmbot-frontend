@@ -11,7 +11,7 @@ interface RegimenItemListProps {
 
 export function RegimenItemList({ items, dispatch }: RegimenItemListProps) {
   let groups = _.groupBy<RegimenItem>(items, function(item: RegimenItem) {
-    return duration(item.timeOffset).days();
+    return Math.round(duration(item.timeOffset).asDays());
   });
 
   let list = _.map(groups, function(innerItems, day) {
