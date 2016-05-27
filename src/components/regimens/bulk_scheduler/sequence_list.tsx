@@ -13,13 +13,15 @@ let NULL_ITEM = <SeqListItem s={{name: "Select Sequence"}} i={ -1 } key={ -1 } /
 export function SequenceList({sequences,
                               current,
                               dispatch}: SequenceListProps) {
+    // Handles issue of [{}].indexOf({}) == -1.
+    let selectedValue = current ? sequences.indexOf(_.findWhere(sequences, current)) : -1;
     return <div>
         <label>Sequence</label>
-        <select value={ sequences.indexOf(current) }
+        <select value={ selectedValue }
                 onChange={ change(dispatch, sequences) }>
-            { sequences
-                .map((s, i) => { return <SeqListItem s={s} i={i} key={i} />; })
-                .concat([NULL_ITEM]) }
+            { [NULL_ITEM]
+                .concat(sequences.map((s, i) => { return <SeqListItem s={s} i={i} key={i} />; }))
+                 }
         </select>
     </div>;
 }

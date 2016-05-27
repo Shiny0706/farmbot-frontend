@@ -1,6 +1,7 @@
 import { RegimensState,
     RegimensActionHandler,
-    Regimen } from "./interfaces";
+    Regimen,
+    RegimenItem } from "./interfaces";
 import { ReduxAction } from "../interfaces";
 import { stubs } from "./temporary_stubs";
 import { randomColor } from "../../util";
@@ -41,26 +42,31 @@ let action_handlers: RegimensActionHandler = {
         return s; // Lol this method is gross.
     },
     NEW_REGIMEN: function(s, a) {
-      s = _.cloneDeep(s);
-      s.all.push(emptyRegimen());
-      return s;
+        s = _.cloneDeep(s);
+        s.all.push(emptyRegimen());
+        return s;
     },
     SELECT_REGIMEN: function(s, a) {
-      s = _.cloneDeep(s);
-      s.current = a.payload;
-      return s;
+        s = _.cloneDeep(s);
+        s.current = a.payload;
+        return s;
     },
     COMMIT_BULK_EDITOR: function(s: RegimensState, a: ReduxAction<any>) {
-      s = _.cloneDeep(s);
-      let { regimenItems, index } = a.payload;
-      let ok = _.cloneDeep(regimenItems);
-      let hmm = s.all[index].items;
-      s.all[index].items = hmm.concat(ok)
-      console.warn("STOPPED HERE");
-      // debugger;
-      return s;
+        s = _.cloneDeep(s);
+        let { regimenItems, index } = a.payload;
+        let ok = _.cloneDeep(regimenItems);
+        let hmm = s.all[index].items;
+        s.all[index].items = hmm.concat(ok);
+        return s;
+    },
+    REMOVE_REGIMEN_ITEM: function(s: RegimensState,
+        a: ReduxAction<RegimenItem>) {
+        s = _.cloneDeep(s);
+        let list = s.all[s.current].items;
+        let index = list.indexOf(a.payload);
+        list.splice(index, 1);
+        return s;
     }
-
 };
 
 const initialState: RegimensState = {
