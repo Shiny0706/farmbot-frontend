@@ -49,7 +49,7 @@ function Day({day, id, dispatch, week, active}) {
            readOnly="1"
            />
     <label className="day-label left-most" htmlFor={id}>
-      { day }
+      { (week * 7) + day }
     </label>
   </div>;
 }

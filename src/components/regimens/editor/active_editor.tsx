@@ -13,6 +13,6 @@ interface ActiveEditorProps {
 export function ActiveEditor({ regimen, dispatch }: ActiveEditorProps) {
     return <div>
         <RegimenNameInput regimen={ regimen } dispatch={ dispatch } />
-        <RegimenItemList items={ regimen.items } />
+        <RegimenItemList items={ regimen.items } dispatch={ dispatch } />
     </div>;
 }

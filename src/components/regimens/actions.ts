@@ -1,4 +1,4 @@
-import { Regimen } from "./interfaces";
+import { Regimen, RegimenItem } from "./interfaces";
 import { ReduxAction } from "../interfaces";
 import { warning } from "../../logger";
 
@@ -44,5 +44,12 @@ export function selectRegimen(index: number): ReduxAction<any> {
   return {
     type: "SELECT_REGIMEN",
     payload: index
+  };
+}
+
+export function removeRegimenItem(item: RegimenItem): ReduxAction<RegimenItem> {
+  return {
+    type: "REMOVE_REGIMEN_ITEM",
+    payload: item
   };
 }
