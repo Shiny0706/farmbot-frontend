@@ -87,9 +87,7 @@ function TOGGLE_DAY(s: BulkSchedulerState,
 
 function COMMIT_BULK_EDITOR(s: BulkSchedulerState,
                             a: ReduxAction<string>): BulkSchedulerState {
-  s = _.cloneDeep<BulkSchedulerState>(s);
-  console.warn("Coming soon!");
-  return s;
+  return _.cloneDeep(newState(s.currentRegimen));
 }
 
 function SET_SEQUENCE(s: BulkSchedulerState,

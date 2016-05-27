@@ -49,6 +49,16 @@ let action_handlers: RegimensActionHandler = {
       s = _.cloneDeep(s);
       s.current = a.payload;
       return s;
+    },
+    COMMIT_BULK_EDITOR: function(s: RegimensState, a: ReduxAction<any>) {
+      s = _.cloneDeep(s);
+      let { regimenItems, index } = a.payload;
+      let ok = _.cloneDeep(regimenItems);
+      let hmm = s.all[index].items;
+      s.all[index].items = hmm.concat(ok)
+      console.warn("STOPPED HERE");
+      // debugger;
+      return s;
     }
 
 };
