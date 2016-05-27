@@ -20,7 +20,18 @@ export function RegimenItemList({ items, dispatch }: RegimenItemListProps) {
                                 key={ day }
                                 dispatch={ dispatch }/>;
   });
-  return <div> { list } </div>;
+  let display = list.length ? list : <EmptyList/>
+  return <div>
+    <hr/>
+    { display }
+  </div>;
+}
+
+function EmptyList({}) {
+  return <div>
+    <p> This regimen doesn't have any items! </p>
+    <p> <i className="fa fa-arrow-left"/>You can add items by using the "bulk scheduler" </p>
+  </div>;
 }
 
 interface RegimenItemStepProps {
