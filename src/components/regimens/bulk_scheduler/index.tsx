@@ -1,13 +1,11 @@
 import * as React from "react";
-import { Regimen } from "../interfaces";
 import { BulkSchedulerState } from "./interfaces";
 import { Sequence } from "../../sequences/interfaces";
 import { AddButton } from "./add_button";
 import { SequenceList } from "./sequence_list";
 import { TimeInput } from "./time_input";
 import { WeekGrid } from "./week_grid";
-import { pushWeek } from "./actions";
-
+import { commitBulkEditor } from "./actions";
 interface BulkEditorProps {
     sequences: Sequence[];
     editor: BulkSchedulerState;
@@ -15,7 +13,7 @@ interface BulkEditorProps {
 }
 
 export function BulkSchedulerWidget({sequences, dispatch, editor}: BulkEditorProps) {
-    let click = function() { alert("Coming soon"); };
+    let click = function() { dispatch(commitBulkEditor(editor)); };
     let active = _.isNumber(editor.currentRegimen);
     return (<div>
         <div className="widget-wrapper bulk-scheduler-widget">
@@ -37,11 +35,14 @@ export function BulkSchedulerWidget({sequences, dispatch, editor}: BulkEditorPro
                 <div className="col-sm-12">
                     <div className="widget-content">
                         <div className="row">
-                            <div className="col-sm-8">
-                                <SequenceList sequences={ sequences } />
+                            <div className="col-sm-7">
+                                <SequenceList sequences={ sequences }
+                                              current={ editor.sequence }
+                                              dispatch={ dispatch }/>
                             </div>
-                            <div className="col-sm-4">
-                                <TimeInput />
+                            <div className="col-sm-5">
+                                <TimeInput dispatch={ dispatch }
+                                           offset={ editor.form.dailyOffsetMs }/>
                             </div>
                         </div>
                     <WeekGrid weeks={ editor.form.weeks } dispatch={ dispatch }/>
