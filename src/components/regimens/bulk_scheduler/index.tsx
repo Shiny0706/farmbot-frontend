@@ -23,7 +23,7 @@ export function BulkSchedulerWidget({sequences, dispatch, editor}: BulkEditorPro
                 <div className="col-sm-12">
                     <AddButton active={ active } click={ click }/>
                     <div className="widget-header">
-                        <h5>Scheduler</h5>
+                        <h5>Scheduler { editor.currentRegimen }</h5>
                         <i className="fa fa-question-circle widget-help-icon">
                             <div className="widget-help-text">Use this tool to schedule
                                 a sequence to run on many days of your regimen. Tip: the

@@ -44,3 +44,18 @@ export function setTimeOffset(time: string /**  time string with format `hh:mm a
     };
   };
 }
+
+export interface ToggleDayParams {
+  week: number;
+  day: number;
+}
+
+export function toggleDay({week, day}: ToggleDayParams) {
+  return {
+    type: "TOGGLE_DAY",
+    payload: {
+      week,
+      day
+    }
+  };
+}

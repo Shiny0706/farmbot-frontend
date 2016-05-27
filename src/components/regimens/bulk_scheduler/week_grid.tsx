@@ -14,7 +14,7 @@ export function WeekGrid({weeks, dispatch}: WeekGridProps) {
             <div className="col-sm-12">
                 <label className="center margin-top margin-left">Days</label>
                 { weeks.map(function(week, i) {
-                  return <WeekRow key={i} index={i} week={week}/>;
+                  return <WeekRow key={i} index={i} week={week} dispatch={ dispatch }/>;
                 }) }
             </div>
         </div>
