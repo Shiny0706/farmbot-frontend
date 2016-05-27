@@ -13,12 +13,13 @@ export class TimeInput extends React.Component<TimeInputProps, any> {
   public isEditing: boolean;
 
   formatMs(ms) {
-    if (_.isNumber(ms)) {
+    if (_.isNumber(ms)) { // Way to much logic. 
       let d = duration(ms);
       let isPM = (d.hours() > 12);
-      let hh = d.hours();
-      if (isPM) { hh -= 12; };
-      return `${ hh }:${ d.minutes() } ${ isPM ? "PM" : "AM" }`;
+      let hh = (isPM) ? (d.hours() - 12) : d.hours();
+      let h = _.padLeft(hh.toString(), 2, "0");
+      let m = _.padLeft(d.minutes().toString(), 2, "0");
+      return `${ h }:${ m } ${ isPM ? "PM" : "AM" }`;
     } else {
       return "10:26 AM";
     }

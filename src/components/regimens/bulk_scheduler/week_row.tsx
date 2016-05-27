@@ -46,6 +46,7 @@ function Day({day, id, dispatch, week, active}) {
            className="day"
            onClick={ select(dispatch, day, week) }
            checked={ active }
+           readOnly="1"
            />
     <label className="day-label left-most" htmlFor={id}>
       { day }
