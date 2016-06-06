@@ -2,6 +2,8 @@ import * as React from "react";
 import { Link } from "react-router";
 import { Plant } from "../../models/plant";
 
+const pathname = "/app/dashboard/designer";
+
 export class Plants extends React.Component<any, any> {
   render() {
     return(
@@ -18,28 +20,26 @@ export class Plants extends React.Component<any, any> {
           <div className="panel-tabs">
             <ul>
               <li className="hidden-sm hidden-md hidden-lg">
-                  <Link to={ "/dashboard/designer?p1=NoTab" }>Designer</Link>
+                  <Link to={ { pathname, query: { p1: "NoTab" }} }>Designer</Link>
               </li>
               <li>
-              <Link to={ { pathname: "/dashboard/designer", query: { p1: "Plants" }} }
-                    className={"active"}>
-                Plants
+              <Link to={ { pathname, query: { p1: "Plants" }} } >
+                Plants **
               </Link>
               </li>
               <li>
-                <Link to={ { pathname: "/dashboard/designer", query: { p1: "Groups" }} }>
+                <Link to={ { pathname, query: { p1: "Groups" }} }>
                   Groups
                 </Link>
               </li>
               <li>
-              <Link to={ { pathname: "/dashboard/designer", query: { p1: "Zones" }} }
-                    className={"active"}>
+              <Link to={ { pathname, query: { p1: "Zones" }} }>
                 Zones
               </Link>
               </li>
               <li className="hidden-sm hidden-md hidden-lg">
                   <Link to={ {
-                    pathname: "/dashboard/designer",
+                    pathname,
                     query: { p1: "Panel2" }} }>
                       Calendar
                   </Link>
@@ -56,7 +56,7 @@ export class Plants extends React.Component<any, any> {
             <List plants={ this.props.plants.all } />
           </div>
         </div>
-        <Link to="/dashboard/designer?p1=SpeciesCatalog">
+        <Link to={ { pathname, query: { p1: "SpeciesCatalog" }} }>
           <div className="plus-button add-plant button-like"
                data-toggle="tooltip"
                title="Add plant">

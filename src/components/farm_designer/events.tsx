@@ -36,19 +36,19 @@ export class Events extends React.Component<any, any> {
                 <div className="panel-tabs hidden-sm hidden-md hidden-lg">
                   <ul>
                     <li>
-                      <Link to={ "/dashboard/designer?p1=NoTab" }>Designer</Link>
+                      <Link to={ "/app/dashboard/designer?p1=NoTab" }>Designer</Link>
                     </li>
                     <li>
-                      <Link to={ "/dashboard/designer?p1=Plants" }>Plants</Link>
+                      <Link to={ "/app/dashboard/designer?p1=Plants" }>Plants</Link>
                     </li>
                     <li>
-                      <Link to={ "/dashboard/designer?p1=Groups" }>Groups</Link>
+                      <Link to={ "/app/dashboard/designer?p1=Groups" }>Groups</Link>
                     </li>
                     <li>
-                      <Link to={ "/dashboard/designer?p1=Zones" }>Zones</Link>
+                      <Link to={ "/app/dashboard/designer?p1=Zones" }>Zones</Link>
                     </li>
                     <li>
-                      <Link to={ "/dashboard/designer?p1=Panel2" } className={"active"}>Calendar</Link>
+                      <Link to={ "/app/dashboard/designer?p1=Panel2" } className={"active"}>Calendar</Link>
                     </li>
                   </ul>
                 </div>
@@ -63,7 +63,7 @@ export class Events extends React.Component<any, any> {
                 { events }
                 <div className="event-date">OCT 15</div>
                 { events }
-                <Link to="/dashboard/designer?p2=AddEvent">
+                <Link to="/app/dashboard/designer?p2=AddEvent">
                   <div className="plus-button add-event button-like" data-toggle="tooltip" title="Add event">
                     <i className="fa fa-2x fa-plus" />
                   </div>

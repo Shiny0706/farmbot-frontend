@@ -8,7 +8,7 @@ let fakeHeaders = { // TODO: Add auth scheme.
 
 export class Plant {
   static designerUrl = function(plant) {
-    return "/dashboard/designer?p1=PlantInfo" +
+    return "/app/dashboard/designer?p1=PlantInfo" +
            "&id=" + plant._id;
   };
 
