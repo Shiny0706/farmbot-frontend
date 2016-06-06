@@ -24,7 +24,7 @@ export class Plants extends React.Component<any, any> {
               </li>
               <li>
               <Link to={ { pathname, query: { p1: "Plants" }} } >
-                Plants **
+                Plants
               </Link>
               </li>
               <li>
