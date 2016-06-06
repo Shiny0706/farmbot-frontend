@@ -3,3 +3,7 @@ export interface Specimen {
   name: string;
   imgUrl: string;
 }
+
+export interface DesignerState {
+  foo: string;
+}

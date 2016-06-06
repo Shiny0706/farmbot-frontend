@@ -35,7 +35,7 @@ export class SpeciesCatalog extends React.Component<any, any> {
     // TEMP FIX:
     // let species = this.props.global.species.map(
     let species = [{
-      name: "bloobeareez", imgUrl: "http://placehold.it/200x150", _id: 123
+      name: "bloobeareez", imgUrl: "http://placehold.it/200x150", _id: "123"
     }].map(
       (specimen, k) => <SpeciesCatalogTile specimen={ specimen }
         key={ k }

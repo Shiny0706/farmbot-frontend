@@ -16,10 +16,10 @@ export class SpeciesInfo extends React.Component<any, any> {
   }
 
   render() {
-    let query = { _id: getParam("id") };
+    // let query = { _id: getParam("id") };
     // TEMP FIX:
-    let all = [{
-      name: "Placeholder", _id: 123, imgUrl: "http://placehold.it/200x150"
+    let all: Specimen[] = [{
+      name: "Placeholder", _id: "123", imgUrl: "http://placehold.it/200x150"
     }]; // this.props.global.species;
     // TODO REAL ERROR HANDLER ZOMG
     let specimen: Specimen = all[0]; // _(all).find(query);

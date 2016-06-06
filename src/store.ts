@@ -12,6 +12,7 @@ import { plantReducer as plants } from "./reducers/plant_reducer";
 import { configReducer as config } from "./components/config/config_reducer";
 import { routerReducer as routing } from "react-router-redux";
 import { regimensReducer as regimens } from "./components/regimens/reducer";
+import { designer } from "./components/farm_designer/reducer";
 import {
   BulkSchedulerReducer as bulkScheduler
 } from "./components/regimens/bulk_scheduler/reducer";
@@ -28,7 +29,8 @@ let reducers = combineReducers({
   sequences,
   regimens,
   bulkScheduler,
-  config
+  config,
+  designer
 });
 let storageKey = "lastState";
 let lastState = JSON.parse(sessionStorage[storageKey] || "{}");
