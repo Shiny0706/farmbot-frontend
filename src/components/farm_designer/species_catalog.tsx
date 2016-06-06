@@ -28,11 +28,13 @@ export class SpeciesCatalogTile extends React.Component<any, any> {
 
 export class SpeciesCatalog extends React.Component<any, any> {
   render() {
-    let species = this.props.global.species.map(
-       (specimen, k) => <SpeciesCatalogTile specimen={ specimen }
-                                       key={ k }
-                                       dispatch={ this.props.dispatch } />
-     );
+    // TEMP FIX:
+    // let species = this.props.global.species.map(
+    //    (specimen, k) => <SpeciesCatalogTile specimen={ specimen }
+    //                                    key={ k }
+    //                                    dispatch={ this.props.dispatch } />
+    //  );
+    let species = [];
     return <div className="panel-container green-panel">
             <div className="panel-header green-panel">
               <p className="panel-title">

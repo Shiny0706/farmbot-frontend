@@ -16,7 +16,8 @@ export class SpeciesInfo extends React.Component<any, any> {
 
   render() {
     let query = {_id: getParam("id")};
-    let all = this.props.global.species;
+    // TEMP FIX:
+    let all = []; //this.props.global.species;
     // TODO REAL ERROR HANDLER ZOMG
     let specimen: any = _(all).find(query);
     return  <div className="panel-container green-panel">
