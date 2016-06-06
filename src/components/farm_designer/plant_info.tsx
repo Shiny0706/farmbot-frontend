@@ -1,8 +1,7 @@
-import * as React from 'react';
-import { Plant } from '../../models/plant'
-import { Link } from 'react-router';
-import { BackArrow } from './back_arrow';
-import { getParam } from '../../util.ts';
+import * as React from "react";
+import { BackArrow } from "./back_arrow";
+import { getParam } from "../../util.ts";
+
 export class PlantInfo extends React.Component<any, any> {
   removePlant() {
    this.props.dispatch({type: "PLANT_REMOVE_REQUEST",
@@ -26,7 +25,7 @@ export class PlantInfo extends React.Component<any, any> {
             <div className="panel-content">
               <label>Photos of this Plant</label>
               <img className="crop-drag-info-image"
-                   src={this.plant.imgUrl || '/img/placeholder_berries.jpg'} />
+                   src={this.plant.imgUrl || "http://placehold.it/200x150"} />
               <label>Plant Info</label>
               <span><a href="#">Edit</a></span>
               <ul>

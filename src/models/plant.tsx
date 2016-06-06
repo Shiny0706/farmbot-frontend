@@ -13,10 +13,10 @@ export class Plant {
   };
 
   static fakes = [
-    new Plant({name: "Blueberry", imgUrl: "/img/blueberry.svg"}),
-    new Plant({name: "Cabbage", imgUrl: "/img/cabbage.svg"}),
-    new Plant({name: "Pepper", imgUrl: "/img/pepper.svg"}),
-    new Plant({name: "Cilantro", imgUrl: "/img/cilantro.svg"}),
+    new Plant({name: "Blueberry", imgUrl: "http://placehold.it/200x150"}),
+    new Plant({name: "Cabbage", imgUrl: "http://placehold.it/200x150"}),
+    new Plant({name: "Pepper", imgUrl: "http://placehold.it/200x150"}),
+    new Plant({name: "Cilantro", imgUrl: "http://placehold.it/200x150"}),
   ];
 
   static fetchAll = function() {
@@ -54,7 +54,7 @@ export class Plant {
     let options = (opts || {});
     this._id  = String(options._id || _.random(0, 1000));
     this.age  = (options.age || _.random(0, 5));
-    this.imgUrl = (options.imgUrl || "/img/unknown.svg");
+    this.imgUrl = (options.imgUrl || "http://placehold.it/200x150");
     this.name = (options.name || "Untitled Plant");
     this.x = (options.x || 0);
     this.y = (options.y || 0);

@@ -11,7 +11,7 @@ export class Species {
 
   constructor (opts) {
     opts = (opts || {});
-    this.imgUrl = opts.imgUrl || "/img/placeholder_berries.jpg";
+    this.imgUrl = opts.imgUrl || "http://placehold.it/200x150";
     this.name = opts.name || "Unnamed Species";
     this._id  = String(opts._id || inc++);
   }
