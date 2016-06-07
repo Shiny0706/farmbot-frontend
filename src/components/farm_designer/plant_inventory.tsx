@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Link } from "react-router";
-import { Plant } from "../../models/plant";
 
 const pathname = "/app/dashboard/designer";
 
@@ -53,7 +52,7 @@ export class Plants extends React.Component<any, any> {
           <div className="search-underline"></div>
           <div className="object-list">
             <label>Current Plants</label>
-            <List plants={ this.props.plants.all } />
+            <List plants={ [] } />
           </div>
         </div>
         <Link to={ { pathname, query: { p1: "SpeciesCatalog" }} }>
@@ -73,11 +72,18 @@ export class List extends React.Component<any, any> {
     let mapper = function(plant, key) {
       return(
         <li key={ key } >
-          <Link to={ Plant.designerUrl(plant) }>{ plant.name }</Link>
+          <Link to={ {
+              pathname: "/dashboard/designer",
+              query: {
+                  p1: "PlantInfo",
+                  id: plant._id
+                }
+              } }>
+            { plant.name }
+          </Link>
           <p>{plant.age} days old</p>
         </li>);
     };
-
     return(<ul>
              { this.props.plants.map(mapper) }
            </ul>);

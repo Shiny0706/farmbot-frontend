@@ -9,7 +9,7 @@ export class PlantInfo extends React.Component<any, any> {
   }
 
   get plant() {
-    var p: any = _(this.props.plants.all)
+    var p: any = _([])
              .find({_id: getParam("id")}) || {};
     return p;
 

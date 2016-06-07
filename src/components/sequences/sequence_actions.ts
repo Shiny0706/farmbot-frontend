@@ -43,7 +43,7 @@ export function fetchSequences() {
     let { iss, token } = state;
 
     let headers = authHeaders(token);
-    axios.get<Array<Sequence>>(`${iss}/api/sequences`, headers)
+    axios.get<Sequence[]>(`${iss}/api/sequences`, headers)
       .then(({data}) => {
         dispatch(fetchSequencesOk(data));
       }, (e: Error) => {

@@ -3,15 +3,18 @@ import { Navbar } from "../nav/navbar";
 import { Panel1 } from "./panel_1";
 import { GardenMap } from "./garden_map";
 import { Panel2 } from "./panel_2";
-import { fetchAllPlants } from "../../actions/plant_actions";
+import { fetchPlants } from "./actions";
 import { connect } from "react-redux";
 
 
 class FarmDesignerPage extends React.Component<any, any> {
 
-  componentDidMount() { this.props.dispatch(fetchAllPlants()); }
+  componentDidMount() {
+    debugger;
+    // this.props.dispatch(fetchPlants());
+  }
 
-// Is there anyway to do this in one step down in the render section?
+// anyway to do this in one step down in the render section?
 // Yes, https://facebook.github.io/react/docs/transferring-props.html
 // TODO: convert it over to that ^
   renderPanel1() {

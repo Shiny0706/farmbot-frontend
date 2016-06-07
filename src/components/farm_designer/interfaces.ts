@@ -1,3 +1,12 @@
+export interface Plant {
+    _id: String;
+    age: Number;
+    imgUrl: String;
+    name: String;
+    x: Number;
+    y: Number;
+}
+
 export interface Specimen {
   _id: string;
   name: string;
@@ -5,5 +14,5 @@ export interface Specimen {
 }
 
 export interface DesignerState {
-  foo: string;
+  plants: Plant[];
 }

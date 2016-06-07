@@ -1,15 +1,10 @@
 import { generateReducer } from "../generate_reducer";
 import { DesignerState } from "./interfaces";
 
-export let designer = generateReducer<DesignerState>(
-    { foo: "bar" },
-    function catchAll(s, a) {
-        console.log(`Looks like the reducer was installed correctly. ${a.type}.`);
-        return s;
-    });
+export let designer = generateReducer<DesignerState>( { foo: "bar" } );
 
 
-designer.add(function FETCH_PLANTS_FAILURE(s, a) {
+designer.add(function LOGIN_OK(s, a) {
     console.dir(a.payload);
     return s;
 });

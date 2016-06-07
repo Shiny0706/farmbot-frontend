@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Plant } from "../../models/plant";
-import { addPlant } from "../../actions/plant_actions";
+import { savePlant } from "./actions";
 import { BackArrow } from "./back_arrow";
-import { getParam } from "../../util.ts";
 import { Specimen } from "./interfaces";
+import { Plant } from "./plant";
 
 export class SpeciesInfo extends React.Component<any, any> {
   drop(e) {
@@ -11,8 +10,8 @@ export class SpeciesInfo extends React.Component<any, any> {
       .querySelector("#drop-area > svg > rect")
       .getBoundingClientRect();
     let coords = fromScreenToGarden(e.pageX, e.pageY, box.left, box.bottom)
-    let plant = new Plant(coords);
-    this.props.dispatch(addPlant(plant));
+    let plant = Plant(coords);
+    this.props.dispatch(savePlant(plant, "CHANGE_THIS_PLZ", "CHANGE_THIS_TOO!!"));
   }
 
   render() {

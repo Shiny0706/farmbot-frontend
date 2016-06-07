@@ -1,9 +1,9 @@
 import * as React from "react";
-import { navigateSelectedPlant } from "../../actions/router_actions";
 
 export class MapPoint extends React.Component<any, any> {
   select() {
-    this.props.dispatch(navigateSelectedPlant(this.props.plant));
+    alert("TODO");
+    // this.props.dispatch(navigateSelectedPlant(this.props.plant));
   }
 
   selected() {
@@ -23,7 +23,7 @@ export class MapPoint extends React.Component<any, any> {
 
 export class GardenMap extends React.Component<any, any> {
   plants() {
-    return this.props.plants.all.map(
+    return [].map(
       function (p, k) {
         return <MapPoint plant={ p }
                   key={ k }
