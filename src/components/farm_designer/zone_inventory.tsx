@@ -14,19 +14,19 @@ export class Zones extends React.Component<any, any> {
           <div className="panel-tabs">
             <ul>
               <li className="hidden-sm hidden-md hidden-lg">
-                  <Link to={ "/dashboard/designer?p1=NoTab" }>Designer</Link>
+                  <Link to={ "/app/dashboard/designer?p1=NoTab" }>Designer</Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?p1=Plants" }>Plants</Link>
+                  <Link to={ "/app/dashboard/designer?p1=Plants" }>Plants</Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?p1=Groups" }>Groups</Link>
+                  <Link to={ "/app/dashboard/designer?p1=Groups" }>Groups</Link>
               </li>
               <li>
-                  <Link to={ "/dashboard/designer?p1=Zones" } className={"active"}>Zones</Link>
+                  <Link to={ "/app/dashboard/designer?p1=Zones" } className={"active"}>Zones</Link>
               </li>
               <li className="hidden-sm hidden-md hidden-lg">
-                  <Link to={ "/dashboard/designer?p1=Panel2" }>Calendar</Link>
+                  <Link to={ "/app/dashboard/designer?p1=Panel2" }>Calendar</Link>
               </li>
             </ul>
           </div>
@@ -58,7 +58,7 @@ export class Zones extends React.Component<any, any> {
             </ul>
           </div>
         </div>
-        <Link to="/dashboard/designer?p1=AddZone">
+        <Link to="app/dashboard/designer?p1=AddZone">
           <div className="plus-button add-zone button-like" data-toggle="tooltip" title="Add zone">
             <i className="fa fa-2x fa-plus" />
           </div>

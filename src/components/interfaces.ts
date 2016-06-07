@@ -4,8 +4,8 @@ import { SequenceReducerState } from "./sequences/interfaces";
 import { BulkSchedulerState } from "./regimens/bulk_scheduler/interfaces";
 
 export interface ReduxAction<T> {
-    type: string;
-    payload: T;
+  type: string;
+  payload: T;
 };
 
 
