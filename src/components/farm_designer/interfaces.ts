@@ -1,10 +1,11 @@
 export interface Plant {
-    _id: String;
-    age: Number;
-    imgUrl: String;
-    name: String;
-    x: Number;
-    y: Number;
+    _id: string;
+    age: number;
+    imgUrl: string;
+    name: string;
+    x: number;
+    y: number;
+    planting_area_id: string;
 }
 
 export interface Specimen {
