@@ -22,7 +22,7 @@ export class Plants extends React.Component<any, any> {
                   <Link to={ { pathname, query: { p1: "NoTab" }} }>Designer</Link>
               </li>
               <li>
-              <Link to={ { pathname, query: { p1: "Plants" }} } >
+              <Link to={ { pathname, query: { p1: "Plants" }} }  className={"active"}>
                 Plants
               </Link>
               </li>
