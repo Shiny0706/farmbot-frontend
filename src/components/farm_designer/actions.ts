@@ -5,9 +5,9 @@ import { Plant } from "./interfaces";
 
 const PLANT_URL = "api/plants";
 
-export function designerUrl(plant) {
-    return `/app/dashboard/designer?p1=PlantInfo&id=${plant._id}`;
-};
+// export function designerUrl(plant) {
+//     return `/app/dashboard/designer?p1=PlantInfo&id=${plant._id}`;
+// };
 
 export function fetchPlants(baseUrl: string, token: string) {
     let url = baseUrl + "/" + PLANT_URL;
