@@ -23,13 +23,13 @@ export class MapPoint extends React.Component<any, any> {
 
 export class GardenMap extends React.Component<any, any> {
   plants() {
-    return [].map(
-      function (p, k) {
-        return <MapPoint plant={ p }
-                  key={ k }
-                  { ...this.props }/>;
-      }.bind(this)
-    );
+    return this
+      .props
+      .designer
+      .plants
+      .map((p, k) => {
+        return <MapPoint plant={ p } key={ k } { ...this.props }/>;
+      });
   }
 
   render() {
