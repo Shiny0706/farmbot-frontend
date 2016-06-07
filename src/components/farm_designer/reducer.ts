@@ -20,6 +20,5 @@ export let designer = generateReducer<DesignerState>({plants: []}, probe)
     // Exxxttrraaa runtime safety.
     let plant = newPlant(a.payload);
     state.plants.push(plant);
-    debugger;
     return state;
   });

@@ -1,13 +1,16 @@
 import * as React from "react";
+import { push } from "../../history";
 
 export class MapPoint extends React.Component<any, any> {
   select() {
-    alert("TODO");
-    // this.props.dispatch(navigateSelectedPlant(this.props.plant));
+    let p1 = this.props.location.query.p1 || "PlantInfo";
+    let url = `/app/dashboard/designer?p1=${ p1 }&id=${ this.props.plant._id }`;
+    push(url);
   }
 
   selected() {
-    return (!!this.props.selected);
+    let isSelected = (!!this.props.selected);
+    return isSelected;
   }
 
   render() {
@@ -28,7 +31,11 @@ export class GardenMap extends React.Component<any, any> {
       .designer
       .plants
       .map((p, k) => {
-        return <MapPoint plant={ p } key={ k } { ...this.props }/>;
+        let isSelected = this.props.location.query.id === p._id;
+        return <MapPoint plant={ p }
+                         key={ k }
+                         { ...this.props }
+                         selected={ isSelected } />;
       });
   }
 

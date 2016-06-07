@@ -11,7 +11,7 @@ interface SpeciesCatalogTileProps {
 export class SpeciesCatalogTile extends React.Component<SpeciesCatalogTileProps, any> {
   render() {
     let specimen = this.props.specimen;
-    let url = "app/dashboard/designer?p1=SpeciesInfo&id="
+    let url = "/app/dashboard/designer?p1=SpeciesInfo&id="
       + specimen._id;
     return (
       <div className="plantCatalogTile">

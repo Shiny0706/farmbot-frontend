@@ -37,7 +37,6 @@ export function savePlant(plant: Plant, baseUrl: string, token: string) {
             })
             .catch((payload) => {
                 error("Tried to save plant, but couldn't.");
-                debugger;
                 dispatch({ type: "SAVE_PLANT_ERR", payload });
             });
     };
