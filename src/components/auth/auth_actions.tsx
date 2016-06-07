@@ -4,6 +4,7 @@ import { fetchSequences } from "../sequences/sequence_actions";
 import { post } from "axios";
 import { error } from "../../logger";
 import { AuthState } from "./auth_reducer";
+import { fetchPlants } from "../farm_designer/actions";
 
 export interface AuthResponseToken {
     unencoded: AuthToken;
@@ -19,6 +20,7 @@ export function didLogin(authState: AuthState, dispatch) {
     dispatch(loginOk(authState));
     dispatch(fetchDevice(authState.token));
     dispatch(fetchSequences());
+    dispatch(fetchPlants(authState.iss, authState.token));
 };
 
 // We need to handle OK logins for numerous use cases (Ex: login AND registration)

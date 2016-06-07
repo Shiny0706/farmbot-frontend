@@ -11,7 +11,9 @@ export class SpeciesInfo extends React.Component<any, any> {
       .getBoundingClientRect();
     let coords = fromScreenToGarden(e.pageX, e.pageY, box.left, box.bottom)
     let plant = Plant(coords);
-    this.props.dispatch(savePlant(plant, "CHANGE_THIS_PLZ", "CHANGE_THIS_TOO!!"));
+    let baseUrl = this.props.auth.iss;
+    let token = this.props.auth.token;
+    this.props.dispatch(savePlant(plant, baseUrl, token));
   }
 
   render() {

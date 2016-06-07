@@ -43,7 +43,7 @@ export function generateReducer<State>(
          * For example, if the reducer must respond to ADD_TOO,
          * call myReducer.add(function ADD_TODO(state, action){ . . . })
          */
-        add?: <T>(fn: GenericActionHandler<T>) => void; // Calms the type checker.
+        add?: <T>(fn: GenericActionHandler<T>) => GeneratedReducer; // Calms the type checker.
     }
 
     let actionHandlers: ActionHandlerDict = { DEFAULT };
@@ -57,6 +57,7 @@ export function generateReducer<State>(
 
     reducer.add = function addHandler<T>(fn: GenericActionHandler<T>) {
         actionHandlers[name(fn)] = fn;
+        return reducer;
     };
 
     return reducer;

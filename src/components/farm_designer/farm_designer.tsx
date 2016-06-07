@@ -10,8 +10,9 @@ import { connect } from "react-redux";
 class FarmDesignerPage extends React.Component<any, any> {
 
   componentDidMount() {
-    debugger;
-    // this.props.dispatch(fetchPlants());
+    let token = this.props.auth.token;
+    let baseUrl = this.props.config.farmbotApiUrl;
+    this.props.dispatch(fetchPlants(baseUrl, token));
   }
 
 // anyway to do this in one step down in the render section?
