@@ -8,7 +8,8 @@ export let designer = generateReducer<DesignerState>(
         return s;
     });
 
+
 designer.add(function FETCH_PLANTS_FAILURE(s, a) {
-    console.log("Failed to fetch them plants.");
+    console.dir(a.payload);
     return s;
 });

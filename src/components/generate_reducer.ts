@@ -28,6 +28,11 @@ export function generateReducer<State>(
         // TODO: Remove explicit any in favor of generic.
     }
 
+    interface GenericActionHandler<T> {
+        (state: State, action: ReduxAction<T>): State;
+        // TODO: Remove explicit any in favor of generic.
+    }
+
     interface ActionHandlerDict {
         [actionHandler: string]: ActionHandler;
         DEFAULT: ActionHandler;
@@ -38,18 +43,19 @@ export function generateReducer<State>(
          * For example, if the reducer must respond to ADD_TOO,
          * call myReducer.add(function ADD_TODO(state, action){ . . . })
          */
-        add?: (fn: ActionHandler) => void; // Calms the type checker.
+        add?: <T>(fn: GenericActionHandler<T>) => void; // Calms the type checker.
     }
 
     let actionHandlers: ActionHandlerDict = { DEFAULT };
 
-    let reducer: GeneratedReducer = function(state = initialState, action: any): State {
+    let reducer: GeneratedReducer = function<T>(state = initialState,
+                                                action: ReduxAction<T>): State {
         let handler = (actionHandlers[action.type] || actionHandlers["DEFAULT"]);
         let result: State = handler(state, action);
         return result;
     };
 
-    reducer.add = function addHandler<Action>(fn: ActionHandler) {
+    reducer.add = function addHandler<T>(fn: GenericActionHandler<T>) {
         actionHandlers[name(fn)] = fn;
     };
 
