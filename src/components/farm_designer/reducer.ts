@@ -21,4 +21,10 @@ export let designer = generateReducer<DesignerState>({plants: []}, probe)
     let plant = newPlant(a.payload);
     state.plants.push(plant);
     return state;
+  })
+  .add<Plant>(function DESTROY_PLANT_OK(s, { payload }) {
+    let state = cloneDeep(s);
+    let a = state.plants;
+    a.splice(a.indexOf(payload), 1);
+    return state;
   });
