@@ -305,15 +305,12 @@ class DevicesPage extends React.Component<any, any> {
                                   <td>
                                     <label>LENGTH (m)</label>
                                   </td>
-                                  <td>
-                                    <input value="---" />
-                                  </td>
-                                  <td>
-                                    <input value="---" />
-                                  </td>
-                                  <td>
-                                    <input value="---" />
-                                  </td>
+                                  <SettingsInputBox setting="movement_axis_nr_steps_x"
+                                                    {...this.props} />
+                                  <SettingsInputBox setting="movement_axis_nr_steps_y"
+                                                    {...this.props} />
+                                  <SettingsInputBox setting="movement_axis_nr_steps_z"
+                                                    {...this.props} />
                                 </tr>
                                 <tr>
                                   <td>

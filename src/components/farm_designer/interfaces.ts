@@ -15,5 +15,7 @@ export interface Specimen {
 }
 
 export interface DesignerState {
+  x_size: number;
+  y_size: number;
   plants: Plant[];
 }

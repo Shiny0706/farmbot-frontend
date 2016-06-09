@@ -47,7 +47,8 @@ export class GardenMap extends React.Component<any, any> {
       stroke:      "rgba(0,0,0,0.15)"
     };
 
-    let width = length = 240; // this.props.global.planting_area;
+    let width = this.props.designer.x_size;
+    let length = this.props.designer.y_size;
 
     return <div>
              <div className="drop-area"

@@ -25,34 +25,39 @@ export interface BotState {
 
 /** Status registers for the bot's status */
 export interface HardwareState {
+  busy?: number;
+  last?: string;
+  last_sync?: string;
+  method?: string;
+  s?: number;
   x?: number;
   y?: number;
   z?: number;
-  s?: number;
-  busy?: number;
-  last?: string;
-  param_version?: number;
-  movement_timeout_x?: number;
-  movement_timeout_y?: number;
-  movement_timeout_z?: number;
+  movement_axis_nr_steps_x: number;
+  movement_axis_nr_steps_y: number;
+  movement_axis_nr_steps_z: number;
+  movement_home_up_x?: number;
+  movement_home_up_y?: number;
+  movement_home_up_z?: number;
   movement_invert_endpoints_x?: number;
   movement_invert_endpoints_y?: number;
   movement_invert_endpoints_z?: number;
   movement_invert_motor_x?: number;
   movement_invert_motor_y?: number;
   movement_invert_motor_z?: number;
-  movement_steps_acc_dec_x?: number;
-  movement_steps_acc_dec_y?: number;
-  movement_steps_acc_dec_z?: number;
-  movement_home_up_x?: number;
-  movement_home_up_y?: number;
-  movement_home_up_z?: number;
-  movement_min_spd_x?: number;
-  movement_min_spd_y?: number;
-  movement_min_spd_z?: number;
   movement_max_spd_x?: number;
   movement_max_spd_y?: number;
   movement_max_spd_z?: number;
+  movement_min_spd_x?: number;
+  movement_min_spd_y?: number;
+  movement_min_spd_z?: number;
+  movement_steps_acc_dec_x?: number;
+  movement_steps_acc_dec_y?: number;
+  movement_steps_acc_dec_z?: number;
+  movement_timeout_x?: number;
+  movement_timeout_y?: number;
+  movement_timeout_z?: number;
+  param_version?: number;
   pin0?: string;
   pin1?: string;
   pin2?: string;
@@ -67,6 +72,5 @@ export interface HardwareState {
   pin11?: string;
   pin12?: string;
   pin13?: string;
-  last_sync?: string;
-  method?: string;
 }
+

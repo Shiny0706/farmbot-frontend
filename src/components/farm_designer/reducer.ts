@@ -3,6 +3,7 @@ import { Plant as newPlant } from "./plant";
 import { generateReducer } from "../generate_reducer";
 import { DesignerState } from "./interfaces";
 import { cloneDeep } from "lodash";
+import { HardwareState } from "../devices/interfaces";
 
 let probe = (s, a) => {
     console.log(`➫ ${ a.type }`)
@@ -26,5 +27,11 @@ export let designer = generateReducer<DesignerState>({plants: []}, probe)
     let state = cloneDeep(s);
     let a = state.plants;
     a.splice(a.indexOf(payload), 1);
+    return state;
+  })
+  .add<HardwareState>(function BOT_CHANGE(s, { payload }) {
+    let state = cloneDeep(s);
+    state.x_size = payload.movement_axis_nr_steps_x;
+    state.y_size = payload.movement_axis_nr_steps_y;
     return state;
   });
