@@ -5,7 +5,6 @@ import { destroyPlant } from "./actions";
 import { Plant as NewPlant } from "./plant";
 import { Plant } from "./interfaces";
 
-// destroyPlant(plant: Plant, baseUrl: string, token: string)
 export class PlantInfo extends React.Component<any, any> {
   removePlant() {
     let url = this.props.auth.iss;
@@ -60,7 +59,7 @@ export class PlantInfo extends React.Component<any, any> {
           </button>
         </span>
       </div>
-    </div>
+    </div>;
 
   }
 }
