@@ -1,11 +1,12 @@
 import * as React from "react";
-import { push } from "../../history";
+// import { push } from "../../history";
+import { browserHistory } from 'react-router';
 
 export class MapPoint extends React.Component<any, any> {
   select() {
     let p1 = this.props.location.query.p1 || "PlantInfo";
     let url = `/app/dashboard/designer?p1=${ p1 }&id=${ this.props.plant._id }`;
-    push(url);
+    browserHistory.push(url);
   }
 
   selected() {

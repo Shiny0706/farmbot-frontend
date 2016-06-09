@@ -17,13 +17,12 @@ export class SpeciesInfo extends React.Component<any, any> {
   }
 
   render() {
-    // let query = { _id: getParam("id") };
-    // TEMP FIX:
     let all: Specimen[] = [{
       name: "Placeholder", _id: "123", imgUrl: "http://placehold.it/200x150"
-    }]; // this.props.global.species;
-    // TODO REAL ERROR HANDLER ZOMG
+    }];
+
     let specimen: Specimen = all[0]; // _(all).find(query);
+
     return <div className="panel-container green-panel">
       <div className="panel-header green-panel">
         <p className="panel-title">
@@ -39,6 +38,19 @@ export class SpeciesInfo extends React.Component<any, any> {
           <div className="crop-info-overlay">
             To plant, drag and drop into map
           </div>
+        </div>
+        <div className="object-list">
+          <label>
+            Delete This Crop
+          </label>
+          <p>
+            Note: You will no longer be able to plant this crop.
+          </p>
+          <span>
+            <button className="red">
+              Delete
+            </button>
+          </span>
         </div>
         <div className="object-list">
           <label>
@@ -71,19 +83,6 @@ export class SpeciesInfo extends React.Component<any, any> {
             <li>Blueberries by OpenFarm</li>
             <li>Soil Acidifier</li>
           </ul>
-        </div>
-        <div className="object-list">
-          <label>
-            Delete This Crop
-          </label>
-          <p>
-            Note: You will no longer be able to plant this crop.
-          </p>
-          <span>
-            <button className="red">
-              Delete
-            </button>
-          </span>
         </div>
       </div>
     </div>

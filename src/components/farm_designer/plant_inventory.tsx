@@ -73,7 +73,7 @@ export class List extends React.Component<any, any> {
       return(
         <li key={ key } >
           <Link to={ {
-                pathname: "app/dashboard/designer",
+                pathname: "/app/dashboard/designer",
                 query: { p1: "PlantInfo", id: (plant._id || "") }
               } }>
             { plant.name }
