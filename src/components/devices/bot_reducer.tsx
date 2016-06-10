@@ -1,6 +1,7 @@
 import { error, warning, success } from "../../logger";
 import * as _ from "lodash";
 import { BotState } from "./interfaces";
+import { generateReducer } from "../generate_reducer";
 
 let status = {
   NOT_READY: "never connected to device",
@@ -14,28 +15,26 @@ let status = {
 };
 
 let initialState: BotState = {
+  logQueueSize: 10,
+  logQueue: [],
   status: status.NOT_READY,
   stepSize: 1000,
   hardware: {},
   axisBuffer: {},
   settingsBuffer: {}
 };
-interface ActionHandlerDictionary {
-  [name: string]: (state: BotState, action: any) => BotState;
-}
-let action_handlers: ActionHandlerDictionary = {
-  SETTING_TOGGLE_OK: function(state, action) {
-    return this.READ_STATUS_OK(state, action);
-  },
 
-  COMMIT_SETTINGS_OK: function(state, action) {
+export let botReducer = generateReducer<BotState>(initialState)
+  .add<any>(function SETTING_TOGGLE_OK(state, action) {
+    return this.READ_STATUS_OK(state, action);
+  })
+  .add<any>(function COMMIT_SETTINGS_OK(state, action) {
     let nextState = _.assign<any, BotState>({}, state, {
       settingsBuffer: {}
     });
     return nextState;
-  },
-
-  COMMIT_AXIS_CHANGE_OK: function(oldState, action) {
+  })
+  .add<any>(function COMMIT_AXIS_CHANGE_OK(oldState, action) {
     let hardware = _.assign({}, oldState.hardware, action.payload);
     let state = _.assign<any, BotState>({}, oldState);
 
@@ -43,22 +42,19 @@ let action_handlers: ActionHandlerDictionary = {
       axisBuffer: {},
       hardware
     });
-  },
-
-  COMMIT_AXIS_CHANGE_ERR: function(state, action) {
+  })
+  .add<any>(function COMMIT_AXIS_CHANGE_ERR(state, action) {
     return state;
-  },
-
-  CHANGE_AXIS_BUFFER: function(state, action) {
+  })
+  .add<any>(function CHANGE_AXIS_BUFFER(state, action) {
     let axisBuffer = _.assign({}, state.axisBuffer);
     axisBuffer[action.payload.key] = action.payload.val;
 
     return _.assign<any, BotState>({}, state, {
       axisBuffer: axisBuffer
     });
-  },
-
-  CHANGE_SETTINGS_BUFFER: function(state, action) {
+  })
+  .add<any>(function CHANGE_SETTINGS_BUFFER(state, action) {
     let settingsBuffer = _.assign({}, state.settingsBuffer);
     let newVal = Number(action.payload.val);
     if (newVal) {
@@ -69,15 +65,13 @@ let action_handlers: ActionHandlerDictionary = {
     return _.assign<any, BotState>({}, state, {
       settingsBuffer: settingsBuffer
     });
-  },
-
-  CHANGE_STEP_SIZE: function(state, action) {
+  })
+  .add<any>(function CHANGE_STEP_SIZE(state, action) {
     return _.assign<any, BotState>({}, state, {
       stepSize: action.payload
     });
-  },
-
-  READ_STATUS_OK: function(state, action) {
+  })
+  .add<any>(function READ_STATUS_OK(state, action) {
     let hardware: any = _.assign({}, action.payload);
     delete hardware.method;
     return _.assign<any, BotState>({},
@@ -86,59 +80,49 @@ let action_handlers: ActionHandlerDictionary = {
       }, {
         status: status.READY
       });
-  },
-
-  BOT_CHANGE: function(state, action) {
+  })
+  .add<any>(function BOT_CHANGE(state, action) {
     let statuses: any = _.assign({}, action.payload);
     let newState: any = _.assign({}, state);
     newState.hardware = _.assign({}, state.hardware, statuses);
     return _.assign<any, BotState>({}, newState);
-  },
-
-  DEFAULT: function(state, action) {
-    return state;
-  },
-
-  COMMAND_ERR: function(s, a) {
+  })
+  .add<any>(function COMMAND_ERR(s, a) {
     return s;
-  },
-
-  COMMAND_OK: function(s, a) {
+  })
+  .add<any>(function COMMAND_OK(s, a) {
     return s;
-  },
-
-  CONNECT_OK: function(state, action) {
+  })
+  .add<any>(function CONNECT_OK(state, action) {
     return _.assign<any, BotState>({},
       state,
       action.payload, {
         status: status.CONNECTED,
         connected: true
       });
-  },
-
-  CONNECT_ERR: function(state, action) {
+  })
+  .add<any>(function CONNECT_ERR(state, action) {
     return _.assign<any, BotState>({},
       state, {
         status: status.WEBSOCKET_ERR
       });
-  },
-  CHANGE_DEVICE: function(state, action) {
+  })
+  .add<any>(function CHANGE_DEVICE(state, action) {
     return _.assign<any, BotState>({},
       state,
       action.payload);
-  },
-
-  FETCH_DEVICE: function(state, action) {
+  })
+  .add<any>(function FETCH_DEVICE(state, action) {
     return state;
-  },
-  FETCH_DEVICE_OK: function(state, { payload }) {
+  })
+  .add<any>(function FETCH_DEVICE_OK(state, { payload }) {
     return _.assign<any, BotState>({},
       state,
       payload, {
         status: status.AWAITING_WEBSOCKET
       });
-  },
-  FETCH_DEVICE_ERR: function(state, action) {
+  })
+  .add<any>(function FETCH_DEVICE_ERR(state, action) {
     if (action.payload.status === 404) {
       warning("You need to add a device to your account.",
         "No device found!");
@@ -150,8 +134,8 @@ let action_handlers: ActionHandlerDictionary = {
       state, {
         status: status.API_ERROR
       });
-  },
-  SAVE_DEVICE_ERR: function(state, action) {
+  })
+  .add<any>(function SAVE_DEVICE_ERR(state, action) {
     switch (action.payload.status) {
       case 422:
         let errors = _.map(action.payload.responseJSON, v => v)
@@ -163,25 +147,20 @@ let action_handlers: ActionHandlerDictionary = {
         break;
     }
     return state;
-  },
-  SAVE_DEVICE_OK: function(state, action) {
+  })
+  .add<any>(function SAVE_DEVICE_OK(state, action) {
     // TODO Move this into the action creator. Does not belong in a reducer.
     success("Device saved.");
     return _.assign<any, BotState>({}, state, action.payload, {
       dirty: false
     });
-  },
-  BOT_NOTIFICATION: function(state, action) {
-    let nextState = _.cloneDeep(state);
-    let newStatus = _.cloneDeep(action.payload);
-    _.assign<any, BotState>(nextState.hardware, newStatus);
-    return nextState;
-  }
-};
+  })
+  .add<any>(function BOT_LOG_MESSAGE(s, { payload }) {
+    let state = _.cloneDeep(s);
+    let msg = _.cloneDeep(payload);
 
-export function botReducer(state = initialState, action) {
-  let handler = (action_handlers[action.type] || action_handlers["DEFAULT"]);
-  let result = handler.call(action_handlers, state, action);
-  let newState = _.assign({}, result);
-  return newState;
-}
+    state.logQueue.unshift(msg);
+    state.logQueue = _.take(state.logQueue, state.logQueueSize);
+
+    return state;
+  });

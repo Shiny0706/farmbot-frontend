@@ -80,6 +80,7 @@ class DevicesPage extends React.Component<any, any> {
   render() {
     let bot = this.state.bot;
     let auth = this.props.auth;
+
     return (
       <div>
         <Navbar { ...this.props } />
@@ -94,7 +95,10 @@ class DevicesPage extends React.Component<any, any> {
                       <form onSubmit={ this.saveBot.bind(this) }>
                           <div className="row">
                             <div className="col-sm-12">
-                              <button type="submit" className="button-like green widget-control">SAVE { bot.dirty ? "*" : "" }</button>
+                              <button type="submit"
+                                      className="button-like green widget-control">
+                                SAVE { bot.dirty ? "*" : "" }
+                              </button>
                               <div className="widget-header">
                                 <h5>DEVICE</h5>
                                 <i className="fa fa-question-circle widget-help-icon">
@@ -115,7 +119,9 @@ class DevicesPage extends React.Component<any, any> {
                                         <label>FARMBOT NAME</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="name" onChange={ this.changeBot.bind(this) } value={ bot.name || "Fix me!"} />
+                                        <input name="name"
+                                               onChange={ this.changeBot.bind(this) }
+                                               value={ bot.name || "Fix me!"} />
                                       </td>
                                     </tr>
                                     <tr>
@@ -123,7 +129,9 @@ class DevicesPage extends React.Component<any, any> {
                                         <label>UUID</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="uuid" onChange={ this.changeBot.bind(this) } value={ auth.bot }/>
+                                        <input name="uuid"
+                                               onChange={ this.changeBot.bind(this) }
+                                               value={ auth.bot }/>
                                       </td>
                                     </tr>
                                     <tr>
@@ -131,7 +139,9 @@ class DevicesPage extends React.Component<any, any> {
                                         <label>SECURITY TOKEN</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <input name="token" onChange={ this.changeBot.bind(this) } value={ auth.token }/>
+                                        <input name="token"
+                                               onChange={ this.changeBot.bind(this) }
+                                               value={ auth.token }/>
                                       </td>
                                     </tr>
                                     <tr>
@@ -163,10 +173,15 @@ class DevicesPage extends React.Component<any, any> {
                                         <label>COMPUTER</label>
                                       </td>
                                       <td>
-                                        <p>Raspberry Pi 2 Model B+ running farmbot-raspberry-pi-controller V1.233</p>
+                                        <p>
+                                          Raspberry Pi 2 Model B+ running
+                                          farmbot-raspberry-pi-controller V1.233
+                                        </p>
                                       </td>
                                       <td>
-                                        <button className="button-like green">UPDATE TO V1.234</button>
+                                        <button className="button-like green">
+                                          UPDATE TO V1.234
+                                        </button>
                                       </td>
                                     </tr>
                                     <tr>
@@ -174,10 +189,16 @@ class DevicesPage extends React.Component<any, any> {
                                         <label>MICROCONTROLLER</label>
                                       </td>
                                       <td>
-                                        <p>Version { String(this.props.bot.hardware.param_version) || "information is loading..." }</p>
+                                        <p>
+                                          Version {
+                                            String(this.props.bot.hardware.param_version) || "information is loading..."
+                                          }
+                                        </p>
                                       </td>
                                       <td>
-                                        <button className="button-like green">UPDATE TO V1.234</button>
+                                        <button className="button-like green">
+                                          UPDATE TO V1.234
+                                        </button>
                                       </td>
                                     </tr>
                                     <tr>
@@ -185,10 +206,15 @@ class DevicesPage extends React.Component<any, any> {
                                         <label>RESTART FARMBOT</label>
                                       </td>
                                       <td>
-                                        <p>This will restart FarmBot"s Raspberry Pi and controller software</p>
+                                        <p>
+                                          This will restart FarmBot"s Raspberry Pi and controller software
+                                        </p>
                                       </td>
                                       <td>
-                                        <button type="button" className="button-like yellow">RESTART</button>
+                                        <button type="button"
+                                                className="button-like yellow">
+                                          RESTART
+                                        </button>
                                       </td>
                                     </tr>
                                     <tr>
@@ -196,7 +222,9 @@ class DevicesPage extends React.Component<any, any> {
                                         <label>SHUTDOWN FARMBOT</label>
                                       </td>
                                       <td>
-                                        <p>This will shutdown FarmBot"s Raspberry Pi. To turn it back on, unplug FarmBot and plug it back in.</p>                                                                         </td>
+                                        <p>
+                                          This will shutdown FarmBot"s Raspberry Pi. To turn it back on, unplug FarmBot and plug it back in.
+                                        </p>                                                                         </td>
                                       <td>
                                         <button type="button" className="button-like red">SHUTDOWN</button>
                                       </td>
@@ -209,7 +237,10 @@ class DevicesPage extends React.Component<any, any> {
                                         <p>Caution! This cannot be undone</p>
                                       </td>
                                       <td>
-                                        <button type="button" className="button-like red">DELETE</button>
+                                        <button type="button"
+                                                className="button-like red">
+                                          DELETE
+                                        </button>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -275,17 +306,23 @@ class DevicesPage extends React.Component<any, any> {
                                   <td>
                                     <label>ACCELERATE FOR (steps)</label>
                                   </td>
-                                  <SettingsInputBox setting="movement_steps_acc_dec_x" {...this.props} />
-                                  <SettingsInputBox setting="movement_steps_acc_dec_y" {...this.props} />
-                                  <SettingsInputBox setting="movement_steps_acc_dec_z" {...this.props} />
+                                  <SettingsInputBox setting="movement_steps_acc_dec_x"
+                                                    {...this.props} />
+                                  <SettingsInputBox setting="movement_steps_acc_dec_y"
+                                                    {...this.props} />
+                                  <SettingsInputBox setting="movement_steps_acc_dec_z"
+                                                    {...this.props} />
                                 </tr>
                                 <tr>
                                   <td>
                                     <label>TIMEOUT AFTER (seconds)</label>
                                   </td>
-                                  <SettingsInputBox setting="movement_timeout_x" {...this.props} />
-                                  <SettingsInputBox setting="movement_timeout_y" {...this.props} />
-                                  <SettingsInputBox setting="movement_timeout_z" {...this.props} />
+                                  <SettingsInputBox setting="movement_timeout_x"
+                                                    {...this.props} />
+                                  <SettingsInputBox setting="movement_timeout_y"
+                                                    {...this.props} />
+                                  <SettingsInputBox setting="movement_timeout_z"
+                                                    {...this.props} />
                                 </tr>
                                 <tr>
                                   <td>
@@ -422,11 +459,7 @@ class DevicesPage extends React.Component<any, any> {
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <td colSpan={3}>
-                                    <p>We cant find any logs. Are your FarmBot device credentials correct?</p>
-                                  </td>
-                                </tr>
+                                <Logs logs={ this.props.bot.logQueue } />
                               </tbody>
                             </table>
                           </div>
@@ -443,5 +476,27 @@ class DevicesPage extends React.Component<any, any> {
     );
   }
 };
+
+function Logs({logs}) {
+  function HasLogs(props) {
+    return logs.map((log) => {
+      return <tr>
+              <td>
+                There's a log here...
+              </td>
+            </tr>;
+    });
+  }
+
+  function NoLogs(props) {
+    return <tr>
+            <td colSpan={3}>
+              <p>No logs yet.</p>
+            </td>
+          </tr>;
+  }
+
+  return (logs.length ? <HasLogs logs={logs} /> : <NoLogs />);
+}
 
 export let Devices = connect(state => state)(DevicesPage);

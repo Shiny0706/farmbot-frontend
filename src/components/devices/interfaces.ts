@@ -1,4 +1,11 @@
+export interface BotLog {
+  data: string;
+}
+
 export interface BotState {
+  /** Maximum number of messages to cache. Excess is truncated. */
+  logQueueSize: number;
+  logQueue: BotLog[];
   status: string;
   /** How many steps to move when the user presses a manual movement arrow */
   stepSize: number;
