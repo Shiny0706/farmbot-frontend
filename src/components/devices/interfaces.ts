@@ -33,9 +33,9 @@ export interface HardwareState {
   x?: number;
   y?: number;
   z?: number;
-  movement_axis_nr_steps_x: number;
-  movement_axis_nr_steps_y: number;
-  movement_axis_nr_steps_z: number;
+  movement_axis_nr_steps_x?: number;
+  movement_axis_nr_steps_y?: number;
+  movement_axis_nr_steps_z?: number;
   movement_home_up_x?: number;
   movement_home_up_y?: number;
   movement_home_up_z?: number;

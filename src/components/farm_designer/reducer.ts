@@ -10,7 +10,7 @@ let probe = (s, a) => {
     return s;
 };
 
-export let designer = generateReducer<DesignerState>({plants: []}, probe)
+export let designer = generateReducer<DesignerState>({ plants: [], x_size: 0, y_size: 0 }, probe)
   .add<Plant[]>(function FETCH_PLANTS_OK(s, a) {
     let state = cloneDeep(s);
     state.plants = a.payload;
