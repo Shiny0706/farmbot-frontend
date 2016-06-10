@@ -1,6 +1,8 @@
 export interface BotLog {
+  name: string;
+  priority: string;
   data: string;
-}
+};
 
 export interface BotState {
   /** Maximum number of messages to cache. Excess is truncated. */

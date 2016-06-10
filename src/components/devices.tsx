@@ -329,13 +329,13 @@ class DevicesPage extends React.Component<any, any> {
                                     <label>STEPS PER MM</label>
                                   </td>
                                   <td>
-                                    <input value="---" />
+                                    <input value="---" readOnly/>
                                   </td>
                                   <td>
-                                    <input value="---" />
+                                    <input value="---" readOnly/>
                                   </td>
                                   <td>
-                                    <input value="---" />
+                                    <input value="---" readOnly/>
                                   </td>
                                 </tr>
                                 <tr>
@@ -458,9 +458,7 @@ class DevicesPage extends React.Component<any, any> {
                                   </th>
                                 </tr>
                               </thead>
-                              <tbody>
                                 <Logs logs={ this.props.bot.logQueue } />
-                              </tbody>
                             </table>
                           </div>
                         </div>
@@ -479,24 +477,25 @@ class DevicesPage extends React.Component<any, any> {
 
 function Logs({logs}) {
   function HasLogs(props) {
-    return logs.map((log) => {
-      return <tr>
-              <td>
-                There's a log here...
-              </td>
-            </tr>;
-    });
+    return <tbody>
+             {
+               logs.map((log, i) => <tr key={ i }>
+                 <td> { log.data } </td>
+               </tr>)
+              }
+           </tbody>;
   }
 
   function NoLogs(props) {
-    return <tr>
-            <td colSpan={3}>
-              <p>No logs yet.</p>
-            </td>
-          </tr>;
+    return <tbody>
+            <tr>
+              <td colSpan={3}>
+                <p>No logs yet.</p>
+              </td>
+            </tr>
+           </tbody>;
   }
-
-  return (logs.length ? <HasLogs logs={logs} /> : <NoLogs />);
+  return (logs.length ? <HasLogs logs={ logs }/> : <NoLogs />) ;
 }
 
 export let Devices = connect(state => state)(DevicesPage);

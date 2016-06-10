@@ -22,7 +22,7 @@ export function getParam(name: string) {
 /** Generate generic type guards that validate an interface against a Joi
     object schema. Returns a new type guard function. */
 export function is<T>(schema: Joi.ObjectSchema) {
-  return (input: any): input is T => !Joi.validate(input, schema).error;
+  return (input: T|{}): input is T => !Joi.validate(input, schema).error;
 }
 
 let colors: Array<Color> = ["blue", "green", "yellow", "orange", "purple", "pink", "gray", "red"];

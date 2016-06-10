@@ -2,6 +2,7 @@ import { error, warning, success } from "../../logger";
 import * as _ from "lodash";
 import { BotState } from "./interfaces";
 import { generateReducer } from "../generate_reducer";
+import { isBotLog } from "./is_bot_log";
 
 let status = {
   NOT_READY: "never connected to device",
@@ -155,12 +156,21 @@ export let botReducer = generateReducer<BotState>(initialState)
       dirty: false
     });
   })
-  .add<any>(function BOT_LOG_MESSAGE(s, { payload }) {
-    let state = _.cloneDeep(s);
-    let msg = _.cloneDeep(payload);
+  .add<any>(function BOT_NOTIFICATION
+  (s, { payload }) {
+    let state;
 
-    state.logQueue.unshift(msg);
-    state.logQueue = _.take(state.logQueue, state.logQueueSize);
-
+    if (isBotLog(payload)) {
+      state = _.cloneDeep(s);
+      let msg = _.cloneDeep(payload);
+      state.logQueue.unshift(msg);
+      state.logQueue = _.take(state.logQueue, state.logQueueSize);
+      console.groupCollapsed("Bot Message");
+      console.log(msg.data);
+      console.groupEnd();
+    } else {
+      state = s; // Not a log message.
+    }
     return state;
+
   });
