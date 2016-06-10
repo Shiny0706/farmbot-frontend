@@ -15,7 +15,7 @@ export class MapPoint extends React.Component<any, any> {
   }
 
   render() {
-    let length = 240; // this.props.global.planting_area.length;
+    let length = this.props.designer.y_size;
     let fill = this.selected() ? "red" : "black";
     return <circle cx={ this.props.plant.x }
                    cy={ (-1 * this.props.plant.y) + length }
