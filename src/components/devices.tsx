@@ -480,7 +480,9 @@ function Logs({logs}) {
     return <tbody>
              {
                logs.map((log, i) => <tr key={ i }>
+                 <td> { log.time } </td>
                  <td> { log.data } </td>
+                 <td> --- </td>
                </tr>)
               }
            </tbody>;

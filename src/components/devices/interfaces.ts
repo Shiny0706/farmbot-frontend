@@ -2,6 +2,8 @@ export interface BotLog {
   name: string;
   priority: string;
   data: string;
+  /** Unix timestamp (UTC) */
+  time: number;
 };
 
 export interface BotState {

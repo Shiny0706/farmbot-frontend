@@ -169,6 +169,7 @@ export let botReducer = generateReducer<BotState>(initialState)
       console.log(msg.data);
       console.groupEnd();
     } else {
+      console.warn("Unexpected log message?");
       state = s; // Not a log message.
     }
     return state;
