@@ -6,7 +6,12 @@ let botLogValidator = object().keys({
     data: string(),
     name: string(),
     priority: string(),
-    time: number()
+    time: number(),
+    status: object().keys({
+        x: number(),
+        y: number(),
+        z: number()
+    })
 });
 
 export let isBotLog = is<BotLog>(botLogValidator);

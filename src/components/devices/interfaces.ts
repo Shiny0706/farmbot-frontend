@@ -1,9 +1,18 @@
 export interface BotLog {
+  /** A tag for (eventually) filtering log messages. */
   name: string;
-  priority: string;
+  /** Some day, we'll squelch messages. */
+  priority: "low"|"medium"|"high"; // TODO: Use numbers?
+  /** The actual message that was emitted */
   data: string;
-  /** Unix timestamp (UTC) */
+  /** a Unix timestamp (UTC) */
   time: number;
+  /** A subset of interface `HardwareState`. But I only needed x,y,z. */
+  status: {
+    x: number;
+    y: number;
+    z: number;
+  };
 };
 
 export interface BotState {
