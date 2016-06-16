@@ -1,17 +1,16 @@
-import { string, number, object } from "joi-browser";
-import { is } from "../../util";
 import { BotLog } from "./interfaces";
 
-let botLogValidator = object().keys({
-    data: string(),
-    name: string(),
-    priority: string(),
-    time: number(),
-    status: object().keys({
-        x: number(),
-        y: number(),
-        z: number()
-    })
-});
+const schema = {
+    data: "string",
+    name: "string",
+    priority: "string",
+    time: "number",
+    status: "object"
+};
 
-export let isBotLog = is<BotLog>(botLogValidator);
+export function isBotLog(log: BotLog|{}): log is BotLog {
+   let results: { [key: string]: boolean; } = {};
+   _.forIn(log, (v, k) => results[k] = (typeof v === schema[k]));
+
+   return !_(results).values().includes(false);
+};

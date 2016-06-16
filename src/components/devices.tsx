@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import { convertFormToObject } from "../util.ts";
 import { ToggleButton } from "./toggle_button";
 import { devices } from "../device";
+import { BotLog } from "./devices/interfaces";
+import * as moment from "moment";
 
 export class SettingsInputBox extends React.Component<any, any> {
 
@@ -475,14 +477,32 @@ class DevicesPage extends React.Component<any, any> {
   }
 };
 
-function Logs({logs}) {
-  function HasLogs(props) {
+interface LogsProps {
+  logs: BotLog[];
+}
+
+function Logs({logs}: LogsProps) {
+  function HasLogs(_) {
+    function displayTime(t: number): string {
+      return moment.unix(t).format("D MMM h:mma");
+    }
+
+    function displayCoordinates(log: BotLog) {
+      // Stringify coords bcuz 0 is falsy in JS.
+      let [x, y, z] = [log.status.X, log.status.Y, log.status.Z].map((i) => String(i));
+      if (x && y && z) {
+        return `${x}, ${y}, ${z}`;
+      } else {
+        return "Unknown";
+      }
+    }
+
     return <tbody>
              {
                logs.map((log, i) => <tr key={ i }>
-                 <td> { log.time } </td>
+                 <td> { displayTime(log.time) } </td>
                  <td> { log.data } </td>
-                 <td> --- </td>
+                 <td> { displayCoordinates(log) } </td>
                </tr>)
               }
            </tbody>;
