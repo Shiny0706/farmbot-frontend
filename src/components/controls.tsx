@@ -78,9 +78,14 @@ export class StepSizeSelector extends React.Component<any, any> {
 }
 
 class ControlsPage extends React.Component<any, any> {
+  constructor() {
+    super();
+    this.state ={ url: "http://71.93.48.48:8080/?action=stream" };
+  }
   render() {
 
     let bot = this.props.bot;
+    let url = this.state.url;
 
     return(
       <div>
@@ -299,7 +304,16 @@ class ControlsPage extends React.Component<any, any> {
                     </div>
                     <div className="row">
                       <div className="col-sm-12">
-                        <p> Webcam disabled </p>
+                        <img src={ url } />
+                        <div>
+                        <label>Set Webcam URL:</label>
+                        <input type="text"
+                               onChange={ (e) => {
+                                 return this.setState({url: e.target["value"] });
+                                }
+                               }
+                               value={ url } />
+                        </div>
                       </div>
                     </div>
                   </div>
