@@ -26,16 +26,16 @@ let initialState: BotState = {
 };
 
 export let botReducer = generateReducer<BotState>(initialState)
-  .add<any>(function SETTING_TOGGLE_OK(state, action) {
+  .add<any>("SETTING_TOGGLE_OK", function(state, action) {
     return this.READ_STATUS_OK(state, action);
   })
-  .add<any>(function COMMIT_SETTINGS_OK(state, action) {
+  .add<any>("COMMIT_SETTINGS_OK", function(state, action) {
     let nextState = _.assign<any, BotState>({}, state, {
       settingsBuffer: {}
     });
     return nextState;
   })
-  .add<any>(function COMMIT_AXIS_CHANGE_OK(oldState, action) {
+  .add<any>("COMMIT_AXIS_CHANGE_OK", function(oldState, action) {
     let hardware = _.assign({}, oldState.hardware, action.payload);
     let state = _.assign<any, BotState>({}, oldState);
 
@@ -44,10 +44,10 @@ export let botReducer = generateReducer<BotState>(initialState)
       hardware
     });
   })
-  .add<any>(function COMMIT_AXIS_CHANGE_ERR(state, action) {
+  .add<any>("COMMIT_AXIS_CHANGE_ERR", function(state, action) {
     return state;
   })
-  .add<any>(function CHANGE_AXIS_BUFFER(state, action) {
+  .add<any>("CHANGE_AXIS_BUFFER", function(state, action) {
     let axisBuffer = _.assign({}, state.axisBuffer);
     axisBuffer[action.payload.key] = action.payload.val;
 
@@ -55,7 +55,7 @@ export let botReducer = generateReducer<BotState>(initialState)
       axisBuffer: axisBuffer
     });
   })
-  .add<any>(function CHANGE_SETTINGS_BUFFER(state, action) {
+  .add<any>("CHANGE_SETTINGS_BUFFER", function(state, action) {
     let settingsBuffer = _.assign({}, state.settingsBuffer);
     let newVal = Number(action.payload.val);
     if (newVal) {
@@ -67,12 +67,12 @@ export let botReducer = generateReducer<BotState>(initialState)
       settingsBuffer: settingsBuffer
     });
   })
-  .add<any>(function CHANGE_STEP_SIZE(state, action) {
+  .add<any>("CHANGE_STEP_SIZE", function(state, action) {
     return _.assign<any, BotState>({}, state, {
       stepSize: action.payload
     });
   })
-  .add<any>(function READ_STATUS_OK(state, action) {
+  .add<any>("READ_STATUS_OK", function(state, action) {
     let hardware: any = _.assign({}, action.payload);
     delete hardware.method;
     return _.assign<any, BotState>({},
@@ -82,19 +82,19 @@ export let botReducer = generateReducer<BotState>(initialState)
         status: status.READY
       });
   })
-  .add<any>(function BOT_CHANGE(state, action) {
+  .add<any>("BOT_CHANGE", function(state, action) {
     let statuses: any = _.assign({}, action.payload);
     let newState: any = _.assign({}, state);
     newState.hardware = _.assign({}, state.hardware, statuses);
     return _.assign<any, BotState>({}, newState);
   })
-  .add<any>(function COMMAND_ERR(s, a) {
+  .add<any>("COMMAND_ERR", function(s, a) {
     return s;
   })
-  .add<any>(function COMMAND_OK(s, a) {
+  .add<any>("COMMAND_OK", function(s, a) {
     return s;
   })
-  .add<any>(function CONNECT_OK(state, action) {
+  .add<any>("CONNECT_OK", function(state, action) {
     return _.assign<any, BotState>({},
       state,
       action.payload, {
@@ -102,28 +102,28 @@ export let botReducer = generateReducer<BotState>(initialState)
         connected: true
       });
   })
-  .add<any>(function CONNECT_ERR(state, action) {
+  .add<any>("CONNECT_ERR", function(state, action) {
     return _.assign<any, BotState>({},
       state, {
         status: status.WEBSOCKET_ERR
       });
   })
-  .add<any>(function CHANGE_DEVICE(state, action) {
+  .add<any>("CHANGE_DEVICE", function(state, action) {
     return _.assign<any, BotState>({},
       state,
       action.payload);
   })
-  .add<any>(function FETCH_DEVICE(state, action) {
+  .add<any>("FETCH_DEVICE", function(state, action) {
     return state;
   })
-  .add<any>(function FETCH_DEVICE_OK(state, { payload }) {
+  .add<any>("FETCH_DEVICE_OK", function(state, { payload }) {
     return _.assign<any, BotState>({},
       state,
       payload, {
         status: status.AWAITING_WEBSOCKET
       });
   })
-  .add<any>(function FETCH_DEVICE_ERR(state, action) {
+  .add<any>("FETCH_DEVICE_ERR", function(state, action) {
     if (action.payload.status === 404) {
       warning("You need to add a device to your account.",
         "No device found!");
@@ -136,7 +136,7 @@ export let botReducer = generateReducer<BotState>(initialState)
         status: status.API_ERROR
       });
   })
-  .add<any>(function SAVE_DEVICE_ERR(state, action) {
+  .add<any>("SAVE_DEVICE_ERR", function(state, action) {
     switch (action.payload.status) {
       case 422:
         let errors = _.map(action.payload.responseJSON, v => v)
@@ -149,15 +149,14 @@ export let botReducer = generateReducer<BotState>(initialState)
     }
     return state;
   })
-  .add<any>(function SAVE_DEVICE_OK(state, action) {
+  .add<any>("SAVE_DEVICE_OK", function(state, action) {
     // TODO Move this into the action creator. Does not belong in a reducer.
     success("Device saved.");
     return _.assign<any, BotState>({}, state, action.payload, {
       dirty: false
     });
   })
-  .add<any>(function BOT_NOTIFICATION
-  (s, { payload }) {
+  .add<any>("BOT_NOTIFICATION", function(s, { payload }) {
     let state;
 
     if (isBotLog(payload)) {

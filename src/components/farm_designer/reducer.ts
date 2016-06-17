@@ -11,25 +11,25 @@ let probe = (s, a) => {
 };
 
 export let designer = generateReducer<DesignerState>({ plants: [], x_size: 0, y_size: 0 }, probe)
-  .add<Plant[]>(function FETCH_PLANTS_OK(s, a) {
+  .add<Plant[]>("FETCH_PLANTS_OK", function(s, a) {
     let state = cloneDeep(s);
     state.plants = a.payload;
     return state;
   })
-  .add<Plant>(function SAVE_PLANT_OK(s, a) {
+  .add<Plant>("SAVE_PLANT_OK", function(s, a) {
     let state = cloneDeep(s);
     // Exxxttrraaa runtime safety.
     let plant = newPlant(a.payload);
     state.plants.push(plant);
     return state;
   })
-  .add<Plant>(function DESTROY_PLANT_OK(s, { payload }) {
+  .add<Plant>("DESTROY_PLANT_OK", function(s, { payload }) {
     let state = cloneDeep(s);
     let a = state.plants;
     a.splice(a.indexOf(payload), 1);
     return state;
   })
-  .add<HardwareState>(function BOT_CHANGE(s, { payload }) {
+  .add<HardwareState>("BOT_CHANGE", function(s, { payload }) {
     let state = cloneDeep(s);
     state.x_size = payload.movement_axis_nr_steps_x;
     state.y_size = payload.movement_axis_nr_steps_y;
