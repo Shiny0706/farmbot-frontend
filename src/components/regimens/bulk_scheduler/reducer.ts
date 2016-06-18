@@ -35,7 +35,7 @@ function newState(index: number): BulkSchedulerState {
     currentRegimen: index, // Sketchy.
     form: {
       dailyOffsetMs: 300000,
-      weeks: _.times(7, newWeek)
+      weeks: _.times(10, newWeek)
     }
   };
 }

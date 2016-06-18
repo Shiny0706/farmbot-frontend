@@ -24,9 +24,7 @@ export function BulkSchedulerWidget({sequences, dispatch, editor}: BulkEditorPro
                         <h5>Scheduler</h5>
                         <i className="fa fa-question-circle widget-help-icon">
                             <div className="widget-help-text">Use this tool to schedule
-                                a sequence to run on many days of your regimen. Tip: the
-                                checkboxes on the top and left side of the calendar can
-                                be used to bulk select days. Note: this is coming soon!</div>
+                                a sequence to run on many days of your regimen.</div>
                         </i>
                     </div>
                 </div>

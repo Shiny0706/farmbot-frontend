@@ -105,8 +105,7 @@ class DevicesPage extends React.Component<any, any> {
                                 <h5>DEVICE</h5>
                                 <i className="fa fa-question-circle widget-help-icon">
                                   <div className="widget-help-text">This widget
-                                  shows device information. Coming soon: update
-                                  your FarmBot's software with one click!</div>
+                                  shows device information. Note: not all features work.</div>
                                 </i>
                               </div>
                             </div>
@@ -124,26 +123,6 @@ class DevicesPage extends React.Component<any, any> {
                                         <input name="name"
                                                onChange={ this.changeBot.bind(this) }
                                                value={ bot.name || "Fix me!"} />
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <label>UUID</label>
-                                      </td>
-                                      <td colSpan={2}>
-                                        <input name="uuid"
-                                               onChange={ this.changeBot.bind(this) }
-                                               value={ auth.bot }/>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <label>SECURITY TOKEN</label>
-                                      </td>
-                                      <td colSpan={2}>
-                                        <input name="token"
-                                               onChange={ this.changeBot.bind(this) }
-                                               value={ auth.token }/>
                                       </td>
                                     </tr>
                                     <tr>
@@ -172,23 +151,22 @@ class DevicesPage extends React.Component<any, any> {
                                     </tr>
                                     <tr>
                                       <td>
-                                        <label>COMPUTER</label>
+                                        <label>CONTROLLER</label>
                                       </td>
                                       <td>
                                         <p>
-                                          Raspberry Pi 2 Model B+ running
-                                          farmbot-raspberry-pi-controller V1.233
+                                          farmbot-raspberry-pi-controller
                                         </p>
                                       </td>
                                       <td>
-                                        <button className="button-like green">
-                                          UPDATE TO V1.234
+                                        <button className="button-like disabled gray">
+                                          REMOTE UPDATES COMING SOON
                                         </button>
                                       </td>
                                     </tr>
                                     <tr>
                                       <td>
-                                        <label>MICROCONTROLLER</label>
+                                        <label>FIRMWARE</label>
                                       </td>
                                       <td>
                                         <p>
@@ -198,8 +176,8 @@ class DevicesPage extends React.Component<any, any> {
                                         </p>
                                       </td>
                                       <td>
-                                        <button className="button-like green">
-                                          UPDATE TO V1.234
+                                        <button className="button-like disabled gray">
+                                          REMOTE UPDATES COMING SOON
                                         </button>
                                       </td>
                                     </tr>
@@ -209,7 +187,7 @@ class DevicesPage extends React.Component<any, any> {
                                       </td>
                                       <td>
                                         <p>
-                                          This will restart FarmBot"s Raspberry Pi and controller software
+                                          This will restart FarmBot"s Raspberry Pi and controller software (coming soon)
                                         </p>
                                       </td>
                                       <td>
@@ -225,24 +203,11 @@ class DevicesPage extends React.Component<any, any> {
                                       </td>
                                       <td>
                                         <p>
-                                          This will shutdown FarmBot"s Raspberry Pi. To turn it back on, unplug FarmBot and plug it back in.
-                                        </p>                                                                         </td>
+                                          This will shutdown FarmBot"s Raspberry Pi. To turn it back on, unplug FarmBot and plug it back in. (coming soon)
+                                        </p>
+                                      </td>
                                       <td>
                                         <button type="button" className="button-like red">SHUTDOWN</button>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <label>DELETE FARMBOT</label>
-                                      </td>
-                                      <td>
-                                        <p>Caution! This cannot be undone</p>
-                                      </td>
-                                      <td>
-                                        <button type="button"
-                                                className="button-like red">
-                                          DELETE
-                                        </button>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -275,7 +240,8 @@ class DevicesPage extends React.Component<any, any> {
                             sure to test any new settings before letting
                             your FarmBot use them unsupervised. Tip: Recalibrate
                             FarmBot after changing settings and test a few sequences
-                            to verify that everything works as expected.</div>
+                            to verify that everything works as expected. Note:
+                            Currently not all settings can be changed.</div>
                           </i>
                         </div>
                         <div className="row">
@@ -438,8 +404,9 @@ class DevicesPage extends React.Component<any, any> {
                               <h5>Logs</h5>
                               <i className="fa fa-question-circle widget-help-icon">
                                 <div className="widget-help-text">All messages from
-                                your FarmBot are stored in these logs. Coming soon:
-                                logs!</div>
+                                your FarmBot are shown in these logs. Note: these
+                                are not currently saved anywhere so if you refresh
+                                the app this table will be cleared.</div>
                               </i>
                             </div>
                           </div>

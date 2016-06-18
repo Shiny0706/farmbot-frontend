@@ -10,7 +10,7 @@ export function RegimenListItem({regimen,
                                  dispatch,
                                  index}: RegimenListItemProps) {
     let color = regimen.color || randomColor();
-    let style = `block full-width text-left ${ color }-block block-header`;
+    let style = `block block-wrapper full-width text-left ${ color }-block block-header`;
     return <div>
         <button className={ style }
                 onClick={ select(dispatch, index) }>
