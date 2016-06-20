@@ -20,11 +20,11 @@ export function WeekGrid({weeks, dispatch}: WeekGridProps) {
         </div>
         <div className="row">
             <div className="col-sm-12">
-            <button className="green button-like widget-control"
+            <button className="green button-like left widget-control"
                     onClick={ () => dispatch(pushWeek()) }>
               <i className="fa fa-plus" /> Week
             </button>
-            <button className="red button-like widget-control"
+            <button className="red button-like left widget-control"
                     onClick={ () => dispatch(popWeek()) }>
               <i className="fa fa-minus" /> Week
             </button>

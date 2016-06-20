@@ -26,38 +26,26 @@ export class PlantInfo extends React.Component<any, any> {
         </p>
       </div>
       <div className="panel-content">
-        <label>Photos of this Plant</label>
-        <img className="crop-drag-info-image"
-          src={this.plant.imgUrl || "http://placehold.it/200x150"} />
         <label>Plant Info</label>
-        <span><a href="#">Edit</a></span>
         <ul>
-          <li> Expected height: 28 inches </li>
-          <li> Expected diameter: 44 inches </li>
-          <li> Life Expectancy: 8 years </li>
+          <li>Started: April 17, 2016</li>
+          <li>Age: 62 days</li>
+          <li>Location: 580, 3,000, -12,303</li>
+          <li>Est. height: 28 inches</li>
+          <li>Est. diameter: 44 inches</li>
         </ul>
-        <label>Planting Tips</label>
-        <span><a href="#">Edit</a></span>
+        <label>Regimens</label>
+        <span className="edit-link"><a href="#">Edit</a></span>
         <ul>
-          <li> Plant in full sun </li>
-          <li> Fruits most in acidic soil </li>
-          <li> Plant near melons </li>
-        </ul>
-        <label>Default Regimens</label>
-        <span><a href="#">Edit</a></span>
-        <ul>
-          <li> Blueberries by OpenFarm</li>
-          <li> Soil Acidifier </li>
+          <li>Blueberries by OpenFarm</li>
+          <li>Soil Acidifier</li>
         </ul>
         <label>Delete This Plant</label>
-        <p>
-          Note: You will no longer be able to plant this plant.
-        </p>
-        <span>
+        <div>
           <button className="red button-like left" onClick={this.removePlant.bind(this) }>
             Delete
           </button>
-        </span>
+        </div>
       </div>
     </div>;
 

@@ -26,10 +26,10 @@ export function RegimensList(props: ReduxStateAtom) {
                     </div>
                   </div>
                 </div>
-                <div className="row">
-                  <div className="col-sm-12">
-                    <div className="widget-content">
-                      <div className="block-wrapper">
+                <div className="widget-content no-bottom-padding">
+                  <div className="row">
+                    <div className="col-sm-12">
+                      <div>
                         { props
                             .regimens
                             .all

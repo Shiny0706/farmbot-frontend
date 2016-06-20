@@ -116,7 +116,8 @@ class ControlsPage extends React.Component<any, any> {
                             arrows for relative movements or type in new
                             coordinates and press <strong>GO</strong> for an
                             absolute movement. Tip: Press the Home button when
-                            you are done so FarmBot is ready to get back to work.</div>
+                            you are done so FarmBot is ready to get back to work.
+                            Note: Currently all buttons except for Home work.</div>
                           </i>
                         </div>
                       </div>
@@ -297,14 +298,15 @@ class ControlsPage extends React.Component<any, any> {
                           <i className="fa fa-question-circle widget-help-icon">
                             <div className="widget-help-text">Press the <strong>EDIT
                             </strong> button to add the URL of a livestream of
-                            your FarmBot. Coming soon: A working edit button.</div>
+                            your FarmBot. Coming soon: A working edit button and
+                            the ability to save your webcam URL in the backend.</div>
                           </i>
                         </div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-sm-12">
-                        <img src={ url } />
+                        <img className="webcam-stream" src={ url } />
                         <div>
                         <label>Set Webcam URL:</label>
                         <input type="text"

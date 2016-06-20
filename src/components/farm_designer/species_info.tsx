@@ -31,30 +31,16 @@ export class SpeciesInfo extends React.Component<any, any> {
       </div>
       <div className="panel-content">
         <div className="crop-drag-info-tile">
-          <label>Species Image</label>
           <img className="crop-drag-info-image"
             src={ specimen.imgUrl }
             onDragEnd={ this.drop.bind(this) }/>
           <div className="crop-info-overlay">
-            To plant, drag and drop into map
+            Drag and drop into map
           </div>
         </div>
         <div className="object-list">
           <label>
-            Delete This Crop
-          </label>
-          <p>
-            Note: You will no longer be able to plant this crop.
-          </p>
-          <span>
-            <button className="red">
-              Delete
-            </button>
-          </span>
-        </div>
-        <div className="object-list">
-          <label>
-            Plant Info
+            Crop Info
           </label>
           <span className="edit-link"><a href="#">Edit</a></span>
           <ul>

@@ -32,6 +32,7 @@ export class Zones extends React.Component<any, any> {
           </div>
         </div>
         <div className="panel-content">
+          <p>Note: Zones are coming soon!</p>
           <i className="fa fa-search"></i>
           <input className="search" placeholder="Search"/>
           <div className="search-underline"></div>

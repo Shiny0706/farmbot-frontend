@@ -39,9 +39,10 @@
 i.widget-help-icon {
   display: inline;
   padding: 1rem 0;
-  color: $gray;
+  color: $medium_gray;
   &:hover {
-    color: $off_white;
+    color: $gray;
+    transition-delay: 0.1s;
   }
 }
 
@@ -61,6 +62,7 @@ i.widget-help-icon {
   padding: 0.5rem 0.3rem;
   max-height: 200px;
   transition: 0.5s;
+  transition-delay: 0.1s;
 }
 
 .widget-content {
