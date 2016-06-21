@@ -11,6 +11,7 @@ import { botReducer as bot } from "./components/devices/bot_reducer";
 import { configReducer as config } from "./components/config/config_reducer";
 import { routerReducer as routing } from "react-router-redux";
 import { regimensReducer as regimens } from "./components/regimens/reducer";
+import { tickerReducer as ticker } from "./components/ticker/reducer";
 import { designer } from "./components/farm_designer/reducer";
 import {
   BulkSchedulerReducer as bulkScheduler
@@ -28,7 +29,8 @@ let reducers = combineReducers({
   regimens,
   bulkScheduler,
   config,
-  designer
+  designer,
+  ticker
 });
 let storageKey = "lastState";
 let lastState = JSON.parse(sessionStorage[storageKey] || "{}");

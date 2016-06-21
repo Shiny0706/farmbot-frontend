@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { sendCommand } from "../devices/bot_actions";
 import { AuthState } from "../auth/auth_reducer";
 import { BotState } from "../devices/interfaces";
+import { Ticker } from "../ticker/ticker";
 
 interface NavButtonState {
   auth: AuthState;
@@ -21,7 +22,6 @@ let LogoutButton = ({ auth }: NavButtonState) => {
     </a>;
 };
 
-// TODO: Rick, make this real!
 let SyncButton = ({auth, dispatch}: NavButtonState) => {
   if (!auth.authenticated) { return <span></span>; }
   return <button className="nav-sync button-like green"
@@ -32,16 +32,6 @@ let SyncButton = ({auth, dispatch}: NavButtonState) => {
     </button>;
 };
 
-// TODO: Rick, make this real!
-let StatusTicker = ({auth, bot}: NavButtonState) => {
-  if (!auth.authenticated) { return <span></span>; }
-  return <div className="status-ticker-wrapper">
-      <div className="status-ticker-light" />
-      <label className="status-ticker-message">{ bot.status }</label>
-    </div>;
-};
-
-// TODO: Rick, make this real!
 let EStopButton = ({auth, dispatch}: NavButtonState) => {
   if (!auth.authenticated) { return <span></span>; }
   return <button className="nav-e-stop button-like red"
@@ -86,7 +76,7 @@ export function Navbar(props) {
               }
             </ul>
             <SyncButton { ...props }/>
-            <StatusTicker { ...props }/>
+            <Ticker { ...props }/>
             <LogoutButton { ...props }/>
             <EStopButton { ...props }/>
           </div>
