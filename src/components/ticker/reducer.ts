@@ -17,7 +17,7 @@ export let tickerReducer = generateReducer<TickerState>({
 .add<{}>("LOGIN_OK", change(YELLOW, "Logged in"))
 .add<{}>("LOGIN_ERR", change(RED, "Bad login"))
 .add<{}>("FETCH_PLANTS_START", change(YELLOW, "Fetching plants"))
-.add<{}>("FETCH_PLANTS_OK", change(YELLOW, "Done fetching plants"))
+.add<{}>("FETCH_PLANTS_OK", change(GREEN, "Done fetching plants"))
 .add<{}>("FETCH_PLANTS_ERR", change(RED, "Plant fetch error"))
 .add<{}>("FETCH_SEQUENCES_OK", change(GREEN, "Done fetching sequences"))
 .add<{}>("READ_STATUS_OK", change(GREEN, "Bot status OK"))
