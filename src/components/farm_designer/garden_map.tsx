@@ -9,19 +9,19 @@ export class MapPoint extends React.Component<any, any> {
     browserHistory.push(url);
   }
 
-  selected() {
-    let isSelected = (!!this.props.selected);
-    return isSelected;
-  }
+  // selected() {
+  //   let isSelected = (!!this.props.selected);
+  //   return isSelected;
+  // }
 
   render() {
-    let length = this.props.designer.y_size;
-    let fill = this.selected() ? "red" : "black";
-    return <circle cx={ this.props.plant.x }
-                   cy={ (-1 * this.props.plant.y) + length }
-                   onClick={ this.select.bind(this) }
-                   fill={ fill }
-                   r="5" />;
+    let length = this.props.designer.y_size, height = 30, width  = 30;
+    return <image href="/icons/cabbage.png"
+                  x={ this.props.plant.x - (width / 2) }
+                  y={ ((-1 * this.props.plant.y) + length) - (height / 2) }
+                  height={ `${ height }px` }
+                  onClick={ this.select.bind(this) }
+                  width={ `${width}px` } />;
   }
 };
 
