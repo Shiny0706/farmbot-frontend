@@ -42,13 +42,18 @@ export class SpeciesCatalog extends React.Component<any, any> {
         dispatch={ this.props.dispatch } />
       );
     return <div className="panel-container green-panel">
-      <div className="panel-header green-panel">
-        <p className="panel-title">
-          <BackArrow/> Choose a Species
-        </p>
-      </div>
       <div className="panel-content">
-        { species }
+        <div className="panel-header green-panel">
+          <p className="panel-title">
+            <BackArrow/> Choose a Species
+          </p>
+        </div>
+        <i className="fa fa-search"></i>
+        <input className="search" placeholder="Search"/>
+        <div className="search-underline"></div>
+        <div className="panel-content">
+          { species }
+        </div>
       </div>
     </div>;
   }

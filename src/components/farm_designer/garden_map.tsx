@@ -17,7 +17,7 @@ export class MapPoint extends React.Component<any, any> {
 
   render() {
     let length = this.props.designer.y_size, height = 30, width  = 30;
-    return <image href={ this.props.icon }
+    return <image xlinkHref={ this.props.icon }
                   x={ this.props.plant.x - (width / 2) }
                   y={ ((-1 * this.props.plant.y) + length) - (height / 2) }
                   height={ `${ height }px` }
@@ -34,9 +34,10 @@ export class GardenMap extends React.Component<any, any> {
       .plants
       .map((p, k) => {
         let isSelected = this.props.location.query.id === p._id;
+        let icon = p.icon || ICONS[0];
         return <MapPoint plant={ p }
                          key={ k }
-                         icon={ p.icon || ICONS[0] }
+                         icon={ icon }
                          { ...this.props }
                          selected={ isSelected } />;
       });
