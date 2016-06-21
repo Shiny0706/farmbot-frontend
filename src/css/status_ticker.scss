@@ -23,3 +23,13 @@
   margin-left: 15px;
   line-height: 20px;
 }
+
+.status-ticker-message span {
+  -webkit-animation: flash 1.5s ease-in;
+  animation: flash 1.5s ease-in;
+}
+
+@keyframes flash {
+   0% {text-shadow: white 0px 0px 10px;}
+   100% {text-shadow: none;}
+}
