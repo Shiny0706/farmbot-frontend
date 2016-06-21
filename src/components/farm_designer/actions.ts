@@ -57,3 +57,7 @@ export function destroyPlant(plant: Plant, baseUrl: string, token: string) {
             });
     };
 };
+
+export function openFarmSearchQUery() {
+    
+};
