@@ -6,6 +6,7 @@ export interface Plant {
     x: number;
     y: number;
     planting_area_id: string;
+    icon: string; // ? Maybe this will change.
 }
 
 export interface Specimen {

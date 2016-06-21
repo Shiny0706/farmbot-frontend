@@ -1,6 +1,7 @@
 import * as React from "react";
 // import { push } from "../../history";
 import { browserHistory } from 'react-router';
+import { ICONS } from "./icons";
 
 export class MapPoint extends React.Component<any, any> {
   select() {
@@ -16,7 +17,7 @@ export class MapPoint extends React.Component<any, any> {
 
   render() {
     let length = this.props.designer.y_size, height = 30, width  = 30;
-    return <image href="/icons/cabbage.png"
+    return <image href={ this.props.icon }
                   x={ this.props.plant.x - (width / 2) }
                   y={ ((-1 * this.props.plant.y) + length) - (height / 2) }
                   height={ `${ height }px` }
@@ -35,6 +36,7 @@ export class GardenMap extends React.Component<any, any> {
         let isSelected = this.props.location.query.id === p._id;
         return <MapPoint plant={ p }
                          key={ k }
+                         icon={ p.icon || ICONS[0] }
                          { ...this.props }
                          selected={ isSelected } />;
       });

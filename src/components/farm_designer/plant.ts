@@ -19,6 +19,7 @@ export function Plant(options: PlantOptions): Plant {
         name: (options.name || "Untitled Plant"),
         x: (options.x || 0),
         y: (options.y || 0),
-        planting_area_id: (options.planting_area_id || "")
+        planting_area_id: (options.planting_area_id || ""),
+        icon: "/icons/Natural Food-96.png"
     };
 }

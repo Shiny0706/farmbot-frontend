@@ -4,6 +4,7 @@ import { generateReducer } from "../generate_reducer";
 import { DesignerState } from "./interfaces";
 import { cloneDeep } from "lodash";
 import { HardwareState } from "../devices/interfaces";
+import { ICONS } from "./icons";
 
 let probe = (s, a) => {
     console.log(`➫ ${ a.type }`)
@@ -13,7 +14,11 @@ let probe = (s, a) => {
 export let designer = generateReducer<DesignerState>({ plants: [], x_size: 0, y_size: 0 }, probe)
   .add<Plant[]>("FETCH_PLANTS_OK", function(s, a) {
     let state = cloneDeep(s);
-    state.plants = a.payload;
+    let plants = a.payload.map(function(p) {
+      p.icon = _.sample(ICONS);
+      return p;
+    });
+    state.plants = plants;
     return state;
   })
   .add<Plant>("SAVE_PLANT_OK", function(s, a) {
