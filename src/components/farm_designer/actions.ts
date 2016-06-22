@@ -2,13 +2,9 @@ import { authHeaders } from "../auth/util";
 import * as Axios from "axios";
 import { error } from "../../logger";
 import { Plant } from "./interfaces";
-import { Timer } from "promisified-timer";
+import { CropSearchResult, OpenFarm } from "./openfarm";
 
 const PLANT_URL = "api/plants";
-
-// export function designerUrl(plant) {
-//     return `/app/dashboard/designer?p1=PlantInfo&id=${plant._id}`;
-// };
 
 export function fetchPlants(baseUrl: string, token: string) {
     let url = baseUrl + "/" + PLANT_URL;
@@ -59,9 +55,31 @@ export function destroyPlant(plant: Plant, baseUrl: string, token: string) {
     };
 };
 
-export function openFarmSearchQuery() {
-  Timer
-    .start("searchQuery", 500)
-    .then((d) => { debugger; })
-    .catch((d) => { debugger; })
+
+let _openFarmSearchQuery = _.throttle(function (q) {
+    let url = `${OpenFarm.cropUrl}?filter=${q}`;
+    return Axios.get<CropSearchResult>(url);
+}, 750);
+
+/** Search openfarm for crops. This is a throttled function, useful for live search. */
+export function openFarmSearchQuery(query: string) {
+    console.log("1");
+    return function (dispatch: Function) {
+        console.log("2");
+        dispatch({
+            type: "SEARCH_QUERY_CHANGE",
+            payload: query
+        });
+        return _openFarmSearchQuery(query)
+            .then((resp) => {
+                console.log("3");
+                console.log("DING!");
+                let payload = resp.data.data.map((d) => d.attributes);
+                dispatch({
+                    type: "OF_SEARCH_RESULTS_OK",
+                    payload
+                });
+            })
+            .catch((error) => console.error("OPENFARM IS DOWN!!"));
+    };
 };

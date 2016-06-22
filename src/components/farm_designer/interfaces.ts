@@ -1,3 +1,5 @@
+import { OpenFarm } from "./openfarm";
+
 export interface Plant {
     _id: string;
     age: number;
@@ -19,4 +21,6 @@ export interface DesignerState {
   x_size: number;
   y_size: number;
   plants: Plant[];
+  cropSearchQuery: string;
+  cropSearchResults: OpenFarm.OFCrop[];
 }

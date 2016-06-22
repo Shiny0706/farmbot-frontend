@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Link } from "react-router";
 import { BackArrow } from "./back_arrow";
-import { Specimen } from "./interfaces";
+import { Specimen, DesignerState } from "./interfaces";
+import { openFarmSearchQuery } from "./actions";
 
 interface SpeciesCatalogTileProps {
   specimen: Specimen;
@@ -30,10 +31,13 @@ export class SpeciesCatalogTile extends React.Component<SpeciesCatalogTileProps,
   }
 };
 
-export class SpeciesCatalog extends React.Component<any, any> {
+interface SpeciesCatalogProps {
+  designer: DesignerState;
+  dispatch: Function;
+}
+
+export class SpeciesCatalog extends React.Component<SpeciesCatalogProps, any> {
   render() {
-    // TEMP FIX:
-    // let species = this.props.global.species.map(
     let species = [{
       name: "Placeholder Berries", imgUrl: "http://placehold.it/200x150", _id: "123"
     }].map(
@@ -49,7 +53,8 @@ export class SpeciesCatalog extends React.Component<any, any> {
       </div>
       <div className="panel-content">
         <i className="fa fa-search"></i>
-        <input className="search" placeholder="Search"/>
+        <SearchBox query={ this.props.designer.cropSearchQuery }
+                   dispatch={ this.props.dispatch } />
         <div className="search-underline"></div>
         <div className="panel-content">
           { species }
@@ -57,4 +62,20 @@ export class SpeciesCatalog extends React.Component<any, any> {
       </div>
     </div>;
   }
+}
+
+interface SearchBoxParams {
+  query: string;
+  dispatch: Function
+}
+
+function SearchBox({query, dispatch}: SearchBoxParams) {
+  return <input value={ query }
+                onChange={ (e) => doSearch(e, dispatch) }
+                className="search"
+                placeholder="Search OpenFarm for crops"/>;
+}
+
+function doSearch(e: React.FormEvent, dispatch: Function) {
+  dispatch(openFarmSearchQuery(e.target["value"]));
 }

@@ -12,6 +12,6 @@ export function Ticker({ ticker }: TickerParams) {
     <div className="status-ticker-light" style={style} />
     <label className="status-ticker-message">
       { ticker.message || "Loading" }
-    </label>;
+    </label>
   </div>;
 };
