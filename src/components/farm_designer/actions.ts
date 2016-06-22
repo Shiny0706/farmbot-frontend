@@ -83,12 +83,12 @@ export function openFarmSearchQuery(query: string) { // TODO make less smelly
                           url: item.attributes.thumbnail_url
                    }))
                   .map((val, acc) => images[val.id] = val.url);
-                console.dir(images);
                 let payload = resp
                   .data
                   .data
-                  .map(function(crop) {
-                      let id = _.get<string>(crop, "relationships.pictures.data[0].id");
+                  .map(function(datum) {
+                      let crop = datum.attributes;
+                      let id = _.get<string>(datum, "relationships.pictures.data[0].id");
                       return { crop, image: (images[id] || STUB_IMAGE) };
                   });
 
@@ -100,3 +100,4 @@ export function openFarmSearchQuery(query: string) { // TODO make less smelly
             .catch((error) => console.error("OPENFARM IS DOWN!!"));
     };
 };
+name

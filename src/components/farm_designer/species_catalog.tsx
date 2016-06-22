@@ -1,34 +1,33 @@
 import * as React from "react";
 import { Link } from "react-router";
 import { BackArrow } from "./back_arrow";
-import { Specimen, DesignerState } from "./interfaces";
+import { Specimen, DesignerState, CropLiveSearchResult } from "./interfaces";
 import { openFarmSearchQuery } from "./actions";
 
 interface SpeciesCatalogTileProps {
-  specimen: Specimen;
+  result: CropLiveSearchResult;
   dispatch: Function;
 }
 
-export class SpeciesCatalogTile extends React.Component<SpeciesCatalogTileProps, any> {
-  render() {
-    let specimen = this.props.specimen;
+export function SpeciesCatalogTile({result}: SpeciesCatalogTileProps) {
+    // let specimen = this.props.specimen;
     let url = "/app/dashboard/designer?p1=SpeciesInfo&id="
-      + specimen._id;
+      + result.crop.slug;
+    console.dir(result.crop);
     return (
       <div className="plantCatalogTile">
         <div className="small-header-wrapper">
-          <label>{ specimen.name }</label>
+          <label>{ result.crop.name }</label>
         </div>
         <div>
           <p>
             <Link to={ url }>
-              <img className="crop-drag-info-image" src={ specimen.imgUrl } />
+              <img className="crop-drag-info-image" src={ result.image } />
             </Link>
           </p>
         </div>
       </div>
     );
-  }
 };
 
 interface SpeciesCatalogProps {
@@ -38,10 +37,8 @@ interface SpeciesCatalogProps {
 
 export class SpeciesCatalog extends React.Component<SpeciesCatalogProps, any> {
   render() {
-    let species = [{
-      name: "Placeholder Berries", imgUrl: "http://placehold.it/200x150", _id: "123"
-    }].map(
-      (specimen, k) => <SpeciesCatalogTile specimen={ specimen }
+    let species = this.props.designer.cropSearchResults.map(
+      (result, k) => <SpeciesCatalogTile result={ result }
         key={ k }
         dispatch={ this.props.dispatch } />
       );
