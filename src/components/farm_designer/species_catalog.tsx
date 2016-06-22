@@ -13,7 +13,6 @@ export function SpeciesCatalogTile({result}: SpeciesCatalogTileProps) {
     // let specimen = this.props.specimen;
     let url = "/app/dashboard/designer?p1=SpeciesInfo&id="
       + result.crop.slug;
-    console.dir(result.crop);
     return (
       <div className="plantCatalogTile">
         <div className="small-header-wrapper">
