@@ -2,6 +2,7 @@ import { authHeaders } from "../auth/util";
 import * as Axios from "axios";
 import { error } from "../../logger";
 import { Plant } from "./interfaces";
+import { Timer } from "promisified-timer";
 
 const PLANT_URL = "api/plants";
 
@@ -58,6 +59,9 @@ export function destroyPlant(plant: Plant, baseUrl: string, token: string) {
     };
 };
 
-export function openFarmSearchQUery() {
-    
+export function openFarmSearchQuery() {
+  Timer
+    .start("searchQuery", 500)
+    .then((d) => { debugger; })
+    .catch((d) => { debugger; })
 };
