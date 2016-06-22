@@ -48,7 +48,7 @@ export class RootComponent extends React.Component<any, any> {
               <Route path="dashboard"
                   component={ Dashboard }
                   onEnter={ this.requireAuth.bind(this) }>
-                <Route path="designer(?:p1)"
+                <Route path="designer(?:p1&?:id)"
                   component={ FarmDesigner }
                   onEnter={ this.requireAuth.bind(this) }/>
                 <Route path="controls"

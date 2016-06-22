@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router";
 import { BackArrow } from "./back_arrow";
-import { Specimen, DesignerState, CropLiveSearchResult } from "./interfaces";
+import { Everything, CropLiveSearchResult } from "./interfaces";
 import { openFarmSearchQuery } from "./actions";
 
 interface SpeciesCatalogTileProps {
@@ -10,37 +10,31 @@ interface SpeciesCatalogTileProps {
 }
 
 export function SpeciesCatalogTile({result}: SpeciesCatalogTileProps) {
-    // let specimen = this.props.specimen;
-    let url = "/app/dashboard/designer?p1=SpeciesInfo&id="
-      + result.crop.slug;
-    return (
-      <div className="plantCatalogTile">
-        <div className="small-header-wrapper">
-          <label>{ result.crop.name }</label>
-        </div>
-        <div>
-          <p>
-            <Link to={ url }>
-              <img className="crop-drag-info-image" src={ result.image } />
-            </Link>
-          </p>
-        </div>
+  let query =  { p1: "SpeciesInfo", id: result.crop.slug };
+  let pathname = "/app/dashboard/designer";
+  return (
+    <div className="plantCatalogTile">
+      <div className="small-header-wrapper">
+        <label>{ result.crop.name }</label>
       </div>
-    );
+      <div>
+        <p>
+          <Link to={ { pathname, query } }>
+            <img className="crop-drag-info-image" src={ result.image } />
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
 };
 
-interface SpeciesCatalogProps {
-  designer: DesignerState;
-  dispatch: Function;
-}
-
-export class SpeciesCatalog extends React.Component<SpeciesCatalogProps, any> {
+export class SpeciesCatalog extends React.Component<Everything, any> {
   render() {
     let species = this.props.designer.cropSearchResults.map(
       (result, k) => <SpeciesCatalogTile result={ result }
         key={ k }
         dispatch={ this.props.dispatch } />
-      );
+    );
     return <div className="panel-container green-panel">
       <div className="panel-header green-panel">
         <p className="panel-title">
@@ -50,7 +44,7 @@ export class SpeciesCatalog extends React.Component<SpeciesCatalogProps, any> {
       <div className="panel-content">
         <i className="fa fa-search"></i>
         <SearchBox query={ this.props.designer.cropSearchQuery }
-                   dispatch={ this.props.dispatch } />
+          dispatch={ this.props.dispatch } />
         <div className="search-underline"></div>
         <div className="panel-content">
           { species }
@@ -62,14 +56,14 @@ export class SpeciesCatalog extends React.Component<SpeciesCatalogProps, any> {
 
 interface SearchBoxParams {
   query: string;
-  dispatch: Function
+  dispatch: Function;
 }
 
 function SearchBox({query, dispatch}: SearchBoxParams) {
   return <input value={ query }
-                onChange={ (e) => doSearch(e, dispatch) }
-                className="search"
-                placeholder="Search OpenFarm for crops"/>;
+    onChange={ (e) => doSearch(e, dispatch) }
+    className="search"
+    placeholder="Search OpenFarm for crops"/>;
 }
 
 function doSearch(e: React.FormEvent, dispatch: Function) {

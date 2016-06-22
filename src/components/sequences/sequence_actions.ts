@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import { AuthState } from "../auth/auth_reducer";
+import { AuthState } from "../auth/interfaces";
 import { authHeaders } from "../auth/util";
 import { SequenceOptions,
          Step,

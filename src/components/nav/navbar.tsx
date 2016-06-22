@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router";
 import { sendCommand } from "../devices/bot_actions";
-import { AuthState } from "../auth/auth_reducer";
+import { AuthState } from "../auth/interfaces";
 import { BotState } from "../devices/interfaces";
 import { Ticker } from "../ticker/ticker";
 

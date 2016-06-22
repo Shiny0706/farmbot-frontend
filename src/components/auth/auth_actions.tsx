@@ -3,7 +3,7 @@ import { push } from "../../history";
 import { fetchSequences } from "../sequences/sequence_actions";
 import { post } from "axios";
 import { error } from "../../logger";
-import { AuthState } from "./auth_reducer";
+import { AuthState } from "./interfaces";
 import { fetchPlants } from "../farm_designer/actions";
 
 export interface AuthResponseToken {
