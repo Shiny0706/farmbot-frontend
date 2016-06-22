@@ -1,5 +1,5 @@
 import { didLogin } from "../auth/auth_actions";
-import { AuthState } from "../auth/auth_reducer";
+import { AuthState } from "../auth/interfaces";
 
 export interface ChangeApiUrl {
   type: "CHANGE_API_URL";
