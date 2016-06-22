@@ -1,11 +1,11 @@
-import { Plant } from "./interfaces";
+import { Plant, CropLiveSearchResult } from "./interfaces";
 import { Plant as newPlant } from "./plant";
 import { generateReducer } from "../generate_reducer";
 import { DesignerState } from "./interfaces";
 import { cloneDeep } from "lodash";
 import { HardwareState } from "../devices/interfaces";
 import { ICONS } from "./icons";
-import { OpenFarm } from "./openfarm";
+
 
 let DEFAULT_STATE = {
   plants: [],
@@ -49,7 +49,7 @@ export let designer = generateReducer<DesignerState>(DEFAULT_STATE)
     state.cropSearchQuery = payload;
     return state;
   })
-  .add<OpenFarm.OFCrop[]>("OF_SEARCH_RESULTS_OK", function(s, { payload }) {
+  .add<CropLiveSearchResult[]>("OF_SEARCH_RESULTS_OK", function(s, { payload }) {
     let state = cloneDeep(s);
     state.cropSearchResults = payload;
     return state;

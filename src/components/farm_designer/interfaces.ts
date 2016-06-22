@@ -1,5 +1,11 @@
 import { OpenFarm } from "./openfarm";
 
+/** OFCrop bundled with corresponding profile image from OpenFarm API. */
+export interface CropLiveSearchResult {
+  crop: OpenFarm.OFCrop;
+  image: string;
+}
+
 export interface Plant {
     _id: string;
     age: number;
@@ -22,5 +28,5 @@ export interface DesignerState {
   y_size: number;
   plants: Plant[];
   cropSearchQuery: string;
-  cropSearchResults: OpenFarm.OFCrop[];
+  cropSearchResults: CropLiveSearchResult[];
 }

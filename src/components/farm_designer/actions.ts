@@ -1,7 +1,7 @@
 import { authHeaders } from "../auth/util";
 import * as Axios from "axios";
 import { error } from "../../logger";
-import { Plant } from "./interfaces";
+import { Plant, CropLiveSearchResult } from "./interfaces";
 import { CropSearchResult, OpenFarm } from "./openfarm";
 
 const PLANT_URL = "api/plants";
@@ -57,24 +57,41 @@ export function destroyPlant(plant: Plant, baseUrl: string, token: string) {
 
 
 let _openFarmSearchQuery = _.throttle(function (q) {
-    let url = `${OpenFarm.cropUrl}?filter=${q}`;
+    let url = `${OpenFarm.cropUrl}?include=pictures&filter=${q}`;
     return Axios.get<CropSearchResult>(url);
 }, 750);
 
+let STUB_IMAGE = "http://placehold.it/200x150";
+
 /** Search openfarm for crops. This is a throttled function, useful for live search. */
-export function openFarmSearchQuery(query: string) {
-    console.log("1");
+export function openFarmSearchQuery(query: string) { // TODO make less smelly
     return function (dispatch: Function) {
-        console.log("2");
         dispatch({
             type: "SEARCH_QUERY_CHANGE",
             payload: query
         });
         return _openFarmSearchQuery(query)
             .then((resp) => {
-                console.log("3");
-                console.log("DING!");
-                let payload = resp.data.data.map((d) => d.attributes);
+                window["reppp"]  = resp;
+                // Only some crops will have images...
+                let images: {[key: string]: string} = {};
+                resp
+                  .data
+                  .included
+                  .map((item) => ({
+                          id: item.id,
+                          url: item.attributes.thumbnail_url
+                   }))
+                  .map((val, acc) => images[val.id] = val.url);
+                console.dir(images);
+                let payload = resp
+                  .data
+                  .data
+                  .map(function(crop) {
+                      let id = _.get<string>(crop, "relationships.pictures.data[0].id");
+                      return { crop, image: (images[id] || STUB_IMAGE) };
+                  });
+
                 dispatch({
                     type: "OF_SEARCH_RESULTS_OK",
                     payload
