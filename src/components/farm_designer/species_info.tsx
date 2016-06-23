@@ -1,7 +1,7 @@
 import * as React from "react";
 import { savePlant } from "./actions";
 import { BackArrow } from "./back_arrow";
-import { Specimen, Everything, CropLiveSearchResult } from "./interfaces";
+import { Everything } from "./interfaces";
 import { Plant } from "./plant";
 
 export class SpeciesInfo extends React.Component<Everything, any> {
@@ -9,10 +9,17 @@ export class SpeciesInfo extends React.Component<Everything, any> {
     let box = document
       .querySelector("#drop-area > svg > rect")
       .getBoundingClientRect();
-    let coords = fromScreenToGarden(e.pageX, e.pageY, box.left, box.bottom)
+    let coords = fromScreenToGarden(e.pageX, e.pageY, box.left, box.bottom);
     let plant = Plant(coords);
     let baseUrl: string = this.props.auth.iss;
     let token: string = this.props.auth.token;
+
+    // TEMPORARY SOLUTION =======
+    let OFEntry = this.findCrop(this.props.location.query["id"]);
+    plant.imgUrl = OFEntry.image;
+    plant.openfarm_slug = OFEntry.crop.slug;
+    // END TEMPORARY SOLUTION =======
+
     this.props.dispatch(savePlant(plant, baseUrl, token));
   }
 

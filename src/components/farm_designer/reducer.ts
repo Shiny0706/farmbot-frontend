@@ -15,7 +15,12 @@ let DEFAULT_STATE = {
   cropSearchResults: []
 };
 
-export let designer = generateReducer<DesignerState>(DEFAULT_STATE)
+let probe = (s, a) => {
+  console.log(a.type);
+  return s;
+};
+
+export let designer = generateReducer<DesignerState>(DEFAULT_STATE, probe)
   .add<Plant[]>("FETCH_PLANTS_OK", function(s, a) {
     let state = cloneDeep(s);
     let plants = a.payload.map(function(p) {

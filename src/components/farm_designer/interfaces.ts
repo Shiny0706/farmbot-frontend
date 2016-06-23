@@ -37,6 +37,7 @@ export interface Plant {
   y: number;
   planting_area_id: string;
   icon: string; // ? Maybe this will change.
+  openfarm_slug: string; // ? Maybe this will change.
 }
 
 export interface Specimen {

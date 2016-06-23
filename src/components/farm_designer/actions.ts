@@ -29,7 +29,8 @@ export function savePlant(plant: Plant, baseUrl: string, token: string) {
     dispatch({ type: "SAVE_PLANT_START" });
     return Axios.post<Plant>(url, plant, authHeaders(token))
       .then((resp) => {
-        let payload = resp.data;
+        // so that no persisted data sticks around.
+        let payload: Plant = _.assign({}, plant, resp.data) as Plant;
         dispatch({ type: "SAVE_PLANT_OK", payload });
       })
       .catch((payload) => {
