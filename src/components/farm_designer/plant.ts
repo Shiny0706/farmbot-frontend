@@ -62,7 +62,7 @@ let TEMP_ICON_MAP: {[ofSlug: string]: string} = {
     "not-set": "/icons/Natural Food-96.png"
 };
 
-interface PlantOptions {
+export interface PlantOptions {
     _id?: string;
     planted_at?: number;
     img_url?: string;

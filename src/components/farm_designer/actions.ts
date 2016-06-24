@@ -1,7 +1,7 @@
 import { authHeaders } from "../auth/util";
 import * as Axios from "axios";
 import { error } from "../../logger";
-import { Plant, CropLiveSearchResult } from "./interfaces";
+import { Plant } from "./interfaces";
 import { CropSearchResult, OpenFarm } from "./openfarm";
 
 const PLANT_URL = "api/plants";
@@ -13,6 +13,7 @@ export function fetchPlants(baseUrl: string, token: string) {
     return Axios.get<Plant[]>(url, authHeaders(token))
       .then((resp) => {
         let payload = resp.data;
+        console.dir(payload);
         dispatch({ type: "FETCH_PLANTS_OK", payload });
       })
       .catch((payload) => {
