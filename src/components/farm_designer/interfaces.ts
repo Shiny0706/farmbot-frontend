@@ -30,13 +30,13 @@ export interface CropLiveSearchResult {
 
 export interface Plant {
   _id: string;
-  age: number;
-  imgUrl: string;
+  planted_at: number;
+  img_url: string;
   name: string;
   x: number;
   y: number;
   planting_area_id: string;
-  icon: string; // ? Maybe this will change.
+  icon_url: string; // ? Maybe this will change.
   openfarm_slug: string; // ? Maybe this will change.
 }
 

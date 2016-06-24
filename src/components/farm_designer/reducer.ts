@@ -24,7 +24,7 @@ export let designer = generateReducer<DesignerState>(DEFAULT_STATE, probe)
   .add<Plant[]>("FETCH_PLANTS_OK", function(s, a) {
     let state = cloneDeep(s);
     let plants = a.payload.map(function(p) {
-      p.icon = _.sample(ICONS);
+      p.icon_url = _.sample(ICONS);
       return p;
     });
     state.plants = plants;

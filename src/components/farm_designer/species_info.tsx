@@ -24,19 +24,34 @@ export class SpeciesInfo extends React.Component<Everything, any> {
   }
 
   findCrop(slug) {
+    let qqq = slug;
     let crops = this.props.designer.cropSearchResults;
     let crop = _(crops).find((result) => result.crop.slug === slug);
-    return crop;
+    // if (!crop) { debugger; }
+    return crop || {
+      crop: {
+        binomial_name: "binomial_name",
+        common_names: "common_names",
+        name: "name",
+        row_spacing: "row_spacing",
+        spread: "spread",
+        description: "description",
+        height: "height",
+        processing_pictures: "processing_pictures",
+        slug: "slug",
+        sun_requirements: "sun_requirements"
+      },
+      image: "http://placehold.it/350x150"
+    };
   }
 
   render() {
 
     let result = this.findCrop(this.props.location.query["id"]);
-
     return <div className="panel-container green-panel">
       <div className="panel-header green-panel">
         <p className="panel-title">
-          <BackArrow /> { result.crop.name }
+          <BackArrow /> result.crop.name
         </p>
       </div>
       <div className="panel-content">
