@@ -64,7 +64,7 @@ let TEMP_ICON_MAP: {[ofSlug: string]: string} = {
 
 interface PlantOptions {
     _id?: string;
-    created_at?: number;
+    planted_at?: number;
     img_url?: string;
     name?: string;
     x?: number;
@@ -76,11 +76,11 @@ interface PlantOptions {
 /** Factory function for Plant types. */
 export function Plant(options: PlantOptions): Plant {
     let openfarm_slug = options.openfarm_slug || "not-set";
-    let icon = TEMP_ICON_MAP[openfarm_slug] ||  TEMP_ICON_MAP["not-set"];
+    let icon_url = TEMP_ICON_MAP[openfarm_slug] ||  TEMP_ICON_MAP["not-set"];
     return {
         _id: String(options._id || ""),
-        planted_at: (options.age || _.random(0, 5)),
-        img_url: (options.imgUrl || "http://placehold.it/200x150"),
+        planted_at: (options.planted_at || _.random(0, 5)),
+        img_url: (options.img_url || "http://placehold.it/200x150"),
         name: (options.name || "Untitled Plant"),
         x: (options.x || 0),
         y: (options.y || 0),

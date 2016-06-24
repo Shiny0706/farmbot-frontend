@@ -16,7 +16,7 @@ export class SpeciesInfo extends React.Component<Everything, any> {
 
     // TEMPORARY SOLUTION =======
     let OFEntry = this.findCrop(this.props.location.query["id"]);
-    plant.imgUrl = OFEntry.image;
+    plant.img_url = OFEntry.image;
     plant.openfarm_slug = OFEntry.crop.slug;
     // END TEMPORARY SOLUTION =======
 
@@ -24,10 +24,8 @@ export class SpeciesInfo extends React.Component<Everything, any> {
   }
 
   findCrop(slug) {
-    let qqq = slug;
     let crops = this.props.designer.cropSearchResults;
     let crop = _(crops).find((result) => result.crop.slug === slug);
-    // if (!crop) { debugger; }
     return crop || {
       crop: {
         binomial_name: "binomial_name",
