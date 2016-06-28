@@ -5,6 +5,11 @@ import { Everything } from "./interfaces";
 import { Plant, PlantOptions } from "./plant";
 
 export class SpeciesInfo extends React.Component<Everything, any> {
+  drag(e) {
+    var img = document.createElement("img");
+    img.src = "/icons/Cabbage-96.png";
+    e.dataTransfer.setDragImage(img, 0, 0);
+  }
   drop(e) {
     let box = document
       .querySelector("#drop-area > svg > rect")
@@ -45,7 +50,6 @@ export class SpeciesInfo extends React.Component<Everything, any> {
   }
 
   render() {
-    console.log("-B-R-O-K-E--4--S-H-O-");
     let result = this.findCrop(this.props.location.query["id"]);
     return <div className="panel-container green-panel">
       <div className="panel-header green-panel">
@@ -57,6 +61,7 @@ export class SpeciesInfo extends React.Component<Everything, any> {
         <div className="crop-drag-info-tile">
           <img className="crop-drag-info-image"
             src={ result.image }
+            onDragStart= { this.drag.bind(this) }
             onDragEnd={ this.drop.bind(this) }/>
           <div className="crop-info-overlay">
             Drag and drop into map
