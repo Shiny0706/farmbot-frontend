@@ -13,7 +13,6 @@ export function fetchPlants(baseUrl: string, token: string) {
     return Axios.get<Plant[]>(url, authHeaders(token))
       .then((resp) => {
         let payload = resp.data;
-        console.dir(payload);
         dispatch({ type: "FETCH_PLANTS_OK", payload });
       })
       .catch((payload) => {

@@ -50,7 +50,7 @@ export class SpeciesInfo extends React.Component<Everything, any> {
     return <div className="panel-container green-panel">
       <div className="panel-header green-panel">
         <p className="panel-title">
-          <BackArrow /> result.crop.name
+          <BackArrow /> { result.crop.name }
         </p>
       </div>
       <div className="panel-content">
