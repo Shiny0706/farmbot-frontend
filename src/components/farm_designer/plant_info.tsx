@@ -3,9 +3,9 @@ import { BackArrow } from "./back_arrow";
 import { getParam } from "../../util.ts";
 import { destroyPlant } from "./actions";
 import { Plant as NewPlant } from "./plant";
-import { Plant } from "./interfaces";
+import { Plant, Everything } from "./interfaces";
 
-export class PlantInfo extends React.Component<any, any> {
+export class PlantInfo extends React.Component<Everything, any> {
   removePlant() {
     let url = this.props.auth.iss;
     let token = this.props.auth.token;
@@ -14,7 +14,8 @@ export class PlantInfo extends React.Component<any, any> {
 
   get plant(): Plant {
     let plants = this.props.designer.plants;
-    var p: any  = _(plants).find({ _id: getParam("id") }) || NewPlant({name: "Deleted plant"});
+    let query = { openfarm_slug: getParam("id") };
+    var p = _(plants).find(query) || NewPlant({name: "Deleted plant"});
     return p;
   }
 
@@ -22,7 +23,8 @@ export class PlantInfo extends React.Component<any, any> {
     return <div className="panel-container green-panel">
       <div className="panel-header green-panel">
         <p className="panel-title">
-          <BackArrow/>{this.plant.name || "Plant" } { this.plant._id || "" }
+          <BackArrow/>
+          { this.plant.name || "Plant" }
         </p>
       </div>
       <div className="panel-content">

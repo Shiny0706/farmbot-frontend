@@ -1,7 +1,7 @@
 import { authHeaders } from "../auth/util";
 import * as Axios from "axios";
 import { error } from "../../logger";
-import { Plant, CropLiveSearchResult } from "./interfaces";
+import { Plant } from "./interfaces";
 import { CropSearchResult, OpenFarm } from "./openfarm";
 
 const PLANT_URL = "api/plants";
@@ -13,6 +13,7 @@ export function fetchPlants(baseUrl: string, token: string) {
     return Axios.get<Plant[]>(url, authHeaders(token))
       .then((resp) => {
         let payload = resp.data;
+        console.dir(payload);
         dispatch({ type: "FETCH_PLANTS_OK", payload });
       })
       .catch((payload) => {
@@ -29,7 +30,8 @@ export function savePlant(plant: Plant, baseUrl: string, token: string) {
     dispatch({ type: "SAVE_PLANT_START" });
     return Axios.post<Plant>(url, plant, authHeaders(token))
       .then((resp) => {
-        let payload = resp.data;
+        // so that no persisted data sticks around.
+        let payload: Plant = _.assign({}, plant, resp.data) as Plant;
         dispatch({ type: "SAVE_PLANT_OK", payload });
       })
       .catch((payload) => {

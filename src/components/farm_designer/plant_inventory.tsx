@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Link } from "react-router";
+import { Plant, Everything } from "./interfaces";
 
 const pathname = "/app/dashboard/designer";
 
-export class Plants extends React.Component<any, any> {
+export class Plants extends React.Component<Everything, any> {
   render() {
     return(
       <div className="panel-container green-panel">
@@ -67,18 +68,21 @@ export class Plants extends React.Component<any, any> {
   }
 };
 
-export class List extends React.Component<any, any> {
+interface ListProps {
+  plants: Plant[];
+}
+export class List extends React.Component<ListProps, any> {
   render() {
-    let mapper = function(plant, key) {
+    let mapper = function(plant: Plant, key) {
       return(
         <li key={ key } >
           <Link to={ {
                 pathname: "/app/dashboard/designer",
-                query: { p1: "PlantInfo", id: (plant._id || "") }
+                query: { p1: "PlantInfo", id: (plant.openfarm_slug || "") }
               } }>
             { plant.name }
           </Link>
-          <p>{ plant.age || "?" } days old</p>
+          <p>{ plant.planted_at || "Unknown planting time" }</p>
         </li>);
     };
     return(<ul>

@@ -1,35 +1,56 @@
 import * as React from "react";
 import { savePlant } from "./actions";
 import { BackArrow } from "./back_arrow";
-import { Specimen, Everything, CropLiveSearchResult } from "./interfaces";
-import { Plant } from "./plant";
+import { Everything } from "./interfaces";
+import { Plant, PlantOptions } from "./plant";
 
 export class SpeciesInfo extends React.Component<Everything, any> {
   drop(e) {
     let box = document
       .querySelector("#drop-area > svg > rect")
       .getBoundingClientRect();
-    let coords = fromScreenToGarden(e.pageX, e.pageY, box.left, box.bottom)
-    let plant = Plant(coords);
+    let p: PlantOptions = fromScreenToGarden(e.pageX, e.pageY, box.left, box.bottom);
+    // TEMPORARY SOLUTION =======
+    let OFEntry = this.findCrop(this.props.location.query["id"]);
+    p.img_url = OFEntry.image;
+    p.openfarm_slug = OFEntry.crop.slug;
+    p.name = OFEntry.crop.name || "Mystery Crop";
+    // END TEMPORARY SOLUTION =======
+
+    let plant = Plant(p);
     let baseUrl: string = this.props.auth.iss;
     let token: string = this.props.auth.token;
+
     this.props.dispatch(savePlant(plant, baseUrl, token));
   }
 
   findCrop(slug) {
     let crops = this.props.designer.cropSearchResults;
     let crop = _(crops).find((result) => result.crop.slug === slug);
-    return crop;
+    return crop || {
+      crop: {
+        binomial_name: "binomial_name",
+        common_names: "common_names",
+        name: "name",
+        row_spacing: "row_spacing",
+        spread: "spread",
+        description: "description",
+        height: "height",
+        processing_pictures: "processing_pictures",
+        slug: "slug",
+        sun_requirements: "sun_requirements"
+      },
+      image: "http://placehold.it/350x150"
+    };
   }
 
   render() {
-
+    console.log("-B-R-O-K-E--4--S-H-O-");
     let result = this.findCrop(this.props.location.query["id"]);
-
     return <div className="panel-container green-panel">
       <div className="panel-header green-panel">
         <p className="panel-title">
-          <BackArrow /> { result.crop.name }
+          <BackArrow /> result.crop.name
         </p>
       </div>
       <div className="panel-content">
