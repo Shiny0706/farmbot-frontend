@@ -7,9 +7,10 @@ import { Plant, PlantOptions } from "./plant";
 export class SpeciesInfo extends React.Component<Everything, any> {
   drag(e) {
     var img = document.createElement("img");
-    img.src = "/icons/Cabbage-96.png";
-    e.dataTransfer.setDragImage(img, 0, 0);
+    img.src = "/icons/seed.png";
+    e.dataTransfer.setDragImage(img, 12, 48);
   }
+
   drop(e) {
     let box = document
       .querySelector("#drop-area > svg > rect")
