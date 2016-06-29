@@ -5,10 +5,10 @@ import { Everything } from "./interfaces";
 import { Plant, PlantOptions } from "./plant";
 
 export class SpeciesInfo extends React.Component<Everything, any> {
-  drag(e) {
+  drag(e: React.DragEvent) {
     var img = document.createElement("img");
     img.src = "/icons/seed.png";
-    e.dataTransfer.setDragImage(img, 12, 48);
+    e.dataTransfer["setDragImage"](img, 12, 48);
   }
 
   drop(e) {

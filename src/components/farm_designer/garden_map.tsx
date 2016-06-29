@@ -20,7 +20,7 @@ export class MapPoint extends React.Component<MapPointProps, any> {
   }
 
   render() {
-    let length = this.props.designer.y_size, height = 30, width  = 30;
+    let length = this.props.designer.y_size, height = 96, width  = 96;
     return <image xlinkHref={ this.props.icon }
                   x={ this.props.plant.x - (width / 2) }
                   y={ ((-1 * this.props.plant.y) + length) - (height / 2) }
