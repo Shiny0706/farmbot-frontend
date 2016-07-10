@@ -14,7 +14,7 @@
 # Deploy to Production
 
 1. run `npm run build`
-2. Upload `dist/fb_frontend.min.js` to your server.
+2. Upload `tools/dist/farmbot-production.min.js` to your server.
 3. Add `<script src="fb_frontend.min.js">` to the page at `app/index.html`. This is the only endpoint we support at the moment. PRs welcome.
 4. Please, [raise an issue](https://github.com/FarmBot/farmbot-web-frontend/issues/new?title=Help,%20I%20cant%20setup!) if you have any trouble setting up.
 

@@ -49,7 +49,6 @@ let links = {
   "Regimens"      : "/app/dashboard/regimens"
 };
 
-// TODO: Convert to ES6 class or stateless component and add a display name.
 export function Navbar(props) {
   return (
       <nav className="navbar navbar-default" role="navigation">

@@ -15,24 +15,13 @@ class FarmDesignerPage extends React.Component<any, any> {
     this.props.dispatch(fetchPlants(baseUrl, token));
   }
 
-// anyway to do this in one step down in the render section?
-// Yes, https://facebook.github.io/react/docs/transferring-props.html
-// TODO: convert it over to that ^
-  renderPanel1() {
-    return React.createElement(Panel1, this.props);
-  }
-
-  renderPanel2() {
-    return React.createElement(Panel2, this.props);
-  }
-
   render() {
     return (
         <div className="farm-designer">
         <Navbar { ...this.props } />
             <div className="farm-designer-body">
             <div className="farm-designer-left">
-              { this.renderPanel1() }
+              <Panel1 { ...this.props } />
             </div>
 
             <div className="farm-designer-map">
@@ -40,7 +29,7 @@ class FarmDesignerPage extends React.Component<any, any> {
             </div>
 
             <div className="farm-designer-right">
-              { this.renderPanel2() }
+              <Panel2 { ...this.props } />
             </div>
           </div>
         </div>

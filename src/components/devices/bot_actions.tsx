@@ -2,9 +2,10 @@ import { Device } from "../../models/device";
 import { Farmbot } from "farmbot";
 import { store } from "../../store";
 import { devices } from "../../device";
-import { error, warning } from "../../logger";
+import { error, warning, success } from "../../logger";
 import { Sequence } from "../sequences/interfaces";
 import { catchMessage, RPCError } from "./message_catcher";
+
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
@@ -228,6 +229,7 @@ export function addDevice(deviceAttrs) {
 }
 
 function saveDeviceOk(resp) {
+    success("Device saved.");
     return {
         type: "SAVE_DEVICE_OK",
         payload: resp.data

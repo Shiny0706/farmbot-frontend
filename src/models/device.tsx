@@ -2,14 +2,9 @@ import * as _ from "lodash";
 import * as $ from "jquery";
 
 export class Device {
-  static fetch = function() {
-    return $.ajax({
-      method: "GET",
-      url: "//THIS_URL_MUST_CHANGE" + "/api/device"
-    });
-  };
-
   static save = function (that) {
+    // TODO: Remove JQuery here in favor of Axios.
+    // Actually, forget this whole class!
     return $.ajax({
       method: "POST",
       url: "//THIS_URL_MUST_CHANGE" + "/api/device",
@@ -17,12 +12,6 @@ export class Device {
     });
   };
 
-  static destroy = function (that) {
-    return $.ajax({
-      method: "DELETE",
-      url: "//THIS_URL_MUST_CHANGE" + "/api/device"
-    });
-  };
   public _id: String;
   public name: String;
 

@@ -1,4 +1,4 @@
-import { error, warning, success } from "../../logger";
+import { error, warning } from "../../logger";
 import * as _ from "lodash";
 import { BotState } from "./interfaces";
 import { generateReducer } from "../generate_reducer";
@@ -150,8 +150,6 @@ export let botReducer = generateReducer<BotState>(initialState)
     return state;
   })
   .add<any>("SAVE_DEVICE_OK", function(state, action) {
-    // TODO Move this into the action creator. Does not belong in a reducer.
-    success("Device saved.");
     return _.assign<any, BotState>({}, state, action.payload, {
       dirty: false
     });

@@ -58,7 +58,8 @@ export interface Sequence {
   dirty?: Boolean;
 }
 
-// TODO: Does typescript have subset types?
+// Typescript does not have subset types.
+// If you are reading this in the future and subset types exist, refactor this code.
 export interface SequenceOptions {
   color?: Color;
   name?: String;
