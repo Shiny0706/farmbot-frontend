@@ -1,4 +1,5 @@
 var path = require('path');
+var open = require('open');
 
 module.exports = {
   module: {
@@ -33,3 +34,5 @@ module.exports = {
     }
   }
 };
+
+open('http://localhost:8080/app/login');
