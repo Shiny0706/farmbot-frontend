@@ -24,30 +24,7 @@ export function loadFromCdn(filename: string, filetype: string) {
     };
 }
 
-require("!style!css!sass!./css/toastr.scss");
-require("!style!css!sass!./css/alerts.scss");
-require("!style!css!sass!./css/auth.scss");
-require("!style!css!sass!./css/blocks.scss");
-require("!style!css!sass!./css/buttons.scss");
-require("!style!css!sass!./css/events.scss");
-require("!style!css!sass!./css/farm_designer.scss");
-require("!style!css!sass!./css/farm_designer_mobile.scss");
-require("!style!css!sass!./css/farmbot.scss");
-require("!style!css!sass!./css/inputs.scss");
-require("!style!css!sass!./css/labels.scss");
-require("!style!css!sass!./css/farm_designer_panels.scss");
-require("!style!css!sass!./css/map.scss");
-require("!style!css!sass!./css/navbar.scss");
-require("!style!css!sass!./css/regimen_builder_mobile.scss");
-require("!style!css!sass!./css/regimen_editor_widget.scss");
-require("!style!css!sass!./css/search.scss");
-require("!style!css!sass!./css/status_ticker.scss");
-require("!style!css!sass!./css/steps.scss");
-require("!style!css!sass!./css/tables.scss");
-require("!style!css!sass!./css/tooltips.scss");
-require("!style!css!sass!./css/widgets.scss");
-require("!style!css!sass!./css/widget_move.scss");
-require("!style!css!sass!./css/widget_tool_control.scss");
+require("!style!css!sass!./css/index.scss");
 
 loadFromCdn(
   "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
