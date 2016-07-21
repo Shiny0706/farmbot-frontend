@@ -1,7 +1,5 @@
 // Styles used throughout the frontend
 
-@import 'colors';
-
 .all-content-wrapper {
   padding: 3rem 3rem 0rem 3rem;
   margin-left: auto;
@@ -53,6 +51,7 @@
   color: $dark_gray;
   background-color: $light_gray;
 }
+
 .xx-small {
   padding-left: 0.45rem;
   padding-right: 0.45rem;
@@ -79,6 +78,7 @@
 .margin {
   margin-bottom: 20px;
 }
+
 .page-title {
   text-align: center;
   padding-top: 2rem;
@@ -96,6 +96,7 @@
 body {
   background: $light_gray!important;
 }
+
 .drop-shadow {
   box-shadow: 0 4px 10px $translucent;
 }
@@ -103,30 +104,38 @@ body {
 * {
   outline: none;
 }
+
 .padding-bottom {
   padding-bottom: 20px;
 }
+
 .no-right-gutter {
   padding-right: 0;
 }
+
 .no-radius {
     border-radius: 0;
 }
+
 .radius {
     border-radius: 5px;
 }
+
 .full-width {
   width: 100%;
 }
+
 fieldset {
   border: none;
   legend {
     background: transparent;
   }
 }
+
 .light-icon {
   color: $light_gray;
 }
+
 .medium-icon {
   font-size: 1.3rem;
 }
@@ -134,6 +143,7 @@ fieldset {
 .sized a {
   width: 100px;
 }
+
 .top-bar .name h5 {
   font-weight: bold;
   color: $dark_gray;
@@ -142,6 +152,7 @@ fieldset {
   margin: 0;
   line-height: normal;
 }
+
 i.fa {
   &.fa-bars.right {
     line-height: inherit;
@@ -150,6 +161,7 @@ i.fa {
     line-height: inherit;
   }
 }
+
 span.prefix {
   color: $light_gray;
   background-color: $dark_gray;

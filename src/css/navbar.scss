@@ -1,7 +1,5 @@
 // Styles for the NAVBAR
 
-@import 'colors';
-
 div#navbar {
     padding-left: 0px;
     margin-left: -1rem;
@@ -16,7 +14,6 @@ nav.navbar {
   text-transform: uppercase;
   border-radius: 0px;
   border: 0px solid;
-
 }
 .navbar-nav>li>a, .logout-button {
   color: $gray!important;

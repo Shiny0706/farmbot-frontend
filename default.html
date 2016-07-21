@@ -3,22 +3,6 @@
 <head>
 </head>
 <body>
-  <script type="text/javascript">
-    // PULL REQUESTS APPRECIATED.
-    // This is a hack to prevent developers from visiting `/`.
-    // The app is located at `/app`. Visiting `/` will cause a "route not found"
-    // error. Somebody fix this, please!
-    var wrong = !document.location.pathname.includes("/app");
-    var bodyElem = document.querySelector("body");
-    if (wrong) {
-      sessionStorage.clear();
-      bodyElem.innerHTML = '<a href="http://localhost:8080/app/login"> Go here. </a>';
-    } else {
-      var js = document.createElement('script')
-      js.setAttribute("type","text/javascript");
-      js.setAttribute("src", "/src/bundle.js");
-      document.head.appendChild(js);
-    };
-  </script>
+  <script type="text/javascript" src="/src/bundle.js"></script>
 </body>
 </html>
