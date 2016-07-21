@@ -4,9 +4,9 @@ import { BulkSchedulerWidget } from "./bulk_scheduler/index";
 import { RegimensList } from "./list/index";
 import { RegimenEditorWidget } from "./editor/index";
 import { connect } from "react-redux";
-import { ReduxStateAtom } from "../interfaces";
+import { Everything } from "../farm_designer/interfaces";
 
-class XRegimens extends React.Component<ReduxStateAtom, {}> {
+class XRegimens extends React.Component<Everything, {}> {
 
   render() {
     return (

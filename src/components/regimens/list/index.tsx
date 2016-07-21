@@ -1,9 +1,9 @@
 import * as React from "react";
 import { RegimenListItem } from "./regimen_list_item";
-import { ReduxStateAtom } from "../../interfaces";
+import { Everything } from "../../farm_designer/interfaces";
 import { AddRegimen } from "./add_button";
 
-export function RegimensList(props: ReduxStateAtom) {
+export function RegimensList(props: Everything) {
     return <div>
               <div className="widget-wrapper regimens-widget">
                 <div className="row">

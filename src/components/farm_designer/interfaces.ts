@@ -1,5 +1,11 @@
 import { OpenFarm } from "./openfarm";
 import { AuthState } from "../auth/interfaces";
+import { BotState } from "../devices/interfaces";
+import { TickerState } from "../ticker/interfaces";
+import { BulkSchedulerState } from "../regimens/bulk_scheduler/interfaces";
+import { RegimensState } from "../regimens/interfaces";
+import { SequenceReducerState } from "../sequences/interfaces";
+
 /** All the props. TODO: Add all the interfaces to this prop ball. */
 export interface Everything {
   location: {
@@ -20,6 +26,11 @@ export interface Everything {
   auth: AuthState;
   designer: DesignerState;
   dispatch: Function;
+  bot: BotState;
+  ticker: TickerState;
+  sequences: SequenceReducerState;
+  regimens: RegimensState;
+  bulkScheduler: BulkSchedulerState;
 }
 
 /** OFCrop bundled with corresponding profile image from OpenFarm API. */

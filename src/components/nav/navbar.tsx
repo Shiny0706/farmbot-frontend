@@ -4,6 +4,7 @@ import { sendCommand } from "../devices/bot_actions";
 import { AuthState } from "../auth/interfaces";
 import { BotState } from "../devices/interfaces";
 import { Ticker } from "../ticker/ticker";
+import { Everything } from "../farm_designer/interfaces";
 
 interface NavButtonState {
   auth: AuthState;
@@ -49,7 +50,7 @@ let links = {
   "Regimens"      : "/app/dashboard/regimens"
 };
 
-export function Navbar(props) {
+export function Navbar(props: Everything) {
   return (
       <nav className="navbar navbar-default" role="navigation">
         <div className="container-fluid">

@@ -9,10 +9,3 @@ export interface ReduxAction<T> {
 };
 
 
-export interface ReduxStateAtom {
-  sequences: SequenceReducerState;
-  dispatch: Function;
-  auth: AuthToken;
-  regimens: RegimensState;
-  bulkScheduler: BulkSchedulerState;
-}
