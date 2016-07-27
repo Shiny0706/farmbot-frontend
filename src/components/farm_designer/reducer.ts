@@ -16,7 +16,7 @@ let DEFAULT_STATE = {
 };
 
 let probe = (s, a) => {
-  console.log(a.type);
+  // console.log(a.type);
   return s;
 };
 

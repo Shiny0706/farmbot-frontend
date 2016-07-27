@@ -4,40 +4,13 @@ module.exports = function (config) {
   config.set({
     singleRun: false,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: [],
     files: [ 'tests.webpack.js' ],
     frameworks: [ 'jasmine' ],
     preprocessors: {
-      'tests.webpack.js': ['coverage', 'webpack', 'sourcemap'],
+      'tests.webpack.js': ['webpack'],
     },
-    reporters: [ 'progress' , 'coverage' ],
-    webpack: {
-      resolve: {
-          extensions: ["", ".js", ".ts", ".tsx"]
-      },
-      cache: true,
-      devtool: 'inline-source-map',
-      module: {
-        postLoaders: [
-            {
-                test: /\.(ts|tsx)?$/,
-                include: path.resolve(__dirname, 'src'),
-                exclude: path.resolve(__dirname, 'src/__tests__'),
-                loader: 'istanbul-instrumenter'
-            }
-        ],
-        loaders: [
-          {
-            test: /\.tsx?$/,
-            // include: path.resolve(__dirname, '../src'),
-            exclude: /(bower_components|node_modules)/,
-            loader: 'ts',
-          }
-        ],
-      },
-      ts: {
-        configFileName: "tsconfig.json"
-      },
-    },
+    reporters: [ 'progress' ],
+    webpack: require("./tools/webpack.config.base.js"),
   });
 };
