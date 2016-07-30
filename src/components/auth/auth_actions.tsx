@@ -1,3 +1,4 @@
+import * as $ from "jquery";
 import { fetchDevice } from "../../components/devices/bot_actions";
 import { push } from "../../history";
 import { fetchSequences } from "../sequences/sequence_actions";
@@ -121,6 +122,7 @@ function requestRegistration(name, email, password, confirmation, url) {
 
 
 function requestToken(email, password, url) {
+  // TODO: Replace with AXIOS.get().
   return $.ajax({
     url: url + "/api/tokens",
     type: "POST",
@@ -130,7 +132,7 @@ function requestToken(email, password, url) {
 }
 
 // TODO Someday, we will stop using jQuery. This is mostly for legacy support.
-function setToken(token) {
+export function setToken(token: string) {
   $.ajaxSetup({
     beforeSend: function (xhr) {
       xhr.setRequestHeader("Authorization", token);
