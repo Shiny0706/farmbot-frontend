@@ -91,7 +91,7 @@ class ControlsPage extends React.Component<any, any> {
       <div>
           <Navbar { ...this.props } />
           <div className="all-content-wrapper">
-          <div ng-view className="ng-scope">
+          <div className="ng-scope">
             <div className="row ng-scope">
               <div className="col-md-4 col-sm-6 col-xs-12 col-md-offset-1">
                 <div>
@@ -133,8 +133,9 @@ class ControlsPage extends React.Component<any, any> {
                             </div>
                           </div>
                           <div className="row">
-                            <table align="center" className="jog-table" style={{border: 0}}>
-                              <tbody><tr>
+                            <table className="jog-table" style={{border: 0}}>
+                              <tbody>
+                                <tr>
                                   <td />
                                   <td />
                                   <td />

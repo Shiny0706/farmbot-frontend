@@ -26,6 +26,9 @@ export function loadFromCdn(filename: string, filetype: string) {
 
 require("!style!css!sass!./css/index.scss");
 
+// TODO: Put this into a bundle with file splitting (for caching / performance).
+// As it stands, app will not look right in offline mode because of dependence
+// on these URLs for CSS.
 loadFromCdn(
   "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
   "css");
