@@ -5,7 +5,6 @@ let createSpy = jasmine.createSpy;
 
 describe("bot actions", () => {
   it("toggles settings", (done) => {
-  console.log("!!?!!");
     spyOn(devices.current, "updateCalibration")
       .and
       .returnValue(Promise.resolve({result: {}}));
@@ -15,7 +14,6 @@ describe("bot actions", () => {
         example: 1
       }
     };
-    console.log("WOW!");
     let thunk = settingToggle( "example", bot );
     let message = { example: 0 };
     let dispatch = jasmine.createSpy("dispatch");

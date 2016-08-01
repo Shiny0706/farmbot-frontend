@@ -77,7 +77,8 @@ export class StepSizeSelector extends React.Component<any, any> {
   }
 }
 
-class ControlsPage extends React.Component<any, any> {
+@connect(state => state)
+export class Controls extends React.Component<any, any> {
   constructor() {
     super();
     this.state ={ url: "http://71.93.48.48:8080/?action=stream" };
@@ -329,5 +330,3 @@ class ControlsPage extends React.Component<any, any> {
     );
   }
 };
-
-export let Controls = connect(state => state)(ControlsPage);

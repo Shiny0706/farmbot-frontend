@@ -6,6 +6,7 @@ import { RegimenEditorWidget } from "./editor/index";
 import { connect } from "react-redux";
 import { Everything } from "../farm_designer/interfaces";
 
+// TODO: Why is @connect broke? SEE: compile errors.
 class XRegimens extends React.Component<Everything, {}> {
 
   render() {

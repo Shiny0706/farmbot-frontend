@@ -53,18 +53,18 @@ type Steps = Array<Step>;
 export interface Sequence {
   _id?: string;
   color: Color;
-  name: String;
+  name: string;
   steps: Steps;
-  dirty?: Boolean;
+  dirty?: boolean;
 }
 
 // Typescript does not have subset types.
 // If you are reading this in the future and subset types exist, refactor this code.
 export interface SequenceOptions {
   color?: Color;
-  name?: String;
+  name?: string;
   steps?: Steps;
-  dirty?: Boolean;
+  dirty?: boolean;
 }
 
 export interface StepCommand {
