@@ -178,11 +178,11 @@ export function changeDevice(attributesThatWillChange = { dirty: true }) {
     };
 }
 
-export function fetchDevice(token: String): {} | ((dispatch: any) => any) {
+export function fetchDevice(token: string): {} | ((dispatch: any) => any) {
     return (dispatch) => {
         let bot = new Farmbot({ token });
         return bot
-            .connect(() => { }) // TODO: Make this param optional.
+            .connect()
             .then(() => {
                 devices.current = bot;
                 dispatch(readStatus());
