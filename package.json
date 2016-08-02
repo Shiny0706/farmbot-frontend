@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "axios": "^0.11.0",
-    "farmbot": "1.3.0",
+    "farmbot": "1.2.1",
     "joi-browser": "^8.0.5",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
