@@ -11,7 +11,7 @@ function NullBot(): Farmbot {
   // one place and NullBot satisfies the same interface as a real bot.
   const funnyConfigObject = {token: `0.${btoa("\"NOT_SET\"")}.0`};
   let bot = new Farmbot(funnyConfigObject);
-  bot.connect = (unused) => Promise.reject(`Tried to connect to null bot.
+  bot.connect = () => Promise.reject(`Tried to connect to null bot.
     You probably meant to set a bot first.`);
   return bot;
 }
