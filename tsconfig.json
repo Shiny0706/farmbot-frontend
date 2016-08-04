@@ -13,9 +13,9 @@
     "strictNullChecks": true
   },
   "pretty": true,
-  // "files": [
-  //   "typings/index.d.ts"
-  // ],
+  "files": [
+    "./src/fb_frontend.tsx"
+  ],
   "exclude": [
     "node_modules"
   ],

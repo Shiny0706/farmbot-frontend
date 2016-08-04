@@ -15,7 +15,7 @@ let reactElem = React.createElement(RootComponent, {store});
 let domElem = document.getElementById("root");
 
 if (domElem) {
-  render(reactElem, domElem)
+  render(reactElem, domElem);
 } else {
   throw new Error("Add a div with id `root` to the page first.")
 };

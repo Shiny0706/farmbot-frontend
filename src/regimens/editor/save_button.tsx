@@ -1,9 +1,16 @@
 import * as React from "react";
-import { RegimenProps } from "../interfaces";
+import { RegimenProps, Regimen } from "../interfaces";
 import { saveRegimen } from "../actions";
 
 function save({regimen, dispatch}: RegimenProps) {
-  return event => dispatch(saveRegimen(regimen));
+  if (!regimen) {
+    throw new Error("Regimen is required");
+  };
+
+  return (event) => {
+    regimen = regimen as Regimen; // TS BUG???
+    dispatch(saveRegimen(regimen));
+  };
 }
 
 export function SaveButton({regimen, dispatch}: RegimenProps) {
