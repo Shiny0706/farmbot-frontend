@@ -4,6 +4,7 @@ import { TickerState } from "./ticker/interfaces";
 import { BulkSchedulerState } from "./regimens/bulk_scheduler/interfaces";
 import { RegimensState } from "./regimens/interfaces";
 import { SequenceReducerState } from "./sequences/interfaces";
+import { DesignerState } from "./farm_designer/interfaces";
 
 /** Regimens and sequences may have a "color" which determines how it looks
     in the UI. Only certain colors are valid. */

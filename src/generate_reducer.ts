@@ -36,7 +36,7 @@ export function generateReducer<State>(
         let handler = (actionHandlers[action.type] || actionHandlers["DEFAULT"]);
         let result: State = handler(state, action);
         return result;
-    };
+    } as GeneratedReducer;
 
     reducer.add = function addHandler<T>(name: string, fn: GenericActionHandler<T>) {
         actionHandlers[name] = fn;

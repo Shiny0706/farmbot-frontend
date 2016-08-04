@@ -42,10 +42,6 @@ function newState(index: number): BulkSchedulerState {
 
 let initialState: BulkSchedulerState = newState(0); // 0 default is sketchy.
 
-interface Handler {
-  (state: BulkSchedulerState, action: ReduxAction<any>): BulkSchedulerState;
-}
-
 function NONE(s: BulkSchedulerState, a: ReduxAction<any>) {
   return s;
 }

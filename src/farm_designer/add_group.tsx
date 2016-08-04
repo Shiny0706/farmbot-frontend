@@ -1,6 +1,5 @@
-import * as React from 'react';
-import { Link } from 'react-router';
-import { BackArrow } from './back_arrow';
+import * as React from "react";
+import { BackArrow } from "./back_arrow";
 
 export class AddGroup extends React.Component<any, any> {
   render() {

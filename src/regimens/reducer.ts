@@ -8,7 +8,7 @@ import { randomColor } from "../util";
 
 export function emptyRegimen(): Regimen {
     return {
-        _id: null,
+        _id: "---------",
         name: "Untitled Regimen",
         color: randomColor(),
         items: [],

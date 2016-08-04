@@ -1,3 +1,4 @@
+/// <reference path="../../../typings/index.d.ts" />
 import * as React from "react";
 import { RegimenItem } from "../interfaces";
 import * as moment from "moment";
@@ -14,13 +15,13 @@ export function RegimenItemList({ items, dispatch }: RegimenItemListProps) {
     return Math.round(duration(item.timeOffset).asDays());
   });
 
-  let list = _.map(groups, function(innerItems, day) {
+  let list = _.map(groups, function(innerItems: RegimenItem[], day: string) {
     return <RegimenItemDayGroup day={ day }
                                 items={ innerItems }
                                 key={ day }
                                 dispatch={ dispatch }/>;
   });
-  let display = list.length ? list : <EmptyList/>
+  let display = list.length ? list : <EmptyList/>;
   return <div>
     <hr/>
     { display }
@@ -57,6 +58,7 @@ interface RegimenItemDayGroupProps {
     day: string;
     items: RegimenItem[];
     dispatch: Function;
+    // key: string|number; // Props can be deleted later. Bug hunting atm.
 }
 
 function RegimenItemDayGroup({ day,

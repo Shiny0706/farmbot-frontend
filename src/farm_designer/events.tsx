@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Schedule } from "../models/schedule";
 import { Link } from "react-router";
-import { BackArrow } from "./back_arrow";
 
 export class ScheduleEvent extends React.Component<any, any> {
   render () {

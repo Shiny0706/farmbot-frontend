@@ -3,7 +3,12 @@ import { RegimenProps } from "../interfaces";
 import { deleteRegimen } from "../actions";
 
 function remove({regimen, dispatch}: RegimenProps) {
-  return event => dispatch(deleteRegimen(regimen));
+  if (regimen) {
+    let wow = deleteRegimen(regimen);
+    return event => dispatch(wow);
+  } else {
+    throw new Error("Tried to delete non-existant regimen");
+  }
 }
 
 export function DeleteButton({regimen, dispatch}: RegimenProps) {

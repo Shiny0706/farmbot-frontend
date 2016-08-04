@@ -4,6 +4,7 @@ import { Sequence } from "../../sequences/interfaces";
 import { AddButton } from "./add_button";
 import { SequenceList } from "./sequence_list";
 import { TimeInput } from "./time_input";
+import { nullSequence } from "../../sequences/sequence_actions";
 import { WeekGrid } from "./week_grid";
 import { commitBulkEditor } from "./actions";
 interface BulkEditorProps {
@@ -35,7 +36,7 @@ export function BulkSchedulerWidget({sequences, dispatch, editor}: BulkEditorPro
                         <div className="row">
                             <div className="col-sm-7">
                                 <SequenceList sequences={ sequences }
-                                              current={ editor.sequence }
+                                              current={ editor.sequence || nullSequence() }
                                               dispatch={ dispatch }/>
                             </div>
                             <div className="col-sm-5">

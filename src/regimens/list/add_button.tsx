@@ -4,7 +4,8 @@ import { newRegimen } from "../actions";
 interface AddRegimenProps {
   dispatch: Function;
 }
-export function AddRegimen({dispatch}) {
+
+export function AddRegimen({dispatch}: AddRegimenProps) {
   return <button className="green button-like widget-control"
                  onClick={ add(dispatch) }>
     Add

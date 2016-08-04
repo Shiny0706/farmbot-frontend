@@ -2,7 +2,8 @@ import * as React from "react";
 // import { push } from "../history";
 import { browserHistory } from "react-router";
 import { ICONS } from "./icons";
-import { Everything, Plant } from "../interfaces";
+import { Everything } from "../interfaces";
+import { Plant } from "./interfaces";
 
 interface MapPointProps extends Everything {
   plant: Plant;

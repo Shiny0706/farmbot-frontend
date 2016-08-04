@@ -81,7 +81,6 @@ class DevicesPage extends React.Component<any, any> {
 
   render() {
     let bot = this.state.bot;
-    let auth = this.props.auth;
 
     return (
       <div>

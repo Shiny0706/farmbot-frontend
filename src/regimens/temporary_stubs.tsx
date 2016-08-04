@@ -4,7 +4,7 @@ import { duration } from "moment";
 let THIRTY_SIX_HOURS = duration(36, "hours").asMilliseconds();
 
 let firstItem: Regimen = {
-    _id: null,
+    _id: "---------",
     name: "World's First Regimen",
     color: "red",
     items: [
@@ -45,6 +45,6 @@ let firstItem: Regimen = {
     ]
 };
 
-let secondItem = _.clone(firstItem);
+let secondItem = _.clone(firstItem) as Regimen;
 secondItem.name = "Second Item";
 export let stubs: Regimen[] = [firstItem, secondItem];

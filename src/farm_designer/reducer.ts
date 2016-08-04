@@ -4,7 +4,6 @@ import { generateReducer } from "../generate_reducer";
 import { DesignerState } from "./interfaces";
 import { cloneDeep } from "lodash";
 import { HardwareState } from "../devices/interfaces";
-import { ICONS } from "./icons";
 
 
 let DEFAULT_STATE = {
@@ -41,8 +40,11 @@ export let designer = generateReducer<DesignerState>(DEFAULT_STATE, probe)
   })
   .add<HardwareState>("BOT_CHANGE", function(s, { payload }) {
     let state = cloneDeep(s);
-    state.x_size = payload.movement_axis_nr_steps_x;
-    state.y_size = payload.movement_axis_nr_steps_y;
+    let [x, y] = [payload.movement_axis_nr_steps_x, payload.movement_axis_nr_steps_y];
+    if (x && y) {
+      state.x_size = x;
+      state.y_size = y;
+    }
     return state;
   })
   .add<string>("SEARCH_QUERY_CHANGE", function(s, { payload }) {

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Navbar } from "./nav/navbar";
-import { Link } from "react-router";
 import { login, register } from "./auth/auth_actions";
 import { connect } from "react-redux";
 import { changeApiUrl } from "./config/config_actions";

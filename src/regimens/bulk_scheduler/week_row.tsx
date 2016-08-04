@@ -38,7 +38,7 @@ interface DayProps {
 
 let select = (dispatch, day, week) => () => dispatch(toggleDay({day, week}));
 
-function Day({day, id, dispatch, week, active}) {
+function Day({day, id, dispatch, week, active}: DayProps) {
 
   return <div className="day-selector-wrapper">
     <input type="checkbox"

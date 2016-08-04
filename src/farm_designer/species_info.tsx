@@ -1,7 +1,7 @@
 import * as React from "react";
 import { savePlant } from "./actions";
 import { BackArrow } from "./back_arrow";
-import { Everything } from "./interfaces";
+import { Everything } from "../interfaces";
 import { Plant, PlantOptions } from "./plant";
 
 export class SpeciesInfo extends React.Component<Everything, any> {

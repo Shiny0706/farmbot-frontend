@@ -1,7 +1,7 @@
 import { settingToggle, settingToggleOk } from "../../devices/bot_actions";
 import { devices } from "../../device";
 
-let createSpy = jasmine.createSpy;
+// let createSpy = jasmine.createSpy;
 
 describe("bot actions", () => {
   it("toggles settings", (done) => {

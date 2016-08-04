@@ -9,13 +9,15 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true,
+    "pretty": true,
     "strictNullChecks": true
   },
   "pretty": true,
+  // "files": [
+  //   "typings/index.d.ts"
+  // ],
   "exclude": [
-    "node_modules",
-    "typings/browser",
-    "typings/browser.d.ts"
+    "node_modules"
   ],
   "compileOnSave": false,
   "buildOnSave": false

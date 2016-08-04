@@ -7,7 +7,7 @@ import { editCurrentSequence,
          deleteSequence,
          nullSequence } from "./sequence_actions";
 import { stepTiles, StepTile } from "./step_tiles";
-import { Help } from "../help";
+
 let Oops: StepTile = (_) => { return <div>Whoops! Not a valid message_type</div>; };
 let StepList = ({sequence, sequences, dispatch}) => {
     return (<div>

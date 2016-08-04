@@ -3,7 +3,8 @@ import { BackArrow } from "./back_arrow";
 import { getParam } from "../util";
 import { destroyPlant } from "./actions";
 import { Plant as NewPlant } from "./plant";
-import { Plant, Everything } from "./interfaces";
+import { Plant } from "./interfaces";
+import { Everything } from "../interfaces";
 
 export class PlantInfo extends React.Component<Everything, any> {
   removePlant() {
@@ -12,10 +13,10 @@ export class PlantInfo extends React.Component<Everything, any> {
     this.props.dispatch(destroyPlant(this.plant, url, token));
   }
 
-  get plant(): Plant {
+  get plant() {
     let plants = this.props.designer.plants;
     let query = { openfarm_slug: getParam("id") };
-    var p = _(plants).find(query) || NewPlant({name: "Deleted plant"});
+    var p = (_(plants).find(query) || NewPlant({name: "Deleted plant"})) as Plant;
     return p;
   }
 

@@ -11,8 +11,15 @@ node.id = "root";
 
 document.body.appendChild(node);
 
-let elem = React.createElement(RootComponent, {store});
-render(elem, document.getElementById("root"));
+let reactElem = React.createElement(RootComponent, {store});
+let domElem = document.getElementById("root");
+
+if (domElem) {
+  render(reactElem, domElem)
+} else {
+  throw new Error("Add a div with id `root` to the page first.")
+};
+
 document.addEventListener("DOMContentLoaded", function(event) {
   store.dispatch(ready(event));
 });
