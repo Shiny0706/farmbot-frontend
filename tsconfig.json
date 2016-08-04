@@ -2,10 +2,16 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
+    "moduleResolution": "node",
     "jsx": "react",
     "experimentalDecorators": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true
   },
+  "pretty": true,
   "exclude": [
     "node_modules",
     "typings/browser",

@@ -15,14 +15,14 @@ import {
   RouterState
 } from "react-router";
 
-import App from "./components/app";
-import Dashboard from "./components/dashboard";
-import { Controls } from "./components/controls";
-import { Devices } from "./components/devices";
-import { Sequences } from "./components/sequences/sequences";
-import { Regimens } from "./components/regimens/index";
-import { FarmDesigner } from "./components/farm_designer/farm_designer";
-import { Login } from "./components/login";
+import App from "./app";
+import Dashboard from "./dashboard";
+import { Controls } from "./controls";
+import { Devices } from "./devices";
+import { Sequences } from "./sequences/sequences";
+import { Regimens } from "./regimens/index";
+import { FarmDesigner } from "./farm_designer/farm_designer";
+import { Login } from "./login";
 import { store } from "./store";
 import { history } from "./history";
 

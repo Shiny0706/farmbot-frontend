@@ -5,17 +5,17 @@ import {
   applyMiddleware,
   combineReducers
 } from "redux";
-import { authReducer as auth } from "./components/auth/auth_reducer";
-import { sequenceReducer as sequences } from "./components/sequences/sequence_reducer";
-import { botReducer as bot } from "./components/devices/bot_reducer";
-import { configReducer as config } from "./components/config/config_reducer";
+import { authReducer as auth } from "./auth/auth_reducer";
+import { sequenceReducer as sequences } from "./sequences/sequence_reducer";
+import { botReducer as bot } from "./devices/bot_reducer";
+import { configReducer as config } from "./config/config_reducer";
 import { routerReducer as routing } from "react-router-redux";
-import { regimensReducer as regimens } from "./components/regimens/reducer";
-import { tickerReducer as ticker } from "./components/ticker/reducer";
-import { designer } from "./components/farm_designer/reducer";
+import { regimensReducer as regimens } from "./regimens/reducer";
+import { tickerReducer as ticker } from "./ticker/reducer";
+import { designer } from "./farm_designer/reducer";
 import {
   BulkSchedulerReducer as bulkScheduler
-} from "./components/regimens/bulk_scheduler/reducer";
+} from "./regimens/bulk_scheduler/reducer";
 
 // Activate dev tools (if the browser has them).
 declare var devToolsExtension: any;

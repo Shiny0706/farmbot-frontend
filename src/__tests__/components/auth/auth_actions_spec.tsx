@@ -1,6 +1,6 @@
 import * as $ from "jquery";
 import { didLogin,
-  setToken } from "../../../components/auth/auth_actions.tsx";
+  setToken } from "../../../auth/auth_actions.tsx";
 import { fakeState } from "../../helpers";
 
 

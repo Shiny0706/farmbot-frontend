@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Everything } from "../components/farm_designer/interfaces";
+import { Everything } from "../interfaces";
 
 export class Wrapper extends React.Component<any, any> {
   render() {
@@ -13,12 +13,11 @@ export function fakeState(dispatcher?: Function): Everything {
   let sequences = {
     all: [],
     current: 0
-  }
+  };
   let location = {
     pathname: "/testsuite",
     search: "?foo=bar",
     hash: "??????",
-    state: null,
     action: "PUSH",
     key: "jhedoi",
     query
