@@ -4,20 +4,24 @@ import { SaveButton } from "./save_button";
 import { DeleteButton } from "./delete_button";
 import { EmptyEditor } from "./empty_editor";
 import { ActiveEditor } from "./active_editor";
+import { AuthState } from "../../auth/interfaces";
 
 interface RegimenEditorWidgetProps {
   regimens: RegimensState;
   dispatch: Function;
+  auth: AuthState;
 }
-export function RegimenEditorWidget({regimens, dispatch}: RegimenEditorWidgetProps) {
+export function RegimenEditorWidget({regimens, dispatch, auth}: RegimenEditorWidgetProps) {
     let regimen = regimens.all[regimens.current];
-    // Hmm... this might be "unsafe" for type checker...
     let Wow = regimen ? ActiveEditor : EmptyEditor;
     return( <div>
               <div className="widget-wrapper regimen-editor-widget">
                 <div className="row">
                   <div className="col-sm-12">
-                    <SaveButton regimen={ regimen } dispatch={ dispatch } />
+                    <SaveButton regimen={ regimen }
+                                dispatch={ dispatch }
+                                url={ auth.iss }
+                                token={ auth.token } />
                     <DeleteButton regimen={ regimen } dispatch={ dispatch } />
                     <div className="widget-header">
                       <h5>Regimen Editor</h5>

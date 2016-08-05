@@ -2,21 +2,31 @@ import * as React from "react";
 import { RegimenProps, Regimen } from "../interfaces";
 import { saveRegimen } from "../actions";
 
-function save({regimen, dispatch}: RegimenProps) {
-  if (!regimen) {
-    throw new Error("Regimen is required");
+interface SaveButtonProps extends RegimenProps {
+  url: string;
+  token: string;
+};
+
+function save({regimen, dispatch, url, token}: SaveButtonProps) {
+  if (regimen) {
+    return (event) => {
+      regimen = regimen as Regimen; // TS BUG???
+      dispatch(saveRegimen(regimen, url, token));
+    };
+  } else {
+    throw new Error("Tried to save regimen, but there was no regimen.");
   };
 
-  return (event) => {
-    regimen = regimen as Regimen; // TS BUG???
-    dispatch(saveRegimen(regimen));
-  };
 }
 
-export function SaveButton({regimen, dispatch}: RegimenProps) {
-  if (!regimen) { return <span /> };
-  return <button className="green button-like widget-control"
-                 onClick={ save({dispatch, regimen}) }>
-    Save { regimen.dirty ? "*" : "" }
-  </button>;
+export function SaveButton({regimen, dispatch, url, token}: SaveButtonProps) {
+  if (regimen) {
+    return <button className="green button-like widget-control"
+      onClick={save({ dispatch, regimen, url, token })}>
+
+      Save {regimen.dirty ? "*" : ""}
+    </button>;
+  } else {
+    return <span />;
+  };
 }
