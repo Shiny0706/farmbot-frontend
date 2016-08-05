@@ -1,7 +1,6 @@
 import { Regimen, RegimenItem } from "./interfaces";
 import { ReduxAction } from "../interfaces";
 import { warning } from "../logger";
-// import { post } from "axios";
 
 export function editRegimen(regimen: Regimen,
   update: Object):
@@ -24,21 +23,6 @@ export function saveRegimen(regimen: Regimen) {
       type: "SAVE_REGIMEN_START",
       payload: regimen
     });
-  //     let form = {
-  //   user: {
-  //     email: email,
-  //     password: password,
-  //     password_confirmation: confirmation,
-  //     name: name
-  //   }
-  // };
-  //   return post<Regimen>(url + "/api/users", form)
-  //          .then()
-  //          .catch();
-
-  //   alert("Stopped here.");
-  //   debugger;
-  //   return axios.post("", {});
   };
 }
 

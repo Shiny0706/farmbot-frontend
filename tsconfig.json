@@ -4,7 +4,9 @@
     "module": "commonjs",
     "jsx": "react",
     "experimentalDecorators": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "allowUnreachableCode": false
   },
   "exclude": [
     "node_modules",

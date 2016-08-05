@@ -13,7 +13,7 @@ module.exports = {
     app: './src/fb_frontend.tsx'
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "..", "dist"),
     publicPath: "/src/",
     filename: "bundle.js"
   },
