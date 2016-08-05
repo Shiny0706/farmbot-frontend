@@ -9,7 +9,7 @@ export interface AuthState {
   iat: number;
   /** Token identifier */
   jti: string;
-  /** Issuer */
+  /** Issuer (server URL) */
   iss: string;
   /** Expiration timestamp */
   exp: number;

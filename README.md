@@ -22,6 +22,13 @@
 
 All config is in the user auth token. There's no need to point to an MQTT URL or a particular bot. That information is contained in your auth token.
 
-# TODO
+# Low Hanging Fruit
 
- - [ ] Set `noImplicitAny: true` in `tsconfig.json` once things stabilize.
+Are you a developer? Do you want to help? Don't know where to start?
+
+Here are some easy-to-do tasks that our (small) team hasn't gotten around to yet:
+
+ - [ ] Writing unit tests for existing code.
+ - [ ] Factoring out implcity `any` types. This was originally a vanilla JS project that later became TypeScript. We have a lot of "unsafe" code that does not have type annotations yet.
+ - [ ] DRY up URL usage into a URL config object. A lot of AJAX requests are still relying on hardcoded strings rather than DRY configuration.
+ - [ ] Any comment in sourcode with the word `HACK` or `TODO`.
