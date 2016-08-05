@@ -1,11 +1,11 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import { Navbar } from "./nav/navbar";
 import { addDevice,
          changeSettingsBuffer,
          commitSettingsChanges,
          settingToggle,
          changeDevice } from "./devices/bot_actions";
-import { connect } from "react-redux";
 import { convertFormToObject } from "./util";
 import { ToggleButton } from "./toggle_button";
 import { devices } from "./device";
