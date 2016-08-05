@@ -7,7 +7,7 @@ import { Plant, PlantOptions } from "./plant";
 export class SpeciesInfo extends React.Component<Everything, any> {
   drag(e: React.DragEvent) {
     var img = document.createElement("img");
-    img.src = "/icons/seed.png";
+    img.src = "/img/icons/seed.png";
     e.dataTransfer["setDragImage"](img, 12, 48);
   }
 

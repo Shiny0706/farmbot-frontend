@@ -1,5 +1,5 @@
-var path = require('path');
 var open = require('open');
+var path = require('path');
 
 module.exports = {
   module: {
@@ -10,7 +10,7 @@ module.exports = {
     }],
   },
   entry: {
-    app: './src/fb_frontend.tsx'
+    app: './src/entry.tsx'
   },
   output: {
     path: path.resolve(__dirname, "..", "dist"),
