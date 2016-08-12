@@ -7,7 +7,7 @@ let firstItem: Regimen = {
     _id: "---------",
     name: "World's First Regimen",
     color: "red",
-    items: [
+    regimen_items: [
         {
             sequence: {
                 _id: "xyz",

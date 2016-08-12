@@ -11,7 +11,7 @@ export function emptyRegimen(): Regimen {
         _id: "---------",
         name: "Untitled Regimen",
         color: randomColor(),
-        items: [],
+        regimen_items: [],
         dirty: true
     };
 }
@@ -55,14 +55,14 @@ let action_handlers: RegimensActionHandler = {
         s = _.cloneDeep(s);
         let { regimenItems, index } = a.payload;
         let ok = _.cloneDeep(regimenItems);
-        let hmm = s.all[index].items;
-        s.all[index].items = hmm.concat(ok);
+        let hmm = s.all[index].regimen_items;
+        s.all[index].regimen_items = hmm.concat(ok);
         return s;
     },
     REMOVE_REGIMEN_ITEM: function(s: RegimensState,
         a: ReduxAction<RegimenItem>) {
         s = _.cloneDeep(s);
-        let list = s.all[s.current].items;
+        let list = s.all[s.current].regimen_items;
         let index = list.indexOf(a.payload);
         list.splice(index, 1);
         return s;

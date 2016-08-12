@@ -15,7 +15,7 @@ export interface Regimen {
     /** Friendly identifier for humans to easily identify regimens. */
     name: string;
     color: Color;
-    items: RegimenItem[];
+    regimen_items: RegimenItem[];
     dirty?: boolean;
 };
 

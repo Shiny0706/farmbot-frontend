@@ -11,8 +11,8 @@ import { DesignerState } from "./farm_designer/interfaces";
 export type Color = "blue"|"green"|"yellow"|"orange"|"purple"|"pink"|"gray"|"red";
 
 export interface ReduxAction<T> {
-  type: string;
-  payload: T;
+  readonly type: string;
+  readonly payload: T;
 };
 
 

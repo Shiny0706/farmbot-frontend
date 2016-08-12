@@ -3,6 +3,7 @@ import { ReduxAction } from "../interfaces";
 import { warning } from "../logger";
 import { authHeaders } from "../auth/util";
 import { post } from "axios";
+import { regimenAdapter } from "./regimen_adapter";
 
 const REGIMEN_URL = "api/regimens";
 
@@ -26,7 +27,8 @@ export function saveRegimen(regimen: Regimen, baseUrl: string, token: string) {
         payload: regimen
       });
     let url = baseUrl + REGIMEN_URL;
-    return post<Regimen>(url, regimen, authHeaders(token))
+    console.dir(regimen);
+    return post<Regimen>(url, regimenAdapter(regimen), authHeaders(token))
            .then(resp => dispatch(saveRegimenOk(resp.data)))
            .catch(err => dispatch(saveRegimenErr(err)));
   };
