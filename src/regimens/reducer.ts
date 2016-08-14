@@ -1,7 +1,8 @@
 import { RegimensState,
     RegimensActionHandler,
     Regimen,
-    RegimenItem } from "./interfaces";
+    RegimenItem,
+    RegimenApiResponse } from "./interfaces";
 import { ReduxAction } from "../interfaces";
 import { stubs } from "./temporary_stubs";
 import { randomColor } from "../util";
@@ -57,6 +58,13 @@ let action_handlers: RegimensActionHandler = {
         let ok = _.cloneDeep(regimenItems);
         let hmm = s.all[index].regimen_items;
         s.all[index].regimen_items = hmm.concat(ok);
+        return s;
+    },
+    SAVE_REGIMEN_OK: function(s: RegimensState, a: ReduxAction<RegimenApiResponse>) {
+        s = _.cloneDeep(s);
+        // NEED TO VALIDATE_UNIQUENESS_OF regimen.name BEFORE CONTINUING.
+        let current = _.find<Regimen>(s.all, r => r.name === a.payload.name);
+        _.assign(current, a.payload, {dirty: false}); // Merge props.
         return s;
     },
     REMOVE_REGIMEN_ITEM: function(s: RegimensState,
