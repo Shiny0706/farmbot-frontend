@@ -1,6 +1,5 @@
 import * as axios from "axios";
 import { AuthState } from "../auth/interfaces";
-import { authHeaders } from "../auth/util";
 import { SequenceOptions,
          Step,
          UnplacedStep,
@@ -40,10 +39,8 @@ function fetchSequencesOk(sequences: Array<Sequence>): FetchSequencesOk {
 export function fetchSequences() {
   return (dispatch: Function, getState: Function) => {
     let state: AuthState = getState().auth;
-    let { iss, token } = state;
-
-    let headers = authHeaders(token);
-    axios.get<Sequence[]>(`${iss}/api/sequences`, headers)
+    let { iss } = state;
+    axios.get<Sequence[]>(`${iss}/api/sequences`)
       .then(({data}) => {
         dispatch(fetchSequencesOk(data));
       }, (e: Error) => {
@@ -114,7 +111,7 @@ export function removeStep(index: number): RemoveStep {
 export function saveSequence(sequence: Sequence) {
   return function(dispatch: Function, getState: Function) {
     let state: AuthState = getState().auth;
-    let { iss, token } = state;
+    let { iss} = state;
     let url = `${iss}/api/sequences/`;
     let method: Function;
     if (sequence._id) {
@@ -123,7 +120,7 @@ export function saveSequence(sequence: Sequence) {
     } else {
       method = axios.post;
     };
-    return method(url, sequence, authHeaders(token))
+    return method(url, sequence)
     .then(function(resp: {data: Sequence; }) {
       let seq: Sequence = resp.data;
       success(`Saved ${("'" + seq.name + "'") || "sequence"}`);
@@ -189,10 +186,10 @@ function confirmDeletion(dispatch: Function, getState: Function) {
   let sequenceState: SequenceReducerState = getState().sequences;
   let sequence = sequenceState.all[sequenceState.current];
   let index = sequenceState.current;
-  let { iss, token } = authState;
-  let handler = (sequence._id) ? deleteSavedSequence : deleteUnsavedSequence;
+  let { iss } = authState;
+  let handler = (sequence._id) ? deleteSavedSequence : Promise.resolve;
 
-  handler({ sequence, iss, token }).then(() => {
+  handler({ sequence, iss }).then(() => {
     dispatch(deleteSequenceOk(sequence, index));
   }, () => {
       error("Unable to delete sequence");
@@ -203,21 +200,13 @@ function confirmDeletion(dispatch: Function, getState: Function) {
 interface SequenceDeletionParams {
   sequence: Sequence;
   iss: string;
-  token: string;
 }
 
-function deleteSavedSequence({
-                                 sequence,
-                                 iss,
-                                 token
-                               }: SequenceDeletionParams) {
+function deleteSavedSequence({ sequence, iss }: SequenceDeletionParams) {
   let url = `${iss}/api/sequences/${sequence._id}`;
-  return axios.delete(url, authHeaders(token));
+  return axios.delete(url);
 };
 
-function deleteUnsavedSequence(_: SequenceDeletionParams) {
-  return Promise.resolve();
-};
 
 export interface DeleteSequenceOk {
   type: "DELETE_SEQUENCE_OK";

@@ -5,14 +5,13 @@ import { GardenMap } from "./garden_map";
 import { Panel2 } from "./panel_2";
 import { fetchPlants } from "./actions";
 import { connect } from "react-redux";
+import { Everything } from "../interfaces";
 
-
-class FarmDesignerPage extends React.Component<any, any> {
+class FarmDesignerPage extends React.Component<Everything, any> {
 
   componentDidMount() {
-    let token = this.props.auth.token;
-    let baseUrl = this.props.config.farmbotApiUrl;
-    this.props.dispatch(fetchPlants(baseUrl, token));
+    let baseUrl = this.props.auth.iss;
+    this.props.dispatch(fetchPlants(baseUrl));
   }
 
   render() {

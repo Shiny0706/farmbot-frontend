@@ -1,7 +1,6 @@
 import { Regimen, RegimenItem } from "./interfaces";
 import { ReduxAction } from "../interfaces";
 import { warning } from "../logger";
-import { authHeaders } from "../auth/util";
 import * as Axios from "axios";
 import { regimenAdapter } from "./regimen_adapter";
 
@@ -28,8 +27,7 @@ export function saveRegimen(regimen: Regimen, baseUrl: string, token: string) {
       });
 
     return Axios.post<Regimen>(baseUrl + REGIMEN_URL,
-                         regimenAdapter(regimen),
-                         authHeaders(token))
+                         regimenAdapter(regimen))
            .then(resp => dispatch(saveRegimenOk(resp.data)))
            .catch(err => dispatch(saveRegimenErr(err)));
   };
@@ -50,7 +48,7 @@ export function deleteRegimen(regimen: Regimen,
   return function(dispatch) {
     if (regimen && regimen._id) {
       let url = baseUrl + REGIMEN_URL + regimen._id;
-      Axios.delete(url, authHeaders(token));
+      Axios.delete(url);
     } else {
       warning("TODO: Deletion of unsaved regimens.")
     };

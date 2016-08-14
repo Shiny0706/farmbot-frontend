@@ -25,9 +25,8 @@ export class SpeciesInfo extends React.Component<Everything, any> {
 
     let plant = Plant(p);
     let baseUrl: string = this.props.auth.iss;
-    let token: string = this.props.auth.token;
 
-    this.props.dispatch(savePlant(plant, baseUrl, token));
+    this.props.dispatch(savePlant(plant, baseUrl));
   }
 
   findCrop(slug) {

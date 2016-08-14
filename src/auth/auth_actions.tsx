@@ -6,6 +6,7 @@ import { post } from "axios";
 import { error } from "../logger";
 import { AuthState } from "./interfaces";
 import { fetchPlants } from "../farm_designer/actions";
+import * as Axios from "axios";
 
 export interface AuthResponseToken {
     unencoded: AuthToken;
@@ -21,7 +22,7 @@ export function didLogin(authState: AuthState, dispatch) {
     dispatch(loginOk(authState));
     dispatch(fetchDevice(authState.token));
     dispatch(fetchSequences());
-    dispatch(fetchPlants(authState.iss, authState.token));
+    dispatch(fetchPlants(authState.iss));
 };
 
 // We need to handle OK logins for numerous use cases (Ex: login AND registration)
@@ -76,10 +77,17 @@ export interface LoginOk {
   payload: AuthState;
 };
 
-export function loginOk(token: AuthState) {
+export function loginOk(auth: AuthState) {
+  // This is how we attach the auth token to every
+  // outbound HTTP request (after user logs in).
+  Axios.interceptors.request.use(function(config) {
+    config.headers = config.headers || {};
+    config.headers["Authorization"] = auth.token;
+    return config;
+  });
   return {
     type: "LOGIN_OK",
-    payload: token
+    payload: auth
   };
 }
 

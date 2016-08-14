@@ -1,4 +1,3 @@
-import { authHeaders } from "../auth/util";
 import * as Axios from "axios";
 import { error } from "../logger";
 import { Plant } from "./interfaces";
@@ -6,11 +5,11 @@ import { CropSearchResult, OpenFarm } from "./openfarm";
 
 const PLANT_URL = "api/plants";
 
-export function fetchPlants(baseUrl: string, token: string) {
+export function fetchPlants(baseUrl: string) {
   let url = baseUrl + "/" + PLANT_URL;
   return function (dispatch, getState) {
     dispatch({ type: "FETCH_PLANTS_START" });
-    return Axios.get<Plant[]>(url, authHeaders(token))
+    return Axios.get<Plant[]>(url)
       .then((resp) => {
         let payload = resp.data;
         dispatch({ type: "FETCH_PLANTS_OK", payload });
@@ -23,11 +22,11 @@ export function fetchPlants(baseUrl: string, token: string) {
   };
 };
 
-export function savePlant(plant: Plant, baseUrl: string, token: string) {
+export function savePlant(plant: Plant, baseUrl: string) {
   let url = baseUrl + PLANT_URL;
   return function (dispatch, getState) {
     dispatch({ type: "SAVE_PLANT_START" });
-    return Axios.post<Plant>(url, plant, authHeaders(token))
+    return Axios.post<Plant>(url, plant)
       .then((resp) => {
         // so that no persisted data sticks around.
         let payload: Plant = _.assign({}, plant, resp.data) as Plant;
@@ -40,11 +39,11 @@ export function savePlant(plant: Plant, baseUrl: string, token: string) {
   };
 };
 
-export function destroyPlant(plant: Plant, baseUrl: string, token: string) {
+export function destroyPlant(plant: Plant, baseUrl: string) {
   let url = baseUrl + PLANT_URL + "/" + plant._id;
   return function (dispatch, getState) {
     dispatch({ type: "DESTROY_PLANT_START" });
-    return Axios.delete<Plant>(url, authHeaders(token))
+    return Axios.delete<Plant>(url)
       .then((resp) => {
         let payload = plant;
         dispatch({ type: "DESTROY_PLANT_OK", payload });

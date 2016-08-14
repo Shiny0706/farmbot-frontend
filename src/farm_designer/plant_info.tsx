@@ -9,8 +9,7 @@ import { Everything } from "../interfaces";
 export class PlantInfo extends React.Component<Everything, any> {
   removePlant() {
     let url = this.props.auth.iss;
-    let token = this.props.auth.token;
-    this.props.dispatch(destroyPlant(this.plant, url, token));
+    this.props.dispatch(destroyPlant(this.plant, url));
   }
 
   get plant() {
