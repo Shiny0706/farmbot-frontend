@@ -10,13 +10,13 @@ import { catchMessage, RPCError } from "./message_catcher";
 const ON = 1, OFF = 0, DIGITAL = 0;
 
 export function settingToggle(name: string, bot) {
-    return function(dispatch: Function) {
+    return function (dispatch: Function) {
         let currentValue = bot.hardware[name];
         return devices
-          .current
-          .updateCalibration({ [name]: (currentValue === 0) ? ON : OFF })
-          .then(res => { dispatch(settingToggleOk(res)); },
-                err => { dispatch(settingToggleErr(err)); });
+            .current
+            .updateCalibration({ [name]: (currentValue === 0) ? ON : OFF })
+            .then(res => { dispatch(settingToggleOk(res)); },
+            err => { dispatch(settingToggleErr(err)); });
     };
 }
 
@@ -37,7 +37,7 @@ export function settingToggleErr(err) {
 
 
 export function pinToggle(num) {
-    return function(dispatch) {
+    return function (dispatch) {
         let currentValue = store.getState().bot.hardware[`pin${num}`];
         let newPinValue = (currentValue === "on") ? OFF : ON;
         return devices
@@ -91,7 +91,7 @@ export function commitSettingsChanges() {
         .assign(settingsBuffer)
         .value();
     let promise = devices.current.updateCalibration(packet);
-    return function(dispatch) {
+    return function (dispatch) {
         return promise.then(
             (resp) => dispatch(commitSettingsChangesOk(resp)),
             (err) => dispatch(commitSettingsChangesErr(err)));
@@ -123,12 +123,12 @@ export function commitAxisChanges() {
         .pick("x", "y", "z", "speed")
         .transform((a, b, c: string) => a[c] = Number(b), {})
         .value();
-    return function(dispatch) {
+    return function (dispatch) {
         return devices
-          .current
-          .moveAbsolute(packet)
-          .then((resp) => dispatch(commitAxisChangesOk(resp)),
-                (err) => dispatch(commitAxisChangesErr(err)));
+            .current
+            .moveAbsolute(packet)
+            .then((resp) => dispatch(commitAxisChangesOk(resp)),
+            (err) => dispatch(commitAxisChangesErr(err)));
     };
 }
 
@@ -147,12 +147,12 @@ function commitAxisChangesOk(resp) {
 }
 
 export function readStatus() {
-    return function(dispatch) {
+    return function (dispatch) {
         return devices
-          .current
-          .readStatus()
-          .then((resp) => dispatch(readStatusOk(resp)),
-                (errr) => dispatch(readStatusErr(errr)));
+            .current
+            .readStatus()
+            .then((resp) => dispatch(readStatusOk(resp)),
+            (errr) => dispatch(readStatusErr(errr)));
     };
 }
 
@@ -166,8 +166,8 @@ function readStatusOk(status) {
 function readStatusErr(msg) {
     error("Did you configure your bot? Is it online?", "Can't read status");
     return {
-      type: "READ_STATUS_ERR",
-      payload: msg
+        type: "READ_STATUS_ERR",
+        payload: msg
     };
 }
 
@@ -186,13 +186,13 @@ export function fetchDevice(token: string): {} | ((dispatch: any) => any) {
             .then(() => {
                 devices.current = bot;
                 dispatch(readStatus());
-                bot.on("*", function(message: any) {
+                bot.on("*", function (message: any) {
                     let when = catchMessage(message);
                     when({
-                      response: (r) => dispatch(botChange(r.result)),
-                      error: (r) => dispatch(botError(r.error)),
-                      notification: (r) => dispatch(botNotification(r.result)),
-                      _: (r) => dispatch(unknownMessage(r))
+                        response: (r) => dispatch(botChange(r.result)),
+                        error: (r) => dispatch(botError(r.error)),
+                        notification: (r) => dispatch(botNotification(r.result)),
+                        _: (r) => dispatch(unknownMessage(r))
                     });
                 });
             }, (err) => dispatch(fetchDeviceErr(err)));
@@ -204,7 +204,7 @@ export function sendCommand(payload) {
     let result = method.call(devices.current, payload);
     return (dispatch) => {
         return result.then((res) => sendCommandOk(res, payload, dispatch),
-                           (e) => sendCommandErr(e, payload, dispatch));
+            (e) => sendCommandErr(e, payload, dispatch));
     };
 }
 
@@ -223,8 +223,8 @@ export function addDevice(deviceAttrs) {
     return (dispatch) => {
         Device
             .save(deviceAttrs)
-            .then(function(res) { dispatch(saveDeviceOk(res)); },
-            function(err) { dispatch(saveDeviceErr(err)); });
+            .then(function (res) { dispatch(saveDeviceOk(res)); },
+            function (err) { dispatch(saveDeviceErr(err)); });
     };
 }
 
@@ -245,34 +245,34 @@ function saveDeviceErr(err) {
 
 function botChange(statusMessage) {
     return {
-      type: "BOT_CHANGE",
-      payload: statusMessage
+        type: "BOT_CHANGE",
+        payload: statusMessage
     };
 }
 
 function botError(statusMessage: RPCError) {
     error(statusMessage.error);
     return {
-      type: "BOT_ERROR",
-      payload: statusMessage
+        type: "BOT_ERROR",
+        payload: statusMessage
     };
 }
 
 function botNotification(statusMessage) {
-  return {
-    type: "BOT_NOTIFICATION",
-    payload: statusMessage
-  };
+    return {
+        type: "BOT_NOTIFICATION",
+        payload: statusMessage
+    };
 }
 
 function unknownMessage(statusMessage: any) {
-  warning("FarmBot sent an unknown message. See log for details.",
-          "Malformed Message");
-  console.dir(statusMessage);
-  return {
-    type: "UNKNOWN_MESSAGE",
-    payload: statusMessage
-  };
+    warning("FarmBot sent an unknown message. See log for details.",
+        "Malformed Message");
+    console.dir(statusMessage);
+    return {
+        type: "UNKNOWN_MESSAGE",
+        payload: statusMessage
+    };
 }
 
 function fetchDeviceErr(err: Error) {
@@ -283,21 +283,21 @@ function fetchDeviceErr(err: Error) {
 }
 
 export function execSequence(sequence: Sequence) {
-  return (dispatch: Function) => {
-    dispatch({type: "EXEC_SEQUENCE_START", payload: sequence});
-    return devices
-             .current
-             .execSequence(sequence)
-             .then(
-               (payload) => { dispatch({type: "EXEC_SEQUENCE_OK", payload}); },
-               (e: string) => {
-                 // This needs to be fixed. FarmbotJS timer deferred promises
-                 // should be returning type Error, never string!
-                 console.dir(e);
-                 dispatch(botError({
-                   error: "Unable to execute sequence. See log for details.",
-                   method: "TODO: Fix Farmbotjs timer defer rejection"
-                 }));
-               });
-  };
+    return (dispatch: Function) => {
+        dispatch({ type: "EXEC_SEQUENCE_START", payload: sequence });
+        return devices
+            .current
+            .execSequence(sequence)
+            .then(
+            (payload) => { dispatch({ type: "EXEC_SEQUENCE_OK", payload }); },
+            (e: string) => {
+                // This needs to be fixed. FarmbotJS timer deferred promises
+                // should be returning type Error, never string!
+                console.dir(e);
+                dispatch(botError({
+                    error: "Unable to execute sequence. See log for details.",
+                    method: "TODO: Fix Farmbotjs timer defer rejection"
+                }));
+            });
+    };
 };

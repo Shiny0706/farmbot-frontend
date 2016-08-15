@@ -2,6 +2,7 @@ import * as $ from "jquery";
 import { fetchDevice } from "../devices/bot_actions";
 import { push } from "../history";
 import { fetchSequences } from "../sequences/sequence_actions";
+import { fetchRegimens } from "../regimens/actions";
 import { post } from "axios";
 import { error } from "../logger";
 import { AuthState } from "./interfaces";
@@ -22,6 +23,7 @@ export function didLogin(authState: AuthState, dispatch) {
     dispatch(loginOk(authState));
     dispatch(fetchDevice(authState.token));
     dispatch(fetchSequences());
+    dispatch(fetchRegimens(authState.iss));
     dispatch(fetchPlants(authState.iss));
 };
 

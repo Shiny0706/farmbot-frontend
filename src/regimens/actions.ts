@@ -75,3 +75,8 @@ export function removeRegimenItem(item: RegimenItem): ReduxAction<RegimenItem> {
     payload: item
   };
 }
+
+export function fetchRegimens(apiUrl: string) {
+  debugger;
+  console.warn("This is the next TODO for me.");
+}
