@@ -74,6 +74,18 @@ let action_handlers: RegimensActionHandler = {
         let index = list.indexOf(a.payload);
         list.splice(index, 1);
         return s;
+    },
+    FETCH_REGIMENS_OK: function(s: RegimensState,
+        a: ReduxAction<RegimenItem>){
+      const nextState = _.cloneDeep<RegimensState>(s);
+      console.warn(`
+      Stopped here. See regimenItemDeserializer to continue.
+       AMS is broke on the API.
+       Need to fix it so that regimenItems include a nested "Sequence". Otherwise
+       will be a lot of work with caching. SEE regimen_serializer.rb.
+      `);
+      debugger;
+      return nextState;
     }
 };
 

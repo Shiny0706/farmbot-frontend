@@ -2,7 +2,7 @@ import { Regimen, RegimenItem } from "./interfaces";
 import { ReduxAction } from "../interfaces";
 import { warning } from "../logger";
 import * as Axios from "axios";
-import { regimenAdapter } from "./regimen_adapter";
+import { regimenSerializer } from "./serializers";
 
 const REGIMEN_URL = "api/regimens/";
 
@@ -21,15 +21,15 @@ export function editRegimen(regimen: Regimen,
 
 export function saveRegimen(regimen: Regimen, baseUrl: string, token: string) {
   return function (dispatch: Function) {
-      dispatch({
-        type: "SAVE_REGIMEN_START",
-        payload: regimen
-      });
+    dispatch({
+      type: "SAVE_REGIMEN_START",
+      payload: regimen
+    });
 
     return Axios.post<Regimen>(baseUrl + REGIMEN_URL,
-                         regimenAdapter(regimen))
-           .then(resp => dispatch(saveRegimenOk(resp.data)))
-           .catch(err => dispatch(saveRegimenErr(err)));
+      regimenSerializer(regimen))
+      .then(resp => dispatch(saveRegimenOk(resp.data)))
+      .catch(err => dispatch(saveRegimenErr(err)));
   };
 }
 
@@ -43,9 +43,9 @@ function saveRegimenErr(error: Error) {
 }
 
 export function deleteRegimen(regimen: Regimen,
-                              baseUrl: string,
-                              token: string) {
-  return function(dispatch) {
+  baseUrl: string,
+  token: string) {
+  return function (dispatch) {
     if (regimen && regimen._id) {
       let url = baseUrl + REGIMEN_URL + regimen._id;
       Axios.delete(url);
@@ -77,6 +77,19 @@ export function removeRegimenItem(item: RegimenItem): ReduxAction<RegimenItem> {
 }
 
 export function fetchRegimens(apiUrl: string) {
-  debugger;
-  console.warn("This is the next TODO for me.");
-}
+  return function (dispatch) {
+    return Axios
+      .get<Regimen[]>(apiUrl + "/api/regimens")
+      .then(r => dispatch({
+        type: "FETCH_REGIMENS_OK",
+        payload: r.data
+      }))
+      .catch(e => {
+        warning("Could not download regimens.");
+        dispatch({
+          type: "FETCH_REGIMENS_ERR",
+          payload: e
+        });
+      });
+  };
+};
