@@ -33,7 +33,7 @@ let initialState: AuthState = {
   exp: 0,
 };
 
-export function authReducer(state = initialState, action) {
+export function authReducer(state:AuthState = initialState, action) {
   let handler = (action_handlers[action.type] || action_handlers.DEFAULT);
   return handler(state, action);
 }

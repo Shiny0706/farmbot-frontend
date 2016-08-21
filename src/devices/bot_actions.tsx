@@ -9,8 +9,8 @@ import { catchMessage, RPCError } from "./message_catcher";
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
-export function settingToggle(name: string, bot) {
-    return function(dispatch: Function) {
+export function settingToggle(name: string, bot):Function {
+    return function(dispatch: Function):Thenable<void> {
         let currentValue = bot.hardware[name];
         return devices
           .current
@@ -36,7 +36,7 @@ export function settingToggleErr(err) {
 }
 
 
-export function pinToggle(num) {
+export function pinToggle(num):Function {
     return function(dispatch) {
         let currentValue = store.getState().bot.hardware[`pin${num}`];
         let newPinValue = (currentValue === "on") ? OFF : ON;
@@ -91,7 +91,7 @@ export function commitSettingsChanges() {
         .assign(settingsBuffer)
         .value();
     let promise = devices.current.updateCalibration(packet);
-    return function(dispatch) {
+    return function(dispatch):Thenable<void> {
         return promise.then(
             (resp) => dispatch(commitSettingsChangesOk(resp)),
             (err) => dispatch(commitSettingsChangesErr(err)));
