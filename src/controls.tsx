@@ -11,11 +11,11 @@ import { connect } from "react-redux";
 
 export class AxisInputBox extends React.Component<any, any> {
 
-  primary() {
+  primary(): string {
     return this.props.bot.axisBuffer[this.props.axis];
   }
 
-  secondary() {
+  secondary(): string {
     let num = this.props.bot.hardware[this.props.axis];
     if (_.isNumber(num)) {
       return String(num); // Prevent 0 from being falsy.
@@ -28,7 +28,7 @@ export class AxisInputBox extends React.Component<any, any> {
     return { border: (this.primary()) ? "1px solid red" : "" };
   }
 
-  change(key, dispatch) {
+  change(key, dispatch): Function {
     return function(event) {
       dispatch(changeAxisBuffer(key, event.target.value));
     };
@@ -81,7 +81,7 @@ export class StepSizeSelector extends React.Component<any, any> {
 export class Controls extends React.Component<any, any> {
   constructor() {
     super();
-    this.state ={ url: "http://71.93.48.48:8080/?action=stream" };
+    this.state = { url: "http://71.93.48.48:8080/?action=stream" };
   }
   render() {
 

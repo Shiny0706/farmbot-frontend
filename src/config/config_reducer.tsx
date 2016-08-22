@@ -6,7 +6,7 @@ interface ConfigReducerState {
   farmbotApiUrl: string;
 }
 
-function getApiUrl():string {
+function getApiUrl(): string {
   let host = `//${location.host || "localhost"}`;
   return (host["includes"]("//localhost")) ? "//localhost:3000" : host;
 }

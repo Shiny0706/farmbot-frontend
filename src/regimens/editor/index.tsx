@@ -19,7 +19,7 @@ export function RegimenEditorWidget({regimens, dispatch, auth}: RegimenEditorWid
     regimen,
     token: auth.token,
     baseUrl: auth.iss
-  }
+  };
   return (<div>
     <div className="widget-wrapper regimen-editor-widget">
       <div className="row">

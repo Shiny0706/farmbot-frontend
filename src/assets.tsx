@@ -7,7 +7,7 @@ window["jQuery"] = $;
 
 // Programmatically add *.css and *.js from CDN to dom.
 // If there"s a way to (easily) do this with WebPack, submit a PR!
-export function loadFromCdn(filename: string, filetype: string) {
+export function loadFromCdn(filename: string, filetype: string): void {
     let fileref: Element;
     if (filetype === "js") { // if filename is a external JavaScript file
         fileref = document.createElement("script");

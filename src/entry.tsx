@@ -17,7 +17,7 @@ let domElem = document.getElementById("root");
 if (domElem) {
   render(reactElem, domElem);
 } else {
-  throw new Error("Add a div with id `root` to the page first.")
+  throw new Error("Add a div with id `root` to the page first.");
 };
 
 document.addEventListener("DOMContentLoaded", function(event) {
