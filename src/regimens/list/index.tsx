@@ -16,7 +16,7 @@ export function RegimensList(props: Everything) {
                         <span className="glyphicon glyphicon-menu-hamburger" />
                       </button>
                     </div>
-                    <AddRegimen dispatch={ props.dispatch }/>
+                    <AddRegimen dispatch={ props.dispatch } />
                     <div className="widget-header">
                       <h5>Regimens</h5>
                       <i className="fa fa-question-circle widget-help-icon">

@@ -18,7 +18,6 @@ describe("bot actions", () => {
     let message = { example: 0 };
     let dispatch = jasmine.createSpy("dispatch");
 
-
     thunk(dispatch)
       .then(function(){
         expect(devices.current.updateCalibration).toHaveBeenCalledWith(message);

@@ -5,8 +5,8 @@ import { Wrapper, fakeState } from "../../helpers";
 
 describe("Navbar component", () => {
   it("has a callback", () => {
-    let props = {auth: fakeState().auth, onClick: jasmine.createSpy("LogoutButton onClick()")}
-    let JSXElem  = <Wrapper><LogoutButton {...props} /></Wrapper>;
+    let props = {auth: fakeState().auth, onClick: jasmine.createSpy("LogoutButton onClick()") };
+    let JSXElem  = <Wrapper><LogoutButton { ...props } /></Wrapper>;
     let ReactComponent = TUtils.renderIntoDocument(JSXElem) as React.Component<any, any>;
     let DOMElem = TUtils.findRenderedDOMComponentWithTag(ReactComponent, "a");
 

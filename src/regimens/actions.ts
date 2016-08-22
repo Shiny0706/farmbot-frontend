@@ -79,7 +79,7 @@ export function removeRegimenItem(item: RegimenItem): ReduxAction<RegimenItem> {
 export function fetchRegimens(apiUrl: string) {
   return function (dispatch) {
     return Axios
-      .get<Regimen[]>(apiUrl + "/api/regimens")
+      .get<Regimen[]>(apiUrl + REGIMEN_URL)
       .then(r => dispatch({
         type: "FETCH_REGIMENS_OK",
         payload: r.data
