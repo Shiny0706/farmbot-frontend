@@ -7,6 +7,7 @@ import { post } from "axios";
 import { error } from "../logger";
 import { AuthState } from "./interfaces";
 import { fetchPlants } from "../farm_designer/actions";
+import { ReduxAction } from "../interfaces";
 import * as Axios from "axios";
 
 export interface AuthResponseToken {
@@ -18,7 +19,7 @@ export interface AuthResponse {
   token: AuthResponseToken;
 };
 
-export function didLogin(authState: AuthState, dispatch) {
+export function didLogin(authState: AuthState, dispatch:Function) {
     setToken(authState.token);
     dispatch(loginOk(authState));
     dispatch(fetchDevice(authState.token));
@@ -47,7 +48,9 @@ export function onLogin(dispatch: Function) {
   };
 };
 
-export function login(username, password, url) {
+export function login(username: string,
+                      password: string,
+                      url: string) {
   return dispatch => {
     return requestToken(username, password, url).then(
       onLogin(dispatch),
@@ -79,7 +82,7 @@ export interface LoginOk {
   payload: AuthState;
 };
 
-export function loginOk(auth: AuthState) {
+export function loginOk(auth: AuthState): ReduxAction<AuthState> {
   // This is how we attach the auth token to every
   // outbound HTTP request (after user logs in).
   Axios.interceptors.request.use(function(config) {
@@ -93,7 +96,11 @@ export function loginOk(auth: AuthState) {
   };
 }
 
-export function register(name, email, password, confirmation, url) {
+export function register(name: string,
+                         email: string,
+                         password: string,
+                         confirmation: string,
+                         url: string) {
   return dispatch => {
     let p = requestRegistration(name,
                                 email,
@@ -118,7 +125,11 @@ export function onRegistrationErr(dispatch) {
   };
 }
 
-function requestRegistration(name, email, password, confirmation, url) {
+function requestRegistration(name: string,
+                             email: string,
+                             password: string,
+                             confirmation: string,
+                             url: string) {
   let form = {
     user: {
       email: email,
@@ -131,7 +142,9 @@ function requestRegistration(name, email, password, confirmation, url) {
 }
 
 
-function requestToken(email, password, url) {
+function requestToken(email: string,
+                      password: string,
+                      url: string): JQueryXHR {
   // TODO: Replace with AXIOS.get().
   return $.ajax({
     url: url + "/api/tokens",
@@ -142,7 +155,7 @@ function requestToken(email, password, url) {
 }
 
 // TODO Someday, we will stop using jQuery. This is mostly for legacy support.
-export function setToken(token: string) {
+export function setToken(token: string): void {
   $.ajaxSetup({
     beforeSend: function (xhr) {
       xhr.setRequestHeader("Authorization", token);
