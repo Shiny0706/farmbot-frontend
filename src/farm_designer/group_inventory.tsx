@@ -87,6 +87,6 @@ export class Groups extends React.Component<any, any> {
           </Link>
         </div>
       </div>
-    )
+    );
   }
 };

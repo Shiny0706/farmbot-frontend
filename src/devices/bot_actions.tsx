@@ -5,12 +5,13 @@ import { devices } from "../device";
 import { error, warning, success } from "../logger";
 import { Sequence } from "../sequences/interfaces";
 import { catchMessage, RPCError } from "./message_catcher";
+import { ReduxAction } from "../interfaces";
 
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
 export function settingToggle(name: string, bot): Function {
-    return function(dispatch: Function):Thenable<void> {
+    return function(dispatch: Function): Thenable<void> {
         let currentValue = bot.hardware[name];
         return devices
             .current

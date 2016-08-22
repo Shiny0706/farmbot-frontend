@@ -12,7 +12,7 @@ export function convertFormToObject(formEl: Element) {
 // http://stackoverflow.com/a/901144/1064917
 // Grab a query string param by name, because react-router-redux doesn't
 // support query strings yet.
-export function getParam(name: string) {
+export function getParam(name: string): string {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         r = regex.exec(location.search);

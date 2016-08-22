@@ -50,7 +50,7 @@ export function deleteRegimen(regimen: Regimen,
       let url = baseUrl + REGIMEN_URL + regimen._id;
       Axios.delete(url);
     } else {
-      warning("TODO: Deletion of unsaved regimens.")
+      warning("TODO: Deletion of unsaved regimens.");
     };
   };
 }

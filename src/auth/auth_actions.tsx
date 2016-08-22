@@ -19,7 +19,7 @@ export interface AuthResponse {
   token: AuthResponseToken;
 };
 
-export function didLogin(authState: AuthState, dispatch:Function) {
+export function didLogin(authState: AuthState, dispatch: Function) {
     setToken(authState.token);
     dispatch(loginOk(authState));
     dispatch(fetchDevice(authState.token));

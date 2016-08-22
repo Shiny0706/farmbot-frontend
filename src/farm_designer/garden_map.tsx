@@ -15,7 +15,7 @@ export class MapPoint extends React.Component<MapPointProps, any> {
   select() {
     let p1 = this.props.location.query["p1"] || "PlantInfo";
     // Need to use OPENFARM SLUG, *not* UUID!
-    console.dir(Object.keys(this.props.plant))
+    console.dir(Object.keys(this.props.plant));
     let url = `/app/dashboard/designer?p1=${ p1 }&id=${ this.props.plant.openfarm_slug || "OOPS" }`;
     browserHistory.push(url);
   }

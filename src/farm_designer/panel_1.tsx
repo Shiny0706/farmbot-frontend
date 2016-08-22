@@ -20,11 +20,21 @@ import { getParam } from "../util";
 // based on the value of hash fragment "p1"
 export class Panel1 extends React.Component<any, any> {
   get tabName() {
-    return (getParam("p1") || "Plants")
+    return (getParam("p1") || "Plants");
   }
 
   get content() {
-    let component = {Plants, NoTab, SpeciesCatalog, SpeciesInfo, PlantInfo, Groups, AddGroup, Zones, AddZone, Panel2}[this.tabName];
+    let component = {
+      Plants,
+      NoTab,
+      SpeciesCatalog,
+      SpeciesInfo,
+      PlantInfo,
+      Groups,
+      AddGroup,
+      Zones,
+      AddZone,
+      Panel2}[this.tabName];
     return React.createElement(component, this.props);
   }
 
@@ -33,6 +43,6 @@ export class Panel1 extends React.Component<any, any> {
       <div>
         { this.content }
       </div>
-    )
+    );
   }
 };
