@@ -46,7 +46,7 @@ function Day({day, id, dispatch, week, active}: DayProps) {
            className="day"
            onClick={ select(dispatch, day, week) }
            checked={ active }
-           readOnly="1"
+           readOnly={ true }
            />
     <label className="day-label left-most" htmlFor={id}>
       { (week * 7) + day }

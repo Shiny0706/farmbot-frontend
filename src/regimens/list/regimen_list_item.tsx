@@ -21,5 +21,5 @@ export function RegimenListItem({regimen,
 }
 
 function select(dispatch: Function, index: number) {
-  return (event: Event) => dispatch(selectRegimen(index));
+  return (event: React.MouseEvent) => dispatch(selectRegimen(index));
 }
