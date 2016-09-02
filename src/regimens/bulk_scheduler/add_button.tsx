@@ -2,7 +2,7 @@ import * as React from "react";
 
 interface AddButtonProps {
   active: boolean;
-  click: Function;
+  click: React.EventHandler<React.FormEvent>;
 }
 
 export function AddButton({active, click}: AddButtonProps) {

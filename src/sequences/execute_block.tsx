@@ -34,7 +34,7 @@ function SequenceSelectBox({dispatch,
         return <option value={ seq._id } key={ seq._id } > { seq.name } </option>;
     };
 
-    function change(e: Event) {
+    function change(e: React.FormEvent) {
         let update = {
             command: {
                 value: "0",

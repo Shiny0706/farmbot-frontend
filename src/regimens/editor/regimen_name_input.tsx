@@ -2,15 +2,15 @@ import * as React from "react";
 import { editRegimen } from "../actions";
 import { RegimenProps, Regimen } from "../interfaces";
 
-function write({dispatch, regimen}: RegimenProps): Function {
+function write({dispatch, regimen}: RegimenProps): React.EventHandler<React.FormEvent> {
   if (!regimen) {
     throw new Error("Regimen is required");
   }
-  return (event) => {
+  return (event: React.FormEvent) => {
     regimen = regimen as Regimen; // Almost certainly a bug in TS.
     let action = editRegimen(
       regimen, {
-        name: event.target.value
+        name: event.target["value"]
       }
     );
     dispatch(action);
