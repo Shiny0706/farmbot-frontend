@@ -114,8 +114,8 @@ export function saveSequence(sequence: Sequence) {
     let { iss} = state;
     let url = `${iss}/api/sequences/`;
     let method: Function;
-    if (sequence._id) {
-      url += sequence._id;
+    if (sequence.id) {
+      url += sequence.id;
       method = axios.put;
     } else {
       method = axios.post;
@@ -187,7 +187,7 @@ function confirmDeletion(dispatch: Function, getState: Function) {
   let sequence = sequenceState.all[sequenceState.current];
   let index = sequenceState.current;
   let { iss } = authState;
-  let handler = (sequence._id) ? deleteSavedSequence : Promise.resolve;
+  let handler = (sequence.id) ? deleteSavedSequence : Promise.resolve;
 
   handler({ sequence, iss }).then(() => {
     dispatch(deleteSequenceOk(sequence, index));
@@ -203,7 +203,7 @@ interface SequenceDeletionParams {
 }
 
 function deleteSavedSequence({ sequence, iss }: SequenceDeletionParams) {
-  let url = `${iss}/api/sequences/${sequence._id}`;
+  let url = `${iss}/api/sequences/${sequence.id}`;
   return axios.delete(url);
 };
 

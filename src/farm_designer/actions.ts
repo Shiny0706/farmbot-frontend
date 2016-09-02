@@ -40,7 +40,7 @@ export function savePlant(plant: Plant, baseUrl: string) {
 };
 
 export function destroyPlant(plant: Plant, baseUrl: string) {
-  let url = baseUrl + PLANT_URL + "/" + plant._id;
+  let url = baseUrl + PLANT_URL + "/" + plant.id;
   return function (dispatch, getState) {
     dispatch({ type: "DESTROY_PLANT_START" });
     return Axios.delete<Plant>(url)

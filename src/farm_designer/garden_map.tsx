@@ -38,7 +38,8 @@ export class GardenMap extends React.Component<Everything, any> {
       .designer
       .plants
       .map((p, k) => {
-        let isSelected = this.props.location.query["id"] === p._id;
+        let id = p.id || (function() {throw new Error("Plant needs to have an ID.")}) ();
+        let isSelected = this.props.location.query["id"] === id.toString();
         let icon = p.icon_url || ICONS[0];
         return <MapPoint plant={ p }
                          key={ k }

@@ -12,14 +12,14 @@ export interface RegimenProps {
  * A Regimen, as returned from the '/api/regemins' endpoint (JSON). 
  */
 export interface RegimenApiResponse {
-    _id: string;
+    id: number;
     color: string;
     device_id: string;
     name: string;
 }
 /** A list of "sequences" scheduled after a starting point (epoch). */
 export interface Regimen {
-    _id?: string;
+    id?: number;
     /** Friendly identifier for humans to easily identify regimens. */
     name: string;
     color: Color;
