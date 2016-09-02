@@ -12,7 +12,7 @@ let buttonList = (dispatch: Function) => (seq: Sequence, index: number) => {
              `${ seq.color || "purple" }-block`,
              "block-header"];
   let click = () => { dispatch(selectSequence(index)); };
-  return <button key={ seq._id || index }
+  return <button key={ seq.id || index }
                  onClick={ click }
                  className={ css.join(" ") }>
     { seq.name + (seq.dirty ? "*" : "") }

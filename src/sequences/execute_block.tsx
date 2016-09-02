@@ -5,7 +5,7 @@ import { changeStep } from "./sequence_actions";
 
 /** Removes un-executable sequences, such as "self" or unsaved ones */
 function filterSequenceList(sequences, sequence) {
-    let isSaved = (s) => !!s._id;
+    let isSaved = (s) => !!s.id;
     let notRecursive = (me, you) => me !== you;
     return sequences
         .filter(function(seq) {
@@ -31,7 +31,7 @@ function SequenceSelectBox({dispatch,
     let eligibleSequences: Sequence[] = filterSequenceList(sequences, sequence);
 
     function iter(seq) {
-        return <option value={ seq._id } key={ seq._id } > { seq.name } </option>;
+        return <option value={ seq.id } key={ seq._d } > { seq.name } </option>;
     };
 
     function change(e: React.FormEvent) {
@@ -49,9 +49,9 @@ function SequenceSelectBox({dispatch,
 
     let choices = eligibleSequences.map(iter);
     let ssid = step.command.sub_sequence_id;
-    let subSeq = _.find(eligibleSequences, (s) => s._id === ssid) || {};
+    let subSeq = _.find(eligibleSequences, (s) => s.id === ssid) || {};
     return <select onChange={ change }
-        value={ subSeq["_id"] || "" }>
+        value={ subSeq["id"] || "" }>
         <option value="">Pick a sequence (or save a new one) </option>
         { choices }
     </select>;

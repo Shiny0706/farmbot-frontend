@@ -51,7 +51,7 @@ import { Color } from "../interfaces";
 type Steps = Array<Step>;
 
 export interface Sequence {
-  _id?: string;
+  id?: number;
   color: Color;
   name: string;
   steps: Steps;
@@ -104,7 +104,7 @@ export type messageType = "emergency_stop"
 export interface UnplacedStep {
   message_type: messageType;
   position?: number;
-  _id?: string;
+  id?: number;
   command: StepCommand;
 };
 

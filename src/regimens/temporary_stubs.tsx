@@ -4,20 +4,20 @@ import { duration } from "moment";
 let THIRTY_SIX_HOURS = duration(36, "hours").asMilliseconds();
 
 let firstItem: Regimen = {
-    _id: "---------",
+    id: 123,
     name: "World's First Regimen",
     color: "red",
     regimen_items: [
         {
             sequence: {
-                _id: "xyz",
+                id: 456,
                 color: "red",
                 name: "Stub sequence",
                 steps: [
                     {
                         message_type: "home_all",
                         position: 0,
-                        _id: "string",
+                        id: 459,
                         command: {}
                     }
                 ],
@@ -27,14 +27,14 @@ let firstItem: Regimen = {
         },
         {
             sequence: {
-                _id: "xyz",
+                id: 890,
                 color: "red",
                 name: "Another sequence",
                 steps: [
                     {
                         message_type: "home_all",
                         position: 0,
-                        _id: "string",
+                        id: 456,
                         command: {}
                     }
                 ],

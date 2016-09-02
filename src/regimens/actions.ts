@@ -46,8 +46,8 @@ export function deleteRegimen(regimen: Regimen,
   baseUrl: string,
   token: string) {
   return function (dispatch) {
-    if (regimen && regimen._id) {
-      let url = baseUrl + REGIMEN_URL + regimen._id;
+    if (regimen && regimen.id) {
+      let url = baseUrl + REGIMEN_URL + regimen.id;
       Axios.delete(url);
     } else {
       warning("TODO: Deletion of unsaved regimens.");
