@@ -9,7 +9,6 @@ import { randomColor } from "../util";
 
 export function emptyRegimen(): Regimen {
     return {
-        _id: "---------",
         name: "Untitled Regimen",
         color: randomColor(),
         regimen_items: [],
@@ -20,7 +19,7 @@ export function emptyRegimen(): Regimen {
 let action_handlers: RegimensActionHandler = {
     DEFAULT: function(s, a) { return s; },
     /** Currently just a stub */
-    EDIT_REGIMEN: function(s, a) {
+    EDIT_REGIMEN: function(s, a: any) {
         s = _.cloneDeep(s);
         let update = _.assign<{},
             Regimen>({},

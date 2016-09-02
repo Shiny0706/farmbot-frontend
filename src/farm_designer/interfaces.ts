@@ -7,7 +7,7 @@ export interface CropLiveSearchResult {
 }
 
 export interface Plant {
-  _id: string;
+  id: number;
   planted_at: number;
   img_url: string;
   name: string;
@@ -19,7 +19,7 @@ export interface Plant {
 }
 
 export interface Specimen {
-  _id: string;
+  id: number;
   name: string;
   imgUrl: string;
 }
