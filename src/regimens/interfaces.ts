@@ -31,7 +31,7 @@ export interface Regimen {
 export interface RegimenItem {
     sequence: Sequence;
     /** Time (in milliseconds) to wait before executing the sequence */
-    timeOffset: number;
+    time_offset: number;
 };
 
 /** How Regimen state is stored in the application. Used by Regimen reducer mostly */

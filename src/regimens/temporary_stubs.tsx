@@ -23,7 +23,7 @@ let firstItem: Regimen = {
                 ],
                 dirty: false
             },
-            timeOffset: THIRTY_SIX_HOURS
+            time_offset: THIRTY_SIX_HOURS
         },
         {
             sequence: {
@@ -40,7 +40,7 @@ let firstItem: Regimen = {
                 ],
                 dirty: false
             },
-            timeOffset: THIRTY_SIX_HOURS * 2
+            time_offset: THIRTY_SIX_HOURS * 2
         },
     ]
 };

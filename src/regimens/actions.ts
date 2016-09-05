@@ -26,7 +26,8 @@ export function saveRegimen(regimen: Regimen, baseUrl: string, token: string) {
       payload: regimen
     });
 
-    return Axios.post<Regimen>(baseUrl + REGIMEN_URL,
+    const action = regimen.id ? Axios.put : Axios.post 
+    return action<Regimen>(baseUrl + REGIMEN_URL,
       regimenSerializer(regimen))
       .then(resp => dispatch(saveRegimenOk(resp.data)))
       .catch(err => dispatch(saveRegimenErr(err)));

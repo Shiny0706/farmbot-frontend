@@ -11,7 +11,7 @@ interface RegimenItemListProps {
 
 export function RegimenItemList({ items, dispatch }: RegimenItemListProps) {
   let groups = _.groupBy<RegimenItem>(items, function(item: RegimenItem) {
-    return Math.round(duration(item.timeOffset).asDays());
+    return Math.round(duration(item.time_offset).asDays());
   });
 
   let list = _.map(groups, function(innerItems: RegimenItem[], day: string) {
@@ -39,12 +39,11 @@ interface RegimenItemStepProps {
   dispatch: Function;
 }
 function RegimenItemStep({ item, dispatch }: RegimenItemStepProps) {
-  let d = duration(item.timeOffset);
+  let d = duration(item.time_offset);
   let time = moment({
     hour: d.hours(),
     minute: d.minutes()
   }).format("h:mm a");
-
   return <div className="regimen-event">
   <span className="regimen-event-title"> { item.sequence.name } </span>
   <span className="regimen-event-time"> { time } </span>
@@ -57,7 +56,6 @@ interface RegimenItemDayGroupProps {
     day: string;
     items: RegimenItem[];
     dispatch: Function;
-    // key: string|number; // Props can be deleted later. Bug hunting atm.
 }
 
 function RegimenItemDayGroup({ day,

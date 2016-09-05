@@ -31,7 +31,7 @@ export function regimenSerializer(input: Regimen): ApiRegimen {
         .map<ApiRegimenItem>(function wow(r) {
             if (r && r.sequence && r.sequence.id) {
                 return {
-                    time_offset: r.timeOffset,
+                    time_offset: r.time_offset,
                     sequence_id: r.sequence.id
                 };
             } else {

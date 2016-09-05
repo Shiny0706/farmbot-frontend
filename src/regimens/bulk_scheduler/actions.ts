@@ -1,7 +1,7 @@
 import { warning } from "../../logger";
 import { BulkSchedulerOutput,
     BulkSchedulerState } from "./interfaces";
-// import { RegimenItem } from "../interfaces";
+import { RegimenItem } from "../interfaces";
 import { ReduxAction } from "../../interfaces";
 import { Sequence } from "../../sequences/interfaces";
 
@@ -90,6 +90,7 @@ export function commitBulkEditor(state: BulkSchedulerState):
 
     let keys = ["day1", "day2", "day3", "day4", "day5", "day6", "day7"];
 
+    // TODO: This function needs to be in a seperate file and have unit tests.
     const regimenItems = state
         .form
         .weeks
@@ -115,9 +116,15 @@ export function commitBulkEditor(state: BulkSchedulerState):
         // sort (duh)
         .sort()
         // Transform the sorted array of values into a regimenItem[] array.
-        .map((timeOffset) => {
-          let sequence = _.cloneDeep(state.sequence);
-          return { timeOffset, sequence };
+        .map<RegimenItem>((time_offset) => {
+            if (state.sequence) {
+                let sequence = state.sequence && _.cloneDeep<Sequence>(state.sequence);
+                return { time_offset, sequence };
+            } else {
+                // Typescript type check acts funny as of TSC 2.0
+                // Maybe we can delete this some day?
+                throw new Error("Opps");
+            };
         });
 
     return {
