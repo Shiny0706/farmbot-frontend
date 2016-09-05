@@ -50,8 +50,9 @@ function SequenceSelectBox({dispatch,
     let choices = eligibleSequences.map(iter);
     let ssid = step.command.sub_sequence_id;
     let subSeq = _.find(eligibleSequences, (s) => s.id === ssid) || {};
+
     return <select onChange={ change }
-        value={ subSeq["id"] || "" }>
+        value={ (subSeq.id || "").toString() }>
         <option value="">Pick a sequence (or save a new one) </option>
         { choices }
     </select>;

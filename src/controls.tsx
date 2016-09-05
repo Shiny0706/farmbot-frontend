@@ -28,13 +28,11 @@ export class AxisInputBox extends React.Component<any, any> {
     return { border: (this.primary()) ? "1px solid red" : "" };
   }
 
-  change(key, dispatch): Function {
+  change(key, dispatch): React.EventHandler<React.FormEvent>  {    
     return function(event) {
-      dispatch(changeAxisBuffer(key, event.target.value));
+      dispatch(changeAxisBuffer(key, event.target["value"]));
     };
   }
-
-
 
   render() {
     return  <div className="col-xs-3">
