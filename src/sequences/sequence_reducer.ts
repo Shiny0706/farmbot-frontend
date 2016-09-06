@@ -10,8 +10,8 @@ import { EditCurrentSequence,
          RemoveStep,
          SaveSequenceOk,
          FetchSequencesOk,
-         SelectSequence,
-         DeleteSequenceOk } from "./sequence_actions";
+         SelectSequence } from "./sequence_actions";
+import { ReduxAction } from "../interfaces";
 
 function populate(state: SequenceReducerState): Sequence {
   // This worries me. What if #current and #all get out of sync?
@@ -102,12 +102,16 @@ let action_handlers = {
         return newState;
     },
     DELETE_SEQUENCE_OK: function(state: SequenceReducerState,
-                                 action: DeleteSequenceOk) {
-    let { index } = action.payload
-        , newState = cloneDeep<SequenceReducerState>(state);
-    _.pullAt(newState.all, index);
-    newState.current = ((index === 0) ? index : newState.current - 1);
-    return newState;
+                                 action: ReduxAction<Sequence>) {
+    let index = state.all.indexOf(action.payload);
+    let nextState = _.cloneDeep<SequenceReducerState>(state);
+    if (index === -1 ) {
+        throw new Error("Tried to delete a sequence that doesn't exist. ");
+    }else {
+        state.all.slice(index, 1);
+        state.current = 0;
+    }
+    return nextState;
   },
   ADD_SEQUENCE: function(state: SequenceReducerState, _action) {
     let newState = cloneDeep<SequenceReducerState>(state);
