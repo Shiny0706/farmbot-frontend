@@ -57,12 +57,12 @@ let action_handlers: RegimensActionHandler = {
         let { regimenItems, index } = a.payload;
         let ok = _.cloneDeep(regimenItems);
         let hmm = s.all[index].regimen_items;
+        s.all[index].dirty = true;
         s.all[index].regimen_items = hmm.concat(ok);
         return s;
     },
     SAVE_REGIMEN_OK: function(s: RegimensState, a: ReduxAction<RegimenApiResponse>) {
         s = _.cloneDeep(s);
-        // NEED TO VALIDATE_UNIQUENESS_OF regimen.name BEFORE CONTINUING.
         let current = _.find<Regimen>(s.all, r => r.name === a.payload.name);
         _.assign(current, a.payload, {dirty: false}); // Merge props.
         return s;
@@ -73,6 +73,7 @@ let action_handlers: RegimensActionHandler = {
         let list = s.all[s.current].regimen_items;
         let index = list.indexOf(a.payload);
         list.splice(index, 1);
+        s.all[s.current].dirty = true;
         return s;
     },
     FETCH_REGIMENS_OK: function(s: RegimensState,

@@ -4,7 +4,7 @@ import { deleteRegimen } from "../actions";
 
 function remove({regimen, dispatch, baseUrl, token}: DeleteButtonProps) {
   if (regimen) {
-    return event => regimen && dispatch(deleteRegimen(regimen, baseUrl, token));
+    return event => regimen && dispatch(deleteRegimen(regimen, baseUrl));
   } else {
     // Technically unreachable, but I'll keep TS happy...
     throw new Error("Tried to delete non-existant regimen");
