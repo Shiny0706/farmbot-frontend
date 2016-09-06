@@ -184,18 +184,20 @@ export function deleteSequence(index: number) {
     let { iss } = state.auth;
     let sequence: Sequence = state.sequences.all[index];
     function deleteSequenceOK() {
-      debugger;
       return {
         type: "DELETE_SEQUENCE_OK",
         payload: sequence
       };
     }
-    function deleteSequenceErr(payload: Error) {
-      debugger;
-      return {
-        type: "DELETE_SEQUENCE_ERR",
-        payload
-      };
+    interface SequenceApiResponse {
+      sequence?: string;
+    }
+    function deleteSequenceErr(response: Axios.AxiosXHR<SequenceApiResponse> ) {
+      if (response && response.data.sequence ) {
+        error(response.data.sequence);
+      } else {
+        error("Unable to delete sequence");
+      }
     }
 
     if (sequence.id) {
