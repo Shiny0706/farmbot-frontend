@@ -1,6 +1,6 @@
 import { Regimen, RegimenItem } from "./interfaces";
 import { ReduxAction } from "../interfaces";
-import { warning } from "../logger";
+import { warning, success } from "../logger";
 import * as Axios from "axios";
 import { regimenSerializer } from "./serializers";
 
@@ -27,9 +27,12 @@ export function saveRegimen(regimen: Regimen, baseUrl: string, token: string) {
     });
 
     const action = regimen.id ? Axios.put : Axios.post 
-    return action<Regimen>(baseUrl + REGIMEN_URL + regimen.id,
+    return action<Regimen>(baseUrl + REGIMEN_URL + (regimen.id || ""),
       regimenSerializer(regimen))
-      .then(resp => dispatch(saveRegimenOk(resp.data)))
+      .then(function(resp) {
+        success("Regimen saved.")
+        dispatch(saveRegimenOk(resp.data))
+      })
       .catch(err => dispatch(saveRegimenErr(err)));
   };
 }
@@ -43,17 +46,33 @@ function saveRegimenErr(error: Error) {
   return { type: "SAVE_REGIMEN_ERR", payload: error };
 }
 
-export function deleteRegimen(regimen: Regimen,
-  baseUrl: string,
-  token: string) {
+export function deleteRegimen(regimen: Regimen, baseUrl: string) {
   return function (dispatch) {
     if (regimen && regimen.id) {
       let url = baseUrl + REGIMEN_URL + regimen.id;
-      Axios.delete(url);
+      Axios.delete<Regimen>(url)
+           .then(resp => dispatch(deleteRegimenOk(regimen)))
+           .catch(error => deleteRegimenErr(error));
     } else {
-      warning("TODO: Deletion of unsaved regimens.");
+      dispatch(deleteRegimenOk(regimen))
     };
   };
+}
+
+function deleteRegimenOk(payload: Regimen) {
+  success("Regimen deleted.");
+  return {
+    type: "DELETE_REGIMEN_OK",
+    payload
+  }
+}
+
+function deleteRegimenErr(payload: Error) {
+  warning("Unable to delete regimen.");
+  return {
+    type: "DELETE_REGIMEN_ERR",
+    payload
+  }
 }
 
 export function newRegimen(): ReduxAction<any> {

@@ -35,7 +35,8 @@ let action_handlers: RegimensActionHandler = {
         s.all[s.current] = update;
         return s;
     },
-    DELETE_REGIMEN: function(s, a) {
+    DELETE_REGIMEN_OK: function(s: RegimensState,
+                             a: ReduxAction<Regimen>) {
         s = _.cloneDeep(s);
         s.all.splice(s.current, 1);
         s.current = (s.current <= 1) ? 0 : (s.current - 1);
