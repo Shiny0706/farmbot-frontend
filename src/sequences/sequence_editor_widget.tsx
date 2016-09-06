@@ -28,13 +28,12 @@ let handleNameUpdate = (dispatch: Function) => (event: React.SyntheticEvent) => 
     dispatch(editCurrentSequence({ name }));
 };
 
-let save = function(dispatch: Function, sequence: Sequence, token: AuthToken) {
+let save = function(dispatch: Function, sequence: Sequence) {
     return (e: React.SyntheticEvent) => dispatch(saveSequence(sequence));
 };
 
 let destroy = function(dispatch: Function,
                        sequence: Sequence,
-                       token: AuthToken,
                        inx: number) {
     return () => dispatch(deleteSequence(inx));
 };
@@ -43,8 +42,7 @@ let performSeq = (dispatch, sequence) => (e) => {
   dispatch(execSequence(sequence));
 };
 
-export function SequenceEditorWidget({sequences, dispatch, auth}) {
-    let token = auth;
+export function SequenceEditorWidget({sequences, dispatch}) {
     let inx = sequences.current;
     let sequence: Sequence = sequences.all[inx] || nullSequence();
     return (<div>
@@ -52,7 +50,7 @@ export function SequenceEditorWidget({sequences, dispatch, auth}) {
             <div className="row">
                 <div className="col-sm-12">
                     <button className="green button-like widget-control"
-                        onClick={ save(dispatch, sequence, token) }>
+                        onClick={ save(dispatch, sequence) }>
                         Save { sequence.dirty ? " *" : "" }
                     </button>
                     <button className="yellow button-like widget-control"
@@ -60,7 +58,7 @@ export function SequenceEditorWidget({sequences, dispatch, auth}) {
                         Test
                     </button>
                     <button className="red button-like widget-control"
-                        onClick={ destroy(dispatch, sequence, token, inx) }>
+                        onClick={ destroy(dispatch, sequence, inx) }>
                         Delete
                     </button>
                     <div className="widget-header">

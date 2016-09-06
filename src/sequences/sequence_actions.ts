@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import { Everything } from "../interfaces"
 import { AuthState } from "../auth/interfaces";
 import { SequenceOptions,
          Step,
@@ -112,7 +113,7 @@ export function saveSequence(sequence: Sequence) {
   return function(dispatch: Function, getState: Function) {
     let state: AuthState = getState().auth;
     let { iss} = state;
-    let url = `${iss}/api/sequences/`;
+    let url = `${iss}api/sequences/`;
     let method: Function;
     if (sequence.id) {
       url += sequence.id;
@@ -164,69 +165,47 @@ export function selectSequence(index: number): SelectSequence {
   };
 }
 
-export function deleteSequence(
-  seqInx: number) {
-  return (dispatch: Function, getState: Function) => {
-    dispatch({ type: "DELETE_SEQUENCE_START", payload: {} });
-
-    if (!confirm("Delete sequence?")) {
-      cancelDeletion(dispatch, getState);
-    } else {
-      confirmDeletion(dispatch, getState);
-    }
-  };
-}
-
-function cancelDeletion(dispatch: Function, _: Function) {
-  dispatch({ type: "DELETE_SEQUENCE_CANCEL", payload: {} });
-}
-
-function confirmDeletion(dispatch: Function, getState: Function) {
-  let authState: AuthState = getState().auth;
-  let sequenceState: SequenceReducerState = getState().sequences;
-  let sequence = sequenceState.all[sequenceState.current];
-  let index = sequenceState.current;
-  let { iss } = authState;
-  let handler = (sequence.id) ? deleteSavedSequence : Promise.resolve;
-
-  handler({ sequence, iss }).then(() => {
-    dispatch(deleteSequenceOk(sequence, index));
-  }, () => {
-      error("Unable to delete sequence");
-      dispatch({type: "DELETE_SEQUENCE_ERR", payload: {}});
-  });
-}
-
-interface SequenceDeletionParams {
-  sequence: Sequence;
-  iss: string;
-}
-
-function deleteSavedSequence({ sequence, iss }: SequenceDeletionParams) {
-  let url = `${iss}/api/sequences/${sequence.id}`;
-  return axios.delete(url);
-};
-
-
-export interface DeleteSequenceOk {
-  type: "DELETE_SEQUENCE_OK";
-  payload: {
-    sequence: Sequence;
-    index: number;
-  };
-}
-
-export function deleteSequenceOk(sequence: Sequence,
-                                 index: number): DeleteSequenceOk {
-  return {
-    type: "DELETE_SEQUENCE_OK",
-    payload: {sequence, index}
-  };
-};
-
 export function addSequence() {
   return {
     type: "ADD_SEQUENCE",
     payload: {}
+  };
+}
+
+export function deleteSequence(index: number) {
+  // use cases: 
+  // unsaved sequence. (in state)
+  // saved sequence  (http DELETE)
+  // misc errors 
+  // dependency error. 
+
+  return function(dispatch, getState){
+    let state: Everything = getState();
+    let { iss } = state.auth;
+    let sequence: Sequence = state.sequences.all[index];
+    function deleteSequenceOK() {
+      debugger;
+      return {
+        type: "DELETE_SEQUENCE_OK",
+        payload: sequence
+      };
+    }
+    function deleteSequenceErr(payload: Error) {
+      debugger;
+      return {
+        type: "DELETE_SEQUENCE_ERR",
+        payload
+      };
+    }
+
+    if (sequence.id) {
+      let url = `${iss}api/sequences/` + sequence.id;
+      axios.delete(url)
+        .then(deleteSequenceOK)
+        .catch(deleteSequenceErr);
+    }else {
+      // Sequence is unsaved.
+      deleteSequenceOK();
+    }
   };
 }
