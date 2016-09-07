@@ -1,9 +1,12 @@
 import { warning } from "../../logger";
-import { BulkSchedulerOutput,
-    BulkSchedulerState } from "./interfaces";
+import {
+    BulkSchedulerOutput,
+    BulkSchedulerState
+} from "./interfaces";
 import { RegimenItem } from "../interfaces";
-import { ReduxAction } from "../../interfaces";
+import { ReduxAction, Everything } from "../../interfaces";
 import { Sequence } from "../../sequences/interfaces";
+import { groupRegimenItemsByWeek } from "./group_regimen_items_by_week";
 
 export function pushWeek() {
     return {
@@ -28,8 +31,8 @@ export function setTimeOffset(time: string /**  time string with format `hh:mm a
     };
 
     let milliseconds = [parseInt(hours) * 3600000,
-        parseInt(minutes) * 60000,
-        setAmPmOffset(amPm) * 3600000]
+    parseInt(minutes) * 60000,
+    setAmPmOffset(amPm) * 3600000]
         .reduce((num, acc) => num + acc);
 
     if (_.isNaN(milliseconds) || !_.isNumber(milliseconds)) {
@@ -65,70 +68,33 @@ export function toggleDay({week, day}: ToggleDayParams) {
 }
 
 export function setSequence(sequence: Sequence): ReduxAction<Sequence> {
-  return {
-    type: "SET_SEQUENCE",
-    payload: sequence
-  };
+    return {
+        type: "SET_SEQUENCE",
+        payload: sequence
+    };
 };
 
-export function commitBulkEditor(state: BulkSchedulerState):
-    ReduxAction<BulkSchedulerOutput|{}> {
+export function commitBulkEditor() {
 
-    if (!state.sequence) {
-      warning("Select a sequence from the dropdown first.");
-      return {
-        type: "COMMIT_BULK_EDITOR_FAILURE",
-        payload: {}
-      };
-    }
+    return function (dispatch, getState) {
+        const state: Everything = getState();
+        let index = state.bulkScheduler.currentRegimen;
 
-    let index = state.currentRegimen;
+        const regimenDoesExist = state.regimens.all[state.regimens.current]
 
-    const OFFSET = state.form.dailyOffsetMs;
-    const ONE_WEEK = 604800000;
-    const ONE_DAY = 86400000;
-
-    let keys = ["day1", "day2", "day3", "day4", "day5", "day6", "day7"];
-
-    // TODO: This function needs to be in a seperate file and have unit tests.
-    const regimenItems = state
-        .form
-        .weeks
-        // Collect all of the true/false values in weekX.days. These indicate
-        // wether we should add a sequence on that day or not.
-        .map((week) =>
-            keys.map((key) =>
-                week.days[key])) // [[true,false,false,true] . . . ]
-        // Convert true values to an offset, in milliseconds from the start point.
-        // Convert false values to -1.
-        .map((weekArray, weekNum) => {
-            let weeks = ONE_WEEK * (weekNum);
-            return weekArray.map((shouldExecute, dayNum) => {
-                let days = ONE_DAY * (dayNum + 1);
-                return (shouldExecute) ? (weeks + days + OFFSET) : -1; // lol, In band signaling.
+        if (state.bulkScheduler.sequence && regimenDoesExist) {
+            const regimenItems = groupRegimenItemsByWeek(
+                state.bulkScheduler.form.weeks,
+                state.bulkScheduler.form.dailyOffsetMs,
+                state.bulkScheduler.sequence);
+            dispatch({
+                type: "COMMIT_BULK_EDITOR",
+                payload: { regimenItems, index }
             });
-        })// [[-1, 99999, -1, -1],[.....]]
-        // "flatten" the array into a 1d structure (its an array of
-        // number arrays right now)
-        .reduce((arr, acc) => acc.concat(arr))
-        // Remove -1 values (days that don't execute a sequence).
-        .filter((i) => i !== -1)
-        // sort (duh)
-        .sort()
-        // Transform the sorted array of values into a regimenItem[] array.
-        .map<RegimenItem>((time_offset) => {
-            if (state.sequence) {
-                let sequence = state.sequence && _.cloneDeep<Sequence>(state.sequence);
-                return { time_offset, sequence };
-            } else {
-                // Typescript type check acts funny as of TSC 2.0
-                // Maybe we can delete this some day?
-                throw new Error("Opps");
-            };
-        });
+        } else {
+            warning("Select a sequence from the dropdown first.");
+            (!regimenDoesExist && warning("Select a regimen or create one first."));
+        }
 
-    return {
-        type: "COMMIT_BULK_EDITOR",
-        payload: { regimenItems, index }
-    };
+    }
 }
