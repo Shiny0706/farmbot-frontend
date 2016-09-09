@@ -12,7 +12,9 @@ import { EditCurrentSequence,
          FetchSequencesOk,
          SelectSequence } from "./sequence_actions";
 import { ReduxAction } from "../interfaces";
+import { generateReducer } from "../generate_reducer";
 
+/** Adds an empty sequence to the front of the list. */
 function populate(state: SequenceReducerState): Sequence {
   // This worries me. What if #current and #all get out of sync?
   let current_sequence = nullSequence();
@@ -34,22 +36,6 @@ const initialState: SequenceReducerState = {
 };
 
 let action_handlers = {
-    DEFAULT: function(state, action) {
-        return state;
-    },
-
-    PUSH_STEP: function(state: SequenceReducerState,
-                        action: PushStep) {
-        let newState = cloneDeep<SequenceReducerState>(state);
-        let current_sequence = newState
-                                 .all[newState.current] || populate(newState);
-        let step = assign<any, Step>({}, action.payload.step);
-        current_sequence.steps.push(step);
-        current_sequence.steps = repositionSteps(current_sequence.steps);
-        current_sequence.dirty = true;
-        return newState;
-    },
-
     EDIT_CURRENT_SEQUENCE: function(state: SequenceReducerState,
         action: EditCurrentSequence) {
         let newState = cloneDeep<SequenceReducerState>(state);
@@ -113,19 +99,23 @@ let action_handlers = {
     }
     return nextState;
   },
-  ADD_SEQUENCE: function(state: SequenceReducerState, _action) {
-    let newState = cloneDeep<SequenceReducerState>(state);
-    populate(newState);
-    return newState;
-  }
+
 };
 
-export function sequenceReducer(state = initialState, action) {
-    let handler = (action_handlers[action.type] || action_handlers.DEFAULT);
-    let result: SequenceReducerState = handler(state, action);
-    return result;
-}
-
+export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
+  .add<{ step: UnplacedStep }>("PUSH_STEP", function(state, action) {
+        let current_sequence = state
+                                 .all[state.current] || populate(state);
+        let { step } = action.payload;
+        let newArr = <(Step|UnplacedStep)[]>[current_sequence.steps, ...[step]];
+        current_sequence.steps = repositionSteps(newArr);
+        current_sequence.dirty = true;
+        return state;
+    })
+  .add<void>("ADD_SEQUENCE", function(state, action) {
+    populate(state);
+    return state;
+  });
 /** Transforms input array of steps into new step array where all elements have
     a position attirbute that is equal to their `index` in the array. */
 function repositionSteps(steps: (Step|UnplacedStep)[]): Step[] {

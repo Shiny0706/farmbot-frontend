@@ -29,12 +29,21 @@ export function generateReducer<State>(
                   fn: GenericActionHandler<T>) => GeneratedReducer; // Calms the type checker.
     }
 
+    function defensiveClone<T>(target: T): T {
+      let jsonString = JSON.stringify(target);
+      return JSON.parse(jsonString);
+    }
+
     let actionHandlers: ActionHandlerDict = { DEFAULT };
 
     let reducer: GeneratedReducer = function<T>(state = initialState,
                                                 action: ReduxAction<T>): State {
         let handler = (actionHandlers[action.type] || actionHandlers["DEFAULT"]);
-        let result: State = handler(state, action);
+
+        let clonedState = defensiveClone<State>(state);
+        let clonedAction = defensiveClone<ReduxAction<T>>(action);
+
+        let result: State = handler(clonedState, clonedAction);
         return result;
     } as GeneratedReducer;
 
