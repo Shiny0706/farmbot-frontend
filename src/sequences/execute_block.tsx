@@ -49,7 +49,9 @@ function SequenceSelectBox({dispatch,
 
     let choices = eligibleSequences.map(iter);
     let ssid = step.command.sub_sequence_id;
-    let subSeq = _.find(eligibleSequences, (s) => s.id === ssid) || {};
+    let subSeq = _.find(eligibleSequences, (s) => s.id === ssid) || {
+        id: ""
+    };
 
     return <select onChange={ change }
         value={ (subSeq.id || "").toString() }>
