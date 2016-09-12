@@ -183,12 +183,14 @@ export function deleteSequence(index: number) {
     let state: Everything = getState();
     let { iss } = state.auth;
     let sequence: Sequence = state.sequences.all[index];
+
     function deleteSequenceOK() {
-      return {
+      dispatch( {
         type: "DELETE_SEQUENCE_OK",
         payload: sequence
-      };
+      });
     }
+
     interface SequenceApiResponse {
       sequence?: string;
     }
