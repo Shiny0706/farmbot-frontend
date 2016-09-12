@@ -5,7 +5,7 @@ import {
     UnplacedStep,
     SequenceReducerState
 } from "./interfaces";
-import { nullSequence } from "./sequence_actions";
+import { nullSequence } from "./actions";
 import { generateReducer } from "../generate_reducer";
 
 /** Adds an empty sequence to the front of the list. */

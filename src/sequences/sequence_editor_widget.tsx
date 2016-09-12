@@ -1,11 +1,11 @@
 import * as React from "react";
-import { AuthToken } from "../auth/auth_actions";
+import { AuthToken } from "../auth/actions";
 import { Step as IStep, Sequence } from "./interfaces";
-import { execSequence } from "../devices/bot_actions";
+import { execSequence } from "../devices/actions";
 import { editCurrentSequence,
          saveSequence,
          deleteSequence,
-         nullSequence } from "./sequence_actions";
+         nullSequence } from "./actions";
 import { stepTiles, StepTile } from "./step_tiles";
 
 let Oops: StepTile = (_) => { return <div>Whoops! Not a valid message_type</div>; };

@@ -4,7 +4,7 @@ import * as React from "react";
 import { render } from "react-dom";
 import { RootComponent }from "./root";
 import { store } from "./store";
-import { ready } from "./config/config_actions";
+import { ready } from "./config/actions";
 
 let node = document.createElement("DIV");
 node.id = "root";

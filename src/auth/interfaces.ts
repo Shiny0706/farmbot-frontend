@@ -2,7 +2,7 @@ export interface AuthState {
   /** The JSON Web Token as a string */
   token: string;
   /** Is the client logged in right now? */
-  authenticated: boolean;
+  authenticated?: boolean;
   /** email address of the "subject" */
   sub: string;
   /** Issued at timestamp*/

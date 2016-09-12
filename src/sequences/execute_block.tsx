@@ -1,7 +1,7 @@
 import * as React from "react";
 import { copy, remove, StepParams } from "./step_tiles";
 import { Step, Sequence } from "./interfaces";
-import { changeStep } from "./sequence_actions";
+import { changeStep } from "./actions";
 
 /** Removes un-executable sequences, such as "self" or unsaved ones */
 function filterSequenceList(sequences, sequence) {
