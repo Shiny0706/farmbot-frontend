@@ -5,10 +5,10 @@ import {
   applyMiddleware,
   combineReducers
 } from "redux";
-import { authReducer as auth } from "./auth/auth_reducer";
-import { sequenceReducer as sequences } from "./sequences/sequence_reducer";
-import { botReducer as bot } from "./devices/bot_reducer";
-import { configReducer as config } from "./config/config_reducer";
+import { authReducer as auth } from "./auth/reducer";
+import { sequenceReducer as sequences } from "./sequences/reducer";
+import { botReducer as bot } from "./devices/reducer";
+import { configReducer as config } from "./config/reducer";
 import { routerReducer as routing } from "react-router-redux";
 import { regimensReducer as regimens } from "./regimens/reducer";
 import { tickerReducer as ticker } from "./ticker/reducer";

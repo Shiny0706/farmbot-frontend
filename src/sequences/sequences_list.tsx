@@ -1,8 +1,8 @@
 import * as React from "react";
-import { selectSequence, addSequence } from "./sequence_actions";
+import { selectSequence, addSequence } from "./actions";
 import { SequenceReducerState } from "./interfaces";
 import { Sequence } from "./interfaces";
-import { AuthToken } from "../auth/auth_actions";
+import { AuthToken } from "../auth/actions";
 
 let buttonList = (dispatch: Function) => (seq: Sequence, index: number) => {
   let css = ["block-wrapper",

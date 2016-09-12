@@ -1,4 +1,4 @@
-import { ChangeApiUrl } from "./config_actions";
+import { ChangeApiUrl } from "./actions";
 import { assign } from "lodash";
 import { ReduxAction } from "../interfaces";
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { pushStep } from "./sequence_actions";
+import { pushStep } from "./actions";
 import { Help } from "../help";
 import { UnplacedStep,
     StepCommand as Command,

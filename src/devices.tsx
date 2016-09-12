@@ -5,7 +5,7 @@ import { addDevice,
          changeSettingsBuffer,
          commitSettingsChanges,
          settingToggle,
-         changeDevice } from "./devices/bot_actions";
+         changeDevice } from "./devices/actions";
 import { convertFormToObject } from "./util";
 import { ToggleButton } from "./toggle_button";
 import { devices } from "./device";

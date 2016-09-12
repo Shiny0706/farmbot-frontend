@@ -1,4 +1,4 @@
-import { didLogin } from "../auth/auth_actions";
+import { didLogin } from "../auth/actions";
 import { AuthState } from "../auth/interfaces";
 
 export interface ChangeApiUrl {

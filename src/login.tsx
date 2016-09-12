@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Navbar } from "./nav/navbar";
-import { login, register } from "./auth/auth_actions";
+import { login, register } from "./auth/actions";
 import { connect } from "react-redux";
-import { changeApiUrl } from "./config/config_actions";
+import { changeApiUrl } from "./config/actions";
 
 let setUrl = (dispatch) => (e) => { dispatch(changeApiUrl(e.target.value)); };
 

@@ -1,10 +1,10 @@
 import * as React from "react";
-import { changeStep, removeStep, pushStep } from "./sequence_actions";
+import { changeStep, removeStep, pushStep } from "./actions";
 import { assign } from "lodash";
 import { Step } from "./interfaces";
 import { Help } from "../help";
 import { ExecuteBlock } from "./execute_block";
-import { Sequence } from "./interfaces.ts";
+import { Sequence } from "./interfaces";
 
 interface CopyParams {
   dispatch: Function;
