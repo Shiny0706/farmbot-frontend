@@ -1,7 +1,7 @@
 import * as React from "react";
-import { LogoutButton } from "../../../nav/navbar.tsx";
+import { LogoutButton } from "../../nav/navbar.tsx";
 import * as TUtils from "react-addons-test-utils";
-import { Wrapper, fakeState } from "../../helpers";
+import { Wrapper, fakeState } from "../helpers";
 
 describe("Navbar component", () => {
   it("has a callback", () => {

@@ -4,7 +4,7 @@ import { warning, success } from "../logger";
 import * as Axios from "axios";
 import { regimenSerializer } from "./serializers";
 
-const REGIMEN_URL = "api/regimens/";
+const REGIMEN_URL = "/api/regimens/";
 
 export function editRegimen(regimen: Regimen,
   update: Object):

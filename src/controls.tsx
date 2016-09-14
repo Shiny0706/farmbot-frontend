@@ -6,7 +6,7 @@ import { sendCommand,
          changeStepSize,
          changeAxisBuffer,
          commitAxisChanges,
-         pinToggle } from "./devices/bot_actions";
+         pinToggle } from "./devices/actions";
 import { connect } from "react-redux";
 
 export class AxisInputBox extends React.Component<any, any> {

@@ -1,10 +1,10 @@
 import * as $ from "jquery";
 import { didLogin,
-  setToken } from "../../../auth/auth_actions.tsx";
-import { fakeState } from "../../helpers";
+  setToken } from "../../auth/actions";
+import { fakeState } from "../helpers";
 
 
-describe("auth_actions.tsx", () => {
+describe("Auth actions", () => {
   let authState, dispatch;
 
   beforeEach(() => {

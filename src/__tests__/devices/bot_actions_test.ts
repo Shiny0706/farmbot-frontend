@@ -1,4 +1,4 @@
-import { settingToggle, settingToggleOk } from "../../devices/bot_actions";
+import { settingToggle, settingToggleOk } from "../../devices/actions";
 import { devices } from "../../device";
 
 // let createSpy = jasmine.createSpy;

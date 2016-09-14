@@ -1,7 +1,7 @@
 import * as $ from "jquery";
-import { fetchDevice } from "../devices/bot_actions";
+import { fetchDevice } from "../devices/actions";
 import { push } from "../history";
-import { fetchSequences } from "../sequences/sequence_actions";
+import { fetchSequences } from "../sequences/actions";
 import { fetchRegimens } from "../regimens/actions";
 import { post } from "axios";
 import { error } from "../logger";
@@ -60,6 +60,7 @@ export function login(username: string,
 }
 
 function loginErr(err) {
+  error("Login failed.");
   return {
     type: "LOGIN_ERR",
     payload: err
@@ -76,11 +77,6 @@ export interface AuthToken {
   bot: string;
   authenticated: boolean;
 }
-
-export interface LoginOk {
-  type: "LOGIN_OK";
-  payload: AuthState;
-};
 
 export function loginOk(auth: AuthState): ReduxAction<AuthState> {
   // This is how we attach the auth token to every

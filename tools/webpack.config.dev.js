@@ -1,5 +1,6 @@
 var open = require('open');
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   module: {
@@ -20,6 +21,11 @@ module.exports = {
   ts: {
     configFileName: "tsconfig.json"
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    })
+  ],
   resolve: {
     extensions: [
       '',

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { copy, remove, StepParams } from "./step_tiles";
 import { Step, Sequence } from "./interfaces";
-import { changeStep } from "./sequence_actions";
+import { changeStep } from "./actions";
 
 /** Removes un-executable sequences, such as "self" or unsaved ones */
 function filterSequenceList(sequences, sequence) {
@@ -49,7 +49,9 @@ function SequenceSelectBox({dispatch,
 
     let choices = eligibleSequences.map(iter);
     let ssid = step.command.sub_sequence_id;
-    let subSeq = _.find(eligibleSequences, (s) => s.id === ssid) || {};
+    let subSeq = _.find(eligibleSequences, (s) => s.id === ssid) || {
+        id: ""
+    };
 
     return <select onChange={ change }
         value={ (subSeq.id || "").toString() }>
