@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Everything } from "../interfaces";
+import { ConfigState } from "../config/interfaces";
 
 export class Wrapper extends React.Component<any, any> {
   render() {
@@ -86,6 +87,10 @@ export function fakeState(dispatcher?: Function): Everything {
     }
   };
   let dispatch = dispatcher || function (p: any) { };
+  let config: ConfigState = {
+    host: "localhost",
+    port: "5555"
+  };
 
   return {
     location
@@ -97,5 +102,6 @@ export function fakeState(dispatcher?: Function): Everything {
     , sequences
     , regimens
     , bulkScheduler
+    , config
   };
 }

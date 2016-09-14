@@ -1,4 +1,5 @@
 import { AuthState } from "./auth/interfaces";
+import { ConfigState } from "./config/interfaces";
 import { BotState } from "./devices/interfaces";
 import { TickerState } from "./ticker/interfaces";
 import { BulkSchedulerState } from "./regimens/bulk_scheduler/interfaces";
@@ -34,7 +35,7 @@ interface Location {
 };
 
 export interface Everything {
-  location: Location;
+  config: ConfigState;
   auth: AuthState;
   designer: DesignerState;
   dispatch: Function;
@@ -43,4 +44,5 @@ export interface Everything {
   sequences: SequenceReducerState;
   regimens: RegimensState;
   bulkScheduler: BulkSchedulerState;
+  location: Location;
 };

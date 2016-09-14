@@ -1,36 +1,20 @@
-import { ChangeApiUrl } from "./actions";
-import { assign } from "lodash";
-import { ReduxAction } from "../interfaces";
+import { generateReducer } from "../generate_reducer";
+import { ChangeApiHost, ChangeApiPort, ConfigState} from "./interfaces";
 
-interface ConfigReducerState {
-  farmbotApiUrl: string;
-}
+/** Remove any accidental http:// or https:// from host name. */
+let stripUrl = (url: string) => url.replace(/(https|http|[0-9]|\:|\/|\/\/)/g, "") || "";
 
-function getApiUrl(): string {
-  let host = `//${location.host || "localhost"}`;
-  return (host["includes"]("//localhost")) ? "//localhost:3000" : host;
-}
-
-let initialState: ConfigReducerState = {
-  farmbotApiUrl: getApiUrl()
+let initialState: ConfigState = {
+  host: stripUrl(location.host),
+  port: location.host["includes"]("localhost") ? "3000" : (location.port || "80")
 };
 
-let reduce = {
-  CHANGE_API_URL: function(state: ConfigReducerState,
-                           action: ChangeApiUrl): ConfigReducerState {
-    let newState = assign<{}, ConfigReducerState>({}, state);
-    newState.farmbotApiUrl = action.payload.farmbotApiUrl;
-    return newState;
-  },
-  DEFAULT: function(state: ConfigReducerState,
-                    action: ReduxAction<any>): ConfigReducerState {
-    return state;
-  }
-};
-
-export function configReducer(state = initialState,
-                              action: ReduxAction<any>): ConfigReducerState {
-  let reduceFn = reduce[action.type] || reduce["DEFAULT"];
-  let result = reduceFn(state, action);
-  return result;
-};
+export let configReducer = generateReducer<ConfigState>(initialState)
+  .add<ChangeApiPort>("CHANGE_API_PORT", function(s, a) {
+    s.port = a.payload.port.replace(/\D/g, "");
+    return s;
+  })
+  .add<ChangeApiHost>("CHANGE_API_HOST", function(s, a) {
+    s.host = stripUrl(a.payload.host);
+    return s;
+  });

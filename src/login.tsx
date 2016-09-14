@@ -2,11 +2,18 @@ import * as React from "react";
 import { Navbar } from "./nav/navbar";
 import { login, register } from "./auth/actions";
 import { connect } from "react-redux";
-import { changeApiUrl } from "./config/actions";
+import { changeApiHost, changeApiPort } from "./config/actions";
+import { Everything } from "./interfaces";
 
-let setUrl = (dispatch) => (e) => { dispatch(changeApiUrl(e.target.value)); };
+let setHost = (dispatch) => (e) => dispatch(changeApiHost(e.target.value));
+let setPort = (dispatch) => (e) => dispatch(changeApiPort(e.target.value));
 
-class LoginPage extends React.Component<any, any> {
+
+class LoginPage extends React.Component<Everything, any> {
+  get url(): string {
+    return `//${ this.props.config.host }:${ this.props.config.port }`;
+  }
+
   set(name) {
     return function(event){
       let state = {};
@@ -19,8 +26,7 @@ class LoginPage extends React.Component<any, any> {
     e.preventDefault();
     let password = (this.state || {}).loginPassword;
     let email = (this.state || {}).loginEmail;
-    let url = this.props.config.farmbotApiUrl;
-    return this.props.dispatch(login(email, password, url));
+    return this.props.dispatch(login(email, password, this.url));
   }
 
   submitRegistration(e) {
@@ -31,8 +37,7 @@ class LoginPage extends React.Component<any, any> {
     let email = state.regEmail;
     let password = state.regPass;
     let confirmation = state.regConfirmation;
-    let url = this.props.config.farmbotApiUrl;
-    let action = register(name, email, password, confirmation, url);
+    let action = register(name, email, password, confirmation, this.url);
 
     return this.props.dispatch(action);
   }
@@ -58,7 +63,7 @@ class LoginPage extends React.Component<any, any> {
                       <div className="widget-content">
                         <div className="input-group">
                           <label>Email</label>
-                          <input type="text"
+                          <input type="email"
                                  onChange={ this.set("loginEmail").bind(this) }>
                           </input>
                           <label>Password</label>
@@ -70,7 +75,7 @@ class LoginPage extends React.Component<any, any> {
                           <div className="col-xs-6">
                             <p className="auth-link">
                               <a href={
-                                  this.props.config.farmbotApiUrl + "/users/password/new"
+                                  this.url + "/users/password/new"
                                 }>
                                 Reset password
                               </a>
@@ -84,10 +89,18 @@ class LoginPage extends React.Component<any, any> {
                         </div>
                         <div className="row">
                           <div className="col-xs-12">
-                          <label>Server URL (Advanced)</label>
+                          <label>Server Host</label>
                           <input type="text"
-                                 value={ this.props.config.farmbotApiUrl }
-                                 onChange={ setUrl(this.props.dispatch) } />
+                                 value={ this.props.config.host }
+                                 onChange={ setHost(this.props.dispatch) } />
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-xs-12">
+                          <label>Server Port</label>
+                          <input type="number"
+                                 value={ this.props.config.port }
+                                 onChange={ setPort(this.props.dispatch) } />
                           </div>
                         </div>
                       </div>
