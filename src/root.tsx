@@ -17,8 +17,8 @@ import {
 
 import App from "./app";
 import Dashboard from "./dashboard";
-import { Controls } from "./controls";
-import { Devices } from "./devices";
+import { Controls } from "./controls/controls";
+import { Devices } from "./devices/devices";
 import { Sequences } from "./sequences/sequences";
 import { Regimens } from "./regimens/index";
 import { FarmDesigner } from "./farm_designer/farm_designer";

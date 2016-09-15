@@ -1,15 +1,24 @@
 import * as React from "react";
-import { Navbar } from "./nav/navbar";
+import { Navbar } from "../nav/navbar";
 import { ToggleButton } from "./toggle_button";
 import { DirectionButton } from "./direction_button";
 import { sendCommand,
          changeStepSize,
          changeAxisBuffer,
          commitAxisChanges,
-         pinToggle } from "./devices/actions";
+         pinToggle } from "../devices/actions";
+import { BotState } from "../devices/interfaces";
 import { connect } from "react-redux";
+import { Everything } from "../interfaces";
 
-export class AxisInputBox extends React.Component<any, any> {
+interface AxisInputBoxProps {
+  bot: BotState;
+  axis: string;
+  label: string;
+  dispatch: Function;
+};
+
+export class AxisInputBox extends React.Component<AxisInputBoxProps, {}> {
 
   primary(): string {
     return this.props.bot.axisBuffer[this.props.axis];
@@ -75,14 +84,14 @@ export class StepSizeSelector extends React.Component<any, any> {
   }
 }
 
-@connect(state => state)
-export class Controls extends React.Component<any, any> {
+@connect<any, any, any>(state => state)
+export class Controls extends React.Component<Everything, any> {
   constructor() {
     super();
     this.state = { url: "http://71.93.48.48:8080/?action=stream" };
   }
   render() {
-
+    debugger;
     let bot = this.props.bot;
     let url = this.state.url;
 
@@ -306,7 +315,6 @@ export class Controls extends React.Component<any, any> {
                     </div>
                     <div className="row">
                       <div className="col-sm-12">
-                        <img className="webcam-stream" src={ url } />
                         <div>
                         <label>Set Webcam URL:</label>
                         <input type="text"
@@ -316,6 +324,7 @@ export class Controls extends React.Component<any, any> {
                                }
                                value={ url } />
                         </div>
+                        <img className="webcam-stream" src={ url } />
                       </div>
                     </div>
                   </div>
