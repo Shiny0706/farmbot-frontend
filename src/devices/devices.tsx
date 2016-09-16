@@ -12,6 +12,7 @@ import { devices } from "../device";
 import { BotLog } from "../devices/interfaces";
 import * as moment from "moment";
 import { Everything } from "../interfaces";
+import { saveAccountChanges } from "./actions";
 
 export class SettingsInputBox extends React.Component<any, any> {
 
@@ -63,8 +64,13 @@ export class SettingsInputBox extends React.Component<any, any> {
 class DevicesPage extends React.Component<Everything, any> {
 
   constructor() {
+    // DELETE THIS!
     super();
     this.state = {bot: devices.current};
+  }
+
+  updateBot(e: React.MouseEvent) {
+    this.props.dispatch(saveAccountChanges);
   }
 
   changeBot(e) {
@@ -81,7 +87,6 @@ class DevicesPage extends React.Component<Everything, any> {
   }
 
   render() {
-    let bot = this.state.bot;
 
     return (
       <div>
@@ -98,8 +103,9 @@ class DevicesPage extends React.Component<Everything, any> {
                           <div className="row">
                             <div className="col-sm-12">
                               <button type="submit"
-                                      className="button-like green widget-control">
-                                SAVE { bot.dirty ? "*" : "" }
+                                      className="button-like green widget-control"
+                                      onClick={ this.updateBot.bind(this) }>
+                                SAVE { this.props.bot.account.dirty ? "*" : "" }
                               </button>
                               <div className="widget-header">
                                 <h5>DEVICE</h5>

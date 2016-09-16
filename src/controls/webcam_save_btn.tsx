@@ -1,19 +1,13 @@
 import * as React from "react";
-import { DeviceAccountSettings } from "../devices/interfaces";
-import { put } from "axios";
-
-interface Blah {
+import { updateDevice } from "../devices/actions"
+interface SaveWebcamParams {
   dispatch: Function;
   apiUrl: string;
   webcam_url: string;
 };
 
-let saveWebcamUrl = ({dispatch, apiUrl, webcam_url}: Blah) => () => {
-  return dispatch(function() {
-    put<DeviceAccountSettings>(apiUrl + "/api/device", { webcam_url })
-      .then(res => dispatch({ type: "REPLACE_DEVICE_ACCOUNT_INFO", payload: res.data }))
-      .catch((payload) => dispatch({ type: "DEVICE_ACCOUNT_ERR", payload }));
-  });
+let saveWebcamUrl = ({dispatch, apiUrl, webcam_url}: SaveWebcamParams) => () => {
+  return dispatch((d) => updateDevice(apiUrl, { webcam_url }, d));
 };
 
 interface WebcamSaveBtnProps {

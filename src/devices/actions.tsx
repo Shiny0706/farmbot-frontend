@@ -1,12 +1,12 @@
-import { Device } from "../models/device";
 import { Farmbot } from "farmbot";
 import { store } from "../store";
 import { devices } from "../device";
-import { error, warning, success } from "../logger";
+import { error, warning } from "../logger";
 import { Sequence } from "../sequences/interfaces";
 import { catchMessage, RPCError } from "./message_catcher";
-import { ReduxAction } from "../interfaces";
-
+import { Thunk } from "../interfaces";
+import { put } from "axios";
+import { DeviceAccountSettings } from "../devices/interfaces";
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
@@ -172,10 +172,11 @@ function readStatusErr(msg) {
     };
 }
 
-export function changeDevice(attributesThatWillChange = { dirty: true }) {
+// I wish TS had subset types.
+export function changeDevice(newAttrs: any) {
     return {
         type: "CHANGE_DEVICE",
-        payload: attributesThatWillChange
+        payload: newAttrs
     };
 }
 
@@ -219,28 +220,10 @@ function sendCommandErr(e, payload, dispatch) {
     dispatch({ type: "COMMAND_ERR", payload: e });
 }
 
-export function addDevice(deviceAttrs) {
+export function addDevice(deviceAttrs): Thunk {
 
-    return (dispatch) => {
-        Device
-            .save(deviceAttrs)
-            .then(function (res) { dispatch(saveDeviceOk(res)); },
-            function (err) { dispatch(saveDeviceErr(err)); });
-    };
-}
-
-function saveDeviceOk(resp) {
-    success("Device saved.");
-    return {
-        type: "SAVE_DEVICE_OK",
-        payload: resp.data
-    };
-}
-
-function saveDeviceErr(err) {
-    return {
-        type: "SAVE_DEVICE_ERR",
-        payload: err
+    return (dispatch, getState) => {
+        updateDevice(getState().auth.iss, deviceAttrs, dispatch);
     };
 }
 
@@ -302,3 +285,24 @@ export function execSequence(sequence: Sequence) {
             });
     };
 };
+
+export let saveAccountChanges: Thunk = function(dispatch, getState) {
+    let state = getState();
+    let bot = getState().bot.account;
+    let url = state.auth.iss;
+    return updateDevice(url, bot, dispatch);
+};
+
+interface UpdateDeviceParams {
+  id?: number;
+  name?: string;
+  uuid?: string;
+  webcam_url?: string;
+}
+
+export function updateDevice(apiUrl, optns, dispatch) {
+    return put<DeviceAccountSettings>(apiUrl + "/api/device", optns)
+             .then(res => dispatch({ type: "REPLACE_DEVICE_ACCOUNT_INFO", payload: res.data }))
+             .catch((payload) => dispatch({ type: "DEVICE_ACCOUNT_ERR", payload }));
+;
+}
