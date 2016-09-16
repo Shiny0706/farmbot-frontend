@@ -12,7 +12,7 @@ export function changeApiPort(port: string): ReduxAction<ChangeApiPort> {
 };
 
 export function ready(e: Event) {
-  return (dispatch, getState) => {
+  return (dispatch: Function, getState: Function) => {
     dispatch({ type: "READY", payload: event });
     let state: AuthState = getState().auth;
     if ((state.token || "").length > 30) { // lol

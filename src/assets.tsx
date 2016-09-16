@@ -1,9 +1,11 @@
 // Bootstrap.js doesn"t use ES6 modules yet. Need to globally export.
 // Know a more ES6 compliant way to do this? Submit a PR!
-import * as $ from "jquery";
-
-window["$"] = $;
-window["jQuery"] = $;
+import * as _$ from "jquery";
+declare var $: JQueryStatic;
+declare var jQuery : JQueryStatic;
+// Lul
+(window as any)["$"] = _$;
+(window as any)["jQuery"] = _$;
 
 // Programmatically add *.css and *.js from CDN to dom.
 // If there"s a way to (easily) do this with WebPack, submit a PR!

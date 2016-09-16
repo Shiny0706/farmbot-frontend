@@ -1,10 +1,11 @@
 import * as $ from "jquery";
 import { didLogin } from "../../auth/actions";
 import { fakeState } from "../helpers";
+import { AuthState } from "../../auth/interfaces"
 
 
 describe("Auth actions", () => {
-  let authState, dispatch;
+  let authState: AuthState, dispatch: Function;
 
   beforeEach(() => {
     dispatch = jasmine.createSpy("dispatcher fn");

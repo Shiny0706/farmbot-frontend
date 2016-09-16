@@ -6,7 +6,7 @@ import { fetchRegimens } from "../regimens/actions";
 import { error } from "../logger";
 import { AuthState } from "./interfaces";
 import { fetchPlants } from "../farm_designer/actions";
-import { ReduxAction } from "../interfaces";
+import { ReduxAction, Thunk } from "../interfaces";
 import * as Axios from "axios";
 
 export interface AuthResponseToken {
@@ -27,7 +27,7 @@ export function didLogin(authState: AuthState, dispatch: Function) {
   dispatch(fetchPlants(authState.iss));
 };
 
-export function downloadDeviceData(baseUrl: string) {
+export function downloadDeviceData(baseUrl: string):Thunk {
   return function (dispatch, getState) {
     Axios.get<DeviceAccountSettings>(baseUrl + "/api/device")
       .then(res => dispatch({ type: "REPLACE_DEVICE_ACCOUNT_INFO", payload: res.data }))
@@ -58,17 +58,16 @@ export function onLogin(dispatch: Function) {
 
 export function login(username: string,
   password: string,
-  url: string) {
+  url: string): Thunk {
   return dispatch => {
     return requestToken(username, password, url).then(
       onLogin(dispatch),
-      // function(wut) {},
       (err) => dispatch(loginErr(err))
     );
   };
 }
 
-function loginErr(err) {
+function loginErr(err: AuthResponse ) {
   error("Login failed.");
   return {
     type: "LOGIN_ERR",
@@ -100,7 +99,7 @@ export function loginOk(auth: AuthState): ReduxAction<AuthState> {
   // outbound HTTP request (after user logs in).
   Axios.interceptors.request.use(function (config) {
     config.headers = config.headers || {};
-    config.headers["Authorization"] = auth.token;
+    (config.headers as any).Authorization = auth.token;
     return config;
   });
   return {
@@ -113,7 +112,7 @@ export function register(name: string,
   email: string,
   password: string,
   confirmation: string,
-  url: string) {
+  url: string): Thunk {
   return dispatch => {
     let p = requestRegistration(name,
       email,
@@ -125,8 +124,8 @@ export function register(name: string,
   };
 }
 
-export function onRegistrationErr(dispatch) {
-  return (err) => {
+export function onRegistrationErr(dispatch: Function) {
+  return (err: any) => {
     let msg = _.values(err.data)
       .join(". ")
       .replace(/nil/g, "empty") || "Unknown server error.";

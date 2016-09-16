@@ -1,12 +1,13 @@
 import { generateReducer } from "../generate_reducer";
 import { TickerState } from "./interfaces";
+import { ReduxAction } from "../interfaces"
 
 let YELLOW = "#fd6",
     RED = "#e66",
     GREEN = "#6a4";
 
 function change(color: string, message: string, show = true) {
-    return (s, a) => ({ color, message, show });
+    return (s: TickerState, a: ReduxAction<{}>) => ({ color, message, show });
 }
 
 export let tickerReducer = generateReducer<TickerState>({

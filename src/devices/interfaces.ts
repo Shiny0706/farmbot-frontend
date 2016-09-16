@@ -37,9 +37,11 @@ export interface BotState {
   stepSize: number;
   /** Holds coordinates that the user is currently editing, but has not sent */
   axisBuffer: {
-    x?: string;
-    y?: string;
-    z?: string;
+    // x?: string;
+    // y?: string;
+    // z?: string;
+    [name: string]: string | undefined;
+
   };
   /** Holds settings that the user is currently editing, but has not sent */
   settingsBuffer: {

@@ -113,7 +113,7 @@ export function saveSequence(sequence: Sequence) {
   return function(dispatch: Function, getState: Function) {
     let state: AuthState = getState().auth;
     let { iss} = state;
-    let url = `${iss}api/sequences/`;
+    let url = `${iss}/api/sequences/`;
     let method: Function;
     if (sequence.id) {
       url += sequence.id;
@@ -179,7 +179,7 @@ export function deleteSequence(index: number) {
   // misc errors 
   // dependency error. 
 
-  return function(dispatch, getState){
+  return function(dispatch: Function, getState: Function){
     let state: Everything = getState();
     let { iss } = state.auth;
     let sequence: Sequence = state.sequences.all[index];

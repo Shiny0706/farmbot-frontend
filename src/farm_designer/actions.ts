@@ -1,13 +1,14 @@
 import * as Axios from "axios";
 import { error } from "../logger";
 import { Plant } from "./interfaces";
+import { Thunk } from "../interfaces"
 import { CropSearchResult, OpenFarm } from "./openfarm";
 
-const PLANT_URL = "api/plants";
+const PLANT_URL = "/api/plants";
 
-export function fetchPlants(baseUrl: string) {
-  let url = baseUrl + "/" + PLANT_URL;
-  return function (dispatch, getState) {
+export function fetchPlants(baseUrl: string): Thunk {
+  let url = baseUrl + PLANT_URL;
+  return function (dispatch , getState) {
     dispatch({ type: "FETCH_PLANTS_START" });
     return Axios.get<Plant[]>(url)
       .then((resp) => {
@@ -22,7 +23,7 @@ export function fetchPlants(baseUrl: string) {
   };
 };
 
-export function savePlant(plant: Plant, baseUrl: string) {
+export function savePlant(plant: Plant, baseUrl: string): Thunk {
   let url = baseUrl + PLANT_URL;
   return function (dispatch, getState) {
     dispatch({ type: "SAVE_PLANT_START" });
@@ -39,7 +40,7 @@ export function savePlant(plant: Plant, baseUrl: string) {
   };
 };
 
-export function destroyPlant(plant: Plant, baseUrl: string) {
+export function destroyPlant(plant: Plant, baseUrl: string): Thunk {
   let url = baseUrl + PLANT_URL + "/" + plant.id;
   return function (dispatch, getState) {
     dispatch({ type: "DESTROY_PLANT_START" });
