@@ -103,10 +103,9 @@ export let botReducer = generateReducer<BotState>(initialState)
         status: status.WEBSOCKET_ERR
       });
   })
-  .add<any>("CHANGE_DEVICE", function(state, action) {
-    return _.assign<any, BotState>({},
-      state,
-      action.payload);
+  .add<any>("CHANGE_DEVICE", function(s, a) {
+    _.assign(s.account, a.payload, {dirty: true});
+    return s;
   })
   .add<any>("FETCH_DEVICE", function(state, action) {
     return state;

@@ -16,8 +16,13 @@ export interface ReduxAction<T> {
   readonly payload: T;
 };
 
+/** The "getState()" function, typically passed in by Redux Thunk Middleware. */
+export type GetState = () => Everything;
+/** A Redux Thunk function. */
+export interface Thunk {
+  (dispatch: Function, getState: GetState): any;
+};
 
-/** All the props. TODO: Add all the interfaces to this prop ball. */
 interface Location {
   /** EX: /app/dashboard/designer */
   pathname: string;

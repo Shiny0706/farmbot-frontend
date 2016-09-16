@@ -11,6 +11,8 @@ import { ToggleButton } from "../controls/toggle_button";
 import { devices } from "../device";
 import { BotLog } from "../devices/interfaces";
 import * as moment from "moment";
+import { Everything } from "../interfaces";
+import { saveAccountChanges } from "./actions";
 
 export class SettingsInputBox extends React.Component<any, any> {
 
@@ -59,11 +61,16 @@ export class SettingsInputBox extends React.Component<any, any> {
 // TODO HACK : This is the biggest refactor target in the app right now.
 // Numerous issues: uses local variables instead of component state, references
 // Farmbot object and Redux .bot property (redundant).
-class DevicesPage extends React.Component<any, any> {
+class DevicesPage extends React.Component<Everything, any> {
 
   constructor() {
+    // DELETE THIS!
     super();
     this.state = {bot: devices.current};
+  }
+
+  updateBot(e: React.MouseEvent) {
+    this.props.dispatch(saveAccountChanges);
   }
 
   changeBot(e) {
@@ -80,7 +87,6 @@ class DevicesPage extends React.Component<any, any> {
   }
 
   render() {
-    let bot = this.state.bot;
 
     return (
       <div>
@@ -97,8 +103,9 @@ class DevicesPage extends React.Component<any, any> {
                           <div className="row">
                             <div className="col-sm-12">
                               <button type="submit"
-                                      className="button-like green widget-control">
-                                SAVE { bot.dirty ? "*" : "" }
+                                      className="button-like green widget-control"
+                                      onClick={ this.updateBot.bind(this) }>
+                                SAVE { this.props.bot.account.dirty ? "*" : "" }
                               </button>
                               <div className="widget-header">
                                 <h5>DEVICE</h5>
@@ -121,7 +128,7 @@ class DevicesPage extends React.Component<any, any> {
                                       <td colSpan={2}>
                                         <input name="name"
                                                onChange={ this.changeBot.bind(this) }
-                                               value={ bot.name || "Fix me!"} />
+                                               value={ this.props.bot.account.name } />
                                       </td>
                                     </tr>
                                     <tr>
@@ -137,7 +144,7 @@ class DevicesPage extends React.Component<any, any> {
                                         <label>IP ADDRESS</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <p>{ (this.props.bot.hardware || {}).ip_address}</p>
+                                        <p>0.0.0.0</p>
                                       </td>
                                     </tr>
                                     <tr>
@@ -170,7 +177,7 @@ class DevicesPage extends React.Component<any, any> {
                                       <td>
                                         <p>
                                           Version {
-                                            String(this.props.bot.hardware.param_version) || "information is loading..."
+                                            String(this.props.bot.hardware.param_version) || "loading"
                                           }
                                         </p>
                                       </td>

@@ -10,12 +10,10 @@ export function generateReducer<State>(
     /** A function that responds to a particular action from within a generated reducer. */
     interface ActionHandler {
         (state: State, action: ReduxAction<any>): State;
-        // TODO: Remove explicit any in favor of generic.
     }
 
     interface GenericActionHandler<T> {
         (state: State, action: ReduxAction<T>): State;
-        // TODO: Remove explicit any in favor of generic.
     }
 
     interface ActionHandlerDict {
