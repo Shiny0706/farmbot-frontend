@@ -11,6 +11,7 @@ import { ToggleButton } from "../controls/toggle_button";
 import { devices } from "../device";
 import { BotLog } from "../devices/interfaces";
 import * as moment from "moment";
+import { Everything } from "../interfaces";
 
 export class SettingsInputBox extends React.Component<any, any> {
 
@@ -59,7 +60,7 @@ export class SettingsInputBox extends React.Component<any, any> {
 // TODO HACK : This is the biggest refactor target in the app right now.
 // Numerous issues: uses local variables instead of component state, references
 // Farmbot object and Redux .bot property (redundant).
-class DevicesPage extends React.Component<any, any> {
+class DevicesPage extends React.Component<Everything, any> {
 
   constructor() {
     super();
@@ -121,7 +122,7 @@ class DevicesPage extends React.Component<any, any> {
                                       <td colSpan={2}>
                                         <input name="name"
                                                onChange={ this.changeBot.bind(this) }
-                                               value={ bot.name || "Fix me!"} />
+                                               value={ this.props.bot.account.name } />
                                       </td>
                                     </tr>
                                     <tr>
@@ -137,7 +138,7 @@ class DevicesPage extends React.Component<any, any> {
                                         <label>IP ADDRESS</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <p>{ (this.props.bot.hardware || {}).ip_address}</p>
+                                        <p>0.0.0.0</p>
                                       </td>
                                     </tr>
                                     <tr>
@@ -170,7 +171,7 @@ class DevicesPage extends React.Component<any, any> {
                                       <td>
                                         <p>
                                           Version {
-                                            String(this.props.bot.hardware.param_version) || "information is loading..."
+                                            String(this.props.bot.hardware.param_version) || "loading"
                                           }
                                         </p>
                                       </td>
