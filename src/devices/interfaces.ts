@@ -2,7 +2,7 @@ export interface BotLog {
   /** A tag for (eventually) filtering log messages. */
   name: string;
   /** Some day, we'll squelch messages. */
-  priority: "low"|"medium"|"high"; // TODO: Use numbers?
+  priority: "low" | "medium" | "high"; // TODO: Use numbers?
   /** The actual message that was emitted */
   data: string;
   /** a Unix timestamp (UTC) */
@@ -15,7 +15,20 @@ export interface BotLog {
   };
 };
 
+/** How the device is stored in the API side.
+ * This is what comes back from the API as JSON.
+ */
+export interface DeviceAccountSettings {
+  id: number;
+  name: string;
+  uuid: string;
+  webcam_url?: string;
+  /** Must the deivce be saved? */
+  dirty?: boolean;
+};
+
 export interface BotState {
+  account: DeviceAccountSettings;
   /** Maximum number of messages to cache. Excess is truncated. */
   logQueueSize: number;
   logQueue: BotLog[];

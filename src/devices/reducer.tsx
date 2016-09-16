@@ -1,6 +1,6 @@
 import { error, warning } from "../logger";
 import * as _ from "lodash";
-import { BotState } from "./interfaces";
+import { BotState, DeviceAccountSettings } from "./interfaces";
 import { generateReducer } from "../generate_reducer";
 import { isBotLog } from "./is_bot_log";
 
@@ -16,6 +16,7 @@ let status = {
 };
 
 let initialState: BotState = {
+  account: { id: 0, uuid: "loading...", name: "loading..." },
   logQueueSize: 10,
   logQueue: [],
   status: status.NOT_READY,
@@ -88,12 +89,6 @@ export let botReducer = generateReducer<BotState>(initialState)
     newState.hardware = _.assign({}, state.hardware, statuses);
     return _.assign<any, BotState>({}, newState);
   })
-  .add<any>("COMMAND_ERR", function(s, a) {
-    return s;
-  })
-  .add<any>("COMMAND_OK", function(s, a) {
-    return s;
-  })
   .add<any>("CONNECT_OK", function(state, action) {
     return _.assign<any, BotState>({},
       state,
@@ -124,6 +119,7 @@ export let botReducer = generateReducer<BotState>(initialState)
       });
   })
   .add<any>("FETCH_DEVICE_ERR", function(state, action) {
+    // TODO: Toast messages do not belong in a reducer.
     if (action.payload.status === 404) {
       warning("You need to add a device to your account.",
         "No device found!");
@@ -171,4 +167,13 @@ export let botReducer = generateReducer<BotState>(initialState)
     }
     return state;
 
+  })
+  .add<DeviceAccountSettings>("REPLACE_DEVICE_ACCOUNT_INFO", function(s,a) {
+    s.account = a.payload;
+    return s;
+  })
+  .add<string>("CHANGE_WEBCAM_URL", function(s, a) {
+    s.account.dirty = true;
+    s.account.webcam_url = a.payload;
+    return s;
   });
