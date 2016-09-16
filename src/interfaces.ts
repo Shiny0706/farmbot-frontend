@@ -23,8 +23,6 @@ export interface Thunk {
   (dispatch: Function, getState: GetState): any;
 };
 
-
-/** All the props. TODO: Add all the interfaces to this prop ball. */
 interface Location {
   /** EX: /app/dashboard/designer */
   pathname: string;

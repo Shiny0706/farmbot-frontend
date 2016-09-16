@@ -1,9 +1,8 @@
-import * as $ from "jquery";
 import { connectDevice } from "../devices/actions";
+import { DeviceAccountSettings } from "../devices/interfaces";
 import { push } from "../history";
 import { fetchSequences } from "../sequences/actions";
 import { fetchRegimens } from "../regimens/actions";
-import { post } from "axios";
 import { error } from "../logger";
 import { AuthState } from "./interfaces";
 import { fetchPlants } from "../farm_designer/actions";
@@ -20,7 +19,6 @@ export interface AuthResponse {
 };
 
 export function didLogin(authState: AuthState, dispatch: Function) {
-  setToken(authState.token);
   dispatch(loginOk(authState));
   dispatch(connectDevice(authState.token));
   dispatch(downloadDeviceData(authState.iss))
@@ -31,7 +29,7 @@ export function didLogin(authState: AuthState, dispatch: Function) {
 
 export function downloadDeviceData(baseUrl: string) {
   return function (dispatch, getState) {
-    Axios.get<any>( baseUrl + "/api/device")
+    Axios.get<DeviceAccountSettings>(baseUrl + "/api/device")
       .then(res => dispatch({ type: "REPLACE_DEVICE_ACCOUNT_INFO", payload: res.data }))
       .catch(payload => dispatch({ type: "DEVICE_ACCOUNT_ERR", payload }));
   };
@@ -39,8 +37,9 @@ export function downloadDeviceData(baseUrl: string) {
 
 // We need to handle OK logins for numerous use cases (Ex: login AND registration)
 export function onLogin(dispatch: Function) {
-  return (response: AuthResponse) => {
-    let tokenData: AuthResponseToken = _.cloneDeep<any>(response.token);
+  return (response: Axios.AxiosXHR<AuthResponse>) => {
+    let { data } = response;
+    let tokenData: AuthResponseToken = _.cloneDeep<any>(data.token);
     let authState: AuthState = {
       token: tokenData.encoded,
       sub: tokenData.unencoded.sub,
@@ -63,6 +62,7 @@ export function login(username: string,
   return dispatch => {
     return requestToken(username, password, url).then(
       onLogin(dispatch),
+      // function(wut) {},
       (err) => dispatch(loginErr(err))
     );
   };
@@ -120,7 +120,7 @@ export function register(name: string,
       password,
       confirmation,
       url);
-    return p.then((r) => onLogin(dispatch)(r.data),
+    return p.then(onLogin(dispatch),
       onRegistrationErr(dispatch));
   };
 }
@@ -151,27 +151,14 @@ function requestRegistration(name: string,
       name: name
     }
   };
-  return post<AuthResponse>(url + "/api/users", form);
+  return Axios.post<AuthResponse>(url + "/api/users", form);
 }
 
 
 function requestToken(email: string,
   password: string,
-  url: string): JQueryXHR {
-  // TODO: Replace with AXIOS.get().
-  return $.ajax({
-    url: url + "/api/tokens",
-    type: "POST",
-    data: JSON.stringify({ user: { email: email, password: password } }),
-    contentType: "application/json"
-  });
-}
-
-// TODO Someday, we will stop using jQuery. This is mostly for legacy support.
-export function setToken(token: string): void {
-  $.ajaxSetup({
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader("Authorization", token);
-    }
-  });
+  url: string) {
+  let payload = { user: { email: email, password: password } };
+  let path = url + "/api/tokens";
+  return Axios.post<AuthResponse>(path, payload);
 }
