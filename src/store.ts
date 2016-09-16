@@ -2,7 +2,8 @@ import thunk from "redux-thunk";
 import {
   createStore,
   applyMiddleware,
-  combineReducers
+  combineReducers,
+  compose
 } from "redux";
 import { authReducer as auth } from "./auth/reducer";
 import { sequenceReducer as sequences } from "./sequences/reducer";
@@ -32,15 +33,17 @@ let reducers = combineReducers({
 
 function configureStore(options = {}) {
   let store;
-  // if (process.env.NODE_ENV === "development") {
-  //   let lastState = JSON.parse(sessionStorage["lastState"] || "{}");
-  //   store = createStore(reducers, lastState, applyMiddleware(thunk));
-  //   store.subscribe(function () {
-  //     sessionStorage["lastState"] = JSON.stringify(store.getState());
-  //   });
-  // } else {
+  if (process.env.NODE_ENV !== "production") {
+    let lastState = JSON.parse(sessionStorage["lastState"] || "{}");
+    let dt = window["devToolsExtension"];
+    let srsly = compose(applyMiddleware(thunk), dt ? dt() : f => f);
+    store = createStore(reducers, lastState, srsly);
+    store.subscribe(function () {
+      sessionStorage["lastState"] = JSON.stringify(store.getState());
+    });
+  } else {
     store = createStore(reducers, {}, applyMiddleware(thunk));
-  // };
+  };
   return store;
 }
 

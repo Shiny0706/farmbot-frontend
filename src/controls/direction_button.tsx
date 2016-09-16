@@ -1,5 +1,5 @@
 import * as React from "react";
-import { sendCommand } from "./devices/actions";
+import { sendCommand } from "../devices/actions";
 
 export class DirectionButton extends React.Component<any, any> {
   sendCommand() {

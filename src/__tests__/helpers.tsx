@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Everything } from "../interfaces";
 import { ConfigState } from "../config/interfaces";
+import { BotState } from "../devices/interfaces";
 
 export class Wrapper extends React.Component<any, any> {
   render() {
@@ -41,7 +42,13 @@ export function fakeState(dispatcher?: Function): Everything {
     cropSearchQuery: "?foo=bar",
     cropSearchResults: []
   };
-  let bot = {  /** Maximum number of messages to cache. Excess is truncated. */
+  let bot: BotState = {
+    account: {
+      id: 1,
+      name: "wow",
+      uuid: "000-000-000-000"
+    },
+    /** Maximum number of messages to cache. Excess is truncated. */
     logQueueSize: 0,
     logQueue: [],
     status: "???",

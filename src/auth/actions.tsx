@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import { fetchDevice } from "../devices/actions";
+import { connectDevice } from "../devices/actions";
 import { push } from "../history";
 import { fetchSequences } from "../sequences/actions";
 import { fetchRegimens } from "../regimens/actions";
@@ -11,8 +11,8 @@ import { ReduxAction } from "../interfaces";
 import * as Axios from "axios";
 
 export interface AuthResponseToken {
-    unencoded: AuthToken;
-    encoded: string;
+  unencoded: AuthToken;
+  encoded: string;
 };
 
 export interface AuthResponse {
@@ -20,12 +20,21 @@ export interface AuthResponse {
 };
 
 export function didLogin(authState: AuthState, dispatch: Function) {
-    setToken(authState.token);
-    dispatch(loginOk(authState));
-    dispatch(fetchDevice(authState.token));
-    dispatch(fetchSequences());
-    dispatch(fetchRegimens(authState.iss));
-    dispatch(fetchPlants(authState.iss));
+  setToken(authState.token);
+  dispatch(loginOk(authState));
+  dispatch(connectDevice(authState.token));
+  dispatch(downloadDeviceData(authState.iss))
+  dispatch(fetchSequences());
+  dispatch(fetchRegimens(authState.iss));
+  dispatch(fetchPlants(authState.iss));
+};
+
+export function downloadDeviceData(baseUrl: string) {
+  return function (dispatch, getState) {
+    Axios.get<any>( baseUrl + "/api/device")
+      .then(res => dispatch({ type: "REPLACE_DEVICE_ACCOUNT_INFO", payload: res.data }))
+      .catch(payload => dispatch({ type: "DEVICE_ACCOUNT_ERR", payload }));
+  };
 };
 
 // We need to handle OK logins for numerous use cases (Ex: login AND registration)
@@ -49,8 +58,8 @@ export function onLogin(dispatch: Function) {
 };
 
 export function login(username: string,
-                      password: string,
-                      url: string) {
+  password: string,
+  url: string) {
   return dispatch => {
     return requestToken(username, password, url).then(
       onLogin(dispatch),
@@ -78,10 +87,18 @@ export interface AuthToken {
   authenticated: boolean;
 }
 
+/** Very important. Once called, all outbound HTTP requests will
+ * have a JSON Web Token attached to their "Authorization" header,
+ * thereby granting access to the API.
+ */
 export function loginOk(auth: AuthState): ReduxAction<AuthState> {
+  // TODO: Create a shareable axios instance and set the `baseURL`
+  // IDEA: https://medium.com/@srph/axios-configure-the-base-path-daed6ff79eab#.145enq9g6
+  // OR THIS: https://github.com/srph/axios-base-url
+  // property so we can get rid of all that un-DRY URL concat junk.
   // This is how we attach the auth token to every
   // outbound HTTP request (after user logs in).
-  Axios.interceptors.request.use(function(config) {
+  Axios.interceptors.request.use(function (config) {
     config.headers = config.headers || {};
     config.headers["Authorization"] = auth.token;
     return config;
@@ -93,26 +110,26 @@ export function loginOk(auth: AuthState): ReduxAction<AuthState> {
 }
 
 export function register(name: string,
-                         email: string,
-                         password: string,
-                         confirmation: string,
-                         url: string) {
+  email: string,
+  password: string,
+  confirmation: string,
+  url: string) {
   return dispatch => {
     let p = requestRegistration(name,
-                                email,
-                                password,
-                                confirmation,
-                                url);
+      email,
+      password,
+      confirmation,
+      url);
     return p.then((r) => onLogin(dispatch)(r.data),
-                  onRegistrationErr(dispatch));
+      onRegistrationErr(dispatch));
   };
 }
 
 export function onRegistrationErr(dispatch) {
   return (err) => {
     let msg = _.values(err.data)
-               .join(". ")
-               .replace(/nil/g, "empty") || "Unknown server error.";
+      .join(". ")
+      .replace(/nil/g, "empty") || "Unknown server error.";
     error(msg);
     dispatch({
       type: "REGISTRATION_ERROR",
@@ -122,10 +139,10 @@ export function onRegistrationErr(dispatch) {
 }
 
 function requestRegistration(name: string,
-                             email: string,
-                             password: string,
-                             confirmation: string,
-                             url: string) {
+  email: string,
+  password: string,
+  confirmation: string,
+  url: string) {
   let form = {
     user: {
       email: email,
@@ -139,8 +156,8 @@ function requestRegistration(name: string,
 
 
 function requestToken(email: string,
-                      password: string,
-                      url: string): JQueryXHR {
+  password: string,
+  url: string): JQueryXHR {
   // TODO: Replace with AXIOS.get().
   return $.ajax({
     url: url + "/api/tokens",

@@ -179,7 +179,7 @@ export function changeDevice(attributesThatWillChange = { dirty: true }) {
     };
 }
 
-export function fetchDevice(token: string): {} | ((dispatch: any) => any) {
+export function connectDevice(token: string): {} | ((dispatch: any) => any) {
     return (dispatch) => {
         let bot = new Farmbot({ token });
         return bot
