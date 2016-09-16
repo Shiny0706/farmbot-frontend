@@ -1,5 +1,11 @@
 import { OpenFarm } from "./openfarm";
 
+export interface ScheduledEvent {
+  time: Date;
+  desc: string;
+  icon: string;
+};
+
 /** OFCrop bundled with corresponding profile image from OpenFarm API. */
 export interface CropLiveSearchResult {
   crop: OpenFarm.OFCrop;

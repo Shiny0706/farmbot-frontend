@@ -1,35 +1,49 @@
 import * as React from "react";
 import { Link } from "react-router";
+import { Everything } from "../interfaces";
+import { ScheduledEvent } from "./interfaces";
 
 /** Temp stub for now. */
-const FAKE_SCHEDULES = [{
-    time: "2015-02-27T12:00:00.000Z",
-    desc: "Photos",
-    icon: "fa-trees"
-  }, {
-    time: "2015-02-28T13:00:00.000Z",
-    desc: "Weeding",
-    icon: "fa-trees"
-  }, {
-    time: "2015-02-28T15:00:00.000Z",
-    desc: "Spectral blah this is a long event title",
-    icon: "fa-trees"
-  }];
+const FAKE_SCHEDULES: ScheduledEvent[] = [{
+  time: new Date("02-27-2015 06:00"),
+  desc: "Photos",
+  icon: "fa-trees"
+}, {
+  time: new Date("02-28-2015 07:00"),
+  desc: "Weeding",
+  icon: "fa-trees"
+}, {
+  time: new Date("02-28-2015 09:00"),
+  desc: "Spectral blah this is a long event title",
+  icon: "fa-trees"
+}];
 
-export class ScheduleEvent extends React.Component<any, any> {
+interface ScheduledEventProps {
+  scheduledEvent: ScheduledEvent;
+}
+
+export class ScheduleEvent extends React.Component<ScheduledEventProps, {}> {
+
+  hasPassed(date: Date) { return date < new Date(); }
+
+  formatTime(date: Date) {
+    let hours = date.getHours();
+    return `${hours} ${(hours > 12) ? "a" : "p"}`;
+  }
+
   render() {
     let evnt = this.props.scheduledEvent;
 
-    return <div className="event { this.hasPassed() ? 'past' : '' }">
+    return <div className="event { this.hasPassed(event.time) ? 'past' : '' }">
       <div className="event-time">
-        {evnt.formatTime()}
+        { this.formatTime(evnt.time) }
       </div>
       <div className="event-title">{evnt.desc}</div>
     </div>;
   }
 }
 
-export class Events extends React.Component<any, any> {
+export class Events extends React.Component<Everything, {}> {
   render() {
     let events = _(FAKE_SCHEDULES)
       .sortBy("time")
