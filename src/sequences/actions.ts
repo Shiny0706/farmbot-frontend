@@ -203,7 +203,7 @@ export function deleteSequence(index: number) {
     }
 
     if (sequence.id) {
-      let url = `${iss}api/sequences/` + sequence.id;
+      let url = `${iss}/api/sequences/` + sequence.id;
       axios.delete(url)
         .then(deleteSequenceOK)
         .catch(deleteSequenceErr);

@@ -25,8 +25,6 @@ export class Panel1 extends React.Component<any, any> {
   }
 
   get content() {
-    let wtf = Plants;
-    let x = this.tabName;
     let component= 
     ({
       Plants,
@@ -39,7 +37,7 @@ export class Panel1 extends React.Component<any, any> {
       Zones,
       AddZone,
       Panel2
-    } as ComponentMap)[x];
+    } as ComponentMap)[this.tabName];
     return React.createElement(component, this.props);
   }
 

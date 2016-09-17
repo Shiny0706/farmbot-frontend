@@ -49,23 +49,22 @@ export let botReducer = generateReducer<BotState>(initialState)
     return state;
   })
   .add<any>("CHANGE_AXIS_BUFFER", function(state, action) {
-    let axisBuffer: any = _.assign({}, state.axisBuffer);
-    axisBuffer[action.payload.key] = action.payload.val;
+    // let axisBuffer: any = _.assign({}, state.axisBuffer);
+    state.axisBuffer[action.payload.key] = action.payload.val;
 
     return _.assign<any, BotState>({}, state, {
-      axisBuffer: axisBuffer
+      axisBuffer: state.axisBuffer
     });
   })
   .add<any>("CHANGE_SETTINGS_BUFFER", function(state, action) {
-    let settingsBuffer: any = _.assign({}, state.settingsBuffer);
     let newVal = Number(action.payload.val);
     if (newVal) {
-      settingsBuffer[action.payload.key] = action.payload.val;
+      state.settingsBuffer[action.payload.key] = action.payload.val;
     } else {
-      delete settingsBuffer[action.payload.key];
+      delete state.settingsBuffer[action.payload.key];
     }
     return _.assign<any, BotState>({}, state, {
-      settingsBuffer: settingsBuffer
+      settingsBuffer: state.settingsBuffer
     });
   })
   .add<any>("CHANGE_STEP_SIZE", function(state, action) {
