@@ -1,6 +1,6 @@
 import { ReduxAction } from "./interfaces";
 
-const NOOP = (s, a) => s;
+const NOOP = (s: any, a: ReduxAction<{}>) => s;
 
 export function generateReducer<State>(
   initialState: State,

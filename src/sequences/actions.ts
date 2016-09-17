@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import { Everything } from "../interfaces"
+import { Everything, Thunk } from "../interfaces"
 import { AuthState } from "../auth/interfaces";
 import { SequenceOptions,
          Step,
@@ -109,11 +109,11 @@ export function removeStep(index: number): RemoveStep {
   };
 }
 
-export function saveSequence(sequence: Sequence) {
-  return function(dispatch: Function, getState: Function) {
+export function saveSequence(sequence: Sequence): Thunk {
+  return function(dispatch, getState) {
     let state: AuthState = getState().auth;
     let { iss} = state;
-    let url = `${iss}api/sequences/`;
+    let url = `${iss}/api/sequences/`;
     let method: Function;
     if (sequence.id) {
       url += sequence.id;
@@ -179,7 +179,7 @@ export function deleteSequence(index: number) {
   // misc errors 
   // dependency error. 
 
-  return function(dispatch, getState){
+  return function(dispatch: Function, getState: Function){
     let state: Everything = getState();
     let { iss } = state.auth;
     let sequence: Sequence = state.sequences.all[index];
@@ -203,7 +203,7 @@ export function deleteSequence(index: number) {
     }
 
     if (sequence.id) {
-      let url = `${iss}api/sequences/` + sequence.id;
+      let url = `${iss}/api/sequences/` + sequence.id;
       axios.delete(url)
         .then(deleteSequenceOK)
         .catch(deleteSequenceErr);

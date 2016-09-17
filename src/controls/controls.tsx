@@ -24,11 +24,11 @@ interface AxisInputBoxProps {
 export class AxisInputBox extends React.Component<AxisInputBoxProps, {}> {
 
   primary(): string {
-    return this.props.bot.axisBuffer[this.props.axis];
+    return this.props.bot.axisBuffer[this.props.axis] || "";
   }
 
   secondary(): string {
-    let num = this.props.bot.hardware[this.props.axis];
+    let num = (this.props.bot.hardware as any)[this.props.axis];
     if (_.isNumber(num)) {
       return String(num); // Prevent 0 from being falsy.
     } else {
@@ -40,9 +40,9 @@ export class AxisInputBox extends React.Component<AxisInputBoxProps, {}> {
     return { border: (this.primary()) ? "1px solid red" : "" };
   }
 
-  change(key, dispatch): React.EventHandler<React.FormEvent> {
+  change(key: string, dispatch: Function): React.EventHandler<React.FormEvent> {
     return function (event) {
-      dispatch(changeAxisBuffer(key, event.target["value"]));
+      dispatch(changeAxisBuffer(key,  (event.target as any).value ));
     };
   }
 
@@ -58,7 +58,7 @@ export class AxisInputBox extends React.Component<AxisInputBoxProps, {}> {
   }
 }
 export class StepSizeSelector extends React.Component<any, any> {
-  cssForIndex(num) {
+  cssForIndex(num: number) {
     let choices = this.props.choices;
     let css = "move-amount no-radius ";
     if (num === _.first(choices)) {
@@ -77,7 +77,7 @@ export class StepSizeSelector extends React.Component<any, any> {
     return (<div className="move-amount-wrapper">
       {
         this.props.choices.map(
-          (item, inx) => <button
+          (item: number, inx: number) => <button
             className={this.cssForIndex(item)}
             onClick={() => this.props.selector(item)}
             key={inx} >{item}</button>
@@ -136,7 +136,7 @@ export class Controls extends React.Component<Everything, any> {
                             <div className="col-sm-12">
                               <StepSizeSelector
                                 choices={[1, 10, 100, 1000, 10000]}
-                                selector={(num) => this.props.dispatch(changeStepSize(num))}
+                                selector={(num: number) => this.props.dispatch(changeStepSize(num))}
                                 selected={bot.stepSize} />
                             </div>
                           </div>
@@ -345,6 +345,6 @@ const showUrl = (url: string, dirty: boolean) => {
 const updateWebcamUrl = (dispatch: Function) => (event: React.KeyboardEvent) => {
   dispatch({
     type: "CHANGE_WEBCAM_URL",
-    payload: event.target["value"]
+    payload: (event.target as any)["value"]
   });
 };

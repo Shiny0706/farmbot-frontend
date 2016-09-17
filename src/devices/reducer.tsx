@@ -49,23 +49,22 @@ export let botReducer = generateReducer<BotState>(initialState)
     return state;
   })
   .add<any>("CHANGE_AXIS_BUFFER", function(state, action) {
-    let axisBuffer = _.assign({}, state.axisBuffer);
-    axisBuffer[action.payload.key] = action.payload.val;
+    // let axisBuffer: any = _.assign({}, state.axisBuffer);
+    state.axisBuffer[action.payload.key] = action.payload.val;
 
     return _.assign<any, BotState>({}, state, {
-      axisBuffer: axisBuffer
+      axisBuffer: state.axisBuffer
     });
   })
   .add<any>("CHANGE_SETTINGS_BUFFER", function(state, action) {
-    let settingsBuffer = _.assign({}, state.settingsBuffer);
     let newVal = Number(action.payload.val);
     if (newVal) {
-      settingsBuffer[action.payload.key] = action.payload.val;
+      state.settingsBuffer[action.payload.key] = action.payload.val;
     } else {
-      delete settingsBuffer[action.payload.key];
+      delete state.settingsBuffer[action.payload.key];
     }
     return _.assign<any, BotState>({}, state, {
-      settingsBuffer: settingsBuffer
+      settingsBuffer: state.settingsBuffer
     });
   })
   .add<any>("CHANGE_STEP_SIZE", function(state, action) {
@@ -149,23 +148,17 @@ export let botReducer = generateReducer<BotState>(initialState)
       dirty: false
     });
   })
-  .add<any>("BOT_NOTIFICATION", function(s, { payload }) {
-    let state;
-
+  .add<any>("BOT_NOTIFICATION", function(state, { payload }) {
     if (isBotLog(payload)) {
-      state = _.cloneDeep(s);
-      let msg = _.cloneDeep(payload);
-      state.logQueue.unshift(msg);
+      state.logQueue.unshift(payload);
       state.logQueue = _.take(state.logQueue, state.logQueueSize);
       console.groupCollapsed("Bot Message");
-      console.log(msg.data);
+      console.log(payload.data);
       console.groupEnd();
     } else {
       console.warn("Unexpected log message?");
-      state = s; // Not a log message.
     }
     return state;
-
   })
   .add<DeviceAccountSettings>("REPLACE_DEVICE_ACCOUNT_INFO", function(s,a) {
     s.account = a.payload;

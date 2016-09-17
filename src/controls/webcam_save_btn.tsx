@@ -7,7 +7,7 @@ interface SaveWebcamParams {
 };
 
 let saveWebcamUrl = ({dispatch, apiUrl, webcam_url}: SaveWebcamParams) => () => {
-  return dispatch((d) => updateDevice(apiUrl, { webcam_url }, d));
+  return dispatch( () => updateDevice(apiUrl, { webcam_url }, dispatch) );
 };
 
 interface WebcamSaveBtnProps {
@@ -17,7 +17,7 @@ interface WebcamSaveBtnProps {
   dirty: boolean;
 }
 
-export function WebcamSaveBtn({dispatch, webcamUrl, apiUrl, dirty}) {
+export function WebcamSaveBtn({dispatch, webcamUrl, apiUrl, dirty}:WebcamSaveBtnProps) {
   if (dirty) {
     return <button type="button"
                    className="green button-like widget-control"

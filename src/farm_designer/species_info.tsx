@@ -8,10 +8,10 @@ export class SpeciesInfo extends React.Component<Everything, any> {
   drag(e: React.DragEvent) {
     var img = document.createElement("img");
     img.src = "/img/icons/seed.png";
-    e.dataTransfer["setDragImage"](img, 12, 48);
+    (e.dataTransfer as any)["setDragImage"](img, 12, 48);
   }
 
-  drop(e) {
+  drop(e: React.MouseEvent) {
     let box = document
       .querySelector("#drop-area > svg > rect")
       .getBoundingClientRect();
@@ -29,7 +29,7 @@ export class SpeciesInfo extends React.Component<Everything, any> {
     this.props.dispatch(savePlant(plant, baseUrl));
   }
 
-  findCrop(slug) {
+  findCrop(slug?: string) {
     let crops = this.props.designer.cropSearchResults;
     let crop = _(crops).find((result) => result.crop.slug === slug);
     return crop || {
@@ -94,7 +94,7 @@ export class SpeciesInfo extends React.Component<Everything, any> {
   }
 }
 
-function fromScreenToGarden(mouseX, mouseY, boxX, boxY) {
+function fromScreenToGarden(mouseX: number, mouseY: number, boxX: number, boxY: number) {
   let rawX = mouseX - boxX;
   let rawY = boxY - mouseY;
 

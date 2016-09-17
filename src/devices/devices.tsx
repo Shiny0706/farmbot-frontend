@@ -41,9 +41,9 @@ export class SettingsInputBox extends React.Component<any, any> {
     };
   }
 
-  change(key, dispatch) {
-    return function(event) {
-      dispatch(changeSettingsBuffer(key, event.target.value));
+  change(key: any, dispatch: Function) {
+    return function(event: React.FormEvent) {
+      dispatch(changeSettingsBuffer(key, (event.target as any).value));
     };
   }
 
@@ -73,17 +73,17 @@ class DevicesPage extends React.Component<Everything, any> {
     this.props.dispatch(saveAccountChanges);
   }
 
-  changeBot(e) {
+  changeBot(e: React.MouseEvent) {
     // THIS IS THE CAUSE OF THE "STALE DATA" BUG: Fix me!
     e.preventDefault();
-    let updates: any = _.object([[e.target.name, e.target.value]]); // {name: "value"}
+    let updates: any = _.object([[(e.target as any).name, (e.target as any).value]]); // {name: "value"}
     this.props.dispatch(changeDevice(updates));
   }
 
-  saveBot(e) {
+  saveBot(e: React.MouseEvent) {
     // THIS IS THE CAUSE OF THE "STALE DATA" BUG: Fix me!
     e.preventDefault();
-    this.props.dispatch(addDevice(convertFormToObject(e.target)));
+    this.props.dispatch(addDevice(convertFormToObject(e.target as any)));
   }
 
   render() {
@@ -455,7 +455,7 @@ interface LogsProps {
 }
 
 function Logs({logs}: LogsProps) {
-  function HasLogs(_) {
+  function HasLogs(_: any) {
     function displayTime(t: number): string {
       return moment.unix(t).format("D MMM h:mma");
     }
@@ -481,7 +481,7 @@ function Logs({logs}: LogsProps) {
            </tbody>;
   }
 
-  function NoLogs(props) {
+  function NoLogs(_: any) {
     return <tbody>
             <tr>
               <td colSpan={3}>

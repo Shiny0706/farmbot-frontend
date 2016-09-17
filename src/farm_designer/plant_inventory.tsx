@@ -74,7 +74,7 @@ interface ListProps {
 }
 export class List extends React.Component<ListProps, any> {
   render() {
-    let mapper = function(plant: Plant, key) {
+    let mapper = function(plant: Plant, key: number) {
       return(
         <li key={ key } >
           <Link to={ {

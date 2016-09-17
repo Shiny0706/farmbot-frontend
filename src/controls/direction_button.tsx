@@ -7,7 +7,7 @@ export class DirectionButton extends React.Component<any, any> {
     let isNegative = (this.props.direction === "up") ||
                       (this.props.direction === "right");
     let multiplier = (isNegative) ? -1 : 1;
-    payload[this.props.axis] = (this.props.steps || 250 ) * multiplier;
+    (payload as any)[this.props.axis] = (this.props.steps || 250 ) * multiplier;
     this.props.dispatch(sendCommand(payload));
   }
 
@@ -17,7 +17,7 @@ export class DirectionButton extends React.Component<any, any> {
       this.props.direction;
     return <button onClick={this.sendCommand.bind(this)}
                    className={classes}>
-             <i />
+             <i/>
            </button>;
   }
 }

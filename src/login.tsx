@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { changeApiHost, changeApiPort } from "./config/actions";
 import { Everything } from "./interfaces";
 
-let setHost = (dispatch) => (e) => dispatch(changeApiHost(e.target.value));
-let setPort = (dispatch) => (e) => dispatch(changeApiPort(e.target.value));
+let setHost = (dispatch: Function) => (e: React.FormEvent) => dispatch(changeApiHost((e.target as any).value));
+let setPort = (dispatch: Function) => (e: React.FormEvent) => dispatch(changeApiPort((e.target as any).value));
 
 
 class LoginPage extends React.Component<Everything, any> {
@@ -14,22 +14,22 @@ class LoginPage extends React.Component<Everything, any> {
     return `//${ this.props.config.host }:${ this.props.config.port }`;
   }
 
-  set(name) {
-    return function(event){
-      let state = {};
-      state[name] = event.target.value;
+  set(name: string) {
+    return function(event: React.FormEvent){
+      let state: {[name: string]: string} = {};
+      state[name] = (event.target as any).value;
       this.setState(state);
     };
   }
 
-  submitLogin(e) {
+  submitLogin(e: React.FormEvent) {
     e.preventDefault();
     let password = (this.state || {}).loginPassword;
     let email = (this.state || {}).loginEmail;
     return this.props.dispatch(login(email, password, this.url));
   }
 
-  submitRegistration(e) {
+  submitRegistration(e: React.FormEvent) {
     e.preventDefault();
     let state = this.state || {};
 

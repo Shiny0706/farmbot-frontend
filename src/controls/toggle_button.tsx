@@ -2,17 +2,21 @@ import * as React from "react";
 
 export class ToggleButton extends React.Component<any, any> {
   caption() {
-    let captions = {
+    let captions  = {
       "0":         "no",
       "false":     "no",
       "off":       "no",
       "1":         "yes",
       "true":      "yes",
       "on":        "yes",
-      "undefined": "---"
+      "undefined": "---",
     };
-
-    return captions[String(this.props.toggleval)] || "---";
+    let togval = String(this.props.toggleval);
+    if(togval){
+      return (captions as any) [togval];
+    } else {
+      "---"
+    }
   }
 
   css() {
@@ -30,7 +34,7 @@ export class ToggleButton extends React.Component<any, any> {
       "undefined": yellowCSS
     };
 
-    return cssClasses[String(this.props.toggleval)] || yellowCSS;
+    return (cssClasses as any)[String(this.props.toggleval)] || yellowCSS;
   }
 
   render() {

@@ -2,19 +2,7 @@ import { BulkSchedulerState } from "./interfaces";
 import { ReduxAction } from "../../interfaces";
 import { ToggleDayParams } from "./actions";
 import { Sequence } from "../../sequences/interfaces";
-
-export function BulkSchedulerReducer (state: BulkSchedulerState = initialState,
-                                     action: ReduxAction<any>): BulkSchedulerState {
-  return ({
-    SELECT_REGIMEN,
-    PUSH_WEEK,
-    POP_WEEK,
-    SET_TIME_OFFSET,
-    TOGGLE_DAY,
-    COMMIT_BULK_EDITOR,
-    SET_SEQUENCE
-  }[action.type] || NONE)(state, action);
-}
+import { generateReducer } from "../../generate_reducer";
 
 function newWeek() {
   return {
@@ -41,54 +29,33 @@ function newState(index: number): BulkSchedulerState {
 }
 
 let initialState: BulkSchedulerState = newState(0); // 0 default is sketchy.
-
-function NONE(s: BulkSchedulerState, a: ReduxAction<any>) {
-  return s;
-}
-
-function SELECT_REGIMEN(state: BulkSchedulerState,
-                        action: ReduxAction<number>) {
-  return _.cloneDeep(newState(action.payload));
-}
-
-function PUSH_WEEK(s: BulkSchedulerState,
-                  a: ReduxAction<any>): BulkSchedulerState {
-  s = _.cloneDeep<BulkSchedulerState>(s);
-  s.form.weeks.push(newWeek());
-  return s;
-}
-
-function POP_WEEK(s: BulkSchedulerState,
-                  a: ReduxAction<any>): BulkSchedulerState {
-  s = _.cloneDeep<BulkSchedulerState>(s);
-  s.form.weeks.pop();
-  return s;
-}
-
-function SET_TIME_OFFSET(s: BulkSchedulerState,
-                  a: ReduxAction<number>): BulkSchedulerState {
-  s = _.cloneDeep<BulkSchedulerState>(s);
-  s.form.dailyOffsetMs = a.payload;
-  return s;
-}
-
-function TOGGLE_DAY(s: BulkSchedulerState,
-                    a: ReduxAction<ToggleDayParams>): BulkSchedulerState {
-  s = _.cloneDeep<BulkSchedulerState>(s);
-  let week = s.form.weeks[a.payload.week];
-  let day = `day${a.payload.day}`;
-  week.days[day] = !week.days[day];
-  return s;
-}
-
-function COMMIT_BULK_EDITOR(s: BulkSchedulerState,
-                            a: ReduxAction<string>): BulkSchedulerState {
-  return _.cloneDeep(newState(s.currentRegimen));
-}
-
-function SET_SEQUENCE(s: BulkSchedulerState,
-                      a: ReduxAction<Sequence>): BulkSchedulerState {
-  s = _.cloneDeep<BulkSchedulerState>(s);
-  s.sequence = a.payload;
-  return s;
-}
+export let BulkSchedulerReducer = generateReducer<BulkSchedulerState>(initialState)
+  .add<any>("SELECT_REGIMEN", function(state, action) {
+    return newState(action.payload);
+  })
+  .add<any>("PUSH_WEEK", function(state, action) {
+      state.form.weeks.push(newWeek());
+      return state;
+  })
+  .add<any>("POP_WEEK", function(state, action) {
+      state.form.weeks.pop();
+      return state;
+  })
+  .add<any>("SET_TIME_OFFSET", function(state, action) {
+      state.form.dailyOffsetMs = action.payload;
+      return state;
+  })
+  .add<any>("TOGGLE_DAY", function(state, action) {
+      let week = state.form.weeks[action.payload.week];
+      let day = `day${action.payload.day}`;
+      let days = (week.days as {[day: string]: boolean})
+      days[day] = !days[day];
+      return state;
+  })
+  .add<any>("COMMIT_BULK_EDITOR", function(state, action) {
+    return newState(state.currentRegimen);
+  })
+  .add<any>("SET_SEQUENCE", function(state, action) {
+      return state.sequence = action.payload;
+  })
+  
