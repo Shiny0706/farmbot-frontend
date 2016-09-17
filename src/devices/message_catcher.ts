@@ -58,6 +58,7 @@ interface ResponseOutcome {
   error: (r: BotErrorResponse) => any;
   notification: (r: Notification) => any;
   _: (r: any) => any;
+  [name: string]: any;
 }
 
 export let catchMessage = (resp: any) => (choices: ResponseOutcome) => {
@@ -66,7 +67,7 @@ export let catchMessage = (resp: any) => (choices: ResponseOutcome) => {
       error: isBotErrorResponse,
       notification: isNotification
     }).mapValues((f: Function) => f(resp));
-  let matchCount = (results.invert(true).value())["true"] || [];
+  let matchCount = (results.invert(true).value() as any)["true"] || [];
   let isAmbiguous = matchCount.length > 1;
   let result = (isAmbiguous ? "_" : results.findKey((v) => !!v)) || "_";
   console.log(result);

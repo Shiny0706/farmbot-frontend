@@ -32,11 +32,11 @@ let reducers = combineReducers({
 });
 
 function configureStore(options = {}) {
-  let store;
+  let store: Redux.Store;
   if (process.env.NODE_ENV !== "production") {
     let lastState = JSON.parse(sessionStorage["lastState"] || "{}");
-    let dt = window["devToolsExtension"];
-    let srsly = compose(applyMiddleware(thunk), dt ? dt() : f => f);
+    let dt = (window as any)["devToolsExtension"];
+    let srsly = compose(applyMiddleware(thunk), dt ? dt() : (f: any) => f);
     store = createStore(reducers, lastState, srsly);
     store.subscribe(function () {
       sessionStorage["lastState"] = JSON.stringify(store.getState());

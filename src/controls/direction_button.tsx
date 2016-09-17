@@ -17,7 +17,7 @@ export class DirectionButton extends React.Component<any, any> {
       this.props.direction;
     return <button onClick={this.sendCommand.bind(this)}
                    className={classes}>
-             <i />
+             <i/>
            </button>;
   }
 }

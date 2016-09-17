@@ -6,13 +6,14 @@ import { getParam } from "../util";
 
 // Dynamically determine what to render in the designer's second panel
 // based on the value of hash fragment 'p2'
+type ComponentMap = {[name: string] : React.ComponentClass<any> | React.StatelessComponent<any>};
 export class Panel2 extends React.Component<any, any> {
   get tabName() {
     return (getParam("p2") || "Events");
   }
 
   get content() {
-    let component = {Events, AddEvent}[this.tabName];
+    let component = ({Events, AddEvent} as ComponentMap)[this.tabName];
     return React.createElement(component, this.props);
   }
 

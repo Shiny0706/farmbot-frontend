@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import { Everything } from "../interfaces"
+import { Everything, Thunk } from "../interfaces"
 import { AuthState } from "../auth/interfaces";
 import { SequenceOptions,
          Step,
@@ -109,8 +109,8 @@ export function removeStep(index: number): RemoveStep {
   };
 }
 
-export function saveSequence(sequence: Sequence) {
-  return function(dispatch: Function, getState: Function) {
+export function saveSequence(sequence: Sequence): Thunk {
+  return function(dispatch, getState) {
     let state: AuthState = getState().auth;
     let { iss} = state;
     let url = `${iss}/api/sequences/`;

@@ -4,7 +4,7 @@ import {
     BulkSchedulerState
 } from "./interfaces";
 import { RegimenItem } from "../interfaces";
-import { ReduxAction, Everything } from "../../interfaces";
+import { ReduxAction, Everything, Thunk } from "../../interfaces";
 import { Sequence } from "../../sequences/interfaces";
 import { groupRegimenItemsByWeek } from "./group_regimen_items_by_week";
 
@@ -27,7 +27,7 @@ export function setTimeOffset(time: string /**  time string with format `hh:mm a
 
     let setAmPmOffset = (amPmm: string): number => {
         // Typescript doesnt know about `includes`
-        return _(amPmm).capitalize()["includes"]("P") ? 12 : 0;
+        return (_(amPmm).capitalize() as any)["includes"]("P") ? 12 : 0;
     };
 
     let milliseconds = [parseInt(hours) * 3600000,
@@ -74,7 +74,7 @@ export function setSequence(sequence: Sequence): ReduxAction<Sequence> {
     };
 };
 
-export function commitBulkEditor() {
+export function commitBulkEditor(): Thunk {
 
     return function (dispatch, getState) {
         const state: Everything = getState();

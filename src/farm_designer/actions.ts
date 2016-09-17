@@ -57,12 +57,11 @@ export function destroyPlant(plant: Plant, baseUrl: string): Thunk {
 };
 
 let STUB_IMAGE = "http://placehold.it/200x150";
-let url = (q) => `${OpenFarm.cropUrl}?include=pictures&filter=${q}`;
+let url = (q: string) => `${OpenFarm.cropUrl}?include=pictures&filter=${q}`;
 // If we do a search on keypress, we will DDoS OpenFarm.
 // This function prevents that from happening by pausing X ms
 // per keystroke.
-let _openFarmSearchQuery = _.throttle(q => Axios.get<CropSearchResult>(url(q)), 1500);
-
+let _openFarmSearchQuery = _.throttle((q: string) => Axios.get<CropSearchResult>(url(q)), 1500);
 
 /** Search openfarm for crops. This is a throttled function, useful for live search. */
 export function openFarmSearchQuery(query: string) { // TODO make less smelly

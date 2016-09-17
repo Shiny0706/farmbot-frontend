@@ -1,6 +1,6 @@
 import { didLogin } from "../auth/actions";
 import { AuthState } from "../auth/interfaces";
-import { ReduxAction } from "../interfaces";
+import { ReduxAction, Thunk } from "../interfaces";
 import { ChangeApiHost, ChangeApiPort } from "./interfaces";
 
 export function changeApiHost(host: string): ReduxAction<ChangeApiHost> {
@@ -11,8 +11,8 @@ export function changeApiPort(port: string): ReduxAction<ChangeApiPort> {
   return { type: "CHANGE_API_PORT", payload: { port } };
 };
 
-export function ready(e: Event) {
-  return (dispatch: Function, getState: Function) => {
+export function ready(e: Event): Thunk {
+  return (dispatch, getState) => {
     dispatch({ type: "READY", payload: event });
     let state: AuthState = getState().auth;
     if ((state.token || "").length > 30) { // lol

@@ -109,3 +109,9 @@ export interface HardwareState {
   pin13?: string;
 }
 
+export interface MqttMessage {
+  error? : string | undefined;
+  id?: string | undefined;
+  result: HardwareState;
+}
+

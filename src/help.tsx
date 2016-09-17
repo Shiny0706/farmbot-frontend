@@ -5,14 +5,14 @@ import * as React from "react";
 */
 export class Help extends React.Component<HelpProps, HelpState> {
 
-  constructor(props) {
+  constructor(props: HelpProps) {
     super(props);
     this.state = {isHovered: false};
   }
 
   /** The output of this function is what the user will see when the
       Help icon is hovered over. */
-  isHovered({text}) {
+  isHovered({text}: {text: string}) {
     return <div className="help-text"> { text } </div>;
   }
 
