@@ -56,6 +56,7 @@ export let BulkSchedulerReducer = generateReducer<BulkSchedulerState>(initialSta
     return newState(state.currentRegimen);
   })
   .add<any>("SET_SEQUENCE", function(state, action) {
-      return state.sequence = action.payload;
+    state.sequence = action.payload;
+    return state;
   })
   
