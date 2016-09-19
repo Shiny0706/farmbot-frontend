@@ -40,8 +40,7 @@ export interface BotState {
     // x?: string;
     // y?: string;
     // z?: string;
-    [name: string]: string | undefined;
-
+  [name: string]: string | undefined;
   };
   /** Holds settings that the user is currently editing, but has not sent */
   settingsBuffer: {

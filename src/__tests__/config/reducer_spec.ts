@@ -1,6 +1,6 @@
 import { configReducer as reduce } from "../../config/reducer";
 import { changeApiHost, changeApiPort } from "../../config/actions";
-import { ConfigState } from "../../config/interfaces"
+import { ConfigState } from "../../config/interfaces";
 
 describe("Config reducer", function() {
   let initialState: ConfigState;
