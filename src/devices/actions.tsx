@@ -208,7 +208,6 @@ function sendCommandOk(res, payload, dispatch) {
 function sendCommandErr(e, payload, dispatch) {
     let msg = (payload.name || "Command") + " request failed.";
     error(msg, "Farmbot Didn't Get That!");
-    // dispatch({ type: "COMMAND_ERR", payload: e });
 }
 
 export function addDevice(deviceAttrs): Thunk {
@@ -221,7 +220,7 @@ export function addDevice(deviceAttrs): Thunk {
 function botChange(statusMessage) {
     return {
         type: "BOT_CHANGE",
-        // payload: statusMessage
+        payload: statusMessage
     };
 }
 
