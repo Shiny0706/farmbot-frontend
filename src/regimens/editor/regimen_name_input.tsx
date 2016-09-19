@@ -10,7 +10,7 @@ function write({dispatch, regimen}: RegimenProps): React.EventHandler<React.Form
     regimen = regimen as Regimen; // Almost certainly a bug in TS.
     let action = editRegimen(
       regimen, {
-        name: event.target["value"]
+        name: (event.target as any)["value"]
       }
     );
     dispatch(action);

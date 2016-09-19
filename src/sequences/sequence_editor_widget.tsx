@@ -1,5 +1,4 @@
 import * as React from "react";
-import { AuthToken } from "../auth/actions";
 import { Step as IStep, Sequence } from "./interfaces";
 import { execSequence } from "../devices/actions";
 import { editCurrentSequence,
@@ -7,9 +6,11 @@ import { editCurrentSequence,
          deleteSequence,
          nullSequence } from "./actions";
 import { stepTiles, StepTile } from "./step_tiles";
+import { Everything } from "../interfaces";
 
 let Oops: StepTile = (_) => { return <div>Whoops! Not a valid message_type</div>; };
-let StepList = ({sequence, sequences, dispatch}) => {
+let StepList = ({sequence, sequences, dispatch}:
+  {sequence: Sequence, sequences: Sequence[], dispatch: Function}) => {
     return (<div>
         { sequence.steps.map((step: IStep, inx: number) => {
             let Step = stepTiles[step.message_type] || Oops;
@@ -24,7 +25,7 @@ let StepList = ({sequence, sequences, dispatch}) => {
 };
 
 let handleNameUpdate = (dispatch: Function) => (event: React.SyntheticEvent) => {
-    let name: string = event.target["value"] || ""; // Typescript workaround.
+    let name: string = (event.target as any)["value"] || ""; // Typescript workaround.
     dispatch(editCurrentSequence({ name }));
 };
 
@@ -38,11 +39,11 @@ let destroy = function(dispatch: Function,
     return () => dispatch(deleteSequence(inx));
 };
 
-let performSeq = (dispatch, sequence) => (e) => {
+let performSeq = (dispatch: Function, sequence: Sequence) => (e: React.FormEvent) => {
   dispatch(execSequence(sequence));
 };
 
-export function SequenceEditorWidget({sequences, dispatch}) {
+export function SequenceEditorWidget({sequences, dispatch}: Everything) {
     let inx = sequences.current;
     let sequence: Sequence = sequences.all[inx] || nullSequence();
     return (<div>

@@ -5,16 +5,16 @@ import { UnplacedStep,
     StepCommand as Command,
     messageType } from "./interfaces";
 
-let addStep = (dispatch) =>
+let addStep = (dispatch: Function) =>
     (step: UnplacedStep) =>
-        (event) => { dispatch(pushStep(step)); };
+        (event: React.FormEvent) => { dispatch(pushStep(step)); };
 
 let step = function(message_type: messageType,
     command: Command = {}): UnplacedStep {
     return { message_type, command };
 };
 
-export function StepButtonGroup({dispatch}) {
+export function StepButtonGroup({dispatch}: {dispatch: Function}) {
     let clickToAdd = addStep(dispatch);
     // TODO Farmbot does not natively support an "EXECUTE" (unconditional jmp)
     // command. For now we're sneakily making it an if_statement that is always

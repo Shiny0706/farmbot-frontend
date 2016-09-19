@@ -18,7 +18,7 @@ const initialState: AuthState = {
 
 export let authReducer = generateReducer<AuthState>(initialState)
   .add<AuthState>("LOGIN_OK", function(s, a){
-    _.assign(s, a.payload, {authenticated: true})
+    _.assign(s, a.payload, {authenticated: true});
     return s;
   })
   .add<void>("LOGIN_ERR", function(s, a){

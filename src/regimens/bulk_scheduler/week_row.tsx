@@ -22,7 +22,7 @@ export function WeekRow({index, dispatch, week}: WeekRowProps) {
                             dispatch={dispatch}
                             id={id}
                             key={id}
-                            active={week.days[lookup]}/>;
+                            active={(week.days as {[day:string]: boolean})[lookup]}/>;
               })
             }
         </div>;
@@ -36,7 +36,8 @@ interface DayProps {
   active: boolean;
 }
 
-let select = (dispatch, day, week) => () => dispatch(toggleDay({day, week}));
+let select = (dispatch: Function, day: number, week: number) => () =>
+  dispatch(toggleDay({day, week}));
 
 function Day({day, id, dispatch, week, active}: DayProps) {
 

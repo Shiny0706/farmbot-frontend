@@ -26,12 +26,12 @@ export function saveRegimen(regimen: Regimen, baseUrl: string, token: string) {
       payload: regimen
     });
 
-    const action = regimen.id ? Axios.put : Axios.post 
+    const action = regimen.id ? Axios.put : Axios.post;
     return action<Regimen>(baseUrl + REGIMEN_URL + (regimen.id || ""),
       regimenSerializer(regimen))
       .then(function(resp) {
-        success("Regimen saved.")
-        dispatch(saveRegimenOk(resp.data))
+        success("Regimen saved.");
+        dispatch(saveRegimenOk(resp.data));
       })
       .catch(err => dispatch(saveRegimenErr(err)));
   };
@@ -47,14 +47,14 @@ function saveRegimenErr(error: Error) {
 }
 
 export function deleteRegimen(regimen: Regimen, baseUrl: string) {
-  return function (dispatch) {
+  return function (dispatch: Function) {
     if (regimen && regimen.id) {
       let url = baseUrl + REGIMEN_URL + regimen.id;
       Axios.delete<Regimen>(url)
            .then(resp => dispatch(deleteRegimenOk(regimen)))
            .catch(error => deleteRegimenErr(error));
     } else {
-      dispatch(deleteRegimenOk(regimen))
+      dispatch(deleteRegimenOk(regimen));
     };
   };
 }
@@ -64,7 +64,7 @@ function deleteRegimenOk(payload: Regimen) {
   return {
     type: "DELETE_REGIMEN_OK",
     payload
-  }
+  };
 }
 
 function deleteRegimenErr(payload: Error) {
@@ -72,17 +72,17 @@ function deleteRegimenErr(payload: Error) {
   return {
     type: "DELETE_REGIMEN_ERR",
     payload
-  }
+  };
 }
 
-export function newRegimen(): ReduxAction<any> {
+export function newRegimen(): ReduxAction<{}> {
   return {
     type: "NEW_REGIMEN",
     payload: {}
   };
 }
 
-export function selectRegimen(index: number): ReduxAction<any> {
+export function selectRegimen(index: number): ReduxAction<number> {
   return {
     type: "SELECT_REGIMEN",
     payload: index
@@ -97,7 +97,7 @@ export function removeRegimenItem(item: RegimenItem): ReduxAction<RegimenItem> {
 }
 
 export function fetchRegimens(apiUrl: string) {
-  return function (dispatch) {
+  return function (dispatch: Function) {
     return Axios
       .get<Regimen[]>(apiUrl + REGIMEN_URL)
       .then(r => dispatch({

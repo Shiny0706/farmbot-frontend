@@ -15,14 +15,14 @@ export function groupRegimenItemsByWeek(weeks: Week[], OFFSET: number, seq: Sequ
         // wether we should add a sequence on that day or not.
         .map((week) =>
             keys.map((key) =>
-                week.days[key])) // [[true,false,false,true] . . . ]
+                (week.days as {[day: string]: boolean})[key])) // [[true,false,false,true] . . . ]
         // Convert true values to an offset, in milliseconds from the start point.
         // Convert false values to -1.
         .map((weekArray, weekNum) => {
-            let weeks = ONE_WEEK * (weekNum);
+            let tweeks = ONE_WEEK * (weekNum);
             return weekArray.map((shouldExecute, dayNum) => {
                 let days = ONE_DAY * (dayNum + 1);
-                return (shouldExecute) ? (weeks + days + OFFSET) : -1; // lol, In band signaling.
+                return (shouldExecute) ? (tweeks + days + OFFSET) : -1; // lol, In band signaling.
             });
         })// [[-1, 99999, -1, -1],[.....]]
         // "flatten" the array into a 1d structure (its an array of

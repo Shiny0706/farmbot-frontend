@@ -36,7 +36,9 @@ function configureStore(options = {}) {
   if (process.env.NODE_ENV !== "production") {
     let lastState = JSON.parse(sessionStorage["lastState"] || "{}");
     let dt = (window as any)["devToolsExtension"];
-    let srsly = compose(applyMiddleware(thunk), dt ? dt() : (f: any) => f);
+    let risi = require("redux-immutable-state-invariant")();
+    let srsly = compose(applyMiddleware(thunk, risi),
+              dt ? dt() : (f: any) => f);
     store = createStore(reducers, lastState, srsly);
     store.subscribe(function () {
       sessionStorage["lastState"] = JSON.stringify(store.getState());

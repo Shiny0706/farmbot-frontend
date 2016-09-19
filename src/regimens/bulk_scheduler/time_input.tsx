@@ -12,7 +12,7 @@ interface TimeInputProps {
 export class TimeInput extends React.Component<TimeInputProps, any> {
   public isEditing: boolean;
 
-  formatMs(ms) {
+  formatMs(ms: number) {
     if (_.isNumber(ms)) { // Way to much logic. 
       let d = duration(ms);
       let isPM = (d.hours() > 12);
@@ -37,9 +37,9 @@ export class TimeInput extends React.Component<TimeInputProps, any> {
     this.isEditing = true;
   }
 
-  blur (dispatch) {
-    return (event) => {
-      dispatch(setTimeOffset(event.target.value));
+  blur (dispatch: Function) {
+    return (event: React.FormEvent) => {
+      dispatch(setTimeOffset((event.target as any).value));
       this.isEditing = false;
     };
   }
@@ -51,7 +51,7 @@ export class TimeInput extends React.Component<TimeInputProps, any> {
              value={ this.value }
              onChange={ (event) => {
                this.setState({
-                 val: event.target["value"]
+                 val: (event.target as any).value
                });
              }}
              onBlur={ this.blur(this.props.dispatch).bind(this) }/>

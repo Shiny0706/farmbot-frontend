@@ -73,7 +73,7 @@ export function Navbar(props: Everything) {
           <ul className="nav navbar-nav">
             {
               Object.keys(links).map((description) => {
-                let url = links[description];
+                let url = (links as {[name: string]: string})[description];
                 return (
                   <li key={url}>
                     <Link to={url}>{description}</Link>
