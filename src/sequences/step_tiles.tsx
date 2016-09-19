@@ -36,9 +36,9 @@ let updateStep = function ({ dispatch,
                              step,
                              index,
                              field }: UpdateStepParams) {
-  return (e) => {
+  return (e: React.FormEvent) => {
     let update = assign<{}, Step>({}, step);
-    update.command[field] = e.target.value;
+    (update.command as {[name: string]: UpdateStepParams})[field] = (e.target as any).value;
     let action = changeStep(index, update);
     dispatch(action);
   };
@@ -63,7 +63,7 @@ interface IStepInput {
 
 export function StepInputBox({step, field, dispatch, index}: IStepInput) {
   return <input type="text"
-                value={ step.command[field] }
+                value={ (step.command as any )[field] }
                 onChange={ updateStep({dispatch, step, index, field}) } />;
 }
 

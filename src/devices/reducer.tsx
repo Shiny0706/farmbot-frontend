@@ -1,8 +1,9 @@
 import { error, warning } from "../logger";
 import * as _ from "lodash";
-import { BotState, DeviceAccountSettings } from "./interfaces";
+import { BotState, DeviceAccountSettings, HardwareState } from "./interfaces";
 import { generateReducer } from "../generate_reducer";
 import { isBotLog } from "./is_bot_log";
+import { ReduxAction } from "../interfaces";
 
 let status = {
   NOT_READY: "never connected to device",
@@ -26,9 +27,20 @@ let initialState: BotState = {
   settingsBuffer: {}
 };
 
+function READ_STATUS_OK(state: BotState, action: ReduxAction<HardwareState>) {
+    let hardware = action.payload;
+    delete hardware.method;
+    return _.assign<{}, BotState>({},
+      state, {
+        hardware: hardware
+      }, {
+        status: status.READY
+      });
+  };
+
 export let botReducer = generateReducer<BotState>(initialState)
-  .add<any>("SETTING_TOGGLE_OK", function(state, action) {
-    return this.READ_STATUS_OK(state, action);
+  .add<HardwareState>("SETTING_TOGGLE_OK", function(state, action) {
+    return READ_STATUS_OK(state, action);
   })
   .add<any>("COMMIT_SETTINGS_OK", function(state, action) {
     let nextState = _.assign<any, BotState>({}, state, {
@@ -44,9 +56,6 @@ export let botReducer = generateReducer<BotState>(initialState)
       axisBuffer: {},
       hardware
     });
-  })
-  .add<any>("COMMIT_AXIS_CHANGE_ERR", function(state, action) {
-    return state;
   })
   .add<any>("CHANGE_AXIS_BUFFER", function(state, action) {
     // let axisBuffer: any = _.assign({}, state.axisBuffer);
@@ -72,16 +81,7 @@ export let botReducer = generateReducer<BotState>(initialState)
       stepSize: action.payload
     });
   })
-  .add<any>("READ_STATUS_OK", function(state, action) {
-    let hardware: any = _.assign({}, action.payload);
-    delete hardware.method;
-    return _.assign<any, BotState>({},
-      state, {
-        hardware: hardware
-      }, {
-        status: status.READY
-      });
-  })
+  .add<HardwareState>("READ_STATUS_OK", READ_STATUS_OK)
   .add<any>("BOT_CHANGE", function(state, action) {
     let statuses: any = _.assign({}, action.payload);
     let newState: any = _.assign({}, state);
@@ -160,7 +160,7 @@ export let botReducer = generateReducer<BotState>(initialState)
     }
     return state;
   })
-  .add<DeviceAccountSettings>("REPLACE_DEVICE_ACCOUNT_INFO", function(s,a) {
+  .add<DeviceAccountSettings>("REPLACE_DEVICE_ACCOUNT_INFO", function(s, a) {
     s.account = a.payload;
     return s;
   })

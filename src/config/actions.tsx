@@ -13,7 +13,6 @@ export function changeApiPort(port: string): ReduxAction<ChangeApiPort> {
 
 export function ready(e: Event): Thunk {
   return (dispatch, getState) => {
-    dispatch({ type: "READY", payload: event });
     let state: AuthState = getState().auth;
     if ((state.token || "").length > 30) { // lol
       didLogin(state, dispatch);

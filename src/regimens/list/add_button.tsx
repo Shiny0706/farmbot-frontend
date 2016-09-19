@@ -12,6 +12,6 @@ export function AddRegimen({dispatch}: AddRegimenProps) {
   </button>;
 }
 
-function add(dispatch) {
-  return (event) => dispatch(newRegimen());
+function add(dispatch: Function) {
+  return (event: React.FormEvent) => dispatch(newRegimen());
 }

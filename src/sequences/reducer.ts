@@ -95,8 +95,8 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
 /** Transforms input array of steps into new step array where all elements have
     a position attirbute that is equal to their `index` in the array. */
 function repositionSteps(steps: (Step | UnplacedStep)[]): Step[] {
-    let transform = (step, position): Step => {
-        return assign<any, Step>({}, step, { position });
+    let transform = (step: Step, position: number): Step => {
+        return assign<{}, Step>({}, step, { position });
     };
     return steps.map(transform);
 }

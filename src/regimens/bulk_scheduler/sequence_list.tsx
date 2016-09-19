@@ -26,13 +26,14 @@ export function SequenceList({sequences,
     </div>;
 }
 
-function SeqListItem({s, i}) {
-  return <option key={ i } value={ i }>
+function SeqListItem({s, i}: {s: {name: string}, i: number}) {
+  return <option key={ i }
+   value={ i.toString() }>
    { s.name }
   </option>;
 }
-function change(dispatch, sequences) {
-  return (event) => {
-    dispatch(setSequence(sequences[event.target.value]));
+function change(dispatch: Function, sequences: Sequence[]) {
+  return (event: React.FormEvent) => {
+    dispatch(setSequence(sequences[(event.target as any).value]));
   };
 }

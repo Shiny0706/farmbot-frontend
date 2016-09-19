@@ -1,6 +1,6 @@
 import { generateReducer } from "../generate_reducer";
 import { TickerState } from "./interfaces";
-import { ReduxAction } from "../interfaces"
+import { ReduxAction } from "../interfaces";
 
 let YELLOW = "#fd6",
     RED = "#e66",

@@ -1,11 +1,11 @@
-import { RegimensState,
-    RegimensActionHandler,
+import {
+    RegimensState,
     Regimen,
-    RegimenItem,
-    RegimenApiResponse } from "./interfaces";
-import { ReduxAction } from "../interfaces";
+    RegimenItem
+} from "./interfaces";
 import { stubs } from "./temporary_stubs";
 import { randomColor } from "../util";
+import { generateReducer } from "../generate_reducer";
 
 export function emptyRegimen(): Regimen {
     return {
@@ -16,82 +16,62 @@ export function emptyRegimen(): Regimen {
     };
 }
 
-let action_handlers: RegimensActionHandler = {
-    DEFAULT: function(s, a) { return s; },
-    /** Currently just a stub */
-    EDIT_REGIMEN: function(s, a: any) {
-        s = _.cloneDeep(s);
-        let update = _.assign<{},
-            Regimen>({},
-            a.payload.regimen,
-            a.payload.update,
-            { dirty: true });
-        s.all[s.current] = update;
-        return s;
-    },
-    SAVE_REGIMEN_START: function(s, a) {
-        s = _.cloneDeep(s);
-        let update = _.assign<{}, Regimen>({}, a.payload, { dirty: false });
-        s.all[s.current] = update;
-        return s;
-    },
-    DELETE_REGIMEN_OK: function(s: RegimensState,
-                             a: ReduxAction<Regimen>) {
-        s = _.cloneDeep(s);
-        s.all.splice(s.current, 1);
-        s.current = (s.current <= 1) ? 0 : (s.current - 1);
-        return s; // Lol this method is gross.
-    },
-    NEW_REGIMEN: function(s, a) {
-        s = _.cloneDeep(s);
-        s.all.push(emptyRegimen());
-        return s;
-    },
-    SELECT_REGIMEN: function(s, a) {
-        s = _.cloneDeep(s);
-        s.current = a.payload;
-        return s;
-    },
-    COMMIT_BULK_EDITOR: function(s: RegimensState, a: ReduxAction<any>) {
-        s = _.cloneDeep(s);
-        let { regimenItems, index } = a.payload;
-        let ok = _.cloneDeep(regimenItems);
-        let hmm = s.all[index].regimen_items;
-        s.all[index].dirty = true;
-        s.all[index].regimen_items = hmm.concat(ok);
-        return s;
-    },
-    SAVE_REGIMEN_OK: function(s: RegimensState, a: ReduxAction<RegimenApiResponse>) {
-        s = _.cloneDeep(s);
-        let current = _.find<Regimen>(s.all, r => r.name === a.payload.name);
-        _.assign(current, a.payload, {dirty: false}); // Merge props.
-        return s;
-    },
-    REMOVE_REGIMEN_ITEM: function(s: RegimensState,
-        a: ReduxAction<RegimenItem>) {
-        s = _.cloneDeep(s);
-        let list = s.all[s.current].regimen_items;
-        let index = list.indexOf(a.payload);
-        list.splice(index, 1);
-        s.all[s.current].dirty = true;
-        return s;
-    },
-    FETCH_REGIMENS_OK: function(s: RegimensState,
-        a: ReduxAction<Regimen[]>){
-      const nextState = _.cloneDeep<RegimensState>(s);
-      nextState.all = _.cloneDeep<Regimen[]>(a.payload);
-      return nextState;
-    }
-};
-
 const initialState: RegimensState = {
     all: stubs,
     current: 0
 };
 
-export function regimensReducer(state = initialState,
-    action: ReduxAction<any>) {
-    let handler = (action_handlers[action.type] || action_handlers["DEFAULT"]);
-    let result: RegimensState = handler(state, action);
-    return result;
-}
+export let regimensReducer = generateReducer<RegimensState>(initialState)
+    .add<{ regimen: Regimen, update: Regimen }>("EDIT_REGIMEN", function (state, action) {
+        let update = _.assign<{},
+            Regimen>({},
+            action.payload.regimen,
+            action.payload.update,
+            { dirty: true });
+        state.all[state.current] = update;
+        return state;
+    })
+    .add<Regimen>("SAVE_REGIMEN_START", function (state, action) {
+        let update = _.assign<{}, Regimen>({}, action.payload, { dirty: false });
+        state.all[state.current] = update;
+        return state;
+    })
+    .add<void>("DELETE_REGIMEN_OK", function (state, action) {
+        state.all.splice(state.current, 1);
+        state.current = (state.current <= 1) ? 0 : (state.current - 1);
+        return state; // Lol this method is gross.
+    })
+    .add<void>("NEW_REGIMEN", function (state, action) {
+        state.all.push(emptyRegimen());
+        return state;
+    })
+    .add<number>("SELECT_REGIMEN", function (state, action) {
+        state.current = action.payload;
+        return state;
+    })
+    .add<{ index: number, regimenItems: RegimenItem[] }>
+    ("COMMIT_BULK_EDITOR", function (state, action) {
+        let { regimenItems, index } = action.payload;
+        let ok = _.cloneDeep(regimenItems);
+        let hmm = state.all[index].regimen_items;
+        state.all[index].dirty = true;
+        state.all[index].regimen_items = hmm.concat(ok);
+        return state;
+    })
+    .add<Regimen>("SAVE_REGIMEN_OK", function (state, action) {
+        let current = _.find<Regimen>(state.all, r => r.name === action.payload.name);
+        _.assign(current, action.payload, { dirty: false }); // Merge props.
+        return state;
+    })
+    .add<RegimenItem>("REMOVE_REGIMEN_ITEM", function (state, action) {
+            let list = state.all[state.current].regimen_items;
+            let index = list.indexOf(action.payload);
+            list.splice(index, 1);
+            state.all[state.current].dirty = true;
+            return state;
+        })
+    .add<any>("FETCH_REGIMENS_OK", function (state, action) {
+
+        state.all = action.payload;
+        return state;
+    });

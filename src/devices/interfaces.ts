@@ -54,6 +54,7 @@ export interface BotState {
     movement_timeout_x?: string;
     movement_timeout_y?: string;
     movement_timeout_z?: string;
+    [name: string]: string | undefined;
   };
   hardware: HardwareState;
 }

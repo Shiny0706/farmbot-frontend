@@ -9,7 +9,7 @@ interface SaveButtonProps extends RegimenProps {
 
 function save({regimen, dispatch, url, token}: SaveButtonProps) {
   if (regimen) {
-    return (event) => {
+    return (event: React.FormEvent) => {
       regimen = regimen as Regimen; // TS BUG???
       dispatch(saveRegimen(regimen, url, token));
     };

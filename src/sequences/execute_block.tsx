@@ -5,8 +5,8 @@ import { changeStep } from "./actions";
 
 /** Removes un-executable sequences, such as "self" or unsaved ones */
 function filterSequenceList(sequences: Sequence[], sequence: Sequence) {
-    let isSaved = (s) => !!s.id;
-    let notRecursive = (me, you) => me !== you;
+    let isSaved = (s: Sequence) => !!s.id;
+    let notRecursive = (me: Sequence, you: Sequence) => me !== you;
     return sequences
         .filter(function(seq) {
             // Can't function recurseCant use unsaved sequences.
@@ -31,12 +31,11 @@ function SequenceSelectBox({dispatch,
     let eligibleSequences: Sequence[] = filterSequenceList(sequences, sequence);
 
     function iter(seq: Sequence) {
-        if(seq.id) {
-            return <option value={ seq.id.toString() } key={ seq.id } > { seq.name } </option>; 
+        if (seq.id) {
+            return <option value={ seq.id.toString() } key={ seq.id } > { seq.name } </option>;
         } else {
             throw new Error("Sequence must have ID.")
         }
-           
     };
 
     function change(e: React.FormEvent) {
@@ -45,7 +44,7 @@ function SequenceSelectBox({dispatch,
                 value: "0",
                 operator: ">",
                 variable: "time",
-                sub_sequence_id: (e.target as any).value 
+                sub_sequence_id: (e.target as any).value
             }
         };
         let newStep = _.assign<{}, Step>({}, step, update);
