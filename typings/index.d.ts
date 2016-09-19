@@ -14,5 +14,6 @@
 /// <reference path="globals/react/index.d.ts" />
 /// <reference path="globals/redux-thunk/index.d.ts" />
 /// <reference path="globals/redux/index.d.ts" />
+/// <reference path="globals/sinon/index.d.ts" />
 /// <reference path="globals/toastr/index.d.ts" />
 /// <reference path="globals/webpack-require/webpack-require.d.ts" />
