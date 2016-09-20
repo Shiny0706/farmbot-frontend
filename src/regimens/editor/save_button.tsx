@@ -4,14 +4,13 @@ import { saveRegimen } from "../actions";
 
 interface SaveButtonProps extends RegimenProps {
   url: string;
-  token: string;
 };
 
-function save({regimen, dispatch, url, token}: SaveButtonProps) {
+function save({regimen, dispatch, url}: SaveButtonProps) {
   if (regimen) {
     return (event: React.FormEvent) => {
       regimen = regimen as Regimen; // TS BUG???
-      dispatch(saveRegimen(regimen, url, token));
+      dispatch(saveRegimen(regimen, url));
     };
   } else {
     throw new Error("Tried to save regimen, but there was no regimen.");
@@ -19,10 +18,10 @@ function save({regimen, dispatch, url, token}: SaveButtonProps) {
 
 }
 
-export function SaveButton({regimen, dispatch, url, token}: SaveButtonProps) {
+export function SaveButton({regimen, dispatch, url}: SaveButtonProps) {
   if (regimen) {
     return <button className="green button-like widget-control"
-      onClick={save({ dispatch, regimen, url, token })}>
+      onClick={save({ dispatch, regimen, url })}>
 
       Save {regimen.dirty ? "*" : ""}
     </button>;
