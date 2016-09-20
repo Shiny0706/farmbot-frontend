@@ -9,7 +9,6 @@ const REGIMEN_URL = "/api/regimens/";
 export function editRegimen(regimen: Regimen,
   update: Object):
   ReduxAction<{ regimen: Regimen, update: Object }> {
-
   return {
     type: "EDIT_REGIMEN",
     payload: {
