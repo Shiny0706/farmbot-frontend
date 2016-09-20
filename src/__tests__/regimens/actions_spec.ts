@@ -1,14 +1,11 @@
 import { deleteRegimen } from "../../regimens/actions";
-import * as sinon from "sinon";
 import { Regimen } from "../../regimens/interfaces";
 import { RegimensState } from "../../regimens/interfaces";
+require("jasmine-ajax");
 
 describe("Regimen actions", function () {
     let initialState: RegimensState;
     let regimen: Regimen;
-    let fakeRequest: Sinon.SinonFakeXMLHttpRequest;
-    let requests: Sinon.SinonFakeXMLHttpRequest[] = [];
-
 
     beforeEach(() => {
         regimen = {
@@ -18,25 +15,25 @@ describe("Regimen actions", function () {
             regimen_items: [],
             dirty: true
         };
-
         initialState = { all: [regimen], current: 0 };
-        fakeRequest = sinon.useFakeXMLHttpRequest();
-
-        fakeRequest.onCreate = function (xhr) {
-            console.log("HELLO");
-            requests.push(xhr);
-        };
+        jasmine.Ajax.install();
     });
 
     afterEach(() => {
-        fakeRequest.restore();
+        jasmine.Ajax.uninstall();
     });
 
     it("Adds a new empty Regimen", () => {
+        let doneFn = jasmine.createSpy("success");
+
         let thunk = deleteRegimen(regimen, "//altavista.com");
-        thunk( sinon.spy() );
-        let request = requests[0];
-        request.respond(200, {}, "");
-        expect(request.url).toEqual("//altavista.com/api/regimens/123")
+
+        let blah = thunk( function(){
+            return {
+                type: "DELETE_REGIMEN_OK",
+                regimen
+            };
+        } );
+        debugger;
     });
 });
