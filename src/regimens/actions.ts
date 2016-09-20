@@ -47,12 +47,20 @@ function saveRegimenErr(error: Error) {
 }
 
 export function deleteRegimen(regimen: Regimen, baseUrl: string) {
+
   return function (dispatch: Function) {
     if (regimen && regimen.id) {
       let url = baseUrl + REGIMEN_URL + regimen.id;
+
       Axios.delete<Regimen>(url)
-           .then(resp => dispatch(deleteRegimenOk(regimen)))
-           .catch(error => deleteRegimenErr(error));
+           .then(function(resp) {
+             debugger;
+             dispatch(deleteRegimenOk(regimen));
+            })
+           .catch(function(error) {
+             debugger;
+             deleteRegimenErr(error)
+            });
     } else {
       dispatch(deleteRegimenOk(regimen));
     };

@@ -1,12 +1,11 @@
 import { deleteRegimen } from "../../regimens/actions";
 import { Regimen } from "../../regimens/interfaces";
 import { RegimensState } from "../../regimens/interfaces";
-require("jasmine-ajax");
-
+let moxios = require("moxios");
 describe("Regimen actions", function () {
     let initialState: RegimensState;
     let regimen: Regimen;
-
+    moxios.install();
     beforeEach(() => {
         regimen = {
             id: 123,
@@ -16,24 +15,29 @@ describe("Regimen actions", function () {
             dirty: true
         };
         initialState = { all: [regimen], current: 0 };
-        jasmine.Ajax.install();
     });
 
     afterEach(() => {
-        jasmine.Ajax.uninstall();
+        moxios.uninstall();
     });
 
-    it("Adds a new empty Regimen", () => {
-        let doneFn = jasmine.createSpy("success");
+    it("Adds a new empty Regimen", (done) => {
+        let spy = jasmine.createSpy("success");
 
         let thunk = deleteRegimen(regimen, "//altavista.com");
+        let response = { id: 1, firstName: "Fred", lastName: "Flintstone" };
+        let blah = thunk(spy);
+        moxios
+            .wait(() => {
+                let request = moxios.requests.mostRecent();
+                request
+                    .respondWith({ status: 200, response })
+                    .then(function () {
+                        expect(spy).toHaveBeenCalledWith({});
+                        done();
+                    });
+            });
 
-        let blah = thunk( function(){
-            return {
-                type: "DELETE_REGIMEN_OK",
-                regimen
-            };
-        } );
-        debugger;
     });
 });
+
