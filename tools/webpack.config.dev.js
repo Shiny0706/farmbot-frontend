@@ -1,4 +1,3 @@
-var open = require('open');
 var path = require('path');
 var webpack = require('webpack');
 
@@ -6,7 +5,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.tsx?$/,
-      exclude: /(bower_components|node_modules)/,
+      exclude: /(node_modules)/,
       loader: 'ts'
     }],
   },
@@ -15,12 +14,10 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "..", "dist"),
-    publicPath: "/src/",
+    publicPath: "/app/",
     filename: "bundle.js"
   },
-  ts: {
-    configFileName: "tsconfig.json"
-  },
+  ts: { configFileName: "tsconfig.json" },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
@@ -35,10 +32,6 @@ module.exports = {
     ],
   },
   devServer: {
-    historyApiFallback: {
-      index: 'default.html',
-    }
+    historyApiFallback: { index: '/app/default.html' }
   }
 };
-
-open('http://localhost:8080/app/login');
