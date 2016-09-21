@@ -9,9 +9,7 @@ module.exports = {
       loader: 'ts'
     }],
   },
-  entry: {
-    app: './src/entry.tsx'
-  },
+  entry: { app: './src/entry.tsx' },
   output: {
     path: path.resolve(__dirname, "..", "dist"),
     publicPath: "/app/",
@@ -24,12 +22,7 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: [
-      '',
-      '.js',
-      '.ts',
-      '.tsx'
-    ],
+    extensions: [ '', '.js', '.ts', '.tsx' ],
   },
   devServer: {
     historyApiFallback: { index: '/app/default.html' }
