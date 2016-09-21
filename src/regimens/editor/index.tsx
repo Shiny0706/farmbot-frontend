@@ -26,8 +26,7 @@ export function RegimenEditorWidget({regimens, dispatch, auth}: RegimenEditorWid
         <div className="col-sm-12">
           <SaveButton regimen={regimen}
             dispatch={dispatch}
-            url={auth.iss}
-            token={auth.token} />
+            url={auth.iss} />
           <DeleteButton {...saveButtenProps} />
           <div className="widget-header">
             <h5>Regimen Editor</h5>

@@ -80,7 +80,7 @@ export function commitBulkEditor(): Thunk {
         const state: Everything = getState();
         let index = state.bulkScheduler.currentRegimen;
 
-        const regimenDoesExist = state.regimens.all[state.regimens.current]
+        const regimenDoesExist = state.regimens.all[state.regimens.current];
 
         if (state.bulkScheduler.sequence && regimenDoesExist) {
             const regimenItems = groupRegimenItemsByWeek(
@@ -95,6 +95,5 @@ export function commitBulkEditor(): Thunk {
             warning("Select a sequence from the dropdown first.");
             (!regimenDoesExist && warning("Select a regimen or create one first."));
         }
-
-    }
+    };
 }
