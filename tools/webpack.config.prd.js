@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var baseConfig = require('./webpack.config.dev.js');
 var path = require('path');
 var config = Object.create(baseConfig);
+
 config.devtool = 'source-map';
 config.plugins = [
   new webpack.DefinePlugin({

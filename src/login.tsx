@@ -5,8 +5,11 @@ import { connect } from "react-redux";
 import { changeApiHost, changeApiPort } from "./config/actions";
 import { Everything } from "./interfaces";
 
-let setHost = (dispatch: Function) => (e: React.FormEvent) => dispatch(changeApiHost((e.target as any).value));
-let setPort = (dispatch: Function) => (e: React.FormEvent) => dispatch(changeApiPort((e.target as any).value));
+let setHost = (dispatch: Function) => (e: React.FormEvent) => dispatch(
+  changeApiHost((e.target as any).value));
+
+let setPort = (dispatch: Function) => (e: React.FormEvent) => dispatch(
+  changeApiPort((e.target as any).value));
 
 
 class LoginPage extends React.Component<Everything, any> {
@@ -66,7 +69,7 @@ class LoginPage extends React.Component<Everything, any> {
                           <input type="email"
                                  onChange={ this.set("loginEmail").bind(this) }>
                           </input>
-                          <label>Password</label>
+                          <label>{__("Password")}</label>
                           <input type="password"
                                  onChange={ this.set("loginPassword").bind(this) }>
                           </input>
