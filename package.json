@@ -8,7 +8,7 @@
     "url": "https://github.com/farmbot/farmbot-web-frontend"
   },
   "scripts": {
-    "build": "webpack --config tools/webpack.config.prd.js",
+    "build": "webpack --config tools/webpack.config.prd.js --display-error-details",
     "start": "webpack-dev-server --config tools/webpack.config.dev.js",
     "test": "karma start karma.config.js"
   },
