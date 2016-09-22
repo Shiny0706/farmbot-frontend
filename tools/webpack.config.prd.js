@@ -11,5 +11,5 @@ config.plugins = [
     compressor: { warnings: false },
   }),
 ];
-config.output.filename = "farmbot-production.min.js"
+config.output.filename = "bundle.js"
 module.exports = config;
