@@ -25,6 +25,6 @@ module.exports = {
     extensions: [ '', '.js', '.ts', '.tsx' ],
   },
   devServer: {
-    historyApiFallback: { index: '/app/default.html' }
+    historyApiFallback: { index: '/app/index.html' }
   }
 };
