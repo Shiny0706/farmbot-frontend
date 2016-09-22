@@ -1,30 +1,28 @@
-var path = require('path');
 var webpack = require('webpack');
+var I18nPlugin = require("i18n-webpack-plugin");
+var generateConfig = require("./webpack.config.base");
 
-module.exports = {
-  module: {
-    loaders: [{
-      test: /\.tsx?$/,
-      exclude: /(node_modules)/,
-      loader: 'ts'
-    }],
-  },
-  entry: { app: './src/entry.tsx' },
-  output: {
-    path: path.resolve(__dirname, "..", "app"),
-    publicPath: "/app/",
-    filename: "bundle.js"
-  },
-  ts: { configFileName: "tsconfig.json" },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
-    })
-  ],
-  resolve: {
-    extensions: [ '', '.js', '.ts', '.tsx' ],
-  },
-  devServer: {
-    historyApiFallback: { index: '/app/index.html' }
-  }
+
+var languages = {
+  "en": null,
+  // In development mode, we don't want to spend a lot of time
+  // compiling every possible language. We will just use a subset
+  // of all i18n packs.
+  "de": require("./languages/de.json")
 };
+
+module.exports = Object.keys(languages).map(function (language) {
+  var conf = generateConfig(language);
+
+  conf
+    .plugins
+    .push(new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    }));
+
+  conf
+    .plugins
+    .push(new I18nPlugin(languages[language]));
+
+  return conf;
+});

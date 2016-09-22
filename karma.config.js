@@ -13,6 +13,6 @@ module.exports = function (config) {
       'tests.webpack.js': ['webpack'],
     },
     reporters: [ 'progress' ],
-    webpack: require("./tools/webpack.config.base.js"),
+    webpack: require("./tools/webpack.config.test.js"),
   });
 };
