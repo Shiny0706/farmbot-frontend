@@ -11,7 +11,7 @@ module.exports = {
   },
   entry: { app: './src/entry.tsx' },
   output: {
-    path: path.resolve(__dirname, "..", "dist"),
+    path: path.resolve(__dirname, "..", "app"),
     publicPath: "/app/",
     filename: "bundle.js"
   },
