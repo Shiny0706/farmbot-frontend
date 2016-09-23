@@ -2,7 +2,7 @@
 // Know a more ES6 compliant way to do this? Submit a PR!
 import * as _$ from "jquery";
 declare var $: JQueryStatic;
-declare var jQuery : JQueryStatic;
+declare var jQuery: JQueryStatic;
 // Lul
 (window as any)["$"] = _$;
 (window as any)["jQuery"] = _$;
