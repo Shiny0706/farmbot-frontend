@@ -5,7 +5,9 @@ import { render } from "react-dom";
 import { RootComponent }from "./root";
 import { store } from "./store";
 import { ready } from "./config/actions";
-
+window["__"] = function(string){
+  return string;
+};
 let node = document.createElement("DIV");
 node.id = "root";
 

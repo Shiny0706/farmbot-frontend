@@ -19,4 +19,4 @@
 /// <reference path="globals/toastr/index.d.ts" />
 /// <reference path="globals/webpack-require/webpack-require.d.ts" />
 /** This is webpacks i18n function. */
-declare var __: (input: string | TemplateStringsArray) => string;
+declare var __: (input: string) => string;
