@@ -1,4 +1,4 @@
-import "./assets"; // I'll just take the side effects, thanks.
+require("!style!css!sass!./css/index.scss");
 import * as React from "react";
 
 import {
