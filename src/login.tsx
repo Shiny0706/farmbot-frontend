@@ -4,6 +4,8 @@ import { login, register } from "./auth/actions";
 import { connect } from "react-redux";
 import { changeApiHost, changeApiPort } from "./config/actions";
 import { Everything } from "./interfaces";
+import  * as i18next  from "i18next";
+
 
 let setHost = (dispatch: Function) => (e: React.FormEvent) => dispatch(
   changeApiHost((e.target as any).value));
@@ -56,7 +58,7 @@ class LoginPage extends React.Component<Everything, any> {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="widget-header">
-                      <h5> {__("Login")} </h5>
+                      <h5> {i18next.t("Login")} </h5>
                     </div>
                   </div>
                 </div>
@@ -65,11 +67,11 @@ class LoginPage extends React.Component<Everything, any> {
                     <div className="col-sm-12">
                       <div className="widget-content">
                         <div className="input-group">
-                          <label> {__("Email")} </label>
+                          <label> {("Email")} </label>
                           <input type="email"
                                  onChange={ this.set("loginEmail").bind(this) }>
                           </input>
-                          <label>{__("Password")}</label>
+                          <label>{("Password")}</label>
                           <input type="password"
                                  onChange={ this.set("loginPassword").bind(this) }>
                           </input>
@@ -80,19 +82,19 @@ class LoginPage extends React.Component<Everything, any> {
                               <a href={
                                   this.url + "/users/password/new"
                                 }>
-                                {__("Reset password")}
+                                {("Reset password")}
                               </a>
                             </p>
                           </div>
                           <div className="col-xs-6">
                             <button className="button-like button green login">
-                              {__("Login")}
+                              {("Login")}
                             </button>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-xs-12">
-                          <label> {__("Server Port")} </label>
+                          <label> {("Server Port")} </label>
                           <input type="text"
                                  value={ this.props.config.host }
                                  onChange={ setHost(this.props.dispatch) } />
@@ -100,7 +102,7 @@ class LoginPage extends React.Component<Everything, any> {
                         </div>
                         <div className="row">
                           <div className="col-xs-12">
-                          <label> {__("Server Port")} </label>
+                          <label> {("Server Port")} </label>
                           <input type="number"
                                  value={ this.props.config.port }
                                  onChange={ setPort(this.props.dispatch) } />
@@ -119,7 +121,7 @@ class LoginPage extends React.Component<Everything, any> {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="widget-header">
-                      <h5> {__("Server Port")} </h5>
+                      <h5> {("Server Port")} </h5>
                     </div>
                   </div>
                 </div>
