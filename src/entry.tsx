@@ -5,12 +5,10 @@ import { render } from "react-dom";
 import { RootComponent }from "./root";
 import { store } from "./store";
 import { ready } from "./config/actions";
-window["__"] = function(string){
-  return string;
-};
+import { i18nextInit } from "./i18n";
+
 let node = document.createElement("DIV");
 node.id = "root";
-
 document.body.appendChild(node);
 
 let reactElem = React.createElement(RootComponent, {store});
@@ -23,5 +21,6 @@ if (domElem) {
 };
 
 document.addEventListener("DOMContentLoaded", function(event) {
+  i18nextInit();
   store.dispatch(ready(event));
 });

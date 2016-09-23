@@ -1,5 +1,6 @@
 /// <reference path="globals/axios/index.d.ts" />
 /// <reference path="globals/es6-promise/index.d.ts" />
+/// <reference path="globals/i18next/index.d.ts" />
 /// <reference path="globals/jasmine-ajax/index.d.ts" />
 /// <reference path="globals/jasmine/index.d.ts" />
 /// <reference path="globals/joi/index.d.ts" />
@@ -18,5 +19,3 @@
 /// <reference path="globals/sinon/index.d.ts" />
 /// <reference path="globals/toastr/index.d.ts" />
 /// <reference path="globals/webpack-require/webpack-require.d.ts" />
-/** This is webpacks i18n function. */
-declare var __: (input: string) => string;
