@@ -14,7 +14,7 @@ function getUserLang(langCode = "en_us") {
     .catch((error: any) => {return "en"; });
 };
 
-function detectLanguage() {
+export function detectLanguage() {
     return getUserLang(navigator.language).then(function(lang){
         // TODO: Possiblly requires optimization using Webpack chunking.
         let langi = require("../app/languages/" + lang + ".js");
@@ -26,14 +26,3 @@ function detectLanguage() {
             };
         });
 };
-
-
-export let i18nextInit = function(){
-    detectLanguage().then((config) => {
-        i18next.init(config, (err, t) => {
-
-        });
-    });
-};
-
-

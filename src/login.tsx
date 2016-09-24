@@ -6,7 +6,6 @@ import { changeApiHost, changeApiPort } from "./config/actions";
 import { Everything } from "./interfaces";
 import  * as i18next  from "i18next";
 
-
 let setHost = (dispatch: Function) => (e: React.FormEvent) => dispatch(
   changeApiHost((e.target as any).value));
 
@@ -88,7 +87,7 @@ class LoginPage extends React.Component<Everything, any> {
                           </div>
                           <div className="col-xs-6">
                             <button className="button-like button green login">
-                              {("Login")}
+                              {i18next.t("Login")}
                             </button>
                           </div>
                         </div>

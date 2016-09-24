@@ -1,3 +1,3 @@
 module.exports = {
-    "key": "hello world"
+    "Login": "Login"
 }
