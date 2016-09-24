@@ -7,7 +7,7 @@
 0. [Install node](https://nodejs.org/en/download/) if you haven't already.
 1. git clone https://github.com/FarmBot/farmbot-web-frontend.git
 2. cd farmbot-web-frontend
-3. npm install
+3. run `npm install`
 4. run `npm start`
 5. Visit `http://localhost:8080/app/login`
 
