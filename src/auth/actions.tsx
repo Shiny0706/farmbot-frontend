@@ -19,6 +19,7 @@ export interface AuthResponse {
 };
 
 export function didLogin(authState: AuthState, dispatch: Function) {
+  // DOES THIS RUN??
   dispatch(loginOk(authState));
   dispatch(connectDevice(authState.token));
   dispatch(downloadDeviceData(authState.iss))
@@ -27,7 +28,7 @@ export function didLogin(authState: AuthState, dispatch: Function) {
   dispatch(fetchPlants(authState.iss));
 };
 
-export function downloadDeviceData(baseUrl: string):Thunk {
+export function downloadDeviceData(baseUrl: string): Thunk {
   return function (dispatch, getState) {
     Axios.get<DeviceAccountSettings>(baseUrl + "/api/device")
       .then(res => dispatch({ type: "REPLACE_DEVICE_ACCOUNT_INFO", payload: res.data }))
