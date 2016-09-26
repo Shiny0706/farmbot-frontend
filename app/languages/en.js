@@ -1,3 +1,4 @@
 module.exports = {
-    "Login": "Login"
+    "Login": "Login",
+    "Day {{day}}" : "Day {{day}}"
 }

@@ -21,7 +21,7 @@ export interface AuthResponse {
 export function didLogin(authState: AuthState, dispatch: Function) {
   dispatch(loginOk(authState));
   dispatch(connectDevice(authState.token));
-  dispatch(downloadDeviceData(authState.iss))
+  dispatch(downloadDeviceData(authState.iss));
   dispatch(fetchSequences());
   dispatch(fetchRegimens(authState.iss));
   dispatch(fetchPlants(authState.iss));

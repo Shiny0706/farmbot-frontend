@@ -22,10 +22,7 @@ detectLanguage().then((config) => {
       } else {
         throw new Error("Add a div with id `root` to the page first.");
       };
-
-      document.addEventListener("DOMContentLoaded", function(event) {
-        store.dispatch(ready(event));
-      });
+      store.dispatch(ready());
     });
 });
 
