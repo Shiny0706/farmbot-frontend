@@ -13,6 +13,7 @@ import { BotLog } from "../devices/interfaces";
 import * as moment from "moment";
 import { Everything } from "../interfaces";
 import { saveAccountChanges } from "./actions";
+import  * as i18next  from "i18next";
 
 export class SettingsInputBox extends React.Component<any, any> {
 
@@ -76,7 +77,8 @@ class DevicesPage extends React.Component<Everything, any> {
   changeBot(e: React.MouseEvent) {
     // THIS IS THE CAUSE OF THE "STALE DATA" BUG: Fix me!
     e.preventDefault();
-    let updates: any = _.object([[(e.target as any).name, (e.target as any).value]]); // {name: "value"}
+    let updates: any =
+      _.object([[(e.target as any).name, (e.target as any).value]]); // {name: "value"}
     this.props.dispatch(changeDevice(updates));
   }
 
@@ -105,13 +107,14 @@ class DevicesPage extends React.Component<Everything, any> {
                               <button type="submit"
                                       className="button-like green widget-control"
                                       onClick={ this.updateBot.bind(this) }>
-                                SAVE { this.props.bot.account.dirty ? "*" : "" }
+                                {i18next.t("SAVE")} { this.props.bot.account.dirty ? "*" : "" }
                               </button>
                               <div className="widget-header">
-                                <h5>DEVICE</h5>
+                                <h5>{i18next.t("DEVICE")}</h5>
                                 <i className="fa fa-question-circle widget-help-icon">
-                                  <div className="widget-help-text">This widget
-                                  shows device information. Note: not all features work.</div>
+                                  <div className="widget-help-text">
+                                  {i18next.t("This widget shows device information. Note: not all features work.")}
+                                  </div>
                                 </i>
                               </div>
                             </div>
@@ -123,7 +126,7 @@ class DevicesPage extends React.Component<Everything, any> {
                                   <tbody>
                                     <tr>
                                       <td>
-                                        <label>FARMBOT NAME</label>
+                                        <label>{i18next.t("FARMBOT NAME")}</label>
                                       </td>
                                       <td colSpan={2}>
                                         <input name="name"
@@ -133,15 +136,16 @@ class DevicesPage extends React.Component<Everything, any> {
                                     </tr>
                                     <tr>
                                       <td>
-                                        <label>NETWORK</label>
+                                        <label>{i18next.t("NETWORK")}</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <p>---</p>
+                                        <p> {i18next.t("MQTT: {{mqtt_server}}", 
+                                          {mqtt_server: this.props.auth.mqtt})} </p>
                                       </td>
                                     </tr>
                                     <tr>
                                       <td>
-                                        <label>IP ADDRESS</label>
+                                        <label>{i18next.t("PUBLIC IP ADDRESS")}</label>
                                       </td>
                                       <td colSpan={2}>
                                         <p>0.0.0.0</p>
@@ -149,15 +153,15 @@ class DevicesPage extends React.Component<Everything, any> {
                                     </tr>
                                     <tr>
                                       <td>
-                                        <label>MAC ADDRESS</label>
+                                        <label>{i18next.t("PRIVATE IP ADDRESS")}</label>
                                       </td>
                                       <td colSpan={2}>
-                                        <p>00:00:00:00:00:00</p>
+                                        <p>0.0.0.0</p>
                                       </td>
                                     </tr>
                                     <tr>
                                       <td>
-                                        <label>CONTROLLER</label>
+                                        <label>{i18next.t("CONTROLLER")}</label>
                                       </td>
                                       <td>
                                         <p>
@@ -172,11 +176,11 @@ class DevicesPage extends React.Component<Everything, any> {
                                     </tr>
                                     <tr>
                                       <td>
-                                        <label>FIRMWARE</label>
+                                        <label>{i18next.t("FIRMWARE")}</label>
                                       </td>
                                       <td>
                                         <p>
-                                          Version {
+                                          {i18next.t("Version")} {
                                             String(this.props.bot.hardware.param_version) || "loading"
                                           }
                                         </p>
@@ -189,31 +193,32 @@ class DevicesPage extends React.Component<Everything, any> {
                                     </tr>
                                     <tr>
                                       <td>
-                                        <label>RESTART FARMBOT</label>
+                                        <label>{i18next.t("RESTART FARMBOT")} </label>
                                       </td>
                                       <td>
                                         <p>
-                                          This will restart FarmBot"s Raspberry Pi and controller software (coming soon)
+                                        {i18next.t("This will restart FarmBot's Raspberry Pi and controller software (coming soon)")}
                                         </p>
                                       </td>
                                       <td>
                                         <button type="button"
                                                 className="button-like yellow">
-                                          RESTART
+                                          {i18next.t("RESTART")}
                                         </button>
                                       </td>
                                     </tr>
                                     <tr>
                                       <td>
-                                        <label>SHUTDOWN FARMBOT</label>
+                                        <label>{i18next.t("SHUTDOWN FARMBOT")}</label>
                                       </td>
                                       <td>
                                         <p>
-                                          This will shutdown FarmBot"s Raspberry Pi. To turn it back on, unplug FarmBot and plug it back in. (coming soon)
+                                          {i18next.t("This will shutdown FarmBot's Raspberry Pi. To turn it back on, unplug FarmBot and plug it back in. (coming soon)")}
                                         </p>
                                       </td>
                                       <td>
-                                        <button type="button" className="button-like red">SHUTDOWN</button>
+                                        <button type="button"
+                                        className="button-like red">{i18next.t("SHUTDOWN")}</button>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -234,12 +239,14 @@ class DevicesPage extends React.Component<Everything, any> {
                       <div className="col-sm-12">
                         <button className="green button-like widget-control"
                                 onClick={ () => this.props.dispatch(commitSettingsChanges()) } >
-                          SAVE { Object.keys(this.props.bot.settingsBuffer).length ? "*" : "" }
+                          {i18next.t("SAVE")}
+                          { Object.keys(this.props.bot.settingsBuffer).length ? "*" : "" }
                         </button>
                         <div className="widget-header">
                           <h5>Hardware</h5>
                           <i className="fa fa-question-circle widget-help-icon">
-                            <div className="widget-help-text">Change settings
+                            <div className="widget-help-text">
+                            {i18next.t(`Change settings
                             of your FarmBot hardware with the fields below.
                             Caution: Changing these settings to extreme
                             values can cause hardware malfunction. Make
@@ -247,7 +254,8 @@ class DevicesPage extends React.Component<Everything, any> {
                             your FarmBot use them unsupervised. Tip: Recalibrate
                             FarmBot after changing settings and test a few sequences
                             to verify that everything works as expected. Note:
-                            Currently not all settings can be changed.</div>
+                            Currently not all settings can be changed.`)}
+                            </div>
                           </i>
                         </div>
                         <div className="row">
@@ -257,20 +265,20 @@ class DevicesPage extends React.Component<Everything, any> {
                                 <tr>
                                   <th width="32%" />
                                   <th width="22%">
-                                    <label>X AXIS</label>
+                                    <label>{i18next.t("X AXIS")}</label>
                                   </th>
                                   <th width="22%">
-                                    <label>Y AXIS</label>
+                                    <label>{i18next.t("Y AXIS")}</label>
                                   </th>
                                   <th width="22%">
-                                    <label>Z AXIS</label>
+                                    <label>{i18next.t("Z AXIS")}</label>
                                   </th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
                                   <td>
-                                    <label>MAX SPEED (mm/s)</label>
+                                    <label>{i18next.t("MAX SPEED (mm/s)")}</label>
                                   </td>
                                   <SettingsInputBox setting="movement_max_spd_x" {...this.props} />
                                   <SettingsInputBox setting="movement_max_spd_y" {...this.props} />
@@ -278,7 +286,7 @@ class DevicesPage extends React.Component<Everything, any> {
                                 </tr>
                                 <tr>
                                   <td>
-                                    <label>ACCELERATE FOR (steps)</label>
+                                    <label>{i18next.t("ACCELERATE FOR (steps)")}</label>
                                   </td>
                                   <SettingsInputBox setting="movement_steps_acc_dec_x"
                                                     {...this.props} />
@@ -289,7 +297,7 @@ class DevicesPage extends React.Component<Everything, any> {
                                 </tr>
                                 <tr>
                                   <td>
-                                    <label>TIMEOUT AFTER (seconds)</label>
+                                    <label>{i18next.t("TIMEOUT AFTER (seconds)")}</label>
                                   </td>
                                   <SettingsInputBox setting="movement_timeout_x"
                                                     {...this.props} />
@@ -300,7 +308,7 @@ class DevicesPage extends React.Component<Everything, any> {
                                 </tr>
                                 <tr>
                                   <td>
-                                    <label>STEPS PER MM</label>
+                                    <label>{i18next.t("STEPS PER MM")}</label>
                                   </td>
                                   <td>
                                     <input value="---" readOnly/>
@@ -314,7 +322,7 @@ class DevicesPage extends React.Component<Everything, any> {
                                 </tr>
                                 <tr>
                                   <td>
-                                    <label>LENGTH (m)</label>
+                                    <label>{i18next.t("LENGTH (m)")}</label>
                                   </td>
                                   <SettingsInputBox setting="movement_axis_nr_steps_x"
                                                     {...this.props} />
@@ -325,38 +333,50 @@ class DevicesPage extends React.Component<Everything, any> {
                                 </tr>
                                 <tr>
                                   <td>
-                                    <label>CALIBRATION</label>
+                                    <label>{i18next.t("CALIBRATION")}</label>
                                   </td>
                                   <td>
-                                    <button type="button" className="button-like yellow">CALIBRATE X</button>
+                                    <button type="button" className="button-like yellow">
+                                      {i18next.t("CALIBRATE X")}
+                                    </button>
                                   </td>
                                   <td>
-                                    <button type="button" className="button-like yellow">CALIBRATE Y</button>
+                                    <button type="button" className="button-like yellow">
+                                      {i18next.t("CALIBRATE Y")}
+                                    </button>
                                   </td>
                                   <td>
-                                    <button type="button" className="button-like yellow">CALIBRATE Z</button>
+                                    <button type="button" className="button-like yellow">
+                                      {i18next.t("CALIBRATE Z")}
+                                    </button>
                                   </td>
                                 </tr>
                                 <tr>
                                   <td>
-                                    <label>INVERT ENDPOINTS</label>
+                                    <label>{i18next.t("INVERT ENDPOINTS")}</label>
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_x }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_x", this.props.bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(
+                                                    settingToggle("movement_invert_endpoints_x",
+                                                  this.props.bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_y }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_y", this.props.bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(
+                                                    settingToggle("movement_invert_endpoints_y",
+                                                  this.props.bot)) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_z }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_endpoints_z", this.props.bot)) } />
+                                                  toggleAction={ () => this.props.dispatch(
+                                                    settingToggle("movement_invert_endpoints_z",
+                                                  this.props.bot)) } />
                                   </td>
                                 </tr>
                                 <tr>
                                   <td>
-                                    <label>INVERT MOTOR</label>
+                                    <label>{i18next.t("INVERT MOTORS")}</label>
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_motor_x }
@@ -373,7 +393,7 @@ class DevicesPage extends React.Component<Everything, any> {
                                 </tr>
                                 <tr>
                                   <td>
-                                    <label>ALLOW NEGATIVES</label>
+                                    <label>{i18next.t("ALLOW NEGATIVES")}</label>
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_home_up_x }
@@ -409,10 +429,10 @@ class DevicesPage extends React.Component<Everything, any> {
                             <div className="widget-header">
                               <h5>Logs</h5>
                               <i className="fa fa-question-circle widget-help-icon">
-                                <div className="widget-help-text">All messages from
+                                <div className="widget-help-text">{i18next.t(`All messages from
                                 your FarmBot are shown in these logs. Note: these
                                 are not currently saved anywhere so if you refresh
-                                the app this table will be cleared.</div>
+                                the app this table will be cleared.`)}</div>
                               </i>
                             </div>
                           </div>
@@ -423,13 +443,13 @@ class DevicesPage extends React.Component<Everything, any> {
                               <thead>
                                 <tr>
                                   <th width="15%">
-                                    <label>TIME</label>
+                                    <label>{i18next.t("TIME")}</label>
                                   </th>
                                   <th width="75%">
-                                    <label>MESSAGE</label>
+                                    <label>{i18next.t("MESSAGE")}</label>
                                   </th>
                                   <th width="10%">
-                                    <label>COORDINATES</label>
+                                    <label>{i18next.t("COORDINATES")}</label>
                                   </th>
                                 </tr>
                               </thead>
@@ -485,7 +505,7 @@ function Logs({logs}: LogsProps) {
     return <tbody>
             <tr>
               <td colSpan={3}>
-                <p>No logs yet.</p>
+                <p>{i18next.t("No logs yet.")}</p>
               </td>
             </tr>
            </tbody>;
