@@ -3,7 +3,7 @@ var exec = require('child_process').exec;
 
 exec("rm app/*bundle.js*"); // Clean previous stuff.
 
-module.exports = function (language) {
+module.exports = function () {
   return {
     module: {
       loaders: [{
@@ -14,9 +14,9 @@ module.exports = function (language) {
     },
     entry: { app: './src/entry.tsx' },
     output: {
-      path: path.resolve(__dirname, "..", "app"),
-      publicPath: "/app/",
-      filename: language + "-bundle.js"
+      path: path.resolve(__dirname, "..", "app-resources"),
+      publicPath: "/app-resources/",
+      filename: "bundle.js"
     },
     ts: { configFileName: "tsconfig.json" },
     plugins: [],

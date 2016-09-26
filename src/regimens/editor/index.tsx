@@ -29,7 +29,7 @@ export function RegimenEditorWidget({regimens, dispatch, auth}: RegimenEditorWid
             url={auth.iss} />
           <DeleteButton {...saveButtenProps} />
           <div className="widget-header">
-            <h5>Regimen Editor</h5>
+            <h5> Regimen Editor </h5>
             <i className="fa fa-question-circle widget-help-icon">
               <div className="widget-help-text">Regimens allow FarmBot
                 to take care of a plant throughout its entire life. A

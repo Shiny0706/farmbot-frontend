@@ -1,13 +1,13 @@
 import * as axios from "axios";
-import { Everything, Thunk } from "../interfaces"
+import { Everything, Thunk } from "../interfaces";
 import { AuthState } from "../auth/interfaces";
 import { SequenceOptions,
          Step,
          UnplacedStep,
-         Sequence,
-         SequenceReducerState } from "./interfaces";
+         Sequence } from "./interfaces";
 import { success, error } from "../logger";
 import { randomColor } from "../util";
+import  * as i18next  from "i18next";
 
 
 export function nullSequence(): Sequence {
@@ -45,7 +45,7 @@ export function fetchSequences() {
       .then(({data}) => {
         dispatch(fetchSequencesOk(data));
       }, (e: Error) => {
-        error("Could not download sequences");
+        error(i18next.t("Could not download sequences"));
         dispatch(fetchSequencesNo(e));
       });
   };
@@ -124,12 +124,13 @@ export function saveSequence(sequence: Sequence): Thunk {
     return method(url, sequence)
     .then(function(resp: {data: Sequence; }) {
       let seq: Sequence = resp.data;
-      success(`Saved ${("'" + seq.name + "'") || "sequence"}`);
+      success(i18next.t("Saved '{{sequence_name}}'", 
+        {sequenceName: (sequence.name || "sequence")}));
       dispatch(saveSequenceOk(resp.data));
     },
     function(err: { data: Error; }) {
       let msg: string = _.values(err.data).join("\n");
-      error(`Unable to save ${ ("'" + sequence.name + "'") }.` + msg);
+      error(i18next.t("Unable to save '{{sequenceName}}'", {sequenceName: sequence.name}) + msg);
       dispatch(saveSequenceNo(error));
     });
   };
@@ -198,7 +199,7 @@ export function deleteSequence(index: number) {
       if (response && response.data.sequence ) {
         error(response.data.sequence);
       } else {
-        error("Unable to delete sequence");
+        error(i18next.t("Unable to delete sequence"));
       }
     }
 

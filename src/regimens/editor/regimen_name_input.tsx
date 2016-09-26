@@ -1,6 +1,7 @@
 import * as React from "react";
 import { editRegimen } from "../actions";
 import { RegimenProps, Regimen } from "../interfaces";
+import * as i18next from "i18next";
 
 function write({dispatch, regimen}: RegimenProps): React.EventHandler<React.FormEvent> {
   if (!regimen) {
@@ -20,7 +21,7 @@ function write({dispatch, regimen}: RegimenProps): React.EventHandler<React.Form
 export function RegimenNameInput({regimen, dispatch}: RegimenProps) {
   let value = (regimen && regimen.name) || "";
   return <input id="right-label"
-    placeholder="Regimen Name"
+    placeholder= {i18next.t("Regimen Name")}
     type="text"
     onChange={ write({ dispatch, regimen }) }
     value={ value }/>;

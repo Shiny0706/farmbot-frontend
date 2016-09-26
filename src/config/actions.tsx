@@ -11,7 +11,7 @@ export function changeApiPort(port: string): ReduxAction<ChangeApiPort> {
   return { type: "CHANGE_API_PORT", payload: { port } };
 };
 
-export function ready(e: Event): Thunk {
+export function ready(): Thunk {
   return (dispatch, getState) => {
     let state: AuthState = getState().auth;
     if ((state.token || "").length > 30) { // lol
