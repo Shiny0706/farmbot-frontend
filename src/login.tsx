@@ -6,7 +6,6 @@ import { changeApiHost, changeApiPort } from "./config/actions";
 import { Everything } from "./interfaces";
 import  * as i18next  from "i18next";
 
-
 let setHost = (dispatch: Function) => (e: React.FormEvent) => dispatch(
   changeApiHost((e.target as any).value));
 
@@ -67,11 +66,11 @@ class LoginPage extends React.Component<Everything, any> {
                     <div className="col-sm-12">
                       <div className="widget-content">
                         <div className="input-group">
-                          <label> {("Email")} </label>
+                          <label> {i18next.t("Email")} </label>
                           <input type="email"
                                  onChange={ this.set("loginEmail").bind(this) }>
                           </input>
-                          <label>{("Password")}</label>
+                          <label>{i18next.t("Password")}</label>
                           <input type="password"
                                  onChange={ this.set("loginPassword").bind(this) }>
                           </input>
@@ -82,13 +81,13 @@ class LoginPage extends React.Component<Everything, any> {
                               <a href={
                                   this.url + "/users/password/new"
                                 }>
-                                {("Reset password")}
+                                {i18next.t("Reset password")}
                               </a>
                             </p>
                           </div>
                           <div className="col-xs-6">
                             <button className="button-like button green login">
-                              {("Login")}
+                              {i18next.t("Login")}
                             </button>
                           </div>
                         </div>
@@ -121,7 +120,7 @@ class LoginPage extends React.Component<Everything, any> {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="widget-header">
-                      <h5> {("Server Port")} </h5>
+                      <h5> {i18next.t("Server Port")} </h5>
                     </div>
                   </div>
                 </div>
@@ -130,7 +129,7 @@ class LoginPage extends React.Component<Everything, any> {
                     <form onSubmit={ this.submitRegistration.bind(this) } >
                       <div className="widget-content">
                         <div className="input-group">
-                          <label>Email</label>
+                          <label>{i18next.t("Email")} </label>
                           <input type="email" onChange={ this.set("regEmail").bind(this) } ></input>
                           <label>Name</label>
                           <input type="text" onChange={ this.set("regName").bind(this) }></input>
@@ -138,7 +137,7 @@ class LoginPage extends React.Component<Everything, any> {
                           <input type="password"
                                  onChange={ this.set("regPass").bind(this) }>
                           </input>
-                          <label>Verfy Password</label>
+                          <label>{i18next.t("Verfy Password")}</label>
                           <input type="password"
                                  onChange={
                                    this.set("regConfirmation").bind(this) }>
@@ -150,7 +149,7 @@ class LoginPage extends React.Component<Everything, any> {
                           <div className="col-xs-6">
                             <div className="auth-button">
                               <button className="button-like button green create-account">
-                                Create Account
+                                {i18next.t("Create Account")}
                               </button>
                             </div>
                           </div>

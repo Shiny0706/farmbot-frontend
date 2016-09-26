@@ -22,7 +22,7 @@ export function didLogin(authState: AuthState, dispatch: Function) {
   // DOES THIS RUN??
   dispatch(loginOk(authState));
   dispatch(connectDevice(authState.token));
-  dispatch(downloadDeviceData(authState.iss))
+  dispatch(downloadDeviceData(authState.iss));
   dispatch(fetchSequences());
   dispatch(fetchRegimens(authState.iss));
   dispatch(fetchPlants(authState.iss));

@@ -98,7 +98,7 @@ declare namespace I18next {
 
         getFixedT(lng?: string, ns?: string | string[]): TranslationFunction;
 
-        t(key: string, options?: TranslationOptions): string | any | Array<any>;
+        t(key: string, options?: ResourceStoreKey): string | any | Array<any>;
 
         exists(): boolean;
 

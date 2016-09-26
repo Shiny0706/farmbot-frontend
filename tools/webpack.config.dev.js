@@ -1,11 +1,6 @@
 var webpack = require('webpack');
 var generateConfig = require("./webpack.config.base");
 
-
-var languages = {
-  "en": null
-};
-
 c = function(){
   var conf = generateConfig();
   conf

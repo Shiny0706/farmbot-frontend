@@ -3,6 +3,7 @@ import { RegimenItem } from "../interfaces";
 import * as moment from "moment";
 import { duration } from "moment";
 import { removeRegimenItem } from "../actions";
+import * as i18next from "i18next";
 
 interface RegimenItemListProps {
   items: RegimenItem[];
@@ -62,7 +63,7 @@ function RegimenItemDayGroup({ day,
                                items,
                                dispatch }: RegimenItemDayGroupProps) {
     return <div className="regimen-day">
-        <label>Day { day }</label>
+        <label> { i18next.t( "Day {{day}}" , {day: day} ) } </label>
         { items.map(function(item, inx) {
             return <RegimenItemStep item={ item }
                                     key={ inx }
