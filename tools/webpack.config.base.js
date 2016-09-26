@@ -1,7 +1,7 @@
 var path = require('path');
 var exec = require('child_process').exec;
 
-exec("rm app/*bundle.js*"); // Clean previous stuff.
+exec("rm app-resources/*bundle.js*"); // Clean previous stuff.
 
 module.exports = function () {
   return {

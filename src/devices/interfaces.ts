@@ -110,7 +110,7 @@ export interface HardwareState {
 }
 
 export interface MqttMessage {
-  error? : string | undefined;
+  error?: string | undefined;
   id?: string | undefined;
   result: HardwareState;
 }
