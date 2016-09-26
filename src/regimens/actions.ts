@@ -32,7 +32,7 @@ export function saveRegimen(regimen: Regimen, baseUrl: string) {
         success("Regimen saved.");
         dispatch(saveRegimenOk(resp.data));
       })
-      .catch(err => dispatch(saveRegimenErr(err)));
+      .catch(error => saveRegimenErr(error));
   };
 }
 
@@ -40,7 +40,7 @@ function saveRegimenOk(regimen: Regimen) {
   return { type: "SAVE_REGIMEN_OK", payload: regimen };
 }
 
-function saveRegimenErr(payload: Error) {
+function saveRegimenErr(payload: any) {
   error("Unable to save regimen.");
 }
 

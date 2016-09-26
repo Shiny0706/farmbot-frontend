@@ -1,7 +1,7 @@
 var path = require('path');
 var exec = require('child_process').exec;
 
-exec("rm app/*bundle.js*"); // Clean previous stuff.
+exec("rm app-resources/*bundle.js*"); // Clean previous stuff.
 
 module.exports = function () {
   return {
@@ -14,8 +14,8 @@ module.exports = function () {
     },
     entry: { app: './src/entry.tsx' },
     output: {
-      path: path.resolve(__dirname, "..", "app"),
-      publicPath: "/app/",
+      path: path.resolve(__dirname, "..", "app-resources"),
+      publicPath: "/app-resources/",
       filename: "bundle.js"
     },
     ts: { configFileName: "tsconfig.json" },

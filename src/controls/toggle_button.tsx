@@ -1,18 +1,19 @@
 import * as React from "react";
+import  * as i18next  from "i18next";
 
 export class ToggleButton extends React.Component<any, any> {
   caption() {
     let captions  = {
-      "0":         "no",
-      "false":     "no",
-      "off":       "no",
-      "1":         "yes",
-      "true":      "yes",
-      "on":        "yes",
+      "0":         i18next.t("no"),
+      "false":     i18next.t("no"),
+      "off":       i18next.t("no"),
+      "1":         i18next.t("yes"),
+      "true":      i18next.t("yes"),
+      "on":        i18next.t("yes"),
       "undefined": "---",
     };
     let togval = String(this.props.toggleval);
-    if(togval){
+    if (togval) {
       return (captions as any) [togval];
     } else {
       "---"

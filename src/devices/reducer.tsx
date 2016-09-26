@@ -4,16 +4,17 @@ import { BotState, DeviceAccountSettings, HardwareState } from "./interfaces";
 import { generateReducer } from "../generate_reducer";
 import { isBotLog } from "./is_bot_log";
 import { ReduxAction } from "../interfaces";
+import  * as i18next  from "i18next";
 
 let status = {
-  NOT_READY: "never connected to device",
-  CONNECTING: "initiating connection",
-  AWAITING_API: "downloading device credentials",
-  API_ERROR: "Unable to download device credentials",
-  AWAITING_WEBSOCKET: "calling FarmBot with credentials",
-  WEBSOCKET_ERR: "Error establishing socket connection",
-  CONNECTED: "Socket Connection Established",
-  READY: "Bot ready"
+  NOT_READY: i18next.t("never connected to device"),
+  CONNECTING: i18next.t("initiating connection"),
+  AWAITING_API: i18next.t("downloading device credentials"),
+  API_ERROR: i18next.t("Unable to download device credentials"),
+  AWAITING_WEBSOCKET: i18next.t("calling FarmBot with credentials"),
+  WEBSOCKET_ERR: i18next.t("Error establishing socket connection"),
+  CONNECTED: i18next.t("Socket Connection Established"),
+  READY: i18next.t("Bot ready")
 };
 
 let initialState: BotState = {
@@ -119,11 +120,11 @@ export let botReducer = generateReducer<BotState>(initialState)
   .add<any>("FETCH_DEVICE_ERR", function(state, action) {
     // TODO: Toast messages do not belong in a reducer.
     if (action.payload.status === 404) {
-      warning("You need to add a device to your account.",
-        "No device found!");
+      warning(i18next.t("You need to add a device to your account."),
+        i18next.t("No device found!"));
     } else {
-      error("Unable to download device data from server. " +
-        "Check your internet connection.");
+      error(i18next.t("Unable to download device data from server."),
+        i18next.t("Check your internet connection."));
     };
     return _.assign<any, BotState>({},
       state, {
@@ -135,10 +136,10 @@ export let botReducer = generateReducer<BotState>(initialState)
       case 422:
         let errors = _.map(action.payload.responseJSON, v => v)
           .join(". ");
-        error(errors, "Couldn\'t save device.");
+        error(errors, i18next.t("Couldn\'t save device."));
         break;
       default:
-        error("Error while saving device.");
+        error(i18next.t("Error while saving device."));
         break;
     }
     return state;
@@ -152,11 +153,8 @@ export let botReducer = generateReducer<BotState>(initialState)
     if (isBotLog(payload)) {
       state.logQueue.unshift(payload);
       state.logQueue = _.take(state.logQueue, state.logQueueSize);
-      console.groupCollapsed("Bot Message");
-      console.log(payload.data);
-      console.groupEnd();
     } else {
-      console.warn("Unexpected log message?");
+      console.warn(i18next.t("Unexpected log message?"));
     }
     return state;
   })
