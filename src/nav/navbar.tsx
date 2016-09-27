@@ -76,7 +76,10 @@ export function Navbar(props: Everything) {
                 let url = (links as {[name: string]: string})[description];
                 return (
                   <li key={url}>
-                    <Link to={url}>{description}</Link>
+                    <Link to={url}
+                          activeClassName="fb-navbar-active-link">
+                      {description}
+                    </Link>
                   </li>
                 );
               })
