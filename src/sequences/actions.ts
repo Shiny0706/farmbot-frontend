@@ -7,6 +7,7 @@ import { SequenceOptions,
          Sequence } from "./interfaces";
 import { success, error } from "../logger";
 import { randomColor } from "../util";
+import { Color, ReduxAction } from "../interfaces";
 import  * as i18next  from "i18next";
 
 
@@ -52,13 +53,11 @@ export function fetchSequences() {
 };
 
 export interface EditCurrentSequence {
-  type: "EDIT_CURRENT_SEQUENCE";
-  payload: {
-    name?: String;
+    name?: string;
+    color?: Color;
   };
-};
 
-export function editCurrentSequence(updates: SequenceOptions): EditCurrentSequence {
+export function editCurrentSequence(updates: SequenceOptions): ReduxAction<EditCurrentSequence> {
   return {
     type: "EDIT_CURRENT_SEQUENCE",
     payload: updates

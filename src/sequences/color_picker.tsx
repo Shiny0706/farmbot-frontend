@@ -5,7 +5,7 @@ import { colors } from "../util";
 
 interface ColorPickerProps {
     current: Color;
-    onChange: (color: string) => any;
+    onChange?: (color: Color) => any;
 }
 
 interface ColorPickerState { isHovered: boolean; }
@@ -21,18 +21,24 @@ export class ColorPicker extends React.Component<ColorPickerProps, ColorPickerSt
       color circle is hovered over. */
     isHovered({text}: { text: string }) {
         let actual = this.props.current;
+
+        let cb = this.props.onChange || function(){ };
+
         function littleCircle(color: string, key: number) {
-          let style = { margin: "4px" };
-          if (color === actual) {
-              style["border"] = "3px solid #666";
-          }
-          return <div key={ key } >
-                    <Saucer color={ color } style={style} />
-                </div>;
+
+            let style = { margin: "4px" };
+
+            if (color === actual) { style["border"] = "3px solid #666"; }
+
+            function colorChange() { cb(color); }
+
+            return <div key={key} onClick={colorChange} >
+                <Saucer color={color} style={style} />
+            </div>;
         }
 
         return <div className="colorpicker-text">
-            { colors.map(littleCircle) }
+            {colors.map(littleCircle)}
         </div>;
     }
 
