@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { render } from "react-dom";
-import { RootComponent }from "./root";
+import { RootComponent }from "./routes";
 import { store } from "./store";
 import { ready } from "./config/actions";
 import { detectLanguage } from "./i18n";
