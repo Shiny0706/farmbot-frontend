@@ -55,8 +55,7 @@ interface IStepInput {
          | "y"
          | "z"
          | "stub" // For unimplemented features.
-         | "variable"
-         ;
+         | "variable" ;
   dispatch: Function;
   index: number;
 }

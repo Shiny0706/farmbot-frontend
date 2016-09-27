@@ -19,5 +19,4 @@ describe("Saucer", () => {
     expect((DOMElem["style"] as {background: string}).background).toEqual("red",
       "<Saucer/> must accept a `color` attribute that changes el.style.background.");
   });
-
 });
