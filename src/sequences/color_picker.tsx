@@ -24,7 +24,7 @@ export class ColorPicker extends React.Component<ColorPickerProps, ColorPickerSt
 
         let cb = this.props.onChange || function(){ };
 
-        function littleCircle(color: string, key: number) {
+        function littleCircle(color: Color, key: number) {
 
             let style = { margin: "4px" };
 
