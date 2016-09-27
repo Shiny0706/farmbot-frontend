@@ -43,7 +43,20 @@ export class RootComponent extends React.Component<any, any> {
 
   // Thanks @noahMiller and @jpierson (Github) for this wonderful fix!
   // Reference:
-  //  https://github.com/reactjs/react-router/issues/2704#issuecomment-174067923
+  //  https://github.com/reactjs/react-router/issues/2704#issuecomment-174067923.
+
+  /*
+
+    /                             => Login
+    /app                          => App
+    /app/login                    => Login
+    /app/dashboard/designer?p1&p2 => FarmDesigner
+    /app/dashboard/controls       => Controls
+    /app/dashboard/devices        => Devices
+    /app/dashboard/sequences      => Sequences
+    /app/dashboard/regimens       => Regimens
+
+  */
   routes = (<Route path="app" component={App}>
               <Route path="login" component={ Login }/>
               <Redirect from="/" to="/login"/>
