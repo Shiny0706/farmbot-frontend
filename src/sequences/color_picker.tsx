@@ -3,35 +3,48 @@ import { Saucer } from "../ticker/saucer";
 import { Color } from "../interfaces";
 import { colors } from "../util";
 
-interface ColorPickerProps { current: Color; }
+interface ColorPickerProps {
+    current: Color;
+    onChange: (color: string) => any;
+}
+
 interface ColorPickerState { isHovered: boolean; }
 
 export class ColorPicker extends React.Component<ColorPickerProps, ColorPickerState> {
 
-  constructor(props: ColorPickerProps) {
-    super(props);
-    this.state = { isHovered: false };
-  }
+    constructor(props: ColorPickerProps) {
+        super(props);
+        this.state = { isHovered: false };
+    }
 
-  /** The output of this function is what the user will see when the
-    color circle is hovered over. */
-  isHovered({text}: { text: string }) {
-    return <div>
-      {
-        colors.map((c, i) => <Saucer color={c} key={i} />)
-      }
-    </div>;
-  }
+    /** The output of this function is what the user will see when the
+      color circle is hovered over. */
+    isHovered({text}: { text: string }) {
+        let actual = this.props.current;
+        function littleCircle(color: string, key: number) {
+          let style = { margin: "4px" };
+          if (color === actual) {
+              style["border"] = "3px solid #666";
+          }
+          return <div key={ key } >
+                    <Saucer color={ color } style={style} />
+                </div>;
+        }
 
-  /** This is what the user sees when the circle is not hovered over. */
-  notHovered(props: ColorPickerProps) { return <div></div>; }
+        return <div className="colorpicker-text">
+            { colors.map(littleCircle) }
+        </div>;
+    }
 
-  render() {
-    let Comp = (this.state.isHovered ? this.isHovered : this.notHovered);
-    return <div onMouseEnter={() => { this.setState({ isHovered: true }); } }
-                onMouseLeave={() => { this.setState({ isHovered: false }); } } >
-      <Saucer color={this.props.current} />
-      <Comp />
-    </div>;
-  };
+    /** This is what the user sees when the circle is not hovered over. */
+    notHovered(props: ColorPickerProps) { return <div></div>; }
+
+    render() {
+        let Comp = (this.state.isHovered ? this.isHovered.bind(this) : this.notHovered);
+        return <div onMouseEnter={() => { this.setState({ isHovered: true }); } }
+            onMouseLeave={() => { this.setState({ isHovered: false }); } } >
+            <Saucer color={this.props.current} />
+            <Comp />
+        </div>;
+    };
 }

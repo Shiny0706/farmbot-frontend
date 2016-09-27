@@ -18,3 +18,21 @@
   width: 250px;
   margin-left: -125px;
 }
+
+.colorpicker {
+  display: inline-block;
+  margin-left: 2rem;
+}
+
+.colorpicker-text {
+  position: absolute;
+  z-index: 999;
+  font-style: normal;
+  background-color: $dark_gray;
+  color: $off_white;
+  border-radius: 3px;
+  padding: 6px;
+  width: 250px;
+  top: 10px;
+  margin-left: -125px;
+}
