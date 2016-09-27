@@ -5,6 +5,7 @@ import { Step } from "./interfaces";
 import { Help } from "../help";
 import { ExecuteBlock } from "./execute_block";
 import { Sequence } from "./interfaces";
+import { defensiveClone } from "../util";
 
 interface CopyParams {
   dispatch: Function;
@@ -37,7 +38,8 @@ let updateStep = function ({ dispatch,
                              index,
                              field }: UpdateStepParams) {
   return (e: React.FormEvent) => {
-    let update = assign<{}, Step>({}, step);
+
+    let update = defensiveClone<Step>(step);
     (update.command as {[name: string]: UpdateStepParams})[field] = (e.target as any).value;
     let action = changeStep(index, update);
     dispatch(action);
@@ -62,7 +64,7 @@ interface IStepInput {
 
 export function StepInputBox({step, field, dispatch, index}: IStepInput) {
   return <input type="text"
-                value={ (step.command as any )[field] }
+                value={ (step.command as any )[field] || "" }
                 onChange={ updateStep({dispatch, step, index, field}) } />;
 }
 
