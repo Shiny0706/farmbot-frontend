@@ -25,7 +25,7 @@ export function is<T>(schema: Joi.ObjectSchema) {
   return (input: T | {}): input is T => !Joi.validate(input, schema).error;
 }
 
-let colors: Array<Color> = ["blue", "green", "yellow", "orange", "purple", "pink", "gray", "red"];
+export let colors: Array<Color> = ["blue", "green", "yellow", "orange", "purple", "pink", "gray", "red"];
 /** Picks a color that is compliant with sequence / regimen color codes */
 export function randomColor(): Color {
   return _.sample(colors);
