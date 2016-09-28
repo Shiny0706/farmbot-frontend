@@ -1,4 +1,4 @@
-import { warning } from "../../logger";
+import { warning, error } from "../../logger";
 import {
     BulkSchedulerOutput,
     BulkSchedulerState
@@ -92,7 +92,7 @@ export function commitBulkEditor(): Thunk {
                 payload: { regimenItems, index }
             });
         } else {
-            warning("Select a sequence from the dropdown first.");
+            error("Select a sequence from the dropdown first.");
             (!regimenDoesExist && warning("Select a regimen or create one first."));
         }
     };

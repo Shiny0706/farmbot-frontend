@@ -13,6 +13,7 @@ import { BotState } from "../devices/interfaces";
 import { connect } from "react-redux";
 import { Everything } from "../interfaces";
 import { WebcamSaveBtn } from "./webcam_save_btn";
+import  * as i18next  from "i18next";
 
 interface AxisInputBoxProps {
   bot: BotState;
@@ -119,19 +120,21 @@ export class Controls extends React.Component<Everything, any> {
                         <div className="widget-header">
                           <h5>Move</h5>
                           <i className="fa fa-question-circle widget-help-icon">
-                            <div className="widget-help-text">Use these manual
+                            <div className="widget-help-text">
+                              {i18next.t(`Use these manual
                               control buttons to move FarmBot in realtime. Press the
                               arrows for relative movements or type in new
-                              coordinates and press <strong>GO</strong> for an
+                              coordinates and press GO for an
                               absolute movement. Tip: Press the Home button when
                               you are done so FarmBot is ready to get back to work.
-                              Note: Currently all buttons except for Home work.</div>
+                              Note: Currently all buttons except for Home work.`)}
+                              </div>
                           </i>
                         </div>
                       </div>
                       <div className="col-sm-12">
                         <div className="widget-content">
-                          <label className="text-center">MOVE AMOUNT (mm)</label>
+                          <label className="text-center"> {i18next.t("MOVE AMOUNT (mm)")} </label>
                           <div className="row">
                             <div className="col-sm-12">
                               <StepSizeSelector
@@ -228,17 +231,19 @@ export class Controls extends React.Component<Everything, any> {
                         <button
                           className="gray button-like widget-control"
                           type="button">
-                          EDIT
+                          {i18next.t("EDIT")}
                         </button>
                         <div className="widget-header">
                           <h5>Tools</h5>
                           <i className="fa fa-question-circle widget-help-icon">
-                            <div className="widget-help-text">Use these toggle
+                            <div className="widget-help-text">
+                              {i18next.t(`Use these toggle
                               switches to control FarmBot's tools and peripherals
                               in realtime. To edit and create new tools, press
-                              the <strong>EDIT</strong> button. Make sure to turn
+                              the button. Make sure to turn
                               things off when you're done! Coming soon: a working
-                              edit button.</div>
+                              edit button.`)}
+                              </div>
                           </i>
                         </div>
                       </div>
@@ -246,10 +251,10 @@ export class Controls extends React.Component<Everything, any> {
                         <div className="widget-content no-bottom-padding">
                           <div className="row">
                             <div className="col-sm-4">
-                              <label>VACUUM PUMP</label>
+                              <label>{i18next.t("VACUUM PUMP")}</label>
                             </div>
                             <div className="col-sm-4">
-                              <p>Pin 9</p>
+                              <p>{i18next.t("Pin 9")}</p>
                             </div>
                             <div className="col-sm-4">
                               <ToggleButton toggleval={bot.hardware.pin9}
@@ -260,10 +265,10 @@ export class Controls extends React.Component<Everything, any> {
                           </div>
                           <div className="row">
                             <div className="col-sm-4">
-                              <label>WATER VALVE</label>
+                              <label>{i18next.t("WATER VALVE")}</label>
                             </div>
                             <div className="col-sm-4">
-                              <p>Pin 10</p>
+                              <p>{i18next.t("Pin 10")}</p>
                             </div>
                             <div className="col-sm-4">
                               <ToggleButton toggleval={bot.hardware.pin10}
@@ -274,10 +279,10 @@ export class Controls extends React.Component<Everything, any> {
                           </div>
                           <div className="row">
                             <div className="col-sm-4">
-                              <label>LED</label>
+                              <label>{i18next.t("LED")}</label>
                             </div>
                             <div className="col-sm-4">
-                              <p>Pin 13</p>
+                              <p>{i18next.t("Pin 13")}</p>
                             </div>
                             <div className="col-sm-4">
                               <ToggleButton toggleval={bot.hardware.pin13}
@@ -302,12 +307,13 @@ export class Controls extends React.Component<Everything, any> {
                                        apiUrl={ this.props.auth.iss }
                                        dirty={dirty}/>
                         <div className="widget-header">
-                          <h5>Camera</h5>
+                          <h5>{i18next.t("Camera")}</h5>
                           <i className="fa fa-question-circle widget-help-icon">
-                            <div className="widget-help-text">Press the <strong>EDIT
-                            </strong> button to add the URL of a livestream of
+                            <div className="widget-help-text">
+                              {i18next.t(`Press the button to add the URL of a livestream of
                               your FarmBot. Coming soon: A working edit button and
-                              the ability to save your webcam URL in the backend.</div>
+                              the ability to save your webcam URL in the backend.`)}
+                              </div>
                           </i>
                         </div>
                       </div>
@@ -315,7 +321,7 @@ export class Controls extends React.Component<Everything, any> {
                     <div className="row">
                       <div className="col-sm-12">
                         <div>
-                          <label>Set Webcam URL: </label>
+                          <label>{i18next.t("Set Webcam URL: ")}</label>
                           <input type="text"
                             onChange={updateWebcamUrl(this.props.dispatch)}
                             value={url} />

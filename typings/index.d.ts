@@ -1,4 +1,5 @@
 /// <reference path="globals/axios/index.d.ts" />
+/// <reference path="globals/enzyme/index.d.ts" />
 /// <reference path="globals/es6-promise/index.d.ts" />
 /// <reference path="globals/i18next/index.d.ts" />
 /// <reference path="globals/jasmine-ajax/index.d.ts" />

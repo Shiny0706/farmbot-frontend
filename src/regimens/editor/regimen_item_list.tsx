@@ -45,7 +45,8 @@ function RegimenItemStep({ item, dispatch }: RegimenItemStepProps) {
     hour: d.hours(),
     minute: d.minutes()
   }).format("h:mm a");
-  return <div className="regimen-event">
+  let klass = `${ item.sequence.color || "gray" }-block block-header regimen-event`;
+  return <div className={ klass }>
   <span className="regimen-event-title"> { item.sequence.name } </span>
   <span className="regimen-event-time"> { time } </span>
   <i className="fa fa-trash regimen-control"

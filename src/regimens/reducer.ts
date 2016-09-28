@@ -42,6 +42,7 @@ export let regimensReducer = generateReducer<RegimensState>(initialState)
         return state; // Lol this method is gross.
     })
     .add<void>("NEW_REGIMEN", function (state, action) {
+        state.current = state.all.length || 1;
         state.all.push(emptyRegimen());
         return state;
     })
@@ -66,12 +67,11 @@ export let regimensReducer = generateReducer<RegimensState>(initialState)
     .add<RegimenItem>("REMOVE_REGIMEN_ITEM", function (state, action) {
             let list = state.all[state.current].regimen_items;
             let index = list.indexOf(action.payload);
-            list.splice(index, 1);
+            list.splice(index - 1, 1);
             state.all[state.current].dirty = true;
             return state;
         })
     .add<any>("FETCH_REGIMENS_OK", function (state, action) {
-
         state.all = action.payload;
         return state;
     });

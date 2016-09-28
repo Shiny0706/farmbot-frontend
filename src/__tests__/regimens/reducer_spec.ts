@@ -2,9 +2,8 @@ import { regimensReducer as reduce  } from "../../regimens/reducer";
 import { newRegimen, editRegimen } from "../../regimens/actions";
 import { Regimen } from "../../regimens/interfaces";
 import { RegimensState } from "../../regimens/interfaces";
-import { ReduxAction } from "../../interfaces";
 
-describe("Config reducer", function() {
+describe("Regimen reducer", function() {
   let initialState: RegimensState;
   let regimen: Regimen;
   beforeEach(() => {
@@ -27,6 +26,8 @@ describe("Config reducer", function() {
     expect(reg.dirty).toBeTruthy;
     expect(reg.name).toEqual("Untitled Regimen");
     expect(reg.regimen_items.length).toBe(0);
+    expect(result.current).toEqual((result.all.length - 1),
+      "When you add a new regimen, it should become the active regimen.");
   });
 
   it("edits a regimen", () => {
@@ -39,17 +40,4 @@ describe("Config reducer", function() {
     expect(curReg.name).toEqual(update.name);
   });
 
-  //FIXME
-  // I dont think this is correct.
-  xit("fails edit a regimen", () => {
-    expect(initialState.all.length).toEqual(1);
-    let fake_update = {invalid_param: "mountains", whyamihere: "fail"};
-    let result = reduce(initialState, editRegimen(regimen,
-      fake_update));
-    expect(result.all.length).toEqual(1);
-    let curReg = result.all[0];
-    expect(curReg).toContain({color: "red"});
-    expect(curReg).not.toContain("invalid_param");
-    expect(1).toEqual(0);
-  });
 });

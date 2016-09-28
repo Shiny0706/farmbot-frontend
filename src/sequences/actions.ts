@@ -6,7 +6,7 @@ import { SequenceOptions,
          UnplacedStep,
          Sequence } from "./interfaces";
 import { success, error } from "../logger";
-import { randomColor } from "../util";
+import { randomColor, prettyPrintApiErrors } from "../util";
 import { Color, ReduxAction } from "../interfaces";
 import  * as i18next  from "i18next";
 
@@ -123,13 +123,15 @@ export function saveSequence(sequence: Sequence): Thunk {
     return method(url, sequence)
     .then(function(resp: {data: Sequence; }) {
       let seq: Sequence = resp.data;
-      success(i18next.t("Saved '{{sequence_name}}'", 
-        {sequenceName: (sequence.name || "sequence")}));
+      success( i18next.t("Saved '{{SequenceName}}'",
+        { SequenceName: (sequence.name || "sequence") } ));
       dispatch(saveSequenceOk(resp.data));
     },
-    function(err: { data: Error; }) {
-      let msg: string = _.values(err.data).join("\n");
-      error(i18next.t("Unable to save '{{sequenceName}}'", {sequenceName: sequence.name}) + msg);
+    function(err: {response: { data: {[reason: string]: string}; }}) {
+      let template = "Unable to save '{{SequenceName}}'";
+      let context = { SequenceName: (sequence.name || "sequence") };
+      error(prettyPrintApiErrors(err),
+            i18next.t(template , context));
       dispatch(saveSequenceNo(error));
     });
   };

@@ -19,7 +19,7 @@ export class ColorPicker extends React.Component<ColorPickerProps, ColorPickerSt
 
     /** The output of this function is what the user will see when the
       color circle is hovered over. */
-    isHovered({text}: { text: string }) {
+    isHovered() {
         let actual = this.props.current;
 
         let cb = this.props.onChange || function(){ };
@@ -43,7 +43,7 @@ export class ColorPicker extends React.Component<ColorPickerProps, ColorPickerSt
     }
 
     /** This is what the user sees when the circle is not hovered over. */
-    notHovered(props: ColorPickerProps) { return <div></div>; }
+    notHovered() { return <div></div>; }
 
     render() {
         let Comp = (this.state.isHovered ? this.isHovered.bind(this) : this.notHovered);
