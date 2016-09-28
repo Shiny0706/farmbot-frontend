@@ -123,13 +123,15 @@ export function saveSequence(sequence: Sequence): Thunk {
     return method(url, sequence)
     .then(function(resp: {data: Sequence; }) {
       let seq: Sequence = resp.data;
-      success(i18next.t("Saved '{{sequence_name}}'", 
-        {sequenceName: (sequence.name || "sequence")}));
+      debugger;
+      success( i18next.t("Saved '{{SequenceName}}'",
+        { SequenceName: (sequence.name || "sequence") } ));
       dispatch(saveSequenceOk(resp.data));
     },
     function(err: { data: Error; }) {
       let msg: string = _.values(err.data).join("\n");
-      error(i18next.t("Unable to save '{{sequenceName}}'", {sequenceName: sequence.name}) + msg);
+      error(i18next.t("Unable to save '{{SequenceName}}'",
+        { SequenceName: (sequence.name || "sequence") }), msg);
       dispatch(saveSequenceNo(error));
     });
   };
