@@ -123,7 +123,6 @@ export function saveSequence(sequence: Sequence): Thunk {
     return method(url, sequence)
     .then(function(resp: {data: Sequence; }) {
       let seq: Sequence = resp.data;
-      debugger;
       success( i18next.t("Saved '{{SequenceName}}'",
         { SequenceName: (sequence.name || "sequence") } ));
       dispatch(saveSequenceOk(resp.data));
