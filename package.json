@@ -42,6 +42,7 @@
     "lodash": "^3.10.1",
     "moment": "^2.13.0",
     "moxios": "^0.3.0",
+    "node-sass": "^3.10.0",
     "react": "^15.0.0",
     "react-addons-test-utils": "^15.2.1",
     "react-dom": "^15.0.0",
