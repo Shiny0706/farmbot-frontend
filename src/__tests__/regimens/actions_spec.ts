@@ -85,7 +85,7 @@ describe("Regimen actions", function () {
     it("fails to save a Regimen", (done) => {
         let spy = jasmine.createSpy("save_fail");
         let thunk = saveRegimen(regimen, "http://toastytech.com/evil/");
-        let response = { id: 1, firstName: "Fred", lastName: "Flintstone" };
+        let response = { wrong: "does not work" };
         spyOn(toast, "error");
         thunk(spy);
 
@@ -95,7 +95,8 @@ describe("Regimen actions", function () {
                 request
                     .respondWith({ status: 404, response })
                     .then(function () {
-                        expect(toast.error).toHaveBeenCalledWith("Unable to save regimen.");
+                        expect(toast.error).toHaveBeenCalledWith("Wrong does not work.",
+                                                                 "Unable to save regimen.");
                         done();
                     });
             });
