@@ -3,6 +3,8 @@ import { ReduxAction } from "../interfaces";
 import { warning, success, error } from "../logger";
 import * as Axios from "axios";
 import { regimenSerializer } from "./serializers";
+import { prettyPrintApiErrors } from "../util";
+import { t } from "i18next";
 
 const REGIMEN_URL = "/api/regimens/";
 
@@ -40,8 +42,9 @@ function saveRegimenOk(regimen: Regimen) {
   return { type: "SAVE_REGIMEN_OK", payload: regimen };
 }
 
-function saveRegimenErr(payload: any) {
-  error("Unable to save regimen.");
+function saveRegimenErr(err: any) {
+  error(prettyPrintApiErrors(err),
+        t("Unable to save regimen."));
 }
 
 export function deleteRegimen(regimen: Regimen, baseUrl: string) {
@@ -104,7 +107,7 @@ export function fetchRegimens(apiUrl: string) {
         payload: r.data
       }))
       .catch(e => {
-        warning("Could not download regimens.");
+        warning(t("Could not download regimens."));
         dispatch({
           type: "FETCH_REGIMENS_ERR",
           payload: e
