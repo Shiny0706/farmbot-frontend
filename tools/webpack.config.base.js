@@ -12,19 +12,25 @@ module.exports = function () {
         loader: 'ts'
       }],
     },
-    entry: { app: './src/entry.tsx' },
+    entry: {
+      app: './src/entry.tsx'
+    },
     output: {
       path: path.resolve(__dirname, "..", "app-resources"),
       publicPath: "/app-resources/",
       filename: "bundle.js"
     },
-    ts: { configFileName: "tsconfig.json" },
+    ts: {
+      configFileName: "tsconfig.json"
+    },
     plugins: [],
     resolve: {
       extensions: ['', '.js', '.ts', '.tsx'],
     },
     devServer: {
-      historyApiFallback: { index: '/app/index.html' }
+      historyApiFallback: {
+        index: '/app/index.html'
+      }
     }
   };
 };

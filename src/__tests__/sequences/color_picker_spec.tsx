@@ -1,8 +1,8 @@
 import { ColorPicker } from "../../sequences/color_picker";
 import { Saucer } from "../../ticker/saucer";
 import { colors } from "../../util";
-import * as TestUtils from "react-addons-test-utils";
 import * as React from "react";
+import { render } from "enzyme";
 
 describe("Color picker", () => {
   it("initializes", function() {
@@ -18,20 +18,16 @@ describe("Color picker", () => {
   });
 
   it("picks a color", () => {
-    pending("Maybe I'll just use enzyme....");
-    // Render
+  // Render
     let callback = jasmine.createSpy("<ColorPicker/> onChange property");
-    const renderer = TestUtils.createRenderer();
-    renderer.render(<ColorPicker current="red" onChange={ callback }/>);
-    let a = <div>
-            <Saucer/>
-            <div/>
-        </div>;
-    let b = renderer.getRenderOutput();
-    expect(a).toEqual(b);
-    // hover
+    let huh = render(<ColorPicker current="red" />);
 
-    // Select a color
+  // Unhovered
+      debugger;
+
+  // hover
+
+  // Select a color
 
   });
 });
