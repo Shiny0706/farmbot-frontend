@@ -5,7 +5,10 @@ import {
     UnplacedStep,
     SequenceReducerState
 } from "./interfaces";
-import { nullSequence } from "./actions";
+import {
+    nullSequence,
+    EditCurrentSequence
+} from "./actions";
 import { generateReducer } from "../generate_reducer";
 
 /** Adds an empty sequence to the front of the list. */
@@ -46,10 +49,11 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
         populate(state);
         return state;
     })
-    .add<{ name?: string }>("EDIT_CURRENT_SEQUENCE", function (state, action) {
+    .add<EditCurrentSequence>("EDIT_CURRENT_SEQUENCE", function (state, action) {
         let currentSequence = state.all[state.current] || populate(state);
         currentSequence.dirty = true;
         currentSequence.name = action.payload.name || currentSequence.name;
+        currentSequence.color = action.payload.color || currentSequence.color;
         return state;
     })
     .add<{ step: Step, index: number }>("CHANGE_STEP", function (state, action) {
@@ -82,7 +86,7 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
         return state;
     })
     .add<Sequence>("DELETE_SEQUENCE_OK", function (state, action) {
-        let found = _.find(state.all, {name: action.payload.name });
+        let found = _.find(state.all, { name: action.payload.name });
         if (found) {
             _.pull(state.all, found);
             state.current = 0;

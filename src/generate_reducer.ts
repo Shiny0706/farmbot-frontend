@@ -1,4 +1,5 @@
 import { ReduxAction } from "./interfaces";
+import { defensiveClone } from "./util";
 
 const NOOP = (s: any, a: ReduxAction<{}>) => s;
 
@@ -25,11 +26,6 @@ export function generateReducer<State>(
         /** Adds action handler for current reducer. */
         add: <T>(name: string,
                   fn: GenericActionHandler<T>) => GeneratedReducer; // Calms the type checker.
-    }
-
-    function defensiveClone<T>(target: T): T {
-      let jsonString = JSON.stringify(target);
-      return JSON.parse(jsonString);
     }
 
     let actionHandlers: ActionHandlerDict = { DEFAULT };
