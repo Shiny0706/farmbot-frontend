@@ -17,8 +17,6 @@ import {
   BulkSchedulerReducer as bulkScheduler
 } from "./regimens/bulk_scheduler/reducer";
 
-console.log(`Environment is ${process.env.NODE_ENV}`);
-
 let reducers = combineReducers({
   routing,
   auth,

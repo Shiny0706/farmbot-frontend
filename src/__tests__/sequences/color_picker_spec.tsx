@@ -39,5 +39,8 @@ describe("Color picker", () => {
     expect(callback).toHaveBeenCalledWith(color);
 
   // unhover
+      el.simulate("mouseLeave");
+      expect(saucerCount()).toEqual(1,
+        "Color picker shows 1 color saucer when unhovered.");
   });
 });
