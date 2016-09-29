@@ -4,6 +4,7 @@ import { browserHistory } from "react-router";
 import { ICONS } from "./icons";
 import { Everything } from "../interfaces";
 import { Plant } from "./interfaces";
+import { t } from "i18next";
 
 interface MapPointProps extends Everything {
   plant: Plant;
@@ -37,7 +38,7 @@ export class GardenMap extends React.Component<Everything, any> {
       .designer
       .plants
       .map((p, k) => {
-        let id = p.id || (function() {throw new Error("Plant needs to have an ID.")}) ();
+        let id = p.id || (function() {throw new Error(t("Plant needs to have an ID.")); }) ();
         let isSelected = this.props.location.query["id"] === id.toString();
         let icon = p.icon_url || ICONS[0];
         return <MapPoint plant={ p }

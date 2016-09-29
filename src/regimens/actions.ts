@@ -31,7 +31,7 @@ export function saveRegimen(regimen: Regimen, baseUrl: string) {
     return action<Regimen>(baseUrl + REGIMEN_URL + (regimen.id || ""),
       regimenSerializer(regimen))
       .then(function (resp) {
-        success("Regimen saved.");
+        success(t("Regimen saved."));
         dispatch(saveRegimenOk(resp.data));
       })
       .catch(error => saveRegimenErr(error));
@@ -66,7 +66,7 @@ export function deleteRegimen(regimen: Regimen, baseUrl: string) {
 }
 
 function deleteRegimenOk(payload: Regimen) {
-  success("Regimen deleted.");
+  success(t("Regimen deleted."));
   return {
     type: "DELETE_REGIMEN_OK",
     payload
@@ -74,7 +74,7 @@ function deleteRegimenOk(payload: Regimen) {
 }
 
 function deleteRegimenErr(payload: Error) {
-  error("Unable to delete regimen.");
+  error(t("Unable to delete regimen."));
 }
 
 export function newRegimen(): ReduxAction<{}> {

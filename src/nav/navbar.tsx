@@ -5,6 +5,7 @@ import { AuthState } from "../auth/interfaces";
 import { BotState } from "../devices/interfaces";
 import { Ticker } from "../ticker/ticker";
 import { Everything } from "../interfaces";
+import { t } from "i18next";
 
 interface NavButtonState {
   auth: AuthState;
@@ -26,7 +27,7 @@ export let LogoutButton = ({ auth, onClick }: LogoutProps) => {
   });
   return <a className="logout-button"
     onClick={ onClick }>
-    Log Out
+    {t("Log Out")}
   </a>;
 };
 

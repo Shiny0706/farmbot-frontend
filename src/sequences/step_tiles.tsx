@@ -6,6 +6,7 @@ import { Help } from "../help";
 import { ExecuteBlock } from "./execute_block";
 import { Sequence } from "./interfaces";
 import { defensiveClone } from "../util";
+import { t } from "i18next";
 
 interface CopyParams {
   dispatch: Function;
@@ -114,7 +115,7 @@ export let stepTiles: StepDictionary = {
                            onClick={ () => copy({dispatch, step}) } />
                         <i className="fa fa-trash step-control"
                            onClick={ () => remove({dispatch, index}) } />
-                        <Help text="The Move Relative step instructs FarmBot to \
+                        <Help text={(`The Move Relative step instructs FarmBot to \
                         move the specified distance from its current location. \
                         For example, if FarmBot is currently at X=1000, Y=1000 \
                         and it receives a Move Relative where X=0 and Y=3000, then \
@@ -123,7 +124,7 @@ export let stepTiles: StepDictionary = {
                         require straight movements along one axis at a time, use \
                         multiple Move Relative steps. Move Relative steps should \
                         be preceded by a Move Absolute step to ensure you are \
-                        starting from a known location." />
+                        starting from a known location.`)} />
                       </div>
                     </div>
                   </div>
@@ -132,28 +133,28 @@ export let stepTiles: StepDictionary = {
                       <div className="step-content move-relative-step">
                         <div className="row">
                           <div className="col-xs-6 col-md-3">
-                            <label>X (mm)</label>
+                            <label>{t("X (mm)")}</label>
                             <StepInputBox dispatch={dispatch}
                                           step={step}
                                           index={index}
                                           field="x"/>
                           </div>
                           <div className="col-xs-6 col-md-3">
-                            <label>Y (mm)</label>
+                            <label>{t("Y (mm)")}</label>
                             <StepInputBox dispatch={dispatch}
                                           step={step}
                                           index={index}
                                           field="y"/>
                           </div>
                           <div className="col-xs-6 col-md-3">
-                            <label>Z (mm)</label>
+                            <label>{t("Z (mm)")}</label>
                             <StepInputBox dispatch={dispatch}
                                           step={step}
                                           index={index}
                                           field="z"/>
                           </div>
                           <div className="col-xs-6 col-md-3">
-                            <label>Speed</label>
+                            <label>{t("Speed")}</label>
                             <StepInputBox dispatch={dispatch}
                                           step={step}
                                           index={index}
@@ -178,18 +179,18 @@ export let stepTiles: StepDictionary = {
                          onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
-                      <Help text="The Move Absolute step instructs FarmBot to \
-                      move to the specified coordinate regardless of the current \
-                      position. For example, if FarmBot is currently at X=1000, \
-                      Y=1000 and it receives a Move Absolute where X=0 and Y=3000, \
-                      then FarmBot will move to X=0, Y=3000. If FarmBot must move in \
-                      multiple directions, it will move diagonally. If you \
-                      require straight movements along one axis at a time, \
-                      use multiple Move Absolute steps. Coming soon: Offsets \
-                      allow you to more easily instruct FarmBot to move to a \
-                      location, but offset from it by the specified amount. For \
-                      example moving to just above where a tool is located. Using \
-                      offsets lets FarmBot do the math for you." />
+                      <Help text={(`The Move Absolute step instructs FarmBot to
+                      move to the specified coordinate regardless of the current
+                      position. For example, if FarmBot is currently at X=1000,
+                      Y=1000 and it receives a Move Absolute where X=0 and Y=3000,
+                      then FarmBot will move to X=0, Y=3000. If FarmBot must move in
+                      multiple directions, it will move diagonally. If you
+                      require straight movements along one axis at a time,
+                      use multiple Move Absolute steps. Coming soon: Offsets
+                      allow you to more easily instruct FarmBot to move to a
+                      location, but offset from it by the specified amount. For
+                      example moving to just above where a tool is located. Using
+                      offsets lets FarmBot do the math for you.`)} />
                     </div>
                   </div>
                 </div>
@@ -198,28 +199,28 @@ export let stepTiles: StepDictionary = {
                     <div className="step-content move-absolute-step">
                       <div className="row">
                         <div className="col-xs-6 col-md-3">
-                          <label>X (mm)</label>
+                          <label>{t("X (mm)")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="x"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Y (mm)</label>
+                          <label>{t("Y (mm)")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="y"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Z (mm)</label>
+                          <label>{t("Z (mm)")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="z"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Speed</label>
+                          <label>{t("Speed")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
@@ -228,21 +229,21 @@ export let stepTiles: StepDictionary = {
                       </div>
                       <div className="row">
                         <div className="col-xs-6 col-md-3">
-                          <label>X-Offset (mm)</label>
+                          <label>{t("X-Offset (mm)")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="stub"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Y-Offset (mm)</label>
+                          <label>{t("Y-Offset (mm)")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="stub"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Z-Offset (mm)</label>
+                          <label>{t("Z-Offset (mm)")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
@@ -267,10 +268,10 @@ export let stepTiles: StepDictionary = {
                          onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
-                      <Help text="The Write Pin step instructs FarmBot to \
-                      set the specified pin on the Arduino to the specified mode \
-                      and value. A Pin Mode of 0 is for on/off control, while \
-                      a Pin Mode of 1 is for PWM (pulse width modulation)." />
+                      <Help text={(`The Write Pin step instructs FarmBot to
+                      set the specified pin on the Arduino to the specified mode
+                      and value. A Pin Mode of 0 is for on/off control, while
+                      a Pin Mode of 1 is for PWM (pulse width modulation).`)} />
                     </div>
                   </div>
                 </div>
@@ -279,21 +280,21 @@ export let stepTiles: StepDictionary = {
                     <div className="step-content write-pin-step">
                       <div className="row">
                         <div className="col-xs-6 col-md-3">
-                          <label>Pin Number</label>
+                          <label>{t("Pin Number")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="pin"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Value</label>
+                          <label>{t("Value")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="value"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Pin Mode</label>
+                          <label>{t("Pin Mode")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
@@ -319,9 +320,9 @@ export let stepTiles: StepDictionary = {
                          onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
-                      <Help text="The Wait step instructs FarmBot to wait for the \
-                      specified amount of time. Use it in combination with the \
-                      Pin Write step to water for a length of time." />
+                      <Help text={(`The Wait step instructs FarmBot to wait for the
+                      specified amount of time. Use it in combination with the
+                      Pin Write step to water for a length of time.`)} />
                     </div>
                   </div>
                 </div>
@@ -330,7 +331,7 @@ export let stepTiles: StepDictionary = {
                     <div className="step-content wait-step">
                       <div className="row">
                         <div className="col-xs-6 col-md-3">
-                          <label>Time in milliseconds</label>
+                          <label>{t("Time in milliseconds")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
@@ -356,10 +357,10 @@ export let stepTiles: StepDictionary = {
                          onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
-                      <Help text="The Send Message step instructs FarmBot to \
-                      send a custom message to the logs. This can help you with \
-                      debugging your sequences. Eventually you will be able to \
-                      receive push notifications and email alerts of these messages!" />
+                      <Help text={(`The Send Message step instructs FarmBot to
+                      send a custom message to the logs. This can help you with
+                      debugging your sequences. Eventually you will be able to
+                      receive push notifications and email alerts of these messages!`)} />
                     </div>
                   </div>
                 </div>
@@ -368,7 +369,7 @@ export let stepTiles: StepDictionary = {
                     <div className="step-content send-message-step">
                       <div className="row">
                         <div className="col-xs-12">
-                          <label>Message</label>
+                          <label>{t("Message")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
@@ -394,10 +395,10 @@ export let stepTiles: StepDictionary = {
                          onClick={ () => copy({dispatch, step}) } />
                       <i className="fa fa-trash step-control"
                          onClick={ () => remove({dispatch, index}) } />
-                      <Help text="The Read Pin step instructs FarmBot to \
-                      read the current value of the specified pin. Coming soon: \
-                      This data point is given the label you specified and then \
-                      stored in your web app account to be later viewed" />
+                      <Help text={(`The Read Pin step instructs FarmBot to
+                      read the current value of the specified pin. Coming soon:
+                      This data point is given the label you specified and then
+                      stored in your web app account to be later viewed`)} />
                     </div>
                   </div>
                 </div>
@@ -406,14 +407,14 @@ export let stepTiles: StepDictionary = {
                     <div className="step-content read-pin-step">
                       <div className="row">
                         <div className="col-xs-6 col-md-3">
-                          <label>Pin Number</label>
+                          <label>{t("Pin Number")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
                                         field="pin"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
-                          <label>Data Label</label>
+                          <label>{t("Data Label")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}

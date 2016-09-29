@@ -1,5 +1,6 @@
 import * as React from "react";
 import { BackArrow } from "./back_arrow";
+import { t } from "i18next";
 
 export class AddEvent extends React.Component<any, any> {
   render() {
@@ -10,16 +11,16 @@ export class AddEvent extends React.Component<any, any> {
                 </p>
               </div>
               <div className="panel-content">
-                <label>Sequence or Regimen</label>
+                <label>{t("Sequence or Regimen")}</label>
                 <select className="sequence-regimen-selector">
                   <option value="sequence 1">Sequence 1</option>
                   <option value="sequence 2">Sequence 2</option>
                   <option value="regimen 1">Regimne 1</option>
                   <option value="regimen 2">Regimen 2</option>
                 </select>
-                <label>Parameters</label>
+                <label>{t("Parameters")}</label>
                 <p className="event-parameters">Show sequence/regimen parameters</p>
-                <label>Starts</label>
+                <label>{t("Starts")}</label>
                 <div className="row">
                   <div className="col-xs-6">
                     <input placeholder="Today"
@@ -33,7 +34,7 @@ export class AddEvent extends React.Component<any, any> {
                     </select>
                   </div>
                 </div>
-                <label>Repeats Every</label>
+                <label>{t("Repeats Every")}</label>
                 <div className="row">
                   <div className="col-xs-4">
                     <input placeholder="2"
@@ -51,7 +52,7 @@ export class AddEvent extends React.Component<any, any> {
                     </select>
                   </div>
                 </div>
-                <label>Until</label>
+                <label>{t("Until")}</label>
                 <div className="row">
                   <div className="col-xs-6">
                     <input placeholder="Today"

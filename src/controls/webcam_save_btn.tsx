@@ -1,6 +1,6 @@
 import * as React from "react";
 import { updateDevice } from "../devices/actions";
-import  * as i18next  from "i18next";
+import { t } from "i18next";
 interface SaveWebcamParams {
   dispatch: Function;
   apiUrl: string;
@@ -29,7 +29,7 @@ export function WebcamSaveBtn({dispatch, webcamUrl, apiUrl, dirty}:WebcamSaveBtn
                        webcam_url: webcamUrl
                       })
                    }>
-      {i18next.t("SAVE")}
+      {t("SAVE")}
     </button>;
 
   } else {

@@ -7,6 +7,7 @@ import { RegimenItem } from "../interfaces";
 import { ReduxAction, Everything, Thunk } from "../../interfaces";
 import { Sequence } from "../../sequences/interfaces";
 import { groupRegimenItemsByWeek } from "./group_regimen_items_by_week";
+import { t } from "i18next";
 
 export function pushWeek() {
     return {
@@ -92,8 +93,8 @@ export function commitBulkEditor(): Thunk {
                 payload: { regimenItems, index }
             });
         } else {
-            error("Select a sequence from the dropdown first.");
-            (!regimenDoesExist && warning("Select a regimen or create one first."));
+            error(t("Select a sequence from the dropdown first."));
+            (!regimenDoesExist && warning(t("Select a regimen or create one first.")));
         }
     };
 }
