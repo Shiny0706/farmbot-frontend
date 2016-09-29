@@ -43,7 +43,7 @@ export let regimensReducer = generateReducer<RegimensState>(initialState)
         return state; // Lol this method is gross.
     })
     .add<void>("NEW_REGIMEN", function (state, action) {
-        state.current = state.all.length || 1;
+        state.current = state.all.length;
         state.all.push(emptyRegimen());
         return state;
     })
