@@ -89,9 +89,7 @@ export function SequenceEditorWidget({sequences, dispatch}: Everything) {
                             <div className="col-sm-1">
                                 <ColorPicker current={sequence.color}
                                              onChange={(color) => {
-                                                 dispatch(editCurrentSequence({color}))
-                                                //  dispatch();
-                                                 console.log(`You picked ${ color }`);
+                                                 dispatch(editCurrentSequence({color}));
                                              } } />
                             </div>
                         </div>

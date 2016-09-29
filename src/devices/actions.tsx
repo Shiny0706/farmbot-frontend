@@ -267,7 +267,6 @@ export function execSequence(sequence: Sequence) {
             (e: string) => {
                 // This needs to be fixed. FarmbotJS timer deferred promises
                 // should be returning type Error, never string!
-                console.dir(e);
                 dispatch(botError({
                     error: "Unable to execute sequence. See log for details.",
                     method: "TODO: Fix Farmbotjs timer defer rejection"

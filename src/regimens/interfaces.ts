@@ -29,6 +29,8 @@ export interface Regimen {
 
 /** Individual step that a regimen will execute at a point in time. */
 export interface RegimenItem {
+    id?: number;
+    regimen_id?: number;
     sequence: Sequence;
     /** Time (in milliseconds) to wait before executing the sequence */
     time_offset: number;

@@ -38,6 +38,8 @@ function configureStore(options = {}) {
     let srsly = compose(applyMiddleware(thunk, risi),
               dt ? dt() : (f: any) => f);
     store = createStore(reducers, lastState, srsly);
+    // Make store global in dev env in case I need to probe it.
+    window["store"] = store;
     store.subscribe(function () {
       sessionStorage["lastState"] = JSON.stringify(store.getState());
     });
