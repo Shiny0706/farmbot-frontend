@@ -8,6 +8,7 @@ import { AuthState } from "./interfaces";
 import { fetchPlants } from "../farm_designer/actions";
 import { ReduxAction, Thunk } from "../interfaces";
 import * as Axios from "axios";
+import { t } from "i18next";
 
 export interface AuthResponseToken {
   unencoded: AuthToken;
@@ -69,7 +70,7 @@ export function login(username: string,
 }
 
 function loginErr(err: AuthResponse ) {
-  error("Login failed.");
+  error(t("Login failed."));
   return {
     type: "LOGIN_ERR",
     payload: err

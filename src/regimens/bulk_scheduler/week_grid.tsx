@@ -2,6 +2,7 @@ import * as React from "react";
 import { WeekRow } from "./week_row";
 import { Week } from "./interfaces";
 import { pushWeek, popWeek } from "./actions";
+import { t } from "i18next";
 
 interface WeekGridProps {
  weeks: Week[];
@@ -22,11 +23,11 @@ export function WeekGrid({weeks, dispatch}: WeekGridProps) {
             <div className="col-sm-12">
             <button className="green button-like left widget-control"
                     onClick={ () => dispatch(pushWeek()) }>
-              <i className="fa fa-plus" /> Week
+              <i className="fa fa-plus" /> {t("Week")}
             </button>
             <button className="red button-like left widget-control"
                     onClick={ () => dispatch(popWeek()) }>
-              <i className="fa fa-minus" /> Week
+              <i className="fa fa-minus" /> {t("Week")}
             </button>
             </div>
         </div>

@@ -28,13 +28,15 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
             <div className="row">
                 <div className="col-sm-12">
                     <div className="widget-header">
-                        <h5>Commands</h5>
+                        <h5>{("Commands")}</h5>
                         <i className="fa fa-question-circle widget-help-icon">
-                          <div className="widget-help-text">These commands are
-                          the most basic things FarmBot can do. Combine them into
-                          sequences to create more complex operations for
-                          watering, planting seeds, measuring soil properties,
-                          and more. Coming soon: drag and drop commands!</div>
+                          <div className="widget-help-text">
+                            {(`These commands are
+                            the most basic things FarmBot can do. Combine them into
+                            sequences to create more complex operations for
+                            watering, planting seeds, measuring soil properties,
+                            and more. Coming soon: drag and drop commands!`)}
+                          </div>
                         </i>
                     </div>
                 </div>
@@ -48,7 +50,7 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                     <button className=
                                         "full-width text-left blue-block block-header block"
                                         onClick={ clickToAdd(step("move_absolute")) }>
-                                        MOVE ABSOLUTE
+                                        {("MOVE ABSOLUTE")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
                                 </div>
@@ -58,7 +60,7 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                     <button className=
                                         "full-width text-left green-block block-header block"
                                         onClick={ clickToAdd(step("move_relative")) }>
-                                        MOVE RELATIVE
+                                        {("MOVE RELATIVE")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
                                 </div>
@@ -68,7 +70,7 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                     <button className=
                                         "full-width text-left orange-block block-header block"
                                         onClick={ clickToAdd(step("pin_write")) }>
-                                        WRITE PIN
+                                        {("WRITE PIN")}
                                     </button>
                                     <i className="fa fa-arrows block-control" />
                                 </div>
@@ -78,7 +80,7 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                     <button className=
                                         "full-width text-left yellow-block block-header block"
                                         onClick={ clickToAdd(step("read_pin")) }>
-                                        READ PIN
+                                        {("READ PIN")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
                                 </div>
@@ -88,7 +90,7 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                     <button className=
                                         "full-width text-left brown-block block-header block"
                                         onClick={ clickToAdd(step("wait")) }>
-                                        WAIT
+                                        {("WAIT")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
                                 </div>
@@ -97,7 +99,7 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className="full-width text-left red-block block-header"
                                         onClick={ clickToAdd(step("send_message")) }>
-                                        SEND MESSAGE
+                                        {("SEND MESSAGE")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
                                 </div>
@@ -107,7 +109,7 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                     <button className=
                                         "full-width text-left purple-block block-header block"
                                         onClick={ clickToAdd(step("if_statement")) }>
-                                        IF STATEMENT <Help text="Coming soon" />
+                                        {("IF STATEMENT")} <Help text="Coming soon" />
                                         <i className="fa fa-arrows block-control" />
                                     </button>
                                 </div>
@@ -117,7 +119,7 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                     <button className=
                                         "full-width text-left gray-block block-header block"
                                         onClick={ temporaryHack }>
-                                        EXECUTE
+                                        {("EXECUTE")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
                                 </div>
@@ -128,5 +130,4 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
             </div>
         </div>
     </div>);
-
 }

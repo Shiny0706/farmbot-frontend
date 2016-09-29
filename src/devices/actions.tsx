@@ -7,6 +7,7 @@ import { catchMessage, RPCError } from "./message_catcher";
 import { Thunk } from "../interfaces";
 import { put } from "axios";
 import { DeviceAccountSettings } from "../devices/interfaces";
+import { t } from "i18next";
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
@@ -29,7 +30,7 @@ export function settingToggleOk(res) {
 }
 
 export function settingToggleErr(err) {
-    error("Refresh browser or restart devices.", "Error while toggling setting");
+    error(t("Refresh browser or restart devices."), t("Error while toggling setting"));
     return {
         type: "SETTING_TOGGLE_ERR",
         payload: {}
@@ -57,7 +58,7 @@ export function pinToggleOk(res) {
 }
 
 export function pinToggleErr(err) {
-    error("Refresh browser or restart devices.", "Error while toggling pin");
+    error(t("Refresh browser or restart devices."), t("Error while toggling pin"));
 }
 
 export function changeStepSize(integer) {
@@ -103,7 +104,7 @@ function commitSettingsChangesOk(resp) {
 }
 
 function commitSettingsChangesErr(err) {
-    error("Unable to commit settings changes.");
+    error(t("Unable to commit settings changes."));
 }
 
 export function commitAxisChanges() {
@@ -156,7 +157,7 @@ function readStatusOk(status) {
 }
 
 function readStatusErr(msg) {
-    error("Did you configure your bot? Is it online?", "Can't read status");
+    error(t("Did you configure your bot? Is it online?"), t("Can't read status"));
     return {
         type: "READ_STATUS_ERR",
         payload: msg
@@ -240,8 +241,8 @@ function botNotification(statusMessage) {
 }
 
 function unknownMessage(statusMessage: any) {
-    warning("FarmBot sent an unknown message. See log for details.",
-        "Malformed Message");
+    warning(t("FarmBot sent an unknown message. See log for details."),
+        t("Malformed Message"));
     console.dir(statusMessage);
     return {
         type: "UNKNOWN_MESSAGE",
@@ -267,10 +268,9 @@ export function execSequence(sequence: Sequence) {
             (e: string) => {
                 // This needs to be fixed. FarmbotJS timer deferred promises
                 // should be returning type Error, never string!
-                console.dir(e);
                 dispatch(botError({
-                    error: "Unable to execute sequence. See log for details.",
-                    method: "TODO: Fix Farmbotjs timer defer rejection"
+                    error: t("Unable to execute sequence. See log for details."),
+                    method: t("TODO: Fix Farmbotjs timer defer rejection")
                 }));
             });
     };

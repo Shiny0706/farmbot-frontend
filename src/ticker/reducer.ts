@@ -1,13 +1,17 @@
 import { generateReducer } from "../generate_reducer";
 import { TickerState } from "./interfaces";
 import { ReduxAction } from "../interfaces";
+import * as i18next from "i18next";
 
 let YELLOW = "#fd6",
     RED = "#e66",
     GREEN = "#6a4";
 
 function change(color: string, message: string, show = true) {
-    return (s: TickerState, a: ReduxAction<{}>) => ({ color, message, show });
+    return function (s: TickerState, a: ReduxAction<{}>) {
+        message = i18next.t(message);
+        return { color, message, show };
+    };
 }
 
 export let tickerReducer = generateReducer<TickerState>({
@@ -15,7 +19,7 @@ export let tickerReducer = generateReducer<TickerState>({
     color: "gray",
     show: true
   })
-.add<{}>("LOGIN_OK", change(YELLOW, "Logged in"))
+.add<{}>("LOGIN_OK", change(YELLOW, "Logged in") )
 .add<{}>("LOGIN_ERR", change(RED, "Bad login"))
 .add<{}>("FETCH_PLANTS_START", change(YELLOW, "Fetching plants"))
 .add<{}>("FETCH_PLANTS_OK", change(GREEN, "Done fetching plants"))

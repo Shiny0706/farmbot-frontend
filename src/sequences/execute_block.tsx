@@ -2,6 +2,7 @@ import * as React from "react";
 import { copy, remove, StepParams } from "./step_tiles";
 import { Step, Sequence } from "./interfaces";
 import { changeStep } from "./actions";
+import { t } from "i18next";
 
 /** Removes un-executable sequences, such as "self" or unsaved ones */
 function filterSequenceList(sequences: Sequence[], sequence: Sequence) {
@@ -87,7 +88,7 @@ export function ExecuteBlock({dispatch, step, index, sequence, sequences}: StepP
                     <div className="step-content execute-step">
                         <div className="row">
                             <div className="col-xs-12">
-                                <label>Sequence</label>
+                                <label>{t("Sequence")}</label>
                                 <SequenceSelectBox dispatch={dispatch}
                                     step={step}
                                     sequence={sequence}

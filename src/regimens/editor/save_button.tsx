@@ -1,7 +1,7 @@
 import * as React from "react";
 import { RegimenProps, Regimen } from "../interfaces";
 import { saveRegimen } from "../actions";
-import * as i18next from "i18next";
+import { t } from "i18next";
 
 interface SaveButtonProps extends RegimenProps {
   url: string;
@@ -24,7 +24,7 @@ export function SaveButton({regimen, dispatch, url}: SaveButtonProps) {
     return <button className="green button-like widget-control"
       onClick={save({ dispatch, regimen, url })}>
 
-      { i18next.t("Save") + (regimen.dirty ? "*" : "") }
+      { t("Save") + (regimen.dirty ? "*" : "") }
     </button>;
   } else {
     return <span />;

@@ -20,9 +20,8 @@ detectLanguage().then((config) => {
       if (domElem) {
         render(reactElem, domElem);
       } else {
-        throw new Error("Add a div with id `root` to the page first.");
+        throw new Error(t("Add a div with id `root` to the page first."));
       };
       store.dispatch(ready());
     });
 });
-

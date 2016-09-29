@@ -10,6 +10,7 @@ import {
 import { stepTiles, StepTile } from "./step_tiles";
 import { Everything } from "../interfaces";
 import { ColorPicker } from "./color_picker";
+import { t } from "i18next";
 
 let Oops: StepTile = (_) => { return <div>Whoops! Not a valid message_type</div>; };
 let StepList = ({sequence, sequences, dispatch}:
@@ -55,23 +56,25 @@ export function SequenceEditorWidget({sequences, dispatch}: Everything) {
                 <div className="col-sm-12">
                     <button className="green button-like widget-control"
                         onClick={save(dispatch, sequence)}>
-                        Save {sequence.dirty ? " *" : ""}
+                        {t("Save")} {sequence.dirty ? " *" : ""}
                     </button>
                     <button className="yellow button-like widget-control"
                         onClick={performSeq(dispatch, sequence)}>
-                        Test
+                        {t("Test")}
                     </button>
                     <button className="red button-like widget-control"
                         onClick={destroy(dispatch, sequence, inx)}>
                         Delete
                     </button>
                     <div className="widget-header">
-                        <h5>Sequence Editor</h5>
+                        <h5>{t("Sequence Editor")}</h5>
                         <i className="fa fa-question-circle widget-help-icon">
-                            <div className="widget-help-text">Use this widget to edit
-                        sequences. Coming soon: drag and drop steps,
-                        custom step names, sequence cloning, and inheritable
-                        step properties!</div>
+                            <div className="widget-help-text">
+                              {t(`Use this widget to edit
+                              sequences. Coming soon: drag and drop steps,
+                              custom step names, sequence cloning, and inheritable
+                              step properties!`)}
+                            </div>
                         </i>
                     </div>
                 </div>
@@ -89,9 +92,7 @@ export function SequenceEditorWidget({sequences, dispatch}: Everything) {
                             <div className="col-sm-1">
                                 <ColorPicker current={sequence.color}
                                              onChange={(color) => {
-                                                 dispatch(editCurrentSequence({color}))
-                                                //  dispatch();
-                                                 console.log(`You picked ${ color }`);
+                                                 dispatch(editCurrentSequence({color}));
                                              } } />
                             </div>
                         </div>
@@ -100,7 +101,9 @@ export function SequenceEditorWidget({sequences, dispatch}: Everything) {
                             sequences={sequences.all} />}
                         <div className="row">
                             <div className="col-sm-12">
-                                <div className="drag-drop-area padding">DRAG ACTIONS HERE</div>
+                                <div className="drag-drop-area padding">
+                                  {t("DRAG ACTIONS HERE")
+                                }</div>
                             </div>
                         </div>
                     </div>

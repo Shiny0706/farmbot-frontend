@@ -6,6 +6,7 @@ import {
 import { stubs } from "./temporary_stubs";
 import { randomColor } from "../util";
 import { generateReducer } from "../generate_reducer";
+import { findWhere } from "lodash";
 
 export function emptyRegimen(): Regimen {
     return {
@@ -65,12 +66,13 @@ export let regimensReducer = generateReducer<RegimensState>(initialState)
         return state;
     })
     .add<RegimenItem>("REMOVE_REGIMEN_ITEM", function (state, action) {
-            let list = state.all[state.current].regimen_items;
-            let index = list.indexOf(action.payload);
-            list.splice(index - 1, 1);
-            state.all[state.current].dirty = true;
-            return state;
-        })
+        let list = state.all[state.current].regimen_items;
+        let index = list.indexOf(findWhere(list, action.payload));
+        if (index === -1) { throw new Error("Can't find that regimen."); }
+        list.splice(index, 1);
+        state.all[state.current].dirty = true;
+        return state;
+    })
     .add<any>("FETCH_REGIMENS_OK", function (state, action) {
         state.all = action.payload;
         return state;

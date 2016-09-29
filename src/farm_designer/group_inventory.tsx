@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link } from 'react-router';
+import { t } from "i18next";
 
 export class Groups extends React.Component<any, any> {
   render() {
@@ -17,19 +18,28 @@ export class Groups extends React.Component<any, any> {
           <div className="panel-tabs">
             <ul>
               <li className="hidden-sm hidden-md hidden-lg">
-                  <Link to={ "/app/dashboard/designer?p1=NoTab" }>Designer</Link>
+                  <Link to={ "/app/dashboard/designer?p1=NoTab" }>
+                  {t("Designer")}
+                  </Link>
               </li>
               <li>
-                  <Link to={ "/app/dashboard/designer?p1=Plants" }>Plants</Link>
+                  <Link to={ "/app/dashboard/designer?p1=Plants" }>
+                  {t("Plants")}
+                  </Link>
               </li>
               <li>
-                  <Link to={ "/app/dashboard/designer?p1=Groups" } className={"active"}>Groups</Link>
+                  <Link to={ "/app/dashboard/designer?p1=Groups" }
+                  className={"active"}>{t("Groups")}</Link>
               </li>
               <li>
-                  <Link to={ "/app/dashboard/designer?p1=Zones" }>Zones</Link>
+                  <Link to={ "/app/dashboard/designer?p1=Zones" }>
+                  {t("Zones")}
+                  </Link>
               </li>
               <li className="hidden-sm hidden-md hidden-lg">
-                  <Link to={ "/app/dashboard/designer?p1=Panel2" }>Calendar</Link>
+                  <Link to={ "/app/dashboard/designer?p1=Panel2" }>
+                  {t("Calendar")}
+                  </Link>
               </li>
             </ul>
           </div>
@@ -41,41 +51,41 @@ export class Groups extends React.Component<any, any> {
           <div className="search-underline"></div>
           <div>
             <div className="object-list">
-              <label>My Groups</label>
+              <label>{t("My Groups")}</label>
               <ul>
                 <li>
-                  <a href="#">Lucky Cabages</a>
-                  <p>18 Plants</p>
+                  <a href="#">{("Lucky Cabages")}</a>
+                  <p>{t("18 Plants")}</p>
                 </li>
                 <li>
-                  <a href="#">Sandwich Sprouts</a>
-                  <p>142 Plants</p>
+                  <a href="#">{("Sandwich Sprouts")}</a>
+                  <p>{t("142 Plants")}</p>
                 </li>
               </ul>
             </div>
             <div className="object-list">
-              <label>Zone Auto-Groups</label>
+              <label>{("Zone Auto-Groups")}</label>
               <ul>
                 <li>
-                  <a href="#">Plants in Broccoli Overlord</a>
-                  <p>459 Plants</p>
+                  <a href="#">{("Plants in Broccoli Overlord")}</a>
+                  <p>{t("459 Plants")}</p>
                 </li>
                 <li>
-                  <a href="#">Plants in Flower Patch</a>
-                  <p>22 Plants</p>
+                  <a href="#">{("Plants in Flower Patch")}</a>
+                  <p>{t("22 Plants")}</p>
                 </li>
               </ul>
             </div>
             <div className="object-list">
-              <label>Crop Auto-Groups</label>
+              <label>{t("Crop Auto-Groups")}</label>
               <ul>
                 <li>
-                  <a href="#">All Strawberries</a>
-                  <p>13 Plants</p>
+                  <a href="#">{("All Strawberries")}</a>
+                  <p>{t("13 Plants")}</p>
                 </li>
                 <li>
-                  <a href="#">All Flowers</a>
-                  <p>68 Plants</p>
+                  <a href="#">{("All Flowers")}</a>
+                  <p>{t("68 Plants")}</p>
                 </li>
               </ul>
             </div>

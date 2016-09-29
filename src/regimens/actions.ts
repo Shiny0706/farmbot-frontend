@@ -30,8 +30,8 @@ export function saveRegimen(regimen: Regimen, baseUrl: string) {
     const action = regimen.id ? Axios.put : Axios.post;
     return action<Regimen>(baseUrl + REGIMEN_URL + (regimen.id || ""),
       regimenSerializer(regimen))
-      .then(function(resp) {
-        success("Regimen saved.");
+      .then(function (resp) {
+        success(t("Regimen saved."));
         dispatch(saveRegimenOk(resp.data));
       })
       .catch(error => saveRegimenErr(error));
@@ -44,7 +44,7 @@ function saveRegimenOk(regimen: Regimen) {
 
 function saveRegimenErr(err: any) {
   error(prettyPrintApiErrors(err),
-        t("Unable to save regimen."));
+    t("Unable to save regimen."));
 }
 
 export function deleteRegimen(regimen: Regimen, baseUrl: string) {
@@ -53,12 +53,12 @@ export function deleteRegimen(regimen: Regimen, baseUrl: string) {
       let url = baseUrl + REGIMEN_URL + regimen.id;
 
       Axios.delete<Regimen>(url)
-           .then(function(resp) {
-             dispatch(deleteRegimenOk(regimen));
-            })
-           .catch(function(error) {
-             deleteRegimenErr(error);
-            });
+        .then(function (resp) {
+          dispatch(deleteRegimenOk(regimen));
+        })
+        .catch(function (error) {
+          deleteRegimenErr(error);
+        });
     } else {
       dispatch(deleteRegimenOk(regimen));
     };
@@ -66,7 +66,7 @@ export function deleteRegimen(regimen: Regimen, baseUrl: string) {
 }
 
 function deleteRegimenOk(payload: Regimen) {
-  success("Regimen deleted.");
+  success(t("Regimen deleted."));
   return {
     type: "DELETE_REGIMEN_OK",
     payload
@@ -74,7 +74,7 @@ function deleteRegimenOk(payload: Regimen) {
 }
 
 function deleteRegimenErr(payload: Error) {
-  error("Unable to delete regimen.");
+  error(t("Unable to delete regimen."));
 }
 
 export function newRegimen(): ReduxAction<{}> {
