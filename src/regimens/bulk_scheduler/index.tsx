@@ -7,6 +7,7 @@ import { TimeInput } from "./time_input";
 import { nullSequence } from "../../sequences/actions";
 import { WeekGrid } from "./week_grid";
 import { commitBulkEditor } from "./actions";
+import { t } from "i18next";
 interface BulkEditorProps {
     sequences: Sequence[];
     editor: BulkSchedulerState;
@@ -24,8 +25,8 @@ export function BulkSchedulerWidget({sequences, dispatch, editor}: BulkEditorPro
                     <div className="widget-header">
                         <h5>Scheduler</h5>
                         <i className="fa fa-question-circle widget-help-icon">
-                            <div className="widget-help-text">Use this tool to schedule
-                                a sequence to run on many days of your regimen.</div>
+                            <div className="widget-help-text">{t(`Use this tool to schedule
+                                a sequence to run on many days of your regimen.`)}</div>
                         </i>
                     </div>
                 </div>

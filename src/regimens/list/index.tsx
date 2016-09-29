@@ -2,6 +2,7 @@ import * as React from "react";
 import { RegimenListItem } from "./regimen_list_item";
 import { Everything } from "../../interfaces";
 import { AddRegimen } from "./add_button";
+import { t } from "i18next";
 
 export function RegimensList(props: Everything) {
     return <div>
@@ -20,8 +21,8 @@ export function RegimensList(props: Everything) {
                     <div className="widget-header">
                       <h5>Regimens</h5>
                       <i className="fa fa-question-circle widget-help-icon">
-                        <div className="widget-help-text">This is a list of all
-                        of your regimens. Coming soon: Regimens, and regimen cloning!</div>
+                        <div className="widget-help-text">{t(`This is a list of all
+                        of your regimens. Coming soon: Regimens, and regimen cloning!`)}</div>
                       </i>
                     </div>
                   </div>

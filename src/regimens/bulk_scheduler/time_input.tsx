@@ -1,6 +1,7 @@
 import * as React from "react";
 import { setTimeOffset } from "./actions";
 import { duration } from "moment";
+import { t } from "i18next";
 
 interface TimeInputProps {
   dispatch: Function;
@@ -13,7 +14,7 @@ export class TimeInput extends React.Component<TimeInputProps, any> {
   public isEditing: boolean;
 
   formatMs(ms: number) {
-    if (_.isNumber(ms)) { // Way to much logic. 
+    if (_.isNumber(ms)) { // Way to much logic.
       let d = duration(ms);
       let isPM = (d.hours() > 12);
       let hh = (isPM) ? (d.hours() - 12) : d.hours();
@@ -46,7 +47,7 @@ export class TimeInput extends React.Component<TimeInputProps, any> {
 
   render() {
     return <div>
-      <label>Time</label>
+      <label>{t("Time")}</label>
       <input onFocus={ this.focus.bind(this) }
              value={ this.value }
              onChange={ (event) => {

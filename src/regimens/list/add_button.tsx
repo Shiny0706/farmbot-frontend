@@ -1,5 +1,6 @@
 import * as React from "react";
 import { newRegimen } from "../actions";
+import { t } from "i18next";
 
 interface AddRegimenProps {
   dispatch: Function;
@@ -8,7 +9,7 @@ interface AddRegimenProps {
 export function AddRegimen({dispatch}: AddRegimenProps) {
   return <button className="green button-like widget-control"
                  onClick={ add(dispatch) }>
-    Add
+    {t("Add")}
   </button>;
 }
 

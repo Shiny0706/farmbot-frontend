@@ -3,6 +3,7 @@ import { selectSequence, addSequence } from "./actions";
 import { SequenceReducerState } from "./interfaces";
 import { Sequence } from "./interfaces";
 import { AuthToken } from "../auth/actions";
+import { t } from "i18next";
 
 let buttonList = (dispatch: Function) => (seq: Sequence, index: number) => {
   let css = ["block-wrapper",
@@ -33,14 +34,16 @@ export function SequencesList({sequences, dispatch}: SequencesListProps) {
                   <div className="col-sm-12">
                     <button className="green button-like widget-control"
                             onClick={ () => dispatch(addSequence()) }>
-                      Add
+                      {t("Add")}
                     </button>
                     <div className="widget-header">
-                      <h5>Sequences</h5>
+                      <h5>{t("Sequences")}</h5>
                       <i className="fa fa-question-circle widget-help-icon">
-                        <div className="widget-help-text">Here is the list of
-                        all of your sequences. Click one to edit. Coming soon:
-                        sequence cloning and custom colors!</div>
+                        <div className="widget-help-text">
+                          {t(`Here is the list of
+                          all of your sequences. Click one to edit. Coming soon:
+                          sequence cloning and custom colors!`)}
+                        </div>
                       </i>
                     </div>
                   </div>
