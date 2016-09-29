@@ -25,7 +25,17 @@ export function is<T>(schema: Joi.ObjectSchema) {
   return (input: T | {}): input is T => !Joi.validate(input, schema).error;
 }
 
-export let colors: Array<Color> = ["blue", "green", "yellow", "orange", "purple", "pink", "gray", "red"];
+export let colors: Array<Color> = [
+  "blue",
+  "green",
+  "yellow",
+  "orange",
+  "purple",
+  "pink",
+  "gray",
+  "red"
+];
+
 /** Picks a color that is compliant with sequence / regimen color codes */
 export function randomColor(): Color {
   return _.sample(colors);
@@ -34,4 +44,33 @@ export function randomColor(): Color {
 export function defensiveClone<T>(target: T): T {
   let jsonString = JSON.stringify(target);
   return JSON.parse(jsonString);
+}
+
+interface AxiosErrorResponse {
+  response?: {
+    data: {
+      [reason: string]: string
+    };
+  }
+};
+
+/** Concats and capitalizes all of the error key/value
+ *  pairs returned by the /api/xyz endpoint. */
+export function prettyPrintApiErrors(err: AxiosErrorResponse) {
+  return _.map(safelyFetchErrors(err),
+               (v, k) => `${k} ${v}.`.toLowerCase())
+  .map(str => _.capitalize(str)).join(" ");
+}
+
+/** */ 
+function safelyFetchErrors(err: AxiosErrorResponse): {[key: string]: string} {
+  // In case the interpreter gives us an oddball error message.
+  if (err && err.response && err.response.data) {
+    return err.response.data;
+  } else {
+    console.warn("DONT KNOW HOW TO HANDLE THIS ERROR MESSAGE.");
+    console.dir(err);
+
+    return { possible: "connectivity issues." };
+  };
 }
