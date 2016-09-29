@@ -3,6 +3,7 @@ import {
     Regimen,
     RegimenItem
 } from "./interfaces";
+import { Sequence } from "../sequences/interfaces";
 import { stubs } from "./temporary_stubs";
 import { randomColor } from "../util";
 import { generateReducer } from "../generate_reducer";
@@ -59,6 +60,26 @@ export let regimensReducer = generateReducer<RegimensState>(initialState)
         state.all[index].dirty = true;
         state.all[index].regimen_items = hmm.concat(ok);
         return state;
+    })
+    .add<Sequence>("SAVE_SEQUENCE_OK", function(state, action) {
+      // This is the first time we've hit issues with denormalized data.
+      // TODO: Investigate data normalization for the state tree.
+      let id = action.payload.id;
+      let sequence = action.payload;
+
+      state
+        .all
+        .map(function(regimen) {
+          regimen
+            .regimen_items
+            .map(function(ri) {
+                if (ri.sequence.id === id) {
+                  ri.sequence = sequence;
+                }
+            });
+        });
+
+      return state;
     })
     .add<Regimen>("SAVE_REGIMEN_OK", function (state, action) {
         let current = _.find<Regimen>(state.all, r => r.name === action.payload.name);
