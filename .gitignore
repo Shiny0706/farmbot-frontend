@@ -7,5 +7,7 @@ node_modules
 npm-debug.log
 .DS_Store
 .vscode
-app/*bundle.js*
 app-resources/*bundle.js*
+app-resources/bundle.js
+app-resources/bundle.js.map
+app/*bundle.js*
