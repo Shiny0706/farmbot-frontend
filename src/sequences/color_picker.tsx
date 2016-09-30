@@ -28,7 +28,7 @@ export class ColorPicker extends React.Component<ColorPickerProps, ColorPickerSt
 
             let style = { margin: "4px" };
 
-            if (color === actual) { style["border"] = "3px solid #666"; }
+            if (color === actual) { style["border"] = "3px solid #ddd"; }
 
             function colorChange() { cb(color); }
 

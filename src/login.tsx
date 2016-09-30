@@ -93,7 +93,7 @@ class LoginPage extends React.Component<Everything, any> {
                         </div>
                         <div className="row">
                           <div className="col-xs-12">
-                          <label> {("Server Port")} </label>
+                          <label> {("Server URL")} </label>
                           <input type="text"
                                  value={ this.props.config.host }
                                  onChange={ setHost(this.props.dispatch) } />
