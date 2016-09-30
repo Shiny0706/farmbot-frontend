@@ -24,6 +24,16 @@ nav.navbar {
   }
 }
 
+li > a.fb-navbar-active-link {
+  border-bottom: 3px solid $off_white;
+}
+
+a.fb-navbar-active-link {
+  color: $off_white!important;
+  font-weight: bold;
+  text-decoration: none;
+}
+
 .nav-status-buttons {
   display: block;
   margin: 15px;
