@@ -39,7 +39,7 @@ function configureStore(options = {}) {
               dt ? dt() : (f: any) => f);
     store = createStore(reducers, lastState, srsly);
     // Make store global in dev env in case I need to probe it.
-    window["store"] = store;
+    (window as any)["store"] = store;
     store.subscribe(function () {
       sessionStorage["lastState"] = JSON.stringify(store.getState());
     });

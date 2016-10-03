@@ -60,10 +60,6 @@ export interface BotState {
 
 /** Status registers for the bot's status */
 export interface HardwareState {
-  busy?: number;
-  last?: string;
-  last_sync?: string;
-  method?: string;
   s?: number;
   x?: number;
   y?: number;
@@ -93,20 +89,20 @@ export interface HardwareState {
   movement_timeout_y?: number;
   movement_timeout_z?: number;
   param_version?: number;
-  pin0?: string;
-  pin1?: string;
-  pin2?: string;
-  pin3?: string;
-  pin4?: string;
-  pin5?: string;
-  pin6?: string;
-  pin7?: string;
-  pin8?: string;
-  pin9?: string;
-  pin10?: string;
-  pin11?: string;
-  pin12?: string;
-  pin13?: string;
+  pin0?: number;
+  pin1?: number;
+  pin2?: number;
+  pin3?: number;
+  pin4?: number;
+  pin5?: number;
+  pin6?: number;
+  pin7?: number;
+  pin8?: number;
+  pin9?: number;
+  pin10?: number;
+  pin11?: number;
+  pin12?: number;
+  pin13?: number;
 }
 
 export interface MqttMessage {
