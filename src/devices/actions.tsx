@@ -1,7 +1,7 @@
 import { Farmbot } from "farmbot";
 import { store } from "../store";
 import { devices } from "../device";
-import { error, warning } from "../logger";
+import { error, warning, success } from "../logger";
 import { Sequence } from "../sequences/interfaces";
 import { Thunk, Everything } from "../interfaces";
 import { put } from "axios";
@@ -208,23 +208,19 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
   };
 };
 
-export function sendCommand(payload) {
-  let method = devices.current[payload.name];
-  let result = method.call(devices.current, payload);
-  return (dispatch: Function) => {
-    return result.then((res) => sendCommandOk(res, payload, dispatch),
-      (e) => sendCommandErr(e, payload, dispatch));
-  };
+export function homeAll(speed: number) {
+  devices
+    .current
+    .homeAll({speed})
+    .then((ack) => {
+      success(t("Home all in progress."));
+    }, sendCommandErr("Home all"));
 }
 
-function sendCommandOk(res, payload, dispatch: Function) {
-  dispatch({ type: "COMMAND_OK", payload: res });
-}
-
-function sendCommandErr(e, payload, dispatch: Function) {
-  let msg = (payload.name || "Command") + " request failed.";
+let sendCommandErr = (name?: string) => (e: Error) => {
+  let msg = (name || "Command") + " request failed.";
   error(msg, "Farmbot Didn't Get That!");
-}
+};
 
 export function addDevice(deviceAttrs): Thunk {
 
