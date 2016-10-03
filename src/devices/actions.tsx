@@ -40,17 +40,19 @@ export function settingToggleErr(err) {
 
 
 export function pinToggle(num: number): Function {
-    return function(dispatch: Function) {
-        let currentValue = store.getState().bot.hardware[`pin${num}`];
-        let newPinValue = (currentValue === 1) ? 0 : 1;
-        return devices
-            .current
-            .writePin({ pin_number: num,
-                        pin_value: newPinValue,
-                        pin_mode: DIGITAL })
-            .then(res => dispatch(pinToggleOk(res)),
-            err => dispatch(pinToggleErr(err)));
-    };
+  return function (dispatch: Function) {
+    let currentValue = store.getState().bot.hardware[`pin${num}`];
+    let newPinValue = (currentValue === 1) ? 0 : 1;
+    return devices
+      .current
+      .writePin({
+        pin_number: num,
+        pin_value: newPinValue,
+        pin_mode: DIGITAL
+      })
+      .then(res => dispatch(pinToggleOk(res)),
+      err => dispatch(pinToggleErr(err)));
+  };
 }
 
 export function pinToggleOk(res) {
@@ -148,13 +150,13 @@ function commitAxisChangesOk(resp) {
 }
 
 export function readStatus() {
-    return function (dispatch: Function) {
-        return devices
-            .current
-            .readStatus()
-            .then((resp: Response<[{OK: "OK"}]>) => dispatch(botAck(resp)),
-            (errr) => dispatch(readStatusErr(errr)));
-    };
+  return function (dispatch: Function) {
+    return devices
+      .current
+      .readStatus()
+      .then((resp: Response<[{ OK: "OK" }]>) => dispatch(botAck(resp)),
+      (errr) => dispatch(readStatusErr(errr)));
+  };
 }
 
 function readStatusOk(status) {
@@ -181,41 +183,33 @@ export function changeDevice(newAttrs: any) {
 }
 
 export function connectDevice(token: string): {} | ((dispatch: any) => any) {
-    return (dispatch) => {
-        let bot = new Farmbot({ token });
-        return bot
-            .connect()
-            .then(() => {
-                devices.current = bot;
-                dispatch(readStatus());
-                bot.on("*", function (msg: any) {
-                    msg = Object(msg); // stay safe, folks.
-                    // Unlikely scenario: You received an inbound method invocation.
-                    // We do not invoke methods on clients. 
-                    if (msg.id && msg.method && msg.id) { return; }
-                    let fn: Function = (function(){
-                        // ERROR MESSAGE FROM BOT
-                        if (!(msg.error === undefined || msg.error === null)) { return botError; };
-
-                        // ACK FROM BOT
-                        if (msg.result && msg.id) { return botAck; };
-
-                        // RPC Notification
-                        if (msg.method && msg.params) {
-                            switch (msg.method) {
-                                case "status_update":
-                                    return botNotification;
-                                case "log_message":
-                                    return logNotification;
-                            };
-                        };
-                        return unknownMessage;
-                    })();
-                    console.dir(msg);
-                    dispatch(fn(msg));
-                });
-            }, (err) => dispatch(fetchDeviceErr(err)));
-    };
+  return (dispatch) => {
+    let bot = new Farmbot({ token });
+    return bot
+      .connect()
+      .then(() => {
+        devices.current = bot;
+        dispatch(readStatus());
+        bot.on("*", function (msg: any) {
+          msg = Object(msg); // stay safe, folks.
+          let fn: Function;
+          if (msg.method && msg.params && (msg.id === null)) {
+            switch (msg.method) {
+              case "status_update":
+                fn = botNotification;
+                break;
+              case "log_message":
+                fn = logNotification;
+                break;
+              default:
+                fn = unknownMessage;
+            };
+            console.dir(msg);
+            dispatch(fn(msg));
+          };
+        });
+      }, (err) => dispatch(fetchDeviceErr(err)));
+  };
 };
 
 export function sendCommand(payload) {
@@ -243,11 +237,11 @@ export function addDevice(deviceAttrs): Thunk {
   };
 }
 
-function botAck(response: Response<[{OK: "OK"}]>) {
-    return {
-        type: "BOT_ACK",
-        payload: response
-    };
+function botAck(response: Response<[{ OK: "OK" }]>) {
+  return {
+    type: "BOT_ACK",
+    payload: response
+  };
 }
 
 function botError(statusMessage: ErrorResponse) {
@@ -260,18 +254,18 @@ function botError(statusMessage: ErrorResponse) {
 }
 
 function botNotification(statusMessage: Notification<[HardwareState]>) {
-    return {
-        type: "BOT_CHANGE",
-        payload: statusMessage.params[0]
-    };
+  return {
+    type: "BOT_CHANGE",
+    payload: statusMessage.params[0]
+  };
 }
 
-function logNotification(botLog: 
-Notification<[{message: string, time: number, status: HardwareState}]>) {
-    return {
-        type: "BOT_LOG",
-        payload: botLog
-    };
+function logNotification(botLog:
+  Notification<[{ message: string, time: number, status: HardwareState }]>) {
+  return {
+    type: "BOT_LOG",
+    payload: botLog
+  };
 }
 
 function unknownMessage(statusMessage: any) {
