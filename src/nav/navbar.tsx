@@ -22,6 +22,7 @@ interface LogoutProps {
 export let LogoutButton = ({ auth, onClick }: LogoutProps) => {
   if (!auth.authenticated) { return <span></span>; }
   onClick = onClick || (() => {
+    localStorage.clear();
     sessionStorage.clear();
     location.reload();
   });

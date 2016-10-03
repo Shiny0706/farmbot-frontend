@@ -8,7 +8,8 @@ describe("Saucer", () => {
     let JSXElem  = <Wrapper><Saucer /></Wrapper>;
     let ReactComponent = TUtils.renderIntoDocument(JSXElem) as React.Component<SaucerProps, {}>;
     let DOMElem = TUtils.findRenderedDOMComponentWithClass(ReactComponent, "saucer");
-    expect((DOMElem["style"] as {background: string}).background).toEqual("gray",
+    let style = (DOMElem as any)["style"] as {background: string};
+    expect(style.background).toEqual("gray",
       "If unset, the `color` attribute must default to gray.");
   });
 
@@ -16,7 +17,8 @@ describe("Saucer", () => {
     let JSXElem  = <Wrapper><Saucer color="red" /></Wrapper>;
     let ReactComponent = TUtils.renderIntoDocument(JSXElem) as React.Component<SaucerProps, {}>;
     let DOMElem = TUtils.findRenderedDOMComponentWithClass(ReactComponent, "saucer");
-    expect((DOMElem["style"] as {background: string}).background).toEqual("red",
+    let style = (DOMElem as any)["style"] as {background: string};
+    expect((style).background).toEqual("red",
       "<Saucer/> must accept a `color` attribute that changes el.style.background.");
   });
 });

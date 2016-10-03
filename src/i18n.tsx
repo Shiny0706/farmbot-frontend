@@ -1,6 +1,6 @@
 import * as axios from "axios";
 
-function generateUrl(langCode) {
+function generateUrl(langCode: string) {
     let lang = langCode.slice(0, 2);
     let url = "//" + location.host.split(":")
     [0] + ":" + location.port + "/app-resources/languages/" + lang + ".js";

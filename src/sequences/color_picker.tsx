@@ -26,9 +26,15 @@ export class ColorPicker extends React.Component<ColorPickerProps, ColorPickerSt
 
         function littleCircle(color: Color, key: number) {
 
-            let style = { margin: "4px" };
+            let style: {
+                border: string;
+                margin: string;
+            } = {
+                margin: "4px",
+                border: ""
+            };
 
-            if (color === actual) { style["border"] = "3px solid #ddd"; }
+            if (color === actual) { style.border = "3px solid #666"; }
 
             function colorChange() { cb(color); }
 

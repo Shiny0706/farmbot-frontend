@@ -5,16 +5,16 @@ import { error, warning } from "../logger";
 import { Sequence } from "../sequences/interfaces";
 import { Thunk, Everything } from "../interfaces";
 import { put } from "axios";
-import { DeviceAccountSettings } from "../devices/interfaces";
+import { DeviceAccountSettings, BotState, HardwareState } from "../devices/interfaces";
 import { t } from "i18next";
 import { MovementRequest } from "farmbot/bot_commands";
-import { ErrorResponse } from "farmbot/jsonrpc";
+import { ErrorResponse, Response, Notification } from "farmbot/jsonrpc";
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
-export function settingToggle(name: string, bot): Function {
+export function settingToggle(name: string, bot: BotState): Function {
     return function(dispatch: Function): Thenable<void> {
-        let currentValue = bot.hardware[name];
+        let currentValue: number = (bot.hardware as any)[name];
         return devices
             .current
             .updateCalibration({ [name]: (currentValue === 0) ? ON : OFF })
@@ -40,9 +40,9 @@ export function settingToggleErr(err) {
 
 
 export function pinToggle(num: number): Function {
-    return function(dispatch) {
+    return function(dispatch: Function) {
         let currentValue = store.getState().bot.hardware[`pin${num}`];
-        let newPinValue = (currentValue === "on") ? OFF : ON;
+        let newPinValue = (currentValue === 1) ? 0 : 1;
         return devices
             .current
             .writePin({ pin_number: num,
@@ -64,21 +64,21 @@ export function pinToggleErr(err) {
     error(t("Refresh browser or restart devices."), t("Error while toggling pin"));
 }
 
-export function changeStepSize(integer) {
+export function changeStepSize(integer: number) {
     return {
         type: "CHANGE_STEP_SIZE",
         payload: integer
     };
 }
 
-export function changeAxisBuffer(key, val) {
+export function changeAxisBuffer(key: string, val: number) {
     return {
         type: "CHANGE_AXIS_BUFFER",
         payload: { key, val }
     };
 }
 
-export function changeSettingsBuffer(key, val) {
+export function changeSettingsBuffer(key: string, val: number) {
     return {
         type: "CHANGE_SETTINGS_BUFFER",
         payload: { key, val }
@@ -92,21 +92,21 @@ export function commitSettingsChanges() {
         .assign(settingsBuffer)
         .value();
     let promise = devices.current.updateCalibration(packet);
-    return function(dispatch): Thenable<void> {
+    return function(dispatch: Function): Thenable<void> {
         return promise.then(
             (resp) => dispatch(commitSettingsChangesOk(resp)),
             (err) => dispatch(commitSettingsChangesErr(err)));
     };
 }
 
-function commitSettingsChangesOk(resp) {
+function commitSettingsChangesOk(_: any) {
     return {
         type: "COMMIT_SETTINGS_OK",
         payload: {}
     };
 }
 
-function commitSettingsChangesErr(err) {
+function commitSettingsChangesErr(_: any) {
     error(t("Unable to commit settings changes."));
 }
 
@@ -116,7 +116,7 @@ export function commitAxisChanges() {
     /** Pick the value in axisBuffer or hardware settings dictionary.
      *  axisBuffer has higher priortiy, but may not have value available. */
     function pick(attr: string, other?: number) {
-        return Number( axisBuffer[attr] || hardware[attr] || other);
+        return Number( axisBuffer[attr] || (hardware as any)[attr] || other);
     };
     let packet: MovementRequest = {
       speed: pick("speed", speed),
@@ -124,7 +124,7 @@ export function commitAxisChanges() {
       y: pick("y"),
       z: pick("z"),
     };
-    return function (dispatch) {
+    return function (dispatch: Function) {
         return devices
             .current
             .moveAbsolute(packet)
@@ -148,11 +148,11 @@ function commitAxisChangesOk(resp) {
 }
 
 export function readStatus() {
-    return function (dispatch) {
+    return function (dispatch: Function) {
         return devices
             .current
             .readStatus()
-            .then((resp) => dispatch(readStatusOk(resp)),
+            .then((resp: Response<[{OK: "OK"}]>) => dispatch(botAck(resp)),
             (errr) => dispatch(readStatusErr(errr)));
     };
 }
@@ -194,15 +194,25 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
                     // We do not invoke methods on clients. 
                     if (msg.id && msg.method && msg.id) { return; }
                     let fn: Function = (function(){
-                        if (msg.error !== undefined
-                            || msg.error !== null) { return botError; };
-                        if (msg.result && msg.id) { return botChange; };
-                        if (msg.method && msg.params) { return botNotification; };
+                        // ERROR MESSAGE FROM BOT
+                        if (!(msg.error === undefined || msg.error === null)) { return botError; };
+
+                        // ACK FROM BOT
+                        if (msg.result && msg.id) { return botAck; };
+
+                        // RPC Notification
+                        if (msg.method && msg.params) {
+                            switch (msg.method) {
+                                case "status_update":
+                                    return botNotification;
+                                case "log_message":
+                                    return logNotification;
+                            };
+                        };
                         return unknownMessage;
                     })();
-                    console.dir(fn);
+                    console.dir(msg);
                     dispatch(fn(msg));
-
                 });
             }, (err) => dispatch(fetchDeviceErr(err)));
     };
@@ -211,17 +221,17 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
 export function sendCommand(payload) {
     let method = devices.current[payload.name];
     let result = method.call(devices.current, payload);
-    return (dispatch) => {
+    return (dispatch: Function) => {
         return result.then((res) => sendCommandOk(res, payload, dispatch),
             (e) => sendCommandErr(e, payload, dispatch));
     };
 }
 
-function sendCommandOk(res, payload, dispatch) {
+function sendCommandOk(res, payload, dispatch: Function) {
     dispatch({ type: "COMMAND_OK", payload: res });
 }
 
-function sendCommandErr(e, payload, dispatch) {
+function sendCommandErr(e, payload,  dispatch: Function) {
     let msg = (payload.name || "Command") + " request failed.";
     error(msg, "Farmbot Didn't Get That!");
 }
@@ -233,10 +243,10 @@ export function addDevice(deviceAttrs): Thunk {
     };
 }
 
-function botChange(statusMessage) {
+function botAck(response: Response<[{OK: "OK"}]>) {
     return {
-        type: "BOT_CHANGE",
-        payload: statusMessage
+        type: "BOT_ACK",
+        payload: response
     };
 }
 
@@ -249,10 +259,18 @@ function botError(statusMessage: ErrorResponse) {
     };
 }
 
-function botNotification(statusMessage) {
+function botNotification(statusMessage: Notification<[HardwareState]>) {
     return {
-        type: "BOT_NOTIFICATION",
-        payload: statusMessage
+        type: "BOT_CHANGE",
+        payload: statusMessage.params[0]
+    };
+}
+
+function logNotification(botLog: 
+Notification<[{message: string, time: number, status: HardwareState}]>) {
+    return {
+        type: "BOT_LOG",
+        payload: botLog
     };
 }
 
@@ -301,7 +319,7 @@ interface UpdateDeviceParams {
   webcam_url?: string;
 }
 
-export function updateDevice(apiUrl, optns, dispatch) {
+export function updateDevice(apiUrl: string, optns,  dispatch: Function) {
     return put<DeviceAccountSettings>(apiUrl + "/api/device", optns)
              .then(res => dispatch({ type: "REPLACE_DEVICE_ACCOUNT_INFO", payload: res.data }))
              .catch((payload) => dispatch({ type: "DEVICE_ACCOUNT_ERR", payload }));

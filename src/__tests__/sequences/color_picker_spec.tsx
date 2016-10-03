@@ -13,7 +13,10 @@ describe("Color picker", () => {
       "#notHovered() should return an empty div");
     let hovered = colpik.isHovered();
     expect(hovered.props.className).toEqual("colorpicker-text");
-    let actualColors = hovered.props.children.map((c) => c.props.children.props.color).sort();
+    let actualColors = hovered.props.children.map((c: JSX.Element) => (
+      c.props.children.props.color
+    )).sort();
+
     expect(actualColors).toEqual(colors.sort());
   });
 
