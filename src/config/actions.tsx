@@ -13,7 +13,13 @@ export function changeApiPort(port: string): ReduxAction<ChangeApiPort> {
 
 export function ready(): Thunk {
   return (dispatch, getState) => {
-    let state: AuthState = getState().auth;
+    let state: AuthState
+    let token = localStorage["token"];
+    if (token) {
+      state = JSON.parse(token);
+    } else {
+      state = getState().auth;
+    }
     if ((state.token || "").length > 30) { // lol
       didLogin(state, dispatch);
       return { type: "READY_HAD_TOKEN", payload: {} };

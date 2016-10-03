@@ -490,13 +490,19 @@ function Logs({logs}: LogsProps) {
       }
     }
 
+    // FOR THE LOVE OF GOD DO NOT COMMIT THIS
+    // IT IS A TERRIBLE HACK
     return <tbody>
              {
-               logs.map((log, i) => <tr key={ i }>
-                 <td> { displayTime(log.time) } </td>
-                 <td> { log.data } </td>
-                 <td> { displayCoordinates(log) } </td>
-               </tr>)
+                logs.map((log, i) => {
+                  if(i % 2 == 0) {
+                  return <tr key={ i }>
+                          <td> { displayTime(log.time) }   </td>
+                          <td> { log.data }                </td>
+                          <td> { displayCoordinates(log) } </td>
+                         </tr>;
+                  }
+                })
               }
            </tbody>;
   }

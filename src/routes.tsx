@@ -37,7 +37,10 @@ export class RootComponent extends React.Component<any, any> {
                       .auth
                       .authenticated;
       if (!isAuthed) {
-        replace("/app/login");
+        let token = localStorage["token"];
+        if (!token) {
+          replace("/app/login");
+        }
       }
   };
 

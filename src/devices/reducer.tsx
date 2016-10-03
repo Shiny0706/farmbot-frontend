@@ -4,6 +4,7 @@ import { BotState, DeviceAccountSettings, HardwareState } from "./interfaces";
 import { generateReducer } from "../generate_reducer";
 import { isBotLog } from "./is_bot_log";
 import { ReduxAction } from "../interfaces";
+import { ErrorResponse, Response, Notification } from "farmbot/jsonrpc";
 import  * as i18next  from "i18next";
 
 let status = {
@@ -29,8 +30,9 @@ let initialState: BotState = {
 };
 
 function READ_STATUS_OK(state: BotState, action: ReduxAction<HardwareState>) {
+    console.log("READ_STATUS_OK");
     let hardware = action.payload;
-    delete hardware.method;
+    // delete hardware.method;
     return _.assign<{}, BotState>({},
       state, {
         hardware: hardware
@@ -82,13 +84,10 @@ export let botReducer = generateReducer<BotState>(initialState)
       stepSize: action.payload
     });
   })
-  .add<HardwareState>("READ_STATUS_OK", READ_STATUS_OK)
-  .add<any>("BOT_CHANGE", function(state, action) {
-    let statuses: any = _.assign({}, action.payload);
-    let newState: any = _.assign({}, state);
-    newState.hardware = _.assign({}, state.hardware, statuses);
-    return _.assign<any, BotState>({}, newState);
+  .add<HardwareState>("READ_STATUS_OK", function(state, action){
+    return state;
   })
+  .add<Notification<[HardwareState]>>("BOT_CHANGE", READ_STATUS_OK)
   .add<any>("CONNECT_OK", function(state, action) {
     return _.assign<any, BotState>({},
       state,
