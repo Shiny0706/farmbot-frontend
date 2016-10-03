@@ -1,18 +1,19 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Navbar } from "../nav/navbar";
-import { addDevice,
-         changeSettingsBuffer,
-         commitSettingsChanges,
-         settingToggle,
-         changeDevice } from "../devices/actions";
 import { convertFormToObject } from "../util";
 import { ToggleButton } from "../controls/toggle_button";
 import { devices } from "../device";
 import { BotLog } from "../devices/interfaces";
 import * as moment from "moment";
 import { Everything } from "../interfaces";
-import { saveAccountChanges } from "./actions";
+import { saveAccountChanges,
+         changeDevice,
+         addDevice,
+         settingToggle,
+         changeSettingsBuffer,
+         commitSettingsChanges,
+         changeAxisBuffer } from "./actions";
 import { t } from "i18next";
 
 export class SettingsInputBox extends React.Component<any, any> {
@@ -44,7 +45,8 @@ export class SettingsInputBox extends React.Component<any, any> {
 
   change(key: any, dispatch: Function) {
     return function(event: React.FormEvent) {
-      dispatch(changeSettingsBuffer(key, (event.target as any).value));
+      let formInput: string = (event.target as any).value as string;
+      dispatch(changeSettingsBuffer(key, formInput));
     };
   }
 

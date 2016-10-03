@@ -1,14 +1,22 @@
 import * as React from "react";
-import { sendCommand } from "../devices/actions";
+import { Everything } from "../interfaces";
+import { moveRelative } from "../devices/actions";
 
-export class DirectionButton extends React.Component<any, any> {
+interface DirectionButtonProps extends Everything {
+  axis: "x"|"y"|"z";
+  direction: "up"|"down"|"left"|"right";
+  steps: number;
+}
+
+export class DirectionButton extends React.Component<DirectionButtonProps, any> {
   sendCommand() {
-    let payload = { name: "moveRelative", speed: 100 };
     let isNegative = (this.props.direction === "up") ||
                       (this.props.direction === "right");
     let multiplier = (isNegative) ? -1 : 1;
-    (payload as any)[this.props.axis] = (this.props.steps || 250 ) * multiplier;
-    this.props.dispatch(sendCommand(payload));
+    let distance = (this.props.steps || 250 ) * multiplier;
+    let payload = { speed: 100, x: 0, y: 0, z: 0 };
+    payload[this.props.axis] = distance;
+    moveRelative(payload);
   }
 
   render() {

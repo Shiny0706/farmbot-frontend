@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router";
-import { sendCommand } from "../devices/actions";
+import { sync,
+         emergencyStop } from "../devices/actions";
 import { AuthState } from "../auth/interfaces";
 import { BotState } from "../devices/interfaces";
 import { Ticker } from "../ticker/ticker";
@@ -35,9 +36,7 @@ export let LogoutButton = ({ auth, onClick }: LogoutProps) => {
 let SyncButton = ({auth, dispatch}: NavButtonState) => {
   if (!auth.authenticated) { return <span></span>; }
   return <button className="nav-sync button-like green"
-    onClick={
-      () => dispatch(sendCommand({ name: "syncSequence" }))
-    }>
+    onClick={ sync }>
     Sync
   </button>;
 };
@@ -46,7 +45,7 @@ let EStopButton = ({auth, dispatch}: NavButtonState) => {
   if (!auth.authenticated) { return <span></span>; }
   return <button className="nav-e-stop button-like red"
     type="button"
-    onClick={ () => dispatch(sendCommand({ name: "emergencyStop" })) } >
+    onClick={ emergencyStop } >
     E-Stop
   </button>;
 };

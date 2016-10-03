@@ -43,9 +43,8 @@ let destroy = function (dispatch: Function,
     return () => dispatch(deleteSequence(inx));
 };
 
-let performSeq = (dispatch: Function, sequence: Sequence) => (e: React.FormEvent) => {
-    dispatch(execSequence(sequence));
-};
+let performSeq = (dispatch: Function, sequence: Sequence) =>
+                 (e: React.FormEvent) => execSequence(sequence);
 
 export function SequenceEditorWidget({sequences, dispatch}: Everything) {
     let inx = sequences.current;

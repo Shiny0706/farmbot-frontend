@@ -2,184 +2,137 @@ import { Farmbot } from "farmbot";
 import { store } from "../store";
 import { devices } from "../device";
 import { error, warning, success } from "../logger";
-import { Sequence } from "../sequences/interfaces";
-import { Thunk, Everything } from "../interfaces";
+import { Thunk, Everything, ReduxAction } from "../interfaces";
 import { put } from "axios";
 import { DeviceAccountSettings, BotState, HardwareState } from "../devices/interfaces";
 import { t } from "i18next";
+import { Sequence, configKey } from "farmbot/interfaces";
 import { MovementRequest } from "farmbot/bot_commands";
 import { ErrorResponse, Response, Notification } from "farmbot/jsonrpc";
 
-const ON = 1, OFF = 0, DIGITAL = 0;
+const ON = 1,
+  OFF = 0,
+  DIGITAL = 0;
 
-export function settingToggle(name: string, bot: BotState): Function {
-  return function (dispatch: Function): Thenable<void> {
-    let currentValue: number = (bot.hardware as any)[name];
-    return devices
-      .current
-      .updateCalibration({ [name]: (currentValue === 0) ? ON : OFF })
-      .then(res => { dispatch(settingToggleOk(res)); },
-      err => { dispatch(settingToggleErr(err)); });
-  };
+export function emergencyStop() {
+  let noun = "Emergency stop";
+  devices
+    .current
+    .sync()
+    .then(commandOK(noun), commandErr(noun));
 }
 
-export function settingToggleOk(res) {
-  return {
-    type: "SETTING_TOGGLE_OK",
-    payload: res.result
-  };
+export function sync() {
+  let noun = "Sync";
+  devices
+    .current
+    .sync()
+    .then(commandOK(noun), commandErr(noun));
 }
 
-export function settingToggleErr(err) {
-  error(t("Refresh browser or restart devices."), t("Error while toggling setting"));
-  return {
-    type: "SETTING_TOGGLE_ERR",
-    payload: {}
-  };
+export function execSequence(sequence: Sequence) {
+  const noun = "Sequence execution";
+  return devices
+    .current
+    .execSequence(sequence)
+    .then(commandOK(noun), commandErr(noun));
 }
 
+export let saveAccountChanges: Thunk = function (dispatch, getState) {
+  let state = getState();
+  let bot = getState().bot.account;
+  let url = state.auth.iss;
+  return updateDevice(url, bot, dispatch);
+};
 
-export function pinToggle(num: number): Function {
-  return function (dispatch: Function) {
-    let currentValue = store.getState().bot.hardware[`pin${num}`];
-    let newPinValue = (currentValue === 1) ? 0 : 1;
-    return devices
-      .current
-      .writePin({
-        pin_number: num,
-        pin_value: newPinValue,
-        pin_mode: DIGITAL
-      })
-      .then(res => dispatch(pinToggleOk(res)),
-      err => dispatch(pinToggleErr(err)));
-  };
+let commandErr = (noun = "Command") => () => {
+  let msg = noun + " request failed.";
+  error(msg, t("Farmbot Didn't Get That!"));
+};
+
+let commandOK = (noun = "Command") => () => {
+  let msg = noun + " request sent to device.";
+  success(msg, t("Request sent"));
+};
+
+interface UpdateDeviceParams {
+  id?: number;
+  name?: string;
+  uuid?: string;
+  webcam_url?: string;
 }
 
-export function pinToggleOk(res) {
-  return {
-    type: "PIN_TOGGLE_OK",
-    payload: res.result
-  };
+export function updateDevice(apiUrl: string, optns, dispatch: Function) {
+  return put<DeviceAccountSettings>(apiUrl + "/api/device", optns)
+    .then(res => dispatch({ type: "REPLACE_DEVICE_ACCOUNT_INFO", payload: res.data }))
+    .catch((payload) => dispatch({ type: "DEVICE_ACCOUNT_ERR", payload }));
+  ;
 }
 
-export function pinToggleErr(err) {
-  error(t("Refresh browser or restart devices."), t("Error while toggling pin"));
-}
-
-export function changeStepSize(integer: number) {
-  return {
-    type: "CHANGE_STEP_SIZE",
-    payload: integer
-  };
-}
-
-export function changeAxisBuffer(key: string, val: number) {
-  return {
-    type: "CHANGE_AXIS_BUFFER",
-    payload: { key, val }
-  };
-}
-
-export function changeSettingsBuffer(key: string, val: number) {
-  return {
-    type: "CHANGE_SETTINGS_BUFFER",
-    payload: { key, val }
-  };
-}
-
-export function commitSettingsChanges() {
-  let { settingsBuffer, hardware } = store.getState().bot;
-  let packet = _({})
-    .assign(hardware)
-    .assign(settingsBuffer)
-    .value();
-  let promise = devices.current.updateCalibration(packet);
-  return function (dispatch: Function): Thenable<void> {
-    return promise.then(
-      (resp) => dispatch(commitSettingsChangesOk(resp)),
-      (err) => dispatch(commitSettingsChangesErr(err)));
-  };
-}
-
-function commitSettingsChangesOk(_: any) {
-  return {
-    type: "COMMIT_SETTINGS_OK",
-    payload: {}
-  };
-}
-
-function commitSettingsChangesErr(_: any) {
-  error(t("Unable to commit settings changes."));
-}
-
-export function commitAxisChanges() {
-  let {axisBuffer, hardware} = (store.getState() as Everything).bot;
-  let speed: number = devices.current.getState()["speed"] as number;
-  /** Pick the value in axisBuffer or hardware settings dictionary.
-   *  axisBuffer has higher priortiy, but may not have value available. */
-  function pick(attr: string, other?: number) {
-    return Number(axisBuffer[attr] || (hardware as any)[attr] || other);
-  };
-  let packet: MovementRequest = {
-    speed: pick("speed", speed),
-    x: pick("x"),
-    y: pick("y"),
-    z: pick("z"),
-  };
-  return function (dispatch: Function) {
-    return devices
-      .current
-      .moveAbsolute(packet)
-      .then((resp) => dispatch(commitAxisChangesOk(resp)),
-      (err) => dispatch(commitAxisChangesErr(err)));
-  };
-}
-
-function commitAxisChangesErr(err) {
-  return {
-    type: "COMMIT_AXIS_CHANGE_ERR",
-    payload: err
-  };
-}
-
-function commitAxisChangesOk(resp) {
-  return {
-    type: "COMMIT_AXIS_CHANGE_OK",
-    payload: resp.result
-  };
-}
-
-export function readStatus() {
-  return function (dispatch: Function) {
-    return devices
-      .current
-      .readStatus()
-      .then((resp: Response<[{ OK: "OK" }]>) => dispatch(botAck(resp)),
-      (errr) => dispatch(readStatusErr(errr)));
-  };
-}
-
-function readStatusOk(status) {
-  return {
-    type: "READ_STATUS_OK",
-    payload: status.result
-  };
-}
-
-function readStatusErr(msg) {
-  error(t("Did you configure your bot? Is it online?"), t("Can't read status"));
-  return {
-    type: "READ_STATUS_ERR",
-    payload: msg
-  };
-}
-
-// I wish TS had subset types.
 export function changeDevice(newAttrs: any) {
+  // Flips the "dirty" flag to true.
   return {
     type: "CHANGE_DEVICE",
     payload: newAttrs
   };
+}
+
+export function addDevice(deviceAttrs): Thunk {
+  return (dispatch, getState) => {
+    updateDevice(getState().auth.iss, deviceAttrs, dispatch);
+  };
+}
+
+export function settingToggle(name: configKey, bot: BotState) {
+  // TODO : This should be an atomic operation handled at the bot level
+  // as a lower level command.
+  const noun = "Setting toggle";
+
+  return devices
+    .current
+    .updateCalibration({
+      [name]: (bot.hardware[name] === 0) ? ON : OFF
+    })
+    .then(commandOK(noun), commandErr(noun));
+};
+
+export function moveRelative(props: MovementRequest) {
+  const noun = "Relative movement";
+
+  return devices
+    .current
+    .moveRelative(props)
+    .then(commandOK(noun), commandErr(noun));
+}
+
+// TODO: Move this into FarmbotJS,
+type pinNum = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
+export function pinToggle(pin_number: pinNum, bot: BotState) {
+  // TODO : This should be an atomic operation handled at the bot level
+  // as a lower level command.
+  const noun = "Setting toggle";
+
+  let pin_value = (bot.hardware[`pin${pin_number}`] === 0) ? ON : OFF;
+  return devices
+    .current
+    .writePin({ pin_number, pin_value, pin_mode: DIGITAL })
+    .then(commandOK(noun), commandErr(noun));
+}
+
+export function homeAll(speed: number) {
+  let noun = "'Home All' command";
+  devices
+    .current
+    .homeAll({ speed })
+    .then(commandOK(noun), commandErr(noun));
+}
+
+export function readStatus() {
+  let noun = "'Read Status' command";
+  return devices
+    .current
+    .readStatus()
+    .then(commandOK(noun), commandErr(noun));
 }
 
 export function connectDevice(token: string): {} | ((dispatch: any) => any) {
@@ -191,7 +144,7 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
         devices.current = bot;
         dispatch(readStatus());
         bot.on("notification",
-        function(msg: any) {
+          function (msg: any) {
             console.warn("You promised you'd fix this!!");
             switch (msg.method) {
               case "status_update":
@@ -203,47 +156,10 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
                 dispatch(logNotification(msg));
                 break;
             };
-        });
+          });
       }, (err) => dispatch(fetchDeviceErr(err)));
   };
 };
-
-export function homeAll(speed: number) {
-  devices
-    .current
-    .homeAll({speed})
-    .then((ack) => {
-      success(t("Home all in progress."));
-    }, sendCommandErr("Home all"));
-}
-
-let sendCommandErr = (name?: string) => (e: Error) => {
-  let msg = (name || "Command") + " request failed.";
-  error(msg, "Farmbot Didn't Get That!");
-};
-
-export function addDevice(deviceAttrs): Thunk {
-
-  return (dispatch, getState) => {
-    updateDevice(getState().auth.iss, deviceAttrs, dispatch);
-  };
-}
-
-function botAck(response: Response<[{ OK: "OK" }]>) {
-  return {
-    type: "BOT_ACK",
-    payload: response
-  };
-}
-
-function botError(statusMessage: ErrorResponse) {
-  error(statusMessage.error.message || t("Unknown error!"));
-  console.dir(statusMessage);
-  return {
-    type: "BOT_ERROR",
-    payload: statusMessage
-  };
-}
 
 function botNotification(statusMessage: Notification<[HardwareState]>) {
   return {
@@ -260,15 +176,6 @@ function logNotification(botLog:
   };
 }
 
-function unknownMessage(statusMessage: any) {
-  warning(t("FarmBot sent an unknown message. See log for details."),
-    t("Malformed Message"));
-  return {
-    type: "UNKNOWN_MESSAGE",
-    payload: statusMessage
-  };
-}
-
 function fetchDeviceErr(err: Error) {
   return {
     type: "FETCH_DEVICE_ERR",
@@ -276,38 +183,162 @@ function fetchDeviceErr(err: Error) {
   };
 }
 
-export function execSequence(sequence: Sequence) {
-  return (dispatch: Function) => {
-    dispatch({ type: "EXEC_SEQUENCE_START", payload: sequence });
+export interface ChangeSettingsBuffer {
+  key: configKey;
+  val: number;
+};
+
+export function changeSettingsBuffer(key: configKey, val: string):
+  ReduxAction<ChangeSettingsBuffer> {
+
+  return {
+    type: "CHANGE_SETTINGS_BUFFER",
+    payload: { key, val: parseInt(val, 10) }
+  };
+}
+
+export function changeStepSize(integer: number) {
+  return {
+    type: "CHANGE_STEP_SIZE",
+    payload: integer
+  };
+}
+
+export function commitAxisChanges() {
+  return function (
+    dispatch: Function,
+    getState: () => Everything) {
+    let {axisBuffer, hardware} = getState().bot;
+    let speed: number = devices.current.getState()["speed"] as number;
+    /** Pick the value in axisBuffer or hardware settings dictionary.
+     *  axisBuffer has higher priortiy, but may not be available. */
+    function pick(attr: string,
+      fallback?: number) {
+      return Number(axisBuffer[attr] || (hardware as any)[attr] || fallback);
+    };
+    let packet: MovementRequest = {
+      speed: pick("speed", speed),
+      x: pick("x"),
+      y: pick("y"),
+      z: pick("z"),
+    };
     return devices
       .current
-      .execSequence(sequence)
-      .then(
-      (payload) => { dispatch({ type: "EXEC_SEQUENCE_OK", payload }); },
-      (e: string) => {
-        error(t("Unable to execute sequence. See log for details."))
-        console.error("TODO: Fix Farmbotjs timer defer rejection");
-      });
+      .moveAbsolute(packet)
+      .then((resp) => dispatch(commitAxisChangesOk(resp)),
+      (err) => dispatch(commitAxisChangesErr(err)));
   };
-};
-
-export let saveAccountChanges: Thunk = function (dispatch, getState) {
-  let state = getState();
-  let bot = getState().bot.account;
-  let url = state.auth.iss;
-  return updateDevice(url, bot, dispatch);
-};
-
-interface UpdateDeviceParams {
-  id?: number;
-  name?: string;
-  uuid?: string;
-  webcam_url?: string;
 }
 
-export function updateDevice(apiUrl: string, optns, dispatch: Function) {
-  return put<DeviceAccountSettings>(apiUrl + "/api/device", optns)
-    .then(res => dispatch({ type: "REPLACE_DEVICE_ACCOUNT_INFO", payload: res.data }))
-    .catch((payload) => dispatch({ type: "DEVICE_ACCOUNT_ERR", payload }));
-  ;
+function commitAxisChangesOk(resp) {
+  return {
+    type: "COMMIT_AXIS_CHANGE_OK",
+    payload: resp.result
+  };
 }
+
+function commitAxisChangesErr(err) {
+  return {
+    type: "COMMIT_AXIS_CHANGE_ERR",
+    payload: err
+  };
+}
+
+export function commitSettingsChanges() {
+  return function (dispatch: Function,
+                   getState: () => Everything): Thenable<void> {
+    let { settingsBuffer, hardware } = getState().bot;
+    let packet = _({})
+      .assign(hardware)
+      .assign(settingsBuffer)
+      .value();
+    return devices
+      .current
+      .updateCalibration(packet)
+      .then(
+      (resp) => dispatch(commitSettingsChangesOk(resp)),
+      (err) => dispatch(commitSettingsChangesErr(err)));
+  };
+}
+
+function commitSettingsChangesOk(_: any) {
+  return {
+    type: "COMMIT_SETTINGS_OK",
+    payload: {}
+  };
+}
+
+function commitSettingsChangesErr(_: any) { error(t("Unable to commit settings changes.")); }
+
+export function changeAxisBuffer(key: string, val: number) {
+  return {
+    type: "CHANGE_AXIS_BUFFER",
+    payload: { key, val }
+  };
+}
+
+// export function pinToggleOk(res) {
+//   return {
+//     type: "PIN_TOGGLE_OK",
+//     payload: res.result
+//   };
+// }
+
+// export function pinToggleErr(err) {
+//   error(t("Refresh browser or restart devices."), t("Error while toggling pin"));
+// }
+
+// function readStatusOk(status) {
+//   return {
+//     type: "READ_STATUS_OK",
+//     payload: status.result
+//   };
+// }
+
+// function readStatusErr(msg) {
+//   error(t("Did you configure your bot? Is it online?"), t("Can't read status"));
+//   return {
+//     type: "READ_STATUS_ERR",
+//     payload: msg
+//   };
+// }
+
+// function botAck(response: Response<[{ OK: "OK" }]>) {
+//   return {
+//     type: "BOT_ACK",
+//     payload: response
+//   };
+// }
+
+// function botError(statusMessage: ErrorResponse) {
+//   error(statusMessage.error.message || t("Unknown error!"));
+//   console.dir(statusMessage);
+//   return {
+//     type: "BOT_ERROR",
+//     payload: statusMessage
+//   };
+// }
+
+// function unknownMessage(statusMessage: any) {
+//   warning(t("FarmBot sent an unknown message. See log for details."),
+//     t("Malformed Message"));
+//   return {
+//     type: "UNKNOWN_MESSAGE",
+//     payload: statusMessage
+//   };
+// }
+
+// export function execSequence(sequence: Sequence) {
+//   return (dispatch: Function) => {
+//     dispatch({ type: "EXEC_SEQUENCE_START", payload: sequence });
+//     return devices
+//       .current
+//       .execSequence(sequence)
+//       .then(
+//       (payload) => { dispatch({ type: "EXEC_SEQUENCE_OK", payload }); },
+//       (e: string) => {
+//         error(t("Unable to execute sequence. See log for details."))
+//         console.error("TODO: Fix Farmbotjs timer defer rejection");
+//       });
+//   };
+// };

@@ -3,17 +3,18 @@ import { Navbar } from "../nav/navbar";
 import { ToggleButton } from "./toggle_button";
 import { DirectionButton } from "./direction_button";
 import {
-  sendCommand,
+  emergencyStop,
+  pinToggle,
+  homeAll,
   changeStepSize,
-  changeAxisBuffer,
   commitAxisChanges,
-  pinToggle
+  changeAxisBuffer
 } from "../devices/actions";
 import { BotState } from "../devices/interfaces";
 import { connect } from "react-redux";
 import { Everything } from "../interfaces";
 import { WebcamSaveBtn } from "./webcam_save_btn";
-import  { t } from "i18next";
+import { t } from "i18next";
 
 interface AxisInputBoxProps {
   bot: BotState;
@@ -43,7 +44,7 @@ export class AxisInputBox extends React.Component<AxisInputBoxProps, {}> {
 
   change(key: string, dispatch: Function): React.EventHandler<React.FormEvent> {
     return function (event) {
-      dispatch(changeAxisBuffer(key,  (event.target as any).value ));
+      dispatch(changeAxisBuffer(key, (event.target as any).value));
     };
   }
 
@@ -110,9 +111,7 @@ export class Controls extends React.Component<Everything, any> {
                         <button
                           className="red button-like widget-control"
                           type="button"
-                          onClick={
-                            () => this.props.dispatch(sendCommand({ name: "emergencyStop" }))
-                          } >
+                          onClick={emergencyStop} >
 
                           E-STOP
 
@@ -128,12 +127,12 @@ export class Controls extends React.Component<Everything, any> {
                               absolute movement. Tip: Press the Home button when
                               you are done so FarmBot is ready to get back to work.
                               Note: Currently all buttons except for Home work.`)}
-                              </div>
+                            </div>
                           </i>
                         </div>
                       </div>
                       <div className="col-sm-12">
-                        <div className="widget-content">
+                        <div className="widget-content">bot
                           <label className="text-center"> {t("MOVE AMOUNT (mm)")} </label>
                           <div className="row">
                             <div className="col-sm-12">
@@ -170,10 +169,7 @@ export class Controls extends React.Component<Everything, any> {
                                     <button
                                       className="button-like i fa fa-home arrow-button"
                                       onClick={
-                                        () => this.props.dispatch(sendCommand({
-                                          name: "homeAll",
-                                          speed: (bot.hardware.s || 100)
-                                        }))
+                                        () => homeAll((bot.hardware.s || 100))
                                       } />
                                   </td>
                                   <td />
@@ -243,7 +239,7 @@ export class Controls extends React.Component<Everything, any> {
                               the button. Make sure to turn
                               things off when you're done! Coming soon: a working
                               edit button.`)}
-                              </div>
+                            </div>
                           </i>
                         </div>
                       </div>
@@ -258,9 +254,7 @@ export class Controls extends React.Component<Everything, any> {
                             </div>
                             <div className="col-sm-4">
                               <ToggleButton toggleval={bot.hardware.pin9}
-                                toggleAction={
-                                  () => this.props.dispatch(pinToggle(9))
-                                } />
+                                toggleAction={() => pinToggle(9, this.props.bot)} />
                             </div>
                           </div>
                           <div className="row">
@@ -272,9 +266,7 @@ export class Controls extends React.Component<Everything, any> {
                             </div>
                             <div className="col-sm-4">
                               <ToggleButton toggleval={bot.hardware.pin10}
-                                toggleAction={
-                                  () => this.props.dispatch(pinToggle(10))
-                                } />
+                                toggleAction={() => pinToggle(10, this.props.bot)} />
                             </div>
                           </div>
                           <div className="row">
@@ -286,9 +278,7 @@ export class Controls extends React.Component<Everything, any> {
                             </div>
                             <div className="col-sm-4">
                               <ToggleButton toggleval={bot.hardware.pin13}
-                                toggleAction={
-                                  () => this.props.dispatch(pinToggle(13))
-                                } />
+                                toggleAction={() => pinToggle(13, this.props.bot)} />
                             </div>
                           </div>
                         </div>
@@ -302,10 +292,10 @@ export class Controls extends React.Component<Everything, any> {
                   <div className="widget-wrapper">
                     <div className="row">
                       <div className="col-sm-12">
-                        <WebcamSaveBtn dispatch={ this.props.dispatch }
-                                       webcamUrl={ url }
-                                       apiUrl={ this.props.auth.iss }
-                                       dirty={dirty}/>
+                        <WebcamSaveBtn dispatch={this.props.dispatch}
+                          webcamUrl={url}
+                          apiUrl={this.props.auth.iss}
+                          dirty={dirty} />
                         <div className="widget-header">
                           <h5>{t("Camera")}</h5>
                           <i className="fa fa-question-circle widget-help-icon">
@@ -313,7 +303,7 @@ export class Controls extends React.Component<Everything, any> {
                               {t(`Press the button to add the URL of a livestream of
                               your FarmBot. Coming soon: A working edit button and
                               the ability to save your webcam URL in the backend.`)}
-                              </div>
+                            </div>
                           </i>
                         </div>
                       </div>

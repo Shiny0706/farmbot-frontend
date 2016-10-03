@@ -6,6 +6,7 @@ import { isBotLog } from "./is_bot_log";
 import { ReduxAction } from "../interfaces";
 import { ErrorResponse, Response, Notification } from "farmbot/jsonrpc";
 import * as i18next from "i18next";
+import { ChangeSettingsBuffer } from "./actions";
 
 let status = {
   NOT_READY: i18next.t("never connected to device"),
@@ -64,10 +65,10 @@ export let botReducer = generateReducer<BotState>(initialState)
       axisBuffer: state.axisBuffer
     });
   })
-  .add<any>("CHANGE_SETTINGS_BUFFER", function (state, action) {
-    let newVal = Number(action.payload.val);
+  .add<ChangeSettingsBuffer>("CHANGE_SETTINGS_BUFFER", function (state, action) {
+    let newVal = action.payload.val;
     if (newVal) {
-      state.settingsBuffer[action.payload.key] = action.payload.val;
+      state.settingsBuffer[action.payload.key] = action.payload.val.toString();
     } else {
       delete state.settingsBuffer[action.payload.key];
     }
