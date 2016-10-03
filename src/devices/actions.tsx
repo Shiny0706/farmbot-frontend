@@ -204,6 +204,7 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
               default:
                 fn = unknownMessage;
             };
+            console.dir(new Error().stack);
             console.dir(msg);
             dispatch(fn(msg));
           };

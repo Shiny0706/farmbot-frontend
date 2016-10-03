@@ -3,6 +3,7 @@ var generateConfig = require("./webpack.config.base");
 
 c = function(){
   var conf = generateConfig();
+  conf.devtool = 'source-map';
   conf
     .plugins
     .push(new webpack.DefinePlugin({
