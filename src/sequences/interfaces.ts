@@ -1,62 +1,12 @@
-type userVariables = "x"
-                    | "y"
-                    | "z"
-                    | "s"
-                    | "busy"
-                    | "last"
-                    | "pins"
-                    | "unknown_parameter_busy"
-                    | "unknown_parameter_last"
-                    | "param_version"
-                    | "unknown_parameter_unknown_parameter_1"
-                    | "movement_timeout_x"
-                    | "movement_timeout_y"
-                    | "movement_timeout_z"
-                    | "movement_invert_endpoints_x"
-                    | "movement_invert_endpoints_y"
-                    | "movement_invert_endpoints_z"
-                    | "movement_invert_motor_x"
-                    | "movement_invert_motor_y"
-                    | "movement_invert_motor_z"
-                    | "movement_steps_acc_dec_x"
-                    | "movement_steps_acc_dec_y"
-                    | "movement_steps_acc_dec_z"
-                    | "movement_home_up_x"
-                    | "movement_home_up_y"
-                    | "movement_home_up_z"
-                    | "movement_min_spd_x"
-                    | "movement_min_spd_y"
-                    | "movement_min_spd_z"
-                    | "movement_max_spd_x"
-                    | "movement_max_spd_y"
-                    | "movement_max_spd_z"
-                    | "unknown_parameter_1"
-                    | "time"
-                    | "pin0"
-                    | "pin1"
-                    | "pin2"
-                    | "pin3"
-                    | "pin4"
-                    | "pin5"
-                    | "pin6"
-                    | "pin7"
-                    | "pin8"
-                    | "pin9"
-                    | "pin10"
-                    | "pin11"
-                    | "pin12"
-                    | "pin13";
+import { Sequence as FarmBotJsSequence,
+         userVariables as FarmBotJsuserVariables } from "farmbot/interfaces";
 import { Color } from "../interfaces";
+
+type userVariables = FarmBotJsuserVariables;
 
 type Steps = Array<Step>;
 
-export interface Sequence {
-  id?: number;
-  color: Color;
-  name: string;
-  steps: Steps;
-  dirty?: boolean;
-}
+export interface Sequence extends FarmBotJsSequence { }
 
 // Typescript does not have subset types.
 // If you are reading this in the future and subset types exist, refactor this code.
@@ -89,7 +39,7 @@ export type messageType = "emergency_stop"
                           | "home_z"
                           | "move_absolute"
                           | "move_relative"
-                          | "pin_write"
+                          | "write_pin"
                           | "read_parameter"
                           | "read_status"
                           | "write_parameter"
@@ -97,8 +47,7 @@ export type messageType = "emergency_stop"
                           | "send_message"
                           | "if_statement"
                           | "read_pin"
-                          | "execute"
-                          ;
+                          | "execute";
 
 /** Similar to "Step", but "position" isnt mandatory. */
 export interface UnplacedStep {

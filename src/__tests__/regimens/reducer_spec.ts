@@ -40,7 +40,7 @@ describe("Regimen reducer", function () {
             "color": "blue",
             "steps": [{
               "id": 16,
-              "message_type": "pin_write",
+              "message_type": "write_pin",
               "command": {},
               "sequence_id": 2,
               "position": 0
@@ -56,7 +56,7 @@ describe("Regimen reducer", function () {
             "color": "pink",
             "steps": [{
               "id": 15,
-              "message_type": "pin_write",
+              "message_type": "write_pin",
               "command": {},
               "sequence_id": 3,
               "position": 0
@@ -72,7 +72,7 @@ describe("Regimen reducer", function () {
             "color": "orange",
             "steps": [{
               "id": 12,
-              "message_type": "pin_write",
+              "message_type": "write_pin",
               "command": {},
               "sequence_id": 4,
               "position": 0
@@ -103,7 +103,7 @@ describe("Regimen reducer", function () {
             "color": "pink",
             "steps": [{
                 "id": 15,
-                "message_type": "pin_write",
+                "message_type": "write_pin",
                 "command": {},
                 "sequence_id": 3,
                 "position": 0

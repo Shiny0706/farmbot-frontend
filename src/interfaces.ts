@@ -6,10 +6,10 @@ import { BulkSchedulerState } from "./regimens/bulk_scheduler/interfaces";
 import { RegimensState } from "./regimens/interfaces";
 import { SequenceReducerState } from "./sequences/interfaces";
 import { DesignerState } from "./farm_designer/interfaces";
-
+import { Color as FarmBotJsColor } from "farmbot/interfaces";
 /** Regimens and sequences may have a "color" which determines how it looks
     in the UI. Only certain colors are valid. */
-export type Color = "blue"|"green"|"yellow"|"orange"|"purple"|"pink"|"gray"|"red";
+export type Color = FarmBotJsColor;
 
 export interface ReduxAction<T> {
   readonly type: string;

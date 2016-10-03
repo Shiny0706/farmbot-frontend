@@ -3,11 +3,12 @@ import { store } from "../store";
 import { devices } from "../device";
 import { error, warning } from "../logger";
 import { Sequence } from "../sequences/interfaces";
-import { catchMessage, RPCError } from "./message_catcher";
-import { Thunk } from "../interfaces";
+import { Thunk, Everything } from "../interfaces";
 import { put } from "axios";
 import { DeviceAccountSettings } from "../devices/interfaces";
 import { t } from "i18next";
+import { MovementRequest } from "farmbot/bot_commands";
+import { ErrorResponse } from "farmbot/jsonrpc";
 
 const ON = 1, OFF = 0, DIGITAL = 0;
 
@@ -44,7 +45,9 @@ export function pinToggle(num: number): Function {
         let newPinValue = (currentValue === "on") ? OFF : ON;
         return devices
             .current
-            .pinWrite({ pin: num, value1: newPinValue, mode: DIGITAL })
+            .writePin({ pin_number: num,
+                        pin_value: newPinValue,
+                        pin_mode: DIGITAL })
             .then(res => dispatch(pinToggleOk(res)),
             err => dispatch(pinToggleErr(err)));
     };
@@ -108,14 +111,19 @@ function commitSettingsChangesErr(err) {
 }
 
 export function commitAxisChanges() {
-    let {axisBuffer, hardware} = store.getState().bot;
-    let packet = _({})
-        .assign(hardware)
-        .assign(axisBuffer)
-        .assign({ speed: devices.current.getState("speed") })
-        .pick("x", "y", "z", "speed")
-        .transform((a, b, c: string) => a[c] = Number(b), {})
-        .value();
+    let {axisBuffer, hardware} = (store.getState() as Everything).bot;
+    let speed: number = devices.current.getState()["speed"] as number;
+    /** Pick the value in axisBuffer or hardware settings dictionary.
+     *  axisBuffer has higher priortiy, but may not have value available. */
+    function pick(attr: string, other?: number) {
+        return Number( axisBuffer[attr] || hardware[attr] || other);
+    };
+    let packet: MovementRequest = {
+      speed: pick("speed", speed),
+      x: pick("x"),
+      y: pick("y"),
+      z: pick("z"),
+    };
     return function (dispatch) {
         return devices
             .current
@@ -180,14 +188,21 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
             .then(() => {
                 devices.current = bot;
                 dispatch(readStatus());
-                bot.on("*", function (message: any) {
-                    let when = catchMessage(message);
-                    when({
-                        response: (r) => dispatch(botChange(r.result)),
-                        error: (r) => dispatch(botError(r.error)),
-                        notification: (r) => dispatch(botNotification(r.result)),
-                        _: (r) => dispatch(unknownMessage(r))
-                    });
+                bot.on("*", function (msg: any) {
+                    msg = Object(msg); // stay safe, folks.
+                    // Unlikely scenario: You received an inbound method invocation.
+                    // We do not invoke methods on clients. 
+                    if (msg.id && msg.method && msg.id) { return; }
+                    let fn: Function = (function(){
+                        if (msg.error !== undefined
+                            || msg.error !== null) { return botError; };
+                        if (msg.result && msg.id) { return botChange; };
+                        if (msg.method && msg.params) { return botNotification; };
+                        return unknownMessage;
+                    })();
+                    console.dir(fn);
+                    dispatch(fn(msg));
+
                 });
             }, (err) => dispatch(fetchDeviceErr(err)));
     };
@@ -225,8 +240,9 @@ function botChange(statusMessage) {
     };
 }
 
-function botError(statusMessage: RPCError) {
-    error(statusMessage.error);
+function botError(statusMessage: ErrorResponse) {
+    error(statusMessage.error.message || t("Unknown error!"));
+    console.dir(statusMessage);
     return {
         type: "BOT_ERROR",
         payload: statusMessage
@@ -243,7 +259,6 @@ function botNotification(statusMessage) {
 function unknownMessage(statusMessage: any) {
     warning(t("FarmBot sent an unknown message. See log for details."),
         t("Malformed Message"));
-    console.dir(statusMessage);
     return {
         type: "UNKNOWN_MESSAGE",
         payload: statusMessage
@@ -266,12 +281,8 @@ export function execSequence(sequence: Sequence) {
             .then(
             (payload) => { dispatch({ type: "EXEC_SEQUENCE_OK", payload }); },
             (e: string) => {
-                // This needs to be fixed. FarmbotJS timer deferred promises
-                // should be returning type Error, never string!
-                dispatch(botError({
-                    error: t("Unable to execute sequence. See log for details."),
-                    method: t("TODO: Fix Farmbotjs timer defer rejection")
-                }));
+                error(t("Unable to execute sequence. See log for details."))
+                console.error("TODO: Fix Farmbotjs timer defer rejection");
             });
     };
 };
