@@ -190,10 +190,9 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
                 dispatch(readStatus());
                 bot.on("*", function (msg: any) {
                     msg = Object(msg); // stay safe, folks.
-                    if(msg.id && msg.method && msg.id) {
-                        console.log("SKIP!");
-                        return;
-                    }
+                    // Unlikely scenario: You received an inbound method invocation.
+                    // We do not invoke methods on clients. 
+                    if (msg.id && msg.method && msg.id) { return; }
                     let fn: Function = (function(){
                         if (msg.error !== undefined
                             || msg.error !== null) { return botError; };
@@ -243,6 +242,11 @@ function botChange(statusMessage) {
 
 function botError(statusMessage: ErrorResponse) {
     error(statusMessage.error.message || t("Unknown error!"));
+    console.dir(statusMessage);
+    return {
+        type: "BOT_ERROR",
+        payload: statusMessage
+    };
 }
 
 function botNotification(statusMessage) {
