@@ -133,7 +133,7 @@ export function readStatus() {
     .current
     .readStatus()
     .then(commandOK(noun), commandErr(noun));
-}
+  }
 
 export function connectDevice(token: string): {} | ((dispatch: any) => any) {
   return (dispatch) => {
@@ -142,7 +142,7 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
       .connect()
       .then(() => {
         devices.current = bot;
-        dispatch(readStatus());
+        readStatus();
         bot.on("notification",
           function (msg: any) {
             console.warn("You promised you'd fix this!!");
