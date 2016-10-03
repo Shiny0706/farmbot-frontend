@@ -190,13 +190,18 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
       .then(() => {
         devices.current = bot;
         dispatch(readStatus());
-        bot.on("*", function (msg: any) {
-            msg = Object(msg); // stay safe, folks.
+        bot.on("notification",
+        function(msg: any) {
+            console.warn("You promised you'd fix this!!");
             switch (msg.method) {
               case "status_update":
                 console.log("Got status.");
+                dispatch(botNotification(msg));
+                break;
               case "log_message":
                 console.log("Got log.");
+                dispatch(logNotification(msg));
+                break;
             };
         });
       }, (err) => dispatch(fetchDeviceErr(err)));
