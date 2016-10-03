@@ -40,7 +40,6 @@ export function settingToggleErr(err) {
 
 
 export function pinToggle(num: number): Function {
-<<<<<<< HEAD
     return function(dispatch: Function) {
         let currentValue = store.getState().bot.hardware[`pin${num}`];
         let newPinValue = (currentValue === 1) ? 0 : 1;
@@ -52,21 +51,6 @@ export function pinToggle(num: number): Function {
             .then(res => dispatch(pinToggleOk(res)),
             err => dispatch(pinToggleErr(err)));
     };
-=======
-  return function (dispatch: Function) {
-    let currentValue = store.getState().bot.hardware[`pin${num}`];
-    let newPinValue = (currentValue === "on") ? OFF : ON;
-    return devices
-      .current
-      .writePin({
-        pin_number: num,
-        pin_value: newPinValue,
-        pin_mode: DIGITAL
-      })
-      .then(res => dispatch(pinToggleOk(res)),
-      err => dispatch(pinToggleErr(err)));
-  };
->>>>>>> c621654be4957d9edc080e72dc052040dbec70d6
 }
 
 export function pinToggleOk(res) {
@@ -164,7 +148,6 @@ function commitAxisChangesOk(resp) {
 }
 
 export function readStatus() {
-<<<<<<< HEAD
     return function (dispatch: Function) {
         return devices
             .current
@@ -172,15 +155,6 @@ export function readStatus() {
             .then((resp: Response<[{OK: "OK"}]>) => dispatch(botAck(resp)),
             (errr) => dispatch(readStatusErr(errr)));
     };
-=======
-  return function (dispatch: Function) {
-    return devices
-      .current
-      .readStatus()
-      .then((resp) => dispatch(readStatusOk(resp)),
-      (errr) => dispatch(readStatusErr(errr)));
-  };
->>>>>>> c621654be4957d9edc080e72dc052040dbec70d6
 }
 
 function readStatusOk(status) {
@@ -269,19 +243,11 @@ export function addDevice(deviceAttrs): Thunk {
   };
 }
 
-<<<<<<< HEAD
 function botAck(response: Response<[{OK: "OK"}]>) {
     return {
         type: "BOT_ACK",
         payload: response
     };
-=======
-function botChange(statusMessage) {
-  return {
-    type: "BOT_CHANGE",
-    payload: statusMessage
-  };
->>>>>>> c621654be4957d9edc080e72dc052040dbec70d6
 }
 
 function botError(statusMessage: ErrorResponse) {
@@ -293,7 +259,6 @@ function botError(statusMessage: ErrorResponse) {
   };
 }
 
-<<<<<<< HEAD
 function botNotification(statusMessage: Notification<[HardwareState]>) {
     return {
         type: "BOT_CHANGE",
@@ -307,13 +272,6 @@ Notification<[{message: string, time: number, status: HardwareState}]>) {
         type: "BOT_LOG",
         payload: botLog
     };
-=======
-function botNotification(statusMessage) {
-  return {
-    type: "BOT_NOTIFICATION",
-    payload: statusMessage
-  };
->>>>>>> c621654be4957d9edc080e72dc052040dbec70d6
 }
 
 function unknownMessage(statusMessage: any) {
