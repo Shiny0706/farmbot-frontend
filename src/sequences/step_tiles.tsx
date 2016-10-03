@@ -256,7 +256,7 @@ export let stepTiles: StepDictionary = {
               </div>
             </div> );
   },
-  "pin_write": function({dispatch, step, index}: StepParams){
+  "write_pin": function({dispatch, step, index}: StepParams){
     return( <div>
               <div className="step-wrapper">
                 <div className="row">

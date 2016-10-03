@@ -69,7 +69,7 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left orange-block block-header block"
-                                        onClick={ clickToAdd(step("pin_write")) }>
+                                        onClick={ clickToAdd(step("write_pin")) }>
                                         {("WRITE PIN")}
                                     </button>
                                     <i className="fa fa-arrows block-control" />
