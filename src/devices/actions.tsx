@@ -191,23 +191,13 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
         devices.current = bot;
         dispatch(readStatus());
         bot.on("*", function (msg: any) {
-          msg = Object(msg); // stay safe, folks.
-          let fn: Function;
-          if (msg.method && msg.params && (msg.id === null)) {
+            msg = Object(msg); // stay safe, folks.
             switch (msg.method) {
               case "status_update":
-                fn = botNotification;
-                break;
+                console.log("Got status.");
               case "log_message":
-                fn = logNotification;
-                break;
-              default:
-                fn = unknownMessage;
+                console.log("Got log.");
             };
-            console.dir(new Error().stack);
-            console.dir(msg);
-            dispatch(fn(msg));
-          };
         });
       }, (err) => dispatch(fetchDeviceErr(err)));
   };
