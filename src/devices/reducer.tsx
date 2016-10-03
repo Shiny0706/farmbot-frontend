@@ -5,7 +5,7 @@ import { generateReducer } from "../generate_reducer";
 import { isBotLog } from "./is_bot_log";
 import { ReduxAction } from "../interfaces";
 import { ErrorResponse, Response, Notification } from "farmbot/jsonrpc";
-import  * as i18next  from "i18next";
+import * as i18next from "i18next";
 
 let status = {
   NOT_READY: i18next.t("never connected to device"),
@@ -29,29 +29,25 @@ let initialState: BotState = {
   settingsBuffer: {}
 };
 
-function READ_STATUS_OK(state: BotState, action: ReduxAction<HardwareState>) {
-    console.log("READ_STATUS_OK");
+export let botReducer = generateReducer<BotState>(initialState)
+  .add<HardwareState>("SETTING_TOGGLE_OK", function (state: BotState, action: ReduxAction<HardwareState>) {
+
     let hardware = action.payload;
-    // delete hardware.method;
     return _.assign<{}, BotState>({},
       state, {
         hardware: hardware
       }, {
         status: status.READY
       });
-  };
-
-export let botReducer = generateReducer<BotState>(initialState)
-  .add<HardwareState>("SETTING_TOGGLE_OK", function(state, action) {
-    return READ_STATUS_OK(state, action);
-  })
-  .add<any>("COMMIT_SETTINGS_OK", function(state, action) {
+  }
+  )
+  .add<any>("COMMIT_SETTINGS_OK", function (state, action) {
     let nextState = _.assign<any, BotState>({}, state, {
       settingsBuffer: {}
     });
     return nextState;
   })
-  .add<any>("COMMIT_AXIS_CHANGE_OK", function(oldState, action) {
+  .add<any>("COMMIT_AXIS_CHANGE_OK", function (oldState, action) {
     let hardware = _.assign({}, oldState.hardware, action.payload);
     let state = _.assign<any, BotState>({}, oldState);
 
@@ -60,7 +56,7 @@ export let botReducer = generateReducer<BotState>(initialState)
       hardware
     });
   })
-  .add<any>("CHANGE_AXIS_BUFFER", function(state, action) {
+  .add<any>("CHANGE_AXIS_BUFFER", function (state, action) {
     // let axisBuffer: any = _.assign({}, state.axisBuffer);
     state.axisBuffer[action.payload.key] = action.payload.val;
 
@@ -68,7 +64,7 @@ export let botReducer = generateReducer<BotState>(initialState)
       axisBuffer: state.axisBuffer
     });
   })
-  .add<any>("CHANGE_SETTINGS_BUFFER", function(state, action) {
+  .add<any>("CHANGE_SETTINGS_BUFFER", function (state, action) {
     let newVal = Number(action.payload.val);
     if (newVal) {
       state.settingsBuffer[action.payload.key] = action.payload.val;
@@ -79,16 +75,23 @@ export let botReducer = generateReducer<BotState>(initialState)
       settingsBuffer: state.settingsBuffer
     });
   })
-  .add<any>("CHANGE_STEP_SIZE", function(state, action) {
+  .add<any>("CHANGE_STEP_SIZE", function (state, action) {
     return _.assign<any, BotState>({}, state, {
       stepSize: action.payload
     });
   })
-  .add<HardwareState>("READ_STATUS_OK", function(state, action){
-    return state;
-  })
-  .add<Notification<[HardwareState]>>("BOT_CHANGE", READ_STATUS_OK)
-  .add<any>("CONNECT_OK", function(state, action) {
+  .add<Notification<[HardwareState]>>("BOT_CHANGE", function (state: BotState,
+                                                              action: ReduxAction<HardwareState>) {
+    let hardware = action.payload;
+    return _.assign<{}, BotState>({},
+      state, {
+        hardware: hardware
+      }, {
+        status: status.READY
+      });
+  }
+  )
+  .add<any>("CONNECT_OK", function (state, action) {
     return _.assign<any, BotState>({},
       state,
       action.payload, {
@@ -96,27 +99,27 @@ export let botReducer = generateReducer<BotState>(initialState)
         connected: true
       });
   })
-  .add<any>("CONNECT_ERR", function(state, action) {
+  .add<any>("CONNECT_ERR", function (state, action) {
     return _.assign<any, BotState>({},
       state, {
         status: status.WEBSOCKET_ERR
       });
   })
-  .add<any>("CHANGE_DEVICE", function(s, a) {
-    _.assign(s.account, a.payload, {dirty: true});
+  .add<any>("CHANGE_DEVICE", function (s, a) {
+    _.assign(s.account, a.payload, { dirty: true });
     return s;
   })
-  .add<any>("FETCH_DEVICE", function(state, action) {
+  .add<any>("FETCH_DEVICE", function (state, action) {
     return state;
   })
-  .add<any>("FETCH_DEVICE_OK", function(state, { payload }) {
+  .add<any>("FETCH_DEVICE_OK", function (state, { payload }) {
     return _.assign<any, BotState>({},
       state,
       payload, {
         status: status.AWAITING_WEBSOCKET
       });
   })
-  .add<any>("FETCH_DEVICE_ERR", function(state, action) {
+  .add<any>("FETCH_DEVICE_ERR", function (state, action) {
     // TODO: Toast messages do not belong in a reducer.
     if (action.payload.status === 404) {
       warning(i18next.t("You need to add a device to your account."),
@@ -130,7 +133,7 @@ export let botReducer = generateReducer<BotState>(initialState)
         status: status.API_ERROR
       });
   })
-  .add<any>("SAVE_DEVICE_ERR", function(state, action) {
+  .add<any>("SAVE_DEVICE_ERR", function (state, action) {
     switch (action.payload.status) {
       case 422:
         let errors = _.map(action.payload.responseJSON, v => v)
@@ -143,12 +146,12 @@ export let botReducer = generateReducer<BotState>(initialState)
     }
     return state;
   })
-  .add<any>("SAVE_DEVICE_OK", function(state, action) {
+  .add<any>("SAVE_DEVICE_OK", function (state, action) {
     return _.assign<any, BotState>({}, state, action.payload, {
       dirty: false
     });
   })
-  .add<any>("BOT_NOTIFICATION", function(state, { payload }) {
+  .add<any>("BOT_NOTIFICATION", function (state, { payload }) {
     if (isBotLog(payload)) {
       state.logQueue.unshift(payload);
       state.logQueue = _.take(state.logQueue, state.logQueueSize);
@@ -157,11 +160,11 @@ export let botReducer = generateReducer<BotState>(initialState)
     }
     return state;
   })
-  .add<DeviceAccountSettings>("REPLACE_DEVICE_ACCOUNT_INFO", function(s, a) {
+  .add<DeviceAccountSettings>("REPLACE_DEVICE_ACCOUNT_INFO", function (s, a) {
     s.account = a.payload;
     return s;
   })
-  .add<string>("CHANGE_WEBCAM_URL", function(s, a) {
+  .add<string>("CHANGE_WEBCAM_URL", function (s, a) {
     s.account.dirty = true;
     s.account.webcam_url = a.payload;
     return s;
