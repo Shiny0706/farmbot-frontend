@@ -18,7 +18,7 @@ export function emergencyStop() {
   let noun = "Emergency stop";
   devices
     .current
-    .sync()
+    .emergencyStop()
     .then(commandOK(noun), commandErr(noun));
 }
 
@@ -87,7 +87,6 @@ export function settingToggle(name: configKey, bot: BotState) {
   // TODO : This should be an atomic operation handled at the bot level
   // as a lower level command.
   const noun = "Setting toggle";
-
   return devices
     .current
     .updateCalibration({
