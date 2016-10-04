@@ -15,8 +15,8 @@ import { saveAccountChanges,
          commitSettingsChanges,
          changeAxisBuffer,
          checkControllerUpdates,
-         rebootBot,
-         powerOffBot } from "./actions";
+         reboot,
+         powerOff } from "./actions";
 import { t } from "i18next";
 
 export class SettingsInputBox extends React.Component<any, any> {
@@ -197,7 +197,7 @@ class DevicesPage extends React.Component<Everything, any> {
                                       <td>
                                         <button type="button"
                                                 className="button-like yellow"
-                                                onClick={ rebootBot }>
+                                                onClick={ reboot }>
                                           {t("RESTART")}
                                         </button>
                                       </td>
@@ -216,7 +216,7 @@ class DevicesPage extends React.Component<Everything, any> {
                                       <td>
                                         <button type="button"
                                                 className="button-like red"
-                                                onClick={ powerOffBot } >
+                                                onClick={ powerOff } >
                                             {t("SHUTDOWN")}
                                         </button>
                                       </td>

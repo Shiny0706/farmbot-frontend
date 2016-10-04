@@ -23,7 +23,7 @@ export function checkControllerUpdates() {
     .then(commandOK(noun), commandErr(noun));
 }
 
-export function powerOffBot() {
+export function powerOff() {
   let noun = "Power Off Bot";
   devices
     .current
@@ -31,7 +31,7 @@ export function powerOffBot() {
     .then(commandOK(noun), commandErr(noun));
 }
 
-export function rebootBot() {
+export function reboot() {
   let noun = "Reboot Bot";
   devices
     .current
