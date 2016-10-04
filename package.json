@@ -25,7 +25,7 @@
     "axios": "^0.14.0",
     "css-loader": "^0.25.0",
     "enzyme": "^2.4.1",
-    "farmbot": "RickCarlino/farmbot-js",
+    "farmbot": "ConnorRigby/farmbot-js",
     "i18next": "^3.4.3",
     "jasmine-core": "^2.4.1",
     "joi-browser": "^9.0.4",

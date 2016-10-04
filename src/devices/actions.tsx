@@ -9,10 +9,35 @@ import { t } from "i18next";
 import { Sequence, configKey } from "farmbot/interfaces";
 import { MovementRequest } from "farmbot/bot_commands";
 import { ErrorResponse, Response, Notification } from "farmbot/jsonrpc";
+import { beep } from "../util";
 
 const ON = 1,
   OFF = 0,
   DIGITAL = 0;
+
+export function checkControllerUpdates() {
+  let noun = "Check for Updates";
+  devices
+    .current
+    .checkUpdates()
+    .then(commandOK(noun), commandErr(noun));
+}
+
+export function powerOffBot() {
+  let noun = "Power Off Bot";
+  devices
+    .current
+    .powerOff()
+    .then(commandOK(noun), commandErr(noun));
+}
+
+export function rebootBot() {
+  let noun = "Reboot Bot";
+  devices
+    .current
+    .reboot()
+    .then(commandOK(noun), commandErr(noun));
+}
 
 export function emergencyStop() {
   let noun = "Emergency stop";
@@ -148,6 +173,7 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
             switch (msg.method) {
               case "status_update":
                 dispatch(botNotification(msg));
+                beep();
                 break;
               case "log_message":
                 dispatch(logNotification(msg));
