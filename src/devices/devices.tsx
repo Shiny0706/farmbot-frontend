@@ -359,21 +359,21 @@ class DevicesPage extends React.Component<Everything, any> {
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_x }
-                                                  toggleAction={ () => this.props.dispatch(
+                                                  toggleAction={ () =>
                                                     settingToggle("movement_invert_endpoints_x",
-                                                  this.props.bot)) } />
+                                                  this.props.bot) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_y }
-                                                  toggleAction={ () => this.props.dispatch(
+                                                  toggleAction={ () =>
                                                     settingToggle("movement_invert_endpoints_y",
-                                                  this.props.bot)) } />
+                                                  this.props.bot) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_endpoints_z }
-                                                  toggleAction={ () => this.props.dispatch(
+                                                  toggleAction={ () =>
                                                     settingToggle("movement_invert_endpoints_z",
-                                                  this.props.bot)) } />
+                                                  this.props.bot) } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -382,15 +382,15 @@ class DevicesPage extends React.Component<Everything, any> {
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_motor_x }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_x", this.props.bot)) } />
+                                                  toggleAction={ () => settingToggle("movement_invert_motor_x", this.props.bot) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_motor_y }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_y", this.props.bot)) } />
+                                                  toggleAction={ () => settingToggle("movement_invert_motor_y", this.props.bot) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_invert_motor_z }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_invert_motor_z", this.props.bot)) } />
+                                                  toggleAction={ () => settingToggle("movement_invert_motor_z", this.props.bot) } />
                                   </td>
                                 </tr>
                                 <tr>
@@ -399,15 +399,15 @@ class DevicesPage extends React.Component<Everything, any> {
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_home_up_x }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_x", this.props.bot)) } />
+                                                  toggleAction={ () => settingToggle("movement_home_up_x", this.props.bot) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_home_up_y }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_y", this.props.bot)) } />
+                                                  toggleAction={ () => settingToggle("movement_home_up_y", this.props.bot) } />
                                   </td>
                                   <td>
                                     <ToggleButton toggleval={ this.props.bot.hardware.movement_home_up_z }
-                                                  toggleAction={ () => this.props.dispatch(settingToggle("movement_home_up_z", this.props.bot)) } />
+                                                  toggleAction={ () => settingToggle("movement_home_up_z", this.props.bot) } />
                                   </td>
                                 </tr>
                               </tbody>
@@ -484,7 +484,7 @@ function Logs({logs}: LogsProps) {
 
     function displayCoordinates(log: BotLog) {
       // Stringify coords bcuz 0 is falsy in JS.
-      let [x, y, z] = [log.status.X, log.status.Y, log.status.Z].map((i) => String(i));
+      let [x, y, z] = [log.status.x, log.status.y, log.status.z].map((i) => String(i));
       if (x && y && z) {
         return `${x}, ${y}, ${z}`;
       } else {
@@ -492,19 +492,13 @@ function Logs({logs}: LogsProps) {
       }
     }
 
-    // FOR THE LOVE OF GOD DO NOT COMMIT THIS
-    // IT IS A TERRIBLE HACK
     return <tbody>
              {
-                logs.map((log, i) => {
-                  if(i % 2 == 0) {
-                  return <tr key={ i }>
-                          <td> { displayTime(log.time) }   </td>
-                          <td> { log.data }                </td>
-                          <td> { displayCoordinates(log) } </td>
-                         </tr>;
-                  }
-                })
+               logs.map((log, i) => <tr key={ i }>
+                 <td> { displayTime(log.time) } </td>
+                 <td> { log.message } </td>
+                 <td> { displayCoordinates(log) } </td>
+               </tr>)
               }
            </tbody>;
   }

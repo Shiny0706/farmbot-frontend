@@ -18,7 +18,7 @@ export function emergencyStop() {
   let noun = "Emergency stop";
   devices
     .current
-    .sync()
+    .emergencyStop()
     .then(commandOK(noun), commandErr(noun));
 }
 
@@ -47,7 +47,7 @@ export let saveAccountChanges: Thunk = function (dispatch, getState) {
 
 let commandErr = (noun = "Command") => () => {
   let msg = noun + " request failed.";
-  error(msg, t("Farmbot Didn't Get That!"));
+  error(msg, t("Farmbot Didn't Get That!") );
 };
 
 let commandOK = (noun = "Command") => () => {
@@ -87,7 +87,6 @@ export function settingToggle(name: configKey, bot: BotState) {
   // TODO : This should be an atomic operation handled at the bot level
   // as a lower level command.
   const noun = "Setting toggle";
-
   return devices
     .current
     .updateCalibration({
@@ -133,7 +132,7 @@ export function readStatus() {
     .current
     .readStatus()
     .then(commandOK(noun), commandErr(noun));
-}
+  }
 
 export function connectDevice(token: string): {} | ((dispatch: any) => any) {
   return (dispatch) => {
@@ -142,17 +141,15 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
       .connect()
       .then(() => {
         devices.current = bot;
-        dispatch(readStatus());
+        readStatus();
         bot.on("notification",
           function (msg: any) {
             console.warn("You promised you'd fix this!!");
             switch (msg.method) {
               case "status_update":
-                console.log("Got status.");
                 dispatch(botNotification(msg));
                 break;
               case "log_message":
-                console.log("Got log.");
                 dispatch(logNotification(msg));
                 break;
             };
@@ -172,7 +169,7 @@ function logNotification(botLog:
   Notification<[{ message: string, time: number, status: HardwareState }]>) {
   return {
     type: "BOT_LOG",
-    payload: botLog
+    payload: botLog.params[0]
   };
 }
 
@@ -218,29 +215,15 @@ export function commitAxisChanges() {
     };
     let packet: MovementRequest = {
       speed: pick("speed", speed),
-      x: pick("x"),
-      y: pick("y"),
-      z: pick("z"),
+      x: pick("x", 0),
+      y: pick("y", 0),
+      z: pick("z", 0),
     };
+    let noun = "Move Absolute Command";
     return devices
       .current
       .moveAbsolute(packet)
-      .then((resp) => dispatch(commitAxisChangesOk(resp)),
-      (err) => dispatch(commitAxisChangesErr(err)));
-  };
-}
-
-function commitAxisChangesOk(resp) {
-  return {
-    type: "COMMIT_AXIS_CHANGE_OK",
-    payload: resp.result
-  };
-}
-
-function commitAxisChangesErr(err) {
-  return {
-    type: "COMMIT_AXIS_CHANGE_ERR",
-    payload: err
+      .then(commandOK(noun), commandErr(noun));
   };
 }
 

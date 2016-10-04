@@ -10,7 +10,7 @@ interface DirectionButtonProps extends Everything {
 
 export class DirectionButton extends React.Component<DirectionButtonProps, any> {
   sendCommand() {
-    let isNegative = (this.props.direction === "up") ||
+    let isNegative =  (this.props.direction === "up") ||
                       (this.props.direction === "right");
     let multiplier = (isNegative) ? -1 : 1;
     let distance = (this.props.steps || 250 ) * multiplier;
