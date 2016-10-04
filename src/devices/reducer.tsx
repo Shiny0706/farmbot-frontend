@@ -21,7 +21,7 @@ let status = {
 
 let initialState: BotState = {
   account: { id: 0, uuid: "loading...", name: "loading..." },
-  logQueueSize: 10,
+  logQueueSize: 20,
   logQueue: [],
   status: status.NOT_READY,
   stepSize: 1000,
@@ -152,7 +152,7 @@ export let botReducer = generateReducer<BotState>(initialState)
       dirty: false
     });
   })
-  .add<any>("BOT_NOTIFICATION", function (state, { payload }) {
+  .add<any>("BOT_LOG", function (state, { payload }) {
     if (isBotLog(payload)) {
       state.logQueue.unshift(payload);
       state.logQueue = _.take(state.logQueue, state.logQueueSize);

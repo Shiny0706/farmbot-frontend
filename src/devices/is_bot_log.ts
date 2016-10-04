@@ -1,9 +1,7 @@
 import { BotLog } from "./interfaces";
 
 const schema = {
-    data: "string",
-    name: "string",
-    priority: "string",
+    message: "string",
     time: "number",
     status: "object",
 };
