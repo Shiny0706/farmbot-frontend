@@ -56,6 +56,7 @@ export interface BotState {
 
 /** Status registers for the bot's status */
 export interface HardwareState {
+  version?: string;
   s?: number;
   x?: number;
   y?: number;

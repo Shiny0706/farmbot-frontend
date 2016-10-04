@@ -13,7 +13,10 @@ import { saveAccountChanges,
          settingToggle,
          changeSettingsBuffer,
          commitSettingsChanges,
-         changeAxisBuffer } from "./actions";
+         changeAxisBuffer,
+         checkControllerUpdates,
+         reboot,
+         powerOff } from "./actions";
 import { t } from "i18next";
 
 export class SettingsInputBox extends React.Component<any, any> {
@@ -147,32 +150,19 @@ class DevicesPage extends React.Component<Everything, any> {
                                     </tr>
                                     <tr>
                                       <td>
-                                        <label>{t("PUBLIC IP ADDRESS")}</label>
-                                      </td>
-                                      <td colSpan={2}>
-                                        <p>0.0.0.0</p>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <label>{t("PRIVATE IP ADDRESS")}</label>
-                                      </td>
-                                      <td colSpan={2}>
-                                        <p>0.0.0.0</p>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>
                                         <label>{t("CONTROLLER")}</label>
                                       </td>
                                       <td>
                                         <p>
-                                          farmbot-raspberry-pi-controller
+                                          { String(this.props.bot.hardware.version)
+                                            || t("Not Connected to bot") }
                                         </p>
                                       </td>
                                       <td>
-                                        <button className="button-like disabled gray">
-                                          REMOTE UPDATES COMING SOON
+                                        <button className="button-like disabled gray"
+                                                onClick={ () =>
+                                                  checkControllerUpdates() }>
+                                          Check for Controller Updates
                                         </button>
                                       </td>
                                     </tr>
@@ -183,7 +173,8 @@ class DevicesPage extends React.Component<Everything, any> {
                                       <td>
                                         <p>
                                           {t("Version")} {
-                                            String(this.props.bot.hardware.param_version) || "loading"
+                                            String(this.props.bot.hardware.param_version)
+                                            || t("Not Connected to bot")
                                           }
                                         </p>
                                       </td>
@@ -199,12 +190,14 @@ class DevicesPage extends React.Component<Everything, any> {
                                       </td>
                                       <td>
                                         <p>
-                                        {t("This will restart FarmBot's Raspberry Pi and controller software (coming soon)")}
+                                        {t(`This will restart FarmBot's Raspberry 
+                                            Pi and controller software`)}
                                         </p>
                                       </td>
                                       <td>
                                         <button type="button"
-                                                className="button-like yellow">
+                                                className="button-like yellow"
+                                                onClick={ reboot }>
                                           {t("RESTART")}
                                         </button>
                                       </td>
@@ -215,12 +208,17 @@ class DevicesPage extends React.Component<Everything, any> {
                                       </td>
                                       <td>
                                         <p>
-                                          {t("This will shutdown FarmBot's Raspberry Pi. To turn it back on, unplug FarmBot and plug it back in. (coming soon)")}
+                                          {t(`This will shutdown FarmBot's Raspberry Pi. 
+                                              To turn it back on, unplug FarmBot
+                                              and plug it back in.`)}
                                         </p>
                                       </td>
                                       <td>
                                         <button type="button"
-                                        className="button-like red">{t("SHUTDOWN")}</button>
+                                                className="button-like red"
+                                                onClick={ powerOff } >
+                                            {t("SHUTDOWN")}
+                                        </button>
                                       </td>
                                     </tr>
                                   </tbody>
