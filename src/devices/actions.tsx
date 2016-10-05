@@ -39,6 +39,14 @@ export function reboot() {
     .then(commandOK(noun), commandErr(noun));
 }
 
+export function checkArduinoUpdates() {
+    let noun = "Check Firmware Updates";
+  devices
+    .current
+    .checkArduinoUpdates()
+    .then(commandOK(noun), commandErr(noun));
+}
+
 export function emergencyStop() {
   let noun = "Emergency stop";
   devices
