@@ -23,6 +23,16 @@ export interface DeviceAccountSettings {
   dirty?: boolean;
 };
 
+/** Typescript does not have partial types yet.
+ *  When it does, we can pull this out*/
+export interface DeviceAccountSettingsUpdate {
+  id?: number;
+  name?: string;
+  uuid?: string;
+  webcam_url?: string;
+  dirty?: boolean;
+};
+
 export interface BotState {
   account: DeviceAccountSettings;
   /** Maximum number of messages to cache. Excess is truncated. */

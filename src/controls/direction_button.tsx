@@ -15,7 +15,7 @@ export class DirectionButton extends React.Component<DirectionButtonProps, any> 
     let multiplier = (isNegative) ? -1 : 1;
     let distance = (this.props.steps || 250 ) * multiplier;
     let payload = { speed: 100, x: 0, y: 0, z: 0 };
-    payload[this.props.axis] = distance;
+    (payload as any)[this.props.axis] = distance;
     moveRelative(payload);
   }
 

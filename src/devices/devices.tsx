@@ -91,7 +91,8 @@ class DevicesPage extends React.Component<Everything, any> {
   saveBot(e: React.MouseEvent) {
     // THIS IS THE CAUSE OF THE "STALE DATA" BUG: Fix me!
     e.preventDefault();
-    this.props.dispatch(addDevice(convertFormToObject(e.target as any)));
+    let devInfo: any = convertFormToObject(e.target as any);
+    this.props.dispatch(addDevice(devInfo));
   }
 
   render() {
