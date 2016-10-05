@@ -16,7 +16,7 @@ interface BulkEditorProps {
 
 export function BulkSchedulerWidget({sequences, dispatch, editor}: BulkEditorProps) {
     let click = function() { dispatch(commitBulkEditor()); };
-    let active = _.isNumber(editor.currentRegimen);
+    let active = !!(sequences && sequences.length) //_.isNumber(editor.currentRegimen);
     return (<div>
         <div className="widget-wrapper bulk-scheduler-widget">
             <div className="row">

@@ -21,3 +21,7 @@
 2. Copy the contents of `/app` into your webserver so that it will be accessible via `/app`.
 3. Visit `/app/login` on your web server to verify installation.
 4. [Submit an issue](https://github.com/FarmBot/farmbot-web-frontend/issues/new?title=Installation%20Failure) if you hit problems during the installation.
+
+# Want to Help?
+
+[Low Hanging Fruit](https://github.com/FarmBot/farmbot-web-frontend/search?l=typescript&q=TODO&utf8=%E2%9C%93)
