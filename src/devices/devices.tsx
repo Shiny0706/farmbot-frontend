@@ -16,7 +16,8 @@ import { saveAccountChanges,
          changeAxisBuffer,
          checkControllerUpdates,
          reboot,
-         powerOff } from "./actions";
+         powerOff,
+         checkArduinoUpdates } from "./actions";
 import { t } from "i18next";
 
 export class SettingsInputBox extends React.Component<any, any> {
@@ -180,8 +181,9 @@ class DevicesPage extends React.Component<Everything, any> {
                                         </p>
                                       </td>
                                       <td>
-                                        <button className="button-like disabled gray">
-                                          REMOTE UPDATES COMING SOON
+                                        <button className="button-like disabled gray"
+                                        onClick={checkArduinoUpdates}>
+                                          Check Firmware Updates
                                         </button>
                                       </td>
                                     </tr>
