@@ -93,7 +93,7 @@ class LoginPage extends React.Component<Everything, any> {
                         </div>
                         <div className="row">
                           <div className="col-xs-12">
-                          <label> {("Server URL")} </label>
+                          <label> { i18next.t("Server URL") } </label>
                           <input type="text"
                                  value={ this.props.config.host }
                                  onChange={ setHost(this.props.dispatch) } />
@@ -101,7 +101,7 @@ class LoginPage extends React.Component<Everything, any> {
                         </div>
                         <div className="row">
                           <div className="col-xs-12">
-                          <label> {("Server Port")} </label>
+                          <label> { i18next.t("Server Port") } </label>
                           <input type="number"
                                  value={ this.props.config.port }
                                  onChange={ setPort(this.props.dispatch) } />
