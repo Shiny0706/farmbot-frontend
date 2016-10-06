@@ -14,6 +14,7 @@ let setPort = (dispatch: Function) => (e: React.FormEvent) => dispatch(
 
 
 class LoginPage extends React.Component<Everything, any> {
+
   get url(): string {
     return `//${ this.props.config.host }:${ this.props.config.port }`;
   }
@@ -47,6 +48,14 @@ class LoginPage extends React.Component<Everything, any> {
   }
 
   render() {
+    if (this.props.auth.authenticated) {
+      localStorage.clear();
+      sessionStorage.clear();
+      location.reload();
+
+      return <span> Logging out now... </span>;
+    }
+
     return (
       <div>
         <Navbar { ...this.props } />
@@ -120,7 +129,7 @@ class LoginPage extends React.Component<Everything, any> {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="widget-header">
-                      <h5> {i18next.t("Server Port")} </h5>
+                      <h5> {i18next.t("Register")} </h5>
                     </div>
                   </div>
                 </div>

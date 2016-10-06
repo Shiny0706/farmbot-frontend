@@ -42,6 +42,7 @@ export function fetchSequences() {
   return (dispatch: Function, getState: Function) => {
     let state: AuthState = getState().auth;
     let { iss } = state;
+
     axios.get<Sequence[]>(`${iss}/api/sequences`)
       .then(({data}) => {
         dispatch(fetchSequencesOk(data));
