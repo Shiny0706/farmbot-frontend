@@ -15,7 +15,9 @@ export function nullSequence(): Sequence {
   return {
     color: randomColor(),
     name: "New Sequence",
-    steps: [],
+    kind: "sequence",
+    args: {},
+    body: [],
     dirty: false
   };
 }

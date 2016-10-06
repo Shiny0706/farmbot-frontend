@@ -24,8 +24,10 @@ const initialState: SequenceReducerState = {
     all: [
         {
             color: "red",
+            kind: "sequence",
+            args: {},
             name: "New Sequence",
-            steps: [],
+            body: [],
             dirty: true
         }
     ],
@@ -37,11 +39,11 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
         let current_sequence = state
             .all[state.current] || populate(state);
         let { step } = action.payload;
-        step.position = step.position || current_sequence.steps.length;
+        step.position = step.position || current_sequence.body.length;
 
         // typing not working. Thanks TS.
         let stepp = step as Step;
-        current_sequence.steps.push(stepp);
+        current_sequence.body.push(stepp);
         current_sequence.dirty = true;
         return state;
     })
@@ -57,18 +59,18 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
         return state;
     })
     .add<{ step: Step, index: number }>("CHANGE_STEP", function (state, action) {
-        let steps = state.all[state.current].steps || populate(state).steps;
+        let steps = state.all[state.current].body || populate(state).body;
         let index = action.payload.index;
-        let step = steps[index];
-        steps[index] = assign<{}, Step>(step, action.payload.step);
+        let body = steps[index];
+        body[index] = assign<{}, Step>(body, action.payload.step);
         state.all[state.current].dirty = true;
         return state;
     })
     .add<{ index: number }>("REMOVE_STEP", function (state, action) {
         let seq = state.all[state.current];
         let index = action.payload.index;
-        seq.steps = _.without(seq.steps, seq.steps[index]);
-        seq.steps = repositionSteps(seq.steps);
+        seq.body = _.without(seq.body, seq.body[index]);
+        seq.body = repositionSteps(seq.body);
         seq.dirty = true;
         return state;
     })
@@ -77,7 +79,7 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
         return state;
     })
     .add<Array<Sequence>>("FETCH_SEQUENCES_OK", function (state, action) {
-        state.all = action.payload;
+        // state.all = action.payload;
         return state;
     })
     .add<number>("SELECT_SEQUENCE", function (state, action) {

@@ -1,17 +1,15 @@
 import * as React from "react";
 import { pushStep } from "./actions";
 import { Help } from "../help";
-import { UnplacedStep,
-    StepCommand as Command,
-    messageType } from "./interfaces";
+import { UnplacedStep, SequenceStepNode } from "./interfaces";
 
 let addStep = (dispatch: Function) =>
     (step: UnplacedStep) =>
         (event: React.FormEvent) => { dispatch(pushStep(step)); };
 
-let step = function(message_type: messageType,
-    command: Command = {}): UnplacedStep {
-    return { message_type, command };
+let step = function(message_type: string,
+    command: any = {}): UnplacedStep {
+    return {kind: message_type, args: command};
 };
 
 export function StepButtonGroup({dispatch}: {dispatch: Function}) {
@@ -20,8 +18,8 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
     // command. For now we're sneakily making it an if_statement that is always
     // true.
     let temporaryHack = clickToAdd({
-      message_type: "if_statement",
-      command: {}
+      kind: "if_statement",
+      args: {}
     });
     return (<div>
         <div className="widget-wrapper">

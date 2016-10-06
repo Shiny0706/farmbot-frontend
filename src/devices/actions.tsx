@@ -9,9 +9,10 @@ import { DeviceAccountSettingsUpdate,
          BotState,
          HardwareState } from "../devices/interfaces";
 import { t } from "i18next";
-import { Sequence, configKey } from "farmbot/interfaces";
+import { configKey } from "farmbot/interfaces";
 import { MovementRequest } from "farmbot/bot_commands";
 import { ErrorResponse, Response, Notification } from "farmbot/jsonrpc";
+import { Sequence } from "../sequences/interfaces";
 import { beep } from "../util";
 
 const ON = 1,

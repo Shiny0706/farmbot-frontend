@@ -41,7 +41,7 @@ let updateStep = function ({ dispatch,
   return (e: React.FormEvent) => {
 
     let update = defensiveClone<Step>(step);
-    (update.command as {[name: string]: UpdateStepParams})[field] = (e.target as any).value;
+    (update.args as {[name: string]: UpdateStepParams})[field] = (e.target as any).value;
     let action = changeStep(index, update);
     dispatch(action);
   };
@@ -65,7 +65,7 @@ interface IStepInput {
 
 export function StepInputBox({step, field, dispatch, index}: IStepInput) {
   return <input type="text"
-                value={ (step.command as any )[field] || "" }
+                value={ (step.args as any )[field] || "" }
                 onChange={ updateStep({dispatch, step, index, field}) } />;
 }
 
