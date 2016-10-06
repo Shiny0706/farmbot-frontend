@@ -7,7 +7,6 @@ export interface BulkSchedulerOutput {
 }
 
 export interface BulkSchedulerState {
-  currentRegimen: number;
   sequence?: Sequence;
   form: BulkScheduleForm;
 }

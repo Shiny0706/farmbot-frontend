@@ -16,9 +16,8 @@ function newWeek() {
   };
 }
 
-function newState(index: number): BulkSchedulerState {
+function newState(): BulkSchedulerState {
   return {
-    currentRegimen: index, // Sketchy.
     form: {
       dailyOffsetMs: 300000,
       weeks: _.times(10, newWeek)
@@ -26,10 +25,11 @@ function newState(index: number): BulkSchedulerState {
   };
 }
 
-let initialState: BulkSchedulerState = newState(0); // 0 default is sketchy.
+let initialState: BulkSchedulerState = newState();
+
 export let BulkSchedulerReducer = generateReducer<BulkSchedulerState>(initialState)
   .add<number>("SELECT_REGIMEN", function(state, action) {
-    return newState(action.payload);
+    return newState();
   })
   .add<void>("PUSH_WEEK", function(state, action) {
       state.form.weeks.push(newWeek());
@@ -51,7 +51,7 @@ export let BulkSchedulerReducer = generateReducer<BulkSchedulerState>(initialSta
       return state;
   })
   .add<void>("COMMIT_BULK_EDITOR", function(state, action) {
-    return newState(state.currentRegimen);
+    return newState();
   })
   .add<Sequence>("SET_SEQUENCE", function(state, action) {
     state.sequence = action.payload;
