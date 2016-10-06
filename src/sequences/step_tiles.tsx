@@ -50,7 +50,7 @@ let updateStep = function ({ dispatch,
 interface IStepInput {
   step: Step;
   field: "speed"
-         | "pin"
+         | "pin_number"
          | "value"
          | "mode"
          | "operator"
@@ -58,7 +58,8 @@ interface IStepInput {
          | "y"
          | "z"
          | "stub" // For unimplemented features.
-         | "variable" ;
+         | "variable"
+         | "data_label" ;
   dispatch: Function;
   index: number;
 }
@@ -284,7 +285,7 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="pin"/>
+                                        field="pin_number"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
                           <label>{t("Value")}</label>
@@ -411,14 +412,14 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="pin"/>
+                                        field="pin_number"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
                           <label>{t("Data Label")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="stub"/>
+                                        field="data_label"/>
                         </div>
                       </div>
                     </div>
