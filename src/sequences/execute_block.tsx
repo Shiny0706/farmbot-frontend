@@ -41,7 +41,7 @@ function SequenceSelectBox({dispatch,
 
     function change(e: React.FormEvent) {
         let update = {
-            command: {
+            args: {
                 value: "0",
                 operator: ">",
                 variable: "time",
@@ -53,7 +53,7 @@ function SequenceSelectBox({dispatch,
     };
 
     let choices = eligibleSequences.map(iter);
-    let ssid = step.command.sub_sequence_id;
+    let ssid = step.args.sub_sequence_id;
     let subSeq = _.find(eligibleSequences, (s) => s.id === ssid) || {
         id: ""
     };

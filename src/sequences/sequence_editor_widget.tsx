@@ -16,8 +16,8 @@ let Oops: StepTile = (_) => { return <div>Whoops! Not a valid message_type</div>
 let StepList = ({sequence, sequences, dispatch}:
     { sequence: Sequence, sequences: Sequence[], dispatch: Function }) => {
     return (<div>
-        {sequence.steps.map((step: IStep, inx: number) => {
-            let Step = stepTiles[step.message_type] || Oops;
+        {sequence.body.map((step: IStep, inx: number) => {
+            let Step = stepTiles[step.kind] || Oops;
             return <Step step={step}
                 key={inx}
                 index={inx}

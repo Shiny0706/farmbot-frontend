@@ -2,7 +2,6 @@ import { assign } from "lodash";
 import {
     Step,
     Sequence,
-    UnplacedStep,
     SequenceReducerState
 } from "./interfaces";
 import {
@@ -24,8 +23,10 @@ const initialState: SequenceReducerState = {
     all: [
         {
             color: "red",
+            kind: "sequence",
+            args: {},
             name: "New Sequence",
-            steps: [],
+            body: [],
             dirty: true
         }
     ],
@@ -33,15 +34,13 @@ const initialState: SequenceReducerState = {
 };
 
 export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
-    .add<{ step: UnplacedStep }>("PUSH_STEP", function (state, action) {
+    .add<{ step: Step }>("PUSH_STEP", function (state, action) {
         let current_sequence = state
             .all[state.current] || populate(state);
         let { step } = action.payload;
-        step.position = step.position || current_sequence.steps.length;
-
         // typing not working. Thanks TS.
         let stepp = step as Step;
-        current_sequence.steps.push(stepp);
+        current_sequence.body.push(stepp);
         current_sequence.dirty = true;
         return state;
     })
@@ -57,18 +56,18 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
         return state;
     })
     .add<{ step: Step, index: number }>("CHANGE_STEP", function (state, action) {
-        let steps = state.all[state.current].steps || populate(state).steps;
+        let steps = state.all[state.current].body || populate(state).body;
         let index = action.payload.index;
-        let step = steps[index];
-        steps[index] = assign<{}, Step>(step, action.payload.step);
+        let current_step = steps[index];
+        steps[index] = assign<{}, Step>(current_step, action.payload.step);
         state.all[state.current].dirty = true;
         return state;
     })
     .add<{ index: number }>("REMOVE_STEP", function (state, action) {
         let seq = state.all[state.current];
         let index = action.payload.index;
-        seq.steps = _.without(seq.steps, seq.steps[index]);
-        seq.steps = repositionSteps(seq.steps);
+        seq.body = _.without(seq.body, seq.body[index]);
+        seq.body = repositionSteps(seq.body);
         seq.dirty = true;
         return state;
     })
@@ -77,7 +76,7 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
         return state;
     })
     .add<Array<Sequence>>("FETCH_SEQUENCES_OK", function (state, action) {
-        state.all = action.payload;
+        // state.all = action.payload;
         return state;
     })
     .add<number>("SELECT_SEQUENCE", function (state, action) {
@@ -98,7 +97,7 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
 
 /** Transforms input array of steps into new step array where all elements have
     a position attirbute that is equal to their `index` in the array. */
-function repositionSteps(steps: (Step | UnplacedStep)[]): Step[] {
+function repositionSteps(steps: Step[]): Step[] {
     let transform = (step: Step, position: number): Step => {
         return assign<{}, Step>({}, step, { position });
     };

@@ -13,34 +13,12 @@ let firstItem: Regimen = {
                 id: 456,
                 color: "red",
                 name: "Stub sequence",
-                steps: [
-                    {
-                        message_type: "home_all",
-                        position: 0,
-                        id: 459,
-                        command: {}
-                    }
-                ],
+                kind: "sequence",
+                args: {},
+                body: [],
                 dirty: false
             },
             time_offset: THIRTY_SIX_HOURS
-        },
-        {
-            sequence: {
-                id: 890,
-                color: "red",
-                name: "Another sequence",
-                steps: [
-                    {
-                        message_type: "home_all",
-                        position: 0,
-                        id: 456,
-                        command: {}
-                    }
-                ],
-                dirty: false
-            },
-            time_offset: THIRTY_SIX_HOURS * 2
         },
     ]
 };

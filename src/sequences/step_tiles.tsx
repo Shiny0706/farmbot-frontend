@@ -40,8 +40,40 @@ let updateStep = function ({ dispatch,
                              field }: UpdateStepParams) {
   return (e: React.FormEvent) => {
 
+    let to_number = function(update: Step, feild: string) {
+        // (update.args as any)[field] = {
+        //   kind: "literal",
+        //   args: { data_type: "integer",
+        //           data_value: (e.target as any).value}
+        // };
+        console.log((e.target as any).value);
+        console.log(typeof((e.target as any).value));
+        let f = parseInt( (e.target as any).value );
+        console.log(f);
+        return f;
+      };
+    let reg = function(update: Step, feild: string) {
+      // (update.args as any)[field] = {
+      //   kind: "literal",
+      //   args: {data_type: "string",
+      //          data_value: (e.target as any).value}
+      // };
+      (e.target as any).value
+    };
+
     let update = defensiveClone<Step>(step);
-    (update.command as {[name: string]: UpdateStepParams})[field] = (e.target as any).value;
+    // field.indexOf("x") !== -1
+    let numberFields = ["x", "y", "z",
+                        "speed", "pin_number",
+                        "pin_mode", "pin_value",
+                        "milliseconds"];
+
+    if (numberFields.indexOf(field) !== -1) {
+      to_number(update, field);
+    } else {
+      reg(update, field);
+    }
+
     let action = changeStep(index, update);
     dispatch(action);
   };
@@ -50,23 +82,30 @@ let updateStep = function ({ dispatch,
 interface IStepInput {
   step: Step;
   field: "speed"
-         | "pin"
-         | "value"
-         | "mode"
+         | "pin_number"
+         | "pin_value"
+         | "pin_mode"
          | "operator"
          | "x"
          | "y"
          | "z"
          | "stub" // For unimplemented features.
-         | "variable" ;
+         | "variable"
+         | "data_label"
+         | "milliseconds"
+         | "message" ;
   dispatch: Function;
   index: number;
 }
 
 export function StepInputBox({step, field, dispatch, index}: IStepInput) {
-  return <input type="text"
-                value={ (step.command as any )[field] || "" }
-                onChange={ updateStep({dispatch, step, index, field}) } />;
+
+    return <input type="text"
+              value={
+                (step.args as any )[field] || ""
+              }
+              onChange={ updateStep({dispatch, step, index, field}) } />;
+
 }
 
 export interface StepParams {
@@ -112,7 +151,7 @@ export let stepTiles: StepDictionary = {
                         <input className="step-label" placeholder="Move Relative"/>
                         <i className="fa fa-arrows-v step-control" />
                         <i className="fa fa-clone step-control"
-                           onClick={ () => copy({dispatch, step}) } />
+                           onClick={ () => copy({dispatch,step}) } />
                         <i className="fa fa-trash step-control"
                            onClick={ () => remove({dispatch, index}) } />
                         <Help text={(`The Move Relative step instructs FarmBot to \
@@ -284,21 +323,21 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="pin"/>
+                                        field="pin_number"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
                           <label>{t("Value")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="value"/>
+                                        field="pin_value"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
                           <label>{t("Pin Mode")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="mode"/>
+                                        field="pin_mode"/>
                         </div>
                       </div>
                     </div>
@@ -335,7 +374,7 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="value"/>
+                                        field="milliseconds"/>
                         </div>
                       </div>
                     </div>
@@ -373,7 +412,7 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="value"/>
+                                        field="message"/>
                         </div>
                       </div>
                     </div>
@@ -411,14 +450,14 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="pin"/>
+                                        field="pin_number"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
                           <label>{t("Data Label")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="stub"/>
+                                        field="data_label"/>
                         </div>
                       </div>
                     </div>
