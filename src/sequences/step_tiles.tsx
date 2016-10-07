@@ -41,15 +41,29 @@ let updateStep = function ({ dispatch,
   return (e: React.FormEvent) => {
 
     let to_number = function(update: Step, feild: string) {
-        console.log("blah");
-        (update.args as {[name: string]: UpdateStepParams})[field] = (e.target as any).value; 
+        (update.args as any)[field] = {
+          kind: "literal",
+          args: { data_type: "integer",
+                  data_value: (e.target as any).value}
+        };
       };
-    let reg = function(update: Step, feild: string)
-      { (update.args as {[name: string]: UpdateStepParams})[field] = (e.target as any).value; };
+    let reg = function(update: Step, feild: string) {
+      (update.args as any)[field] = {
+        kind: "literal",
+        args: {data_type: "string",
+               data_value: (e.target as any).value}
+      };
+    };
+
     let update = defensiveClone<Step>(step);
-    console.log(field);
-    console.log(typeof(field));
-    if (field == "x" || field == "y" || field == "z" || field == "speed") {
+    if (field == "x"
+        || field == "y"
+        || field == "z"
+        || field == "speed"
+        || field == "pin_number"
+        || field == "pin_mode"
+        || field == "pin_value"
+        || field == "milliseconds") {
       to_number(update, field);
     } else {
       reg(update, field);
@@ -80,9 +94,19 @@ interface IStepInput {
 }
 
 export function StepInputBox({step, field, dispatch, index}: IStepInput) {
-  return <input type="text"
-                value={ (step.args as any )[field] || "" }
+  if ((step.args as any)[field] != undefined) {
+      return <input type="text"
+                value={
+                  (step.args as any )[field]["args"]["data_value"] || ""
+                }
                 onChange={ updateStep({dispatch, step, index, field}) } />;
+  } else {
+      return <input type="text"
+                value={
+                  (step.args as any )[field] || ""
+                }
+                onChange={ updateStep({dispatch, step, index, field}) } />;
+  }
 }
 
 export interface StepParams {
@@ -128,7 +152,7 @@ export let stepTiles: StepDictionary = {
                         <input className="step-label" placeholder="Move Relative"/>
                         <i className="fa fa-arrows-v step-control" />
                         <i className="fa fa-clone step-control"
-                           onClick={ () => copy({dispatch, step}) } />
+                           onClick={ () => copy({dispatch,step}) } />
                         <i className="fa fa-trash step-control"
                            onClick={ () => remove({dispatch, index}) } />
                         <Help text={(`The Move Relative step instructs FarmBot to \

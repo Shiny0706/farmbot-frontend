@@ -1,5 +1,5 @@
 import { userVariables as FarmBotJsuserVariables } from "farmbot/interfaces";
-import { BasicNode } from "../ast/interfaces";
+import { BasicNode, IntegerNode, StringNode } from "../ast/interfaces";
 import { Color } from "../interfaces";
 
 type userVariables = FarmBotJsuserVariables;
@@ -24,6 +24,8 @@ export interface SequenceOptions {
 
 /** Similar to "Step", but "position" isnt mandatory. */
 export interface UnplacedStep extends BasicNode {
+  kind: string;
+  args: {};
   position?: number;
 };
 
@@ -41,58 +43,58 @@ export interface SequenceReducerState {
 interface MoveAbsoluteNode extends BasicNode {
   kind: "move_absolute";
   args: {
-    x: number;
-    y: number;
-    z: number;
-    speed: number;
+    x: IntegerNode;
+    y: IntegerNode;
+    z: IntegerNode;
+    speed: IntegerNode;
   };
 }
 
 interface MoveRelativeNode extends BasicNode {
   kind: "move_relative";
   args: {
-    x: number;
-    y: number;
-    z: number;
-    speed: number;
+    x: IntegerNode;
+    y: IntegerNode;
+    z: IntegerNode;
+    speed: IntegerNode;
   };
 }
 
 interface WritePinNode extends BasicNode {
   kind: "write_pin";
   args: {
-    pin_number: number;
-    pin_value: number;
-    pin_mode: 0 | 1;
+    pin_number: IntegerNode;
+    pin_value: IntegerNode;
+    pin_mode: IntegerNode;
   };
 }
 
 interface ReadPinNode extends BasicNode {
   kind: "read_pin";
   args: {
-    pin_number: number;
-    data_label: string;
+    pin_number: IntegerNode;
+    data_label: StringNode;
   };
 }
 
 interface WaitNode extends BasicNode {
   kind: "wait";
   args: {
-    milliseconds: number;
+    milliseconds: IntegerNode;
   };
 }
 
 interface SendMessageNode extends BasicNode {
   kind: "send_message";
   args: {
-    message: string;
+    message: StringNode;
   };
 }
 
 interface ExecuteNode extends BasicNode {
   kind: "execute";
   args: {
-    sub_sequence_id: number;
+    sub_sequence_id: IntegerNode;
   };
 }
 
@@ -101,8 +103,8 @@ interface IfStatementNode extends BasicNode {
   args: {
     lhs: userVariables
     op: ">" | "<" | "is" | "not";
-    rhs: number;
-    sub_sequence_id: number;
+    rhs: IntegerNode;
+    sub_sequence_id: IntegerNode;
   };
 }
 
@@ -121,4 +123,4 @@ export interface SequenceNode extends BasicNode {
   args: { };
   // Body isn't optional for this one. Remove the "?" when refining.
   body: BasicNode[];
-}
+};

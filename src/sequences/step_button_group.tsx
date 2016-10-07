@@ -2,25 +2,19 @@ import * as React from "react";
 import { pushStep } from "./actions";
 import { Help } from "../help";
 import { UnplacedStep, SequenceStepNode } from "./interfaces";
+import { StringNode, IntegerNode } from "../ast/interfaces";
 
 let addStep = (dispatch: Function) =>
     (step: UnplacedStep) =>
         (event: React.FormEvent) => { dispatch(pushStep(step)); };
 
 let step = function(message_type: string,
-    command: any = {}): UnplacedStep {
+                    command: {[name: string]: IntegerNode | StringNode } ): UnplacedStep {
     return {kind: message_type, args: command};
 };
 
 export function StepButtonGroup({dispatch}: {dispatch: Function}) {
     let clickToAdd = addStep(dispatch);
-    // TODO Farmbot does not natively support an "EXECUTE" (unconditional jmp)
-    // command. For now we're sneakily making it an if_statement that is always
-    // true.
-    let temporaryHack = clickToAdd({
-      kind: "if_statement",
-      args: {}
-    });
     return (<div>
         <div className="widget-wrapper">
             <div className="row">
@@ -47,7 +41,26 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left blue-block block-header block"
-                                        onClick={ clickToAdd(step("move_absolute")) }>
+                                        onClick={ clickToAdd(
+                                            step("move_absolute",
+                                             { x: {
+                                                 kind: "literal",
+                                                 args: {"data_type": "integer", data_value: "0"}
+                                                },
+                                               y: {
+                                                   kind: "literal",
+                                                   args: {data_type: "integer", data_value: "0"}
+                                               },
+                                               z: {
+                                                   kind: "literal",
+                                                   args: {data_type: "integer", data_value: "0"}
+                                               },
+                                               speed: {
+                                                   kind: "literal",
+                                                   args: {data_type: "integer", data_value: "100"}
+                                               }
+                                              },
+                                                )) }>
                                         {("MOVE ABSOLUTE")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -57,7 +70,26 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left green-block block-header block"
-                                        onClick={ clickToAdd(step("move_relative")) }>
+                                        onClick={ clickToAdd(
+                                            step("move_relative",
+                                            {
+                                               x: {
+                                                 kind: "literal",
+                                                 args: {"data_type": "integer", data_value: "0"}
+                                                },
+                                               y: {
+                                                   kind: "literal",
+                                                   args: {data_type: "integer", data_value: "0"}
+                                               },
+                                               z: {
+                                                   kind: "literal",
+                                                   args: {data_type: "integer", data_value: "0"}
+                                               },
+                                               speed: {
+                                                   kind: "literal",
+                                                   args: {data_type: "integer", data_value: "100"}
+                                               }
+                                            }))}>
                                         {("MOVE RELATIVE")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -67,7 +99,22 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left orange-block block-header block"
-                                        onClick={ clickToAdd(step("write_pin")) }>
+                                        onClick={ clickToAdd(
+                                            step("write_pin",
+                                            {
+                                                pin_number: {
+                                                    kind: "literal",
+                                                    args: {data_type: "integer", data_value: ""}
+                                                },
+                                                pin_value: {
+                                                    kind: "literal",
+                                                    args: {data_type: "integer", data_value: ""}
+                                                },
+                                                pin_mode: {
+                                                    kind: "literal",
+                                                    args: {data_type: "integer", data_value: ""}
+                                                }
+                                            })) }>
                                         {("WRITE PIN")}
                                     </button>
                                     <i className="fa fa-arrows block-control" />
@@ -77,7 +124,18 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left yellow-block block-header block"
-                                        onClick={ clickToAdd(step("read_pin")) }>
+                                        onClick={ clickToAdd(
+                                            step("read_pin",
+                                            {
+                                                pin_number: {
+                                                    kind: "literal",
+                                                    args: {data_type: "integer", data_value: ""}
+                                                },
+                                                pin_mode: {
+                                                    kind: "literal",
+                                                    args: {data_type: "integer", data_value: ""}
+                                                }
+                                            })) }>
                                         {("READ PIN")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -87,7 +145,14 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left brown-block block-header block"
-                                        onClick={ clickToAdd(step("wait")) }>
+                                        onClick={ clickToAdd(
+                                            step("wait",
+                                            {
+                                                milliseconds: {
+                                                    kind: "literal",
+                                                    args: {data_type: "integer", data_value: ""}
+                                                }
+                                            })) }>
                                         {("WAIT")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -96,7 +161,14 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                             <div className="col-xs-6">
                                 <div className="block-wrapper">
                                     <button className="full-width text-left red-block block-header"
-                                        onClick={ clickToAdd(step("send_message")) }>
+                                        onClick={ clickToAdd(
+                                            step("send_message",
+                                            {
+                                                message: {
+                                                    kind: "literal",
+                                                    args: {data_type: "string", data_value: ""}
+                                                }
+                                            })) }>
                                         {("SEND MESSAGE")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -106,7 +178,9 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left purple-block block-header block"
-                                        onClick={ clickToAdd(step("if_statement")) }>
+                                        onClick={ clickToAdd(
+                                            step("if_statement",
+                                            {})) }>
                                         {("IF STATEMENT")} <Help text="Coming soon" />
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -116,7 +190,15 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left gray-block block-header block"
-                                        onClick={ temporaryHack }>
+                                        onClick={ clickToAdd(
+                                            step("execute",
+                                            {
+                                                sub_sequence_id: {
+                                                    kind: "literal",
+                                                    args: {data_type: "integer", data_value: ""}
+                                                }
+                                            })
+                                        ) }>
                                         {("EXECUTE")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
