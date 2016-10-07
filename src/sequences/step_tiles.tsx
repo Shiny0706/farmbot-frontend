@@ -63,14 +63,12 @@ let updateStep = function ({ dispatch,
 
     let update = defensiveClone<Step>(step);
     // field.indexOf("x") !== -1
-    if (field == "x"
-        || field == "y"
-        || field == "z"
-        || field == "speed"
-        || field == "pin_number"
-        || field == "pin_mode"
-        || field == "pin_value"
-        || field == "milliseconds") {
+    let numberFields = ["x", "y", "z",
+                        "speed", "pin_number",
+                        "pin_mode", "pin_value",
+                        "milliseconds"];
+
+    if (numberFields.indexOf(field) !== -1) {
       to_number(update, field);
     } else {
       reg(update, field);

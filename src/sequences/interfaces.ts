@@ -126,5 +126,5 @@ export interface SequenceNode extends BasicNode {
   // Just an example- we don't need this today, but it's on the calendar.
   args: { };
   // Body isn't optional for this one. Remove the "?" when refining.
-  body: BasicNode[];
+  body: SequenceStepNode[];
 };

@@ -2,7 +2,6 @@ import { assign } from "lodash";
 import {
     Step,
     Sequence,
-    UnplacedStep,
     SequenceReducerState
 } from "./interfaces";
 import {
@@ -35,12 +34,10 @@ const initialState: SequenceReducerState = {
 };
 
 export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
-    .add<{ step: UnplacedStep }>("PUSH_STEP", function (state, action) {
+    .add<{ step: Step }>("PUSH_STEP", function (state, action) {
         let current_sequence = state
             .all[state.current] || populate(state);
         let { step } = action.payload;
-        step.position = step.position || current_sequence.body.length;
-
         // typing not working. Thanks TS.
         let stepp = step as Step;
         current_sequence.body.push(stepp);
@@ -100,7 +97,7 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
 
 /** Transforms input array of steps into new step array where all elements have
     a position attirbute that is equal to their `index` in the array. */
-function repositionSteps(steps: (Step | UnplacedStep)[]): Step[] {
+function repositionSteps(steps: Step[]): Step[] {
     let transform = (step: Step, position: number): Step => {
         return assign<{}, Step>({}, step, { position });
     };
