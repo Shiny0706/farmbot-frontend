@@ -40,8 +40,21 @@ let updateStep = function ({ dispatch,
                              field }: UpdateStepParams) {
   return (e: React.FormEvent) => {
 
+    let to_number = function(update: Step, feild: string) {
+        console.log("blah");
+        (update.args as {[name: string]: UpdateStepParams})[field] = (e.target as any).value; 
+      };
+    let reg = function(update: Step, feild: string)
+      { (update.args as {[name: string]: UpdateStepParams})[field] = (e.target as any).value; };
     let update = defensiveClone<Step>(step);
-    (update.args as {[name: string]: UpdateStepParams})[field] = (e.target as any).value;
+    console.log(field);
+    console.log(typeof(field));
+    if (field == "x" || field == "y" || field == "z" || field == "speed") {
+      to_number(update, field);
+    } else {
+      reg(update, field);
+    }
+
     let action = changeStep(index, update);
     dispatch(action);
   };
@@ -51,15 +64,17 @@ interface IStepInput {
   step: Step;
   field: "speed"
          | "pin_number"
-         | "value"
-         | "mode"
+         | "pin_value"
+         | "pin_mode"
          | "operator"
          | "x"
          | "y"
          | "z"
          | "stub" // For unimplemented features.
          | "variable"
-         | "data_label" ;
+         | "data_label"
+         | "milliseconds"
+         | "message" ;
   dispatch: Function;
   index: number;
 }
@@ -292,14 +307,14 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="value"/>
+                                        field="pin_value"/>
                         </div>
                         <div className="col-xs-6 col-md-3">
                           <label>{t("Pin Mode")}</label>
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="mode"/>
+                                        field="pin_mode"/>
                         </div>
                       </div>
                     </div>
@@ -336,7 +351,7 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="value"/>
+                                        field="milliseconds"/>
                         </div>
                       </div>
                     </div>
@@ -374,7 +389,7 @@ export let stepTiles: StepDictionary = {
                           <StepInputBox dispatch={dispatch}
                                         step={step}
                                         index={index}
-                                        field="value"/>
+                                        field="message"/>
                         </div>
                       </div>
                     </div>
