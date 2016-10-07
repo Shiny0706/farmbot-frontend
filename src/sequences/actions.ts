@@ -3,7 +3,6 @@ import { Everything, Thunk } from "../interfaces";
 import { AuthState } from "../auth/interfaces";
 import { SequenceOptions,
          Step,
-         UnplacedStep,
          Sequence } from "./interfaces";
 import { success, error } from "../logger";
 import { randomColor, prettyPrintApiErrors } from "../util";
@@ -70,11 +69,11 @@ export function editCurrentSequence(updates: SequenceOptions): ReduxAction<EditC
 export interface PushStep {
   type: "PUSH_STEP";
   payload: {
-    step: UnplacedStep;
+    step: Step;
   };
 }
 
-export function pushStep(step: UnplacedStep): PushStep {
+export function pushStep(step: Step): PushStep {
   return {
     type: "PUSH_STEP",
     payload: {step}

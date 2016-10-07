@@ -22,16 +22,20 @@ export interface SequenceOptions {
   dirty?: boolean;
 }
 
-/** Similar to "Step", but "position" isnt mandatory. */
-export interface UnplacedStep extends BasicNode {
-  kind: string;
-  args: {};
-  position?: number;
-};
+export type possibelKind = "move_absolute"
+                          | "move_relative"
+                          | "write_pin"
+                          | "read_pin"
+                          | "wait"
+                          | "send_message"
+                          | "execute"
+                          | "if_statement"
 
-/** One step in a larger "Sequence". */
-export interface Step extends UnplacedStep {
-  position: number;
+
+/* Step */
+export interface Step extends BasicNode {
+  kind: possibelKind;
+  args: {};
 };
 
 
@@ -40,71 +44,71 @@ export interface SequenceReducerState {
     current: number;
 };
 
-interface MoveAbsoluteNode extends BasicNode {
+interface MoveAbsoluteNode extends Step {
   kind: "move_absolute";
   args: {
-    x: IntegerNode;
-    y: IntegerNode;
-    z: IntegerNode;
-    speed: IntegerNode;
+    x: IntegerNode | number;
+    y: IntegerNode | number;
+    z: IntegerNode | number;
+    speed: IntegerNode | number;
   };
 }
 
-interface MoveRelativeNode extends BasicNode {
+interface MoveRelativeNode extends Step {
   kind: "move_relative";
   args: {
-    x: IntegerNode;
-    y: IntegerNode;
-    z: IntegerNode;
-    speed: IntegerNode;
+    x: IntegerNode | number;
+    y: IntegerNode | number;
+    z: IntegerNode | number;
+    speed: IntegerNode | number;
   };
 }
 
-interface WritePinNode extends BasicNode {
+interface WritePinNode extends Step {
   kind: "write_pin";
   args: {
-    pin_number: IntegerNode;
-    pin_value: IntegerNode;
-    pin_mode: IntegerNode;
+    pin_number: IntegerNode | number;
+    pin_value: IntegerNode | number;
+    pin_mode: IntegerNode | number;
   };
 }
 
-interface ReadPinNode extends BasicNode {
+interface ReadPinNode extends Step {
   kind: "read_pin";
   args: {
-    pin_number: IntegerNode;
-    data_label: StringNode;
+    pin_number: IntegerNode | number;
+    data_label: StringNode | string;
   };
 }
 
-interface WaitNode extends BasicNode {
+interface WaitNode extends Step {
   kind: "wait";
   args: {
-    milliseconds: IntegerNode;
+    milliseconds: IntegerNode | number;
   };
 }
 
-interface SendMessageNode extends BasicNode {
+interface SendMessageNode extends Step {
   kind: "send_message";
   args: {
-    message: StringNode;
+    message: StringNode | string;
   };
 }
 
-interface ExecuteNode extends BasicNode {
+interface ExecuteNode extends Step {
   kind: "execute";
   args: {
-    sub_sequence_id: IntegerNode;
+    sub_sequence_id: IntegerNode | number;
   };
 }
 
-interface IfStatementNode extends BasicNode {
+interface IfStatementNode extends Step {
   kind: "if_statement";
   args: {
-    lhs: userVariables
+    lhs: userVariables | number
     op: ">" | "<" | "is" | "not";
-    rhs: IntegerNode;
-    sub_sequence_id: IntegerNode;
+    rhs: IntegerNode | number;
+    sub_sequence_id: IntegerNode | number;
   };
 }
 

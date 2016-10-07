@@ -41,21 +41,28 @@ let updateStep = function ({ dispatch,
   return (e: React.FormEvent) => {
 
     let to_number = function(update: Step, feild: string) {
-        (update.args as any)[field] = {
-          kind: "literal",
-          args: { data_type: "integer",
-                  data_value: (e.target as any).value}
-        };
+        // (update.args as any)[field] = {
+        //   kind: "literal",
+        //   args: { data_type: "integer",
+        //           data_value: (e.target as any).value}
+        // };
+        console.log((e.target as any).value);
+        console.log(typeof((e.target as any).value));
+        let f = parseInt( (e.target as any).value );
+        console.log(f);
+        return f;
       };
     let reg = function(update: Step, feild: string) {
-      (update.args as any)[field] = {
-        kind: "literal",
-        args: {data_type: "string",
-               data_value: (e.target as any).value}
-      };
+      // (update.args as any)[field] = {
+      //   kind: "literal",
+      //   args: {data_type: "string",
+      //          data_value: (e.target as any).value}
+      // };
+      (e.target as any).value
     };
 
     let update = defensiveClone<Step>(step);
+    // field.indexOf("x") !== -1
     if (field == "x"
         || field == "y"
         || field == "z"
@@ -94,19 +101,13 @@ interface IStepInput {
 }
 
 export function StepInputBox({step, field, dispatch, index}: IStepInput) {
-  if ((step.args as any)[field] != undefined) {
-      return <input type="text"
-                value={
-                  (step.args as any )[field]["args"]["data_value"] || ""
-                }
-                onChange={ updateStep({dispatch, step, index, field}) } />;
-  } else {
-      return <input type="text"
-                value={
-                  (step.args as any )[field] || ""
-                }
-                onChange={ updateStep({dispatch, step, index, field}) } />;
-  }
+
+    return <input type="text"
+              value={
+                (step.args as any )[field] || ""
+              }
+              onChange={ updateStep({dispatch, step, index, field}) } />;
+
 }
 
 export interface StepParams {
