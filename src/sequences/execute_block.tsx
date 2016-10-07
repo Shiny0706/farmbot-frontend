@@ -53,7 +53,13 @@ function SequenceSelectBox({dispatch,
     };
 
     let choices = eligibleSequences.map(iter);
-    let ssid = step.args.sub_sequence_id;
+
+    if (step.kind === "execute" || step.kind === "if_statement" ) {
+        var ssid = step.args.sub_sequence_id;
+    } else {
+        console.warn("No sub sequence ID");
+    };
+
     let subSeq = _.find(eligibleSequences, (s) => s.id === ssid) || {
         id: ""
     };

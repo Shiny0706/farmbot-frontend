@@ -11,7 +11,7 @@ export interface Sequence extends SequenceNode {
   body: Step[];
 }
 
-type Steps = SequenceStepNode[];
+type Steps = Step[];
 
 // Typescript does not have subset types.
 // If you are reading this in the future and subset types exist, refactor this code.
@@ -22,29 +22,21 @@ export interface SequenceOptions {
   dirty?: boolean;
 }
 
-export type possibelKind = "move_absolute"
+export type possibleKind = "move_absolute"
                           | "move_relative"
                           | "write_pin"
                           | "read_pin"
                           | "wait"
                           | "send_message"
                           | "execute"
-                          | "if_statement"
-
-
-/* Step */
-export interface Step extends BasicNode {
-  kind: possibelKind;
-  args: {};
-};
-
+                          | "if_statement";
 
 export interface SequenceReducerState {
     all: Array<Sequence>;
     current: number;
 };
 
-interface MoveAbsoluteNode extends Step {
+interface MoveAbsoluteNode extends BasicNode {
   kind: "move_absolute";
   args: {
     x: IntegerNode | number;
@@ -54,7 +46,7 @@ interface MoveAbsoluteNode extends Step {
   };
 }
 
-interface MoveRelativeNode extends Step {
+interface MoveRelativeNode extends BasicNode {
   kind: "move_relative";
   args: {
     x: IntegerNode | number;
@@ -64,7 +56,7 @@ interface MoveRelativeNode extends Step {
   };
 }
 
-interface WritePinNode extends Step {
+interface WritePinNode extends BasicNode {
   kind: "write_pin";
   args: {
     pin_number: IntegerNode | number;
@@ -73,7 +65,7 @@ interface WritePinNode extends Step {
   };
 }
 
-interface ReadPinNode extends Step {
+interface ReadPinNode extends BasicNode {
   kind: "read_pin";
   args: {
     pin_number: IntegerNode | number;
@@ -81,28 +73,28 @@ interface ReadPinNode extends Step {
   };
 }
 
-interface WaitNode extends Step {
+interface WaitNode extends BasicNode {
   kind: "wait";
   args: {
     milliseconds: IntegerNode | number;
   };
 }
 
-interface SendMessageNode extends Step {
+interface SendMessageNode extends BasicNode {
   kind: "send_message";
   args: {
     message: StringNode | string;
   };
 }
 
-interface ExecuteNode extends Step {
+interface ExecuteNode extends BasicNode {
   kind: "execute";
   args: {
     sub_sequence_id: IntegerNode | number;
   };
 }
 
-interface IfStatementNode extends Step {
+interface IfStatementNode extends BasicNode {
   kind: "if_statement";
   args: {
     lhs: userVariables | number
@@ -112,7 +104,7 @@ interface IfStatementNode extends Step {
   };
 }
 
-export type SequenceStepNode = MoveAbsoluteNode
+export type Step = MoveAbsoluteNode
                       | MoveRelativeNode
                       | WritePinNode
                       | ReadPinNode
@@ -123,8 +115,6 @@ export type SequenceStepNode = MoveAbsoluteNode
 
 export interface SequenceNode extends BasicNode {
   kind: "sequence";
-  // Just an example- we don't need this today, but it's on the calendar.
   args: { };
-  // Body isn't optional for this one. Remove the "?" when refining.
-  body: SequenceStepNode[];
+  body: Step[];
 };

@@ -1,10 +1,11 @@
 import * as React from "react";
 import { pushStep } from "./actions";
 import { Help } from "../help";
-import { SequenceStepNode } from "./interfaces";
+import { Step } from "./interfaces";
+import { t } from "i18next";
 
 let addStep = (dispatch: Function) =>
-    (step: SequenceStepNode) =>
+    (step: Step) =>
         (event: React.FormEvent) => { dispatch(pushStep(step)); };
 
 export function StepButtonGroup({dispatch}: {dispatch: Function}) {
@@ -47,8 +48,11 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left green-block block-header block"
-                                        onClick={ clickToAdd({})}>
-                                        {("MOVE RELATIVE")}
+                                        onClick={ clickToAdd({
+                                            kind: "move_relative",
+                                            args: {x: 0, y: 0, z: 0, speed: 0}
+                                        })}>
+                                        { t("MOVE RELATIVE") }
                                         <i className="fa fa-arrows block-control" />
                                     </button>
                                 </div>
@@ -57,7 +61,10 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left orange-block block-header block"
-                                        onClick={ clickToAdd({}) }>
+                                        onClick={ clickToAdd({
+                                            kind: "write_pin",
+                                            args: { pin_number: 0, pin_value: 0, pin_mode: 0 }
+                                        }) }>
                                         {("WRITE PIN")}
                                     </button>
                                     <i className="fa fa-arrows block-control" />
@@ -67,7 +74,11 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left yellow-block block-header block"
-                                        onClick={ clickToAdd({}) }>
+                                        onClick={ clickToAdd({
+                                            kind: "read_pin",
+                                            args: { pin_number: 0,
+                                                    data_label: "---" }
+                                        }) }>
                                         {("READ PIN")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -77,7 +88,10 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left brown-block block-header block"
-                                        onClick={ clickToAdd({}) }>
+                                        onClick={ clickToAdd({
+                                            kind: "wait",
+                                            args: { milliseconds: 0 }
+                                        }) }>
                                         {("WAIT")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -86,7 +100,10 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                             <div className="col-xs-6">
                                 <div className="block-wrapper">
                                     <button className="full-width text-left red-block block-header"
-                                        onClick={ clickToAdd({}) }>
+                                        onClick={ clickToAdd({
+                                            kind: "send_message",
+                                            args: { message: "Bot is at position {{ x }}." }
+                                        }) }>
                                         {("SEND MESSAGE")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -96,7 +113,10 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left purple-block block-header block"
-                                        onClick={ clickToAdd({}) }>
+                                        onClick={ clickToAdd({
+                                            kind: "if_statement",
+                                            args: { lhs: 0, op: "is", rhs: 0, sub_sequence_id: 0 }
+                                        }) }>
                                         {("IF STATEMENT")} <Help text="Coming soon" />
                                         <i className="fa fa-arrows block-control" />
                                     </button>
@@ -106,7 +126,10 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                 <div className="block-wrapper">
                                     <button className=
                                         "full-width text-left gray-block block-header block"
-                                        onClick={ clickToAdd({}) }>
+                                        onClick={ clickToAdd({
+                                            kind: "execute",
+                                            args: { sub_sequence_id: 0 }
+                                        }) }>
                                         {("EXECUTE")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>

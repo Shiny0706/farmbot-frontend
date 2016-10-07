@@ -1,7 +1,6 @@
 import { Farmbot } from "farmbot";
-import { store } from "../store";
 import { devices } from "../device";
-import { error, warning, success } from "../logger";
+import { error, success } from "../logger";
 import { Thunk, Everything, ReduxAction } from "../interfaces";
 import { put } from "axios";
 import { DeviceAccountSettingsUpdate,
@@ -11,7 +10,7 @@ import { DeviceAccountSettingsUpdate,
 import { t } from "i18next";
 import { configKey } from "farmbot/interfaces";
 import { MovementRequest } from "farmbot/bot_commands";
-import { ErrorResponse, Response, Notification } from "farmbot/jsonrpc";
+import { Notification } from "farmbot/jsonrpc";
 import { Sequence } from "../sequences/interfaces";
 import { beep } from "../util";
 
@@ -69,9 +68,10 @@ export function sync() {
 
 export function execSequence(sequence: Sequence) {
   const noun = "Sequence execution";
+  console.warn("Fix this / remove any type here!");
   return devices
     .current
-    .execSequence(sequence)
+    .execSequence(sequence as any)
     .then(commandOK(noun), commandErr(noun));
 }
 
