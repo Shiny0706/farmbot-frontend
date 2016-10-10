@@ -71,7 +71,6 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
         let seq = state.all[state.current];
         let index = action.payload.index;
         seq.body = _.without(seq.body, seq.body[index]);
-        seq.body = repositionSteps(seq.body);
         seq.dirty = true;
         return state;
     })
@@ -98,12 +97,3 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
         }
         return state;
     });
-
-/** Transforms input array of steps into new step array where all elements have
-    a position attirbute that is equal to their `index` in the array. */
-function repositionSteps(steps: Step[]): Step[] {
-    let transform = (step: Step, position: number): Step => {
-        return assign<{}, Step>({}, step, { position });
-    };
-    return steps.map(transform);
-}
