@@ -41,6 +41,8 @@ export interface BotState {
   status: string;
   /** How many steps to move when the user presses a manual movement arrow */
   stepSize: number;
+  /** Is the bot in sync with the api */
+  dirty: boolean;
   /** Holds coordinates that the user is currently editing, but has not sent */
   axisBuffer: {
     // x?: string;

@@ -33,11 +33,11 @@ export let LogoutButton = ({ auth, onClick }: LogoutProps) => {
   </a>;
 };
 
-let SyncButton = ({auth, dispatch}: NavButtonState) => {
+let SyncButton = ({auth, bot, dispatch}: NavButtonState) => {
   if (!auth.authenticated) { return <span></span>; }
   return <button className="nav-sync button-like green"
     onClick={ sync }>
-    Sync
+    { (bot.dirty) ? "Synced" : "Sync Required" }
   </button>;
 };
 
@@ -46,7 +46,7 @@ let EStopButton = ({auth, dispatch}: NavButtonState) => {
   return <button className="nav-e-stop button-like red"
     type="button"
     onClick={ emergencyStop } >
-    E-Stop
+    {t("E STOP")}
   </button>;
 };
 
