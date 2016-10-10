@@ -44,7 +44,7 @@ export class AxisInputBox extends React.Component<AxisInputBoxProps, {}> {
 
   change(key: string, dispatch: Function): React.EventHandler<React.FormEvent> {
     return function (event) {
-      dispatch(changeAxisBuffer(key, (event.target as any).value));
+      dispatch(changeAxisBuffer(key, (event.target as HTMLInputElement).value));
     };
   }
 
@@ -341,6 +341,6 @@ const showUrl = (url: string, dirty: boolean) => {
 const updateWebcamUrl = (dispatch: Function) => (event: React.KeyboardEvent) => {
   dispatch({
     type: "CHANGE_WEBCAM_URL",
-    payload: (event.target as any)["value"]
+    payload: (event.target as HTMLInputElement)["value"]
   });
 };

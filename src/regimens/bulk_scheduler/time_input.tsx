@@ -40,7 +40,7 @@ export class TimeInput extends React.Component<TimeInputProps, any> {
 
   blur (dispatch: Function) {
     return (event: React.FormEvent) => {
-      dispatch(setTimeOffset((event.target as any).value));
+      dispatch(setTimeOffset((event.target as HTMLInputElement).value));
       this.isEditing = false;
     };
   }
@@ -52,7 +52,7 @@ export class TimeInput extends React.Component<TimeInputProps, any> {
              value={ this.value }
              onChange={ (event) => {
                this.setState({
-                 val: (event.target as any).value
+                 val: (event.target as HTMLInputElement).value
                });
              }}
              onBlur={ this.blur(this.props.dispatch).bind(this) }/>

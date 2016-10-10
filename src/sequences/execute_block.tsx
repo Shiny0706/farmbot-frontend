@@ -45,7 +45,7 @@ function SequenceSelectBox({dispatch,
                 value: "0",
                 operator: ">",
                 variable: "time",
-                sub_sequence_id: (e.target as any).value
+                sub_sequence_id: (e.target as HTMLInputElement).value
             }
         };
         let newStep = _.assign<{}, Step>({}, step, update);
