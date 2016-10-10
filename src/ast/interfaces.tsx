@@ -2,6 +2,7 @@ export interface BasicNode {
   kind: string;
   args: {};
   body?: BasicNode[];
+  comment?: string;
 };
 
 export interface StringNode extends BasicNode {

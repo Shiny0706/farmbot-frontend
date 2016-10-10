@@ -49,7 +49,7 @@ export class SettingsInputBox extends React.Component<any, any> {
 
   change(key: any, dispatch: Function) {
     return function(event: React.FormEvent) {
-      let formInput: string = (event.target as any).value as string;
+      let formInput: string = (event.target as HTMLInputElement).value as string;
       dispatch(changeSettingsBuffer(key, formInput));
     };
   }
@@ -84,14 +84,14 @@ class DevicesPage extends React.Component<Everything, any> {
     // THIS IS THE CAUSE OF THE "STALE DATA" BUG: Fix me!
     e.preventDefault();
     let updates: any =
-      _.object([[(e.target as any).name, (e.target as any).value]]); // {name: "value"}
+      _.object([[(e.target as HTMLInputElement).name, (e.target as HTMLInputElement).value]]); // {name: "value"}
     this.props.dispatch(changeDevice(updates));
   }
 
   saveBot(e: React.MouseEvent) {
     // THIS IS THE CAUSE OF THE "STALE DATA" BUG: Fix me!
     e.preventDefault();
-    let devInfo: any = convertFormToObject(e.target as any);
+    let devInfo: any = convertFormToObject(e.target as HTMLInputElement);
     this.props.dispatch(addDevice(devInfo));
   }
 

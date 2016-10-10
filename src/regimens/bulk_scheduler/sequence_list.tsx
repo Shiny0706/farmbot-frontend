@@ -34,6 +34,7 @@ function SeqListItem({s, i}: {s: {name: string}, i: number}) {
 }
 function change(dispatch: Function, sequences: Sequence[]) {
   return (event: React.FormEvent) => {
-    dispatch(setSequence(sequences[(event.target as any).value]));
+    let i = _.parseInt((event.target as HTMLInputElement).value || "-999")
+    dispatch(setSequence(sequences[i]));
   };
 }

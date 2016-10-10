@@ -68,5 +68,5 @@ function SearchBox({query, dispatch}: SearchBoxParams) {
 }
 
 function doSearch(e: React.FormEvent, dispatch: Function) {
-  dispatch(openFarmSearchQuery((e.target as any)["value"]));
+  dispatch(openFarmSearchQuery((e.target as HTMLInputElement).value));
 }

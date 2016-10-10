@@ -7,6 +7,7 @@ import { ExecuteBlock } from "./execute_block";
 import { Sequence } from "./interfaces";
 import { defensiveClone } from "../util";
 import { t } from "i18next";
+import { StepTitleBar } from "./step_title_bar";
 
 interface CopyParams {
   dispatch: Function;
@@ -40,7 +41,7 @@ let updateStep = function ({ dispatch,
                              field }: UpdateStepParams) {
   return (e: React.FormEvent) => {
     let copy = defensiveClone<Step>(step);
-    let val: string = (e.target as any).value;
+    let val: string = (e.target as HTMLInputElement).value;
 
     if (NUMERIC_FIELDS.indexOf(field) !== -1) {
       _.assign(copy.args, {[field]: parseInt(val, 10)});
@@ -122,7 +123,9 @@ export let stepTiles: StepDictionary = {
                 <div className="row">
                     <div className="col-sm-12">
                       <div className="step-header move-relative-step">
-                        <input className="step-label" placeholder="Move Relative"/>
+                        <StepTitleBar index={ index}
+                                      dispatch={ dispatch }
+                                      step={ step } />
                         <i className="fa fa-arrows-v step-control" />
                         <i className="fa fa-clone step-control"
                            onClick={ () => copy({dispatch,step}) } />
@@ -186,7 +189,9 @@ export let stepTiles: StepDictionary = {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="step-header move-absolute-step">
-                      <input className="step-label" placeholder="Move Absolute"/>
+                      <StepTitleBar index={ index}
+                                    dispatch={ dispatch }
+                                    step={ step } />
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
                          onClick={ () => copy({dispatch, step}) } />
@@ -240,29 +245,6 @@ export let stepTiles: StepDictionary = {
                                         field="speed"/>
                         </div>
                       </div>
-                      <div className="row">
-                        <div className="col-xs-6 col-md-3">
-                          <label>{t("X-Offset (mm)")}</label>
-                          <StepInputBox dispatch={dispatch}
-                                        step={step}
-                                        index={index}
-                                        field="stub"/>
-                        </div>
-                        <div className="col-xs-6 col-md-3">
-                          <label>{t("Y-Offset (mm)")}</label>
-                          <StepInputBox dispatch={dispatch}
-                                        step={step}
-                                        index={index}
-                                        field="stub"/>
-                        </div>
-                        <div className="col-xs-6 col-md-3">
-                          <label>{t("Z-Offset (mm)")}</label>
-                          <StepInputBox dispatch={dispatch}
-                                        step={step}
-                                        index={index}
-                                        field="stub"/>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -275,7 +257,9 @@ export let stepTiles: StepDictionary = {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="step-header write-pin-step">
-                      <input placeholder="Write Pin"/>
+                      <StepTitleBar index={ index}
+                                    dispatch={ dispatch }
+                                    step={ step } />
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
                          onClick={ () => copy({dispatch, step}) } />
@@ -327,7 +311,9 @@ export let stepTiles: StepDictionary = {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="step-header wait-step">
-                      <input className="step-label" placeholder="Wait"/>
+                      <StepTitleBar index={ index}
+                                    dispatch={ dispatch }
+                                    step={ step } />
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
                          onClick={ () => copy({dispatch, step}) } />
@@ -364,7 +350,9 @@ export let stepTiles: StepDictionary = {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="step-header send-message-step">
-                      <input className="step-label" placeholder="Send Message"/>
+                      <StepTitleBar index={ index}
+                                    dispatch={ dispatch }
+                                    step={ step } />
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
                          onClick={ () => copy({dispatch, step}) } />
@@ -402,7 +390,9 @@ export let stepTiles: StepDictionary = {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="step-header read-pin-step">
-                      <input className="step-label" placeholder="Read Pin"/>
+                      <StepTitleBar index={ index}
+                                    dispatch={ dispatch }
+                                      step={ step } />
                       <i className="fa fa-arrows-v step-control" />
                       <i className="fa fa-clone step-control"
                          onClick={ () => copy({dispatch, step}) } />

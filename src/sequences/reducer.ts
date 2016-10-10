@@ -34,6 +34,12 @@ const initialState: SequenceReducerState = {
 };
 
 export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
+    .add<{index: number, comment: string}>("ADD_COMMENT", function(s, a) {
+        let seq = s.all[s.current];
+        seq.dirty = true;
+        seq.body[a.payload.index].comment = a.payload.comment;
+        return s;
+    })
     .add<{ step: Step }>("PUSH_STEP", function (state, action) {
         let current_sequence = state
             .all[state.current] || populate(state);
