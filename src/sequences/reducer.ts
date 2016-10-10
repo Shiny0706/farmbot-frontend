@@ -80,7 +80,7 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
         return state;
     })
     .add<Array<Sequence>>("FETCH_SEQUENCES_OK", function (state, action) {
-        // state.all = action.payload;
+        state.all = action.payload;
         return state;
     })
     .add<number>("SELECT_SEQUENCE", function (state, action) {
