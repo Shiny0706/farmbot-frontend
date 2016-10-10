@@ -48,14 +48,6 @@ class LoginPage extends React.Component<Everything, any> {
   }
 
   render() {
-    if (this.props.auth.authenticated) {
-      localStorage.clear();
-      sessionStorage.clear();
-      location.reload();
-
-      return <span> Logging out now... </span>;
-    }
-
     return (
       <div>
         <Navbar { ...this.props } />
