@@ -44,7 +44,8 @@ export class AxisInputBox extends React.Component<AxisInputBoxProps, {}> {
 
   change(key: string, dispatch: Function): React.EventHandler<React.FormEvent> {
     return function (event) {
-      dispatch(changeAxisBuffer(key, (event.target as HTMLInputElement).value));
+      let num = Number((event.target as HTMLInputElement).value);
+      dispatch(changeAxisBuffer(key, num));
     };
   }
 
