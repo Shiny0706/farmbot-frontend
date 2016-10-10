@@ -1,7 +1,9 @@
 import { userVariables as FarmBotJsuserVariables } from "farmbot/interfaces";
 import { BasicNode, IntegerNode, StringNode } from "../ast/interfaces";
 import { Color } from "../interfaces";
-
+export const NUMERIC_FIELDS  = ["x", "y", "z", "speed", "pin_number",
+        "pin_value", "pin_mode", "milliseconds",
+        "sub_sequence_id", "rhs", "sub_sequence_id"];
 type userVariables = FarmBotJsuserVariables;
 export interface Sequence extends SequenceNode {
   color: Color;

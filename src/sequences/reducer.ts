@@ -56,11 +56,15 @@ export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
         return state;
     })
     .add<{ step: Step, index: number }>("CHANGE_STEP", function (state, action) {
-        let steps = state.all[state.current].body || populate(state).body;
-        let index = action.payload.index;
-        let current_step = steps[index];
-        steps[index] = assign<{}, Step>(current_step, action.payload.step);
-        state.all[state.current].dirty = true;
+
+        /// DELETE THIS!?!?!?!?
+        // let steps = state.all[state.current].body || populate(state).body;
+        // let index = action.payload.index;
+        // let current_step = steps[index];
+        // steps[index] = assign<{}, Step>(current_step, action.payload.step);
+        // state.all[state.current].dirty = true;
+        let current = state.all[state.current].body[action.payload.index];
+        _.assign(current, action.payload.step);
         return state;
     })
     .add<{ index: number }>("REMOVE_STEP", function (state, action) {

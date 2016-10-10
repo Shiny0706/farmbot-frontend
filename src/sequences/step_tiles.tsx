@@ -1,7 +1,7 @@
 import * as React from "react";
 import { changeStep, removeStep, pushStep } from "./actions";
 import { assign } from "lodash";
-import { Step } from "./interfaces";
+import { Step, NUMERIC_FIELDS } from "./interfaces";
 import { Help } from "../help";
 import { ExecuteBlock } from "./execute_block";
 import { Sequence } from "./interfaces";
@@ -31,7 +31,7 @@ interface UpdateStepParams {
   dispatch: Function;
   step: Step;
   index: number;
-  field: string; // "x"|"y"|"z"|"speed";
+  field: string;
 }
 
 let updateStep = function ({ dispatch,
@@ -39,43 +39,16 @@ let updateStep = function ({ dispatch,
                              index,
                              field }: UpdateStepParams) {
   return (e: React.FormEvent) => {
+    let copy = defensiveClone<Step>(step);
+    let val: string = (e.target as any).value;
 
-    let to_number = function(update: Step, feild: string) {
-        // (update.args as any)[field] = {
-        //   kind: "literal",
-        //   args: { data_type: "integer",
-        //           data_value: (e.target as any).value}
-        // };
-        console.log((e.target as any).value);
-        console.log(typeof((e.target as any).value));
-        let f = parseInt( (e.target as any).value );
-        console.log(f);
-        return f;
-      };
-    let reg = function(update: Step, feild: string) {
-      // (update.args as any)[field] = {
-      //   kind: "literal",
-      //   args: {data_type: "string",
-      //          data_value: (e.target as any).value}
-      // };
-      (e.target as any).value
+    if (NUMERIC_FIELDS.indexOf(field) !== -1) {
+      _.assign(copy.args, {[field]: parseInt(val, 10)});
+    } else {
+      _.assign(copy.args, {[field]: val});
     };
 
-    let update = defensiveClone<Step>(step);
-    // field.indexOf("x") !== -1
-    let numberFields = ["x", "y", "z",
-                        "speed", "pin_number",
-                        "pin_mode", "pin_value",
-                        "milliseconds"];
-
-    if (numberFields.indexOf(field) !== -1) {
-      to_number(update, field);
-    } else {
-      reg(update, field);
-    }
-
-    let action = changeStep(index, update);
-    dispatch(action);
+    dispatch(changeStep(index, copy));
   };
 };
 
@@ -99,11 +72,10 @@ interface IStepInput {
 }
 
 export function StepInputBox({step, field, dispatch, index}: IStepInput) {
+    let val = (step.args as any )[field] || "";
 
     return <input type="text"
-              value={
-                (step.args as any )[field] || ""
-              }
+              value={ val }
               onChange={ updateStep({dispatch, step, index, field}) } />;
 
 }
