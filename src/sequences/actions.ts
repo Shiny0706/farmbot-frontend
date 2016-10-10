@@ -5,14 +5,14 @@ import { SequenceOptions,
          Step,
          Sequence } from "./interfaces";
 import { success, error } from "../logger";
-import { randomColor, prettyPrintApiErrors } from "../util";
+import { prettyPrintApiErrors } from "../util";
 import { Color, ReduxAction } from "../interfaces";
 import  * as i18next  from "i18next";
 
 
 export function nullSequence(): Sequence {
   return {
-    color: randomColor(),
+    color: "gray",
     name: "New Sequence",
     kind: "sequence",
     args: {},
@@ -123,8 +123,7 @@ export function saveSequence(sequence: Sequence): Thunk {
       method = axios.post;
     };
     return method(url, sequence)
-    .then(function(resp: {data: Sequence; }) {
-      let seq: Sequence = resp.data;
+    .then(function(resp: {data: Sequence }) {
       success( i18next.t("Saved '{{SequenceName}}'",
         { SequenceName: (sequence.name || "sequence") } ));
       dispatch(saveSequenceOk(resp.data));

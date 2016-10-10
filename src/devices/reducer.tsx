@@ -9,25 +9,26 @@ import * as i18next from "i18next";
 import { ChangeSettingsBuffer } from "./actions";
 
 let status = {
-  NOT_READY: i18next.t("never connected to device"),
-  CONNECTING: i18next.t("initiating connection"),
-  AWAITING_API: i18next.t("downloading device credentials"),
-  API_ERROR: i18next.t("Unable to download device credentials"),
-  AWAITING_WEBSOCKET: i18next.t("calling FarmBot with credentials"),
-  WEBSOCKET_ERR: i18next.t("Error establishing socket connection"),
-  CONNECTED: i18next.t("Socket Connection Established"),
-  READY: i18next.t("Bot ready")
+  NOT_READY: (): string => { return i18next.t("never connected to device"); },
+  CONNECTING: (): string => { return i18next.t("initiating connection"); },
+  AWAITING_API: (): string => { return i18next.t("downloading device credentials"); },
+  API_ERROR: (): string => { return i18next.t("Unable to download device credentials"); },
+  AWAITING_WEBSOCKET: (): string => { return i18next.t("calling FarmBot with credentials"); },
+  WEBSOCKET_ERR: (): string => { return i18next.t("Error establishing socket connection"); },
+  CONNECTED: (): string => { return i18next.t("Socket Connection Established"); },
+  READY: (): string => { return i18next.t("Bot ready"); }
 };
 
 let initialState: BotState = {
   account: { id: 0, uuid: "loading...", name: "loading..." },
   logQueueSize: 20,
   logQueue: [],
-  status: status.NOT_READY,
+  status: status.NOT_READY(),
   stepSize: 1000,
   hardware: {},
   axisBuffer: {},
-  settingsBuffer: {}
+  settingsBuffer: {},
+  dirty: false
 };
 
 export let botReducer = generateReducer<BotState>(initialState)
@@ -38,7 +39,7 @@ export let botReducer = generateReducer<BotState>(initialState)
       state, {
         hardware: hardware
       }, {
-        status: status.READY
+        status: status.READY()
       });
   }
   )
@@ -47,6 +48,18 @@ export let botReducer = generateReducer<BotState>(initialState)
       settingsBuffer: {}
     });
     return nextState;
+  })
+  .add<any>("SAVE_SEQUENCE_OK", function (state, action) {
+    state.dirty = false;
+    return state;
+  })
+  .add<any>("SAVE_REGIMEN_OK", function (state, action) {
+    state.dirty = false;
+    return state;
+  })
+  .add<any>("SYNC_OK", function (state, action) {
+    state.dirty = true;
+    return state;
   })
   .add<any>("COMMIT_AXIS_CHANGE_OK", function (oldState, action) {
     let hardware = _.assign({}, oldState.hardware, action.payload);
@@ -81,14 +94,15 @@ export let botReducer = generateReducer<BotState>(initialState)
       stepSize: action.payload
     });
   })
-  .add<Notification<[HardwareState]>>("BOT_CHANGE", function (state: BotState,
-                                                              action: ReduxAction<HardwareState>) {
+  .add<Notification<[HardwareState]>>("BOT_CHANGE",
+  function (state: BotState,
+            action: ReduxAction<HardwareState>) {
     let hardware = action.payload;
     return _.assign<{}, BotState>({},
       state, {
         hardware: hardware
       }, {
-        status: status.READY
+        status: status.READY()
       });
   }
   )

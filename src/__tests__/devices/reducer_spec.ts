@@ -21,6 +21,7 @@ describe("Config reducer", function() {
                      status: status.NOT_READY,
                      stepSize: 1000,
                      hardware: {},
+                     dirty: false,
                      axisBuffer: {},
                      settingsBuffer: {}
                     };

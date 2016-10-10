@@ -52,6 +52,7 @@ export function fakeState(dispatcher?: Function): Everything {
     logQueueSize: 0,
     logQueue: [],
     status: "???",
+    dirty: false,
     /** How many steps to move when the user presses a manual movement arrow */
     stepSize: 100,
     /** Holds coordinates that the user is currently editing, but has not sent */

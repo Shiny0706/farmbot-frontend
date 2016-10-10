@@ -6,7 +6,7 @@ let stripUrl = (url: string) => url.replace(/(https|http|[0-9]|\:|\/|\/\/)/g, ""
 
 let initialState: ConfigState = {
   host: stripUrl(location.host),
-  port: (location.host as any)["includes"] ("localhost") ? "3000" : (location.port || "80") 
+  port: (location.host as any)["includes"] ("localhost") ? "3000" : (location.port || "80")
 };
 
 export let configReducer = generateReducer<ConfigState>(initialState)
