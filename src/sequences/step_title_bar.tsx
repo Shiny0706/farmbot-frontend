@@ -18,6 +18,7 @@ export class StepTitleBar extends React.Component<StepTitleBarProps, {}> {
 
   render( ) {
     return <input className="step-label"
+                  value={ this.props.step.comment || "" }
                   placeholder={ this.props.step.kind }
                   onChange={ this.onChange.bind(this) }/>;
   };
