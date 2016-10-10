@@ -175,6 +175,13 @@ export function addSequence() {
   };
 }
 
+export function addComment(step: Step, index: number, comment: string) {
+  return {
+    type: "ADD_COMMENT",
+    payload: { comment, index }
+  }
+}
+
 export function deleteSequence(index: number) {
   // use cases: 
   // unsaved sequence. (in state)

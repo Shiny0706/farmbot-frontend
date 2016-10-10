@@ -7,10 +7,10 @@ import { Everything } from "./interfaces";
 import  * as i18next  from "i18next";
 
 let setHost = (dispatch: Function) => (e: React.FormEvent) => dispatch(
-  changeApiHost((e.target as any).value));
+  changeApiHost((e.target as HTMLInputElement).value));
 
 let setPort = (dispatch: Function) => (e: React.FormEvent) => dispatch(
-  changeApiPort((e.target as any).value));
+  changeApiPort((e.target as HTMLInputElement).value));
 
 
 class LoginPage extends React.Component<Everything, any> {
@@ -22,7 +22,7 @@ class LoginPage extends React.Component<Everything, any> {
   set(name: string) {
     return function(event: React.FormEvent){
       let state: {[name: string]: string} = {};
-      state[name] = (event.target as any).value;
+      state[name] = (event.target as HTMLInputElement).value;
       this.setState(state);
     };
   }

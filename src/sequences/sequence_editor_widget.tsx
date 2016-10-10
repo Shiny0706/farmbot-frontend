@@ -29,7 +29,7 @@ let StepList = ({sequence, sequences, dispatch}:
 };
 
 let handleNameUpdate = (dispatch: Function) => (event: React.SyntheticEvent) => {
-    let name: string = (event.target as any)["value"] || ""; // Typescript workaround.
+    let name: string = (event.target as HTMLInputElement).value || "";
     dispatch(editCurrentSequence({ name }));
 };
 
