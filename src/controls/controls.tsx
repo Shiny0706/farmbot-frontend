@@ -341,6 +341,6 @@ const showUrl = (url: string, dirty: boolean) => {
 const updateWebcamUrl = (dispatch: Function) => (event: React.KeyboardEvent) => {
   dispatch({
     type: "CHANGE_WEBCAM_URL",
-    payload: (event.target as HTMLInputElement)["value"]
+    payload: (event.target as HTMLInputElement).value
   });
 };
