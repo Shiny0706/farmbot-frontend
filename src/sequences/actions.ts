@@ -127,8 +127,8 @@ export function saveSequence(sequence: Sequence): Thunk {
       success( i18next.t("Saved '{{SequenceName}}'",
         { SequenceName: (sequence.name || "sequence") } ));
       dispatch(saveSequenceOk(resp.data));
-    },
-    function(err: {response: { data: {[reason: string]: string}; }}) {
+    })
+    .catch(function(err: {response: { data: {[reason: string]: string}; }}) {
       let template = "Unable to save '{{SequenceName}}'";
       let context = { SequenceName: (sequence.name || "sequence") };
       error(prettyPrintApiErrors(err),
