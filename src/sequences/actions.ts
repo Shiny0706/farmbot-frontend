@@ -5,7 +5,7 @@ import { SequenceOptions,
          Step,
          Sequence } from "./interfaces";
 import { success, error } from "../logger";
-import { prettyPrintApiErrors } from "../util";
+import { prettyPrintApiErrors, AxiosErrorResponse } from "../util";
 import { Color, ReduxAction } from "../interfaces";
 import  * as i18next  from "i18next";
 
@@ -133,7 +133,7 @@ export function saveSequence(sequence: Sequence): Thunk {
       let context = { SequenceName: (sequence.name || "sequence") };
       error(prettyPrintApiErrors(err),
             i18next.t(template , context));
-      dispatch(saveSequenceNo(error));
+      dispatch(saveSequenceNo(err));
     });
   };
 };
@@ -149,7 +149,7 @@ export function saveSequenceOk(sequence: Sequence) {
   };
 }
 
-export function saveSequenceNo(error: any) {
+export function saveSequenceNo(error: AxiosErrorResponse) {
   return {
     type: "SAVE_SEQUENCE_NO",
     payload: error
@@ -179,7 +179,7 @@ export function addComment(step: Step, index: number, comment: string) {
   return {
     type: "ADD_COMMENT",
     payload: { comment, index }
-  }
+  };
 }
 
 export function deleteSequence(index: number) {

@@ -8,7 +8,7 @@ import { Ticker } from "../ticker/ticker";
 import { Everything } from "../interfaces";
 import { t } from "i18next";
 
-interface NavButtonState {
+interface NavButtonProps {
   auth: AuthState;
   dispatch: Function;
   bot: BotState;
@@ -33,15 +33,15 @@ export let LogoutButton = ({ auth, onClick }: LogoutProps) => {
   </a>;
 };
 
-let SyncButton = ({auth, bot, dispatch}: NavButtonState) => {
+let SyncButton = ({auth, bot, dispatch}: NavButtonProps) => {
   if (!auth.authenticated) { return <span></span>; }
   return <button className="nav-sync button-like green"
-    onClick={ sync }>
-    { (bot.dirty) ? "Synced" : "Sync Required" }
+    onClick={ () => {dispatch(sync()); } }>
+    { (bot.dirty) ? t("Sync Required") : t("Synced") }
   </button>;
 };
 
-let EStopButton = ({auth, dispatch}: NavButtonState) => {
+let EStopButton = ({auth, dispatch}: NavButtonProps) => {
   if (!auth.authenticated) { return <span></span>; }
   return <button className="nav-e-stop button-like red"
     type="button"
