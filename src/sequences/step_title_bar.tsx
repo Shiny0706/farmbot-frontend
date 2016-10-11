@@ -16,10 +16,10 @@ export class StepTitleBar extends React.Component<StepTitleBarProps, {}> {
     dispatch(addComment(step, index, target.value));
   }
 
-  render( ) {
+  render() {
     return <input className="step-label"
-                  value={ this.props.step.comment || "" }
-                  placeholder={ this.props.step.kind }
-                  onChange={ this.onChange.bind(this) }/>;
+      value={this.props.step.comment || ""}
+      placeholder={this.props.step.kind}
+      onChange={this.onChange.bind(this)} />;
   };
 };

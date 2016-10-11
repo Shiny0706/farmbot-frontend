@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Link } from "react-router";
-import { sync,
-         emergencyStop } from "../devices/actions";
+import {
+  sync,
+  emergencyStop
+} from "../devices/actions";
 import { AuthState } from "../auth/interfaces";
 import { BotState } from "../devices/interfaces";
 import { Ticker } from "../ticker/ticker";
@@ -28,16 +30,19 @@ export let LogoutButton = ({ auth, onClick }: LogoutProps) => {
     location.reload();
   });
   return <a className="logout-button"
-    onClick={ onClick }>
+    onClick={onClick}>
     {t("Log Out")}
   </a>;
 };
 
 let SyncButton = ({auth, bot, dispatch}: NavButtonProps) => {
   if (!auth.authenticated) { return <span></span>; }
-  return <button className="nav-sync button-like green"
-    onClick={ () => {dispatch(sync()); } }>
-    { (bot.dirty) ? t("Sync Required") : t("Synced") }
+  let dirty = bot.dirty;
+  let color = dirty ? "yellow" : "green";
+
+  return <button className={"nav-sync button-like " + color}
+    onClick={() => { dispatch(sync()); } }>
+    {dirty ? t("Sync Required") : t("Synced")}
   </button>;
 };
 
@@ -45,7 +50,7 @@ let EStopButton = ({auth, dispatch}: NavButtonProps) => {
   if (!auth.authenticated) { return <span></span>; }
   return <button className="nav-e-stop button-like red"
     type="button"
-    onClick={ emergencyStop } >
+    onClick={emergencyStop} >
     {t("E STOP")}
   </button>;
 };
@@ -74,11 +79,11 @@ export function Navbar(props: Everything) {
           <ul className="nav navbar-nav">
             {
               Object.keys(links).map((description) => {
-                let url = (links as {[name: string]: string})[description];
+                let url = (links as { [name: string]: string })[description];
                 return (
                   <li key={url}>
                     <Link to={url}
-                          activeClassName="fb-navbar-active-link">
+                      activeClassName="fb-navbar-active-link">
                       {description}
                     </Link>
                   </li>
@@ -86,10 +91,10 @@ export function Navbar(props: Everything) {
               })
             }
           </ul>
-          <SyncButton { ...props }/>
-          <Ticker { ...props }/>
-          <LogoutButton { ...props }/>
-          <EStopButton { ...props }/>
+          <SyncButton { ...props } />
+          <Ticker { ...props } />
+          <LogoutButton { ...props } />
+          <EStopButton { ...props } />
         </div>
       </div>
     </nav>

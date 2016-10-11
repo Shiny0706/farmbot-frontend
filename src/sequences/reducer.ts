@@ -33,10 +33,14 @@ const initialState: SequenceReducerState = {
 };
 
 export let sequenceReducer = generateReducer<SequenceReducerState>(initialState)
-    .add<{index: number, comment: string}>("ADD_COMMENT", function(s, a) {
+    .add<{ index: number, comment: string }>("ADD_COMMENT", function (s, a) {
         let seq = s.all[s.current];
+        let node = seq.body[a.payload.index];
         seq.dirty = true;
-        seq.body[a.payload.index].comment = a.payload.comment;
+        node.comment = a.payload.comment;
+        // API complains about empty values.
+        // TODO: Clean up BE.
+        if (!node.comment) { delete node.comment; }
         return s;
     })
     .add<{ step: Step }>("PUSH_STEP", function (state, action) {

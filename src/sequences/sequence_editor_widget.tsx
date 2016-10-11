@@ -44,7 +44,7 @@ let destroy = function (dispatch: Function,
 };
 
 let performSeq = (dispatch: Function, sequence: Sequence) =>
-                 (e: React.FormEvent) => execSequence(sequence);
+    (e: React.FormEvent) => execSequence(sequence);
 
 export function SequenceEditorWidget({sequences, dispatch}: Everything) {
     let inx = sequences.current;
@@ -69,7 +69,7 @@ export function SequenceEditorWidget({sequences, dispatch}: Everything) {
                         <h5>{t("Sequence Editor")}</h5>
                         <i className="fa fa-question-circle widget-help-icon">
                             <div className="widget-help-text">
-                              {t(`Use this widget to edit
+                                {t(`Use this widget to edit
                               sequences. Coming soon: drag and drop steps,
                               custom step names, sequence cloning, and inheritable
                               step properties!`)}
@@ -90,9 +90,9 @@ export function SequenceEditorWidget({sequences, dispatch}: Everything) {
                             </div>
                             <div className="col-sm-1">
                                 <ColorPicker current={sequence.color}
-                                             onChange={(color) => {
-                                                 dispatch(editCurrentSequence({color}));
-                                             } } />
+                                    onChange={(color) => {
+                                        dispatch(editCurrentSequence({ color }));
+                                    } } />
                             </div>
                         </div>
                         {<StepList sequence={sequence}
@@ -101,8 +101,8 @@ export function SequenceEditorWidget({sequences, dispatch}: Everything) {
                         <div className="row">
                             <div className="col-sm-12">
                                 <div className="drag-drop-area padding">
-                                  {t("DRAG ACTIONS HERE")
-                                }</div>
+                                    {t("DRAG ACTIONS HERE")
+                                    }</div>
                             </div>
                         </div>
                     </div>
