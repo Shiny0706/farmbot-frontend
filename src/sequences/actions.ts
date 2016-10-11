@@ -5,7 +5,7 @@ import { SequenceOptions,
          Step,
          Sequence } from "./interfaces";
 import { success, error } from "../logger";
-import { prettyPrintApiErrors } from "../util";
+import { prettyPrintApiErrors, AxiosErrorResponse } from "../util";
 import { Color, ReduxAction } from "../interfaces";
 import  * as i18next  from "i18next";
 
@@ -127,13 +127,13 @@ export function saveSequence(sequence: Sequence): Thunk {
       success( i18next.t("Saved '{{SequenceName}}'",
         { SequenceName: (sequence.name || "sequence") } ));
       dispatch(saveSequenceOk(resp.data));
-    },
-    function(err: {response: { data: {[reason: string]: string}; }}) {
+    })
+    .catch(function(err: {response: { data: {[reason: string]: string}; }}) {
       let template = "Unable to save '{{SequenceName}}'";
       let context = { SequenceName: (sequence.name || "sequence") };
       error(prettyPrintApiErrors(err),
             i18next.t(template , context));
-      dispatch(saveSequenceNo(error));
+      dispatch(saveSequenceNo(err));
     });
   };
 };
@@ -149,7 +149,7 @@ export function saveSequenceOk(sequence: Sequence) {
   };
 }
 
-export function saveSequenceNo(error: any) {
+export function saveSequenceNo(error: AxiosErrorResponse) {
   return {
     type: "SAVE_SEQUENCE_NO",
     payload: error
@@ -179,7 +179,7 @@ export function addComment(step: Step, index: number, comment: string) {
   return {
     type: "ADD_COMMENT",
     payload: { comment, index }
-  }
+  };
 }
 
 export function deleteSequence(index: number) {
@@ -205,21 +205,16 @@ export function deleteSequence(index: number) {
       sequence?: string;
     }
     function deleteSequenceErr(response: Axios.AxiosXHR<SequenceApiResponse> ) {
-      if (response && response.data.sequence ) {
-        error(response.data.sequence);
-      } else {
-        error(i18next.t("Unable to delete sequence"));
+      if (response && response.data ) {
+        error((response.data.sequence) || i18next.t("Unable to delete sequence"));
       }
     }
 
-    if (sequence.id) {
+    if (sequence && sequence.id) {
       let url = `${iss}/api/sequences/` + sequence.id;
       axios.delete(url)
-        .then(deleteSequenceOK)
-        .catch(deleteSequenceErr);
-    }else {
-      // Sequence is unsaved.
-      deleteSequenceOK();
-    }
+        .then(() => deleteSequenceOK())
+        .catch((error) => deleteSequenceErr(error.response));
+      }
   };
 }

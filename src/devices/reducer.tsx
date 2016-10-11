@@ -28,11 +28,12 @@ let initialState: BotState = {
   hardware: {},
   axisBuffer: {},
   settingsBuffer: {},
-  dirty: false
+  dirty: true
 };
 
 export let botReducer = generateReducer<BotState>(initialState)
-  .add<HardwareState>("SETTING_TOGGLE_OK", function (state: BotState, action: ReduxAction<HardwareState>) {
+  .add<HardwareState>("SETTING_TOGGLE_OK",
+  function (state: BotState, action: ReduxAction<HardwareState>) {
 
     let hardware = action.payload;
     return _.assign<{}, BotState>({},
@@ -50,15 +51,23 @@ export let botReducer = generateReducer<BotState>(initialState)
     return nextState;
   })
   .add<any>("SAVE_SEQUENCE_OK", function (state, action) {
-    state.dirty = false;
+    state.dirty = true;
+    return state;
+  })
+  .add<any>("DELETE_SEQUENCE_OK", function (state, action) {
+    state.dirty = true;
     return state;
   })
   .add<any>("SAVE_REGIMEN_OK", function (state, action) {
-    state.dirty = false;
+    state.dirty = true;
     return state;
   })
-  .add<any>("SYNC_OK", function (state, action) {
+  .add<any>("DELETE_REGIMEN_OK", function (state, action) {
     state.dirty = true;
+    return state;
+  })
+  .add< {} >("BOT_SYNC_OK", function (state, action) {
+    state.dirty = false;
     return state;
   })
   .add<any>("COMMIT_AXIS_CHANGE_OK", function (oldState, action) {

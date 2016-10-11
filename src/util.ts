@@ -46,23 +46,23 @@ export function defensiveClone<T>(target: T): T {
   return JSON.parse(jsonString);
 }
 
-interface AxiosErrorResponse {
+export interface AxiosErrorResponse {
   response?: {
     data: {
       [reason: string]: string
     };
-  }
+  };
 };
 
 /** Concats and capitalizes all of the error key/value
  *  pairs returned by the /api/xyz endpoint. */
 export function prettyPrintApiErrors(err: AxiosErrorResponse) {
   return _.map(safelyFetchErrors(err),
-               (v, k) => `${k} ${v}.`.toLowerCase())
+               (v, k) => `${k} ${JSON.stringify(v)}.`.toLowerCase())
   .map(str => _.capitalize(str)).join(" ");
 }
 
-/** */ 
+/** */
 function safelyFetchErrors(err: AxiosErrorResponse): {[key: string]: string} {
   // In case the interpreter gives us an oddball error message.
   if (err && err.response && err.response.data) {

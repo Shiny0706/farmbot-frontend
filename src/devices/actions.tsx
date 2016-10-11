@@ -58,12 +58,19 @@ export function emergencyStop() {
     .then(commandOK(noun), commandErr(noun));
 }
 
-export function sync() {
+export function sync(): Thunk {
   let noun = "Sync";
-  devices
+  return function(dispatch, getState){
+    devices
     .current
     .sync()
-    .then(commandOK(noun), commandErr(noun));
+    .then(() => {
+      commandOK(noun);
+      dispatch({type: "BOT_SYNC_OK", payload: {}});
+    }).catch( () => {
+      commandErr(noun);
+    });
+  };
 }
 
 export function execSequence(sequence: Sequence) {
@@ -179,6 +186,7 @@ export function connectDevice(token: string): {} | ((dispatch: any) => any) {
       .then(() => {
         devices.current = bot;
         readStatus();
+        dispatch(sync());
         bot.on("notification",
           function (msg: any) {
             console.warn("You promised you'd fix this!!");
