@@ -38,7 +38,7 @@ export function StepButtonGroup({dispatch}: {dispatch: Function}) {
                                         "full-width text-left blue-block block-header block"
                                         onClick={ clickToAdd(
                                             {kind: "move_absolute",
-                                             args: {x: 0, y: 0, z: 0, speed: 0}}) }>
+                                             args: {x: 0, y: 0, z: 0, speed: 100}}) }>
                                         {("MOVE ABSOLUTE")}
                                         <i className="fa fa-arrows block-control" />
                                     </button>
