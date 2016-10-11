@@ -205,21 +205,16 @@ export function deleteSequence(index: number) {
       sequence?: string;
     }
     function deleteSequenceErr(response: Axios.AxiosXHR<SequenceApiResponse> ) {
-      if (response && response.data.sequence ) {
-        error(response.data.sequence);
-      } else {
-        error(i18next.t("Unable to delete sequence"));
+      if (response && response.data ) {
+        error((response.data.sequence) || i18next.t("Unable to delete sequence"));
       }
     }
 
-    if (sequence.id) {
+    if (sequence && sequence.id) {
       let url = `${iss}/api/sequences/` + sequence.id;
       axios.delete(url)
-        .then(deleteSequenceOK)
-        .catch(deleteSequenceErr);
-    }else {
-      // Sequence is unsaved.
-      deleteSequenceOK();
-    }
+        .then(() => deleteSequenceOK())
+        .catch((error) => deleteSequenceErr(error.response));
+      }
   };
 }

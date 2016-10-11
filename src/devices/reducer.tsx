@@ -54,7 +54,15 @@ export let botReducer = generateReducer<BotState>(initialState)
     state.dirty = true;
     return state;
   })
+  .add<any>("DELETE_SEQUENCE_OK", function (state, action) {
+    state.dirty = true;
+    return state;
+  })
   .add<any>("SAVE_REGIMEN_OK", function (state, action) {
+    state.dirty = true;
+    return state;
+  })
+  .add<any>("DELETE_REGIMEN_OK", function (state, action) {
     state.dirty = true;
     return state;
   })
